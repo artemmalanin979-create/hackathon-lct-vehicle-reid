@@ -1,0 +1,29 @@
+# Данные и веса — не в git
+data/
+datasets/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.ckpt
+weights/
+checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Результаты прогонов
+runs/
+outputs/
+wandb/
+mlruns/
+*.log
+
+# Системное
+.DS_Store
+.idea/
+.vscode/
