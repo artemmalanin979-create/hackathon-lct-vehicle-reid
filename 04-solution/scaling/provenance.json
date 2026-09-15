@@ -1,0 +1,134 @@
+{
+  "repo": "/home/artem/projects/hackathon-lct-vehicle-reid",
+  "commit": "f46601209bb1dba83095a82e16353773e66bfe0a",
+  "files": {
+    "reid_metrics.py": {
+      "source": "04-solution/eval/reid_metrics.py",
+      "sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec"
+    },
+    "scope_metrics.py": {
+      "source": "04-solution/eval/scope_metrics.py",
+      "sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df"
+    },
+    "rerank.py": {
+      "source": "04-solution/service/app/core/rerank.py",
+      "sha256": "3b1d33338dcbe2a127b889893f7734d415de06ee879de1cf7cf6adf4dc0bd7d7"
+    },
+    "ranking.py": {
+      "source": "04-solution/service/app/core/ranking.py",
+      "sha256": "b6c16d756f01c20723a87058e1e70cdc8c1e67205b78884bbb79135186eb9d94"
+    },
+    "val_query.npy": {
+      "source": "04-solution/postproc/out/val_query.npy",
+      "sha256": "4bf81dce5f9608340dc419f78944b5b426daf37f134830189940cc59e6ac005d"
+    },
+    "val_query.ids": {
+      "source": "04-solution/postproc/out/val_query.ids",
+      "sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf"
+    },
+    "val_query.csv": {
+      "source": "04-solution/split/files/val_query.csv",
+      "sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6"
+    },
+    "val_gallery.npy": {
+      "source": "04-solution/postproc/out/val_gallery.npy",
+      "sha256": "c342bfd967ea827bdb1609142396f91509260dd969eb20b85972fcc802dc79ed"
+    },
+    "val_gallery.ids": {
+      "source": "04-solution/postproc/out/val_gallery.ids",
+      "sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c"
+    },
+    "val_gallery.csv": {
+      "source": "04-solution/split/files/val_gallery.csv",
+      "sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d"
+    }
+  },
+  "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+  "reextraction_checks": {
+    "query": [
+      {
+        "row": 0,
+        "image_id": "64a7b342e5654ac38e16ab1cc2d58037",
+        "cosine": 1.0000000003676406,
+        "max_abs_diff": 6.694798021511517e-09
+      },
+      {
+        "row": 119,
+        "image_id": "5fb938d7aa7947578e7d1b4b63f2433c",
+        "cosine": 0.9999999991211725,
+        "max_abs_diff": 3.643256293872632e-09
+      },
+      {
+        "row": 555,
+        "image_id": "50c574372f7647f4b96dd8555c0b694d",
+        "cosine": 1.0000000017876955,
+        "max_abs_diff": 3.7150615084247107e-09
+      },
+      {
+        "row": 820,
+        "image_id": "a28183c5036f47f0a3749d293e56da5e",
+        "cosine": 0.9999999985413589,
+        "max_abs_diff": 3.6459052860093877e-09
+      },
+      {
+        "row": 937,
+        "image_id": "2999ae8e23bc4019995583daf6b1df92",
+        "cosine": 1.0000000008525625,
+        "max_abs_diff": 3.926299702028402e-09
+      },
+      {
+        "row": 1109,
+        "image_id": "68eb1880caa546a5abf3110035ebff5d",
+        "cosine": 1.000000001356514,
+        "max_abs_diff": 6.709705513419095e-09
+      }
+    ],
+    "gallery": [
+      {
+        "row": 0,
+        "image_id": "46c988eefbac489a80cbe8975086e6c3",
+        "cosine": 1.0000000013641002,
+        "max_abs_diff": 5.8943143144141175e-09
+      },
+      {
+        "row": 80,
+        "image_id": "4d11d4234b824cb9a36b6275913d59d1",
+        "cosine": 1.0000000030467153,
+        "max_abs_diff": 5.869190938811997e-09
+      },
+      {
+        "row": 375,
+        "image_id": "20dba23b28a44041952a61a2f08095e9",
+        "cosine": 1.000000002995066,
+        "max_abs_diff": 5.0019985098348485e-09
+      },
+      {
+        "row": 554,
+        "image_id": "08e472d1664740bb94f37d46a6a1f530",
+        "cosine": 0.9999999994463393,
+        "max_abs_diff": 3.859665420602454e-09
+      },
+      {
+        "row": 632,
+        "image_id": "9f3054fb9762485eaf1ef8f8f86fafb5",
+        "cosine": 0.9999999977725017,
+        "max_abs_diff": 5.824650151087241e-09
+      },
+      {
+        "row": 749,
+        "image_id": "6b95c9c8fd354c3fb75db759b4f0fd46",
+        "cosine": 0.9999999998036044,
+        "max_abs_diff": 5.117919227304313e-09
+      }
+    ]
+  },
+  "packages": {
+    "numpy": "2.5.3",
+    "faiss-cpu": "1.15.0",
+    "packaging": "26.3",
+    "onnxruntime": "1.30.0",
+    "pillow": "12.3.0"
+  },
+  "python": "3.13.13 (main, Apr  8 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]",
+  "ids_match_csv": true
+}

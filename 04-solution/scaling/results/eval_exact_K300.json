@@ -1,0 +1,7951 @@
+{
+  "protocol": {
+    "camera_policy": "market",
+    "ap_method": "step",
+    "refusal_mode": "presence",
+    "score_kind": "similarity",
+    "tie_policy": "column_index",
+    "filtered_positive_policy": "drop",
+    "empty_denominator": null,
+    "threshold_rule": ">=",
+    "ranking_scope": "full_gallery",
+    "auc_pr_method": "trapezoid",
+    "schema_version": 2,
+    "ranking_scopes": [
+      "full_gallery",
+      "top_k"
+    ],
+    "ranking_alias": "ranking_full_gallery",
+    "top_k": 10,
+    "ap_denominator": "all_gallery_positives",
+    "query_average": "valid_queries",
+    "incomplete_inp": "undefined_if_incomplete",
+    "rank_beyond_k": "undefined",
+    "rank_ks": [
+      1,
+      5
+    ],
+    "truncation_order": "top_k_then_filter",
+    "rank_and_inp_query_average": "valid_queries",
+    "refusal_scope": "full_eligible_gallery",
+    "score_precision": "float64_no_downcast",
+    "threshold_precision": "float64_no_downcast",
+    "score_input_dtype": "float64",
+    "tie_equality": "exact_represented_value",
+    "embedding_accumulation": "float64",
+    "missing_ap_all_queries": "zero",
+    "empty_retrieved_ap_for_valid_query": 0.0,
+    "incomplete_inp_mean": "propagate_undefined_or_assign_zero; never_drop_query"
+  },
+  "ranking_full_gallery": {
+    "mAP": 0.6863217587220884,
+    "Rank-1": 0.6574519230769231,
+    "Rank-5": 0.7896634615384616,
+    "mINP": 0.653000981387798,
+    "num_valid_queries": 832,
+    "scope": "full_gallery",
+    "mAP_by_query_average": {
+      "valid_queries": 0.6863217587220884,
+      "all_queries_zero": 0.514432165096196
+    },
+    "mAP_query_average": "valid_queries",
+    "mAP_denominator": 832
+  },
+  "ranking_top_k": {
+    "scope": "top_k",
+    "k": 10,
+    "filter_order": "top_k_then_filter",
+    "ap_denominator": "all_gallery_positives",
+    "mAP_query_average": "valid_queries",
+    "incomplete_inp_policy": "undefined_if_incomplete",
+    "rank_beyond_k_policy": "undefined",
+    "mAP": 0.6754614526098901,
+    "mINP": null,
+    "Rank-1": 0.6574519230769231,
+    "Rank-5": 0.7896634615384616,
+    "num_valid_queries": 832,
+    "mAP_denominator": 832,
+    "num_incomplete_queries": 201,
+    "num_complete_queries": 631,
+    "mAP_by_ap_denominator_and_query_average": {
+      "all_gallery_positives": {
+        "valid_queries": 0.6754614526098901,
+        "all_queries_zero": 0.5062918275418276
+      },
+      "retrieved_positives": {
+        "valid_queries": 0.6945810916514041,
+        "all_queries_zero": 0.5206229443729443
+      }
+    },
+    "mINP_by_incomplete_policy": {
+      "undefined_if_incomplete": null,
+      "zero_if_incomplete": 0.6384624923687424
+    },
+    "ranks_by_beyond_k_policy": {
+      "undefined": {
+        "Rank-1": 0.6574519230769231,
+        "Rank-5": 0.7896634615384616
+      },
+      "clamp_to_k": {
+        "Rank-1": 0.6574519230769231,
+        "Rank-5": 0.7896634615384616
+      }
+    }
+  },
+  "ranking_top_k_by_filter_order": {
+    "top_k_then_filter": {
+      "scope": "top_k",
+      "k": 10,
+      "filter_order": "top_k_then_filter",
+      "ap_denominator": "all_gallery_positives",
+      "mAP_query_average": "valid_queries",
+      "incomplete_inp_policy": "undefined_if_incomplete",
+      "rank_beyond_k_policy": "undefined",
+      "mAP": 0.6754614526098901,
+      "mINP": null,
+      "Rank-1": 0.6574519230769231,
+      "Rank-5": 0.7896634615384616,
+      "num_valid_queries": 832,
+      "mAP_denominator": 832,
+      "num_incomplete_queries": 201,
+      "num_complete_queries": 631,
+      "mAP_by_ap_denominator_and_query_average": {
+        "all_gallery_positives": {
+          "valid_queries": 0.6754614526098901,
+          "all_queries_zero": 0.5062918275418276
+        },
+        "retrieved_positives": {
+          "valid_queries": 0.6945810916514041,
+          "all_queries_zero": 0.5206229443729443
+        }
+      },
+      "mINP_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.6384624923687424
+      },
+      "ranks_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.6574519230769231,
+          "Rank-5": 0.7896634615384616
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.6574519230769231,
+          "Rank-5": 0.7896634615384616
+        }
+      }
+    },
+    "filter_then_top_k": {
+      "scope": "top_k",
+      "k": 10,
+      "filter_order": "filter_then_top_k",
+      "ap_denominator": "all_gallery_positives",
+      "mAP_query_average": "valid_queries",
+      "incomplete_inp_policy": "undefined_if_incomplete",
+      "rank_beyond_k_policy": "undefined",
+      "mAP": 0.6765391769688645,
+      "mINP": null,
+      "Rank-1": 0.6574519230769231,
+      "Rank-5": 0.7896634615384616,
+      "num_valid_queries": 832,
+      "mAP_denominator": 832,
+      "num_incomplete_queries": 195,
+      "num_complete_queries": 637,
+      "mAP_by_ap_denominator_and_query_average": {
+        "all_gallery_positives": {
+          "valid_queries": 0.6765391769688645,
+          "all_queries_zero": 0.5070996353496353
+        },
+        "retrieved_positives": {
+          "valid_queries": 0.6942255227411477,
+          "all_queries_zero": 0.5203564278564279
+        }
+      },
+      "mINP_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.6395442231379731
+      },
+      "ranks_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.6574519230769231,
+          "Rank-5": 0.7896634615384616
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.6574519230769231,
+          "Rank-5": 0.7896634615384616
+        }
+      }
+    }
+  },
+  "per_query": [
+    {
+      "query_index": 0,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 2,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 3,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 4,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 5,
+      "ap": 0.006369426751592357,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 6,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 7,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 8,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 9,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 10,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 11,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 12,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 13,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 14,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 15,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 16,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 17,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 18,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 19,
+      "ap": 0.07142857142857142,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 20,
+      "ap": 0.6696969696969698,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 21,
+      "ap": 0.668859649122807,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 22,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 23,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 24,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 25,
+      "ap": 0.7333333333333334,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 26,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 27,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 28,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 29,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 30,
+      "ap": 0.1,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 31,
+      "ap": 0.125,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 32,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 33,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 34,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 35,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 36,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 37,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 38,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 39,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 40,
+      "ap": 0.08204334365325078,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 41,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 42,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 43,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 44,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 45,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 46,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 47,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 48,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 49,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 50,
+      "ap": 0.8666666666666667,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 51,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 52,
+      "ap": 0.8095238095238094,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 53,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 54,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 55,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 56,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 57,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 58,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 59,
+      "ap": 0.011111111111111112,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 60,
+      "ap": 0.05,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 61,
+      "ap": 0.007518796992481203,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 62,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 63,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 64,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 65,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 66,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 67,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 68,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 69,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 70,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 71,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 72,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 73,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 74,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 75,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 76,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 77,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 78,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 79,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 80,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 81,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 82,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 83,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 84,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 85,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 86,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 87,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 88,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 89,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 90,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 91,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 92,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 93,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 94,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 95,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 96,
+      "ap": 0.5833333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 97,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 98,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 99,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 100,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 101,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 102,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 103,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 104,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 105,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 106,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 107,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 108,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 109,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 110,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 111,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 112,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 113,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 114,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 115,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 116,
+      "ap": 0.6666666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 117,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 118,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 119,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 120,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 121,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 122,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 123,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 124,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 125,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 126,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 127,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 128,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 129,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 130,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 131,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 132,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 133,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 134,
+      "ap": 0.0625,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 135,
+      "ap": 0.05,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 136,
+      "ap": 0.05263157894736842,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 137,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 138,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 139,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 140,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 141,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 142,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 143,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 144,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 145,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 146,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 147,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 148,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 149,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 150,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 151,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 152,
+      "ap": 0.17142857142857143,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 153,
+      "ap": 0.5909090909090909,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 154,
+      "ap": 0.5833333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 155,
+      "ap": 0.13025210084033612,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 156,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 157,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 158,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 159,
+      "ap": 0.125,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 160,
+      "ap": 0.07692307692307693,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 161,
+      "ap": 0.07142857142857142,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 162,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 163,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 164,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 165,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 166,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 167,
+      "ap": 0.03571428571428571,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 168,
+      "ap": 0.02631578947368421,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 169,
+      "ap": 0.6981818181818181,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 170,
+      "ap": 0.2368104118104118,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 171,
+      "ap": 0.5046082949308756,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 172,
+      "ap": 0.17026378896882494,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 173,
+      "ap": 0.04089462848586936,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 174,
+      "ap": 0.2647058823529412,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 175,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 176,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 177,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 178,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 179,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 180,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 181,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 182,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 183,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 184,
+      "ap": 0.12142857142857143,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 185,
+      "ap": 0.042119565217391304,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 186,
+      "ap": 0.09583333333333333,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 187,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 188,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 189,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 190,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 191,
+      "ap": 0.0055248618784530384,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 192,
+      "ap": 0.015151515151515152,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 193,
+      "ap": 0.004149377593360996,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 194,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 195,
+      "ap": 0.027777777777777776,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 196,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 197,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 198,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 199,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 200,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 201,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 202,
+      "ap": 0.15476190476190477,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 203,
+      "ap": 0.26785714285714285,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 204,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 205,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 206,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 207,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 208,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 209,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 210,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 211,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 212,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 213,
+      "ap": 0.003816793893129771,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 214,
+      "ap": 0.027777777777777776,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 215,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 216,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 217,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 218,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 219,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 220,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 221,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 222,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 223,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 224,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 225,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 226,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 227,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 228,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 229,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 230,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 231,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 232,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 233,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 234,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 235,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 236,
+      "ap": 0.14285714285714285,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 237,
+      "ap": 0.038461538461538464,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 238,
+      "ap": 0.027777777777777776,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 239,
+      "ap": 0.125,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 240,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 241,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 242,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 243,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 244,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 245,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 246,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 247,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 248,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 249,
+      "ap": 0.009433962264150943,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 250,
+      "ap": 0.021739130434782608,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 251,
+      "ap": 0.016129032258064516,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 252,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 253,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 254,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 255,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 256,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 257,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 258,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 259,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 260,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 261,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 262,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 263,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 264,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 265,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 266,
+      "ap": 0.03225806451612903,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 267,
+      "ap": 0.03333333333333333,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 268,
+      "ap": 0.043478260869565216,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 269,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 270,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 271,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 272,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 273,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 274,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 275,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 276,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 277,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 278,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 279,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 280,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 281,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 282,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 283,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 284,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 285,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 286,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 287,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 288,
+      "ap": 0.1,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 289,
+      "ap": 0.1111111111111111,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 290,
+      "ap": 0.1,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 291,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 292,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 293,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 294,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 295,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 296,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 297,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 298,
+      "ap": 0.0029585798816568047,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 299,
+      "ap": 0.008849557522123894,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 300,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 301,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 302,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 303,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 304,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 305,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 306,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 307,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 308,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 309,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 310,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 311,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 312,
+      "ap": 0.029411764705882353,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 313,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 314,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 315,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 316,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 317,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 318,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 319,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 320,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 321,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 322,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 323,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 324,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 325,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 326,
+      "ap": 0.625,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 327,
+      "ap": 0.17142857142857143,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 328,
+      "ap": 0.19642857142857142,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 329,
+      "ap": 0.625,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 330,
+      "ap": 0.6428571428571428,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 331,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 332,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 333,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 334,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 335,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 336,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 337,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 338,
+      "ap": 0.6178571428571429,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 339,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 340,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 341,
+      "ap": 0.06666666666666667,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 342,
+      "ap": 0.008771929824561403,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 343,
+      "ap": 0.020833333333333332,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 344,
+      "ap": 0.1111111111111111,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 345,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 346,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 347,
+      "ap": 0.5833333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 348,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 349,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 350,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 351,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 352,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 353,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 354,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 355,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 356,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 357,
+      "ap": 0.28869047619047616,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 358,
+      "ap": 0.289922480620155,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 359,
+      "ap": 0.5384615384615384,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 360,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 361,
+      "ap": 0.028181818181818183,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 362,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 363,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 364,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 365,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 366,
+      "ap": 0.03571428571428571,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 367,
+      "ap": 0.05555555555555555,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 368,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 369,
+      "ap": 0.022727272727272728,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 370,
+      "ap": 0.02127659574468085,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 371,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 372,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 373,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 374,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 375,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 376,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 377,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 378,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 379,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 380,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 381,
+      "ap": 0.05505952380952381,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 382,
+      "ap": 0.2644927536231884,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 383,
+      "ap": 0.07681159420289854,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 384,
+      "ap": 0.5769230769230769,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 385,
+      "ap": 0.13541666666666666,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 386,
+      "ap": 0.19607843137254902,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 387,
+      "ap": 0.13275193798449614,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 388,
+      "ap": 0.006675700893055494,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 389,
+      "ap": 0.01610062893081761,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 390,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 391,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 392,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 393,
+      "ap": 0.005649717514124294,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 394,
+      "ap": 0.05,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 395,
+      "ap": 0.007246376811594203,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 396,
+      "ap": 0.047619047619047616,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 397,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 398,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 399,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 400,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 401,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 402,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 403,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 404,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 405,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 406,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 407,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 408,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 409,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 410,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 411,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 412,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 413,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 414,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 415,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 416,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 417,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 418,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 419,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 420,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 421,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 422,
+      "ap": 0.41666666666666663,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 423,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 424,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 425,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 426,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 427,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 428,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 429,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 430,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 431,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 432,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 433,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 434,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 435,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 436,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 437,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 438,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 439,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 440,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 441,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 442,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 443,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 444,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 445,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 446,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 447,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 448,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 449,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 450,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 451,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 452,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 453,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 454,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 455,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 456,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 457,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 458,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 459,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 460,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 461,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 462,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 463,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 464,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 465,
+      "ap": 0.32604638009049774,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 466,
+      "ap": 0.27459899013102673,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 467,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 468,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 469,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 470,
+      "ap": 0.012987012987012988,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 471,
+      "ap": 0.006493506493506494,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 472,
+      "ap": 0.008849557522123894,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 473,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 474,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 475,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 476,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 477,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 478,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 479,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 480,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 481,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 482,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 483,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 484,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 485,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 486,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 487,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 488,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 489,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 490,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 491,
+      "ap": 0.05263157894736842,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 492,
+      "ap": 0.03333333333333333,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 493,
+      "ap": 0.02702702702702703,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 494,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 495,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 496,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 497,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 498,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 499,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 500,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 501,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 502,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 503,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 504,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 505,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 506,
+      "ap": 0.6666666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 507,
+      "ap": 0.6666666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 508,
+      "ap": 0.41666666666666663,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 509,
+      "ap": 0.41666666666666663,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 510,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 511,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 512,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 513,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 514,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 515,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 516,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 517,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 518,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 519,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 520,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 521,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 522,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 523,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 524,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 525,
+      "ap": 0.05555555555555555,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 526,
+      "ap": 0.05263157894736842,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 527,
+      "ap": 0.04,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 528,
+      "ap": 0.043478260869565216,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 529,
+      "ap": 0.02857142857142857,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 530,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 531,
+      "ap": 0.027777777777777776,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 532,
+      "ap": 0.045454545454545456,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 533,
+      "ap": 0.027777777777777776,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 534,
+      "ap": 0.05,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 535,
+      "ap": 0.05263157894736842,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 536,
+      "ap": 0.05555555555555555,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 537,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 538,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 539,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 540,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 541,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 542,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 543,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 544,
+      "ap": 0.013888888888888888,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 545,
+      "ap": 0.022222222222222223,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 546,
+      "ap": 0.125,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 547,
+      "ap": 0.1111111111111111,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 548,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 549,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 550,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 551,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 552,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 553,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 554,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 555,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 556,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 557,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 558,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 559,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 560,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 561,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 562,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 563,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 564,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 565,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 566,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 567,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 568,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 569,
+      "ap": 0.225,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 570,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 571,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 572,
+      "ap": 0.015384615384615385,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 573,
+      "ap": 0.016666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 574,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 575,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 576,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 577,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 578,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 579,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 580,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 581,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 582,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 583,
+      "ap": 0.10989010989010989,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 584,
+      "ap": 0.6666666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 585,
+      "ap": 0.6428571428571428,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 586,
+      "ap": 0.09583333333333333,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 587,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 588,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 589,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 590,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 591,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 592,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 593,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 594,
+      "ap": 0.007874015748031496,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 595,
+      "ap": 0.012987012987012988,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 596,
+      "ap": 0.018867924528301886,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 597,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 598,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 599,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 600,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 601,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 602,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 603,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 604,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 605,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 606,
+      "ap": 0.05555555555555555,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 607,
+      "ap": 0.03333333333333333,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 608,
+      "ap": 0.0014749262536873156,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 609,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 610,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 611,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 612,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 613,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 614,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 615,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 616,
+      "ap": 0.19444444444444442,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 617,
+      "ap": 0.11212121212121212,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 618,
+      "ap": 0.17763157894736842,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 619,
+      "ap": 0.14215686274509803,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 620,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 621,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 622,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 623,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 624,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 625,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 626,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 627,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 628,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 629,
+      "ap": 0.1625,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 630,
+      "ap": 0.5769230769230769,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 631,
+      "ap": 0.08225806451612903,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 632,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 633,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 634,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 635,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 636,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 637,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 638,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 639,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 640,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 641,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 642,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 643,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 644,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 645,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 646,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 647,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 648,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 649,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 650,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 651,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 652,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 653,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 654,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 655,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 656,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 657,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 658,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 659,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 660,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 661,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 662,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 663,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 664,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 665,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 666,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 667,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 668,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 669,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 670,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 671,
+      "ap": 0.9166666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 672,
+      "ap": 0.8095238095238094,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 673,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 674,
+      "ap": 0.625,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 675,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 676,
+      "ap": 0.13392857142857142,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 677,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 678,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 679,
+      "ap": 0.8269230769230769,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 680,
+      "ap": 0.07933576839826839,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 681,
+      "ap": 0.5833333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 682,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 683,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 684,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 685,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 686,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 687,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 688,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 689,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 690,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 691,
+      "ap": 0.017857142857142856,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 692,
+      "ap": 0.06666666666666667,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 693,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 694,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 695,
+      "ap": 0.1698615548455804,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 696,
+      "ap": 0.16982124079915878,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 697,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 698,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 699,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 700,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 701,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 702,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 703,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 704,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 705,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 706,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 707,
+      "ap": 0.5714285714285714,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 708,
+      "ap": 0.043557168784029036,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 709,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 710,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 711,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 712,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 713,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 714,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 715,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 716,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 717,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 718,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 719,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 720,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 721,
+      "ap": 0.7291666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 722,
+      "ap": 0.03657159833630422,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 723,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 724,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 725,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 726,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 727,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 728,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 729,
+      "ap": 0.54,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 730,
+      "ap": 0.03557422969187675,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 731,
+      "ap": 0.6,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 732,
+      "ap": 0.03292939936775553,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 733,
+      "ap": 0.5277777777777778,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 734,
+      "ap": 0.06666666666666667,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 735,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 736,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 737,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 738,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 739,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 740,
+      "ap": 0.058823529411764705,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 741,
+      "ap": 0.058823529411764705,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 742,
+      "ap": 0.05,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 743,
+      "ap": 0.0625,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 744,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 745,
+      "ap": 0.002702702702702703,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 746,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 747,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 748,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 749,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 750,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 751,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 752,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 753,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 754,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 755,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 756,
+      "ap": 0.03571428571428571,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 757,
+      "ap": 0.047619047619047616,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 758,
+      "ap": 0.07692307692307693,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 759,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 760,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 761,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 762,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 763,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 764,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 765,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 766,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 767,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 768,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 769,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 770,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 771,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 772,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 773,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 774,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 775,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 776,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 777,
+      "ap": 0.01282051282051282,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 778,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 779,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 780,
+      "ap": 0.016666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 781,
+      "ap": 0.023255813953488372,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 782,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 783,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 784,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 785,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 786,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 787,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 788,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 789,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 790,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 791,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 792,
+      "ap": 0.3384992027795626,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 5
+    },
+    {
+      "query_index": 793,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 794,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 795,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 796,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 797,
+      "ap": 0.010032817627754338,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 798,
+      "ap": 0.3,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 799,
+      "ap": 0.27040816326530615,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 800,
+      "ap": 0.011613532856213402,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 801,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 802,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 803,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 804,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 805,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 806,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 807,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 808,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 809,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 810,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 811,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 812,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 813,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 814,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 815,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 816,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 817,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 818,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 819,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 820,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 821,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 822,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 823,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 824,
+      "ap": 0.05,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 825,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 826,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 827,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 828,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 829,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 830,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 831,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 832,
+      "ap": 0.013888888888888888,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 833,
+      "ap": 0.03333333333333333,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 834,
+      "ap": 0.0078125,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 835,
+      "ap": 0.005555555555555556,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 836,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 837,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 838,
+      "ap": 0.5666666666666667,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 839,
+      "ap": 0.12878787878787878,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 840,
+      "ap": 0.15,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 841,
+      "ap": 0.55,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 842,
+      "ap": 0.14090909090909093,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 843,
+      "ap": 0.625,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 844,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 845,
+      "ap": 0.532258064516129,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 846,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 847,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 848,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 849,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 850,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 851,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 852,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 853,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 854,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 855,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 856,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 857,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 858,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 859,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 860,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 861,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 862,
+      "ap": 0.41666666666666663,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 863,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 864,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 865,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 866,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 867,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 868,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 869,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 870,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 871,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 872,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 873,
+      "ap": 0.08696969696969697,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 874,
+      "ap": 0.6916666666666668,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 875,
+      "ap": 0.4246031746031746,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 876,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 877,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 878,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 879,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 880,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 881,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 882,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 883,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 884,
+      "ap": 0.041666666666666664,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 885,
+      "ap": 0.030303030303030304,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 886,
+      "ap": 0.06666666666666667,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 887,
+      "ap": 0.0625,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 888,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 889,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 890,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 891,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 892,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 893,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 894,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 895,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 896,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 897,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 898,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 899,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 900,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 901,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 902,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 903,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 904,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 905,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 906,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 907,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 908,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 909,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 910,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 911,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 912,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 913,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 914,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 915,
+      "ap": 0.2126262626262626,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 916,
+      "ap": 0.584126984126984,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 917,
+      "ap": 0.18104575163398695,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 918,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 919,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 920,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 921,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 922,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 923,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 924,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 925,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 926,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 927,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 928,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 929,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 930,
+      "ap": 0.2,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 931,
+      "ap": 0.14285714285714285,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 932,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 933,
+      "ap": 0.14285714285714285,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 934,
+      "ap": 0.09090909090909091,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 935,
+      "ap": 0.02127659574468085,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 936,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 937,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 938,
+      "ap": 0.11075268817204302,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 939,
+      "ap": 0.2857142857142857,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 940,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 941,
+      "ap": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 942,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 943,
+      "ap": 0.6666666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 944,
+      "ap": 0.6666666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 945,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 946,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 947,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 948,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 949,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 950,
+      "ap": 0.02857142857142857,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 951,
+      "ap": 0.027777777777777776,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 952,
+      "ap": 0.03125,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 953,
+      "ap": 0.16666666666666666,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 954,
+      "ap": 0.8928571428571428,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 955,
+      "ap": 0.36408730158730157,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 956,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 4
+    },
+    {
+      "query_index": 957,
+      "ap": 0.06135531135531135,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 958,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 959,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 960,
+      "ap": 0.5133333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 961,
+      "ap": 0.025528455284552845,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 962,
+      "ap": 0.5149253731343284,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 963,
+      "ap": 0.06477732793522267,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 964,
+      "ap": 0.045454545454545456,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 965,
+      "ap": 0.05555555555555555,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 966,
+      "ap": 0.047619047619047616,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 967,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 968,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 969,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 970,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 971,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 972,
+      "ap": 0.41666666666666663,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 973,
+      "ap": 0.75,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 974,
+      "ap": 0.18253968253968253,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 975,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 976,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 977,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 978,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 979,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 980,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 981,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 982,
+      "ap": 0.325,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 983,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 984,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 985,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 986,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 987,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 988,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 989,
+      "ap": 0.9166666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 990,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 991,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 992,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 993,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 994,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 995,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 996,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 997,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 998,
+      "ap": 0.8333333333333333,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 999,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1000,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1001,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1002,
+      "ap": 0.14285714285714285,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1003,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1004,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1005,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1006,
+      "ap": 0.002364066193853428,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1007,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1008,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1009,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1010,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1011,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1012,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1013,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1014,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1015,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1016,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1017,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1018,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1019,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1020,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1021,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1022,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1023,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1024,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1025,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1026,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1027,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1028,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1029,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1030,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1031,
+      "ap": 0.41666666666666663,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1032,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1033,
+      "ap": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1034,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1035,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1036,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1037,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1038,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1039,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1040,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1041,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1042,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1043,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1044,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1045,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1046,
+      "ap": 0.9166666666666666,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 1047,
+      "ap": 0.6388888888888888,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 3
+    },
+    {
+      "query_index": 1048,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1049,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1050,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1051,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1052,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1053,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1054,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1055,
+      "ap": 0.11688311688311688,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1056,
+      "ap": 0.12222222222222222,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1057,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1058,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1059,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1060,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1061,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1062,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1063,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1064,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1065,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1066,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1067,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1068,
+      "ap": 0.7,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1069,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1070,
+      "ap": 0.0625,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1071,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1072,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1073,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1074,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1075,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1076,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1077,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1078,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1079,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1080,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1081,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1082,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1083,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1084,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1085,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1086,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1087,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1088,
+      "ap": 0.09166666666666667,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1089,
+      "ap": 0.10101010101010101,
+      "rank1": 0.0,
+      "rank5": 0.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1090,
+      "ap": 0.6,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1091,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1092,
+      "ap": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1093,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1094,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1095,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1096,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1097,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1098,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 2
+    },
+    {
+      "query_index": 1099,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1100,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1101,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1102,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1103,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1104,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1105,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1106,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1107,
+      "ap": null,
+      "rank1": null,
+      "rank5": null,
+      "num_relevant": 0
+    },
+    {
+      "query_index": 1108,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    },
+    {
+      "query_index": 1109,
+      "ap": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "num_relevant": 1
+    }
+  ]
+}
