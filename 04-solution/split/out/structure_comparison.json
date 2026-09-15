@@ -1,0 +1,117 @@
+{
+ "ours": {
+  "query_frames": 1110,
+  "gallery_frames": 750,
+  "ratio_q_to_g": 1.48,
+  "query_series": {
+   "frames": 1110,
+   "series": 975,
+   "frames_per_series": 1.1385
+  },
+  "gallery_series": {
+   "frames": 750,
+   "series": 747,
+   "frames_per_series": 1.004
+  },
+  "queries_with_same_moment_in_gallery_cos090": 234,
+  "bbox_median_share_query_pct": 15.8,
+  "bbox_median_share_gallery_pct": 16.1
+ },
+ "test": {
+  "query_frames": 1110,
+  "gallery_frames": 750,
+  "ratio_q_to_g": 1.48,
+  "query_series": {
+   "frames": 1110,
+   "series": 953,
+   "frames_per_series": 1.1647
+  },
+  "gallery_series": {
+   "frames": 750,
+   "series": 748,
+   "frames_per_series": 1.0027
+  },
+  "queries_with_same_moment_in_gallery_cos090": 365,
+  "bbox_median_share_query_pct": 16.2,
+  "bbox_median_share_gallery_pct": 16.2
+ },
+ "ours_labels_only": {
+  "protocol_identities": 369,
+  "frames_per_identity": {
+   "min": 1,
+   "median": 5.0,
+   "max": 8
+  },
+  "known_queries": 832,
+  "refusal_queries": 278,
+  "refusal_share": 0.2505,
+  "cross_camera_mates_per_known_query": {
+   "1": 514,
+   "2": 258,
+   "3": 39,
+   "5": 8,
+   "4": 13
+  },
+  "known_queries_with_same_camera_mate": 832,
+  "distinct_cameras_in_val": 90,
+  "top5_cameras_val_frames_pct": [
+   [
+    90,
+    197,
+    10.6
+   ],
+   [
+    89,
+    192,
+    10.3
+   ],
+   [
+    6,
+    67,
+    3.6
+   ],
+   [
+    12,
+    63,
+    3.4
+   ],
+   [
+    33,
+    58,
+    3.1
+   ]
+  ],
+  "top5_cameras_train_frames_pct": [
+   [
+    90,
+    1069,
+    11.2
+   ],
+   [
+    89,
+    969,
+    10.1
+   ],
+   [
+    43,
+    287,
+    3.0
+   ],
+   [
+    82,
+    286,
+    3.0
+   ],
+   [
+    6,
+    256,
+    2.7
+   ]
+  ]
+ },
+ "test_external_estimates": {
+  "queries_with_same_point_double_lower_bound": "635/1110 (EDA s05b)",
+  "identities_scenario": "250–350 (EDA §6, сценарная оценка)",
+  "refusal_share": "неизвестна (гарантировано лишь >0)"
+ }
+}

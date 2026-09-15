@@ -1,0 +1,39 @@
+{
+ "counts": {
+  "identities": {
+   "gallery_only_or_unused": 1,
+   "paired": 294,
+   "refusal": 75,
+   "train_fit": 1171,
+   "val_total": 370
+  },
+  "queries_with_same_camera_mate_in_gallery": 832,
+  "query_series_selected": {
+   "known": 736,
+   "refusal": 239
+  },
+  "second_frames_added": {
+   "known": 96,
+   "refusal": 39
+  },
+  "train_fit": 7248,
+  "val_gallery": 750,
+  "val_query": 1110,
+  "val_query_refusal": 278,
+  "val_query_with_mate": 832,
+  "val_unused": 448
+ },
+ "params": {
+  "n_gallery": 750,
+  "n_query": 1110,
+  "p_refusal": 0.25,
+  "seed": 20260915,
+  "target_query_series": 953
+ },
+ "sha256": {
+  "split_assignment.csv": "0d6b0ddbaccefbe08b1f9ac3810383ab52ca7f7481c3d30d2bf99fb986f74e28",
+  "train_fit.csv": "4eae49f6e50795445ef9281181571565298cc69828ba3d54b345386acb8441b8",
+  "val_gallery.csv": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+  "val_query.csv": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6"
+ }
+}
