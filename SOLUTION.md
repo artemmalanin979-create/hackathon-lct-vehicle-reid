@@ -317,6 +317,8 @@ docker run --rm --network none -e PYTHONDONTWRITEBYTECODE=1 \
 docker run --rm --network none vehicle-reid-service python -m pip freeze --all
 ```
 
+Дополнительно в сервисе есть [tools/eval_split.py](04-solution/service/tools/eval_split.py) и [tools/calibrate_threshold.py](04-solution/service/tools/calibrate_threshold.py). Они проверены на векторах, заново полученных командой R: ранжирование совпало, калибровка прошла 185 прямых сверок с контуром. Эти скрипты не копируются в образ Dockerfile и требуют доступа к исходному репозиторию; для калибровки нужно явно передать выходной каталог.
+
 ## 8. Таблица «число → команда» и границы воспроизведения
 
 | Числа/утверждение | Как получить | Результат проверки |
@@ -328,6 +330,7 @@ docker run --rm --network none vehicle-reid-service python -m pip freeze --all
 | 8 836 743 байта и SHA-256 ONNX | R → `model`; `sha256sum 04-solution/service/model/*.onnx` | Скачано заново, размер и хеш совпали |
 | Порядок `(query; gallery)` в `embeddings.npy` | R → `row_order`, независимый batch=1 на границах | Проверено переизвлечением, а не чтением отчёта |
 | 60 тестов метрик | T | Пройдены |
+| 185 прямых сверок новой калибровки | `docker run --rm --network none -v "$REPO:/repo:ro" -v "$OUT_DIR:/out" vehicle-reid-service python -B /repo/04-solution/service/tools/calibrate_threshold.py /out/val/embeddings.npy /out/calibration` | Пройдены на независимо извлечённых векторах; результат — `headline.json` и `verification.json` |
 | Точные версии всех пакетов образа | V | Полный freeze проверенной сборки — §10 |
 | Исторические 43.8 мс/объект и 0.55 с на rerank | `python 04-solution/postproc/scripts/s09_timing.py` | Источник — [s09_timing.json](04-solution/postproc/out/s09_timing.json); точные исторические тайминги не воспроизведены. Скрипту не хватает model/out-векторов. R выполняет новый ограниченный замер, с другим объёмом выборки и лимитом CPU |
 | Эффект зоны пластины около −0.003 mAP, 95% CI [−0.011; +0.004]; расширенная маска: верхняя граница +0.016 | `python 04-solution/plate-ablation/scripts/eval_variants.py` после извлечения всех вариантов | **Не воспроизведено из git:** нет `work/emb`, детекций и исходной ручной разметки. Числа только из [ablation.json](04-solution/plate-ablation/out/ablation.json) и [отчёта](04-solution/plate-ablation/REPORT.md) |
