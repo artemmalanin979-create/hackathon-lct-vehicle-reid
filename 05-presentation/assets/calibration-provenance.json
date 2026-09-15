@@ -1,0 +1,31 @@
+{
+  "branch": "rerank_market_presence",
+  "selection": "selected.robust_balanced",
+  "curve_rows": 1111,
+  "selected": {
+    "mode": "presence",
+    "threshold": 0.49937235233589916,
+    "tp": 603,
+    "fp": 62,
+    "fn": 229,
+    "tn_unknown": 216,
+    "fp_unknown": 62,
+    "precision": 0.9067669172932331,
+    "recall": 0.7247596153846154,
+    "f1": 0.8056112224448898,
+    "tnr": 0.7769784172661871,
+    "auc_pr": 0.921883867563915,
+    "auc_pr_trapezoid": 0.921883867563915,
+    "ap_pr_step": 0.9219639623994422
+  },
+  "sources": {
+    "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/calib/curve_rerank_market_presence.csv": "17ea6df6bc79d12e5a082ce7448a3486ecd71731ba2145d1376a28e7284dd611",
+    "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/calib/summary.json": "435c75a9d0fe10d05ac9735204d948382b2c019cd5999d41b68277cbb555a111"
+  },
+  "rendering": "steps-pre, existing CSV rows only, no smoothing",
+  "notice": "Calibration validation; untrained weights; not a holdout result.",
+  "outputs": [
+    "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_18/assets/f1_tnr_threshold.svg",
+    "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_18/assets/f1_tnr_threshold.png"
+  ]
+}
