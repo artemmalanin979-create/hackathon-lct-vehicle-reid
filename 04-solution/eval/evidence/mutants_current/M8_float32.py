@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: оценки и порог квантуются во float32 перед сравнением и сортировкой
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -197,7 +198,7 @@ def _evaluate_full(
         except TypeError as exc:
             raise ValueError("gallery_keys must have mutually comparable types") from exc
     sign = 1.0 if score_kind == "similarity" else -1.0
-    utility, cutoff = raw * sign, threshold * sign
+    utility, cutoff = (raw * sign).astype(np.float32).astype(np.float64), float(np.float64(np.float32(threshold * sign)))
     rows, event_scores, event_correct = [], [], []
     known_count = unknown_count = filtered_count = unknown_tn = 0
     pair_positive_count = 0

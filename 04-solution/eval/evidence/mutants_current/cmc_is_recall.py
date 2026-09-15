@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: CMC подменена recall@k
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -76,7 +77,7 @@ def _rank_statistics(relevant, method):
         before_hit[later] = (hits[later] - 1) / (ranks[later] - 1)
         ap = float(np.mean((before_hit + at_hit) / 2))
     return dict(ap=ap, inp=float(count / ranks[-1]),
-                rank1=float(ranks[0] <= 1), rank5=float(ranks[0] <= 5),
+                rank1=float(np.count_nonzero(ranks <= 1) / count), rank5=float(np.count_nonzero(ranks <= 5) / count),
                 positive_ranks=ranks.tolist(), num_relevant=count)
 
 

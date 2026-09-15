@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: mAP взвешивается числом верных
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -84,7 +85,7 @@ def _aggregate_ranking(rows, total_queries):
     # total_queries is intentionally not the denominator: only valid queries.
     valid = [row for row in rows if row["ap"] is not None]
     return {
-        "mAP": _mean([row["ap"] for row in valid]),
+        "mAP": _ratio(math.fsum(row["ap"] * row["num_relevant"] for row in valid), sum(row["num_relevant"] for row in valid)),
         "Rank-1": _mean([row["rank1"] for row in valid]),
         "Rank-5": _mean([row["rank5"] for row in valid]),
         "mINP": _mean([row["inp"] for row in valid]),

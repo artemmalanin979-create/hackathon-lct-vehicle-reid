@@ -294,5 +294,89 @@ class MetricTests(unittest.TestCase):
                     self.assertAlmostEqual(sum(v[key] for v in values) / len(values), float(expected), places=12)
 
 
+class BlindSpotTests(unittest.TestCase):
+    def test_keys_three_cycle_and_permutations(self):
+        from oracle_checks import check_legacy
+        for perm in itertools.permutations(range(4)):
+            for kind, sign in [("similarity", 1), ("distance", -1)]:
+                gids = [8, 8, 7, 7]
+                keys = ["b", "d", "a", "c"]
+                result = check_legacy(metrics, [[sign] * 4], [7],
+                                      [gids[j] for j in perm], [0], [1] * 4, [False],
+                                      gallery_keys=[keys[j] for j in perm], score_kind=kind)
+                self.assertAlmostEqual(result["ranking"]["mAP"], 5 / 6, places=12)
+
+    def test_keys_combined_with_every_filter(self):
+        from oracle_checks import check_legacy
+        filters = [dict(gallery_junk=[False, True, False]),
+                   dict(exclude_mask=[[False, True, False]]),
+                   dict(query_frames=[7], gallery_frames=[8, 7, 8])]
+        for options in filters:
+            for kind, sign in [("similarity", 1), ("distance", -1)]:
+                check_legacy(metrics, [[5 * sign, 9 * sign, sign]], [7], [8, 7, 7],
+                             [0], [1, 0 if "query_frames" in options else 1, 1], [False],
+                             gallery_keys=["c", "a", "b"], score_kind=kind, **options)
+        for camera in ["market", "all_same_camera"]:
+            check_legacy(metrics, [[5, 9, 1]], [7], [8, 7, 7], [0], [1, 0, 1], [False],
+                         gallery_keys=[30, 10, 20], camera_policy=camera)
+
+    def test_distance_pr_curve_all_fields(self):
+        from oracle_checks import check_legacy
+        for mode in ["presence", "top1", "pairwise"]:
+            result = check_legacy(metrics, [[1., 3.], [1., 2.], [2., 2.]],
+                                  [1, 9, 2], [1, 2], [0] * 3, [1, 1],
+                                  [False, True, False], threshold=2.,
+                                  score_kind="distance", refusal_mode=mode)
+            self.assertTrue(all(t is None or t > 0
+                                for t in result["refusal"]["pr_curve"]["thresholds"]))
+
+    def test_distance_top_score_original_units(self):
+        result = run([[1., 3.]], [1], [1, 2], threshold=2., score_kind="distance")
+        self.assertEqual(result["per_query"][0]["top_score"], 1.)
+
+    def test_audit_counts_and_one_based_ranks(self):
+        from oracle_checks import check_legacy
+        result = check_legacy(metrics, [[9, 4, 3, 2, 1]], [1], [1, 2, 1, 3, 1],
+                              [0], [0, 1, 1, 1, 1], [False])
+        row = result["per_query"][0]
+        self.assertEqual((row["eligible_count"], row["num_relevant"]), (4, 2))
+        self.assertEqual(row["positive_ranks"], [2, 4])
+        self.assertEqual(result["counts"]["relevant_pairs"], 2)
+
+    def test_unknown_threshold_equality_all_modes(self):
+        from oracle_checks import check_legacy
+        for mode in ["presence", "top1", "pairwise"]:
+            for kind in ["similarity", "distance"]:
+                result = check_legacy(metrics, [[.5]], [9], [1], [0], [1], [True],
+                                      refusal_mode=mode, score_kind=kind)
+                self.assertTrue(result["per_query"][0]["accepted"])
+                self.assertEqual(result["refusal"]["tnr"], 0.)
+                self.assertEqual(result["refusal"]["fp_unknown"], 1)
+
+    def test_float64_near_float32_ranking(self):
+        for kind, values in [("similarity", [.6, .6 + 2e-8]),
+                             ("distance", [.6 + 2e-8, .6])]:
+            result = run([values], [1], [1, 2], score_kind=kind)
+            self.assertEqual(result["ranking"]["mAP"], .5)
+            self.assertEqual(result["ranking"]["Rank-1"], 0.)
+
+    def test_float64_near_float32_unknown_threshold(self):
+        for kind, threshold in [("similarity", .5 + 6e-9), ("distance", .5 - 6e-9)]:
+            result = run([[.5]], [9], [1], absent=[True], threshold=threshold, score_kind=kind)
+            self.assertFalse(result["per_query"][0]["accepted"])
+            self.assertEqual(result["refusal"]["tnr"], 1.)
+
+    def test_float32_scores_are_honest_exact_ties(self):
+        values = np.array([[.6, .6 + 2e-8]], dtype=np.float32)
+        self.assertEqual(values[0, 0], values[0, 1])
+        result = run(values, [1], [1, 2], include_rankings=True)
+        self.assertEqual(result["per_query"][0]["ranking"], [0, 1])
+        self.assertEqual(result["ranking"]["mAP"], 1.)
+
+    def test_full_output_fraction_oracle(self):
+        from oracle_checks import differential_all_fields
+        self.assertEqual(differential_all_fields(metrics, trials=120)["mismatches"], 0)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

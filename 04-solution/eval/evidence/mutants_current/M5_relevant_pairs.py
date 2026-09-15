@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: counts.relevant_pairs подменён числом известных запросов
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -280,7 +281,7 @@ def _evaluate_full(
         counts=dict(queries=nq, gallery=ng, known_queries=known_count,
                     unknown_queries=unknown_count, filtered_queries=filtered_count,
                     refusal_queries=known_count + unknown_count,
-                    relevant_pairs=pair_positive_count),
+                    relevant_pairs=known_count),
         ranking=_aggregate_ranking(rows, nq), refusal=refusal, per_query=rows,
     )
 

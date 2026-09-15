@@ -1,0 +1,332 @@
+[
+  {
+    "name": "reverse_sort",
+    "description": "Сортировка близости по возрастанию",
+    "changes": [
+      [
+        "np.argsort(-values[candidates], kind=\"stable\")",
+        "np.argsort(values[candidates], kind=\"stable\")",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/reverse_sort.py"
+  },
+  {
+    "name": "no_camera_filter",
+    "description": "Удаление фильтра камеры",
+    "changes": [
+      [
+        "return ~(same_id & same_camera)",
+        "return np.ones_like(same_id, dtype=bool)",
+        1
+      ],
+      [
+        "return ~same_camera",
+        "return np.ones_like(same_camera, dtype=bool)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/no_camera_filter.py"
+  },
+  {
+    "name": "mean_all_queries",
+    "description": "mAP делится на все запросы",
+    "changes": [
+      [
+        "_mean([row[\"ap\"] for row in valid])",
+        "_ratio(math.fsum(row[\"ap\"] or 0.0 for row in rows), total_queries)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/mean_all_queries.py"
+  },
+  {
+    "name": "mean_weighted_positives",
+    "description": "mAP взвешивается числом верных",
+    "changes": [
+      [
+        "_mean([row[\"ap\"] for row in valid])",
+        "_ratio(math.fsum(row[\"ap\"] * row[\"num_relevant\"] for row in valid), sum(row[\"num_relevant\"] for row in valid))",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/mean_weighted_positives.py"
+  },
+  {
+    "name": "ap_divide_gallery",
+    "description": "AP делится на длину списка",
+    "changes": [
+      [
+        "ap = float(np.mean(at_hit))",
+        "ap = float(np.sum(at_hit) / len(relevant))",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/ap_divide_gallery.py"
+  },
+  {
+    "name": "ignore_junk",
+    "description": "Не исключается gallery_junk",
+    "changes": [
+      [
+        "_camera_keep(same_id, same_camera, camera_policy) & ~junk",
+        "_camera_keep(same_id, same_camera, camera_policy)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/ignore_junk.py"
+  },
+  {
+    "name": "cmc_is_recall",
+    "description": "CMC подменена recall@k",
+    "changes": [
+      [
+        "rank1=float(ranks[0] <= 1), rank5=float(ranks[0] <= 5)",
+        "rank1=float(np.count_nonzero(ranks <= 1) / count), rank5=float(np.count_nonzero(ranks <= 5) / count)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/cmc_is_recall.py"
+  },
+  {
+    "name": "inp_first",
+    "description": "INP использует первое совпадение",
+    "changes": [
+      [
+        "inp=float(count / ranks[-1])",
+        "inp=float(1.0 / ranks[0])",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/inp_first.py"
+  },
+  {
+    "name": "ties_reverse",
+    "description": "Обратный порядок внутри ничьих",
+    "changes": [
+      [
+        "candidates = tie_order[eligible[tie_order]]",
+        "candidates = tie_order[eligible[tie_order]][::-1]",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/ties_reverse.py"
+  },
+  {
+    "name": "threshold_strict",
+    "description": "Строгое сравнение порога",
+    "changes": [
+      [
+        ">= cutoff",
+        "> cutoff",
+        2
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/threshold_strict.py"
+  },
+  {
+    "name": "identity_as_presence",
+    "description": "Ошибочная идентичность считается TP",
+    "changes": [
+      [
+        "if refusal_mode == \"top1\":",
+        "if False:",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/identity_as_presence.py"
+  },
+  {
+    "name": "pr_split_ties",
+    "description": "Ничьи PR разрываются по одному кандидату",
+    "changes": [
+      [
+        "ends = np.flatnonzero(np.r_[scores[1:] != scores[:-1], True])",
+        "ends = np.arange(scores.size)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/pr_split_ties.py"
+  },
+  {
+    "name": "pr_area_alias",
+    "description": "Трапеции PR подменяются AP step",
+    "changes": [
+      [
+        "auc_pr_trapezoid=float(trap_area)",
+        "auc_pr_trapezoid=float(step_area)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/pr_area_alias.py"
+  },
+  {
+    "name": "rank5_off_by_one",
+    "description": "Rank-5 использует ранг <5",
+    "changes": [
+      [
+        "rank5=float(ranks[0] <= 5)",
+        "rank5=float(ranks[0] < 5)",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/rank5_off_by_one.py"
+  },
+  {
+    "name": "filtered_become_fn",
+    "description": "Исключённые известные запросы добавляются в FN",
+    "changes": [
+      [
+        "else known_count\n    escores",
+        "else known_count + filtered_count\n    escores",
+        1
+      ]
+    ],
+    "origin": "author",
+    "artifact": "mutants/filtered_become_fn.py"
+  },
+  {
+    "name": "M1_keys_filter_mask",
+    "description": "gallery_keys: маска eligible применяется к tie_order позиционно (ранжируется не то множество)",
+    "changes": [
+      [
+        "candidates = tie_order[eligible[tie_order]]",
+        "candidates = tie_order[eligible]",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M1_keys_filter_mask.py"
+  },
+  {
+    "name": "M1b_keys_inverse_perm",
+    "description": "gallery_keys: используется обратная перестановка ключей (незаметно при 2 элементах)",
+    "changes": [
+      [
+        "tie_order = np.asarray(sorted(range(ng), key=lambda j: keys[j]), dtype=int)",
+        "tie_order = np.argsort(np.asarray(sorted(range(ng), key=lambda j: keys[j]), dtype=int))",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M1b_keys_inverse_perm.py"
+  },
+  {
+    "name": "M2_pr_thresholds_sign",
+    "description": "pr_curve.thresholds не переводятся обратно в шкалу расстояний",
+    "changes": [
+      [
+        "curve[\"thresholds\"] = [None if t is None else t * sign for t in curve[\"thresholds\"]]",
+        "curve[\"thresholds\"] = list(curve[\"thresholds\"])",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M2_pr_thresholds_sign.py"
+  },
+  {
+    "name": "M3_top_score_sign",
+    "description": "top_score отдаёт внутреннюю полезность (знак) вместо исходной оценки",
+    "changes": [
+      [
+        "top_score=float(raw[i, best]) if best is not None else None",
+        "top_score=float(utility[i, best]) if best is not None else None",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M3_top_score_sign.py"
+  },
+  {
+    "name": "M4_eligible_count",
+    "description": "eligible_count всегда равен размеру галереи",
+    "changes": [
+      [
+        "row = dict(query_index=i, status=status, eligible_count=int(order.size),",
+        "row = dict(query_index=i, status=status, eligible_count=int(ng),",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M4_eligible_count.py"
+  },
+  {
+    "name": "M5_relevant_pairs",
+    "description": "counts.relevant_pairs подменён числом известных запросов",
+    "changes": [
+      [
+        "relevant_pairs=pair_positive_count),",
+        "relevant_pairs=known_count),",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M5_relevant_pairs.py"
+  },
+  {
+    "name": "M6_positive_ranks_0based",
+    "description": "positive_ranks отдаются с нуля, а не с единицы",
+    "changes": [
+      [
+        "positive_ranks=ranks.tolist(), num_relevant=count)",
+        "positive_ranks=(ranks - 1).tolist(), num_relevant=count)",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M6_positive_ranks_0based.py"
+  },
+  {
+    "name": "M7_num_relevant",
+    "description": "num_relevant отдаёт ранг последнего совпадения вместо числа совпадений",
+    "changes": [
+      [
+        "positive_ranks=ranks.tolist(), num_relevant=count)",
+        "positive_ranks=ranks.tolist(), num_relevant=int(ranks[-1]))",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M7_num_relevant.py"
+  },
+  {
+    "name": "M8_float32",
+    "description": "оценки и порог квантуются во float32 перед сравнением и сортировкой",
+    "changes": [
+      [
+        "utility, cutoff = raw * sign, threshold * sign",
+        "utility, cutoff = (raw * sign).astype(np.float32).astype(np.float64), float(np.float64(np.float32(threshold * sign)))",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M8_float32.py"
+  },
+  {
+    "name": "M9_accepted_strict",
+    "description": "порог принятия строгий только в per_query/TNR (tp/fp остаются нестрогими)",
+    "changes": [
+      [
+        "accepted = best is not None and bool(utility[i, best] >= cutoff)",
+        "accepted = best is not None and bool(utility[i, best] > cutoff)",
+        1
+      ]
+    ],
+    "origin": "review",
+    "artifact": "review/mutants-surviving/mutant_M9_accepted_strict.py"
+  }
+]

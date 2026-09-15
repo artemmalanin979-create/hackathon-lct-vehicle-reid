@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: gallery_keys: маска eligible применяется к tie_order позиционно (ранжируется не то множество)
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -56,7 +57,7 @@ def _camera_keep(same_id, same_camera, policy):
 
 def _rank_indices(values, eligible, tie_order):
     # tie_order is either the original column order or ascending unique keys.
-    candidates = tie_order[eligible[tie_order]]
+    candidates = tie_order[eligible]
     return candidates[np.argsort(-values[candidates], kind="stable")]
 
 

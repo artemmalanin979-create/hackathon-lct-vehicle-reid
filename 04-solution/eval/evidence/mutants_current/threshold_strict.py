@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Строгое сравнение порога
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -222,7 +223,7 @@ def _evaluate_full(
         if stats:
             row.update(stats)
         best = int(order[0]) if order.size else None
-        accepted = best is not None and bool(utility[i, best] >= cutoff)
+        accepted = best is not None and bool(utility[i, best] > cutoff)
         row.update(top_gallery_index=best,
                    top_score=float(raw[i, best]) if best is not None else None,
                    accepted=accepted)
@@ -251,7 +252,7 @@ def _evaluate_full(
     positives = pair_positive_count if refusal_mode == "pairwise" else known_count
     escores = np.asarray(event_scores, dtype=np.float64)
     ecorrect = np.asarray(event_correct, dtype=bool)
-    selected = escores >= cutoff
+    selected = escores > cutoff
     tp = int(np.count_nonzero(selected & ecorrect))
     fp = int(np.count_nonzero(selected & ~ecorrect))
     fn = int(positives - tp)

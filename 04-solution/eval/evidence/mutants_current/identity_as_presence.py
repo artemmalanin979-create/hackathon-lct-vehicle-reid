@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Ошибочная идентичность считается TP
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -245,7 +246,7 @@ def _evaluate_full(
         elif best is not None:
             event_scores.append(float(utility[i, best]))
             correct = status == "known"
-            if refusal_mode == "top1":
+            if False:
                 correct = correct and bool(same_id[best])
             event_correct.append(correct)
     positives = pair_positive_count if refusal_mode == "pairwise" else known_count

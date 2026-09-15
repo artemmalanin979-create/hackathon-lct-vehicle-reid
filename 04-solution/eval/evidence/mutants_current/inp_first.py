@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: INP использует первое совпадение
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -75,7 +76,7 @@ def _rank_statistics(relevant, method):
         later = ranks > 1
         before_hit[later] = (hits[later] - 1) / (ranks[later] - 1)
         ap = float(np.mean((before_hit + at_hit) / 2))
-    return dict(ap=ap, inp=float(count / ranks[-1]),
+    return dict(ap=ap, inp=float(1.0 / ranks[0]),
                 rank1=float(ranks[0] <= 1), rank5=float(ranks[0] <= 5),
                 positive_ranks=ranks.tolist(), num_relevant=count)
 

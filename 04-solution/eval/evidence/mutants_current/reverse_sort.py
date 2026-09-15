@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Сортировка близости по возрастанию
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -57,7 +58,7 @@ def _camera_keep(same_id, same_camera, policy):
 def _rank_indices(values, eligible, tie_order):
     # tie_order is either the original column order or ascending unique keys.
     candidates = tie_order[eligible[tie_order]]
-    return candidates[np.argsort(-values[candidates], kind="stable")]
+    return candidates[np.argsort(values[candidates], kind="stable")]
 
 
 def _rank_statistics(relevant, method):

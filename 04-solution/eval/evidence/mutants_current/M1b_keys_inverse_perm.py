@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: gallery_keys: используется обратная перестановка ключей (незаметно при 2 элементах)
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -193,7 +194,7 @@ def _evaluate_full(
         if len(set(keys.tolist())) != ng:
             raise ValueError("gallery_keys must be unique")
         try:
-            tie_order = np.asarray(sorted(range(ng), key=lambda j: keys[j]), dtype=int)
+            tie_order = np.argsort(np.asarray(sorted(range(ng), key=lambda j: keys[j]), dtype=int))
         except TypeError as exc:
             raise ValueError("gallery_keys must have mutually comparable types") from exc
     sign = 1.0 if score_kind == "similarity" else -1.0

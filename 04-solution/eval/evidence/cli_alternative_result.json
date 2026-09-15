@@ -1,0 +1,1187 @@
+{
+  "protocol": {
+    "camera_policy": "all_same_camera",
+    "ap_method": "market_matlab",
+    "refusal_mode": "pairwise",
+    "score_kind": "distance",
+    "tie_policy": "column_index",
+    "filtered_positive_policy": "as_unknown",
+    "empty_denominator": null,
+    "threshold_rule": "<=",
+    "ranking_scope": "full_gallery",
+    "auc_pr_method": "trapezoid",
+    "schema_version": 2,
+    "ranking_scopes": [
+      "full_gallery",
+      "top_k"
+    ],
+    "ranking_alias": "ranking_full_gallery",
+    "top_k": 2,
+    "ap_denominator": "retrieved_positives",
+    "query_average": "all_queries_zero",
+    "incomplete_inp": "zero_if_incomplete",
+    "rank_beyond_k": "clamp_to_k",
+    "rank_ks": [
+      1,
+      3,
+      5,
+      12
+    ],
+    "truncation_order": "filter_then_top_k",
+    "rank_and_inp_query_average": "valid_queries",
+    "refusal_scope": "full_eligible_gallery",
+    "score_precision": "float64_no_downcast",
+    "threshold_precision": "float64_no_downcast",
+    "score_input_dtype": "float64",
+    "tie_equality": "exact_represented_value",
+    "embedding_accumulation": "float64",
+    "missing_ap_all_queries": "zero",
+    "empty_retrieved_ap_for_valid_query": 0.0,
+    "incomplete_inp_mean": "propagate_undefined_or_assign_zero; never_drop_query"
+  },
+  "counts": {
+    "queries": 5,
+    "gallery": 4,
+    "known_queries": 3,
+    "unknown_queries": 2,
+    "filtered_queries": 0,
+    "refusal_queries": 5,
+    "relevant_pairs": 3
+  },
+  "ranking": {
+    "mAP": 0.09166666666666666,
+    "Rank-1": 0.0,
+    "Rank-5": 1.0,
+    "mINP": 0.3055555555555555,
+    "num_valid_queries": 3,
+    "scope": "full_gallery",
+    "mAP_by_query_average": {
+      "valid_queries": 0.15277777777777776,
+      "all_queries_zero": 0.09166666666666666
+    },
+    "mAP_query_average": "all_queries_zero",
+    "mAP_denominator": 5,
+    "Rank-3": 0.6666666666666666,
+    "Rank-12": 1.0
+  },
+  "refusal": {
+    "mode": "pairwise",
+    "threshold": 0.5,
+    "tp": 1,
+    "fp": 15,
+    "fn": 2,
+    "tn_unknown": 0,
+    "fp_unknown": 2,
+    "precision": 0.0625,
+    "recall": 0.3333333333333333,
+    "f1": 0.10526315789473684,
+    "tnr": 0.0,
+    "auc_pr": 0.08367948056415549,
+    "auc_pr_trapezoid": 0.08367948056415549,
+    "ap_pr_step": 0.11143790849673202,
+    "pr_curve": {
+      "auc_pr_trapezoid": 0.08367948056415549,
+      "ap_pr_step": 0.11143790849673202,
+      "max_recall": 1.0,
+      "positive_count": 3,
+      "thresholds": [
+        null,
+        0.0,
+        0.02,
+        0.03,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.7,
+        0.8,
+        0.85,
+        0.9
+      ],
+      "precision": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.06666666666666667,
+        0.0625,
+        0.11764705882352941,
+        0.1111111111111111,
+        0.10526315789473684,
+        0.15
+      ],
+      "recall": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.6666666666666666,
+        0.6666666666666666,
+        0.6666666666666666,
+        1.0
+      ],
+      "tp": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3
+      ],
+      "fp": [
+        0,
+        5,
+        7,
+        9,
+        11,
+        14,
+        14,
+        15,
+        15,
+        16,
+        17,
+        17
+      ]
+    }
+  },
+  "per_query": [
+    {
+      "query_index": 0,
+      "status": "known",
+      "eligible_count": 4,
+      "ap": 0.125,
+      "inp": 0.25,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "positive_ranks": [
+        4
+      ],
+      "num_relevant": 1,
+      "top_gallery_index": 3,
+      "top_score": 0.0,
+      "accepted": true,
+      "ranking": [
+        3,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "query_index": 1,
+      "status": "known",
+      "eligible_count": 4,
+      "ap": 0.16666666666666666,
+      "inp": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "positive_ranks": [
+        3
+      ],
+      "num_relevant": 1,
+      "top_gallery_index": 0,
+      "top_score": 0.0,
+      "accepted": true,
+      "ranking": [
+        0,
+        2,
+        1,
+        3
+      ]
+    },
+    {
+      "query_index": 2,
+      "status": "known",
+      "eligible_count": 4,
+      "ap": 0.16666666666666666,
+      "inp": 0.3333333333333333,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "positive_ranks": [
+        3
+      ],
+      "num_relevant": 1,
+      "top_gallery_index": 0,
+      "top_score": 0.0,
+      "accepted": true,
+      "ranking": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "query_index": 3,
+      "status": "unknown",
+      "eligible_count": 4,
+      "ap": null,
+      "inp": null,
+      "rank1": null,
+      "rank5": null,
+      "positive_ranks": [],
+      "num_relevant": 0,
+      "top_gallery_index": 0,
+      "top_score": 0.0,
+      "accepted": true,
+      "ranking": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "query_index": 4,
+      "status": "unknown",
+      "eligible_count": 4,
+      "ap": null,
+      "inp": null,
+      "rank1": null,
+      "rank5": null,
+      "positive_ranks": [],
+      "num_relevant": 0,
+      "top_gallery_index": 0,
+      "top_score": 0.0,
+      "accepted": true,
+      "ranking": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "ranking_full_gallery": {
+    "mAP": 0.09166666666666666,
+    "Rank-1": 0.0,
+    "Rank-5": 1.0,
+    "mINP": 0.3055555555555555,
+    "num_valid_queries": 3,
+    "scope": "full_gallery",
+    "mAP_by_query_average": {
+      "valid_queries": 0.15277777777777776,
+      "all_queries_zero": 0.09166666666666666
+    },
+    "mAP_query_average": "all_queries_zero",
+    "mAP_denominator": 5,
+    "Rank-3": 0.6666666666666666,
+    "Rank-12": 1.0
+  },
+  "ranking_top_k": {
+    "scope": "top_k",
+    "k": 2,
+    "filter_order": "filter_then_top_k",
+    "ap_denominator": "retrieved_positives",
+    "mAP_query_average": "all_queries_zero",
+    "incomplete_inp_policy": "zero_if_incomplete",
+    "rank_beyond_k_policy": "clamp_to_k",
+    "mAP": 0.0,
+    "mINP": 0.0,
+    "Rank-1": 0.0,
+    "Rank-3": 0.0,
+    "Rank-5": 0.0,
+    "Rank-12": 0.0,
+    "num_valid_queries": 3,
+    "mAP_denominator": 5,
+    "num_incomplete_queries": 3,
+    "num_complete_queries": 0,
+    "mAP_by_ap_denominator_and_query_average": {
+      "all_gallery_positives": {
+        "valid_queries": 0.0,
+        "all_queries_zero": 0.0
+      },
+      "retrieved_positives": {
+        "valid_queries": 0.0,
+        "all_queries_zero": 0.0
+      }
+    },
+    "mINP_by_incomplete_policy": {
+      "undefined_if_incomplete": null,
+      "zero_if_incomplete": 0.0
+    },
+    "ranks_by_beyond_k_policy": {
+      "undefined": {
+        "Rank-1": 0.0,
+        "Rank-3": null,
+        "Rank-5": null,
+        "Rank-12": null
+      },
+      "clamp_to_k": {
+        "Rank-1": 0.0,
+        "Rank-3": 0.0,
+        "Rank-5": 0.0,
+        "Rank-12": 0.0
+      }
+    }
+  },
+  "ranking_top_k_by_filter_order": {
+    "top_k_then_filter": {
+      "scope": "top_k",
+      "k": 2,
+      "filter_order": "top_k_then_filter",
+      "ap_denominator": "retrieved_positives",
+      "mAP_query_average": "all_queries_zero",
+      "incomplete_inp_policy": "zero_if_incomplete",
+      "rank_beyond_k_policy": "clamp_to_k",
+      "mAP": 0.0,
+      "mINP": 0.0,
+      "Rank-1": 0.0,
+      "Rank-3": 0.0,
+      "Rank-5": 0.0,
+      "Rank-12": 0.0,
+      "num_valid_queries": 3,
+      "mAP_denominator": 5,
+      "num_incomplete_queries": 3,
+      "num_complete_queries": 0,
+      "mAP_by_ap_denominator_and_query_average": {
+        "all_gallery_positives": {
+          "valid_queries": 0.0,
+          "all_queries_zero": 0.0
+        },
+        "retrieved_positives": {
+          "valid_queries": 0.0,
+          "all_queries_zero": 0.0
+        }
+      },
+      "mINP_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.0
+      },
+      "ranks_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.0,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.0,
+          "Rank-3": 0.0,
+          "Rank-5": 0.0,
+          "Rank-12": 0.0
+        }
+      }
+    },
+    "filter_then_top_k": {
+      "scope": "top_k",
+      "k": 2,
+      "filter_order": "filter_then_top_k",
+      "ap_denominator": "retrieved_positives",
+      "mAP_query_average": "all_queries_zero",
+      "incomplete_inp_policy": "zero_if_incomplete",
+      "rank_beyond_k_policy": "clamp_to_k",
+      "mAP": 0.0,
+      "mINP": 0.0,
+      "Rank-1": 0.0,
+      "Rank-3": 0.0,
+      "Rank-5": 0.0,
+      "Rank-12": 0.0,
+      "num_valid_queries": 3,
+      "mAP_denominator": 5,
+      "num_incomplete_queries": 3,
+      "num_complete_queries": 0,
+      "mAP_by_ap_denominator_and_query_average": {
+        "all_gallery_positives": {
+          "valid_queries": 0.0,
+          "all_queries_zero": 0.0
+        },
+        "retrieved_positives": {
+          "valid_queries": 0.0,
+          "all_queries_zero": 0.0
+        }
+      },
+      "mINP_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.0
+      },
+      "ranks_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.0,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.0,
+          "Rank-3": 0.0,
+          "Rank-5": 0.0,
+          "Rank-12": 0.0
+        }
+      }
+    }
+  },
+  "per_query_top_k": [
+    {
+      "query_index": 0,
+      "status": "known",
+      "candidate_count": 2,
+      "num_relevant_gallery": 1,
+      "num_relevant_retrieved": 0,
+      "positive_ranks": [],
+      "all_positives_retrieved": false,
+      "ap_by_denominator": {
+        "all_gallery_positives": 0.0,
+        "retrieved_positives": 0.0
+      },
+      "inp_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.0
+      },
+      "rank_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.0,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.0,
+          "Rank-3": 0.0,
+          "Rank-5": 0.0,
+          "Rank-12": 0.0
+        }
+      },
+      "ranking": [
+        3,
+        2
+      ]
+    },
+    {
+      "query_index": 1,
+      "status": "known",
+      "candidate_count": 2,
+      "num_relevant_gallery": 1,
+      "num_relevant_retrieved": 0,
+      "positive_ranks": [],
+      "all_positives_retrieved": false,
+      "ap_by_denominator": {
+        "all_gallery_positives": 0.0,
+        "retrieved_positives": 0.0
+      },
+      "inp_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.0
+      },
+      "rank_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.0,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.0,
+          "Rank-3": 0.0,
+          "Rank-5": 0.0,
+          "Rank-12": 0.0
+        }
+      },
+      "ranking": [
+        0,
+        2
+      ]
+    },
+    {
+      "query_index": 2,
+      "status": "known",
+      "candidate_count": 2,
+      "num_relevant_gallery": 1,
+      "num_relevant_retrieved": 0,
+      "positive_ranks": [],
+      "all_positives_retrieved": false,
+      "ap_by_denominator": {
+        "all_gallery_positives": 0.0,
+        "retrieved_positives": 0.0
+      },
+      "inp_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.0
+      },
+      "rank_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.0,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.0,
+          "Rank-3": 0.0,
+          "Rank-5": 0.0,
+          "Rank-12": 0.0
+        }
+      },
+      "ranking": [
+        0,
+        1
+      ]
+    },
+    {
+      "query_index": 3,
+      "status": "unknown",
+      "candidate_count": 2,
+      "num_relevant_gallery": 0,
+      "num_relevant_retrieved": 0,
+      "positive_ranks": [],
+      "all_positives_retrieved": null,
+      "ap_by_denominator": {
+        "all_gallery_positives": null,
+        "retrieved_positives": null
+      },
+      "inp_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": null
+      },
+      "rank_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": null,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": null,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        }
+      },
+      "ranking": [
+        0,
+        1
+      ]
+    },
+    {
+      "query_index": 4,
+      "status": "unknown",
+      "candidate_count": 2,
+      "num_relevant_gallery": 0,
+      "num_relevant_retrieved": 0,
+      "positive_ranks": [],
+      "all_positives_retrieved": null,
+      "ap_by_denominator": {
+        "all_gallery_positives": null,
+        "retrieved_positives": null
+      },
+      "inp_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": null
+      },
+      "rank_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": null,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        },
+        "clamp_to_k": {
+          "Rank-1": null,
+          "Rank-3": null,
+          "Rank-5": null,
+          "Rank-12": null
+        }
+      },
+      "ranking": [
+        0,
+        1
+      ]
+    }
+  ],
+  "per_query_top_k_by_filter_order": {
+    "top_k_then_filter": [
+      {
+        "query_index": 0,
+        "status": "known",
+        "candidate_count": 2,
+        "num_relevant_gallery": 1,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": false,
+        "ap_by_denominator": {
+          "all_gallery_positives": 0.0,
+          "retrieved_positives": 0.0
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": 0.0
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": 0.0,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": 0.0,
+            "Rank-3": 0.0,
+            "Rank-5": 0.0,
+            "Rank-12": 0.0
+          }
+        },
+        "ranking": [
+          3,
+          2
+        ],
+        "submitted_ranking_before_filter": [
+          3,
+          2
+        ]
+      },
+      {
+        "query_index": 1,
+        "status": "known",
+        "candidate_count": 2,
+        "num_relevant_gallery": 1,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": false,
+        "ap_by_denominator": {
+          "all_gallery_positives": 0.0,
+          "retrieved_positives": 0.0
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": 0.0
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": 0.0,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": 0.0,
+            "Rank-3": 0.0,
+            "Rank-5": 0.0,
+            "Rank-12": 0.0
+          }
+        },
+        "ranking": [
+          0,
+          2
+        ],
+        "submitted_ranking_before_filter": [
+          0,
+          2
+        ]
+      },
+      {
+        "query_index": 2,
+        "status": "known",
+        "candidate_count": 2,
+        "num_relevant_gallery": 1,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": false,
+        "ap_by_denominator": {
+          "all_gallery_positives": 0.0,
+          "retrieved_positives": 0.0
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": 0.0
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": 0.0,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": 0.0,
+            "Rank-3": 0.0,
+            "Rank-5": 0.0,
+            "Rank-12": 0.0
+          }
+        },
+        "ranking": [
+          0,
+          1
+        ],
+        "submitted_ranking_before_filter": [
+          0,
+          1
+        ]
+      },
+      {
+        "query_index": 3,
+        "status": "unknown",
+        "candidate_count": 2,
+        "num_relevant_gallery": 0,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": null,
+        "ap_by_denominator": {
+          "all_gallery_positives": null,
+          "retrieved_positives": null
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": null
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          }
+        },
+        "ranking": [
+          0,
+          1
+        ],
+        "submitted_ranking_before_filter": [
+          0,
+          1
+        ]
+      },
+      {
+        "query_index": 4,
+        "status": "unknown",
+        "candidate_count": 2,
+        "num_relevant_gallery": 0,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": null,
+        "ap_by_denominator": {
+          "all_gallery_positives": null,
+          "retrieved_positives": null
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": null
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          }
+        },
+        "ranking": [
+          0,
+          1
+        ],
+        "submitted_ranking_before_filter": [
+          0,
+          1
+        ]
+      }
+    ],
+    "filter_then_top_k": [
+      {
+        "query_index": 0,
+        "status": "known",
+        "candidate_count": 2,
+        "num_relevant_gallery": 1,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": false,
+        "ap_by_denominator": {
+          "all_gallery_positives": 0.0,
+          "retrieved_positives": 0.0
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": 0.0
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": 0.0,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": 0.0,
+            "Rank-3": 0.0,
+            "Rank-5": 0.0,
+            "Rank-12": 0.0
+          }
+        },
+        "ranking": [
+          3,
+          2
+        ]
+      },
+      {
+        "query_index": 1,
+        "status": "known",
+        "candidate_count": 2,
+        "num_relevant_gallery": 1,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": false,
+        "ap_by_denominator": {
+          "all_gallery_positives": 0.0,
+          "retrieved_positives": 0.0
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": 0.0
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": 0.0,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": 0.0,
+            "Rank-3": 0.0,
+            "Rank-5": 0.0,
+            "Rank-12": 0.0
+          }
+        },
+        "ranking": [
+          0,
+          2
+        ]
+      },
+      {
+        "query_index": 2,
+        "status": "known",
+        "candidate_count": 2,
+        "num_relevant_gallery": 1,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": false,
+        "ap_by_denominator": {
+          "all_gallery_positives": 0.0,
+          "retrieved_positives": 0.0
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": 0.0
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": 0.0,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": 0.0,
+            "Rank-3": 0.0,
+            "Rank-5": 0.0,
+            "Rank-12": 0.0
+          }
+        },
+        "ranking": [
+          0,
+          1
+        ]
+      },
+      {
+        "query_index": 3,
+        "status": "unknown",
+        "candidate_count": 2,
+        "num_relevant_gallery": 0,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": null,
+        "ap_by_denominator": {
+          "all_gallery_positives": null,
+          "retrieved_positives": null
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": null
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          }
+        },
+        "ranking": [
+          0,
+          1
+        ]
+      },
+      {
+        "query_index": 4,
+        "status": "unknown",
+        "candidate_count": 2,
+        "num_relevant_gallery": 0,
+        "num_relevant_retrieved": 0,
+        "positive_ranks": [],
+        "all_positives_retrieved": null,
+        "ap_by_denominator": {
+          "all_gallery_positives": null,
+          "retrieved_positives": null
+        },
+        "inp_by_incomplete_policy": {
+          "undefined_if_incomplete": null,
+          "zero_if_incomplete": null
+        },
+        "rank_by_beyond_k_policy": {
+          "undefined": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          },
+          "clamp_to_k": {
+            "Rank-1": null,
+            "Rank-3": null,
+            "Rank-5": null,
+            "Rank-12": null
+          }
+        },
+        "ranking": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "refusal_by_filtered_positive_policy": {
+    "drop": {
+      "counts": {
+        "queries": 5,
+        "gallery": 4,
+        "known_queries": 3,
+        "unknown_queries": 2,
+        "filtered_queries": 0,
+        "refusal_queries": 5,
+        "relevant_pairs": 3
+      },
+      "refusal": {
+        "mode": "pairwise",
+        "threshold": 0.5,
+        "tp": 1,
+        "fp": 15,
+        "fn": 2,
+        "tn_unknown": 0,
+        "fp_unknown": 2,
+        "precision": 0.0625,
+        "recall": 0.3333333333333333,
+        "f1": 0.10526315789473684,
+        "tnr": 0.0,
+        "auc_pr": 0.08367948056415549,
+        "auc_pr_trapezoid": 0.08367948056415549,
+        "ap_pr_step": 0.11143790849673202,
+        "pr_curve": {
+          "auc_pr_trapezoid": 0.08367948056415549,
+          "ap_pr_step": 0.11143790849673202,
+          "max_recall": 1.0,
+          "positive_count": 3,
+          "thresholds": [
+            null,
+            0.0,
+            0.02,
+            0.03,
+            0.05,
+            0.1,
+            0.15,
+            0.2,
+            0.7,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "precision": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.06666666666666667,
+            0.0625,
+            0.11764705882352941,
+            0.1111111111111111,
+            0.10526315789473684,
+            0.15
+          ],
+          "recall": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.6666666666666666,
+            0.6666666666666666,
+            0.6666666666666666,
+            1.0
+          ],
+          "tp": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3
+          ],
+          "fp": [
+            0,
+            5,
+            7,
+            9,
+            11,
+            14,
+            14,
+            15,
+            15,
+            16,
+            17,
+            17
+          ]
+        }
+      }
+    },
+    "as_unknown": {
+      "counts": {
+        "queries": 5,
+        "gallery": 4,
+        "known_queries": 3,
+        "unknown_queries": 2,
+        "filtered_queries": 0,
+        "refusal_queries": 5,
+        "relevant_pairs": 3
+      },
+      "refusal": {
+        "mode": "pairwise",
+        "threshold": 0.5,
+        "tp": 1,
+        "fp": 15,
+        "fn": 2,
+        "tn_unknown": 0,
+        "fp_unknown": 2,
+        "precision": 0.0625,
+        "recall": 0.3333333333333333,
+        "f1": 0.10526315789473684,
+        "tnr": 0.0,
+        "auc_pr": 0.08367948056415549,
+        "auc_pr_trapezoid": 0.08367948056415549,
+        "ap_pr_step": 0.11143790849673202,
+        "pr_curve": {
+          "auc_pr_trapezoid": 0.08367948056415549,
+          "ap_pr_step": 0.11143790849673202,
+          "max_recall": 1.0,
+          "positive_count": 3,
+          "thresholds": [
+            null,
+            0.0,
+            0.02,
+            0.03,
+            0.05,
+            0.1,
+            0.15,
+            0.2,
+            0.7,
+            0.8,
+            0.85,
+            0.9
+          ],
+          "precision": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.06666666666666667,
+            0.0625,
+            0.11764705882352941,
+            0.1111111111111111,
+            0.10526315789473684,
+            0.15
+          ],
+          "recall": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.3333333333333333,
+            0.3333333333333333,
+            0.6666666666666666,
+            0.6666666666666666,
+            0.6666666666666666,
+            1.0
+          ],
+          "tp": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3
+          ],
+          "fp": [
+            0,
+            5,
+            7,
+            9,
+            11,
+            14,
+            14,
+            15,
+            15,
+            16,
+            17,
+            17
+          ]
+        }
+      }
+    }
+  }
+}

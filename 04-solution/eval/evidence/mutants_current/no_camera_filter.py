@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Удаление фильтра камеры
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -50,8 +51,8 @@ def _mean(values):
 
 def _camera_keep(same_id, same_camera, policy):
     if policy == "market":
-        return ~(same_id & same_camera)
-    return ~same_camera
+        return np.ones_like(same_id, dtype=bool)
+    return np.ones_like(same_camera, dtype=bool)
 
 
 def _rank_indices(values, eligible, tie_order):

@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: num_relevant отдаёт ранг последнего совпадения вместо числа совпадений
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -77,7 +78,7 @@ def _rank_statistics(relevant, method):
         ap = float(np.mean((before_hit + at_hit) / 2))
     return dict(ap=ap, inp=float(count / ranks[-1]),
                 rank1=float(ranks[0] <= 1), rank5=float(ranks[0] <= 5),
-                positive_ranks=ranks.tolist(), num_relevant=count)
+                positive_ranks=ranks.tolist(), num_relevant=int(ranks[-1]))
 
 
 def _aggregate_ranking(rows, total_queries):

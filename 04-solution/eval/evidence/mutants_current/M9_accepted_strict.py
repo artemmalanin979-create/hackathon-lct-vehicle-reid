@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: порог принятия строгий только в per_query/TNR (tp/fp остаются нестрогими)
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -222,7 +223,7 @@ def _evaluate_full(
         if stats:
             row.update(stats)
         best = int(order[0]) if order.size else None
-        accepted = best is not None and bool(utility[i, best] >= cutoff)
+        accepted = best is not None and bool(utility[i, best] > cutoff)
         row.update(top_gallery_index=best,
                    top_score=float(raw[i, best]) if best is not None else None,
                    accepted=accepted)

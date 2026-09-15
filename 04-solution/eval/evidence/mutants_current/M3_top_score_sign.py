@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: top_score отдаёт внутреннюю полезность (знак) вместо исходной оценки
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -224,7 +225,7 @@ def _evaluate_full(
         best = int(order[0]) if order.size else None
         accepted = best is not None and bool(utility[i, best] >= cutoff)
         row.update(top_gallery_index=best,
-                   top_score=float(raw[i, best]) if best is not None else None,
+                   top_score=float(utility[i, best]) if best is not None else None,
                    accepted=accepted)
         if include_rankings:
             row["ranking"] = order.tolist()

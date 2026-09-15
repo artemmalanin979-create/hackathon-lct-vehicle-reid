@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Не исключается gallery_junk
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -207,7 +208,7 @@ def _evaluate_full(
         if bool(absent[i]) == raw_has_match:
             raise ValueError(f"known_absent[{i}] contradicts identity presence in raw gallery")
         same_camera = gcams == qcams[i]
-        eligible = _camera_keep(same_id, same_camera, camera_policy) & ~junk
+        eligible = _camera_keep(same_id, same_camera, camera_policy)
         if excluded is not None:
             eligible &= ~excluded[i]
         if qframes is not None:

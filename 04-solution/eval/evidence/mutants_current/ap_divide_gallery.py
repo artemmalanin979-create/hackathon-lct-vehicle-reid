@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: AP делится на длину списка
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -68,7 +69,7 @@ def _rank_statistics(relevant, method):
     hits = np.arange(1, count + 1, dtype=np.float64)
     at_hit = hits / ranks
     if method == "step":
-        ap = float(np.mean(at_hit))
+        ap = float(np.sum(at_hit) / len(relevant))
     else:
         # MATLAB compute_AP updates precision even at non-relevant positions.
         before_hit = np.ones(count, dtype=np.float64)

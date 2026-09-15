@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: eligible_count всегда равен размеру галереи
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -216,7 +217,7 @@ def _evaluate_full(
         relevant = same_id[order]
         stats = _rank_statistics(relevant, ap_method)
         status = "unknown" if absent[i] else "known" if stats else "filtered_positive"
-        row = dict(query_index=i, status=status, eligible_count=int(order.size),
+        row = dict(query_index=i, status=status, eligible_count=int(ng),
                    ap=None, inp=None, rank1=None, rank5=None,
                    positive_ranks=[], num_relevant=0)
         if stats:

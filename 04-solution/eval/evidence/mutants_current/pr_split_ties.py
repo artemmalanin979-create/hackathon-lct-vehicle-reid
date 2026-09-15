@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Ничьи PR разрываются по одному кандидату
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -109,7 +110,7 @@ def _pr_events(scores, correct, positive_count):
         order = np.argsort(-scores, kind="stable")
         scores, correct = scores[order], correct[order]
         cumulative = np.cumsum(correct, dtype=np.int64)
-        ends = np.flatnonzero(np.r_[scores[1:] != scores[:-1], True])
+        ends = np.arange(scores.size)
         for end in ends:
             accepted = int(end + 1)
             tp = int(cumulative[end])

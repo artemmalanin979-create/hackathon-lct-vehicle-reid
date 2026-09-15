@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: pr_curve.thresholds не переводятся обратно в шкалу расстояний
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -256,7 +257,7 @@ def _evaluate_full(
     fp = int(np.count_nonzero(selected & ~ecorrect))
     fn = int(positives - tp)
     curve = _pr_events(escores, ecorrect, positives)
-    curve["thresholds"] = [None if t is None else t * sign for t in curve["thresholds"]]
+    curve["thresholds"] = list(curve["thresholds"])
     refusal = dict(
         mode=refusal_mode, threshold=threshold,
         tp=tp, fp=fp, fn=fn, tn_unknown=unknown_tn,

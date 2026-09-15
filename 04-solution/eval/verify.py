@@ -29,97 +29,105 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
 
 
-def test_run(module):
-    original = test_metrics.metrics
-    test_metrics.metrics = module
+def test_run(module, include_protocols=True):
+    modules = [test_metrics]
+    if include_protocols and (ROOT / "test_protocols.py").exists():
+        import test_protocols
+        modules.append(test_protocols)
+    originals = [m.metrics for m in modules]
     stream = io.StringIO()
     try:
-        suite = unittest.defaultTestLoader.loadTestsFromTestCase(test_metrics.MetricTests)
-        names = [test.id().split(".")[-1] for test in suite]
+        suite = unittest.TestSuite()
+        names = []
+        for m in modules:
+            m.metrics = module
+            loaded = unittest.defaultTestLoader.loadTestsFromModule(m)
+            def collect(tests):
+                for test in tests:
+                    if isinstance(test, unittest.TestSuite):
+                        collect(test)
+                    else:
+                        names.append(test.id())
+            collect(loaded)
+            suite.addTests(loaded)
         result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
-        failed = [test.id().split(".")[-1] for test, _ in result.failures]
-        errors = [test.id().split(".")[-1] for test, _ in result.errors]
+        failed = sorted({test.id() for test, _ in result.failures})
+        errors = sorted({test.id() for test, _ in result.errors})
         return dict(tests=result.testsRun, failed=failed, errors=errors,
                     passed=[n for n in names if n not in failed + errors]), stream.getvalue()
     finally:
-        test_metrics.metrics = original
+        for m, original in zip(modules, originals):
+            m.metrics = original
 
 
 def mutation_check():
     source = (ROOT / "reid_metrics.py").read_text()
-    specs = [
-        ("reverse_sort", "Сортировка близости по возрастанию", [
-            ('np.argsort(-values[candidates], kind="stable")', 'np.argsort(values[candidates], kind="stable")', 1)]),
-        ("no_camera_filter", "Удаление фильтра камеры", [
-            ('return ~(same_id & same_camera)', 'return np.ones_like(same_id, dtype=bool)', 1),
-            ('return ~same_camera', 'return np.ones_like(same_camera, dtype=bool)', 1)]),
-        ("mean_all_queries", "mAP делится на все запросы", [
-            ('_mean([row["ap"] for row in valid])', '_ratio(math.fsum(row["ap"] or 0.0 for row in rows), total_queries)', 1)]),
-        ("mean_weighted_positives", "mAP взвешивается числом верных", [
-            ('_mean([row["ap"] for row in valid])', '_ratio(math.fsum(row["ap"] * row["num_relevant"] for row in valid), sum(row["num_relevant"] for row in valid))', 1)]),
-        ("ap_divide_gallery", "AP делится на длину списка", [
-            ('ap = float(np.mean(at_hit))', 'ap = float(np.sum(at_hit) / len(relevant))', 1)]),
-        ("ignore_junk", "Не исключается gallery_junk", [
-            ('_camera_keep(same_id, same_camera, camera_policy) & ~junk', '_camera_keep(same_id, same_camera, camera_policy)', 1)]),
-        ("cmc_is_recall", "CMC подменена recall@k", [
-            ('rank1=float(ranks[0] <= 1), rank5=float(ranks[0] <= 5)',
-             'rank1=float(np.count_nonzero(ranks <= 1) / count), rank5=float(np.count_nonzero(ranks <= 5) / count)', 1)]),
-        ("inp_first", "INP использует первое совпадение", [
-            ('inp=float(count / ranks[-1])', 'inp=float(1.0 / ranks[0])', 1)]),
-        ("ties_reverse", "Обратный порядок внутри ничьих", [
-            ('candidates = tie_order[eligible[tie_order]]', 'candidates = tie_order[eligible[tie_order]][::-1]', 1)]),
-        ("threshold_strict", "Строгое сравнение порога", [
-            ('>= cutoff', '> cutoff', 2)]),
-        ("identity_as_presence", "Ошибочная идентичность считается TP", [
-            ('if refusal_mode == "top1":', 'if False:', 1)]),
-        ("pr_split_ties", "Ничьи PR разрываются по одному кандидату", [
-            ('ends = np.flatnonzero(np.r_[scores[1:] != scores[:-1], True])', 'ends = np.arange(scores.size)', 1)]),
-        ("pr_area_alias", "Трапеции PR подменяются AP step", [
-            ('auc_pr_trapezoid=float(trap_area)', 'auc_pr_trapezoid=float(step_area)', 1)]),
-        ("rank5_off_by_one", "Rank-5 использует ранг <5", [
-            ('rank5=float(ranks[0] <= 5)', 'rank5=float(ranks[0] < 5)', 1)]),
-        ("filtered_become_fn", "Исключённые известные запросы добавляются в FN", [
-            ('else known_count\n    escores', 'else known_count + filtered_count\n    escores', 1)]),
-    ]
-    directory = ROOT / "mutants"
-    directory.mkdir(exist_ok=True)
+    specs = json.loads((ROOT / "mutation_specs.json").read_text())
+    directory = ROOT / "evidence" / "mutants_current"
+    directory.mkdir(parents=True, exist_ok=True)
     records = []
-    for name, description, changes in specs:
+    for spec in specs:
+        name = spec["name"]
         mutated = source
-        for old, new, count in changes:
+        for old, new, count in spec["changes"]:
             if mutated.count(old) != count:
-                raise AssertionError(f"mutation {name}: source pattern changed")
+                # Failure to inject is a harness error, NEVER a killed mutant.
+                raise AssertionError(f"mutation {name}: cannot inject ({old!r})")
             mutated = mutated.replace(old, new)
         path = directory / f"{name}.py"
-        path.write_text("# INTENTIONALLY BROKEN: " + description + "\n" + mutated)
-        module = types.ModuleType(f"mutant_{name}")
-        exec(compile(mutated, str(path), "exec"), module.__dict__)
-        outcome, log = test_run(module)
-        (directory / f"{name}.log").write_text(log)
-        # A runtime crash alone is insufficient evidence of numerical detection.
-        if not outcome["failed"]:
-            raise AssertionError(f"mutant {name} survived all assertion tests")
-        records.append(dict(name=name, description=description, **outcome))
+        path.write_text("# INTENTIONALLY BROKEN: " + spec["description"] + "\n" + mutated)
+        record = {k: spec[k] for k in ["name", "description", "origin", "artifact"]}
+        for campaign, code, filename in [
+            ("current", mutated, path),
+            ("original", (ROOT / spec["artifact"]).read_text(), ROOT / spec["artifact"]),
+        ]:
+            module = types.ModuleType(f"mutant_{campaign}_{name}")
+            exec(compile(code, str(filename), "exec"), module.__dict__)
+            outcome, log = test_run(module, include_protocols=campaign == "current")
+            (directory / f"{name}.{campaign}.log").write_text(log)
+            record[campaign] = dict(**outcome, sha256=hashlib.sha256(code.encode()).hexdigest(),
+                                    detected=bool(outcome["failed"]))
+        records.append(record)
     write_json(ROOT / "mutation_results.json", records)
     lines = ["# Фактическая матрица мутационных проверок", "",
-             "Числа и имена получены запуском неизменённых аналитических тестов против каждого сломанного модуля. Ошибки исполнения учитываются отдельно от assertion failures.", "",
-             "| Мутация | Нарушено проверок | Ошибки исполнения | Поймали | Не поймали |", "|---|---:|---:|---|---|"]
+             "Команда: `python -B verify.py`. Исходные мутанты не изменяются. "
+             "Каждый запускается как приложенный файл и как такая же поломка новой реализации. "
+             "Засчитываются только assertion failures, не ошибки API/исполнения/внедрения.", "",
+             "| Поломка | Проверка исходного файла | Проверка новой реализации |", "|---|---|---|"]
     for row in records:
-        lines.append(f'| `{row["name"]}` — {row["description"]} | {len(row["failed"])} | {len(row["errors"])} | ' +
-                     ", ".join(f"`{n}`" for n in row["failed"]) + " | " +
-                     ", ".join(f"`{n}`" for n in row["passed"]) + " |")
+        cells = []
+        for campaign in ["original", "current"]:
+            failures = row[campaign]["failed"]
+            cells.append(", ".join(f"`{n}`" for n in failures) or "**НЕ ПОЙМАНА**")
+        lines.append(f'| `{row["name"]}` | {cells[0]} | {cells[1]} |')
     (ROOT / "mutation_matrix.md").write_text("\n".join(lines) + "\n")
-    return dict(total=len(records), killed=sum(bool(r["failed"]) for r in records),
-                runtime_errors=sum(len(r["errors"]) for r in records))
+    summary = dict(total=len(records),
+                   killed=sum(r["current"]["detected"] for r in records),
+                   original_killed=sum(r["original"]["detected"] for r in records),
+                   runtime_errors=sum(len(r[c]["errors"]) for r in records for c in ["current", "original"]),
+                   survivors=[r["name"] for r in records
+                              if not r["current"]["detected"] or not r["original"]["detected"]])
+    if summary["survivors"]:
+        raise AssertionError(f"Uncaught mutants: {summary['survivors']}; see mutation_results.json")
+    return summary
 
 
-def external_rank_function(filename):
+def external_rank_function(filename, stable_ties=False):
     # Only the real eval_market1501 function is compiled; no package imports,
     # dependency installation, Cython compilation or replacement of its body.
     source = (ROOT / "sources" / filename).read_text()
     tree = ast.parse(source)
     node = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "eval_market1501")
-    namespace = {"np": np}
+    class StableSortNumpy:
+        def __getattr__(self, name):
+            return getattr(np, name)
+
+        def argsort(self, values, axis=-1):
+            return np.argsort(values, axis=axis, kind="stable")
+
+    # The body stays byte-for-byte as vendored. A separate, explicitly labelled
+    # adapter changes ONLY its unspecified tie order, never metric arithmetic.
+    namespace = {"np": StableSortNumpy() if stable_ties else np}
     exec(compile(ast.Module(body=[node], type_ignores=[]), filename, "exec"), namespace)
     return namespace["eval_market1501"]
 
@@ -211,6 +219,88 @@ def slow_refusal(scores, qids, gids, qcams, gcams, absent, junk, excluded, mode,
                 f1=ratio(2 * tp, 2 * tp + fp + fn), tnr=ratio(tn, unknown),
                 auc_pr=float(trapezoid) if positives else None,
                 ap_pr_step=float(step) if positives else None)
+
+
+def differential_tied_external():
+    from review.oracle import oracle_evaluate
+    rng = np.random.default_rng(61705)
+    native = {name: external_rank_function(name) for name in ["fastreid_rank.py", "torchreid_rank.py"]}
+    stable = {name: external_rank_function(name, stable_ties=True) for name in native}
+    maximum = 0.
+    disagreements = 0
+    first_difference = None
+    trials = 160
+
+    def check(output, reference, source, max_rank):
+        nonlocal maximum
+        cmc, ap, *inp = output
+        expected = reference["ranking"]
+        values = [(float(np.mean(ap)), expected["mAP"])]
+        if inp:
+            values.append((float(np.mean(inp[0])), expected["mINP"]))
+            for observed, row in zip(ap, reference["per_query"]):
+                values.append((float(observed), row["ap"]))
+        for r in range(1, max_rank + 1):
+            expected_cmc = np.mean([row["positive_ranks"][0] <= r for row in reference["per_query"]])
+            if abs(float(cmc[r - 1]) - expected_cmc) > 1e-7:
+                raise AssertionError((source, "CMC", r, cmc[r - 1], expected_cmc))
+        for observed, wanted in values:
+            delta = abs(observed - wanted)
+            maximum = max(maximum, delta)
+            if delta > 1e-12:
+                raise AssertionError((source, observed, wanted))
+
+    for trial in range(trials):
+        nq, ng, max_rank = 4, 48, 7
+        values = rng.integers(0, 4, (nq, ng)).astype(float)
+        if trial % 8 == 0:
+            values.fill(1.)
+        gids, qids = np.arange(ng) % 4, np.arange(nq)
+        gcams, qcams = rng.integers(0, 3, ng), rng.integers(0, 2, nq)
+        gcams[:8] = 2
+        junk = rng.random(ng) < .1
+        junk[:8] = False
+        keys = rng.permutation(ng)
+        kind = "similarity" if trial % 2 == 0 else "distance"
+        raw = values if kind == "similarity" else -values
+        ours = metrics.evaluate(raw, qids, gids, qcams, gcams, [False] * nq,
+                                threshold=0., score_kind=kind, camera_policy="market",
+                                refusal_mode="top1", gallery_keys=keys, gallery_junk=junk,
+                                rank_ks=range(1, max_rank + 1), include_rankings=True)
+        # Upstream has no keys/junk API: remove global junk and put columns in
+        # canonical key order before calling it. Its own camera mask is executed.
+        columns = np.asarray([j for j in np.argsort(keys) if not junk[j]])
+        utility, ids, cams = values[:, columns], gids[columns], gcams[columns]
+        args = (qids, ids, qcams, cams, max_rank)
+        for name in native:
+            direct = native[name](-utility, *args)
+            adapted = stable[name](-utility, *args)
+            # Verify the unmodified upstream's actual tie order against the
+            # Fraction oracle as well; do not falsely assume quicksort is stable.
+            order = np.argsort(-utility, axis=1)
+            ordinal = np.empty_like(utility)
+            for i in range(nq):
+                ordinal[i, order[i]] = np.arange(len(columns), 0, -1)
+            reference = oracle_evaluate(ordinal.tolist(), qids.tolist(), ids.tolist(),
+                                        qcams.tolist(), cams.tolist(), [False] * nq,
+                                        threshold=0., camera_policy="market", refusal_mode="top1")
+            check(direct, reference, name + "/native", max_rank)
+            check(adapted, ours, name + "/stable-tie adapter", max_rank)
+            for rank in range(1, max_rank + 1):
+                if abs(float(adapted[0][rank - 1]) - ours["ranking"][f"Rank-{rank}"]) > 1e-7:
+                    raise AssertionError(("all requested CMC ranks", rank))
+            native_map, stable_map = float(np.mean(direct[1])), float(np.mean(adapted[1]))
+            if abs(native_map - stable_map) > 1e-12:
+                disagreements += 1
+                if first_difference is None:
+                    first_difference = dict(trial=trial, source=name,
+                                            native_mAP=native_map, stable_mAP=stable_map)
+    return dict(trials=trials, source_calls=trials * 4, seed=61705,
+                max_absolute_metric_error=maximum,
+                native_vs_stable_mAP_disagreements=disagreements,
+                first_tie_policy_difference=first_difference,
+                scope="Actual tied inputs; unmodified upstream vs Fraction in its native order; "
+                      "stable-argsort adapter vs evaluator; 2 measures; keys+junk+camera; CMC ranks 1..7")
 
 
 def differential_refusal():
@@ -333,7 +423,28 @@ def cli_and_comparator():
         raise AssertionError("wrong per-query difference path")
     write_json(ROOT / "comparison_check.json", dict(identity=identity, per_query_changed=per_query,
                                                     float_tolerance=tolerance, protocol_changed=protocol))
-    return dict(cli="passed", comparator_checks=4)
+    alternate_path = ROOT / "evidence" / "cli_alternative_result.json"
+    alternate_path.parent.mkdir(exist_ok=True)
+    subprocess.run([sys.executable, "-B", str(ROOT / "reid_metrics.py"), str(ROOT / "example.npz"),
+                    "--threshold", "0.5", "--camera-policy", "all_same_camera",
+                    "--refusal-mode", "pairwise", "--score-kind", "distance",
+                    "--ap-method", "market_matlab", "--top-k", "2",
+                    "--query-average", "all_queries_zero", "--ap-denominator", "retrieved_positives",
+                    "--filtered-positive-policy", "as_unknown", "--incomplete-inp", "zero_if_incomplete",
+                    "--rank-beyond-k", "clamp_to_k", "--rank-ks", "1", "3", "5", "12",
+                    "--truncation-order", "filter_then_top_k", "--output", str(alternate_path)],
+                   check=True, capture_output=True, text=True)
+    with np.load(ROOT / "example.npz", allow_pickle=False) as data:
+        direct = metrics.evaluate(**{k: data[k] for k in data.files}, threshold=.5,
+                                  camera_policy="all_same_camera", refusal_mode="pairwise",
+                                  score_kind="distance", ap_method="market_matlab", top_k=2,
+                                  query_average="all_queries_zero", ap_denominator="retrieved_positives",
+                                  filtered_positive_policy="as_unknown", incomplete_inp="zero_if_incomplete",
+                                  rank_beyond_k="clamp_to_k", rank_ks=[1, 3, 5, 12],
+                                  truncation_order="filter_then_top_k", include_rankings=True)
+    if json.loads(alternate_path.read_text()) != metrics._json_safe(direct):
+        raise AssertionError("CLI switches differ from Python API")
+    return dict(cli="passed (default and every nondefault convention switch)", comparator_checks=4)
 
 
 def main():
@@ -344,7 +455,12 @@ def main():
     report = dict(python=platform.python_version(), numpy=np.__version__,
                   baseline=baseline, exhaustive_configurations=247)
     report["differential_ranking"] = differential_ranking()
+    report["differential_tied_external"] = differential_tied_external()
     report["differential_refusal"] = differential_refusal()
+    from oracle_checks import differential_all_fields
+    import test_protocols
+    report["differential_all_fields"] = differential_all_fields(metrics)
+    report["differential_new_fields"] = test_protocols.differential_extensions()
     report["random_level"] = random_level()
     report["mutations"] = mutation_check()
     report["compatibility_edges"] = compatibility_edges()

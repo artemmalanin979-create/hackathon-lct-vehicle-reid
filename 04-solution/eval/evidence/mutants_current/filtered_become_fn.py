@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Исключённые известные запросы добавляются в FN
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -248,7 +249,7 @@ def _evaluate_full(
             if refusal_mode == "top1":
                 correct = correct and bool(same_id[best])
             event_correct.append(correct)
-    positives = pair_positive_count if refusal_mode == "pairwise" else known_count
+    positives = pair_positive_count if refusal_mode == "pairwise" else known_count + filtered_count
     escores = np.asarray(event_scores, dtype=np.float64)
     ecorrect = np.asarray(event_correct, dtype=bool)
     selected = escores >= cutoff

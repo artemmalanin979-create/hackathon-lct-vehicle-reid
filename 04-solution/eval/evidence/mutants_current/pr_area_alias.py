@@ -1,3 +1,4 @@
+# INTENTIONALLY BROKEN: Трапеции PR подменяются AP step
 """Independent, offline NumPy evaluator. Protocol choices are explicit.
 
 See REPORT.md for definitions, sources and unresolved organizer conventions.
@@ -125,7 +126,7 @@ def _pr_events(scores, correct, positive_count):
             tp_counts.append(tp)
             fp_counts.append(accepted - tp)
     return dict(
-        auc_pr_trapezoid=float(trap_area) if positive_count else None,
+        auc_pr_trapezoid=float(step_area) if positive_count else None,
         ap_pr_step=float(step_area) if positive_count else None,
         max_recall=recall[-1], positive_count=int(positive_count),
         thresholds=thresholds, precision=precision, recall=recall,
