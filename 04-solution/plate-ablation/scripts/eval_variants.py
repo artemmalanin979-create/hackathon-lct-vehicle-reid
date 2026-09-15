@@ -9,11 +9,12 @@ import csv, json, sys
 from pathlib import Path
 import numpy as np
 JOB = Path(__file__).resolve().parent.parent
-EVAL = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+EVAL = REPO / "04-solution/eval"
+SPLIT = REPO / "04-solution/split/files"
 sys.path.insert(0, str(EVAL))
 from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
-sys.path.insert(0, str(JOB / "work"))
+sys.path.insert(0, str(JOB / "scripts"))  # mask_ops лежит здесь, а не в work/
 from extract_variants import VARIANTS  # noqa: E402
 
 THRESHOLD = 0.349214  # порог бейзлайна; на mAP не влияет, нужен только для refusal-ветки
@@ -24,6 +25,13 @@ def rd(p):
 
 
 def main():
+    missing = [v for v in VARIANTS
+               if not (JOB / "work" / "emb" / f"val_query_{v}.npy").is_file()]
+    if missing:
+        raise SystemExit(
+            f"нет векторов вариантов в {JOB / 'work' / 'emb'} ({len(missing)} из "
+            f"{len(VARIANTS)}, например {missing[0]}). Их создаёт extract_variants.py "
+            "по кэшу детекций work/boxes.json (cache_boxes.py); см. REPORT.md, разд. 7")
     qm, gm = rd(SPLIT / "val_query.csv"), rd(SPLIT / "val_gallery.csv")
     common = dict(query_ids=[r["vehicle_id"] for r in qm],
                   gallery_ids=[r["vehicle_id"] for r in gm],

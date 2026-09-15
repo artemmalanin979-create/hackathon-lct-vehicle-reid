@@ -18,14 +18,16 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
 JOB = Path(__file__).resolve().parent.parent
-EVAL_DIR = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
+EVAL_DIR = REPO / "04-solution/eval"
+SPLIT = REPO / "04-solution/split/files"
 sys.path.insert(0, str(EVAL_DIR))
 from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
 

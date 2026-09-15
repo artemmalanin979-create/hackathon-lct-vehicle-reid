@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Честность применения сплита: те ли поля, те ли идентичности, тот ли порядок."""
+import os
 import csv
 from pathlib import Path
-DATA=Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA=Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT=REPO / "04-solution/split/files"
 JOB=Path(__file__).resolve().parent.parent
 def rd(p): return list(csv.DictReader(open(p,newline="")))
 tr={r["image_id"]:r for r in rd(DATA/"train.csv")}

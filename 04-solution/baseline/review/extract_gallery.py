@@ -5,6 +5,7 @@
 res256, res288, letterbox208 (сохранение пропорций, паддинг 127).
 Выход: work/emb/<split>_<variant>.npy
 """
+import os
 import csv, sys, time
 from pathlib import Path
 import numpy as np
@@ -12,8 +13,9 @@ import onnxruntime as ort
 from PIL import Image
 
 JOB = Path(__file__).resolve().parent.parent
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT = REPO / "04-solution/split/files"
 OUT = JOB / "work" / "emb"; OUT.mkdir(exist_ok=True)
 
 opts = ort.SessionOptions(); opts.log_severity_level = 3

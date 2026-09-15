@@ -6,11 +6,13 @@
 zero-mean/unit-norm, косинус. Калибровка порога на train-парах с известным vehicle_id:
 позитив = same vid & cos32>=0.90, негатив = diff vid & cos32>=0.80 (та же сцена, другая машина).
 Выход: out_s05b.json, qg_flagged_pairs.csv, sheet_qg_*.png. Память: по одному файлу."""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 from PIL import Image, ImageDraw
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(0)
 W, H = 1920, 1080

@@ -3,11 +3,13 @@
 для проверки, ограничена ли полнота суррогата камеры разрешением 32x32.
 Память: потоково, по одному файлу; draft-декодирование JPEG на 1/8.
 Выход: thumbs96.npy (uint8, N x 5184), порядок как в scan_files.json."""
+from pathlib import Path
 import json, os
 import numpy as np
 from PIL import Image
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 files = json.load(open(os.path.join(HERE, "scan_files.json")))
 out = np.zeros((len(files), 54*96), np.uint8)

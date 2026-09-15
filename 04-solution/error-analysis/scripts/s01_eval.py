@@ -5,12 +5,14 @@
 импортируются без модификаций. Сверяем воспроизведение опубликованных чисел бейзлайна,
 затем сохраняем per-query таблицу для разбора ошибок.
 """
+import os
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 
 JOB = Path(__file__).resolve().parent.parent
-P = Path("/home/artem/projects/hackathon-lct-vehicle-reid")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+P = REPO
 sys.path.insert(0, str(P / "04-solution/eval"))
 sys.path.insert(0, str(P / "04-solution/postproc/scripts"))
 from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402

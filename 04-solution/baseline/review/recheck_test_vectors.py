@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Полное независимое переизвлечение всех 1860 векторов теста (кроп numpy-срезом)."""
+import os
 import csv, time
 from pathlib import Path
 import numpy as np, onnxruntime as ort
 from PIL import Image
 JOB=Path(__file__).resolve().parent.parent
-DATA=Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA=Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
 def rd(p): return [(r["image_id"],int(r["x"]),int(r["y"]),int(r["w"]),int(r["h"]))
                    for r in csv.DictReader(open(p,newline=""))]
 rows=rd(DATA/"test_query.csv")+rd(DATA/"test_gallery.csv")

@@ -1,8 +1,10 @@
 import csv, sys, random
+import os
 from pathlib import Path
 from PIL import Image
-DATA=Path("/home/artem/projects/hackathon-lct-vehicle-reid/data/images")
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data")) / "images"
+SPLIT = REPO / "04-solution/split/files"
 def rd(p): return list(csv.DictReader(open(p,newline="")))
 rows=[(r,"q") for r in rd(SPLIT/"val_query.csv")]+[(r,"g") for r in rd(SPLIT/"val_gallery.csv")]
 print(len(rows))

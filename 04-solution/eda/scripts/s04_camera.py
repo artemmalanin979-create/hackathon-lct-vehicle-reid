@@ -9,10 +9,12 @@
  - яркость по камерам (день/ночь внутри одной камеры);
  - геометрия bbox по камерам.
 Требует s02. Выход: out_s04.json. Запуск: python3 s04_camera.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(0)
 

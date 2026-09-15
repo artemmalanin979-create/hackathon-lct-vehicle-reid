@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Компромисс F1/TNR по отфильтрованным top-1 + точность принятых пар."""
+import os
 import csv
 from pathlib import Path
 import numpy as np
 JOB=Path(__file__).resolve().parent.parent
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+SPLIT=REPO / "04-solution/split/files"
 def rd(p): return list(csv.DictReader(open(p,newline="")))
 qm,gm=rd(SPLIT/"val_query.csv"),rd(SPLIT/"val_gallery.csv")
 qv=np.array([r["vehicle_id"] for r in qm]); gv=np.array([r["vehicle_id"] for r in gm])

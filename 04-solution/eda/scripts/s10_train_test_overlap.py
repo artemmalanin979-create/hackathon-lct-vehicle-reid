@@ -4,11 +4,13 @@
 парковочные пары (IoU>=0.8). Если в такой паре размечена ТА ЖЕ машина (crop64>=0.8)
 => машина теста присутствует в train => нарушение обещания.
 Выход: out_s10.json + sheet_traintest.png. Запуск: python3 s10_train_test_overlap.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 from PIL import Image, ImageDraw
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 W, H = 1920, 1080
 

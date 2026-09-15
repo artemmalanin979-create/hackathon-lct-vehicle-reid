@@ -25,6 +25,8 @@ mlruns/
 
 # Системное
 .DS_Store
+.matplotlib/
+.cache/
 .idea/
 .vscode/
 

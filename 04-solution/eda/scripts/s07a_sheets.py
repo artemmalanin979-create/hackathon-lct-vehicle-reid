@@ -6,11 +6,13 @@
    с низким / высоким полнокадровым сходством — что такое «один проезд» на деле;
  - sheet_firstpair.png: первые строки test_query и test_gallery (кадры целиком + кропы).
 Память: по одному файлу. Запуск: python3 s07a_sheets.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 from PIL import Image, ImageDraw
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(0)
 

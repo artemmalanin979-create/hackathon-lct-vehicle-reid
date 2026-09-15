@@ -16,13 +16,18 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
 JOB = Path(__file__).resolve().parent.parent
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+# Веса решения лежат в service/model (их кладёт service/model/fetch_model.sh).
+MODEL = Path(os.environ.get(
+    "REID_MODEL_PATH", REPO / "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx"))
 sys.path.insert(0, str(JOB / "scripts"))
 from extract_embeddings import load_crop, make_session, l2norm  # noqa: E402
 
@@ -52,7 +57,7 @@ def main():
 
     rng = np.random.default_rng(20260915)
     picks = sorted(set(BOUNDARY) | set(rng.choice(len(all_rows), K_RANDOM, replace=False).tolist()))
-    sess = make_session(JOB / "model" / "osnet_ain_x1_0_vehicle_reid.onnx", 0)
+    sess = make_session(MODEL, 0)
     inp = sess.get_inputs()[0].name
 
     checks, min_cos = [], 1.0

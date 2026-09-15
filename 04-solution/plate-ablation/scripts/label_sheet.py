@@ -1,9 +1,11 @@
 """Листы для ручной разметки: кроп в исходном разрешении с координатной сеткой."""
+import os
 import csv, json, random, sys
 from pathlib import Path
 from PIL import Image, ImageDraw
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT = REPO / "04-solution/split/files"
 OUT = Path("pics/label"); OUT.mkdir(parents=True, exist_ok=True)
 
 def rd(p): return list(csv.DictReader(open(p, newline="")))

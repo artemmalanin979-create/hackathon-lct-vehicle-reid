@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """s08: сложность данных — площади bbox, доля тёмных кадров, крайние случаи.
 Числа по CSV + яркость по thumbs32. Выход: out_s08.json. Запуск: python3 s08_complexity.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 W, H = 1920, 1080
 FRAME = W * H

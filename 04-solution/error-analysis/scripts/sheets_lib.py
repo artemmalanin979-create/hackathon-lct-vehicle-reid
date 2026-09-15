@@ -1,9 +1,11 @@
 """Сборка контрольных листов: строки из кропов с подписями (PIL)."""
+import os
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-P = Path("/home/artem/projects/hackathon-lct-vehicle-reid")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+P = REPO
 IMG = P / "data/images"
 F = "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf"
 FB = "/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf"

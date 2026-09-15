@@ -5,6 +5,7 @@
 -> NCHW -> ONNX -> L2. Меняется только вмешательство в кроп до resize.
 """
 from __future__ import annotations
+import os
 import csv, json, sys, time
 from pathlib import Path
 import numpy as np
@@ -13,9 +14,13 @@ from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from mask_ops import fill, controls
 JOB = Path(__file__).resolve().parent.parent
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT = REPO / "04-solution/split/files"
 OUT = JOB / "work" / "emb"; OUT.mkdir(parents=True, exist_ok=True)
+# Веса решения лежат в service/model (их кладёт service/model/fetch_model.sh).
+MODEL = Path(os.environ.get(
+    "REID_MODEL_PATH", REPO / "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx"))
 PAD = 0.12  # расширение бокса (компенсация недокрытия пластины детектором)
 
 VARIANTS = ["base",
@@ -67,7 +72,7 @@ def to_input(a):
 def main():
     boxes = json.load(open(JOB / "work" / "boxes.json"))
     o = ort.SessionOptions(); o.log_severity_level = 3
-    sess = ort.InferenceSession(str(JOB / "model" / "osnet_ain_x1_0_vehicle_reid.onnx"),
+    sess = ort.InferenceSession(str(MODEL),
                                 sess_options=o, providers=["CPUExecutionProvider"])
     inp = sess.get_inputs()[0].name
     for split in ("val_query", "val_gallery"):

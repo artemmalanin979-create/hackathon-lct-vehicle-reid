@@ -6,10 +6,12 @@
 Применение лучшего t к тесту (query+gallery): кластеры, покрытие query кандидатами
 gallery из той же точки; заодно — неоднородность камер 90/89 и слияния разных camera_id.
 Память: блочно. Выход: out_s06.json. Запуск: python3 s06_camcluster.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 W, H = 1920, 1080
 GRID = [0.45, 0.55, 0.65, 0.75, 0.85]

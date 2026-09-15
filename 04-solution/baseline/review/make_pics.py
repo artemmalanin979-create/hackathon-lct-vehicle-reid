@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Контрольные картинки: (1) bbox на кадре, (2) кроп как его видит сеть + линия 70%,
 (3) кроп после --mask-bottom 0.3."""
+import os
 import csv
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 JOB=Path(__file__).resolve().parent.parent
-DATA=Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA=Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT=REPO / "04-solution/split/files"
 rows=list(csv.DictReader(open(SPLIT/"val_query.csv",newline="")))
 rng=np.random.default_rng(7)
 pick=[0]+sorted(rng.choice(len(rows),11,replace=False).tolist())

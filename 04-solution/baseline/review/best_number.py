@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Лучшее число ТЕМИ ЖЕ весами без обучения: TTA + k-reciprocal re-ranking.
 Сетка k1/k2/lambda — чтобы видеть, не выброс ли лучшая точка."""
+import os
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 JOB = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(JOB/"work"))
-sys.path.insert(0, "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+sys.path.insert(0, str(REPO / "04-solution/eval"))
 from reid_metrics import evaluate, scores_from_embeddings
 from postproc import k_reciprocal, l2, QV, GV, QC, GC, ABS, report
 EMB = JOB/"work"/"emb"

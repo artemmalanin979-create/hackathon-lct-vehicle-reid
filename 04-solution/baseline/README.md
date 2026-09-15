@@ -125,12 +125,49 @@ top-1, а точность самих строк `candidates.csv` — **0,089** 
 
 ## Запуск
 
+Только через `.venv/bin/python` проекта. Векторы (`*.npy`) в репозиторий не кладём —
+воспроизводятся прогоном; каталог данных берётся из `REID_DATA_DIR` (по умолчанию
+`data/` репозитория), путь к весам задаётся аргументом `--model`.
+
+Шаг 0 — веса, если их ещё нет в рабочем дереве (`*.onnx` исключён `.gitignore`):
+
 ```bash
-scripts/extract_embeddings.py   # CSV(image_id,x,y,w,h) → L2-нормированные векторы
-scripts/run_eval.py             # все прогоны таблицы, через общий измерительный контур
-scripts/make_submission.py --threshold 0.349214
-scripts/check_embeddings_order.py
+(cd 04-solution/service && sh model/fetch_model.sh)
 ```
 
-Только через `.venv/bin/python` проекта. Векторы (`*.npy`) в репозиторий не кладём —
-воспроизводятся прогоном.
+Дальше — из каталога `04-solution/baseline`. У `extract_embeddings.py` все четыре
+аргумента обязательны (`--csv`, `--images-dir`, `--model`, `--out`), а `run_eval.py`
+ждёт восемь файлов `out/*.npy`: базовый вариант и три абляционных для query и gallery.
+
+```bash
+PY=../../.venv/bin/python
+M=../service/model/osnet_ain_x1_0_vehicle_reid.onnx
+IMG=../../data/images
+
+# 1. векторы валидации: база (+ .ids) и три абляции
+for part in query gallery; do
+  $PY scripts/extract_embeddings.py --csv ../split/files/val_$part.csv --images-dir $IMG \
+      --model $M --out out/val_$part.npy --ids-out out/val_$part.ids
+  $PY scripts/extract_embeddings.py --csv ../split/files/val_$part.csv --images-dir $IMG \
+      --model $M --mask-bottom 0.30 --out out/val_${part}_mask30.npy
+  $PY scripts/extract_embeddings.py --csv ../split/files/val_$part.csv --images-dir $IMG \
+      --model $M --grayscale --out out/val_${part}_gray.npy
+  $PY scripts/extract_embeddings.py --csv ../split/files/val_$part.csv --images-dir $IMG \
+      --model $M --mask-bottom 0.30 --grayscale --out out/val_${part}_mask30gray.npy
+done
+
+# 2. все прогоны таблицы через общий измерительный контур -> out/metrics_summary.json
+$PY scripts/run_eval.py
+
+# 3. векторы выданного теста -> сдаваемые артефакты -> проверка порядка строк
+for part in query gallery; do
+  $PY scripts/extract_embeddings.py --csv ../../data/test_$part.csv --images-dir $IMG \
+      --model $M --out out/test_$part.npy --ids-out out/test_$part.ids
+done
+$PY scripts/make_submission.py --threshold 0.34921352213815304
+$PY scripts/check_embeddings_order.py
+```
+
+Порог в шаге 3 — полное значение из `out/metrics_summary.json`
+(`_threshold_selection.t_star`); округление до 0.349214 даёт другой
+`candidates.csv`, поэтому в команде стоит всё число целиком.

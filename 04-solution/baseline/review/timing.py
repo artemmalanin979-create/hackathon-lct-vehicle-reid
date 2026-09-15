@@ -5,8 +5,9 @@ from pathlib import Path
 import numpy as np, onnxruntime as ort
 from PIL import Image
 JOB=Path(__file__).resolve().parent.parent
-DATA=Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA=Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT=REPO / "04-solution/split/files"
 rows=[(r["image_id"],int(r["x"]),int(r["y"]),int(r["w"]),int(r["h"]))
       for r in csv.DictReader(open(SPLIT/"val_query.csv",newline=""))][:200]
 o=ort.SessionOptions(); o.log_severity_level=3

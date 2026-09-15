@@ -9,8 +9,11 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /srv
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# requirements.txt — семь прямых зависимостей, requirements-lock.txt — полный
+# снимок проверенной сборки (`pip freeze --all` из образа): как constraints он
+# закрепляет и транзитивные версии. Хешей wheel в нём нет.
+COPY requirements.txt requirements-lock.txt ./
+RUN pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt
 
 # Веса — в составе решения. Если файла нет (например, клон без бинарников),
 # model/fetch_model.sh скачает и проверит его ДО сборки образа.

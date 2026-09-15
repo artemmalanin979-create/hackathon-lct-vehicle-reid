@@ -1,0 +1,936 @@
+{
+  "checks": [
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.21915330351144197,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.3368899094690033,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.349214,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.3745235365461382,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.4101473891506712,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.4412196365318835,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.47978406220422365,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.5090255069293314,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.5505529232665857,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.5552296034240933,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.5848364446582176,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.654709265940641,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.8020525151497089,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_presence",
+      "threshold": 0.9525491194015193,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.21915330351144197,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.3368899094690033,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.349214,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.3745235365461382,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.4101473891506712,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.4412196365318835,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.45553824476695814,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.47978406220422365,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.48815967621481376,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.4958007988753278,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.5090255069293314,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.5505529232665857,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.5848364446582176,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.654709265940641,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.8020525151497089,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_absolute_top1",
+      "threshold": 0.9525491194015193,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 5.8617359000590064e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 7.786060185943633e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.0040249637150593385,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.008675199747776087,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.014106795350458725,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.020581622532681313,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.026668933984525914,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.03565411391065532,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.044570231328764476,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.048120095530385994,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.048272646154721155,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.07262673843088015,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.1091588458841858,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.27555014087078844,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_presence",
+      "threshold": 0.5127040579271319,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 5.8617359000590064e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.0040249637150593385,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.008675199747776087,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.014106795350458725,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.020581622532681313,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.026668933984525914,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.03565411391065532,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.03801049255582034,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.04517222131034537,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.048120095530385994,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.07262673843088015,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.1091588458841858,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.27555014087078844,
+      "max_error": 0.0
+    },
+    {
+      "case": "market_gap_top1",
+      "threshold": 0.5127040579271319,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.21915330351144197,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.3368899094690033,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.349214,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.3745235365461382,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.4083542557610889,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.43750444954357853,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.4687427070685758,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.5090255069293314,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.5473262092700217,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.5505529232665857,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.5552296034240933,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.5835200061463808,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.6542678121644672,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.8020525151497089,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_presence",
+      "threshold": 0.8755570787949026,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.21915330351144197,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.3368899094690033,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.349214,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.3745235365461382,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.4083542557610889,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.43750444954357853,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.45553824476695814,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.4687427070685758,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.48815967621481376,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.49695483983067834,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.5090255069293314,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.5505529232665857,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.5835200061463808,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.6542678121644672,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.8020525151497089,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_absolute_top1",
+      "threshold": 0.8755570787949026,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 5.8617359000590064e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.0004307494824709046,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.003864236759167528,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.008651829445626565,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.01489312200401094,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.020581622532681313,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.027081798266433147,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.036622056897638096,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.04495178768354291,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.04822832126139182,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.0483879887861568,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.07262673843088015,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.10789084542307932,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.27555014087078844,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_presence",
+      "threshold": 0.4659911520733991,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 5.8617359000590064e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.003864236759167528,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.008651829445626565,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.01489312200401094,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.020581622532681313,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.027081798266433147,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.036622056897638096,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.03801049255582034,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.04822832126139182,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.07262673843088015,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.10789084542307932,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.27555014087078844,
+      "max_error": 0.0
+    },
+    {
+      "case": "all_same_camera_gap_top1",
+      "threshold": 0.4659911520733991,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.21915330351144197,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.3368899094690033,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.349214,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.3745235365461382,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.4101473891506712,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.4412196365318835,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.47978406220422365,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.5090255069293314,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.5505529232665857,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.5848364446582176,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.6287639650480481,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.654709265940641,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.6857866100088712,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.8020525151497089,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_presence",
+      "threshold": 0.9937305085899049,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.21915330351144197,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.3368899094690033,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.349214,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.3745235365461382,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.4101473891506712,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.4412196365318835,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.47978406220422365,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.5090255069293314,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.5505529232665857,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.5848364446582176,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.6327536099000877,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.654709265940641,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.6763544934615312,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.6924180700783253,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.8020525151497089,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_absolute_top1",
+      "threshold": 0.9937305085899049,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 5.8617359000590064e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.0040249637150593385,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.008675199747776087,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.014106795350458725,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.020581622532681313,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.026668933984525914,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.03565411391065532,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.048120095530385994,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.06076538127126063,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.07262673843088015,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.1091588458841858,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.11804635026406896,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.11979354836654199,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.27555014087078844,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_presence",
+      "threshold": 0.701529453460906,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 5.8617359000590064e-05,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.0040249637150593385,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.008675199747776087,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.014106795350458725,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.020581622532681313,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.026668933984525914,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.03565411391065532,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.048120095530385994,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.07262673843088015,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.08742690585799451,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.1091588458841858,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.1162876322166958,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.11979354836654199,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.27555014087078844,
+      "max_error": 0.0
+    },
+    {
+      "case": "unfiltered_gap_top1",
+      "threshold": 0.701529453460906,
+      "max_error": 0.0
+    }
+  ],
+  "count": 186,
+  "max_abs_error": 0.0
+}

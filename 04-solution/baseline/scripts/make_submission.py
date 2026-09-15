@@ -16,14 +16,16 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
 JOB = Path(__file__).resolve().parent.parent
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-sys.path.insert(0, "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+sys.path.insert(0, str(REPO / "04-solution/eval"))
 from reid_metrics import scores_from_embeddings  # noqa: E402
 
 

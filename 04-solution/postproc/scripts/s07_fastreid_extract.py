@@ -13,6 +13,7 @@ PIL BICUBIC (interpolation=3) -> float32 0..255 CHW; нормализация me
 import argparse
 import csv
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -22,11 +23,12 @@ import torch
 from PIL import Image
 
 JOB = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
 sys.path.insert(0, str(JOB / "fastreid_job/fast-reid"))
 from fastreid.config import get_cfg  # noqa: E402
 from fastreid.modeling.meta_arch import build_model  # noqa: E402
 
-IMAGES = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data/images")
+IMAGES = Path(os.environ.get("REID_DATA_DIR", REPO / "data")) / "images"
 SIZE = 256
 
 

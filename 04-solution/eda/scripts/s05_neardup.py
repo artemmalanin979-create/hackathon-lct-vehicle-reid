@@ -10,11 +10,13 @@
  - верификация кросс-сплитовых пар в среднем разрешении (240x135): доля изменившихся
    пикселей вне объединения bbox (same-pass ~ мало, другой проезд ~ много).
 Память: блочно, пиковое ~ десятки МБ. Выход: out_s05.json. Запуск: python3 s05_neardup.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 from PIL import Image
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(0)
 W, H = 1920, 1080

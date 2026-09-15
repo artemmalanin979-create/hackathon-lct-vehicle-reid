@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """s01: точные колонки CSV, типы, диапазоны, счётчики, распределения.
 Запуск: python3 s01_csv_stats.py  -> печатает JSON и пишет out_s01.json рядом."""
+from pathlib import Path
 import csv, json, os, statistics as st
 from collections import Counter
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 def read_csv(name):

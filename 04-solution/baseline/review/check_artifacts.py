@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Дословная сверка сдаваемых файлов со схемой dataset-readme.md + пересборка из embeddings.npy."""
+import os
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 JOB = Path(__file__).resolve().parent.parent
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
 ART = JOB/"subject"/"artifacts"
-sys.path.insert(0, "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
+sys.path.insert(0, str(REPO / "04-solution/eval"))
 from reid_metrics import scores_from_embeddings
 def ids(p):
     with open(p, newline="") as f: return [r["image_id"] for r in csv.DictReader(f)]

@@ -2,10 +2,12 @@
 """s03: целостность. CSV<->файлы в обе стороны; bbox внутри кадра (реальный размер
 из scan_meta.jsonl); нулевые/отрицательные w,h; побайтовые дубликаты файлов и их
 принадлежность выборкам. Требует прогона s02. Выход: out_s03.json."""
+from pathlib import Path
 import csv, json, os
 from collections import defaultdict
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 def rows_of(name):

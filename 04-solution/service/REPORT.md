@@ -74,10 +74,12 @@ docker run --rm --network none \
       --query /data/test_query.csv --gallery /data/test_gallery.csv --out-dir /out
 ```
 
-Проверялось на машине через podman 5.8.2 / podman-compose 1.6.0 (формат тот же);
-два локальных нюанса задокументированы в README: `podman-compose` требует явного
-`--profile tools` для loader, при SELinux каталогу данных нужна метка (`:z` или
-`chcon -Rt container_file_t`). Для docker у жюри оба нюанса не существуют.
+Проверялось на машине через podman 5.8.2 / podman-compose 1.6.0 (формат тот же).
+Профиль `tools` у loader убран — загрузка галереи входит в `up` (см. README).
+Локальные нюансы podman задокументированы в README: при SELinux каталогу данных
+нужна метка (`:z` или `chcon -Rt container_file_t`), а `condition: service_healthy`
+podman-compose не ждёт — поэтому ожидание готовности хранилища продублировано
+внутри загрузчика. Для docker у жюри этих нюансов нет.
 
 ## 3. Сверка с артефактами бейзлайна
 

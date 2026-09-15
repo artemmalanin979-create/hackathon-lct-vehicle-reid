@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Контроль абляции: закрываем серым 30% полосу СВЕРХУ и ПО СЕРЕДИНЕ — той же площади,
 тем же цветом 127, всё остальное идентично subject/scripts/extract_embeddings.py."""
+import os
 import csv, time
 from pathlib import Path
 import numpy as np, onnxruntime as ort
 from PIL import Image
 JOB=Path(__file__).resolve().parent.parent
-DATA=Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA=Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT=REPO / "04-solution/split/files"
 OUT=JOB/"work"/"emb"
 o=ort.SessionOptions(); o.log_severity_level=3
 sess=ort.InferenceSession(str(JOB/"subject/osnet_ain_x1_0_vehicle_reid.onnx"),sess_options=o,providers=["CPUExecutionProvider"])

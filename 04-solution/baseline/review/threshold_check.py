@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Свой пересчёт порога/F1/TNR + перенос порога val->test."""
+import os
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 JOB = Path(__file__).resolve().parent.parent
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT = REPO / "04-solution/split/files"
 def rd(p):
     with open(p, newline="") as f: return list(csv.DictReader(f))
 qm, gm = rd(SPLIT/"val_query.csv"), rd(SPLIT/"val_gallery.csv")

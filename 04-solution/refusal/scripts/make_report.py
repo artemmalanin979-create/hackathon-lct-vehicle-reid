@@ -7,7 +7,9 @@ import json
 import os
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+# Каталог этапа (scripts/ лежит внутри него): туда же писались REPORT.md,
+# графики и results/ в исходном прогоне.
+ROOT = Path(__file__).resolve().parent.parent
 os.environ["MPLCONFIGDIR"] = str(ROOT / ".matplotlib")
 os.environ["XDG_CACHE_HOME"] = str(ROOT / ".cache")
 import matplotlib
@@ -332,18 +334,30 @@ def write_report():
 
 Все команды выполняются синхронно, записи — только в каталоге задания. Обучения/инференса модели не требуется. Основные вычисления используют Python проекта; графики — системный Python с уже установленным Matplotlib.
 
+Входы этапа — векторы валидации бейзлайна и два текстовых контекста; в git их нет
+(`*.npy`/`*.ids` не коммитятся), поэтому они кладутся рядом с каталогом `scripts/`
+одной командой. Векторы получаются шагом 1 из `baseline/README.md`.
+
 ```bash
-cd {ROOT}
-bash run.sh
+cd 04-solution/refusal
+cp ../baseline/out/val_query.npy ../baseline/out/val_gallery.npy .
+cp ../baseline/out/val_query.ids ../baseline/out/val_gallery.ids .
+cp ../split/REPORT.md context-split.md          # описание сплита, хешируется в манифест
+cp ../../00-task/tz.txt context-tz.txt          # текст ТЗ, хешируется в манифест
 ```
 
-Или по шагам:
+Дальше — по шагам, из каталога `scripts/`:
 
 ```bash
-env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /home/artem/projects/hackathon-lct-vehicle-reid/.venv/bin/python -B analyze.py
-env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 /home/artem/projects/hackathon-lct-vehicle-reid/.venv/bin/python -B robustness.py --bootstrap 500 --cv-repeats 5
+cd scripts
+env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 ../../../.venv/bin/python -B analyze.py
+env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 ../../../.venv/bin/python -B robustness.py --bootstrap 500 --cv-repeats 5
 env PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 -B make_report.py
 ```
+
+Проверено прогоном: все 84 файла `results/` воспроизводятся побайтово (кроме
+`manifest.json`, где порядок ключей теперь фиксирован сортировкой — значения
+хешей те же).
 
 Выполнены **194 прямые сверки** с немодифицированным публичным `evaluate()` (186 точек основных веток, 6 raw-gap, 2 с повторёнными запросами) и **9 проверок инвариантности** recall/TNR по всей шкале при изменении доли. Максимальное абсолютное расхождение **0**. PR-кривые основных веток совпали с исходным контуром целиком. Подробности: [verification.json](results/verification.json), [robustness.json](results/robustness.json).
 

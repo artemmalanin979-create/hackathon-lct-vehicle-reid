@@ -8,8 +8,13 @@
 полученным их скриптом (max|diff| печатается).
 
 Выход: out/{set}_{part}_{S}{f}.npy; тайминг каждого варианта — out/s03_timings.json.
+
+По умолчанию извлекаются оба набора и все шесть вариантов (как в отчёте). Для
+частичного прогона: --sets val --variants 208,208f,256 (столько нужно шагу 6).
 """
+import argparse
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -19,9 +24,11 @@ import onnxruntime as ort
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import JOB, SPLIT, DATA, read_meta, l2norm
+from common import JOB, REPO, SPLIT, DATA, read_meta, l2norm
 
-MODEL = JOB / "model/osnet_ain_x1_0_vehicle_reid.onnx"
+# Веса решения лежат в service/model (их кладёт service/model/fetch_model.sh).
+MODEL = Path(os.environ.get(
+    "REID_MODEL_PATH", REPO / "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx"))
 IMAGES = DATA / "images"
 BATCH = 16
 
@@ -58,16 +65,30 @@ def extract(session, rows, size, flip):
     return l2norm(out.astype(np.float64)).astype(np.float32), dt
 
 
-def main():
-    session = make_session()
-    sets = {
-        ("val", "query"): read_meta(SPLIT / "val_query.csv"),
-        ("val", "gallery"): read_meta(SPLIT / "val_gallery.csv"),
-        ("tune", "query"): read_meta(JOB / "tune/tune_query.csv"),
-        ("tune", "gallery"): read_meta(JOB / "tune/tune_gallery.csv"),
-    }
-    variants = [(208, False), (208, True), (256, False), (256, True),
+ALL_VARIANTS = [(208, False), (208, True), (256, False), (256, True),
                 (288, False), (288, True)]
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--sets", default="val,tune", help="наборы через запятую: val,tune")
+    ap.add_argument("--variants", default=",".join(f"{s}{'f' if f else ''}" for s, f in ALL_VARIANTS),
+                    help="варианты входа через запятую, например 208,208f,256")
+    args = ap.parse_args()
+    wanted_sets = [s.strip() for s in args.sets.split(",") if s.strip()]
+    wanted_tags = [t.strip() for t in args.variants.split(",") if t.strip()]
+
+    session = make_session()
+    all_sets = {
+        ("val", "query"): lambda: read_meta(SPLIT / "val_query.csv"),
+        ("val", "gallery"): lambda: read_meta(SPLIT / "val_gallery.csv"),
+        ("tune", "query"): lambda: read_meta(JOB / "tune/tune_query.csv"),
+        ("tune", "gallery"): lambda: read_meta(JOB / "tune/tune_gallery.csv"),
+    }
+    sets = {key: make() for key, make in all_sets.items() if key[0] in wanted_sets}
+    variants = [(size, flip) for size, flip in ALL_VARIANTS
+                if f"{size}{'f' if flip else ''}" in wanted_tags]
     timings = {}
     for (sname, part), rows in sets.items():
         ids_path = JOB / f"out/{sname}_{part}.ids"
@@ -78,7 +99,12 @@ def main():
             path = JOB / f"out/{sname}_{part}_{tag}.npy"
             if sname == "val" and tag == "208":
                 # уже извлечено их скриптом; сверим свой препроцессинг
-                ref = np.load(JOB / f"out/val_{part}.npy")
+                ref_path = JOB / f"out/val_{part}.npy"
+                if not ref_path.is_file():
+                    raise SystemExit(
+                        f"нет {ref_path}: это базовые векторы бейзлайна. Получить их — "
+                        "scripts/extract_embeddings.py бейзлайна (см. postproc/README.md, шаг 1)")
+                ref = np.load(ref_path)
                 mine, dt = extract(session, rows, size, flip)
                 print(f"val_{part}_208 сверка со скриптом бейзлайна: "
                       f"max|diff|={np.abs(mine - ref).max():.2e}", flush=True)
@@ -92,7 +118,10 @@ def main():
                 "rows": len(rows), "elapsed_s": round(dt, 2),
                 "ms_per_obj_batch16": round(1000 * dt / len(rows), 2)}
             print(f"{sname}_{part}_{tag}: {len(rows)} строк за {dt:.1f} с", flush=True)
-    (JOB / "out/s03_timings.json").write_text(json.dumps(timings, indent=2) + "\n")
+    if wanted_sets == ["val", "tune"] and len(variants) == len(ALL_VARIANTS):
+        (JOB / "out/s03_timings.json").write_text(json.dumps(timings, indent=2) + "\n")
+    else:  # частичный прогон не должен затирать тайминги полного
+        print("частичный прогон: out/s03_timings.json не перезаписан", flush=True)
 
 
 if __name__ == "__main__":

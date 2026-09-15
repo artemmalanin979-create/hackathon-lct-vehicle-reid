@@ -7,10 +7,12 @@
  2) mutual-kNN граф (k=5) + порог, компоненты, парные P/R/purity vs camera_id;
  3) применение лучшей связки к тесту.
 Выход: out_s06b.json. Запуск: python3 s06b_pairlevel.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 W, H = 1920, 1080
 

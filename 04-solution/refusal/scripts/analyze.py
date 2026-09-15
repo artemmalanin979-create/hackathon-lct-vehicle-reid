@@ -19,8 +19,10 @@ import numpy as np
 
 from metric_adapter import Sweep, metric_kernel
 
-ROOT = Path(__file__).resolve().parent
-PROJECT = Path("/home/artem/projects/hackathon-lct-vehicle-reid")
+# ROOT — каталог этапа (scripts/ лежит внутри него): там же лежат входные векторы
+# и туда пишутся results/, metadata/, evaluator_snapshot/ — как в исходном прогоне.
+ROOT = Path(__file__).resolve().parent.parent
+PROJECT = ROOT.parents[1]  # корень репозитория
 SNAPSHOT = ROOT / "evaluator_snapshot"
 META = ROOT / "metadata"
 OUT = ROOT / "results"
@@ -104,7 +106,8 @@ def main():
                   query_cameras=[r["camera_id"] for r in qm],
                   gallery_cameras=[r["camera_id"] for r in gm], known_absent=~known)
     inputs = [ROOT / name for name in ("val_query.npy", "val_gallery.npy", "val_query.ids", "val_gallery.ids", "context-tz.txt", "context-split.md")]
-    inputs += list(SNAPSHOT.glob("*.py")) + list(META.iterdir())
+    # sorted: порядок ключей манифеста не должен зависеть от порядка каталога ФС
+    inputs += sorted(SNAPSHOT.glob("*.py")) + sorted(META.iterdir())
     manifest = {
         "sha256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
         "python": platform.python_version(), "numpy": np.__version__,

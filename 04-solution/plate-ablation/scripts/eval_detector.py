@@ -1,4 +1,5 @@
 """Честная оценка локализации: детектор против ручной разметки 36 кропов val."""
+import os
 import json, sys, time
 from pathlib import Path
 import numpy as np
@@ -6,7 +7,8 @@ from PIL import Image, ImageDraw, ImageFont
 FONT = ImageFont.truetype("/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf", 14)
 sys.path.insert(0, 'work')
 from plate_detect import detect
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
 labels = json.load(open("work/labels.json"))
 
 def iou(a, b):

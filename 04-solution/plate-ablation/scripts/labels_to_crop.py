@@ -1,9 +1,11 @@
 """Перевод ручной разметки из координат листа в координаты кропа + лист проверки."""
+import os
 import json
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 FONT = ImageFont.truetype("/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf", 14)
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
 meta = json.load(open("work/label_meta.json"))
 disp = json.load(open("work/labels_display.json"))
 out = []

@@ -9,11 +9,13 @@ ff32 (полнокадровый косинус 32x32), IoU bbox, crop64 (кро
  3) mutual-kNN кластеризация grad96 на train (метрики vs camera_id) и на тесте;
  4) итоговые флаги для теста уже посчитаны в s05b (qg_flagged_pairs.csv).
 Выход: out_s06d.json, test_scene_clusters.csv. Запуск: python3 s06d_surrogate.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 from PIL import Image
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(0)
 W, H = 1920, 1080

@@ -1,11 +1,16 @@
-# Запуск всего сервиса одной командой:
-#   docker compose up --build -d
-# После этого: тонкий клиент http://localhost:8000/, документация /docs.
-# Загрузка галереи в хранилище — отдельный воспроизводимый шаг (см. README):
-#   DATA_DIR=/путь/к/data docker compose run --rm loader
+# Запуск всего сервиса одной командой ИЗ ЭТОГО КАТАЛОГА (здесь лежит файл compose):
+#   cd 04-solution/service && docker compose up --build -d
+# из корня репозитория то же самое:
+#   docker compose -f 04-solution/service/docker-compose.yml up --build -d
 #
-# Каталог данных задаётся переменной DATA_DIR (по умолчанию ./data рядом с
-# этим файлом); внутрь контейнеров он монтируется только на чтение.
+# `up` поднимает хранилище, API и ЗАГРУЖАЕТ ГАЛЕРЕЮ: loader — обычный сервис
+# прогона (не профиль), он стартует после healthcheck Qdrant, отрабатывает и
+# выходит. Готовность видно по /api/health: storage.gallery_points > 0.
+#
+# Каталог данных задаётся переменной DATA_DIR (по умолчанию data/ в корне
+# репозитория — на два уровня выше этого файла); внутрь контейнеров он
+# монтируется только на чтение. Другой каталог:
+#   DATA_DIR=/путь/к/data docker compose up -d
 services:
   api:
     build: .
@@ -15,27 +20,38 @@ services:
     environment:
       QDRANT_URL: http://qdrant:6333
     depends_on:
-      - qdrant
+      qdrant:
+        condition: service_healthy
     restart: unless-stopped
 
   qdrant:
     image: docker.io/qdrant/qdrant:v1.15.5
     volumes:
       - qdrant_storage:/qdrant/storage
+    # В образе Qdrant нет curl/wget, поэтому готовность HTTP-эндпоинта
+    # проверяется через /dev/tcp самого bash: 200 на /readyz.
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/6333 && printf 'GET /readyz HTTP/1.0\r\n\r\n' >&3 && grep -q '200 OK' <&3"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 5s
     restart: unless-stopped
 
-  # Одноразовый шаг загрузки галереи (запускается явно через `run loader`,
-  # при `up` не стартует благодаря profiles).
+  # Загрузка галереи — часть `up`: без неё поиск отвечает 409 «галерея не
+  # загружена». Шаг идемпотентен (коллекция пересоздаётся), контейнер
+  # разовый: отработал и вышел, перезапуском не поднимается.
   loader:
     image: vehicle-reid-service
     build: .
-    profiles: ["tools"]
     environment:
       QDRANT_URL: http://qdrant:6333
     volumes:
-      - ${DATA_DIR:-./data}:/data:ro
+      - ${DATA_DIR:-../../data}:/data:ro
     depends_on:
-      - qdrant
+      qdrant:
+        condition: service_healthy
+    restart: "no"
     command: >
       python -m app.load_gallery
       --images-dir /data/images

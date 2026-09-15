@@ -9,13 +9,15 @@
        out/tmp_light.npz (dfL, dcL, dsat, night, mixed),
        out/tmp_livery.npy.
 """
+import os
 import csv
 from pathlib import Path
 import numpy as np
 from PIL import Image
 
 JOB = Path(__file__).resolve().parent.parent
-P = Path("/home/artem/projects/hackathon-lct-vehicle-reid")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+P = REPO
 IMG = P/"data/images"
 NIGHT = 70.0          # порог «ночного» кадра по средней яркости
 TWIN_DE, TWIN_ASP = 10.0, 0.2   # «цветовой двойник»: ΔE и допуск по aspect

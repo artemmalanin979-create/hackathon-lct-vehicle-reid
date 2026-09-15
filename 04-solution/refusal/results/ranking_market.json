@@ -1,0 +1,164 @@
+{
+  "protocol": {
+    "camera_policy": "market",
+    "ap_method": "step",
+    "refusal_mode": "presence",
+    "score_kind": "similarity",
+    "tie_policy": "column_index",
+    "filtered_positive_policy": "drop",
+    "empty_denominator": null,
+    "threshold_rule": ">=",
+    "ranking_scope": "full_gallery",
+    "auc_pr_method": "trapezoid",
+    "schema_version": 2,
+    "ranking_scopes": [
+      "full_gallery",
+      "top_k"
+    ],
+    "ranking_alias": "ranking_full_gallery",
+    "top_k": 10,
+    "ap_denominator": "all_gallery_positives",
+    "query_average": "valid_queries",
+    "incomplete_inp": "undefined_if_incomplete",
+    "rank_beyond_k": "undefined",
+    "rank_ks": [
+      1,
+      5
+    ],
+    "truncation_order": "top_k_then_filter",
+    "rank_and_inp_query_average": "valid_queries",
+    "refusal_scope": "full_eligible_gallery",
+    "score_precision": "float64_no_downcast",
+    "threshold_precision": "float64_no_downcast",
+    "score_input_dtype": "float64",
+    "tie_equality": "exact_represented_value",
+    "embedding_accumulation": "float64",
+    "missing_ap_all_queries": "zero",
+    "empty_retrieved_ap_for_valid_query": 0.0,
+    "incomplete_inp_mean": "propagate_undefined_or_assign_zero; never_drop_query"
+  },
+  "counts": {
+    "queries": 1110,
+    "gallery": 750,
+    "known_queries": 832,
+    "unknown_queries": 278,
+    "filtered_queries": 0,
+    "refusal_queries": 1110,
+    "relevant_pairs": 1239
+  },
+  "ranking_full_gallery": {
+    "mAP": 0.6565692724907637,
+    "Rank-1": 0.6310096153846154,
+    "Rank-5": 0.7872596153846154,
+    "mINP": 0.6070423064987811,
+    "num_valid_queries": 832,
+    "scope": "full_gallery",
+    "mAP_by_query_average": {
+      "valid_queries": 0.6565692724907637,
+      "all_queries_zero": 0.4921312024435274
+    },
+    "mAP_query_average": "valid_queries",
+    "mAP_denominator": 832
+  },
+  "ranking_top_k_by_filter_order": {
+    "top_k_then_filter": {
+      "scope": "top_k",
+      "k": 10,
+      "filter_order": "top_k_then_filter",
+      "ap_denominator": "all_gallery_positives",
+      "mAP_query_average": "valid_queries",
+      "incomplete_inp_policy": "undefined_if_incomplete",
+      "rank_beyond_k_policy": "undefined",
+      "mAP": 0.6451091746794871,
+      "mINP": null,
+      "Rank-1": 0.6310096153846154,
+      "Rank-5": 0.7872596153846154,
+      "num_valid_queries": 832,
+      "mAP_denominator": 832,
+      "num_incomplete_queries": 222,
+      "num_complete_queries": 610,
+      "mAP_by_ap_denominator_and_query_average": {
+        "all_gallery_positives": {
+          "valid_queries": 0.6451091746794871,
+          "all_queries_zero": 0.48354129129129125
+        },
+        "retrieved_positives": {
+          "valid_queries": 0.6754970810439561,
+          "all_queries_zero": 0.5063185328185329
+        }
+      },
+      "mINP_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.5900545634920635
+      },
+      "ranks_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.6310096153846154,
+          "Rank-5": 0.7872596153846154
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.6310096153846154,
+          "Rank-5": 0.7872596153846154
+        }
+      }
+    },
+    "filter_then_top_k": {
+      "scope": "top_k",
+      "k": 10,
+      "filter_order": "filter_then_top_k",
+      "ap_denominator": "all_gallery_positives",
+      "mAP_query_average": "valid_queries",
+      "incomplete_inp_policy": "undefined_if_incomplete",
+      "rank_beyond_k_policy": "undefined",
+      "mAP": 0.6467818509615384,
+      "mINP": null,
+      "Rank-1": 0.6310096153846154,
+      "Rank-5": 0.7872596153846154,
+      "num_valid_queries": 832,
+      "mAP_denominator": 832,
+      "num_incomplete_queries": 210,
+      "num_complete_queries": 622,
+      "mAP_by_ap_denominator_and_query_average": {
+        "all_gallery_positives": {
+          "valid_queries": 0.6467818509615384,
+          "all_queries_zero": 0.484795045045045
+        },
+        "retrieved_positives": {
+          "valid_queries": 0.6746156707875458,
+          "all_queries_zero": 0.5056578721578722
+        }
+      },
+      "mINP_by_incomplete_policy": {
+        "undefined_if_incomplete": null,
+        "zero_if_incomplete": 0.5923382173382173
+      },
+      "ranks_by_beyond_k_policy": {
+        "undefined": {
+          "Rank-1": 0.6310096153846154,
+          "Rank-5": 0.7872596153846154
+        },
+        "clamp_to_k": {
+          "Rank-1": 0.6310096153846154,
+          "Rank-5": 0.7872596153846154
+        }
+      }
+    }
+  },
+  "refusal": {
+    "mode": "presence",
+    "threshold": 0.0,
+    "tp": 832,
+    "fp": 278,
+    "fn": 0,
+    "tn_unknown": 0,
+    "fp_unknown": 278,
+    "precision": 0.7495495495495496,
+    "recall": 1.0,
+    "f1": 0.8568486096807415,
+    "tnr": 0.0,
+    "auc_pr": 0.8876079348328122,
+    "auc_pr_trapezoid": 0.8876079348328122,
+    "ap_pr_step": 0.887743167494347,
+    "tn": 0
+  }
+}

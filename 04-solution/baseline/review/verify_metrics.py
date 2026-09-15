@@ -11,13 +11,15 @@
 - refusal presence: событие = top-1 допущенной галереи каждого запроса, порог >=,
   positive = запрос с mate, F1/TNR как обычно.
 """
+import os
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 
 JOB = Path(__file__).resolve().parent.parent
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
-sys.path.insert(0, "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+SPLIT = REPO / "04-solution/split/files"
+sys.path.insert(0, str(REPO / "04-solution/eval"))
 from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
 
 def rd(p):

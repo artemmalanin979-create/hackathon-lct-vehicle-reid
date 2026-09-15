@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Контроль абляции: mAP при закрашивании 30% полосы снизу / сверху / посередине."""
+import os
 import csv, sys
 from pathlib import Path
 import numpy as np
 JOB=Path(__file__).resolve().parent.parent
-SPLIT=Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
-sys.path.insert(0,"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+SPLIT=REPO / "04-solution/split/files"
+sys.path.insert(0,str(REPO / "04-solution/eval"))
 from reid_metrics import evaluate, scores_from_embeddings
 def rd(p): return list(csv.DictReader(open(p,newline="")))
 qm,gm=rd(SPLIT/"val_query.csv"),rd(SPLIT/"val_gallery.csv")

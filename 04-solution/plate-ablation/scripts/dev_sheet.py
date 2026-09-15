@@ -1,11 +1,13 @@
 """Проявочный лист: кропы из TRAIN (dev-выборка, отдельно от val) с боксами детектора."""
+import os
 import csv, random, sys, time
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from plate_detect import detect
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
 rows = list(csv.DictReader(open(DATA / "train.csv", newline="")))
 random.seed(int(sys.argv[1]) if len(sys.argv) > 1 else 7)
 sample = random.sample(rows, 12)

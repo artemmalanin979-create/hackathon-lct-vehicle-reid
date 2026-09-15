@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Полнокадровая сверка: запрос и его верная пара с нарисованными bbox."""
+import os
 import csv, sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-P = Path("/home/artem/projects/hackathon-lct-vehicle-reid")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+P = REPO
 D = P/"data/images"; SPLIT = P/"04-solution/split/files"
 JOB = Path(__file__).resolve().parent.parent
 F = ImageFont.truetype("/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf", 13)

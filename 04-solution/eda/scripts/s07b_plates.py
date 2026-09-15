@@ -8,11 +8,13 @@
     номера; топ-12 -> sheet_suspect_text.png (ручная проверка);
  4) однородность: остаточная градиентная энергия внутри найденных боксов, день vs ночь.
 Выход: out_s07.json + листы. Запуск: python3 s07b_plates.py"""
+from pathlib import Path
 import csv, json, os
 import numpy as np
 from PIL import Image, ImageDraw
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")))
 HERE = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(1)
 W, H = 1920, 1080

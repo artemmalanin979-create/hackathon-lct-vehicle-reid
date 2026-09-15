@@ -46,7 +46,7 @@
   бокса. Гладкий бампер рядом тоже «плоский», но размер его постоянных отрезков другой —
   поэтому рост останавливается на границе пластины, а не растекается по кузову.
 
-Никакого обучения, никаких внешних весов: `work/plate_detect.py`, ~0,6 с на кроп.
+Никакого обучения, никаких внешних весов: `scripts/plate_detect.py`, ~0,6 с на кроп.
 Готовый детектор пластин не понадобился, и это к лучшему — не пришлось тащить в решение
 лицензию и вес чужой модели.
 
@@ -284,20 +284,36 @@ OSNet-AIN без обучения; проверка показывает, что
 
 ## 7. Воспроизведение
 
+Скрипты лежат в `scripts/` (раньше отчёт называл их `work/*.py` — каталог
+переименован), запускаются **из каталога этапа** `04-solution/plate-ablation`, пути
+к данным и сплиту считаются от корня репозитория (переопределяются переменными
+`REID_DATA_DIR`, `REID_MODEL_PATH`).
+
 ```bash
-V=/home/artem/projects/hackathon-lct-vehicle-reid/.venv/bin/python
-$V work/label_sheet.py        # листы ручной разметки (pics/label/)
-$V work/labels_to_crop.py     # разметка -> координаты кропа + листы проверки
-$V work/eval_detector.py      # качество локализации на разметке -> out/detector_eval.json
-$V work/cache_boxes.py        # детекции на всём val (~8 мин, 6 процессов) -> work/boxes.json
-$V work/make_pics.py          # контрольные картинки
-$V work/fill_stats.py         # сдвиг статистик входа от заливок -> out/fill_stats.json
-$V work/extract_variants.py   # 13 вариантов x 1860 кропов (~21 мин) -> work/emb/*.npy
-$V work/eval_variants.py      # метрики контуром + бутстрэп -> out/ablation.json
-$V work/make_tables.py        # таблицы отчёта -> out/tables.md
+cd 04-solution/plate-ablation
+V=../../.venv/bin/python
+$V scripts/cache_boxes.py       # детекции на всём val (~8 мин, 6 процессов) -> work/boxes.json
+$V scripts/make_pics.py         # контрольные картинки
+$V scripts/fill_stats.py        # сдвиг статистик входа от заливок -> out/fill_stats.json
+$V scripts/extract_variants.py  # 13 вариантов x 1860 кропов (~21 мин) -> work/emb/*.npy
+$V scripts/eval_variants.py     # метрики контуром + бутстрэп -> out/ablation.json
+$V scripts/make_tables.py       # таблицы отчёта -> out/tables.md
 ```
 
-Модель — `model/osnet_ain_x1_0_vehicle_reid.onnx`, sha256
+`cache_boxes.py` принимает `--limit N` и `--out ПУТЬ` — неполный кэш годится только
+для проверки запуска, числа отчёта считаются на полном.
+
+**Чего в репозитории нет.** Три первых шага исходной цепочки опираются на ручную
+разметку 60 кропов: `scripts/label_sheet.py` печатает листы для разметки, а
+`scripts/labels_to_crop.py` и `scripts/eval_detector.py` читают её результат
+(`work/label_meta.json`, `work/labels_display.json` -> `work/labels.json`). Этих
+файлов в репозитории нет и заново они не создаются — значит, из чистого клона
+**не воспроизводится** `out/detector_eval.json` (качество локализации пластины) и
+листы `pics/verify_labels_*.png`. Остальная цепочка от `cache_boxes.py` и ниже
+разметки не требует: детектор работает без неё, и `out/ablation.json` считается
+по детекциям.
+
+Модель — `../service/model/osnet_ain_x1_0_vehicle_reid.onnx`, sha256
 `4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f` (совпадает с
 `04-solution/service/model/fetch_model.sh`). Векторы (`work/emb/*.npy`, ~124 МБ) не
 хранятся в репозитории — воспроизводятся прогоном. Ход работы, включая заранее

@@ -1,0 +1,5 @@
+def reuse_metrics(refusal_mode, threshold, known_count, pair_positive_count, tp, fp, unknown_tn, unknown_count, curve):
+    positives = pair_positive_count if refusal_mode == 'pairwise' else known_count
+    fn = int(positives - tp)
+    refusal = dict(mode=refusal_mode, threshold=threshold, tp=tp, fp=fp, fn=fn, tn_unknown=unknown_tn, fp_unknown=unknown_count - unknown_tn, precision=_ratio(tp, tp + fp), recall=_ratio(tp, positives), f1=_ratio(2 * tp, 2 * tp + fp + fn), tnr=_ratio(unknown_tn, unknown_count), auc_pr=curve['auc_pr_trapezoid'], auc_pr_trapezoid=curve['auc_pr_trapezoid'], ap_pr_step=curve['ap_pr_step'], pr_curve=curve)
+    return refusal

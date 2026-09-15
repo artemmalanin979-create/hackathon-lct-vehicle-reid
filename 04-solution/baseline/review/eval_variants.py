@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Метрики контуром для вариантов препроцессинга (те же веса, обучения нет)."""
+import os
 import csv, json, sys, itertools
 from pathlib import Path
 import numpy as np
 JOB = Path(__file__).resolve().parent.parent
 EMB = JOB/"work"/"emb"
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
-sys.path.insert(0, "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/eval")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+SPLIT = REPO / "04-solution/split/files"
+sys.path.insert(0, str(REPO / "04-solution/eval"))
 from reid_metrics import evaluate, scores_from_embeddings
 def rd(p):
     with open(p, newline="") as f: return list(csv.DictReader(f))

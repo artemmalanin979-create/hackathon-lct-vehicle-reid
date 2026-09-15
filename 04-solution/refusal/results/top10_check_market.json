@@ -1,0 +1,6 @@
+{
+  "min_eligible_candidates_in_raw_top10": 9,
+  "top1_changed_by_raw_top10": 0,
+  "top2_changed_by_raw_top10": 0,
+  "refusal_scope_reported_by_evaluator": "full_eligible_gallery"
+}

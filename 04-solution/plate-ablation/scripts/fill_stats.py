@@ -4,14 +4,16 @@
 вмешательства. Чем меньше сдвиг, тем меньше вмешательство «видно» нормировке и тем
 чище измеряется потеря именно информации, а не сдвиг распределения.
 """
+import os
 import csv, json, sys
 from pathlib import Path
 import numpy as np
 from PIL import Image
 sys.path.insert(0, 'work')
 from mask_ops import fill, controls
-DATA = Path("/home/artem/projects/hackathon-lct-vehicle-reid/data")
-SPLIT = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
+SPLIT = REPO / "04-solution/split/files"
 boxes = json.load(open("work/boxes.json"))["val_query"]
 rows = [(r["image_id"], int(r["x"]), int(r["y"]), int(r["w"]), int(r["h"]))
         for r in csv.DictReader(open(SPLIT/"val_query.csv", newline=""))]

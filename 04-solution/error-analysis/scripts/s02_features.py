@@ -11,13 +11,15 @@
   lab_*      средний Lab центральной части кропа (цвет кузова без фона)
   sharp      средний модуль градиента кропа, приведённого к 128x128 (прокси резкости/зума)
 """
+import os
 import csv, sys, time
 from pathlib import Path
 import numpy as np
 from PIL import Image
 
 JOB = Path(__file__).resolve().parent.parent
-P = Path("/home/artem/projects/hackathon-lct-vehicle-reid")
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+P = REPO
 IMG = P / "data/images"
 SPLIT = P / "04-solution/split/files"
 

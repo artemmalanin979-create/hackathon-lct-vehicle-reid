@@ -4,12 +4,14 @@
 Выход: out_s02_meta.json (сводка), scan_files.json (список файлов в порядке скана),
 scan_meta.jsonl (по-файлово), thumbs32.npy (uint8 N x 1024).
 Запуск: python3 s02_scan_images.py"""
+from pathlib import Path
 import hashlib, json, os
 from multiprocessing import Pool
 import numpy as np
 from PIL import Image
 
-DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data/images"
+REPO = Path(__file__).resolve().parents[3]  # корень репозитория
+DATA = str(Path(os.environ.get("REID_DATA_DIR", REPO / "data")) / "images")
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 def one(fname):
