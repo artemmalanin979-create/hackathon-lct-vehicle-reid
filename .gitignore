@@ -32,3 +32,6 @@ mlruns/
 *.npy
 *.ids
 .worker-payload/
+
+# Персональные данные участников — не в git (уезжают только в презентацию)
+05-presentation/team-data.md
