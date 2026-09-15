@@ -1,0 +1,93 @@
+{
+ "n_pairs_checked": 44490,
+ "n_A_moment": 60,
+ "n_B_parked": 44430,
+ "n_same_vehicle_like": 7,
+ "n_test_frames_affected": 6,
+ "affected_train_vids": [
+  289,
+  434,
+  742,
+  1058,
+  1271
+ ],
+ "hits": [
+  {
+   "train_file": "e173b665b18b463399ef9398fe19bbfb.jpg",
+   "train_vid": 742,
+   "train_cam": 6,
+   "test_file": "e8f5726fe08646aab29fd6e5202c7f88.jpg",
+   "test_split": "query",
+   "ff": 0.548,
+   "iou": 0.845,
+   "crop": 0.84,
+   "kind": "B_parked"
+  },
+  {
+   "train_file": "e173b665b18b463399ef9398fe19bbfb.jpg",
+   "train_vid": 742,
+   "train_cam": 6,
+   "test_file": "3bdf75b6d56a422d94e6c850d515d3ed.jpg",
+   "test_split": "query",
+   "ff": 0.566,
+   "iou": 0.82,
+   "crop": 0.839,
+   "kind": "B_parked"
+  },
+  {
+   "train_file": "e173b665b18b463399ef9398fe19bbfb.jpg",
+   "train_vid": 742,
+   "train_cam": 6,
+   "test_file": "feb980ae999948ce9be0266b4ddc048d.jpg",
+   "test_split": "gallery",
+   "ff": 0.57,
+   "iou": 0.825,
+   "crop": 0.838,
+   "kind": "B_parked"
+  },
+  {
+   "train_file": "bb5099872ae742478c07a5a4265a97c8.jpg",
+   "train_vid": 1271,
+   "train_cam": 6,
+   "test_file": "e8f5726fe08646aab29fd6e5202c7f88.jpg",
+   "test_split": "query",
+   "ff": 0.607,
+   "iou": 0.869,
+   "crop": 0.835,
+   "kind": "B_parked"
+  },
+  {
+   "train_file": "d3a0466e4693418d97695f1b54dee60b.jpg",
+   "train_vid": 1058,
+   "train_cam": 64,
+   "test_file": "1419b2c686f44896a0ae2a43e93b5402.jpg",
+   "test_split": "gallery",
+   "ff": 0.707,
+   "iou": 0.854,
+   "crop": 0.817,
+   "kind": "B_parked"
+  },
+  {
+   "train_file": "1dae7114d58f4a06b2986ceb55ffe0e7.jpg",
+   "train_vid": 434,
+   "train_cam": 24,
+   "test_file": "e0ff5d4ae0ec4871a49041d550cdcaa9.jpg",
+   "test_split": "gallery",
+   "ff": 0.688,
+   "iou": 0.812,
+   "crop": 0.806,
+   "kind": "B_parked"
+  },
+  {
+   "train_file": "d2c275147932487594e0eacd92a648c8.jpg",
+   "train_vid": 289,
+   "train_cam": 89,
+   "test_file": "eb6b0705f8744b46a462efa41f20a89a.jpg",
+   "test_split": "query",
+   "ff": 0.471,
+   "iou": 0.826,
+   "crop": 0.8,
+   "kind": "B_parked"
+  }
+ ]
+}

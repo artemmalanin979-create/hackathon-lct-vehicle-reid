@@ -1,0 +1,318 @@
+{
+ "train.csv": {
+  "raw_header_line": "image_id,x,y,w,h,vehicle_id,camera_id",
+  "columns": [
+   "image_id",
+   "x",
+   "y",
+   "w",
+   "h",
+   "vehicle_id",
+   "camera_id"
+  ],
+  "n_rows": 9556,
+  "dup_full_rows": 0,
+  "dup_image_id": 0,
+  "profile": {
+   "image_id": {
+    "type": "str",
+    "n_unique": 9556,
+    "sample": "f0d68d754a8a444b8b49628b0633068c",
+    "minlen": 32,
+    "maxlen": 32
+   },
+   "x": {
+    "type": "int",
+    "n_unique": 1393,
+    "min": 0,
+    "max": 1694
+   },
+   "y": {
+    "type": "int",
+    "n_unique": 686,
+    "min": 0,
+    "max": 933
+   },
+   "w": {
+    "type": "int",
+    "n_unique": 985,
+    "min": 151,
+    "max": 1743
+   },
+   "h": {
+    "type": "int",
+    "n_unique": 641,
+    "min": 147,
+    "max": 1050
+   },
+   "vehicle_id": {
+    "type": "int",
+    "n_unique": 1541,
+    "min": 0,
+    "max": 1540
+   },
+   "camera_id": {
+    "type": "int",
+    "n_unique": 96,
+    "min": 0,
+    "max": 95
+   }
+  },
+  "objects_per_image_max": 1
+ },
+ "test_query.csv": {
+  "raw_header_line": "image_id,x,y,w,h",
+  "columns": [
+   "image_id",
+   "x",
+   "y",
+   "w",
+   "h"
+  ],
+  "n_rows": 1110,
+  "dup_full_rows": 0,
+  "dup_image_id": 0,
+  "profile": {
+   "image_id": {
+    "type": "str",
+    "n_unique": 1110,
+    "sample": "486dd80d22f94a5496b3e670b19399a7",
+    "minlen": 32,
+    "maxlen": 32
+   },
+   "x": {
+    "type": "int",
+    "n_unique": 689,
+    "min": 0,
+    "max": 1368
+   },
+   "y": {
+    "type": "int",
+    "n_unique": 451,
+    "min": 0,
+    "max": 787
+   },
+   "w": {
+    "type": "int",
+    "n_unique": 535,
+    "min": 209,
+    "max": 1390
+   },
+   "h": {
+    "type": "int",
+    "n_unique": 409,
+    "min": 177,
+    "max": 950
+   }
+  },
+  "objects_per_image_max": 1
+ },
+ "test_gallery.csv": {
+  "raw_header_line": "image_id,x,y,w,h",
+  "columns": [
+   "image_id",
+   "x",
+   "y",
+   "w",
+   "h"
+  ],
+  "n_rows": 750,
+  "dup_full_rows": 0,
+  "dup_image_id": 0,
+  "profile": {
+   "image_id": {
+    "type": "str",
+    "n_unique": 750,
+    "sample": "df7ea50171af48df81584ab7e8107d15",
+    "minlen": 32,
+    "maxlen": 32
+   },
+   "x": {
+    "type": "int",
+    "n_unique": 534,
+    "min": 0,
+    "max": 1655
+   },
+   "y": {
+    "type": "int",
+    "n_unique": 389,
+    "min": 0,
+    "max": 650
+   },
+   "w": {
+    "type": "int",
+    "n_unique": 457,
+    "min": 209,
+    "max": 1400
+   },
+   "h": {
+    "type": "int",
+    "n_unique": 369,
+    "min": 173,
+    "max": 974
+   }
+  },
+  "objects_per_image_max": 1
+ },
+ "image_id_overlaps": {
+  "train.csv & test_query.csv": 0,
+  "train.csv & test_gallery.csv": 0,
+  "test_query.csv & test_gallery.csv": 0
+ },
+ "train_identities": {
+  "n_identities": 1541,
+  "frames_per_identity": {
+   "min": 4,
+   "median": 6,
+   "max": 8,
+   "hist": {
+    "4": 119,
+    "5": 228,
+    "6": 748,
+    "7": 116,
+    "8": 330
+   }
+  }
+ },
+ "train_cameras": {
+  "n_cameras": 96,
+  "cam_id_range": [
+   0,
+   95
+  ],
+  "frames_per_camera_top10": [
+   1069,
+   969,
+   287,
+   286,
+   256,
+   251,
+   229,
+   223,
+   208,
+   200
+  ],
+  "frames_per_camera": {
+   "min": 1,
+   "median": 60.5,
+   "max": 1069
+  },
+  "by_camera": {
+   "90": 1069,
+   "89": 969,
+   "43": 287,
+   "82": 286,
+   "6": 256,
+   "12": 251,
+   "51": 229,
+   "33": 223,
+   "85": 208,
+   "19": 200,
+   "86": 199,
+   "92": 193,
+   "68": 178,
+   "63": 178,
+   "71": 168,
+   "20": 166,
+   "1": 143,
+   "36": 138,
+   "69": 138,
+   "15": 129,
+   "77": 123,
+   "59": 122,
+   "11": 117,
+   "94": 113,
+   "40": 111,
+   "54": 110,
+   "56": 110,
+   "7": 108,
+   "83": 103,
+   "91": 102,
+   "61": 96,
+   "42": 91,
+   "24": 91,
+   "17": 86,
+   "53": 85,
+   "37": 82,
+   "22": 81,
+   "81": 80,
+   "21": 80,
+   "27": 76,
+   "48": 73,
+   "87": 71,
+   "38": 70,
+   "31": 66,
+   "39": 65,
+   "45": 64,
+   "73": 64,
+   "13": 61,
+   "57": 60,
+   "95": 59,
+   "35": 56,
+   "50": 55,
+   "80": 54,
+   "72": 53,
+   "0": 52,
+   "25": 50,
+   "74": 48,
+   "28": 47,
+   "23": 47,
+   "18": 42,
+   "67": 41,
+   "10": 40,
+   "79": 40,
+   "64": 40,
+   "32": 39,
+   "70": 38,
+   "62": 36,
+   "65": 35,
+   "46": 34,
+   "84": 32,
+   "26": 32,
+   "16": 31,
+   "5": 31,
+   "78": 29,
+   "14": 28,
+   "30": 24,
+   "29": 24,
+   "60": 24,
+   "52": 22,
+   "2": 21,
+   "55": 21,
+   "49": 18,
+   "44": 18,
+   "3": 15,
+   "4": 15,
+   "88": 15,
+   "41": 14,
+   "58": 13,
+   "66": 12,
+   "75": 10,
+   "76": 7,
+   "47": 7,
+   "93": 6,
+   "8": 6,
+   "9": 5,
+   "34": 1
+  }
+ },
+ "train_cams_per_identity": {
+  "min": 2,
+  "median": 2,
+  "max": 8,
+  "hist": {
+   "2": 1028,
+   "3": 330,
+   "4": 115,
+   "5": 39,
+   "6": 23,
+   "7": 3,
+   "8": 3
+  }
+ },
+ "train_frames_per_vid_cam_pair_hist": {
+  "1": 551,
+  "2": 994,
+  "3": 2339
+ }
+}

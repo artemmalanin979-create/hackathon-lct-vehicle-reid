@@ -1,0 +1,78 @@
+{
+ "n_sampled": 400,
+ "grad_ratio_in_smooth_box": {
+  "all": {
+   "p10": 0.0,
+   "p50": 0.082,
+   "p90": 0.278
+  },
+  "day_bright_ge_80": {
+   "p10": 0.0,
+   "p50": 0.056,
+   "p90": 0.186
+  },
+  "night_bright_lt_50": {
+   "p10": 0.062,
+   "p50": 0.233,
+   "p90": 0.533
+  },
+  "n_day": 243,
+  "n_night": 57
+ },
+ "text_score_quantiles": {
+  "p10": 3.221,
+  "p50": 4.154,
+  "p90": 5.846
+ },
+ "n_text_score_ge_3": 383,
+ "top_text_files": [
+  {
+   "file": "9bac4f1ad8804fd293c81e83418de86e.jpg",
+   "text_score": 10.837
+  },
+  {
+   "file": "a7f491756ba04aaea3444f360a4a6b3a.jpg",
+   "text_score": 9.219
+  },
+  {
+   "file": "28247576fb5d4a918d9b156b04951a04.jpg",
+   "text_score": 9.129
+  },
+  {
+   "file": "322bb48c1a3a491798b11b96f1534300.jpg",
+   "text_score": 9.111
+  },
+  {
+   "file": "04203507ed1d4657b4b8c94e543a65c4.jpg",
+   "text_score": 9.04
+  },
+  {
+   "file": "b6a149611a4f4687afcf1e88532a7b48.jpg",
+   "text_score": 8.229
+  },
+  {
+   "file": "0b26ba16d18243528ec417257ad74b11.jpg",
+   "text_score": 7.705
+  },
+  {
+   "file": "adac41c58f724bd5ae9232f0cd3b0fe8.jpg",
+   "text_score": 7.385
+  },
+  {
+   "file": "12967ba6c60c440c8a7623eb77cc8f5d.jpg",
+   "text_score": 7.242
+  },
+  {
+   "file": "de2358c6f04b46f7b9c512dded5f36d3.jpg",
+   "text_score": 7.211
+  },
+  {
+   "file": "62de15e037654307b242628f876a8ac6.jpg",
+   "text_score": 7.183
+  },
+  {
+   "file": "65150477755e40a2b160a0fe4a6865e8.jpg",
+   "text_score": 7.146
+  }
+ ]
+}

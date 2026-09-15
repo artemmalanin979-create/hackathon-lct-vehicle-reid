@@ -1,0 +1,128 @@
+{
+ "train": {
+  "n": 9556,
+  "bbox_area_px": {
+   "min": 33300.0,
+   "p10": 184930.0,
+   "p50": 325924.0,
+   "p90": 582721.0,
+   "max": 1220100.0
+  },
+  "bbox_area_share_of_frame_pct": {
+   "min": 1.61,
+   "p10": 8.92,
+   "p50": 15.72,
+   "p90": 28.1,
+   "max": 58.84
+  },
+  "share_area_lt_2pct_frame": 0.0005,
+  "share_area_lt_5pct_frame": 0.0144,
+  "share_area_gt_25pct_frame": 0.1537,
+  "min_w": 151,
+  "min_h": 147,
+  "aspect_w_over_h": {
+   "min": 0.46,
+   "p10": 1.03,
+   "p50": 1.36,
+   "p90": 1.83,
+   "max": 5.59
+  },
+  "n_aspect_gt_2.5": 29,
+  "n_aspect_lt_0.5": 1,
+  "n_touch_frame_edge": 817,
+  "share_touch_frame_edge": 0.085,
+  "frame_brightness": {
+   "min": 16.5,
+   "p10": 70.5,
+   "p50": 122.6,
+   "p90": 138.9,
+   "max": 158.9
+  },
+  "share_dark_lt_60": 0.0298,
+  "share_dark_lt_40": 0.0013
+ },
+ "query": {
+  "n": 1110,
+  "bbox_area_px": {
+   "min": 36993.0,
+   "p10": 177078.0,
+   "p50": 336470.0,
+   "p90": 572996.0,
+   "max": 1111440.0
+  },
+  "bbox_area_share_of_frame_pct": {
+   "min": 1.78,
+   "p10": 8.54,
+   "p50": 16.23,
+   "p90": 27.63,
+   "max": 53.6
+  },
+  "share_area_lt_2pct_frame": 0.0009,
+  "share_area_lt_5pct_frame": 0.0072,
+  "share_area_gt_25pct_frame": 0.1459,
+  "min_w": 209,
+  "min_h": 177,
+  "aspect_w_over_h": {
+   "min": 0.73,
+   "p10": 1.02,
+   "p50": 1.33,
+   "p90": 1.76,
+   "max": 3.99
+  },
+  "n_aspect_gt_2.5": 5,
+  "n_aspect_lt_0.5": 0,
+  "n_touch_frame_edge": 107,
+  "share_touch_frame_edge": 0.096,
+  "frame_brightness": {
+   "min": 41.1,
+   "p10": 71.1,
+   "p50": 122.3,
+   "p90": 138.1,
+   "max": 156.7
+  },
+  "share_dark_lt_60": 0.0225,
+  "share_dark_lt_40": 0.0
+ },
+ "gallery": {
+  "n": 750,
+  "bbox_area_px": {
+   "min": 36157.0,
+   "p10": 171120.0,
+   "p50": 335745.0,
+   "p90": 591705.0,
+   "max": 1120000.0
+  },
+  "bbox_area_share_of_frame_pct": {
+   "min": 1.74,
+   "p10": 8.25,
+   "p50": 16.19,
+   "p90": 28.54,
+   "max": 54.01
+  },
+  "share_area_lt_2pct_frame": 0.0013,
+  "share_area_lt_5pct_frame": 0.0147,
+  "share_area_gt_25pct_frame": 0.1707,
+  "min_w": 209,
+  "min_h": 173,
+  "aspect_w_over_h": {
+   "min": 0.61,
+   "p10": 1.03,
+   "p50": 1.33,
+   "p90": 1.8,
+   "max": 2.63
+  },
+  "n_aspect_gt_2.5": 2,
+  "n_aspect_lt_0.5": 0,
+  "n_touch_frame_edge": 77,
+  "share_touch_frame_edge": 0.103,
+  "frame_brightness": {
+   "min": 46.7,
+   "p10": 70.4,
+   "p50": 121.4,
+   "p90": 136.7,
+   "max": 156.8
+  },
+  "share_dark_lt_60": 0.0267,
+  "share_dark_lt_40": 0.0
+ }
+}

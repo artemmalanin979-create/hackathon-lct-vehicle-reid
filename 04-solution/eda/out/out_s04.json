@@ -1,0 +1,221 @@
+{
+ "intra_camera_cosine": {
+  "mean_over_cameras": 0.177,
+  "min": 0.041,
+  "max": 0.466,
+  "cam90": 0.041,
+  "cam89": 0.041
+ },
+ "inter_camera_cosine_mean": 0.01,
+ "intra_low_cameras": {
+  "90": 0.041,
+  "89": 0.041,
+  "28": 0.042,
+  "77": 0.064,
+  "59": 0.066,
+  "20": 0.066,
+  "91": 0.067,
+  "31": 0.072
+ },
+ "nearest_centroid_camera_accuracy": {
+  "2fold_mean": 0.377,
+  "chance": 0.0104,
+  "cam90": 0.186,
+  "cam89": 0.389
+ },
+ "top_similar_camera_pairs": [
+  {
+   "cams": [
+    5,
+    44
+   ],
+   "centroid_cos": 0.757,
+   "shared_vehicle_ids": 0,
+   "sizes": [
+    31,
+    18
+   ]
+  },
+  {
+   "cams": [
+    15,
+    51
+   ],
+   "centroid_cos": 0.755,
+   "shared_vehicle_ids": 1,
+   "sizes": [
+    129,
+    229
+   ]
+  },
+  {
+   "cams": [
+    66,
+    80
+   ],
+   "centroid_cos": 0.744,
+   "shared_vehicle_ids": 0,
+   "sizes": [
+    12,
+    54
+   ]
+  },
+  {
+   "cams": [
+    15,
+    54
+   ],
+   "centroid_cos": 0.733,
+   "shared_vehicle_ids": 1,
+   "sizes": [
+    129,
+    110
+   ]
+  },
+  {
+   "cams": [
+    54,
+    55
+   ],
+   "centroid_cos": 0.721,
+   "shared_vehicle_ids": 0,
+   "sizes": [
+    110,
+    21
+   ]
+  },
+  {
+   "cams": [
+    1,
+    69
+   ],
+   "centroid_cos": 0.718,
+   "shared_vehicle_ids": 8,
+   "sizes": [
+    143,
+    138
+   ]
+  },
+  {
+   "cams": [
+    5,
+    69
+   ],
+   "centroid_cos": 0.714,
+   "shared_vehicle_ids": 1,
+   "sizes": [
+    31,
+    138
+   ]
+  },
+  {
+   "cams": [
+    5,
+    54
+   ],
+   "centroid_cos": 0.709,
+   "shared_vehicle_ids": 0,
+   "sizes": [
+    31,
+    110
+   ]
+  },
+  {
+   "cams": [
+    24,
+    54
+   ],
+   "centroid_cos": 0.705,
+   "shared_vehicle_ids": 1,
+   "sizes": [
+    91,
+    110
+   ]
+  },
+  {
+   "cams": [
+    57,
+    67
+   ],
+   "centroid_cos": 0.694,
+   "shared_vehicle_ids": 0,
+   "sizes": [
+    60,
+    41
+   ]
+  },
+  {
+   "cams": [
+    38,
+    57
+   ],
+   "centroid_cos": 0.693,
+   "shared_vehicle_ids": 0,
+   "sizes": [
+    70,
+    60
+   ]
+  },
+  {
+   "cams": [
+    32,
+    40
+   ],
+   "centroid_cos": 0.692,
+   "shared_vehicle_ids": 1,
+   "sizes": [
+    39,
+    111
+   ]
+  }
+ ],
+ "camera_pair_centroid_cos_quantiles": {
+  "p50": 0.091,
+  "p90": 0.381,
+  "p99": 0.606,
+  "max": 0.757
+ },
+ "dark_frames_train_pct": 2.98,
+ "cameras_with_day_and_night": 21,
+ "dark_share_cam90_cam89": [
+  0.0,
+  0.0
+ ],
+ "bbox_geometry_sample_cams": {
+  "90": {
+   "cx_mean": 0.51,
+   "cx_std": 0.21,
+   "cy_mean": 0.57,
+   "cy_std": 0.09,
+   "area_mean_pct": 15.1
+  },
+  "89": {
+   "cx_mean": 0.48,
+   "cx_std": 0.23,
+   "cy_mean": 0.54,
+   "cy_std": 0.05,
+   "area_mean_pct": 13.3
+  },
+  "43": {
+   "cx_mean": 0.51,
+   "cx_std": 0.23,
+   "cy_mean": 0.49,
+   "cy_std": 0.07,
+   "area_mean_pct": 20.1
+  },
+  "82": {
+   "cx_mean": 0.49,
+   "cx_std": 0.14,
+   "cy_mean": 0.53,
+   "cy_std": 0.12,
+   "area_mean_pct": 21.2
+  },
+  "6": {
+   "cx_mean": 0.52,
+   "cx_std": 0.18,
+   "cy_mean": 0.47,
+   "cy_std": 0.13,
+   "area_mean_pct": 22.6
+  }
+ }
+}

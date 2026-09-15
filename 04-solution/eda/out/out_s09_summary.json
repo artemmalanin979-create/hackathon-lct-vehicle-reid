@@ -1,0 +1,121 @@
+{
+ "rows": {
+  "train": 9556,
+  "query": 1110,
+  "gallery": 750
+ },
+ "files": 11416,
+ "identities_train": 1541,
+ "cameras_train": 96,
+ "resolutions": {
+  "1920x1080": 11416
+ },
+ "exif": {
+  "0": 11416
+ },
+ "qtables": [
+  11416
+ ],
+ "csv_file_mismatch": [
+  0,
+  0
+ ],
+ "bbox_invalid": 0,
+ "byte_dups": {
+  "groups": 11,
+  "pattern": {
+   "train + train": 9,
+   "test_gallery + train": 1,
+   "test_gallery + test_query": 1
+  }
+ },
+ "neardup_0.90": {
+  "train+train": 2397,
+  "train+query": 36,
+  "train+gallery": 24,
+  "query+query": 161,
+  "query+gallery": 375,
+  "gallery+gallery": 2
+ },
+ "queries_with_gallery_neardup_0.90": 365,
+ "qg_same_vehicle_same_point": {
+  "A_same_moment_queries": 332,
+  "B_parked_queries": 303,
+  "union_queries": 635,
+  "of_queries": 1110
+ },
+ "camera_surrogate": {
+  "global_clustering_grad96_knn_t0.4": {
+   "pairwise_precision": 0.907,
+   "pairwise_recall": 0.021,
+   "purity": 0.99,
+   "n_clusters": 3204,
+   "largest": 95
+  },
+  "pairlevel_grad96_t0.4": {
+   "flagged": 20933,
+   "precision_same_cam": 0.997,
+   "recall_same_cam": 0.0134
+  },
+  "targeted_instrument": {
+   "recall_on_same_cam_same_vid": 0.778,
+   "false_flag_on_diff_cam_same_vid": 0.0
+  },
+  "same_vid_pairs_eval_base": {
+   "n_total": 25890,
+   "n_same_cam": 8011,
+   "n_diff_cam": 17879
+  }
+ },
+ "pass_groups_ff0.90": {
+  "query": 953,
+  "gallery": 748,
+  "test_all": 1430,
+  "train": 7583
+ },
+ "camera_id_sanity": {
+  "intra_scene_cos_mean": 0.177,
+  "inter_scene_cos": 0.01,
+  "cam90_intra": 0.041,
+  "nearest_centroid_acc": 0.377,
+  "clusters_inside_cam90": {
+   "frames": 1069,
+   "clusters_ge3": 45,
+   "clusters_ge2": 72,
+   "singletons": 121,
+   "largest": 734
+  },
+  "clusters_inside_cam89": {
+   "frames": 969,
+   "clusters_ge3": 99,
+   "clusters_ge2": 133,
+   "singletons": 125,
+   "largest": 322
+  }
+ },
+ "plates": {
+  "sampled": 400,
+  "grad_ratio_in_box": {
+   "p10": 0.0,
+   "p50": 0.082,
+   "p90": 0.278
+  }
+ },
+ "complexity": {
+  "train": {
+   "area_pct_p50": 15.72,
+   "dark_lt_60": 0.0298,
+   "touch_edge": 0.085
+  },
+  "query": {
+   "area_pct_p50": 16.23,
+   "dark_lt_60": 0.0225,
+   "touch_edge": 0.096
+  },
+  "gallery": {
+   "area_pct_p50": 16.19,
+   "dark_lt_60": 0.0267,
+   "touch_edge": 0.103
+  }
+ }
+}

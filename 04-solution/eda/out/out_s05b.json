@@ -1,0 +1,38 @@
+{
+ "calib_pos_same_vid_n": 300,
+ "calib_neg_diff_vid_n": 677,
+ "calib_pos_cropcos": {
+  "p05": 0.702,
+  "p50": 0.964,
+  "p95": 0.995
+ },
+ "calib_neg_cropcos": {
+  "p05": -0.023,
+  "p50": 0.488,
+  "p95": 0.76
+ },
+ "crop_threshold_used": 0.8,
+ "calib_pos_share_ge_thr": 0.92,
+ "calib_neg_share_ge_thr": 0.021,
+ "A_same_moment_pairs": {
+  "n": 375,
+  "cropcos": {
+   "p05": 0.501,
+   "p50": 0.959,
+   "p95": 0.996
+  },
+  "n_same_vehicle_like": 332,
+  "n_queries_with_same_vehicle_like": 332
+ },
+ "B_parked_pairs_iou0.8_cos_lt_0.9": {
+  "n": 2552,
+  "cropcos": {
+   "p05": -0.09,
+   "p50": 0.252,
+   "p95": 0.934
+  },
+  "n_same_vehicle_like": 303,
+  "n_queries_with_same_vehicle_like": 303
+ },
+ "queries_with_any_same_vehicle_same_place_candidate": 635
+}

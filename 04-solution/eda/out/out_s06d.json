@@ -1,0 +1,141 @@
+{
+ "pairlevel_grad96": {
+  "0.3": {
+   "flagged": 48631,
+   "precision_same_cam": 0.866,
+   "recall_same_cam": 0.0271
+  },
+  "0.4": {
+   "flagged": 20933,
+   "precision_same_cam": 0.997,
+   "recall_same_cam": 0.0134
+  },
+  "0.5": {
+   "flagged": 11509,
+   "precision_same_cam": 1.0,
+   "recall_same_cam": 0.0074
+  },
+  "0.6": {
+   "flagged": 6729,
+   "precision_same_cam": 1.0,
+   "recall_same_cam": 0.0043
+  },
+  "0.7": {
+   "flagged": 4087,
+   "precision_same_cam": 1.0,
+   "recall_same_cam": 0.0026
+  }
+ },
+ "pairlevel_grad96_or_ff32": {
+  "0.3": {
+   "flagged": 48656,
+   "precision_same_cam": 0.866,
+   "recall_same_cam": 0.0271
+  },
+  "0.4": {
+   "flagged": 20967,
+   "precision_same_cam": 0.997,
+   "recall_same_cam": 0.0134
+  },
+  "0.5": {
+   "flagged": 11561,
+   "precision_same_cam": 1.0,
+   "recall_same_cam": 0.0074
+  },
+  "0.6": {
+   "flagged": 6848,
+   "precision_same_cam": 1.0,
+   "recall_same_cam": 0.0044
+  },
+  "0.7": {
+   "flagged": 4329,
+   "precision_same_cam": 1.0,
+   "recall_same_cam": 0.0028
+  }
+ },
+ "pairlevel_iou_alone": {
+  "0.7": {
+   "flagged": 628002,
+   "precision_same_cam": 0.119,
+   "recall_same_cam": 0.048
+  },
+  "0.8": {
+   "flagged": 125354,
+   "precision_same_cam": 0.211,
+   "recall_same_cam": 0.017
+  },
+  "0.9": {
+   "flagged": 13389,
+   "precision_same_cam": 0.574,
+   "recall_same_cam": 0.0049
+  },
+  "0.95": {
+   "flagged": 5431,
+   "precision_same_cam": 0.93,
+   "recall_same_cam": 0.0032
+  }
+ },
+ "same_vid_pairs": {
+  "n_total": 25890,
+  "n_same_cam": 8011,
+  "n_diff_cam": 17879
+ },
+ "instrument_no_crop@grad0.5_or_ff0.90": {
+  "recall_on_same_cam_same_vid": 0.709,
+  "false_flag_on_diff_cam_same_vid": 0.0
+ },
+ "signal_rates_same_vid": {
+  "same_cam": {
+   "ff32_ge_0.90": 0.289,
+   "grad96_ge_0.5": 0.706,
+   "iou_ge_0.8": 0.797
+  },
+  "diff_cam": {
+   "ff32_ge_0.90": 0.0,
+   "grad96_ge_0.5": 0.0,
+   "iou_ge_0.8": 0.0046
+  }
+ },
+ "crop_term_sample": {
+  "same_cam_iou0.8_not_yet_flagged_n": 1133,
+  "sample_n": 400,
+  "share_crop_ge_0.8": 0.485,
+  "diff_cam_iou0.8_not_yet_flagged_n": 83,
+  "sample_dc_n": 83,
+  "share_dc_crop_ge_0.8": 0.0
+ },
+ "instrument_full_estimate": {
+  "recall_on_same_cam_same_vid": 0.778,
+  "false_flag_on_diff_cam_same_vid": 0.0
+ },
+ "mutual_knn_grad96_train": {
+  "t0.3": {
+   "pairwise_precision": 0.134,
+   "pairwise_recall": 0.062,
+   "purity": 0.842,
+   "n_clusters": 1950,
+   "largest": 1148
+  },
+  "t0.4": {
+   "pairwise_precision": 0.907,
+   "pairwise_recall": 0.021,
+   "purity": 0.99,
+   "n_clusters": 3204,
+   "largest": 95
+  },
+  "t0.5": {
+   "pairwise_precision": 1.0,
+   "pairwise_recall": 0.011,
+   "purity": 1.0,
+   "n_clusters": 4327,
+   "largest": 33
+  }
+ },
+ "test_clusters_grad96_t0.4": {
+  "n_clusters": 805,
+  "n_ge2": 509,
+  "largest": 13,
+  "singletons": 296,
+  "queries_with_gallery_same_cluster": 918
+ }
+}
