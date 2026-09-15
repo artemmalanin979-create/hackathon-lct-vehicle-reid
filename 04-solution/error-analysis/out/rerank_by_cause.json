@@ -1,0 +1,11 @@
+{
+  "mutual_errors": 84,
+  "mutual_fixed": 5,
+  "other_errors": 223,
+  "other_fixed": 40,
+  "livery_errors": 30,
+  "livery_fixed": 4,
+  "err_top5": 130,
+  "err_top10": 178,
+  "err_beyond20": 89
+}
