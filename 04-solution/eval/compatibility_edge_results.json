@@ -1,0 +1,26 @@
+[
+  {
+    "source": "fastreid_rank.py",
+    "case": "all_queries_unknown",
+    "exception": "AssertionError",
+    "message": "Error: all query identities do not appear in gallery"
+  },
+  {
+    "source": "fastreid_rank.py",
+    "case": "short_gallery_ragged_after_filter",
+    "exception": "ValueError",
+    "message": "setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part."
+  },
+  {
+    "source": "torchreid_rank.py",
+    "case": "all_queries_unknown",
+    "exception": "AssertionError",
+    "message": "Error: all query identities do not appear in gallery"
+  },
+  {
+    "source": "torchreid_rank.py",
+    "case": "short_gallery_ragged_after_filter",
+    "exception": "ValueError",
+    "message": "setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part."
+  }
+]

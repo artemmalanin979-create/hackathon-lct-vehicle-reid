@@ -1,0 +1,42 @@
+{
+  "identity": {
+    "equal": true,
+    "absolute_tolerance": 1e-07,
+    "difference_count": 0,
+    "differences": [],
+    "truncated": false
+  },
+  "per_query_changed": {
+    "equal": false,
+    "absolute_tolerance": 1e-07,
+    "difference_count": 1,
+    "differences": [
+      {
+        "path": "$.per_query[0].positive_ranks[0]",
+        "left": 1,
+        "right": 2
+      }
+    ],
+    "truncated": false
+  },
+  "float_tolerance": {
+    "equal": true,
+    "absolute_tolerance": 1e-07,
+    "difference_count": 0,
+    "differences": [],
+    "truncated": false
+  },
+  "protocol_changed": {
+    "equal": false,
+    "absolute_tolerance": 1e-07,
+    "difference_count": 1,
+    "differences": [
+      {
+        "path": "$.protocol.refusal_mode",
+        "left": "top1",
+        "right": "presence"
+      }
+    ],
+    "truncated": false
+  }
+}

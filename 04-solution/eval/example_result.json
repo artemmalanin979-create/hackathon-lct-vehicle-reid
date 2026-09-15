@@ -1,0 +1,200 @@
+{
+  "protocol": {
+    "camera_policy": "market",
+    "ap_method": "step",
+    "refusal_mode": "top1",
+    "score_kind": "similarity",
+    "tie_policy": "column_index",
+    "filtered_positive_policy": "drop",
+    "empty_denominator": null,
+    "threshold_rule": ">=",
+    "ranking_scope": "full_gallery",
+    "auc_pr_method": "trapezoid"
+  },
+  "counts": {
+    "queries": 5,
+    "gallery": 4,
+    "known_queries": 3,
+    "unknown_queries": 2,
+    "filtered_queries": 0,
+    "refusal_queries": 5,
+    "relevant_pairs": 3
+  },
+  "ranking": {
+    "mAP": 0.6666666666666666,
+    "Rank-1": 0.3333333333333333,
+    "Rank-5": 1.0,
+    "mINP": 0.6666666666666666,
+    "num_valid_queries": 3
+  },
+  "refusal": {
+    "mode": "top1",
+    "threshold": 0.5,
+    "tp": 1,
+    "fp": 2,
+    "fn": 2,
+    "tn_unknown": 1,
+    "fp_unknown": 1,
+    "precision": 0.3333333333333333,
+    "recall": 0.3333333333333333,
+    "f1": 0.3333333333333333,
+    "tnr": 0.5,
+    "auc_pr": 0.3333333333333333,
+    "auc_pr_trapezoid": 0.3333333333333333,
+    "ap_pr_step": 0.3333333333333333,
+    "pr_curve": {
+      "auc_pr_trapezoid": 0.3333333333333333,
+      "ap_pr_step": 0.3333333333333333,
+      "max_recall": 0.3333333333333333,
+      "positive_count": 3,
+      "thresholds": [
+        null,
+        0.9,
+        0.85,
+        0.8,
+        0.2,
+        0.1
+      ],
+      "precision": [
+        1.0,
+        1.0,
+        0.5,
+        0.3333333333333333,
+        0.25,
+        0.2
+      ],
+      "recall": [
+        0.0,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "tp": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "fp": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "per_query": [
+    {
+      "query_index": 0,
+      "status": "known",
+      "eligible_count": 4,
+      "ap": 1.0,
+      "inp": 1.0,
+      "rank1": 1.0,
+      "rank5": 1.0,
+      "positive_ranks": [
+        1
+      ],
+      "num_relevant": 1,
+      "top_gallery_index": 0,
+      "top_score": 0.9,
+      "accepted": true,
+      "ranking": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "query_index": 1,
+      "status": "known",
+      "eligible_count": 4,
+      "ap": 0.5,
+      "inp": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "positive_ranks": [
+        2
+      ],
+      "num_relevant": 1,
+      "top_gallery_index": 3,
+      "top_score": 0.8,
+      "accepted": true,
+      "ranking": [
+        3,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "query_index": 2,
+      "status": "known",
+      "eligible_count": 4,
+      "ap": 0.5,
+      "inp": 0.5,
+      "rank1": 0.0,
+      "rank5": 1.0,
+      "positive_ranks": [
+        2
+      ],
+      "num_relevant": 1,
+      "top_gallery_index": 3,
+      "top_score": 0.2,
+      "accepted": false,
+      "ranking": [
+        3,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "query_index": 3,
+      "status": "unknown",
+      "eligible_count": 4,
+      "ap": null,
+      "inp": null,
+      "rank1": null,
+      "rank5": null,
+      "positive_ranks": [],
+      "num_relevant": 0,
+      "top_gallery_index": 3,
+      "top_score": 0.85,
+      "accepted": true,
+      "ranking": [
+        3,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "query_index": 4,
+      "status": "unknown",
+      "eligible_count": 4,
+      "ap": null,
+      "inp": null,
+      "rank1": null,
+      "rank5": null,
+      "positive_ranks": [],
+      "num_relevant": 0,
+      "top_gallery_index": 3,
+      "top_score": 0.1,
+      "accepted": false,
+      "ranking": [
+        3,
+        2,
+        1,
+        0
+      ]
+    }
+  ]
+}

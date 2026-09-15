@@ -1,0 +1,41 @@
+{
+  "retrieved": "2026-09-15",
+  "sources": [
+    {
+      "file": "fastreid_rank.py",
+      "url": "https://raw.githubusercontent.com/JDAI-CV/fast-reid/7ed6240e2cb5e56e5ccd61744a3045f24ea7e62d/fastreid/evaluation/rank.py",
+      "sha256": "6b4175df506dbf3dd6ded8413ffc01e74b94e40c6e62310fd2e56ff9a54b21df",
+      "bytes": 7001
+    },
+    {
+      "file": "torchreid_rank.py",
+      "url": "https://raw.githubusercontent.com/KaiyangZhou/deep-person-reid/6b8fe56638d81c36b7872e8e41efe18232335f2f/torchreid/metrics/rank.py",
+      "sha256": "cb11b1b4c216915c4df7fb4124e8d655ca63469125ad82ae0a1efc059bc107c0",
+      "bytes": 6955
+    },
+    {
+      "file": "compute_AP.m",
+      "url": "https://raw.githubusercontent.com/zhunzhong07/person-re-ranking/ca27f37dd88b27ee1f9dbc5668a9d0f45989ca71/evaluation/utils/compute_AP.m",
+      "sha256": "4d0d77e1a0f2ecc0e0ebba1082455351aaa9a84aa36ef73a842dc45438fda3c4",
+      "bytes": 944
+    },
+    {
+      "file": "evaluation.m",
+      "url": "https://raw.githubusercontent.com/zhunzhong07/person-re-ranking/ca27f37dd88b27ee1f9dbc5668a9d0f45989ca71/evaluation/utils/evaluation.m",
+      "sha256": "ac6bf6b852186324e47a078ddb71d64fe889a2648a3140fb2c425307cc3d5925",
+      "bytes": 1115
+    },
+    {
+      "file": "FASTREID_LICENSE",
+      "url": "https://raw.githubusercontent.com/JDAI-CV/fast-reid/7ed6240e2cb5e56e5ccd61744a3045f24ea7e62d/LICENSE",
+      "sha256": "14a8a9a670fa989f040bc7a5d964fa7a478ffd7cb44407a9061303240d9e21df",
+      "bytes": 11347
+    },
+    {
+      "file": "TORCHREID_LICENSE",
+      "url": "https://raw.githubusercontent.com/KaiyangZhou/deep-person-reid/6b8fe56638d81c36b7872e8e41efe18232335f2f/LICENSE",
+      "sha256": "3ac8ce2a83d170cb1c7c84152e0c1faca1f187794303514383960d2441716247",
+      "bytes": 1069
+    }
+  ]
+}
