@@ -1,0 +1,78 @@
+<!doctype html>
+<!-- Тонкий клиент: загрузить кадр с bbox, увидеть кандидатов с оценками или
+     честный отказ. Рабочий минимум; оформление — отдельная задача. -->
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Vehicle ReID — поиск по галерее</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 46rem; }
+  fieldset { border: 1px solid #999; margin-bottom: 1rem; }
+  label { display: inline-block; margin: .25rem 1rem .25rem 0; }
+  input[type=number] { width: 6rem; }
+  table { border-collapse: collapse; margin-top: .5rem; }
+  td, th { border: 1px solid #999; padding: .25rem .75rem; text-align: left; }
+  #refusal { color: #a00; font-weight: bold; }
+  #error { color: #a00; white-space: pre-wrap; }
+  small { color: #555; }
+</style>
+</head>
+<body>
+<h1>Поиск транспортного средства по визуальному признаку</h1>
+<p><small>Кадр + рамка ТС → кандидаты из галереи с оценкой уверенности.
+Если уверенного совпадения нет, сервис честно возвращает пустой ответ.
+Документация API: <a href="/docs">/docs</a> (OpenAPI: <a href="/openapi.json">/openapi.json</a>).</small></p>
+
+<form id="f">
+  <fieldset>
+    <legend>Запрос</legend>
+    <label>Кадр (JPEG/PNG): <input type="file" name="file" required></label><br>
+    <label>x <input type="number" name="x" value="0" required></label>
+    <label>y <input type="number" name="y" value="0" required></label>
+    <label>w <input type="number" name="w" min="1" value="100" required></label>
+    <label>h <input type="number" name="h" min="1" value="100" required></label><br>
+    <label>top-k <input type="number" name="top_k" min="1" max="100" value="10"></label>
+    <label>порог <input type="number" name="threshold" step="0.000001" placeholder="по умолчанию"></label>
+  </fieldset>
+  <button type="submit">Найти кандидатов</button>
+</form>
+
+<p id="error"></p>
+<div id="out" hidden>
+  <p id="refusal" hidden>Отказ: уверенного совпадения в галерее нет.</p>
+  <p id="meta"></p>
+  <table id="tbl" hidden>
+    <thead><tr><th>#</th><th>gallery_id</th><th>confidence</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+document.getElementById("f").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const err = document.getElementById("error"), out = document.getElementById("out");
+  err.textContent = ""; out.hidden = true;
+  const fd = new FormData(ev.target);
+  if (!fd.get("threshold")) fd.delete("threshold"); // пусто = порог сервиса
+  try {
+    const resp = await fetch("/api/search", { method: "POST", body: fd });
+    const data = await resp.json();
+    if (!resp.ok) { err.textContent = "Ошибка " + resp.status + ": " + JSON.stringify(data.detail); return; }
+    out.hidden = false;
+    document.getElementById("refusal").hidden = !data.refusal;
+    document.getElementById("meta").textContent =
+      "порог " + data.threshold.toFixed(6) +
+      (data.best_confidence !== null ? "; лучшая близость " + data.best_confidence.toFixed(6) : "");
+    const tbl = document.getElementById("tbl"), tb = tbl.querySelector("tbody");
+    tb.innerHTML = "";
+    tbl.hidden = data.candidates.length === 0;
+    data.candidates.forEach((c, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${i + 1}</td><td>${c.gallery_id}</td><td>${c.confidence.toFixed(6)}</td>`;
+      tb.appendChild(tr);
+    });
+  } catch (e) { err.textContent = "Сеть/сервис: " + e; }
+});
+</script>
+</body>
+</html>

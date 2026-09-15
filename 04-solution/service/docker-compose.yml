@@ -1,0 +1,45 @@
+# Запуск всего сервиса одной командой:
+#   docker compose up --build -d
+# После этого: тонкий клиент http://localhost:8000/, документация /docs.
+# Загрузка галереи в хранилище — отдельный воспроизводимый шаг (см. README):
+#   DATA_DIR=/путь/к/data docker compose run --rm loader
+#
+# Каталог данных задаётся переменной DATA_DIR (по умолчанию ./data рядом с
+# этим файлом); внутрь контейнеров он монтируется только на чтение.
+services:
+  api:
+    build: .
+    image: vehicle-reid-service
+    ports:
+      - "8000:8000"
+    environment:
+      QDRANT_URL: http://qdrant:6333
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+
+  qdrant:
+    image: docker.io/qdrant/qdrant:v1.15.5
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: unless-stopped
+
+  # Одноразовый шаг загрузки галереи (запускается явно через `run loader`,
+  # при `up` не стартует благодаря profiles).
+  loader:
+    image: vehicle-reid-service
+    build: .
+    profiles: ["tools"]
+    environment:
+      QDRANT_URL: http://qdrant:6333
+    volumes:
+      - ${DATA_DIR:-./data}:/data:ro
+    depends_on:
+      - qdrant
+    command: >
+      python -m app.load_gallery
+      --images-dir /data/images
+      --gallery /data/test_gallery.csv
+
+volumes:
+  qdrant_storage:
