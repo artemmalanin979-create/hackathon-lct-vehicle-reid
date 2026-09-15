@@ -1,0 +1,7 @@
+# Окружение: /home/artem/projects/hackathon-lct-vehicle-reid/.venv (python 3.x)
+# Уже стояли в venv (зафиксированы точные версии):
+onnxruntime==1.30.0
+numpy==2.5.3
+pillow==12.3.0
+# Добавлено в этом задании (инспекция ONNX-графа для выяснения препроцессинга):
+onnx==1.22.0

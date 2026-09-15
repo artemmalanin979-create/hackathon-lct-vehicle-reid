@@ -1,0 +1,10 @@
+{
+  "csv": "/home/artem/projects/hackathon-lct-vehicle-reid/data/test_query.csv",
+  "rows": 1110,
+  "batch": 32,
+  "threads": 0,
+  "mask_bottom": 0.0,
+  "grayscale": false,
+  "elapsed_s": 81.11,
+  "throughput_obj_per_s": 13.69
+}
