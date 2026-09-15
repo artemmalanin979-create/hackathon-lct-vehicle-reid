@@ -1,0 +1,100 @@
+{
+  "/": 200,
+  "/api/health": 200,
+  "/api/version": 200,
+  "version": {
+    "service": "0.1.0",
+    "model": "osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)",
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "embedding_dim": 512,
+    "input_size": 208,
+    "score_scale": "cosine",
+    "default_threshold": 0.5495953464415451,
+    "batch_rerank": {
+      "enabled_by_default": true,
+      "params": [
+        6,
+        3,
+        0.3
+      ],
+      "score_scale": "rerank_confidence_1_minus_distance",
+      "default_threshold": 0.49937235233589916
+    },
+    "onnxruntime": "1.30.0",
+    "numpy": "2.5.3"
+  },
+  "/openapi.json": 200,
+  "/docs": 200,
+  "docs_assets": [
+    "/static/vendor/swagger-ui.css",
+    "/static/vendor/favicon.png",
+    "/static/vendor/swagger-ui-bundle.js"
+  ],
+  "unloaded_gallery": 409,
+  "gallery_points": 12,
+  "embedding_dim": 512,
+  "search_self": {
+    "refusal": false,
+    "threshold": -1.0,
+    "best_confidence": 1.0,
+    "candidates": [
+      {
+        "gallery_id": "df7ea50171af48df81584ab7e8107d15",
+        "confidence": 1.0
+      },
+      {
+        "gallery_id": "e79ae27b52fa4d54aa37735fd275c66e",
+        "confidence": 0.450961
+      },
+      {
+        "gallery_id": "04d24d1cf42b4f7787d8d300cbad6d50",
+        "confidence": 0.146331
+      },
+      {
+        "gallery_id": "41e657daa20545a588584578bdb4101c",
+        "confidence": 0.105926
+      },
+      {
+        "gallery_id": "34b736136487439389c10cc6bd4e9f4e",
+        "confidence": 0.092114
+      },
+      {
+        "gallery_id": "23199e1859544647893a97ea365c5c83",
+        "confidence": 0.055537
+      },
+      {
+        "gallery_id": "fbfaa119f55a477984e42d80498f54d3",
+        "confidence": 0.011776
+      },
+      {
+        "gallery_id": "27fe100af7884932a33bf30f10dacc55",
+        "confidence": -0.003654
+      },
+      {
+        "gallery_id": "0accd1d0138b49049d437c0d9b1c23c3",
+        "confidence": -0.056038
+      },
+      {
+        "gallery_id": "dd36cc0867b94d55a43b82c1c9a0e95c",
+        "confidence": -0.056792
+      }
+    ]
+  },
+  "forced_refusal": {
+    "refusal": true,
+    "threshold": 1.1,
+    "best_confidence": 1.0,
+    "candidates": []
+  },
+  "invalid_image": 422,
+  "invalid_bbox": 422,
+  "health_loaded": {
+    "status": "ok",
+    "model_loaded": true,
+    "storage": {
+      "url": "http://qdrant:6333",
+      "reachable": true,
+      "gallery_points": 12
+    }
+  }
+}

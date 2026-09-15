@@ -1,0 +1,497 @@
+04-solution/split/s00_precompute.py:4:import json
+04-solution/split/s00_precompute.py:5:import os
+04-solution/split/s00_precompute.py:7:import common as C
+04-solution/refusal/scripts/metric_adapter.py:8:from __future__ import annotations
+04-solution/refusal/scripts/metric_adapter.py:10:import ast
+04-solution/refusal/scripts/metric_adapter.py:11:import copy
+04-solution/refusal/scripts/metric_adapter.py:12:import inspect
+04-solution/refusal/scripts/metric_adapter.py:13:import math
+04-solution/refusal/scripts/metric_adapter.py:14:from fractions import Fraction
+04-solution/refusal/scripts/metric_adapter.py:16:import numpy as np
+04-solution/postproc/scripts/s09_timing.py:12:import json
+04-solution/postproc/scripts/s09_timing.py:13:import sys
+04-solution/postproc/scripts/s09_timing.py:14:import time
+04-solution/postproc/scripts/s09_timing.py:15:from pathlib import Path
+04-solution/postproc/scripts/s09_timing.py:17:import numpy as np
+04-solution/postproc/scripts/s09_timing.py:20:from common import JOB, SPLIT, read_meta, rerank
+04-solution/postproc/scripts/s09_timing.py:21:from s03_extract import make_session, extract
+04-solution/postproc/scripts/s09_timing.py:30:import s03_extract
+04-solution/refusal/scripts/make_report.py:3:from __future__ import annotations
+04-solution/refusal/scripts/make_report.py:5:import csv
+04-solution/refusal/scripts/make_report.py:6:import json
+04-solution/refusal/scripts/make_report.py:7:import os
+04-solution/refusal/scripts/make_report.py:8:from pathlib import Path
+04-solution/refusal/scripts/make_report.py:13:import matplotlib
+04-solution/refusal/scripts/make_report.py:15:import matplotlib.pyplot as plt
+04-solution/split/common.py:7:import csv
+04-solution/split/common.py:8:import hashlib
+04-solution/split/common.py:9:import json
+04-solution/split/common.py:10:import os
+04-solution/split/common.py:11:from multiprocessing import Pool
+04-solution/split/common.py:13:import numpy as np
+04-solution/refusal/scripts/robustness.py:3:from __future__ import annotations
+04-solution/refusal/scripts/robustness.py:5:import argparse
+04-solution/refusal/scripts/robustness.py:6:import importlib
+04-solution/refusal/scripts/robustness.py:7:import json
+04-solution/refusal/scripts/robustness.py:8:import sys
+04-solution/refusal/scripts/robustness.py:10:from analyze import ROOT, OUT, SNAPSHOT, FIELDS, PRIORS, write_csv, write_json, metadata, compare
+04-solution/refusal/scripts/robustness.py:11:from metric_adapter import Sweep, metric_kernel
+04-solution/refusal/scripts/robustness.py:12:import numpy as np
+04-solution/split/make_split.py:20:import argparse
+04-solution/split/make_split.py:21:import csv
+04-solution/split/make_split.py:22:import hashlib
+04-solution/split/make_split.py:23:import json
+04-solution/split/make_split.py:24:import os
+04-solution/split/make_split.py:25:from collections import defaultdict
+04-solution/split/make_split.py:27:import numpy as np
+04-solution/split/make_split.py:29:import common as C
+04-solution/split/corrupt_split.py:18:import csv
+04-solution/split/corrupt_split.py:19:import json
+04-solution/split/corrupt_split.py:20:import os
+04-solution/split/corrupt_split.py:21:from collections import defaultdict
+04-solution/split/corrupt_split.py:23:import common as C
+04-solution/refusal/scripts/analyze.py:3:from __future__ import annotations
+04-solution/refusal/scripts/analyze.py:5:import csv
+04-solution/refusal/scripts/analyze.py:6:import hashlib
+04-solution/refusal/scripts/analyze.py:7:import importlib
+04-solution/refusal/scripts/analyze.py:8:import json
+04-solution/refusal/scripts/analyze.py:9:import os
+04-solution/refusal/scripts/analyze.py:10:import platform
+04-solution/refusal/scripts/analyze.py:11:import shutil
+04-solution/refusal/scripts/analyze.py:12:import sys
+04-solution/refusal/scripts/analyze.py:13:from pathlib import Path
+04-solution/refusal/scripts/analyze.py:18:import numpy as np
+04-solution/refusal/scripts/analyze.py:20:from metric_adapter import Sweep, metric_kernel
+04-solution/postproc/scripts/s08_fusion.py:10:import json
+04-solution/postproc/scripts/s08_fusion.py:11:import sys
+04-solution/postproc/scripts/s08_fusion.py:12:from pathlib import Path
+04-solution/postproc/scripts/s08_fusion.py:14:import numpy as np
+04-solution/postproc/scripts/s08_fusion.py:17:from common import (JOB, SPLIT, read_meta, eval_scores, l2norm,
+04-solution/postproc/scripts/s08_fusion.py:19:from s04_grid import K1S_FAST, K2S_FAST, LAMS_FAST
+04-solution/plate-ablation/scripts/dev_sheet.py:2:import csv, random, sys, time
+04-solution/plate-ablation/scripts/dev_sheet.py:3:from pathlib import Path
+04-solution/plate-ablation/scripts/dev_sheet.py:4:import numpy as np
+04-solution/plate-ablation/scripts/dev_sheet.py:5:from PIL import Image, ImageDraw
+04-solution/plate-ablation/scripts/dev_sheet.py:7:from plate_detect import detect
+04-solution/postproc/scripts/s07_fastreid_extract.py:13:import argparse
+04-solution/postproc/scripts/s07_fastreid_extract.py:14:import csv
+04-solution/postproc/scripts/s07_fastreid_extract.py:15:import json
+04-solution/postproc/scripts/s07_fastreid_extract.py:16:import sys
+04-solution/postproc/scripts/s07_fastreid_extract.py:17:import time
+04-solution/postproc/scripts/s07_fastreid_extract.py:18:from pathlib import Path
+04-solution/postproc/scripts/s07_fastreid_extract.py:20:import numpy as np
+04-solution/postproc/scripts/s07_fastreid_extract.py:21:import torch
+04-solution/postproc/scripts/s07_fastreid_extract.py:22:from PIL import Image
+04-solution/postproc/scripts/s07_fastreid_extract.py:26:from fastreid.config import get_cfg  # noqa: E402
+04-solution/postproc/scripts/s07_fastreid_extract.py:27:from fastreid.modeling.meta_arch import build_model  # noqa: E402
+04-solution/split/check_split.py:20:import argparse
+04-solution/split/check_split.py:21:import csv
+04-solution/split/check_split.py:22:import hashlib
+04-solution/split/check_split.py:23:import json
+04-solution/split/check_split.py:24:import os
+04-solution/split/check_split.py:25:import sys
+04-solution/split/check_split.py:26:from collections import defaultdict
+04-solution/split/check_split.py:29:import common as C
+04-solution/plate-ablation/scripts/plate_detect.py:21:from __future__ import annotations
+04-solution/plate-ablation/scripts/plate_detect.py:22:import numpy as np
+04-solution/plate-ablation/scripts/cache_boxes.py:2:import csv, json, sys, time
+04-solution/plate-ablation/scripts/cache_boxes.py:3:from pathlib import Path
+04-solution/plate-ablation/scripts/cache_boxes.py:4:from multiprocessing import Pool
+04-solution/plate-ablation/scripts/cache_boxes.py:5:import numpy as np
+04-solution/plate-ablation/scripts/cache_boxes.py:6:from PIL import Image
+04-solution/plate-ablation/scripts/cache_boxes.py:8:from plate_detect import detect
+04-solution/split/compare_structure.py:6:import csv
+04-solution/split/compare_structure.py:7:import json
+04-solution/split/compare_structure.py:8:import os
+04-solution/split/compare_structure.py:9:from collections import Counter, defaultdict
+04-solution/split/compare_structure.py:11:import numpy as np
+04-solution/split/compare_structure.py:13:import common as C
+04-solution/plate-ablation/scripts/dump_crops.py:1:import csv, sys, random
+04-solution/plate-ablation/scripts/dump_crops.py:2:from pathlib import Path
+04-solution/plate-ablation/scripts/dump_crops.py:3:from PIL import Image
+04-solution/plate-ablation/scripts/dump_crops.py:9:import numpy as np
+04-solution/plate-ablation/scripts/extract_variants.py:7:from __future__ import annotations
+04-solution/plate-ablation/scripts/extract_variants.py:8:import csv, json, sys, time
+04-solution/plate-ablation/scripts/extract_variants.py:9:from pathlib import Path
+04-solution/plate-ablation/scripts/extract_variants.py:10:import numpy as np
+04-solution/plate-ablation/scripts/extract_variants.py:11:import onnxruntime as ort
+04-solution/plate-ablation/scripts/extract_variants.py:12:from PIL import Image
+04-solution/plate-ablation/scripts/extract_variants.py:14:from mask_ops import fill, controls
+04-solution/postproc/scripts/s06_halves.py:9:import json
+04-solution/postproc/scripts/s06_halves.py:10:import sys
+04-solution/postproc/scripts/s06_halves.py:11:from pathlib import Path
+04-solution/postproc/scripts/s06_halves.py:13:import numpy as np
+04-solution/postproc/scripts/s06_halves.py:16:from common import (JOB, SPLIT, read_meta, eval_embeddings, eval_scores,
+04-solution/postproc/scripts/s06_halves.py:18:from s04_grid import run_grid, K1S_FAST, K2S_FAST, LAMS_FAST
+04-solution/plate-ablation/scripts/make_pics.py:2:import csv, json, sys
+04-solution/plate-ablation/scripts/make_pics.py:3:from pathlib import Path
+04-solution/plate-ablation/scripts/make_pics.py:4:import numpy as np
+04-solution/plate-ablation/scripts/make_pics.py:5:from PIL import Image, ImageDraw, ImageFont
+04-solution/plate-ablation/scripts/make_pics.py:8:from mask_ops import fill, controls
+04-solution/plate-ablation/scripts/make_pics.py:9:from extract_variants import pad_box
+04-solution/plate-ablation/scripts/labels_to_crop.py:2:import json
+04-solution/plate-ablation/scripts/labels_to_crop.py:3:from pathlib import Path
+04-solution/plate-ablation/scripts/labels_to_crop.py:4:from PIL import Image, ImageDraw, ImageFont
+04-solution/plate-ablation/scripts/eval_detector.py:2:import json, sys, time
+04-solution/plate-ablation/scripts/eval_detector.py:3:from pathlib import Path
+04-solution/plate-ablation/scripts/eval_detector.py:4:import numpy as np
+04-solution/plate-ablation/scripts/eval_detector.py:5:from PIL import Image, ImageDraw, ImageFont
+04-solution/plate-ablation/scripts/eval_detector.py:8:from plate_detect import detect
+04-solution/postproc/scripts/s06_final_val.py:13:import json
+04-solution/postproc/scripts/s06_final_val.py:14:import sys
+04-solution/postproc/scripts/s06_final_val.py:15:from pathlib import Path
+04-solution/postproc/scripts/s06_final_val.py:17:import numpy as np
+04-solution/postproc/scripts/s06_final_val.py:20:from common import JOB, SPLIT, read_meta, eval_scores, eval_embeddings, rerank
+04-solution/plate-ablation/scripts/make_tables.py:2:import json
+04-solution/plate-ablation/scripts/make_tables.py:3:from pathlib import Path
+04-solution/service/model/fetch_model.sh:7:URL=https://storage.openvinotoolkit.org/repositories/open_model_zoo/public/2022.1/vehicle-reid-0001/$FILE
+04-solution/plate-ablation/scripts/label_sheet.py:2:import csv, json, random, sys
+04-solution/plate-ablation/scripts/label_sheet.py:3:from pathlib import Path
+04-solution/plate-ablation/scripts/label_sheet.py:4:from PIL import Image, ImageDraw
+04-solution/baseline/scripts/run_eval.py:17:from __future__ import annotations
+04-solution/baseline/scripts/run_eval.py:19:import csv
+04-solution/baseline/scripts/run_eval.py:20:import json
+04-solution/baseline/scripts/run_eval.py:21:import sys
+04-solution/baseline/scripts/run_eval.py:22:from pathlib import Path
+04-solution/baseline/scripts/run_eval.py:24:import numpy as np
+04-solution/baseline/scripts/run_eval.py:30:from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
+04-solution/postproc/scripts/s05_tta.py:7:import json
+04-solution/postproc/scripts/s05_tta.py:8:import sys
+04-solution/postproc/scripts/s05_tta.py:9:import time
+04-solution/postproc/scripts/s05_tta.py:10:from pathlib import Path
+04-solution/postproc/scripts/s05_tta.py:12:import numpy as np
+04-solution/postproc/scripts/s05_tta.py:15:from common import JOB, SPLIT, read_meta, eval_embeddings, average_embeddings
+04-solution/plate-ablation/scripts/mask_ops.py:7:from __future__ import annotations
+04-solution/plate-ablation/scripts/mask_ops.py:8:import numpy as np
+04-solution/postproc/scripts/s04_grid.py:10:import json
+04-solution/postproc/scripts/s04_grid.py:11:import sys
+04-solution/postproc/scripts/s04_grid.py:12:import time
+04-solution/postproc/scripts/s04_grid.py:13:from pathlib import Path
+04-solution/postproc/scripts/s04_grid.py:15:import numpy as np
+04-solution/postproc/scripts/s04_grid.py:18:from common import JOB, read_meta, eval_scores, rerank_prepare, rerank_finalize
+04-solution/baseline/review/verify_vectors.py:8:import csv, json, sys
+04-solution/baseline/review/verify_vectors.py:9:from pathlib import Path
+04-solution/baseline/review/verify_vectors.py:10:import numpy as np
+04-solution/baseline/review/verify_vectors.py:11:import onnxruntime as ort
+04-solution/baseline/review/verify_vectors.py:12:from PIL import Image
+04-solution/baseline/scripts/make_submission.py:14:from __future__ import annotations
+04-solution/baseline/scripts/make_submission.py:16:import argparse
+04-solution/baseline/scripts/make_submission.py:17:import csv
+04-solution/baseline/scripts/make_submission.py:18:import json
+04-solution/baseline/scripts/make_submission.py:19:import sys
+04-solution/baseline/scripts/make_submission.py:20:from pathlib import Path
+04-solution/baseline/scripts/make_submission.py:22:import numpy as np
+04-solution/baseline/scripts/make_submission.py:27:from reid_metrics import scores_from_embeddings  # noqa: E402
+04-solution/plate-ablation/scripts/fill_stats.py:7:import csv, json, sys
+04-solution/plate-ablation/scripts/fill_stats.py:8:from pathlib import Path
+04-solution/plate-ablation/scripts/fill_stats.py:9:import numpy as np
+04-solution/plate-ablation/scripts/fill_stats.py:10:from PIL import Image
+04-solution/plate-ablation/scripts/fill_stats.py:12:from mask_ops import fill, controls
+04-solution/plate-ablation/scripts/eval_variants.py:7:from __future__ import annotations
+04-solution/plate-ablation/scripts/eval_variants.py:8:import csv, json, sys
+04-solution/plate-ablation/scripts/eval_variants.py:9:from pathlib import Path
+04-solution/plate-ablation/scripts/eval_variants.py:10:import numpy as np
+04-solution/plate-ablation/scripts/eval_variants.py:15:from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
+04-solution/plate-ablation/scripts/eval_variants.py:17:from extract_variants import VARIANTS  # noqa: E402
+04-solution/service/app/batch.py:18:from __future__ import annotations
+04-solution/service/app/batch.py:20:import argparse
+04-solution/service/app/batch.py:21:import json
+04-solution/service/app/batch.py:22:import platform
+04-solution/service/app/batch.py:23:import time
+04-solution/service/app/batch.py:24:from pathlib import Path
+04-solution/service/app/batch.py:26:import numpy as np
+04-solution/service/app/batch.py:28:from .core import config
+04-solution/service/app/batch.py:29:from .core.model import Embedder
+04-solution/service/app/batch.py:30:from .core.preprocess import read_rows
+04-solution/service/app/batch.py:31:from .core.ranking import cosine_scores
+04-solution/service/app/batch.py:32:from .core.submission import save_embeddings, write_candidates, write_submission
+04-solution/eda/scripts/s10_train_test_overlap.py:7:import csv, json, os
+04-solution/eda/scripts/s10_train_test_overlap.py:8:import numpy as np
+04-solution/eda/scripts/s10_train_test_overlap.py:9:from PIL import Image, ImageDraw
+04-solution/baseline/scripts/extract_embeddings.py:21:from __future__ import annotations
+04-solution/baseline/scripts/extract_embeddings.py:23:import argparse
+04-solution/baseline/scripts/extract_embeddings.py:24:import csv
+04-solution/baseline/scripts/extract_embeddings.py:25:import json
+04-solution/baseline/scripts/extract_embeddings.py:26:import time
+04-solution/baseline/scripts/extract_embeddings.py:27:from pathlib import Path
+04-solution/baseline/scripts/extract_embeddings.py:29:import numpy as np
+04-solution/baseline/scripts/extract_embeddings.py:30:import onnxruntime as ort
+04-solution/baseline/scripts/extract_embeddings.py:31:from PIL import Image
+04-solution/postproc/scripts/common.py:10:from __future__ import annotations
+04-solution/postproc/scripts/common.py:12:import csv
+04-solution/postproc/scripts/common.py:13:import sys
+04-solution/postproc/scripts/common.py:14:import time
+04-solution/postproc/scripts/common.py:15:from pathlib import Path
+04-solution/postproc/scripts/common.py:17:import numpy as np
+04-solution/postproc/scripts/common.py:24:from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
+04-solution/service/app/load_gallery.py:10:from __future__ import annotations
+04-solution/service/app/load_gallery.py:12:import argparse
+04-solution/service/app/load_gallery.py:13:import json
+04-solution/service/app/load_gallery.py:14:from pathlib import Path
+04-solution/service/app/load_gallery.py:16:from .api.store import GalleryStore
+04-solution/service/app/load_gallery.py:17:from .core import config
+04-solution/service/app/load_gallery.py:18:from .core.model import Embedder
+04-solution/service/app/load_gallery.py:19:from .core.preprocess import read_rows
+04-solution/split/eval_degenerate.py:20:import json
+04-solution/split/eval_degenerate.py:21:import math
+04-solution/split/eval_degenerate.py:22:import os
+04-solution/split/eval_degenerate.py:23:import subprocess
+04-solution/split/eval_degenerate.py:24:import sys
+04-solution/split/eval_degenerate.py:25:from functools import lru_cache
+04-solution/split/eval_degenerate.py:27:import numpy as np
+04-solution/split/eval_degenerate.py:33:import common as C
+04-solution/split/eval_degenerate.py:34:import reid_metrics as RM
+04-solution/postproc/scripts/s03_extract.py:12:import json
+04-solution/postproc/scripts/s03_extract.py:13:import sys
+04-solution/postproc/scripts/s03_extract.py:14:import time
+04-solution/postproc/scripts/s03_extract.py:15:from pathlib import Path
+04-solution/postproc/scripts/s03_extract.py:17:import numpy as np
+04-solution/postproc/scripts/s03_extract.py:18:import onnxruntime as ort
+04-solution/postproc/scripts/s03_extract.py:19:from PIL import Image
+04-solution/postproc/scripts/s03_extract.py:22:from common import JOB, SPLIT, DATA, read_meta, l2norm
+04-solution/eda/scripts/s09_consolidate.py:4:import json, os
+04-solution/postproc/scripts/s01_verify_baseline.py:10:import json
+04-solution/postproc/scripts/s01_verify_baseline.py:11:import sys
+04-solution/postproc/scripts/s01_verify_baseline.py:12:import time
+04-solution/postproc/scripts/s01_verify_baseline.py:13:from pathlib import Path
+04-solution/postproc/scripts/s01_verify_baseline.py:15:import numpy as np
+04-solution/postproc/scripts/s01_verify_baseline.py:18:from common import JOB, SPLIT, read_meta, check_ids, eval_scores, eval_embeddings, rerank
+04-solution/postproc/scripts/s02_make_tune_protocol.py:15:import csv
+04-solution/postproc/scripts/s02_make_tune_protocol.py:16:import hashlib
+04-solution/postproc/scripts/s02_make_tune_protocol.py:17:import json
+04-solution/postproc/scripts/s02_make_tune_protocol.py:18:import sys
+04-solution/postproc/scripts/s02_make_tune_protocol.py:19:from collections import defaultdict
+04-solution/postproc/scripts/s02_make_tune_protocol.py:20:from pathlib import Path
+04-solution/postproc/scripts/s02_make_tune_protocol.py:22:import numpy as np
+04-solution/postproc/scripts/s02_make_tune_protocol.py:25:from common import JOB, SPLIT, read_meta
+04-solution/eda/scripts/s08_complexity.py:4:import csv, json, os
+04-solution/eda/scripts/s08_complexity.py:5:import numpy as np
+04-solution/service/app/core/submission.py:7:from __future__ import annotations
+04-solution/service/app/core/submission.py:9:import csv
+04-solution/service/app/core/submission.py:10:from pathlib import Path
+04-solution/service/app/core/submission.py:12:import numpy as np
+04-solution/service/app/core/submission.py:14:from .ranking import accepted_candidates, ranked_indices
+04-solution/eda/scripts/s03_integrity.py:5:import csv, json, os
+04-solution/eda/scripts/s03_integrity.py:6:from collections import defaultdict
+04-solution/eda/scripts/s03_integrity.py:80:from collections import Counter
+04-solution/service/app/api/main.py:14:from __future__ import annotations
+04-solution/service/app/api/main.py:16:import io
+04-solution/service/app/api/main.py:17:from contextlib import asynccontextmanager
+04-solution/service/app/api/main.py:18:from pathlib import Path
+04-solution/service/app/api/main.py:20:import numpy as np
+04-solution/service/app/api/main.py:21:from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+04-solution/service/app/api/main.py:22:from fastapi.openapi.docs import get_swagger_ui_html
+04-solution/service/app/api/main.py:23:from fastapi.responses import FileResponse, HTMLResponse
+04-solution/service/app/api/main.py:24:from fastapi.staticfiles import StaticFiles
+04-solution/service/app/api/main.py:25:from PIL import Image, UnidentifiedImageError
+04-solution/service/app/api/main.py:26:from pydantic import BaseModel, Field
+04-solution/service/app/api/main.py:28:from ..core import config
+04-solution/service/app/api/main.py:29:from ..core.model import Embedder, model_file_sha256
+04-solution/service/app/api/main.py:30:from ..core.preprocess import crop_to_input
+04-solution/service/app/api/main.py:31:from .store import GalleryStore
+04-solution/eda/scripts/s01_csv_stats.py:4:import csv, json, os, statistics as st
+04-solution/eda/scripts/s01_csv_stats.py:5:from collections import Counter
+04-solution/eda/scripts/s07a_sheets.py:9:import csv, json, os
+04-solution/eda/scripts/s07a_sheets.py:10:import numpy as np
+04-solution/eda/scripts/s07a_sheets.py:11:from PIL import Image, ImageDraw
+04-solution/service/app/core/ranking.py:8:from __future__ import annotations
+04-solution/service/app/core/ranking.py:10:import numpy as np
+04-solution/baseline/scripts/check_embeddings_order.py:15:from __future__ import annotations
+04-solution/baseline/scripts/check_embeddings_order.py:17:import csv
+04-solution/baseline/scripts/check_embeddings_order.py:18:import json
+04-solution/baseline/scripts/check_embeddings_order.py:19:import sys
+04-solution/baseline/scripts/check_embeddings_order.py:20:from pathlib import Path
+04-solution/baseline/scripts/check_embeddings_order.py:22:import numpy as np
+04-solution/baseline/scripts/check_embeddings_order.py:27:from extract_embeddings import load_crop, make_session, l2norm  # noqa: E402
+04-solution/service/app/api/store.py:7:from __future__ import annotations
+04-solution/service/app/api/store.py:9:import numpy as np
+04-solution/service/app/api/store.py:10:from qdrant_client import QdrantClient
+04-solution/service/app/api/store.py:11:from qdrant_client import models as qm
+04-solution/service/app/api/store.py:13:from ..core import config
+04-solution/service/app/api/store.py:14:from ..core.preprocess import BBoxRow
+04-solution/service/app/core/model.py:6:from __future__ import annotations
+04-solution/service/app/core/model.py:8:import hashlib
+04-solution/service/app/core/model.py:9:from pathlib import Path
+04-solution/service/app/core/model.py:11:import numpy as np
+04-solution/service/app/core/model.py:12:import onnxruntime as ort
+04-solution/service/app/core/model.py:14:from .config import EMBEDDING_DIM, MODEL_PATH, MODEL_SHA256
+04-solution/service/app/core/model.py:15:from .preprocess import BBoxRow, load_crop
+04-solution/eda/scripts/s06b_pairlevel.py:10:import csv, json, os
+04-solution/eda/scripts/s06b_pairlevel.py:11:import numpy as np
+04-solution/baseline/review/verify_metrics.py:14:import csv, json, sys
+04-solution/baseline/review/verify_metrics.py:15:from pathlib import Path
+04-solution/baseline/review/verify_metrics.py:16:import numpy as np
+04-solution/baseline/review/verify_metrics.py:21:from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
+04-solution/baseline/review/check_split_use.py:3:import csv
+04-solution/baseline/review/check_split_use.py:4:from pathlib import Path
+04-solution/service/app/core/preprocess.py:7:from __future__ import annotations
+04-solution/service/app/core/preprocess.py:9:import csv
+04-solution/service/app/core/preprocess.py:10:from pathlib import Path
+04-solution/service/app/core/preprocess.py:11:from typing import NamedTuple
+04-solution/service/app/core/preprocess.py:13:import numpy as np
+04-solution/service/app/core/preprocess.py:14:from PIL import Image
+04-solution/service/app/core/preprocess.py:16:from .config import INPUT_SIZE
+04-solution/eda/scripts/s04_camera.py:12:import csv, json, os
+04-solution/eda/scripts/s04_camera.py:13:import numpy as np
+04-solution/baseline/review/extract_gallery.py:8:import csv, sys, time
+04-solution/baseline/review/extract_gallery.py:9:from pathlib import Path
+04-solution/baseline/review/extract_gallery.py:10:import numpy as np
+04-solution/baseline/review/extract_gallery.py:11:import onnxruntime as ort
+04-solution/baseline/review/extract_gallery.py:12:from PIL import Image
+04-solution/service/app/core/config.py:6:from __future__ import annotations
+04-solution/service/app/core/config.py:8:import os
+04-solution/service/app/core/config.py:9:from pathlib import Path
+04-solution/service/app/core/config.py:41:QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
+04-solution/baseline/review/timing.py:3:import csv, os, sys, time, json
+04-solution/baseline/review/timing.py:4:from pathlib import Path
+04-solution/baseline/review/timing.py:5:import numpy as np, onnxruntime as ort
+04-solution/baseline/review/timing.py:6:from PIL import Image
+04-solution/eda/scripts/s06c_rescan96.py:6:import json, os
+04-solution/eda/scripts/s06c_rescan96.py:7:import numpy as np
+04-solution/eda/scripts/s06c_rescan96.py:8:from PIL import Image
+04-solution/baseline/review/extract_bands.py:4:import csv, time
+04-solution/baseline/review/extract_bands.py:5:from pathlib import Path
+04-solution/baseline/review/extract_bands.py:6:import numpy as np, onnxruntime as ort
+04-solution/baseline/review/extract_bands.py:7:from PIL import Image
+04-solution/baseline/review/best_number.py:4:import csv, json, sys
+04-solution/baseline/review/best_number.py:5:from pathlib import Path
+04-solution/baseline/review/best_number.py:6:import numpy as np
+04-solution/baseline/review/best_number.py:10:from reid_metrics import evaluate, scores_from_embeddings
+04-solution/baseline/review/best_number.py:11:from postproc import k_reciprocal, l2, QV, GV, QC, GC, ABS, report
+04-solution/baseline/review/threshold_tradeoff.py:3:import csv
+04-solution/baseline/review/threshold_tradeoff.py:4:from pathlib import Path
+04-solution/baseline/review/threshold_tradeoff.py:5:import numpy as np
+04-solution/eda/scripts/s05b_qg_vehicle.py:9:import csv, json, os
+04-solution/eda/scripts/s05b_qg_vehicle.py:10:import numpy as np
+04-solution/eda/scripts/s05b_qg_vehicle.py:11:from PIL import Image, ImageDraw
+04-solution/baseline/review/eval_variants.py:3:import csv, json, sys, itertools
+04-solution/baseline/review/eval_variants.py:4:from pathlib import Path
+04-solution/baseline/review/eval_variants.py:5:import numpy as np
+04-solution/baseline/review/eval_variants.py:10:from reid_metrics import evaluate, scores_from_embeddings
+04-solution/baseline/review/eval_bands.py:3:import csv, sys
+04-solution/baseline/review/eval_bands.py:4:from pathlib import Path
+04-solution/baseline/review/eval_bands.py:5:import numpy as np
+04-solution/baseline/review/eval_bands.py:9:from reid_metrics import evaluate, scores_from_embeddings
+04-solution/baseline/review/threshold_check.py:3:import csv, json, sys
+04-solution/baseline/review/threshold_check.py:4:from pathlib import Path
+04-solution/baseline/review/threshold_check.py:5:import numpy as np
+04-solution/eval/report_examples.py:2:import json
+04-solution/eval/report_examples.py:3:from pathlib import Path
+04-solution/eval/report_examples.py:5:import numpy as np
+04-solution/eval/report_examples.py:7:from reid_metrics import evaluate, scores_from_embeddings, _json_safe
+04-solution/baseline/review/extract_variants.py:8:import csv, sys, time
+04-solution/baseline/review/extract_variants.py:9:from pathlib import Path
+04-solution/baseline/review/extract_variants.py:10:import numpy as np
+04-solution/baseline/review/extract_variants.py:11:import onnxruntime as ort
+04-solution/baseline/review/extract_variants.py:12:from PIL import Image
+04-solution/baseline/review/make_pics.py:4:import csv
+04-solution/baseline/review/make_pics.py:5:from pathlib import Path
+04-solution/baseline/review/make_pics.py:6:import numpy as np
+04-solution/baseline/review/make_pics.py:7:from PIL import Image, ImageDraw
+04-solution/baseline/review/recheck_test_vectors.py:3:import csv, time
+04-solution/baseline/review/recheck_test_vectors.py:4:from pathlib import Path
+04-solution/baseline/review/recheck_test_vectors.py:5:import numpy as np, onnxruntime as ort
+04-solution/baseline/review/recheck_test_vectors.py:6:from PIL import Image
+04-solution/eda/scripts/s05_neardup.py:13:import csv, json, os
+04-solution/eda/scripts/s05_neardup.py:14:import numpy as np
+04-solution/eda/scripts/s05_neardup.py:15:from PIL import Image
+04-solution/eval/build_report.py:2:import json
+04-solution/eval/build_report.py:3:from pathlib import Path
+04-solution/eda/scripts/s06_camcluster.py:9:import csv, json, os
+04-solution/eda/scripts/s06_camcluster.py:10:import numpy as np
+04-solution/eda/scripts/s06d_surrogate.py:12:import csv, json, os
+04-solution/eda/scripts/s06d_surrogate.py:13:import numpy as np
+04-solution/eda/scripts/s06d_surrogate.py:14:from PIL import Image
+04-solution/eval/compare_results.py:2:import argparse
+04-solution/eval/compare_results.py:3:import json
+04-solution/eval/compare_results.py:4:import math
+04-solution/eval/compare_results.py:5:from pathlib import Path
+04-solution/eval/reid_metrics.py:6:from __future__ import annotations
+04-solution/eval/reid_metrics.py:8:import argparse
+04-solution/eval/reid_metrics.py:9:import json
+04-solution/eval/reid_metrics.py:10:import math
+04-solution/eval/reid_metrics.py:11:from pathlib import Path
+04-solution/eval/reid_metrics.py:13:import numpy as np
+04-solution/eval/protocol_oracle.py:7:from fractions import Fraction as F
+04-solution/eval/protocol_oracle.py:9:from review.oracle import oracle_evaluate
+04-solution/eval/verify.py:2:from __future__ import annotations
+04-solution/eval/verify.py:4:import ast
+04-solution/eval/verify.py:5:from contextlib import redirect_stdout
+04-solution/eval/verify.py:6:from copy import deepcopy
+04-solution/eval/verify.py:7:from fractions import Fraction
+04-solution/eval/verify.py:8:import hashlib
+04-solution/eval/verify.py:9:import io
+04-solution/eval/verify.py:10:import json
+04-solution/eval/verify.py:11:import math
+04-solution/eval/verify.py:12:from pathlib import Path
+04-solution/eval/verify.py:13:import platform
+04-solution/eval/verify.py:14:import subprocess
+04-solution/eval/verify.py:15:import sys
+04-solution/eval/verify.py:16:import types
+04-solution/eval/verify.py:17:import unittest
+04-solution/eval/verify.py:19:import numpy as np
+04-solution/eval/verify.py:21:import reid_metrics as metrics
+04-solution/eval/verify.py:22:import test_metrics
+04-solution/eval/verify.py:23:from compare_results import compare
+04-solution/eval/test_metrics.py:2:import itertools
+04-solution/eval/test_metrics.py:3:import math
+04-solution/eval/test_metrics.py:4:import unittest
+04-solution/eval/test_metrics.py:5:from fractions import Fraction
+04-solution/eval/test_metrics.py:7:import numpy as np
+04-solution/eval/test_metrics.py:9:import reid_metrics as metrics
+04-solution/eval/scope_metrics.py:2:import math
+04-solution/eval/scope_metrics.py:4:import numpy as np
+04-solution/eval/oracle_checks.py:2:import numpy as np
+04-solution/eval/oracle_checks.py:4:from review.oracle import oracle_evaluate, diff
+04-solution/eval/test_protocols.py:2:from decimal import Decimal, localcontext
+04-solution/eval/test_protocols.py:3:import itertools
+04-solution/eval/test_protocols.py:4:import unittest
+04-solution/eval/test_protocols.py:6:import numpy as np
+04-solution/eval/test_protocols.py:8:import reid_metrics as metrics
+04-solution/eval/test_protocols.py:9:from oracle_checks import project
+04-solution/eval/test_protocols.py:10:from protocol_oracle import expected_extensions
+04-solution/eval/test_protocols.py:11:from review.oracle import diff
+04-solution/eval/review/fuzz.py:6:import itertools
+04-solution/eval/review/fuzz.py:7:import random
+04-solution/eval/review/fuzz.py:8:import sys
+04-solution/eval/review/fuzz.py:11:import numpy as np
+04-solution/eval/review/fuzz.py:12:import reid_metrics as metrics
+04-solution/eval/review/fuzz.py:13:from oracle import oracle_evaluate, diff
+04-solution/eda/scripts/s07b_plates.py:11:import csv, json, os
+04-solution/eda/scripts/s07b_plates.py:12:import numpy as np
+04-solution/eda/scripts/s07b_plates.py:13:from PIL import Image, ImageDraw
+04-solution/baseline/review/check_artifacts.py:3:import csv, json, sys
+04-solution/baseline/review/check_artifacts.py:4:from pathlib import Path
+04-solution/baseline/review/check_artifacts.py:5:import numpy as np
+04-solution/baseline/review/check_artifacts.py:10:from reid_metrics import scores_from_embeddings
+04-solution/baseline/review/check_artifacts.py:49:from collections import OrderedDict
+04-solution/eda/scripts/s02_scan_images.py:7:import hashlib, json, os
+04-solution/eda/scripts/s02_scan_images.py:8:from multiprocessing import Pool
+04-solution/eda/scripts/s02_scan_images.py:9:import numpy as np
+04-solution/eda/scripts/s02_scan_images.py:10:from PIL import Image
+04-solution/baseline/review/postproc.py:5:import csv, json, sys
+04-solution/baseline/review/postproc.py:6:from pathlib import Path
+04-solution/baseline/review/postproc.py:7:import numpy as np
+04-solution/baseline/review/postproc.py:12:from reid_metrics import evaluate, scores_from_embeddings
+04-solution/eval/review/tz_checks.py:2:import subprocess
+04-solution/eval/review/tz_checks.py:3:import sys
+04-solution/eval/review/tz_checks.py:4:import tempfile
+04-solution/eval/review/tz_checks.py:5:from pathlib import Path
+04-solution/eval/review/tz_checks.py:8:import numpy as np
+04-solution/eval/review/tz_checks.py:9:import reid_metrics as metrics
+04-solution/eval/review/oracle.py:7:from fractions import Fraction
+04-solution/eval/sources/torchreid_rank.py:1:from __future__ import division, print_function, absolute_import
+04-solution/eval/sources/torchreid_rank.py:2:import numpy as np
+04-solution/eval/sources/torchreid_rank.py:3:import warnings
+04-solution/eval/sources/torchreid_rank.py:4:from collections import defaultdict
+04-solution/eval/sources/torchreid_rank.py:139:        # reference: https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Average_precision
+04-solution/eval/review/demos.py:4:import sys
+04-solution/eval/review/demos.py:5:from pathlib import Path
+04-solution/eval/review/demos.py:8:import numpy as np
+04-solution/eval/review/demos.py:9:import reid_metrics as correct
+04-solution/eval/review/demos.py:10:from mutants import MUTANTS, build
+04-solution/eval/sources/fastreid_rank.py:1:# credits: https://github.com/KaiyangZhou/deep-person-reid/blob/master/torchreid/metrics/rank.py
+04-solution/eval/sources/fastreid_rank.py:3:import warnings
+04-solution/eval/sources/fastreid_rank.py:4:from collections import defaultdict
+04-solution/eval/sources/fastreid_rank.py:6:import numpy as np
+04-solution/eval/sources/fastreid_rank.py:146:        # reference: https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Average_precision

@@ -1,0 +1,32 @@
+[
+  {
+    "file": "fastreid_rank.py",
+    "bytes_ok": true,
+    "sha256_ok": true
+  },
+  {
+    "file": "torchreid_rank.py",
+    "bytes_ok": true,
+    "sha256_ok": true
+  },
+  {
+    "file": "compute_AP.m",
+    "bytes_ok": true,
+    "sha256_ok": true
+  },
+  {
+    "file": "evaluation.m",
+    "bytes_ok": true,
+    "sha256_ok": true
+  },
+  {
+    "file": "FASTREID_LICENSE",
+    "bytes_ok": true,
+    "sha256_ok": true
+  },
+  {
+    "file": "TORCHREID_LICENSE",
+    "bytes_ok": true,
+    "sha256_ok": true
+  }
+]

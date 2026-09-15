@@ -1,0 +1,114 @@
+[
+  {
+    "target": "04-solution/service/app/core/preprocess.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/core/model.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/batch.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/core/rerank.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/api/main.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/api/store.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/load_gallery.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/static/index.html",
+    "exists": true
+  },
+  {
+    "target": "04-solution/eval/reid_metrics.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/eval/scope_metrics.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/app/core/config.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/baseline/artifacts/",
+    "exists": true
+  },
+  {
+    "target": "04-solution/split/files/",
+    "exists": true
+  },
+  {
+    "target": "04-solution/split/files/manifest.json",
+    "exists": true
+  },
+  {
+    "target": "04-solution/postproc/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/postproc/out/final_val.json",
+    "exists": true
+  },
+  {
+    "target": "04-solution/refusal/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/postproc/out/s09_timing.json",
+    "exists": true
+  },
+  {
+    "target": "04-solution/plate-ablation/out/ablation.json",
+    "exists": true
+  },
+  {
+    "target": "04-solution/plate-ablation/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/plate-ablation/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/refusal/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/eda/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/postproc/scripts/s07_fastreid_extract.py",
+    "exists": true
+  },
+  {
+    "target": "04-solution/postproc/REPORT.md",
+    "exists": true
+  },
+  {
+    "target": "04-solution/eval/sources/manifest.json",
+    "exists": true
+  },
+  {
+    "target": "04-solution/service/requirements.txt",
+    "exists": true
+  },
+  {
+    "target": "04-solution/eval/requirements.txt",
+    "exists": true
+  }
+]

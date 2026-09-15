@@ -1,0 +1,589 @@
+[
+     {
+          "Id": "c5eceff3f48b15bd9bb3ce92e089247c33e6196ddebd0016b820178eab2819d1",
+          "Digest": "sha256:4629fa9445bd65a938a3209e65c167187596e7bb123dfd794f81754fd681d741",
+          "RepoTags": [
+               "localhost/vehicle-reid-job15:audit"
+          ],
+          "RepoDigests": [
+               "localhost/vehicle-reid-job15@sha256:4629fa9445bd65a938a3209e65c167187596e7bb123dfd794f81754fd681d741"
+          ],
+          "Parent": "343db4062d0843583f591f03c54b4ae562b8ae34f4c5b19d5c1279bc72cbf7dd",
+          "Comment": "debuerreotype 0.17",
+          "Created": "2026-09-15T17:54:57.77196403Z",
+          "Config": {
+               "ExposedPorts": {
+                    "8000/tcp": {}
+               },
+               "Env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                    "PYTHON_VERSION=3.13.15",
+                    "PYTHON_SHA256=1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76",
+                    "PYTHONUNBUFFERED=1",
+                    "PIP_NO_CACHE_DIR=1",
+                    "PIP_DISABLE_PIP_VERSION_CHECK=1",
+                    "MODEL_PATH=/srv/model/osnet_ain_x1_0_vehicle_reid.onnx"
+               ],
+               "Cmd": [
+                    "uvicorn",
+                    "app.api.main:app",
+                    "--host",
+                    "0.0.0.0",
+                    "--port",
+                    "8000"
+               ],
+               "WorkingDir": "/srv",
+               "Labels": {
+                    "io.buildah.version": "1.43.1"
+               }
+          },
+          "Version": "",
+          "Author": "",
+          "Architecture": "amd64",
+          "Os": "linux",
+          "Size": 355908090,
+          "VirtualSize": 355908090,
+          "GraphDriver": {
+               "Name": "overlay",
+               "Data": {
+                    "LowerDir": "/home/artem/.local/share/containers/storage/overlay/4bc0674a4366418256d0405cd2e92b38f940d973f30c9799018fa87ac68910a0/diff:/home/artem/.local/share/containers/storage/overlay/9887ac19982c5d230b5115972967dab35c4616fbfcc9eaeff15a985a7f9e6060/diff:/home/artem/.local/share/containers/storage/overlay/a58934d91fed78a83837c8ddcdbdea38cf73a4a93cfbe18c0dcfd7a394eab455/diff:/home/artem/.local/share/containers/storage/overlay/35fed277b88981eb210e5c61a1a542523894a7cca79284b5c2e534ed3d27f6cb/diff:/home/artem/.local/share/containers/storage/overlay/141594ab222f5cfbee43b965234edc6d3dc4cb298685417af1015ae01bce4e20/diff:/home/artem/.local/share/containers/storage/overlay/8c5bf61b0870a865b2f3406fb9210b9ca4558e35c03d12ed962b2791fde426e5/diff:/home/artem/.local/share/containers/storage/overlay/d0002584f28451d4791f9cbf79021de03e0c42eeb00b02854b17c3eac21b4ff1/diff:/home/artem/.local/share/containers/storage/overlay/411a86676185cb54d695a805b238194a64e9b77e0c723f3802fbb87d333ea0b3/diff",
+                    "UpperDir": "/home/artem/.local/share/containers/storage/overlay/5802ead7ff4f59d148a10d43cbc8c016ff94572cc4d876bac2b5edf6f9b73c00/diff",
+                    "WorkDir": "/home/artem/.local/share/containers/storage/overlay/5802ead7ff4f59d148a10d43cbc8c016ff94572cc4d876bac2b5edf6f9b73c00/work"
+               }
+          },
+          "RootFS": {
+               "Type": "layers",
+               "Layers": [
+                    "sha256:411a86676185cb54d695a805b238194a64e9b77e0c723f3802fbb87d333ea0b3",
+                    "sha256:ac03b9b8028ef885548e0abeafdd0c0c548a6821ba7463e55a8505e985bb81f4",
+                    "sha256:6b1273b0d0edb3eeba426ec54c7409396d83b82aaee569e49b1000e392ea292b",
+                    "sha256:748b8823d6d330abbbd313c17773ac291f00c257bc2a78467bb8d0a22c010360",
+                    "sha256:dcac2ffd496ae14ca9e141c14e4d6b24e9840fd87f0842738a17d56a29be9877",
+                    "sha256:3ebfc899ee86688c81dcadf38a5c6b3b60af85af1e396f1e2b80ba7b53182ec8",
+                    "sha256:ebc55bef45f3eb46417b742bde80a8d421b3b55b7d5eac445552b0ce1bf26ea6",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:179a9bfe47937848ffc0e3c9e0ad786d7023c53fdd849810ff500ec8e269c4d5"
+               ]
+          },
+          "Labels": {
+               "io.buildah.version": "1.43.1"
+          },
+          "Annotations": {
+               "com.docker.official-images.bashbrew.arch": "amd64",
+               "org.opencontainers.image.base.digest": "sha256:cc9dffa47c8294ba9bb795a8dfaeb7b76f2b30acade2c52a461a2999d127eb00",
+               "org.opencontainers.image.base.name": "docker.io/library/python:3.13-slim",
+               "org.opencontainers.image.created": "2026-09-15T17:54:57.77196403Z",
+               "org.opencontainers.image.revision": "688a0b86bb44289df16a363e9f41d90514c1a5f9",
+               "org.opencontainers.image.source": "https://github.com/docker-library/python.git#688a0b86bb44289df16a363e9f41d90514c1a5f9:3.13/slim-trixie",
+               "org.opencontainers.image.url": "https://hub.docker.com/_/python",
+               "org.opencontainers.image.version": "3.13.15-slim-trixie"
+          },
+          "ManifestType": "application/vnd.oci.image.manifest.v1+json",
+          "User": "",
+          "History": [
+               {
+                    "created": "2026-08-24T00:00:00Z",
+                    "created_by": "# debian.sh --arch 'amd64' out/ 'trixie' '@1787529600'",
+                    "comment": "debuerreotype 0.17"
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tnetbase \t\ttzdata \t; \tapt-get dist-clean # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV PYTHON_VERSION=3.13.15",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV PYTHON_SHA256=1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:10:00.81321955Z",
+                    "created_by": "RUN /bin/sh -c set -eux; \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tdpkg-dev \t\tg++ \t\tgcc \t\tgnupg \t\tlibbluetooth-dev \t\tlibbz2-dev \t\tlibc6-dev \t\tlibdb-dev \t\tlibffi-dev \t\tlibgdbm-dev \t\tliblzma-dev \t\tlibncursesw5-dev \t\tlibreadline-dev \t\tlibsqlite3-dev \t\tlibssl-dev \t\tmake \t\ttk-dev \t\tuuid-dev \t\twget \t\txz-utils \t\tzlib1g-dev \t; \t\twget -O python.tar.xz \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz\"; \techo \"$PYTHON_SHA256 *python.tar.xz\" | sha256sum -c -; \twget -O python.tar.xz.asc \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc\"; \tGNUPGHOME=\"$(mktemp -d)\"; export GNUPGHOME; \tgpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$GPG_KEY\"; \tgpg --batch --verify python.tar.xz.asc python.tar.xz; \tgpgconf --kill all; \trm -rf \"$GNUPGHOME\" python.tar.xz.asc; \tmkdir -p /usr/src/python; \ttar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz; \trm python.tar.xz; \t\tcd /usr/src/python; \tgnuArch=\"$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)\"; \t./configure \t\t--build=\"$gnuArch\" \t\t--enable-loadable-sqlite-extensions \t\t--enable-optimizations \t\t--enable-option-checking=fatal \t\t--enable-shared \t\t$(test \"${gnuArch%%-*}\" != 'riscv64' && echo '--with-lto') \t\t--with-ensurepip \t; \tnproc=\"$(nproc)\"; \tEXTRA_CFLAGS=\"$(dpkg-buildflags --get CFLAGS)\"; \tLDFLAGS=\"$(dpkg-buildflags --get LDFLAGS)\"; \tLDFLAGS=\"${LDFLAGS:-} -Wl,--strip-all\"; \tarch=\"$(dpkg --print-architecture)\"; arch=\"${arch##*-}\"; \tcase \"$arch\" in \t\tamd64|arm64) \t\t\tEXTRA_CFLAGS=\"${EXTRA_CFLAGS:-} -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer\"; \t\t\t;; \t\ti386) \t\t\t;; \t\t*) \t\t\tEXTRA_CFLAGS=\"${EXTRA_CFLAGS:-} -fno-omit-frame-pointer\"; \t\t\t;; \tesac; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:-}\" \t; \trm python; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\\$\\$ORIGIN/../lib'\" \t\tpython \t; \tmake install; \t\tcd /; \trm -rf /usr/src/python; \t\tfind /usr/local -depth \t\t\\( \t\t\t\\( -type d -a \\( -name test -o -name tests -o -name idle_test \\) \\) \t\t\t-o \\( -type f -a \\( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \\) \\) \t\t\\) -exec rm -rf '{}' + \t; \t\tldconfig; \t\tapt-mark auto '.*' > /dev/null; \tapt-mark manual $savedAptMark; \tfind /usr/local -type f -executable -not \\( -name '*tkinter*' \\) -exec ldd '{}' ';' \t\t| awk '/=>/ { so = $(NF-1); if (index(so, \"/usr/local/\") == 1) { next }; gsub(\"^/(usr/)?\", \"\", so); printf \"*%s\\n\", so }' \t\t| sort -u \t\t| xargs -rt dpkg-query --search \t\t| awk 'sub(\":$\", \"\", $1) { print $1 }' \t\t| sort -u \t\t| xargs -r apt-mark manual \t; \tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \tapt-get dist-clean; \t\texport PYTHONDONTWRITEBYTECODE=1; \tpython3 --version; \tpip3 --version # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2026-09-01T00:10:00.907487604Z",
+                    "created_by": "RUN /bin/sh -c set -eux; \tfor src in idle3 pip3 pydoc3 python3 python3-config; do \t\tdst=\"$(echo \"$src\" | tr -d 3)\"; \t\t[ -s \"/usr/local/bin/$src\" ]; \t\t[ ! -e \"/usr/local/bin/$dst\" ]; \t\tln -svT \"$src\" \"/usr/local/bin/$dst\"; \tdone # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2026-09-01T00:10:00.907487604Z",
+                    "created_by": "CMD [\"python3\"]",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-15T17:54:05.040401126Z",
+                    "created_by": "/bin/sh -c #(nop) ENV PYTHONUNBUFFERED=1     PIP_NO_CACHE_DIR=1     PIP_DISABLE_PIP_VERSION_CHECK=1",
+                    "comment": "FROM docker.io/library/python:3.13-slim",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-15T17:54:05.210129205Z",
+                    "created_by": "/bin/sh -c #(nop) WORKDIR /srv",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-15T17:54:06.698174758Z",
+                    "created_by": "/bin/sh -c #(nop) COPY file:f65484e2759925fdebef71ebad9014fcf156121045a97a0335906c7486fef83e in .      "
+               },
+               {
+                    "created": "2026-09-15T17:54:44.949821429Z",
+                    "created_by": "/bin/sh -c pip install --no-cache-dir -r requirements.txt"
+               },
+               {
+                    "created": "2026-09-15T17:54:51.061719522Z",
+                    "created_by": "/bin/sh -c #(nop) COPY dir:dce7c3e7ec969ee70678a682e4219907b0e91a41c6bf6f9351a631a13ac681c6 in model/      "
+               },
+               {
+                    "created": "2026-09-15T17:54:54.245951772Z",
+                    "created_by": "/bin/sh -c python - <<'EOF'\nimport hashlib, pathlib, sys\nexpected = \"4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f\"\np = pathlib.Path(\"model/osnet_ain_x1_0_vehicle_reid.onnx\")\nif not p.is_file():\n    sys.exit(\"нет файла весов model/osnet_ain_x1_0_vehicle_reid.onnx — \"\n             \"запустите model/fetch_model.sh перед сборкой\")\ndigest = hashlib.sha256(p.read_bytes()).hexdigest()\nassert digest == expected, f\"sha256 весов не совпал: {digest}\"\nprint(\"веса модели в образе, sha256 OK\")"
+               },
+               {
+                    "created": "2026-09-15T17:54:56.874248005Z",
+                    "created_by": "/bin/sh -c #(nop) COPY dir:4910c5567fe7f8e87a8c42692e2f40114d30d3074aa5519f3b5e822476a985bc in app/      "
+               },
+               {
+                    "created": "2026-09-15T17:54:57.257439323Z",
+                    "created_by": "/bin/sh -c #(nop) ENV MODEL_PATH=/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-15T17:54:57.522176176Z",
+                    "created_by": "/bin/sh -c #(nop) EXPOSE 8000",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-15T17:54:57.7727033Z",
+                    "created_by": "/bin/sh -c #(nop) CMD [\"uvicorn\", \"app.api.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]",
+                    "empty_layer": true
+               }
+          ],
+          "NamesHistory": [
+               "localhost/vehicle-reid-job15:audit"
+          ]
+     },
+     {
+          "Id": "51cce855bb6e44a8ff6ed0f46ded8850f246bfc7549801459f83fc34b80c210f",
+          "Digest": "sha256:cc9dffa47c8294ba9bb795a8dfaeb7b76f2b30acade2c52a461a2999d127eb00",
+          "RepoTags": [
+               "docker.io/library/python:3.13-slim"
+          ],
+          "RepoDigests": [
+               "docker.io/library/python@sha256:9d2e5553305c7c7b0097999bb17187c69b921ccd6bc9d40e4bb5ebe652c00285",
+               "docker.io/library/python@sha256:cc9dffa47c8294ba9bb795a8dfaeb7b76f2b30acade2c52a461a2999d127eb00"
+          ],
+          "Parent": "",
+          "Comment": "debuerreotype 0.17",
+          "Created": "2026-09-01T00:10:00.907487604Z",
+          "Config": {
+               "Env": [
+                    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                    "PYTHON_VERSION=3.13.15",
+                    "PYTHON_SHA256=1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76"
+               ],
+               "Cmd": [
+                    "python3"
+               ]
+          },
+          "Version": "",
+          "Author": "",
+          "Architecture": "amd64",
+          "Os": "linux",
+          "Size": 130402230,
+          "VirtualSize": 130402230,
+          "GraphDriver": {
+               "Name": "overlay",
+               "Data": {
+                    "LowerDir": "/home/artem/.local/share/containers/storage/overlay/8c5bf61b0870a865b2f3406fb9210b9ca4558e35c03d12ed962b2791fde426e5/diff:/home/artem/.local/share/containers/storage/overlay/d0002584f28451d4791f9cbf79021de03e0c42eeb00b02854b17c3eac21b4ff1/diff:/home/artem/.local/share/containers/storage/overlay/411a86676185cb54d695a805b238194a64e9b77e0c723f3802fbb87d333ea0b3/diff",
+                    "UpperDir": "/home/artem/.local/share/containers/storage/overlay/141594ab222f5cfbee43b965234edc6d3dc4cb298685417af1015ae01bce4e20/diff",
+                    "WorkDir": "/home/artem/.local/share/containers/storage/overlay/141594ab222f5cfbee43b965234edc6d3dc4cb298685417af1015ae01bce4e20/work"
+               }
+          },
+          "RootFS": {
+               "Type": "layers",
+               "Layers": [
+                    "sha256:411a86676185cb54d695a805b238194a64e9b77e0c723f3802fbb87d333ea0b3",
+                    "sha256:ac03b9b8028ef885548e0abeafdd0c0c548a6821ba7463e55a8505e985bb81f4",
+                    "sha256:6b1273b0d0edb3eeba426ec54c7409396d83b82aaee569e49b1000e392ea292b",
+                    "sha256:748b8823d6d330abbbd313c17773ac291f00c257bc2a78467bb8d0a22c010360"
+               ]
+          },
+          "Labels": null,
+          "Annotations": {
+               "com.docker.official-images.bashbrew.arch": "amd64",
+               "org.opencontainers.image.base.digest": "sha256:abc9cb88a5587630d7f915f47b23b0668fe250fbfc6457aa4d52b534c1bbf73f",
+               "org.opencontainers.image.base.name": "debian:trixie-slim",
+               "org.opencontainers.image.created": "2026-08-31T23:59:49Z",
+               "org.opencontainers.image.revision": "688a0b86bb44289df16a363e9f41d90514c1a5f9",
+               "org.opencontainers.image.source": "https://github.com/docker-library/python.git#688a0b86bb44289df16a363e9f41d90514c1a5f9:3.13/slim-trixie",
+               "org.opencontainers.image.url": "https://hub.docker.com/_/python",
+               "org.opencontainers.image.version": "3.13.15-slim-trixie"
+          },
+          "ManifestType": "application/vnd.oci.image.manifest.v1+json",
+          "User": "",
+          "History": [
+               {
+                    "created": "2026-08-24T00:00:00Z",
+                    "created_by": "# debian.sh --arch 'amd64' out/ 'trixie' '@1787529600'",
+                    "comment": "debuerreotype 0.17"
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tnetbase \t\ttzdata \t; \tapt-get dist-clean # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV PYTHON_VERSION=3.13.15",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:00:17.861192857Z",
+                    "created_by": "ENV PYTHON_SHA256=1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2026-09-01T00:10:00.81321955Z",
+                    "created_by": "RUN /bin/sh -c set -eux; \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tdpkg-dev \t\tg++ \t\tgcc \t\tgnupg \t\tlibbluetooth-dev \t\tlibbz2-dev \t\tlibc6-dev \t\tlibdb-dev \t\tlibffi-dev \t\tlibgdbm-dev \t\tliblzma-dev \t\tlibncursesw5-dev \t\tlibreadline-dev \t\tlibsqlite3-dev \t\tlibssl-dev \t\tmake \t\ttk-dev \t\tuuid-dev \t\twget \t\txz-utils \t\tzlib1g-dev \t; \t\twget -O python.tar.xz \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz\"; \techo \"$PYTHON_SHA256 *python.tar.xz\" | sha256sum -c -; \twget -O python.tar.xz.asc \"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc\"; \tGNUPGHOME=\"$(mktemp -d)\"; export GNUPGHOME; \tgpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$GPG_KEY\"; \tgpg --batch --verify python.tar.xz.asc python.tar.xz; \tgpgconf --kill all; \trm -rf \"$GNUPGHOME\" python.tar.xz.asc; \tmkdir -p /usr/src/python; \ttar --extract --directory /usr/src/python --strip-components=1 --file python.tar.xz; \trm python.tar.xz; \t\tcd /usr/src/python; \tgnuArch=\"$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)\"; \t./configure \t\t--build=\"$gnuArch\" \t\t--enable-loadable-sqlite-extensions \t\t--enable-optimizations \t\t--enable-option-checking=fatal \t\t--enable-shared \t\t$(test \"${gnuArch%%-*}\" != 'riscv64' && echo '--with-lto') \t\t--with-ensurepip \t; \tnproc=\"$(nproc)\"; \tEXTRA_CFLAGS=\"$(dpkg-buildflags --get CFLAGS)\"; \tLDFLAGS=\"$(dpkg-buildflags --get LDFLAGS)\"; \tLDFLAGS=\"${LDFLAGS:-} -Wl,--strip-all\"; \tarch=\"$(dpkg --print-architecture)\"; arch=\"${arch##*-}\"; \tcase \"$arch\" in \t\tamd64|arm64) \t\t\tEXTRA_CFLAGS=\"${EXTRA_CFLAGS:-} -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer\"; \t\t\t;; \t\ti386) \t\t\t;; \t\t*) \t\t\tEXTRA_CFLAGS=\"${EXTRA_CFLAGS:-} -fno-omit-frame-pointer\"; \t\t\t;; \tesac; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:-}\" \t; \trm python; \tmake -j \"$nproc\" \t\t\"EXTRA_CFLAGS=${EXTRA_CFLAGS:-}\" \t\t\"LDFLAGS=${LDFLAGS:-} -Wl,-rpath='\\$\\$ORIGIN/../lib'\" \t\tpython \t; \tmake install; \t\tcd /; \trm -rf /usr/src/python; \t\tfind /usr/local -depth \t\t\\( \t\t\t\\( -type d -a \\( -name test -o -name tests -o -name idle_test \\) \\) \t\t\t-o \\( -type f -a \\( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \\) \\) \t\t\\) -exec rm -rf '{}' + \t; \t\tldconfig; \t\tapt-mark auto '.*' > /dev/null; \tapt-mark manual $savedAptMark; \tfind /usr/local -type f -executable -not \\( -name '*tkinter*' \\) -exec ldd '{}' ';' \t\t| awk '/=>/ { so = $(NF-1); if (index(so, \"/usr/local/\") == 1) { next }; gsub(\"^/(usr/)?\", \"\", so); printf \"*%s\\n\", so }' \t\t| sort -u \t\t| xargs -rt dpkg-query --search \t\t| awk 'sub(\":$\", \"\", $1) { print $1 }' \t\t| sort -u \t\t| xargs -r apt-mark manual \t; \tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \tapt-get dist-clean; \t\texport PYTHONDONTWRITEBYTECODE=1; \tpython3 --version; \tpip3 --version # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2026-09-01T00:10:00.907487604Z",
+                    "created_by": "RUN /bin/sh -c set -eux; \tfor src in idle3 pip3 pydoc3 python3 python3-config; do \t\tdst=\"$(echo \"$src\" | tr -d 3)\"; \t\t[ -s \"/usr/local/bin/$src\" ]; \t\t[ ! -e \"/usr/local/bin/$dst\" ]; \t\tln -svT \"$src\" \"/usr/local/bin/$dst\"; \tdone # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2026-09-01T00:10:00.907487604Z",
+                    "created_by": "CMD [\"python3\"]",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               }
+          ],
+          "NamesHistory": [
+               "docker.io/library/python:3.13-slim"
+          ]
+     },
+     {
+          "Id": "0ad2e23181e5646b286253c04cea23f07040ca313cc377d9fa7b21db184b6406",
+          "Digest": "sha256:53d8c371bc3ae99e4353897ee594bfcfab7f72c4925f74471ebb34d9f6103a3e",
+          "RepoTags": [
+               "docker.io/qdrant/qdrant:v1.15.5"
+          ],
+          "RepoDigests": [
+               "docker.io/qdrant/qdrant@sha256:0fb8897412abc81d1c0430a899b9a81eb8328aa634e7242d1bc804c1fe8fe863",
+               "docker.io/qdrant/qdrant@sha256:53d8c371bc3ae99e4353897ee594bfcfab7f72c4925f74471ebb34d9f6103a3e"
+          ],
+          "Parent": "",
+          "Comment": "debuerreotype 0.16",
+          "Created": "2025-09-30T10:22:27.172938385Z",
+          "Config": {
+               "User": "0:0",
+               "ExposedPorts": {
+                    "6333/tcp": {},
+                    "6334/tcp": {}
+               },
+               "Env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "DIR=",
+                    "TZ=Etc/UTC",
+                    "RUN_MODE=production"
+               ],
+               "Cmd": [
+                    "./entrypoint.sh"
+               ],
+               "WorkingDir": "/qdrant",
+               "Labels": {
+                    "org.opencontainers.image.description": "Official Qdrant image",
+                    "org.opencontainers.image.documentation": "https://qdrant.com/docs",
+                    "org.opencontainers.image.source": "https://github.com/qdrant/qdrant",
+                    "org.opencontainers.image.title": "Qdrant",
+                    "org.opencontainers.image.url": "https://qdrant.com/",
+                    "org.opencontainers.image.vendor": "Qdrant",
+                    "org.opencontainers.image.version": "v1.15.5"
+               },
+               "ArgsEscaped": true
+          },
+          "Version": "",
+          "Author": "",
+          "Architecture": "amd64",
+          "Os": "linux",
+          "Size": 181090871,
+          "VirtualSize": 181090871,
+          "GraphDriver": {
+               "Name": "overlay",
+               "Data": {
+                    "LowerDir": "/home/artem/.local/share/containers/storage/overlay/4e666e9b5f959e9abbdd87e1e984518648d5b22709c2b939c41074090e6a224c/diff:/home/artem/.local/share/containers/storage/overlay/37179abedbe2cb0843a696f294ebfbf9597c4eb802d0367f612db6ac8e94c0f0/diff:/home/artem/.local/share/containers/storage/overlay/6c2a6a52a73bee5df8993eb57cf070ccd1c9d5f0ce3462c862859f5d2917252c/diff:/home/artem/.local/share/containers/storage/overlay/98ba766d503e5f3f67003280259aae04570d7cd0018f44cc4ee5dc4025962d7f/diff:/home/artem/.local/share/containers/storage/overlay/1d541236b386cddc6f3d72c5a454b4ae9347b1c10fc6ce52f74791a662539f94/diff:/home/artem/.local/share/containers/storage/overlay/4bcfbb3f4c32935da5093c61d723a415be3fa3f9d6185be0ed624cf04dc05108/diff:/home/artem/.local/share/containers/storage/overlay/de322b12c133fff9abcee64b2acae7510a6ccea48121ee05d7f928372b5aa350/diff:/home/artem/.local/share/containers/storage/overlay/094094bbf1b012eedfd0370c0aabdc4432724b4a6430baad00ef916af6b2e98f/diff:/home/artem/.local/share/containers/storage/overlay/97e0ca243a773a37f38c118f8c42cc22c8089293745f55428b464da607df70f9/diff:/home/artem/.local/share/containers/storage/overlay/08b41f5a19a6f064d72925d1029efe4910f942209b4746895a680319b0adbb13/diff:/home/artem/.local/share/containers/storage/overlay/ac0e4bc614a8c07029d7c3061d025e412913d1c50224d03a737ae78685af889e/diff:/home/artem/.local/share/containers/storage/overlay/aa460e714e012019a740215eed9e3299ba8d9cae82818dfe464e3d5adb089ab3/diff:/home/artem/.local/share/containers/storage/overlay/1d46119d249f7719e1820e24a311aa7c453f166f714969cffe89504678eaa447/diff",
+                    "UpperDir": "/home/artem/.local/share/containers/storage/overlay/8e9564e5a4371210566959aecf469ddb8aac0b0d7d4aa84c7376d279223772ea/diff",
+                    "WorkDir": "/home/artem/.local/share/containers/storage/overlay/8e9564e5a4371210566959aecf469ddb8aac0b0d7d4aa84c7376d279223772ea/work"
+               }
+          },
+          "RootFS": {
+               "Type": "layers",
+               "Layers": [
+                    "sha256:1d46119d249f7719e1820e24a311aa7c453f166f714969cffe89504678eaa447",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:df8463457a3159b40d84ff66521fe5376f2026ac8e38c1942393e78b274959a8",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                    "sha256:6838e991cf2aa503d2cca13a613f3e1524268267b5caaea6014f2da59f142cea",
+                    "sha256:297abe3eb07e6cb0ffa9ae5a6a2904cb15f1bebe005ed162d4978a36dc0ab2b5",
+                    "sha256:95989e05c3a38a55f3bd85ad7bb5d7feb4514972d6c33daec391ce7f85e2288b",
+                    "sha256:304d58796fad4b0f6eaf917190ed21406c7b5c6b7eb53f7e36b9df43c95c7e95",
+                    "sha256:8bef5039b455514fbcc7739ee208c8ec31e80950da6d47ac3ccd58c24d809d02",
+                    "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+               ]
+          },
+          "Labels": {
+               "org.opencontainers.image.description": "Official Qdrant image",
+               "org.opencontainers.image.documentation": "https://qdrant.com/docs",
+               "org.opencontainers.image.source": "https://github.com/qdrant/qdrant",
+               "org.opencontainers.image.title": "Qdrant",
+               "org.opencontainers.image.url": "https://qdrant.com/",
+               "org.opencontainers.image.vendor": "Qdrant",
+               "org.opencontainers.image.version": "v1.15.5"
+          },
+          "Annotations": {},
+          "ManifestType": "application/vnd.oci.image.manifest.v1+json",
+          "User": "0:0",
+          "History": [
+               {
+                    "created": "2025-09-29T00:00:00Z",
+                    "created_by": "# debian.sh --arch 'amd64' out/ 'trixie' '@1759104000'",
+                    "comment": "debuerreotype 0.16"
+               },
+               {
+                    "created": "2025-09-30T09:30:17.305729842Z",
+                    "created_by": "ARG GPU",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T09:30:17.305729842Z",
+                    "created_by": "RUN |1 GPU= /bin/sh -c if [ -n \"$GPU\" ]; then     apt-get update     && apt-get install -y     libvulkan1     libvulkan-dev     vulkan-tools     ; fi # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T09:30:17.305729842Z",
+                    "created_by": "ARG PACKAGES",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T09:30:32.580900927Z",
+                    "created_by": "RUN |2 GPU= PACKAGES= /bin/sh -c apt-get update     && apt-get install -y --no-install-recommends ca-certificates tzdata libunwind8 $PACKAGES     && apt-get clean     && rm -rf /var/lib/apt/lists/* /var/cache/debconf/* /var/lib/dpkg/status-old # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T09:30:32.580900927Z",
+                    "created_by": "ARG SOURCES",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T09:30:32.580900927Z",
+                    "created_by": "ENV DIR=",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:21.696420812Z",
+                    "created_by": "COPY /null? / # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:21.696420812Z",
+                    "created_by": "ENV DIR=",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:22.870309667Z",
+                    "created_by": "COPY /null? / # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:22.870309667Z",
+                    "created_by": "ENV DIR=",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:24.052123669Z",
+                    "created_by": "COPY /null? / # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:24.052123669Z",
+                    "created_by": "ENV DIR=",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:25.226587091Z",
+                    "created_by": "COPY /null? / # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:25.226587091Z",
+                    "created_by": "ENV DIR=",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:25.226587091Z",
+                    "created_by": "ARG APP=/qdrant",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:25.226587091Z",
+                    "created_by": "ARG USER_ID=0",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:25.624412797Z",
+                    "created_by": "RUN |5 GPU= PACKAGES= SOURCES= APP=/qdrant USER_ID=0 /bin/sh -c if [ \"$USER_ID\" != 0 ]; then         groupadd --gid \"$USER_ID\" qdrant;         useradd --uid \"$USER_ID\" --gid \"$USER_ID\" -m qdrant;         mkdir -p \"$APP\"/storage \"$APP\"/snapshots;         chown -R \"$USER_ID:$USER_ID\" \"$APP\";     fi # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:26.490175473Z",
+                    "created_by": "COPY --chown=0:0 /qdrant/qdrant /qdrant/qdrant # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:26.606354928Z",
+                    "created_by": "COPY --chown=0:0 /qdrant/qdrant.spdx.json /qdrant/qdrant.spdx.json # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:26.735807283Z",
+                    "created_by": "COPY --chown=0:0 /qdrant/config /qdrant/config # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:26.878543639Z",
+                    "created_by": "COPY --chown=0:0 /qdrant/tools/entrypoint.sh /qdrant/entrypoint.sh # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:27.045290357Z",
+                    "created_by": "COPY --chown=0:0 /static /qdrant/static # buildkit",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "WORKDIR /qdrant",
+                    "comment": "buildkit.dockerfile.v0"
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "USER 0:0",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "ENV TZ=Etc/UTC RUN_MODE=production",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "EXPOSE &{[{{220 0} {220 0}}] 0xc00068c740}",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "EXPOSE &{[{{221 0} {221 0}}] 0xc00068c740}",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "LABEL org.opencontainers.image.title=Qdrant",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "LABEL org.opencontainers.image.description=Official Qdrant image",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "LABEL org.opencontainers.image.url=https://qdrant.com/",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "LABEL org.opencontainers.image.documentation=https://qdrant.com/docs",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "LABEL org.opencontainers.image.source=https://github.com/qdrant/qdrant",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "LABEL org.opencontainers.image.vendor=Qdrant",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               },
+               {
+                    "created": "2025-09-30T10:22:27.172938385Z",
+                    "created_by": "CMD [\"./entrypoint.sh\"]",
+                    "comment": "buildkit.dockerfile.v0",
+                    "empty_layer": true
+               }
+          ],
+          "NamesHistory": [
+               "docker.io/qdrant/qdrant:v1.15.5"
+          ]
+     }
+]

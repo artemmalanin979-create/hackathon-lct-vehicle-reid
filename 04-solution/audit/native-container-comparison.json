@@ -1,0 +1,15 @@
+{
+  "submission.csv": {
+    "native_container_byte_equal": true,
+    "sha256": "7259e7202bcbd5fd442df3de3d0d19d6b6febacefd7e76491dcbc4582fdfef74",
+    "baseline_reference_byte_equal": true
+  },
+  "embeddings.npy": {
+    "native_container_byte_equal": true,
+    "sha256": "4841420191d177f08b30f2646d81dc8d17470fa7b2dbdb05cd5db41be2fac379"
+  },
+  "candidates.csv": {
+    "native_container_byte_equal": true,
+    "sha256": "fa145e1649f462c11dca025270f707e92d3b713e3c22a2b1937c826b0cc005df"
+  }
+}

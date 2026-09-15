@@ -1,0 +1,23 @@
+{
+  "files": {
+    "test_gallery.csv": {
+      "bytes": 36693,
+      "rows": 750,
+      "sha256": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496"
+    },
+    "test_query.csv": {
+      "bytes": 54288,
+      "rows": 1110,
+      "sha256": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c"
+    },
+    "train.csv": {
+      "bytes": 536677,
+      "rows": 9556,
+      "sha256": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268"
+    }
+  },
+  "image_count": 11416,
+  "image_bytes": 7503286826,
+  "image_manifest_sha256": "8274bf0d792e3b4fee1009f6fae7649466c296cffcb359c670150a587473cc4a",
+  "elapsed_s": 37.799210891003895
+}

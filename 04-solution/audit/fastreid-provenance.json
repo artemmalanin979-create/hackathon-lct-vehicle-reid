@@ -1,0 +1,13 @@
+{
+  "git_commit": "c9bc3ceb2f7a6438b62fb515ea3df6d1e999e95d",
+  "files": {
+    "veri_sbs_R50-ibn.model_only.pth": {
+      "bytes": 99273627,
+      "sha256": "8595fa79eeb09f35c565729be1e8826e3b1de7951c86bff0aff048c78529076f"
+    },
+    "veri_sbs_R50-ibn.pth": {
+      "bytes": 198261759,
+      "sha256": "57fb9c17d88911ea64390bf5427f43511435e7f88f6eed9dbc969d4b611e53cd"
+    }
+  }
+}
