@@ -1,5 +1,5 @@
 {
- "split_dir": "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_06/split",
+ "split_dir": "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files",
  "counts": {
   "queries": 1110,
   "gallery": 750,
@@ -180,7 +180,14 @@
     "Rank-1": 1.0,
     "Rank-5": 1.0,
     "mINP": 1.0,
-    "num_valid_queries": 832
+    "num_valid_queries": 832,
+    "scope": "full_gallery",
+    "mAP_by_query_average": {
+     "valid_queries": 1.0,
+     "all_queries_zero": 0.7495495495495496
+    },
+    "mAP_query_average": "valid_queries",
+    "mAP_denominator": 832
    },
    "refusal": {
     "precision": 1.0,
@@ -196,7 +203,14 @@
     "Rank-1": 1.0,
     "Rank-5": 1.0,
     "mINP": 1.0,
-    "num_valid_queries": 832
+    "num_valid_queries": 832,
+    "scope": "full_gallery",
+    "mAP_by_query_average": {
+     "valid_queries": 1.0,
+     "all_queries_zero": 0.7495495495495496
+    },
+    "mAP_query_average": "valid_queries",
+    "mAP_denominator": 832
    },
    "refusal": {
     "precision": 1.0,

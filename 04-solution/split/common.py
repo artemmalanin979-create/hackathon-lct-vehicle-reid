@@ -14,9 +14,9 @@ import numpy as np
 
 DATA = "/home/artem/projects/hackathon-lct-vehicle-reid/data"
 IMAGES = os.path.join(DATA, "images")
-JOB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+JOB = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(JOB, "out")
-SPLIT_DIR = os.path.join(JOB, "split")
+SPLIT_DIR = os.path.join(JOB, "files")  # файлы сплита лежат рядом со скриптами, в files/
 
 SERIES_THRESHOLD = 0.90  # порог "тот же проезд" — откалиброван в EDA s05
 
