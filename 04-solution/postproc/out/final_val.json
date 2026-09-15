@@ -1,0 +1,102 @@
+{
+  "base": {
+    "vectors": "208",
+    "rerank_params": null,
+    "rerank_seconds": 0.0,
+    "mAP": 0.6565692724907637,
+    "Rank-1": 0.6310096153846154,
+    "Rank-5": 0.7872596153846154,
+    "mAP@10": 0.6451091746794871,
+    "valid_queries": 832
+  },
+  "rerank_paper": {
+    "vectors": "208",
+    "rerank_params": [
+      20,
+      6,
+      0.3
+    ],
+    "rerank_seconds": 1.17,
+    "mAP": 0.666638444987006,
+    "Rank-1": 0.6322115384615384,
+    "Rank-5": 0.7764423076923077,
+    "mAP@10": 0.6548916361416361,
+    "valid_queries": 832
+  },
+  "rerank_tuned": {
+    "vectors": "208",
+    "rerank_params": [
+      6,
+      3,
+      0.3
+    ],
+    "rerank_seconds": 0.54,
+    "mAP": 0.6936584724586873,
+    "Rank-1": 0.6634615384615384,
+    "Rank-5": 0.7872596153846154,
+    "mAP@10": 0.6834008858618235,
+    "valid_queries": 832
+  },
+  "tta3": {
+    "vectors": "TTA",
+    "rerank_params": null,
+    "rerank_seconds": 0.0,
+    "mAP": 0.6657246206625119,
+    "Rank-1": 0.6430288461538461,
+    "Rank-5": 0.7932692307692307,
+    "mAP@10": 0.6546478969525845,
+    "valid_queries": 832
+  },
+  "tta3_rerank_tuned": {
+    "vectors": "TTA",
+    "rerank_params": [
+      10,
+      3,
+      0.45
+    ],
+    "rerank_seconds": 0.66,
+    "mAP": 0.6952476387991686,
+    "Rank-1": 0.6670673076923077,
+    "Rank-5": 0.7944711538461539,
+    "mAP@10": 0.6840907753993691,
+    "valid_queries": 832
+  },
+  "tta3_rerank_paper": {
+    "vectors": "TTA",
+    "rerank_params": [
+      20,
+      6,
+      0.3
+    ],
+    "rerank_seconds": 1.2,
+    "mAP": 0.679482047667065,
+    "Rank-1": 0.6418269230769231,
+    "Rank-5": 0.7944711538461539,
+    "mAP@10": 0.6679273742750306,
+    "valid_queries": 832
+  },
+  "tta2": {
+    "vectors": "TTA2",
+    "rerank_params": null,
+    "rerank_seconds": 0.0,
+    "mAP": 0.6673874300509741,
+    "Rank-1": 0.640625,
+    "Rank-5": 0.7956730769230769,
+    "mAP@10": 0.6564719662571226,
+    "valid_queries": 832
+  },
+  "tta2_rerank_tuned": {
+    "vectors": "TTA2",
+    "rerank_params": [
+      10,
+      3,
+      0.3
+    ],
+    "rerank_seconds": 0.69,
+    "mAP": 0.6860820379592572,
+    "Rank-1": 0.6538461538461539,
+    "Rank-5": 0.796875,
+    "mAP@10": 0.6745607177833741,
+    "valid_queries": 832
+  }
+}

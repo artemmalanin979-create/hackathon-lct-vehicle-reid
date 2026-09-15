@@ -1,0 +1,122 @@
+{
+  "val_query_208": {
+    "rows": 1110,
+    "elapsed_s": 108.44,
+    "ms_per_obj_batch16": 97.69
+  },
+  "val_query_208f": {
+    "rows": 1110,
+    "elapsed_s": 116.8,
+    "ms_per_obj_batch16": 105.23
+  },
+  "val_query_256": {
+    "rows": 1110,
+    "elapsed_s": 135.34,
+    "ms_per_obj_batch16": 121.93
+  },
+  "val_query_256f": {
+    "rows": 1110,
+    "elapsed_s": 119.42,
+    "ms_per_obj_batch16": 107.58
+  },
+  "val_query_288": {
+    "rows": 1110,
+    "elapsed_s": 68.35,
+    "ms_per_obj_batch16": 61.58
+  },
+  "val_query_288f": {
+    "rows": 1110,
+    "elapsed_s": 115.73,
+    "ms_per_obj_batch16": 104.26
+  },
+  "val_gallery_208": {
+    "rows": 750,
+    "elapsed_s": 60.89,
+    "ms_per_obj_batch16": 81.19
+  },
+  "val_gallery_208f": {
+    "rows": 750,
+    "elapsed_s": 52.46,
+    "ms_per_obj_batch16": 69.95
+  },
+  "val_gallery_256": {
+    "rows": 750,
+    "elapsed_s": 68.6,
+    "ms_per_obj_batch16": 91.46
+  },
+  "val_gallery_256f": {
+    "rows": 750,
+    "elapsed_s": 66.92,
+    "ms_per_obj_batch16": 89.23
+  },
+  "val_gallery_288": {
+    "rows": 750,
+    "elapsed_s": 87.37,
+    "ms_per_obj_batch16": 116.49
+  },
+  "val_gallery_288f": {
+    "rows": 750,
+    "elapsed_s": 98.67,
+    "ms_per_obj_batch16": 131.55
+  },
+  "tune_query_208": {
+    "rows": 1110,
+    "elapsed_s": 78.93,
+    "ms_per_obj_batch16": 71.11
+  },
+  "tune_query_208f": {
+    "rows": 1110,
+    "elapsed_s": 79.57,
+    "ms_per_obj_batch16": 71.69
+  },
+  "tune_query_256": {
+    "rows": 1110,
+    "elapsed_s": 99.98,
+    "ms_per_obj_batch16": 90.07
+  },
+  "tune_query_256f": {
+    "rows": 1110,
+    "elapsed_s": 100.99,
+    "ms_per_obj_batch16": 90.98
+  },
+  "tune_query_288": {
+    "rows": 1110,
+    "elapsed_s": 114.66,
+    "ms_per_obj_batch16": 103.3
+  },
+  "tune_query_288f": {
+    "rows": 1110,
+    "elapsed_s": 117.21,
+    "ms_per_obj_batch16": 105.6
+  },
+  "tune_gallery_208": {
+    "rows": 732,
+    "elapsed_s": 66.45,
+    "ms_per_obj_batch16": 90.78
+  },
+  "tune_gallery_208f": {
+    "rows": 732,
+    "elapsed_s": 51.71,
+    "ms_per_obj_batch16": 70.65
+  },
+  "tune_gallery_256": {
+    "rows": 732,
+    "elapsed_s": 54.44,
+    "ms_per_obj_batch16": 74.37
+  },
+  "tune_gallery_256f": {
+    "rows": 732,
+    "elapsed_s": 36.75,
+    "ms_per_obj_batch16": 50.2
+  },
+  "tune_gallery_288": {
+    "rows": 732,
+    "elapsed_s": 41.16,
+    "ms_per_obj_batch16": 56.23
+  },
+  "tune_gallery_288f": {
+    "rows": 732,
+    "elapsed_s": 41.63,
+    "ms_per_obj_batch16": 56.87
+  }
+}

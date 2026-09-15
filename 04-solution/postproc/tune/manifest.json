@@ -1,0 +1,14 @@
+{
+  "seed": 20260915,
+  "source": "train_fit.csv (идентичности ∩ вал = ∅)",
+  "gallery_frames": 732,
+  "gallery_ids": 295,
+  "known_queries": 832,
+  "known_query_ids": 294,
+  "refusal_queries": 278,
+  "refusal_ids": 74,
+  "sha256": {
+    "tune_query.csv": "17b03ff171a82a42fb3733b293cd8c1be7f111076613d2c0c8041564b201dce6",
+    "tune_gallery.csv": "224fe2e21ddcc991b8a88a2a2e95d36d9ea3ac0e8e58439d9da2fe5175bcd518"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "seed": 20260915,
+  "folds": {
+    "tuneA_testB": {
+      "sizes": {
+        "tune_q": 538,
+        "tune_g": 373,
+        "test_q": 572,
+        "test_g": 377
+      },
+      "best_params": {
+        "k1": 6,
+        "k2": 3,
+        "lam": 0.3
+      },
+      "base_on_tune_half": {
+        "mAP": 0.71394564237379,
+        "Rank-1": 0.675,
+        "Rank-5": 0.83,
+        "mAP@10": 0.706276488095238,
+        "valid_queries": 400
+      },
+      "base_on_test_half": {
+        "mAP": 0.7347705039995895,
+        "Rank-1": 0.7175925925925926,
+        "Rank-5": 0.8564814814814815,
+        "mAP@10": 0.7239891056731333,
+        "valid_queries": 432
+      },
+      "tuned_mAP_on_tune_half": 0.7694267835734379,
+      "tuned_R1_on_tune_half": 0.735,
+      "tuned_on_test_half": {
+        "mAP": 0.7651540877853104,
+        "Rank-1": 0.75,
+        "Rank-5": 0.8541666666666666,
+        "mAP@10": 0.7551655735596708,
+        "valid_queries": 432
+      },
+      "paper_params_on_test_half": {
+        "mAP": 0.7521658571712478,
+        "Rank-1": 0.7314814814814815,
+        "Rank-5": 0.8449074074074074,
+        "mAP@10": 0.7427195399764843,
+        "valid_queries": 432
+      }
+    },
+    "tuneB_testA": {
+      "sizes": {
+        "tune_q": 572,
+        "tune_g": 377,
+        "test_q": 538,
+        "test_g": 373
+      },
+      "best_params": {
+        "k1": 4,
+        "k2": 4,
+        "lam": 0.45
+      },
+      "base_on_tune_half": {
+        "mAP": 0.7347705039995895,
+        "Rank-1": 0.7175925925925926,
+        "Rank-5": 0.8564814814814815,
+        "mAP@10": 0.7239891056731333,
+        "valid_queries": 432
+      },
+      "base_on_test_half": {
+        "mAP": 0.71394564237379,
+        "Rank-1": 0.675,
+        "Rank-5": 0.83,
+        "mAP@10": 0.706276488095238,
+        "valid_queries": 400
+      },
+      "tuned_mAP_on_tune_half": 0.7687318661257169,
+      "tuned_R1_on_tune_half": 0.7523148148148148,
+      "tuned_on_test_half": {
+        "mAP": 0.7569702122250345,
+        "Rank-1": 0.72,
+        "Rank-5": 0.8425,
+        "mAP@10": 0.7500989583333333,
+        "valid_queries": 400
+      },
+      "paper_params_on_test_half": {
+        "mAP": 0.7332182757748797,
+        "Rank-1": 0.675,
+        "Rank-5": 0.8325,
+        "mAP@10": 0.7255319444444445,
+        "valid_queries": 400
+      }
+    }
+  }
+}
