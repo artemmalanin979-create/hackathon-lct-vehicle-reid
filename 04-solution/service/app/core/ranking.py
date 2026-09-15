@@ -30,11 +30,15 @@ def cosine_scores(query: np.ndarray, gallery: np.ndarray) -> np.ndarray:
 
 
 def ranked_indices(score_row: np.ndarray) -> np.ndarray:
-    """Индексы галереи по убыванию близости; при равенстве — порядок галереи."""
+    """Индексы галереи по убыванию скора; при равенстве — порядок галереи.
+
+    Шкала любая, лишь бы «больше = лучше»: косинус или уверенность
+    переранжирования. Для дистанции d это 1 - d (см. core/rerank.py).
+    """
     return np.argsort(-score_row, kind="stable")
 
 
 def accepted_candidates(score_row: np.ndarray, threshold: float) -> list[int]:
-    """Индексы кандидатов с близостью >= порога, по убыванию; пусто = отказ."""
+    """Индексы кандидатов со скором >= порога, по убыванию; пусто = отказ."""
     order = ranked_indices(score_row)
     return [int(j) for j in order if score_row[j] >= threshold]

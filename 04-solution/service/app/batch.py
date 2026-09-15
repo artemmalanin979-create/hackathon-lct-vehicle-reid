@@ -13,6 +13,11 @@
 Выход: submission.csv, embeddings.npy, candidates.csv (схемы — README датасета)
 и run_info.json со счётчиками и версиями (для протокола, к сдаче не требуется).
 
+По умолчанию кандидаты упорядочиваются переранжированием (k-reciprocal); флаг
+--no-rerank возвращает прежнее упорядочивание по косинусу. `embeddings.npy` в
+обоих режимах один и тот же: переранжирование работает после извлечения векторов
+и на них не влияет.
+
 Зависимости — только numpy/pillow/onnxruntime; FastAPI и Qdrant не импортируются.
 """
 from __future__ import annotations
@@ -29,6 +34,7 @@ from .core import config
 from .core.model import Embedder
 from .core.preprocess import read_rows
 from .core.ranking import cosine_scores
+from .core.rerank import rerank_scores
 from .core.submission import save_embeddings, write_candidates, write_submission
 
 
@@ -43,12 +49,20 @@ def main() -> None:
                     help="CSV галереи: image_id,x,y,w,h")
     ap.add_argument("--out-dir", type=Path, required=True,
                     help="каталог для сдаваемых файлов (создаётся)")
-    ap.add_argument("--threshold", type=float, default=config.DEFAULT_THRESHOLD,
-                    help="порог режима отказа (по умолчанию — обоснованный в README)")
+    ap.add_argument("--threshold", type=float, default=None,
+                    help="порог режима отказа (по умолчанию — обоснованный в README, "
+                         "свой для каждой шкалы)")
+    ap.add_argument("--rerank", dest="rerank", action="store_true", default=config.RERANK_DEFAULT,
+                    help="переранжирование кандидатов (по умолчанию включено)")
+    ap.add_argument("--no-rerank", dest="rerank", action="store_false",
+                    help="прежнее упорядочивание по косинусу, порог на шкале косинуса")
     ap.add_argument("--batch", type=int, default=32, help="размер батча инференса")
     ap.add_argument("--threads", type=int, default=0,
                     help="intra-op потоки onnxruntime (0 = по умолчанию)")
     args = ap.parse_args()
+    if args.threshold is None:
+        args.threshold = (config.DEFAULT_THRESHOLD_RERANK if args.rerank
+                          else config.DEFAULT_THRESHOLD)
 
     t0 = time.perf_counter()
     q_rows = read_rows(args.query)
@@ -62,9 +76,16 @@ def main() -> None:
     t_embed = time.perf_counter() - t0
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    # Сначала векторы: они не зависят от способа упорядочивания кандидатов.
     emb = save_embeddings(args.out_dir / "embeddings.npy", q_emb, g_emb)
 
-    scores = cosine_scores(q_emb, g_emb)
+    t_rank = time.perf_counter()
+    if args.rerank:
+        scores = rerank_scores(q_emb, g_emb, config.RERANK_K1, config.RERANK_K2,
+                               config.RERANK_LAMBDA)
+    else:
+        scores = cosine_scores(q_emb, g_emb)
+    t_rank = time.perf_counter() - t_rank
     q_ids = [r.image_id for r in q_rows]
     g_ids = [r.image_id for r in g_rows]
     write_submission(args.out_dir / "submission.csv", q_ids, g_ids, scores)
@@ -73,10 +94,15 @@ def main() -> None:
 
     info = {
         **counts,
+        "rerank": bool(args.rerank),
+        "score_scale": "rerank_confidence_1_minus_distance" if args.rerank else "cosine",
+        "rerank_params": ([config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA]
+                          if args.rerank else None),
         "queries": len(q_rows),
         "gallery": len(g_rows),
         "embeddings_shape": [int(x) for x in emb.shape],
         "embed_elapsed_s": round(t_embed, 3),
+        "rank_elapsed_s": round(t_rank, 3),
         "total_elapsed_s": round(time.perf_counter() - t0, 3),
         "model": config.MODEL_NAME,
         "model_sha256": config.MODEL_SHA256,

@@ -24,7 +24,11 @@ def save_embeddings(path: Path, query: np.ndarray, gallery: np.ndarray) -> np.nd
 
 
 def write_submission(path: Path, q_ids: list[str], g_ids: list[str], scores: np.ndarray) -> None:
-    """submission.csv: query_id, gallery_id_1..gallery_id_10 по убыванию косинуса."""
+    """submission.csv: query_id, gallery_id_1..gallery_id_10 по убыванию скора.
+
+    Скор — косинус либо уверенность переранжирования (1 - дистанция); шкалу
+    выбирает вызывающий, порядок строк и формат от неё не зависят.
+    """
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["query_id"] + [f"gallery_id_{k}" for k in range(1, TOP_K_SUBMISSION + 1)])
@@ -35,7 +39,11 @@ def write_submission(path: Path, q_ids: list[str], g_ids: list[str], scores: np.
 
 def write_candidates(path: Path, q_ids: list[str], g_ids: list[str],
                      scores: np.ndarray, threshold: float) -> dict:
-    """candidates.csv: все кандидаты с cos >= порога; запрос без строк = отказ."""
+    """candidates.csv: все кандидаты со скором >= порога; запрос без строк = отказ.
+
+    Порог обязан быть на той же шкале, что и скоры (см. config.DEFAULT_THRESHOLD
+    для косинуса и config.DEFAULT_THRESHOLD_RERANK для переранжирования).
+    """
     n_accepted = n_refused = 0
     with open(path, "w", newline="") as f:
         w = csv.writer(f)

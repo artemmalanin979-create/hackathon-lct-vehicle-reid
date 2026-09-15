@@ -102,6 +102,14 @@ def _crop_from_upload(data: bytes, x: int, y: int, w: int, h: int) -> np.ndarray
 
 
 def _search_by_vector(vec: np.ndarray, top_k: int, threshold: float) -> SearchResponse:
+    """Онлайновый поиск — на шкале КОСИНУСА, с косинусным порогом.
+
+    Переранжирование сюда не заводится сознательно: k-reciprocal определено на
+    множестве «все запросы прогона + вся галерея» и для одиночного запроса
+    посчиталось бы по другой окрестности, чем в пакетном прогоне. Смешивать
+    шкалы в одном сервисе нельзя, поэтому API остаётся косинусным, а его порог —
+    config.DEFAULT_THRESHOLD (см. README, раздел про две шкалы).
+    """
     store: GalleryStore = state["store"]
     if not store.reachable():
         raise HTTPException(503, "хранилище галереи (Qdrant) недоступно")
@@ -145,7 +153,14 @@ def version() -> dict:
         "model_sha256": state["model_sha256"],
         "embedding_dim": config.EMBEDDING_DIM,
         "input_size": config.INPUT_SIZE,
+        "score_scale": "cosine",
         "default_threshold": config.DEFAULT_THRESHOLD,
+        "batch_rerank": {
+            "enabled_by_default": config.RERANK_DEFAULT,
+            "params": [config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA],
+            "score_scale": "rerank_confidence_1_minus_distance",
+            "default_threshold": config.DEFAULT_THRESHOLD_RERANK,
+        },
         "onnxruntime": __import__("onnxruntime").__version__,
         "numpy": np.__version__,
     }
