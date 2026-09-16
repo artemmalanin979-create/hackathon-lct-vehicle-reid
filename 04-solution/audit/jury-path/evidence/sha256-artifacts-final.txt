@@ -1,0 +1,3 @@
+fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba  /home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/artifacts-final/submission.csv
+6acbeecaa147c1a30df8e910571a83075a43d020373d5211fc0311d72386b6df  /home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/artifacts-final/candidates.csv
+4841420191d177f08b30f2646d81dc8d17470fa7b2dbdb05cd5db41be2fac379  /home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/artifacts-final/embeddings.npy

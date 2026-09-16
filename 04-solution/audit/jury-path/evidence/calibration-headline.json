@@ -1,0 +1,56 @@
+{
+  "rerank_threshold": 0.49937235233589916,
+  "rerank_point": {
+    "mode": "presence",
+    "threshold": 0.49937235233589916,
+    "tp": 603,
+    "fp": 62,
+    "fn": 229,
+    "tn_unknown": 216,
+    "fp_unknown": 62,
+    "precision": 0.9067669172932331,
+    "recall": 0.7247596153846154,
+    "f1": 0.8056112224448898,
+    "tnr": 0.7769784172661871,
+    "auc_pr": 0.921883867563915,
+    "auc_pr_trapezoid": 0.921883867563915,
+    "ap_pr_step": 0.9219639623994422
+  },
+  "cosine_old_point": {
+    "mode": "presence",
+    "threshold": 0.5495953464415451,
+    "tp": 530,
+    "fp": 84,
+    "fn": 302,
+    "tn_unknown": 194,
+    "fp_unknown": 84,
+    "precision": 0.8631921824104235,
+    "recall": 0.6370192307692307,
+    "f1": 0.7330567081604425,
+    "tnr": 0.697841726618705,
+    "auc_pr": 0.8876079348328122,
+    "auc_pr_trapezoid": 0.8876079348328122,
+    "ap_pr_step": 0.887743167494347
+  },
+  "cosine_rule_reproduced": {
+    "mode": "presence",
+    "threshold": 0.5495953464415451,
+    "tp": 530,
+    "fp": 84,
+    "fn": 302,
+    "tn_unknown": 194,
+    "fp_unknown": 84,
+    "precision": 0.8631921824104235,
+    "recall": 0.6370192307692307,
+    "f1": 0.7330567081604425,
+    "tnr": 0.697841726618705,
+    "auc_pr": 0.8876079348328122,
+    "auc_pr_trapezoid": 0.8876079348328122,
+    "ap_pr_step": 0.887743167494347
+  },
+  "auc_pr": {
+    "rerank": 0.921883867563915,
+    "cosine": 0.8876079348328122
+  },
+  "verification_checks": 185
+}
