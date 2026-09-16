@@ -1,0 +1,36 @@
+{
+ "ms_base_b1": {
+  "median": 19.94,
+  "min": 16.61
+ },
+ "ms_base_b2": {
+  "median": 34.59,
+  "min": 31.46
+ },
+ "ms_patched_b1": {
+  "median": 29.26,
+  "min": 17.91
+ },
+ "ms_patched_b2": {
+  "median": 33.43,
+  "min": 30.86
+ },
+ "load_average": [
+  10.6,
+  11.67,
+  9.51
+ ],
+ "ms_decomposition_math": {
+  "median": 0.096,
+  "min": 0.095
+ },
+ "ms_pair_contrib_full": {
+  "median": 33.4,
+  "min": 32.1
+ },
+ "ms_query_side_only": {
+  "median": 18.5,
+  "min": 18.0
+ },
+ "ms_crop_load": 24.1
+}
