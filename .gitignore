@@ -58,3 +58,4 @@ mlruns/
 # токены и ключи — никогда в git
 *token*
 *.key
+05-presentation/checks/

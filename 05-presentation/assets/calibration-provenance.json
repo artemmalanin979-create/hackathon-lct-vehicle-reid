@@ -25,7 +25,7 @@
   "rendering": "steps-pre, existing CSV rows only, no smoothing",
   "notice": "Calibration validation; untrained weights; not a holdout result.",
   "outputs": [
-    "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_18/assets/f1_tnr_threshold.svg",
-    "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_18/assets/f1_tnr_threshold.png"
+    "/home/artem/projects/hackathon-lct-vehicle-reid/05-presentation/assets/f1_tnr_threshold.svg",
+    "/home/artem/projects/hackathon-lct-vehicle-reid/05-presentation/assets/f1_tnr_threshold.png"
   ]
 }

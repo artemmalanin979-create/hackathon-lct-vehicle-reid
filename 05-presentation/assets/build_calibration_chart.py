@@ -17,8 +17,8 @@ from matplotlib.ticker import FuncFormatter
 
 
 HERE = Path(__file__).resolve().parent
-SOURCE = Path("/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/calib")
-DEST = HERE / "assets"
+SOURCE = HERE.parent.parent / "04-solution/service/calib"
+DEST = HERE
 BRANCH = "rerank_market_presence"
 
 
@@ -58,7 +58,7 @@ def render():
     fig.subplots_adjust(left=0.09, right=0.96, bottom=0.24, top=0.79)
     fig.text(0.09, 0.94, "F1 и доля корректных отказов", fontsize=19, weight="bold")
     fig.text(0.09, 0.885,
-             "Пакетное переранжирование · market / presence · до дообучения [ч]",
+             "Пакетное переранжирование · market / presence · наша валидация",
              fontsize=10.5)
 
     # For acceptance s >= t, the value between two observed scores equals
