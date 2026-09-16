@@ -6,7 +6,7 @@ import hashlib
 import json
 
 from lxml import etree
-from PIL import Image
+from PIL import Image, ImageChops
 from pptx import Presentation
 import re
 import shutil
@@ -132,18 +132,26 @@ with ZipFile(SOURCE) as original, ZipFile(OUTPUT) as result:
 media = json.loads((CHECKS / 'illustrations.json').read_text())
 for item in media:
     slide = prs.slides[item['slide'] - 1]
+    shape = next(s for s in slide.shapes if s.name == item['label'])
     if item['source'].endswith('.pptx'):
         src_pic = next(s for s in template.slides[5].shapes if s.shape_id == item['shape'])
-        dst_pic = next(s for s in slide.shapes if s.shape_type == 13)
-        assert src_pic.image.blob == dst_pic.image.blob
+        assert src_pic.image.blob == shape.image.blob
         continue
-    shape = next(s for s in slide.shapes if s.name == item['label'])
     with Image.open(REPO / item['source']) as source:
         expected = source.crop(item['crop']) if item.get('crop') else source.copy()
         expected = expected.convert('RGB')
     with Image.open(BytesIO(shape.image.blob)) as actual:
         actual = actual.convert('RGB')
-        assert actual.size == expected.size and actual.tobytes() == expected.tobytes()
+        assert actual.size == expected.size
+        if not item.get('palette'):
+            assert actual.tobytes() == expected.tobytes()
+            continue
+        # Плоская графика пережата фиксированной палитрой: сетка пикселей та же,
+        # расходятся только сглаженные края и ровно на записанную при сборке величину.
+        deviation = max(high for _, high in ImageChops.difference(actual, expected).getextrema())
+        assert deviation == item['max_deviation'] <= 40
+        assert len(shape.image.blob) == item['bytes'] < item['source_bytes'] // 10
+        assert abs(shape.width / shape.height - actual.width / actual.height) < .01
 
 fit = json.loads((CHECKS / 'fit_check.json').read_text())
 assert all(item['fits'] for item in fit)
@@ -158,6 +166,8 @@ summary = {
     'mandatory_original_shape_geometries_checked': geometry_checked,
     'embedded_pictures': pictures,
     'source_image_pixel_comparisons_passed': len(media),
+    'palette_packed_illustrations': [{k: item[k] for k in ('label', 'palette', 'max_deviation', 'bytes', 'source_bytes')}
+                                     for item in media if item.get('palette')],
     'empty_active_placeholders': [],
     'broken_pictures': [],
     'external_image_links': [],

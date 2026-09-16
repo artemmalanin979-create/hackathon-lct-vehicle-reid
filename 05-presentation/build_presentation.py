@@ -10,7 +10,7 @@ import json
 import math
 import re
 
-from PIL import Image, ImageFont
+from PIL import Image, ImageChops, ImageFont
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.dml import MSO_THEME_COLOR as C
@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 TEMPLATE = REPO / '00-task/assets/ЛЦТ2026 Шаблон презентации.pptx'
 TEAM = ROOT / 'team-data.md'
+TEAM_LOGO = ROOT / 'assets/logo-prosvet.png'
 SLIDES = ROOT / 'slides.md'
 OUTPUT = ROOT / 'ЛЦТ2026-задача7-ПРОСВЕТ.pptx'
 FONTDIR = Path('/usr/share/fonts/julietaula-montserrat-fonts')
@@ -202,6 +203,45 @@ def table(slide, x, y, widths, heights, rows, size=14, header=13):
     return gf
 
 
+# Логотип команды нарисован тремя цветами; шум экспорта (±2 в плоских зонах)
+# раздувает PNG до 869 КиБ. Фиксированная палитра из этих цветов и переходов между
+# ними снимает шум, не трогая ни пиксельную сетку, ни исходный файл в репозитории.
+TEAM_LOGO_COLORS = ((251, 250, 246), (24, 25, 29), (148, 223, 51))
+TEAM_LOGO_STEPS = 16
+# Свободная полоса титула: плашка шаблона кончается на 2,16", буквы названия команды
+# начинаются на 4,53". Варианты размещения на выбор — левый край, верх, сторона.
+# Поля внутри самого логотипа — 8,3 % стороны слева, поэтому координаты сдвинуты:
+# по краю и по строке выравнивается сам знак, а не рамка файла.
+TEAM_LOGO_PLACEMENTS = {
+    'A': (2.68, 2.59, 1.50),   # по центру над названием команды
+    'B': (0.636, 2.59, 1.50),  # знаком по левому краю логотипа постановщика
+    'C': (0.677, 4.263, 1.0),  # слева от названия, в одну строку с ним
+}
+TEAM_LOGO_PLACEMENT = 'A'
+
+
+def flat_png(path, colors, steps):
+    """Пережать плоскую графику фиксированной палитрой, сохранив размер в пикселях."""
+    ramp = []
+    for i, start in enumerate(colors):
+        for end in colors[i + 1:]:
+            for step in range(steps + 1):
+                shade = tuple(round(a + (b - a) * step / steps) for a, b in zip(start, end))
+                if shade not in ramp:
+                    ramp.append(shade)
+    palette = Image.new('P', (1, 1))
+    palette.putpalette([v for shade in ramp for v in shade] + [0] * (768 - 3 * len(ramp)))
+    with Image.open(path) as source:
+        source = source.convert('RGB')
+        packed = source.quantize(palette=palette, dither=Image.Dither.NONE)
+        deviation = max(high for _, high in ImageChops.difference(packed.convert('RGB'), source).getextrema())
+        size = packed.size
+    stream = BytesIO()
+    packed.save(stream, format='PNG', optimize=True)
+    stream.seek(0)
+    return stream, size, len(ramp), deviation
+
+
 def picture(slide, path, crop, x, y, w, h, label):
     path = Path(path)
     with Image.open(path) as source:
@@ -274,8 +314,17 @@ height = width * ih / iw
 pic = s.shapes.add_picture(BytesIO(logo), Inches(.76), Inches(.68), Inches(width), Inches(height))
 pic.name = 'Фалькон Тех — официальный логотип из слайда 6 шаблона'
 remove(ph)
-MEDIA.append(dict(slide=1, source='00-task/assets/ЛЦТ2026 Шаблон презентации.pptx', shape=2172, label='Официальный белый логотип Фалькон Тех', embedded=True))
-notes(s, 'Титульный слайд на основе страницы 7 оригинального шаблона. Официальный логотип постановщика взят непосредственно из страницы 6 этого же шаблона.')
+MEDIA.append(dict(slide=1, source='00-task/assets/ЛЦТ2026 Шаблон презентации.pptx', shape=2172, label=pic.name, embedded=True))
+left, top, side = TEAM_LOGO_PLACEMENTS[TEAM_LOGO_PLACEMENT]
+stream, (logo_w, logo_h), shades, deviation = flat_png(TEAM_LOGO, TEAM_LOGO_COLORS, TEAM_LOGO_STEPS)
+packed_bytes = stream.getbuffer().nbytes
+team_pic = s.shapes.add_picture(stream, Inches(left), Inches(top), Inches(side), Inches(side * logo_h / logo_w))
+team_pic.name = 'ПРОСВЕТ — логотип команды'
+team_pic._element.nvPicPr.cNvPr.set('descr', 'Логотип команды ПРОСВЕТ')
+MEDIA.append(dict(slide=1, source='05-presentation/assets/logo-prosvet.png', crop=None, label=team_pic.name,
+                  embedded=True, placement=TEAM_LOGO_PLACEMENT, inches=round(side, 3), palette=shades,
+                  max_deviation=deviation, bytes=packed_bytes, source_bytes=TEAM_LOGO.stat().st_size))
+notes(s, 'Титульный слайд на основе страницы 7 оригинального шаблона. Официальный логотип постановщика взят непосредственно из страницы 6 этого же шаблона. Логотип команды пережат фиксированной палитрой без изменения размера в пикселях; исходный файл в репозитории не меняется.')
 
 # 2: mandatory team and solution, original slide 8.
 CURRENT = 2
@@ -316,9 +365,14 @@ notes(s, 'Страница 9 шаблона: сохранены пять кол�
 CURRENT = 4
 s = kept[3]
 set_text(by_id(s, 7), 'ИСТОРИЯ КОМАНДЫ', 20, C.LIGHT_1, True, after=0)
-set_text(by_id(s, 37), short_history, 13.6, min_size=12.5, after=0)
-set_text(by_id(s, 43), why, 12.4, min_size=10.5, after=0)
-set_text(by_id(s, 40), difficulty, 12.6, min_size=11.3, after=0)
+STORY = 12.6  # общий кегль трёх блоков страницы 10 шаблона; сжатие запрещено
+set_text(by_id(s, 37), short_history, STORY, min_size=STORY, after=0)
+# Поле блока 02 кончается на 4,929", а разделительная линия шаблона лежит на 4,82":
+# размещение считаем по расстоянию до линии с зазором 0,06". Оценка в set_text —
+# кегль x интервал, реальная строка выше примерно в 1,2 раза, отсюда поправка.
+to_line = 4.82 - .06 - by_id(s, 43).top / 914400  # дюймы от верха поля до линии
+set_text(by_id(s, 43), why, STORY, min_size=STORY, after=0, height=(to_line / 1.2 + .05) * 72)
+set_text(by_id(s, 40), difficulty, STORY, min_size=STORY, after=0)
 for ident in (38, 41, 44, 9, 11, 12):
     sh = by_id(s, ident)
     set_text(sh, sh.text.replace('\v', '\n'), 14 if ident in (38, 41, 44) else 17, bold=True, min_size=13 if ident in (38, 41, 44) else 17, after=0, align=PP_ALIGN.RIGHT if ident in (9, 11, 12) else PP_ALIGN.LEFT)
@@ -504,7 +558,7 @@ CURRENT = 12
 s = clone_content()
 box(s, .74, 1.67, 11.82, .94, [
     'Базовая модель ошиблась в первом кандидате на 307 из 832 запросов с парой.',
-    '28 пар путаются взаимно: A выдаёт B, B выдаёт A. Это 84 из 307 ошибок — 27 %.',
+    '28 пар путаются взаимно: A выдаёт B, B выдаёт A. Это 84 из 307 ошибок первого кандидата — 27 %.',
     'Переранжирование исправляет 6 % ошибок двойников против 18 % остальных. Мелкие приметы требуют отдельной проверки.',
 ], 13.2, min_size=12.7, after=3, line=1.05)
 table(s, .75, 2.9, [2.65, .65], [.53, .48, .96, .59, .56], [
@@ -528,7 +582,7 @@ path = REPO / '04-solution/error-analysis/sheets/label_check_B.jpg'
 picture(s, path, (10, 443, 710, 836), 8.61, 4.39, 1.89, 1.10, 'v1012: полный кадр запроса, рамка на соседней машине')
 picture(s, path, (720, 443, 1420, 836), 10.62, 4.39, 1.89, 1.10, 'v1012: полный кадр с той же меткой')
 box(s, 8.61, 5.62, 3.93, .60, 'Одна метка, разные машины внутри рамок', 12.4, bold=True, after=0)
-box(s, 4.26, 6.54, 8.26, .21, '27 % и 36 % — разные способы группировать те же ошибки; доли не складываются.', 9.5, after=0)
+box(s, 4.26, 6.54, 8.26, .21, '27 % и 36 % — разные способы группировать те же ошибки первого кандидата; доли не складываются.', 9.5, after=0)
 foot(s, 'Базовая модель, до переранжирования; наша валидация.')
 notes(s, s.notes_slide.notes_text_frame.text + '\n\nВключён мягкий вариант А о разметке: решение о включении зафиксировано в structure.md. На слайде показаны обе стороны двух взаимных ошибок оранжевых машин и полные кадры нижней пары label_check_B.jpg. Это ограничение текущего признака, а не доказанная невозможность различить машины любым методом.')
 
@@ -578,10 +632,10 @@ foot(s, 'Проверен основной офлайн-инференс. Для
 # 15 / custom 10.
 CURRENT = 15
 s = clone_content()
-table(s, .76, 1.79, [4.85, 6.96], [.61, .98, 1.19, 1.01, .96], [
+table(s, .76, 1.79, [4.85, 6.96], [.58, 1.26, 1.10, .92, .89], [
     ['Что ограничивает решение сейчас', 'Что проверяем следующим'],
-    ['≈58 % ошибок — ракурс и освещение', 'Дообучить на данных заказчика; пересчитать mAP и качество этих групп'],
-    ['27 % ошибок — взаимные двойники', 'Проверить локальные детали высокого разрешения и отказ при малом отрыве; показывать оператору различимые приметы'],
+    ['≈58 % ошибок — ракурс и освещение', 'Две попытки дообучения на нашей обучающей части прироста не дали: 0,700 против 0,694, разброс 0,0134, p = 0,52, Rank-1 хуже. Дальше — данные заказчика в большем объёме, а не повтор того же'],
+    ['27 % ошибок первого кандидата — взаимные двойники', 'Проверить локальные детали высокого разрешения и отказ при малом отрыве; показывать оператору различимые приметы'],
     ['Целевой масштаб 10⁶ объектов', 'Проверить приближённый поиск, память, задержку и потерю качества относительно точного поиска'],
     ['≈5 % в случайной выборке ошибок связаны с разметкой', 'Передать примеры на проверку; дообучение не исправляет неверную цель'],
 ], size=14.9, header=14.5)
