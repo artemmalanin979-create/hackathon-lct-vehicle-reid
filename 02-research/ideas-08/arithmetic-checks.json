@@ -1,0 +1,16 @@
+{
+  "diagnostic_query_ceiling_832_of_1110": 0.7495495495495496,
+  "map_gap_using_rounded_baseline": 0.1060000000000001,
+  "required_AP_sum_gain_if_832_queries": 88.19200000000008,
+  "illustration_84_rank4_to1_single_positive": 0.07572115384615384,
+  "two_repaired_queries_max_delta": 0.002403846153846154,
+  "graph_750_square_float32_MiB": 2.1457672119140625,
+  "graph_1860_square_float32_MiB": 13.19732666015625,
+  "gallery_750x512_float32_MiB": 1.46484375,
+  "whitening_512_square_float32_MiB": 1.0,
+  "fraction_remaining_AP_mass_to_recover": 0.3464052287581702,
+  "queries_single_positive_rank4_to1_needed": 118,
+  "improvement_if_118_rank4_to1": 0.1063701923076923,
+  "noise_query_fraction_estimate": 0.01734254807692308,
+  "projection_MACs_per_vector": 262144
+}
