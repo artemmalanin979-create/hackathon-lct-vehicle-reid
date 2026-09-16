@@ -1,0 +1,56 @@
+{
+  "_diag": {
+    "cos_cam_same_mean": 0.1977,
+    "cos_cam_diff_mean": 0.0023,
+    "cos_reid_same_mean": 0.044,
+    "cos_reid_diff_mean": 0.008
+  },
+  "lam=0.0": {
+    "mAP": 0.6642,
+    "Rank-1": 0.6022
+  },
+  "lam=0.0_no_camera_excl": {
+    "mAP": 0.8247,
+    "Rank-1": 0.9651
+  },
+  "lam=0.0_rerank": {
+    "mAP": 0.7,
+    "Rank-1": 0.649
+  },
+  "lam=0.05": {
+    "mAP": 0.666,
+    "Rank-1": 0.607
+  },
+  "lam=0.05_no_camera_excl": {
+    "mAP": 0.8231,
+    "Rank-1": 0.9579
+  },
+  "lam=0.05_rerank": {
+    "mAP": 0.6983,
+    "Rank-1": 0.6502
+  },
+  "lam=0.1": {
+    "mAP": 0.6614,
+    "Rank-1": 0.5974
+  },
+  "lam=0.1_no_camera_excl": {
+    "mAP": 0.8178,
+    "Rank-1": 0.9483
+  },
+  "lam=0.1_rerank": {
+    "mAP": 0.6901,
+    "Rank-1": 0.6442
+  },
+  "lam=0.2": {
+    "mAP": 0.6589,
+    "Rank-1": 0.5986
+  },
+  "lam=0.2_no_camera_excl": {
+    "mAP": 0.7938,
+    "Rank-1": 0.8858
+  },
+  "lam=0.2_rerank": {
+    "mAP": 0.6774,
+    "Rank-1": 0.6442
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "csv": "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv",
+  "rows": 1110,
+  "dim": 128,
+  "batch": 16,
+  "elapsed_s": 77.498,
+  "obj_per_s": 14.32,
+  "ms_per_obj": 69.82
+}

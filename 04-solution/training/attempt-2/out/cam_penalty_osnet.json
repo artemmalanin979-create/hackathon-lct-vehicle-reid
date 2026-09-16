@@ -1,0 +1,92 @@
+{
+  "_diag": {
+    "cos_cam_same_mean": 0.1977,
+    "cos_cam_diff_mean": 0.0023,
+    "cos_reid_same_mean": 0.1433,
+    "cos_reid_diff_mean": 0.0989
+  },
+  "lam=0.0": {
+    "mAP": 0.6566,
+    "Rank-1": 0.631
+  },
+  "lam=0.0_no_camera_excl": {
+    "mAP": 0.8122,
+    "Rank-1": 0.9712
+  },
+  "lam=0.0_rerank": {
+    "mAP": 0.6937,
+    "Rank-1": 0.6635
+  },
+  "lam=0.02": {
+    "mAP": 0.6561,
+    "Rank-1": 0.631
+  },
+  "lam=0.02_no_camera_excl": {
+    "mAP": 0.812,
+    "Rank-1": 0.9724
+  },
+  "lam=0.02_rerank": {
+    "mAP": 0.6926,
+    "Rank-1": 0.6635
+  },
+  "lam=0.05": {
+    "mAP": 0.6557,
+    "Rank-1": 0.6298
+  },
+  "lam=0.05_no_camera_excl": {
+    "mAP": 0.8117,
+    "Rank-1": 0.9724
+  },
+  "lam=0.05_rerank": {
+    "mAP": 0.6911,
+    "Rank-1": 0.6635
+  },
+  "lam=0.1": {
+    "mAP": 0.6529,
+    "Rank-1": 0.6274
+  },
+  "lam=0.1_no_camera_excl": {
+    "mAP": 0.8089,
+    "Rank-1": 0.97
+  },
+  "lam=0.1_rerank": {
+    "mAP": 0.6878,
+    "Rank-1": 0.6671
+  },
+  "lam=0.15": {
+    "mAP": 0.6466,
+    "Rank-1": 0.619
+  },
+  "lam=0.15_no_camera_excl": {
+    "mAP": 0.8046,
+    "Rank-1": 0.9663
+  },
+  "lam=0.15_rerank": {
+    "mAP": 0.6796,
+    "Rank-1": 0.6647
+  },
+  "lam=0.2": {
+    "mAP": 0.6437,
+    "Rank-1": 0.6178
+  },
+  "lam=0.2_no_camera_excl": {
+    "mAP": 0.7987,
+    "Rank-1": 0.9555
+  },
+  "lam=0.2_rerank": {
+    "mAP": 0.6708,
+    "Rank-1": 0.6599
+  },
+  "lam=0.3": {
+    "mAP": 0.6298,
+    "Rank-1": 0.6106
+  },
+  "lam=0.3_no_camera_excl": {
+    "mAP": 0.7737,
+    "Rank-1": 0.9075
+  },
+  "lam=0.3_rerank": {
+    "mAP": 0.6558,
+    "Rank-1": 0.6599
+  }
+}

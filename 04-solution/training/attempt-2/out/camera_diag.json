@@ -1,0 +1,26 @@
+{
+  "osnet": {
+    "F2_CH_cameras": 2.6105,
+    "F2_CH_permuted_mean": 1.0053,
+    "F1_camera_oracle": {
+      "mAP": 0.0164,
+      "Rank-1": 0.0024
+    }
+  },
+  "ainv1": {
+    "F2_CH_cameras": 2.4437,
+    "F2_CH_permuted_mean": 0.9713,
+    "F1_camera_oracle": {
+      "mAP": 0.0139,
+      "Rank-1": 0.0024
+    }
+  },
+  "ainv2": {
+    "F2_CH_cameras": 2.3692,
+    "F2_CH_permuted_mean": 0.9935,
+    "F1_camera_oracle": {
+      "mAP": 0.0228,
+      "Rank-1": 0.0024
+    }
+  }
+}
