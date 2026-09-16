@@ -1,0 +1,1 @@
+{"service":"0.1.0","model":"osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)","score_scale":"cosine","default_threshold":0.5495953464415451,"storage_reachable":true,"gallery_points":750,"images_available":true,"explain_available":true}

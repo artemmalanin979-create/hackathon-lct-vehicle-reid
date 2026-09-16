@@ -27,6 +27,31 @@ const app = {
 const fmt6 = (v) => (v === null || v === undefined ? "—" : v.toFixed(6));
 const fmtSigned = (v) => (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(6);
 
+/** Значение токена темы — чтобы канва не расходилась с CSS. */
+const token = (name, fallback) =>
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+
+/* ---------- 0. тема ---------- */
+
+/* Начальное значение уже поставлено блокирующим скриптом в <head> — здесь
+   только переключение и запоминание выбора. Палитра карты разбора темой не
+   управляется: POS/NEG ниже зафиксированы. */
+(function theme() {
+  const btn = $("theme-btn");
+  const label = () => {
+    const dark = document.documentElement.dataset.theme === "dark";
+    btn.title = btn.ariaLabel =
+      "Сменить тему оформления (сейчас " + (dark ? "тёмная" : "светлая") + ")";
+  };
+  btn.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("reid-theme", next); } catch (e) { /* приватный режим */ }
+    label();
+  });
+  label();
+})();
+
 /* ---------- 1. состояние сервиса ---------- */
 
 async function boot() {
@@ -454,7 +479,7 @@ function renderRefusal(resp) {
     '<span class="mark best"></span><span class="mark thr"></span>'
     + '<span class="lab left" style="left:0">0</span>'
     + `<span class="lab" style="left:${pct(best === null ? 0 : best)}">лучшая ${fmt6(best)}</span>`
-    + `<span class="lab" style="left:${pct(thr)};top:44px">порог ${fmt6(thr)}</span>`
+    + `<span class="lab" style="left:${pct(thr)};top:30px">порог ${fmt6(thr)}</span>`
     + '<span class="lab right" style="left:100%">1</span>';
   $("refusal-facts").innerHTML =
     dt("Лучшая близость", fmt6(best))
@@ -683,7 +708,8 @@ function share(g, p) {
   return (100 * top / all).toFixed(0) + " %";
 }
 
-const SIDE = 260;   // размер плитки разбора
+const SIDE = 416;   // размер плитки разбора — ровно тот, в котором
+                    // приходит кроп галереи (crop?size=416): без пересчёта
 
 function drawTile(canvas, paint, grid, scale) {
   const dpr = window.devicePixelRatio || 1;
@@ -692,7 +718,7 @@ function drawTile(canvas, paint, grid, scale) {
   canvas.style.height = "auto";
   const c = canvas.getContext("2d");
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
-  c.fillStyle = "#f2f1ec";
+  c.fillStyle = token("--card-2", "#f2f1ec");
   c.fillRect(0, 0, SIDE, SIDE);
   const after = () => heat(c, grid, scale);
   const r = paint(c);

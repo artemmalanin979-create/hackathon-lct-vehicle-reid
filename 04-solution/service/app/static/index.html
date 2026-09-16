@@ -3,13 +3,27 @@
      честный отказ, выгрузка результата, разбор «на что смотрела модель».
 
      Ни одного обращения наружу: стили и скрипт лежат рядом, шрифты системные,
-     значок страницы — data:. Проверяется поиском по исходникам (см. REPORT). -->
+     иконки — инлайновый SVG, значок страницы — data:. Проверяется поиском по
+     исходникам и журналом сети (см. REPORT). -->
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vehicle ReID — поиск транспортного средства по галерее</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23fcfcfb'/%3E%3Crect x='2.5' y='2.5' width='11' height='11' fill='none' stroke='%230b0b0b'/%3E%3Ccircle cx='8' cy='8' r='2.4' fill='%23e34948'/%3E%3C/svg%3E">
+<!-- Тема ставится ДО первой отрисовки, иначе при загрузке моргает белым.
+     Блокирующий скрипт на четыре строки: выбор оператора, иначе — системная. -->
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("reid-theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") {
+      t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark" : "light";
+    }
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23f7f7f7'/%3E%3Crect x='2.6' y='2.6' width='10.8' height='10.8' rx='2.2' fill='none' stroke='%231c1c1c' stroke-width='1.2'/%3E%3Crect x='6.4' y='6.4' width='3.2' height='3.2' rx='.8' fill='%231c1c1c'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
@@ -21,7 +35,23 @@
       Номерной знак не используется.</p>
   </div>
   <div class="top-side">
-    <div id="state-chip" class="chip chip-wait">состояние сервиса…</div>
+    <div class="top-row">
+      <div id="state-chip" class="chip chip-wait">состояние сервиса…</div>
+      <button type="button" id="theme-btn" class="icon-btn"
+              aria-label="Сменить тему оформления" title="Сменить тему оформления">
+        <svg class="i-moon" width="15" height="15" viewBox="0 0 16 16" fill="none"
+             stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8z"/>
+        </svg>
+        <svg class="i-sun" width="15" height="15" viewBox="0 0 16 16" fill="none"
+             stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+             aria-hidden="true">
+          <circle cx="8" cy="8" r="3"/>
+          <path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3.05 3.05l1.13 1.13M11.82 11.82l1.13 1.13M12.95 3.05l-1.13 1.13M4.18 11.82l-1.13 1.13"/>
+        </svg>
+      </button>
+    </div>
     <nav class="links">
       <a href="/docs">Документация API</a>
       <a href="/openapi.json">OpenAPI</a>
@@ -44,6 +74,13 @@
 
     <div id="drop" class="drop" tabindex="0" role="button"
          aria-label="Выбрать кадр или перетащить файл">
+      <svg class="drop-ico" width="26" height="26" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
+           stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="4.5" width="18" height="15" rx="2.5"/>
+        <path d="M3.4 16.2l4.3-4.3 3.8 3.8 2.9-2.9 6.2 6.2"/>
+        <circle cx="8.6" cy="9.1" r="1.2"/>
+      </svg>
       <p class="drop-main">Перетащите кадр сюда</p>
       <p class="drop-sub">или нажмите, чтобы выбрать файл — JPEG, PNG</p>
       <input id="file" type="file" accept="image/jpeg,image/png,image/*" hidden>

@@ -1,0 +1,16 @@
+# Поиск внешних загрузок по исходникам тонкого клиента
+
+-- index.html
+   строка  26  абсолютный http/https: http://www.w3.org/2000/svg  -> локально
+   строка  27  <link rel=stylesheet/preload/prefetch: <link rel="stylesheet" href="/static/app.css">
+   строка 199  <script src: <script src="/static/app.js"></script>
+
+-- app.css
+
+-- app.js
+
+шрифты: только системный стек в токене --font (см. app.css)
+значок страницы: data:image/svg+xml, встроен в разметку
+иконки: инлайновый SVG в index.html, внешних наборов нет
+
+ИТОГ: внешних загрузок в исходниках — 0
