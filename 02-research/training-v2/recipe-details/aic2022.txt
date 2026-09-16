@@ -1,0 +1,117 @@
+                                              DATASET LICENSE AGREEMENT
+
+This license is a legal agreement between you and NVIDIA Corporation ("NVIDIA") and governs your use of the NVIDIA dataset
+as available under this license (“DATASET”).
+
+Description of the DATASET:
+    1.       Urban Intersection and Highway Data: Approximately 12 hours of traffic videos synchronously captured from
+             multiple vantage points at various urban intersections and along highways. Videos are 960p or better and
+             most have been captured at 10 frames per second.
+    2.       Metadata of Urban Intersection and Highway Data: Meta data includes GPS locations of cameras, natural
+             language descriptions for vehicle tracks, camera calibration information and other derived data from videos.
+    3.       Retail Dataset: Approximately 100,000 synthetic images of close to 100 objects available in retail stores, and
+             approximately 10 minutes of videos capturing these objects.
+
+
+You agree to use the DATASET only for purposes that are permitted by (a) this license, and (b) any applicable law, regulation
+or generally accepted practices or guidelines in the relevant jurisdictions.
+
+1. LICENSE. Subject to the terms of this license, NVIDIA grants you a revocable, non-exclusive limited license to use the
+DATASET as follows:
+
+        (i)      For the duration of a challenge or event (including the AI City Challenge), you may use the DATASET solely
+                 for purposes of the challenge or event, which includes reading and learning from the DATASET, analyzing
+                 the DATASET, modifying the DATASET and generally preparing your submission including any underlying
+                 models,
+        (ii)     Upon the conclusion of a challenge or event or if NVIDIA provided you the DATASET outside of a challenge
+                 or event (if applicable) you may use the DATASET, including models developed using the DATASET, for
+                 non-commercial, academic purposes only, and
+        (iii)    While the DATASET is not generally distributable, you may distribute a minimal portion of the DATASET as
+                 part of research papers, as appropriate, provided that any such use and distribution of the DATASET is
+                 accompanied by appropriate acknowledgement(s) and no unredacted faces or license plates are
+                 reproduced or otherwise displayed. Phrasing for acknowledgements will be provided prior to the
+                 submission deadline for publications.
+
+2. LIMITATIONS. Your license to use the DATASET is restricted as follows:
+a. You may not use the DATASET or any models developed using the DATASET for any commercial or production purpose.
+b. You may not remove copyright or other proprietary notices from any portion of the DATASET or copies of the DATASET.
+c. Except as expressly authorized under Section 1, you may not copy, sell, rent, sublicense, transfer or distribute the
+DATASET, or share with others.
+d. Unless authorized in writing by NVIDIA, you may not indicate or suggest that any content (including any models) created
+with the DATASET is sponsored or endorsed by NVIDIA.
+
+3. OWNERSHIP. NVIDIA reserves all rights, title and interest in and to the DATASET not expressly granted to you under this
+license. The DATASET and the related intellectual property rights therein are and will remain the sole and exclusive property
+of NVIDIA or its licensors. The DATASET is copyrighted and protected by the laws of the United States and other countries,
+and international treaty provisions. NVIDIA may make changes to the DATASET at any time without notice, but is not obligated
+to support or update the DATASET.
+
+4. FEEDBACK. “Feedback” means metadata that you upload for NVIDIA’s review including in connection with a challenge or
+event, and any other suggestions, feature requests or other feedback regarding the DATASET that you choose to provide,
+including possible enhancements or modifications to the DATASET. For any Feedback that you provide, you hereby grant
+NVIDIA and its affiliates a perpetual, non-exclusive, worldwide, irrevocable license to use, reproduce, modify, license,
+sublicense (through multiple tiers of sublicensees), and distribute (through multiple tiers of distributors) it without the
+payment of any royalties or fees to you. NVIDIA will use Feedback at its choice.
+
+5. THIRD PARTY DATASETS. You may at your option also obtain the naturalistic driving dataset of x hours of video data and
+corresponding metadata, which captures a diverse group of drivers performing multiple tasks while driving a vehicle through
+multiple cameras mounted inside the vehicle. This third party dataset is made available at
+https://drive.google.com/drive/folders/1HocaiT6LfXKxiFY5pccYqz4auH_oVruI and is subject to licensing requirements of the
+licensor. NVIDIA does not support or endorse any third party dataset, or warrant or assume any responsibility for its use,
+accuracy, completeness or usefulness.
+
+6. NO WARRANTIES. THE DATASET is PROVIDED "AS IS" WITHOUT ANY EXPRESS OR IMPLIED WARRANTY OF ANY KIND
+INCLUDING WARRANTIES OF MERCHANTABILITY, NONINFRINGEMENT, OR FITNESS FOR A PARTICULAR PURPOSE. NVIDIA
+DOES NOT WARRANT THAT THE DATASET WILL MEET YOUR REQUIREMENTS, THAT THE OPERATION THEREOF WILL BE
+UNINTERRUPTED OR ERROR-FREE, THAT ALL ERRORS WILL BE CORRECTED OR THAT THE DATASET WAS COLLECTED OR
+GENERATED IN ACCORDANCE WITH LAW. NVIDIA does not warrant or assume responsibility for the accuracy, completeness
+or usefulness of any information, text, graphics, links or other items contained within the DATASET.
+
+7. LIMITATIONS OF LIABILITY. TO THE MAXIMUM EXTENT PERMITTED BY LAW, NVIDIA AND ITS AFFILIATES SHALL NOT BE
+LIABLE FOR ANY SPECIAL, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES, OR ANY LOST PROFITS, LOSS OF USE, LOSS
+OF DATA OR LOSS OF GOODWILL, OR THE COSTS OF PROCURING SUBSTITUTE PRODUCTS, ARISING OUT OF OR IN
+CONNECTION WITH THIS LICENSE OR THE USE OR PERFORMANCE OF THE DATASET, WHETHER SUCH LIABILITY ARISES FROM
+ANY CLAIM BASED UPON BREACH OF CONTRACT, BREACH OF WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT
+LIABILITY OR ANY OTHER CAUSE OF ACTION OR THEORY OF LIABILITY. IN NO EVENT WILL NVIDIA’S AND ITS AFFILIATES TOTAL
+CUMULATIVE LIABILITY UNDER OR ARISING OUT OF THIS AGREEMENT EXCEED US$10.00. THE NATURE OF THE LIABILITY OR
+THE NUMBER OF CLAIMS OR SUITS SHALL NOT ENLARGE OR EXTEND THIS LIMIT.
+
+8. TERMINATION. Your rights under this license will terminate automatically without notice from NVIDIA if you fail to comply
+with any term of this license or if you commence or participate in any legal proceeding against NVIDIA with respect to the
+DATASET. Upon any termination of this license, you agree to promptly discontinue use of the DATASET and destroy all copies
+in your possession or control. All provisions of this license will survive termination, except for the license granted to you.
+
+9. APPLICABLE LAW; DISPUTE RESOLUTION; INJUNCTIVE RELIEF. This license gives you specific legal rights. You may also have
+other rights which vary from state to state, and jurisdiction to jurisdiction. Unless this license is presented to you by NVIDIA in
+another language, you hereby agree to all terms of this license in the English language. If you have any complaint about this
+license or the DATASET, please give NVIDIA a chance to resolve it and contact NVIDIA by U.S. Mail at NVIDIA Corporation, ATTN:
+Legal, 2788 San Tomas Expressway, Santa Clara, California, 95051. If NVIDIA is unable to resolve your dispute and you wish to
+present it to an authority for decision, you agree to resolve it according to the laws of the State of Delaware without regard to
+its conflict of laws rules or principles and submit the dispute to binding arbitration before an arbitrator from Judicial Mediation
+and Arbitration Services (“JAMS”) located in Santa Clara County, California under the Optional Expedited Arbitration Procedures
+then in effect for JAMS. By entering this license, you agree to bring any claims in your individual capacity, and you waive the
+right to a trial by jury or to participate in a class action or other type of representative proceeding. If for any reason this license
+to arbitrate is found not to apply to a dispute and as a result a dispute proceeds in court rather than in arbitration, any dispute
+shall be resolved in the state or federal courts located in Santa Clara County, California. Nothing in this license shall prevent a
+party from seeking injunctive or equitable relief from the courts in any jurisdiction to protect data security, intellectual
+property rights, or other proprietary rights.
+
+10. NO ASSIGNMENT. This license and your rights and obligations thereunder may not be assigned by you by any means or
+operation of law without NVIDIA’s permission. Any attempted assignment not approved by NVIDIA in writing shall be void
+and of no effect.
+
+11. EXPORT. The DATASET is subject to United States export laws and regulations. You agree that you will not ship, transfer
+or export the DATASET into any country, or use the DATASET in any manner, prohibited by the United States Bureau of
+Industry and Security or economic sanctions regulations administered by the U.S. Department of Treasury’s Office of Foreign
+Assets Control (OFAC), or any applicable export laws, restrictions or regulations. These laws include restrictions on
+destinations, end users and end use. By accepting this license, you confirm that you are not a resident or citizen of any country
+currently embargoed by the U.S. and that you are not otherwise prohibited from receiving the DATASET.
+
+12. ENTIRE AGREEMENT. This license is the final, complete and exclusive agreement between the parties relating to the
+subject matter of this license and supersedes all prior or contemporaneous understandings and agreements relating to this
+subject matter, whether oral or written. If any court of competent jurisdiction determines that any provision of this license is
+illegal, invalid or unenforceable, the remaining provisions will remain in full force and effect. This license may only be modified
+in a writing signed by an authorized representative of each party.
+
+(v. February 9, 2022)
+
