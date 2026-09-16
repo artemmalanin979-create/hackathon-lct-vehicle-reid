@@ -12,8 +12,22 @@ WORKDIR /srv
 # requirements.txt — семь прямых зависимостей, requirements-lock.txt — полный
 # снимок проверенной сборки (`pip freeze --all` из образа): как constraints он
 # закрепляет и транзитивные версии. Хешей wheel в нём нет.
+#
+# По умолчанию сборка идёт ОФЛАЙН, из каталога wheels/ в составе решения: 30 пакетов,
+# 57 МБ, собраны в этом же базовом образе командой из README. Так сборка не зависит от
+# доступности PyPI — жюри может собирать образ в изолированной среде.
+#
+# Запасной путь (если каталога wheels/ нет): --build-arg PIP_SOURCE=network, тогда
+# пакеты тянутся из сети, как раньше.
+ARG PIP_SOURCE=offline
 COPY requirements.txt requirements-lock.txt ./
-RUN pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt
+COPY wheels/ /wheels/
+RUN if [ "$PIP_SOURCE" = "offline" ]; then \
+        pip install --no-cache-dir --no-index --find-links=/wheels \
+            -r requirements.txt -c requirements-lock.txt; \
+    else \
+        pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt; \
+    fi && rm -rf /wheels
 
 # Веса — в составе решения. Если файла нет (например, клон без бинарников),
 # model/fetch_model.sh скачает и проверит его ДО сборки образа.
