@@ -1,0 +1,31 @@
+# Пакетный прогон в собранном образе против artifacts-final
+
+Команда (сеть отключена):
+    podman run --rm --network none -v <repo>/data:/data:ro -v /tmp/reid-batch-out:/out \
+      vehicle-reid-service python -m app.batch --images-dir /data/images \
+      --query /data/test_query.csv --gallery /data/test_gallery.csv --out-dir /out
+
+## sha256
+
+файл           эталон                                                     новый
+submission.csv     fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba совпадает
+candidates.csv     6acbeecaa147c1a30df8e910571a83075a43d020373d5211fc0311d72386b6df совпадает
+embeddings.npy     4841420191d177f08b30f2646d81dc8d17470fa7b2dbdb05cd5db41be2fac379 совпадает
+
+## run_info.json — счётчики
+  threshold                эталон=0.49937235233589916  новый=0.49937235233589916  совпадает
+  queries_with_candidates  эталон=1078  новый=1078  совпадает
+  queries_refused          эталон=32  новый=32  совпадает
+  refused_share            эталон=0.0288  новый=0.0288  совпадает
+  rerank                   эталон=True  новый=True  совпадает
+  score_scale              эталон=rerank_confidence_1_minus_distance  новый=rerank_confidence_1_minus_distance  совпадает
+  rerank_params            эталон=[6, 3, 0.3]  новый=[6, 3, 0.3]  совпадает
+  queries                  эталон=1110  новый=1110  совпадает
+  gallery                  эталон=750  новый=750  совпадает
+  embeddings_shape         эталон=[1860, 512]  новый=[1860, 512]  совпадает
+  model                    эталон=osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)  новый=osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)  совпадает
+  model_sha256             эталон=4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f  новый=4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f  совпадает
+  versions                 эталон={'python': '3.13.15', 'numpy': '2.5.3', 'onnxruntime': '1.30.0'}  новый={'python': '3.13.15', 'numpy': '2.5.3', 'onnxruntime': '1.30.0'}  совпадает
+
+  времена прогона (embed/rank/total) различаются — это ожидаемо,
+  машина под нагрузкой; к сдаче run_info.json не требуется.

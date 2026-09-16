@@ -1,0 +1,33 @@
+== живые ответы (побайтово) ==
+     совпадает  /api/health
+     совпадает  /api/version
+     совпадает  /api/search a4f2a13b
+     совпадает  /api/search 5cfbbd42
+     совпадает  /api/search 486dd80d
+     совпадает  /api/search 06975950
+     совпадает  /api/embed
+     совпадает  /api/search/vector
+     совпадает  /api/search/vector (свой порог)
+
+== схема openapi.json: прежние элементы ==
+     совпадает  paths[/api/health]
+     совпадает  paths[/api/version]
+     совпадает  paths[/api/embed]
+     совпадает  paths[/api/search]
+     совпадает  paths[/api/search/vector]
+     совпадает  schemas[Body_embed_api_embed_post]
+     совпадает  schemas[Body_search_api_search_post]
+     совпадает  schemas[Candidate]
+     совпадает  schemas[EmbedResponse]
+     совпадает  schemas[HTTPValidationError]
+     совпадает  schemas[SearchResponse]
+     совпадает  schemas[ValidationError]
+     совпадает  schemas[VectorQuery]
+     совпадает  info/openapi
+
+== добавлено (было пусто) ==
+  + /api/explain
+  + /api/gallery/{gallery_id}/crop
+  + /api/ui/state
+
+ИТОГ: прежнее поведение API не изменилось

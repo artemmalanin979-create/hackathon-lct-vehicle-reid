@@ -65,6 +65,31 @@ class GalleryStore:
                 wait=True,
             )
 
+    def bbox_of(self, image_id: str) -> dict | None:
+        """Рамка объекта галереи по image_id (для показа кропа в клиенте).
+
+        Единственный источник истины — payload точки, тот же, что использует
+        поиск: клиент не читает CSV галереи и не может разойтись с хранилищем.
+        Галерея в ТЗ — один объект на кадр; если закрытый набор принесёт кадр с
+        несколькими рамками, берётся первая — кроп всё равно из того же кадра.
+        """
+        try:
+            points, _ = self.client.scroll(
+                self.collection,
+                scroll_filter=qm.Filter(must=[qm.FieldCondition(
+                    key="image_id", match=qm.MatchValue(value=image_id))]),
+                limit=1,
+                with_payload=True,
+                with_vectors=False,
+            )
+        except Exception:
+            return None
+        if not points:
+            return None
+        p = points[0].payload
+        return {"image_id": p["image_id"], "x": p["x"], "y": p["y"],
+                "w": p["w"], "h": p["h"]}
+
     def search(self, vector: np.ndarray, top_k: int) -> list[dict]:
         """top_k ближайших по косинусу, по убыванию, без порога.
 

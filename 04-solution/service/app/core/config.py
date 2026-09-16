@@ -65,4 +65,11 @@ DEFAULT_THRESHOLD_RERANK = float(
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 QDRANT_COLLECTION = os.environ.get("QDRANT_COLLECTION", "gallery")
 
+# Каталог кадров — только для тонкого клиента: показ кропов кандидатов и карт
+# влияния. На численный результат не влияет: пакетный прогон и загрузчик
+# галереи получают путь к изображениям аргументом команды. Значение по
+# умолчанию — точка монтирования из compose; если каталога нет, API и клиент
+# работают как прежде, но без картинок (состояние видно в /api/ui/state).
+IMAGES_DIR = Path(os.environ.get("IMAGES_DIR", "/data/images"))
+
 SERVICE_VERSION = "0.1.0"

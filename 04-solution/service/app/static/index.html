@@ -1,78 +1,164 @@
 <!doctype html>
-<!-- Тонкий клиент: загрузить кадр с bbox, увидеть кандидатов с оценками или
-     честный отказ. Рабочий минимум; оформление — отдельная задача. -->
+<!-- Тонкий клиент сервиса: кадр + рамка ТС -> кандидаты с оценкой уверенности,
+     честный отказ, выгрузка результата, разбор «на что смотрела модель».
+
+     Ни одного обращения наружу: стили и скрипт лежат рядом, шрифты системные,
+     значок страницы — data:. Проверяется поиском по исходникам (см. REPORT). -->
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Vehicle ReID — поиск по галерее</title>
-<style>
-  body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 46rem; }
-  fieldset { border: 1px solid #999; margin-bottom: 1rem; }
-  label { display: inline-block; margin: .25rem 1rem .25rem 0; }
-  input[type=number] { width: 6rem; }
-  table { border-collapse: collapse; margin-top: .5rem; }
-  td, th { border: 1px solid #999; padding: .25rem .75rem; text-align: left; }
-  #refusal { color: #a00; font-weight: bold; }
-  #error { color: #a00; white-space: pre-wrap; }
-  small { color: #555; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vehicle ReID — поиск транспортного средства по галерее</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23fcfcfb'/%3E%3Crect x='2.5' y='2.5' width='11' height='11' fill='none' stroke='%230b0b0b'/%3E%3Ccircle cx='8' cy='8' r='2.4' fill='%23e34948'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
-<h1>Поиск транспортного средства по визуальному признаку</h1>
-<p><small>Кадр + рамка ТС → кандидаты из галереи с оценкой уверенности.
-Если уверенного совпадения нет, сервис честно возвращает пустой ответ.
-Документация API: <a href="/docs">/docs</a> (OpenAPI: <a href="/openapi.json">/openapi.json</a>).</small></p>
 
-<form id="f">
-  <fieldset>
-    <legend>Запрос</legend>
-    <label>Кадр (JPEG/PNG): <input type="file" name="file" required></label><br>
-    <label>x <input type="number" name="x" value="0" required></label>
-    <label>y <input type="number" name="y" value="0" required></label>
-    <label>w <input type="number" name="w" min="1" value="100" required></label>
-    <label>h <input type="number" name="h" min="1" value="100" required></label><br>
-    <label>top-k <input type="number" name="top_k" min="1" max="100" value="10"></label>
-    <label>порог <input type="number" name="threshold" step="0.000001" placeholder="по умолчанию"></label>
-  </fieldset>
-  <button type="submit">Найти кандидатов</button>
-</form>
+<header class="top">
+  <div class="top-title">
+    <h1>Поиск транспортного средства по визуальному признаку</h1>
+    <p class="sub">Кадр и рамка ТС — кандидаты из галереи с оценкой уверенности.
+      Номерной знак не используется.</p>
+  </div>
+  <div class="top-side">
+    <div id="state-chip" class="chip chip-wait">состояние сервиса…</div>
+    <nav class="links">
+      <a href="/docs">Документация API</a>
+      <a href="/openapi.json">OpenAPI</a>
+    </nav>
+  </div>
+</header>
 
-<p id="error"></p>
-<div id="out" hidden>
-  <p id="refusal" hidden>Отказ: уверенного совпадения в галерее нет.</p>
-  <p id="meta"></p>
-  <table id="tbl" hidden>
-    <thead><tr><th>#</th><th>gallery_id</th><th>confidence</th></tr></thead>
-    <tbody></tbody>
-  </table>
+<!-- Хранилище не поднято или галерея не загружена: внятное состояние вместо
+     пустого экрана и ошибки 409 в консоли. -->
+<div id="banner" class="banner" hidden>
+  <div class="banner-head" id="banner-head"></div>
+  <p class="banner-body" id="banner-body"></p>
+  <pre class="banner-cmd" id="banner-cmd" hidden></pre>
 </div>
 
-<script>
-document.getElementById("f").addEventListener("submit", async (ev) => {
-  ev.preventDefault();
-  const err = document.getElementById("error"), out = document.getElementById("out");
-  err.textContent = ""; out.hidden = true;
-  const fd = new FormData(ev.target);
-  if (!fd.get("threshold")) fd.delete("threshold"); // пусто = порог сервиса
-  try {
-    const resp = await fetch("/api/search", { method: "POST", body: fd });
-    const data = await resp.json();
-    if (!resp.ok) { err.textContent = "Ошибка " + resp.status + ": " + JSON.stringify(data.detail); return; }
-    out.hidden = false;
-    document.getElementById("refusal").hidden = !data.refusal;
-    document.getElementById("meta").textContent =
-      "порог " + data.threshold.toFixed(6) +
-      (data.best_confidence !== null ? "; лучшая близость " + data.best_confidence.toFixed(6) : "");
-    const tbl = document.getElementById("tbl"), tb = tbl.querySelector("tbody");
-    tb.innerHTML = "";
-    tbl.hidden = data.candidates.length === 0;
-    data.candidates.forEach((c, i) => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${i + 1}</td><td>${c.gallery_id}</td><td>${c.confidence.toFixed(6)}</td>`;
-      tb.appendChild(tr);
-    });
-  } catch (e) { err.textContent = "Сеть/сервис: " + e; }
-});
-</script>
+<main class="grid">
+
+  <section class="panel query" aria-labelledby="h-query">
+    <h2 id="h-query">Запрос</h2>
+
+    <div id="drop" class="drop" tabindex="0" role="button"
+         aria-label="Выбрать кадр или перетащить файл">
+      <p class="drop-main">Перетащите кадр сюда</p>
+      <p class="drop-sub">или нажмите, чтобы выбрать файл — JPEG, PNG</p>
+      <input id="file" type="file" accept="image/jpeg,image/png,image/*" hidden>
+    </div>
+
+    <figure id="stage" class="stage" hidden>
+      <canvas id="canvas" aria-label="Кадр запроса; рамка объекта задаётся мышью"></canvas>
+      <figcaption id="stage-note" class="stage-note">
+        Обведите транспортное средство мышью. Рамку можно двигать и растягивать
+        за углы.
+      </figcaption>
+    </figure>
+
+    <div id="qform" class="qform" hidden>
+      <div class="row row-file">
+        <span class="k">Кадр</span>
+        <span class="v" id="file-name">—</span>
+        <span class="k" id="file-size"></span>
+        <button type="button" class="link-btn" id="change-file">заменить</button>
+      </div>
+
+      <fieldset class="bbox">
+        <legend>Рамка объекта, пиксели кадра</legend>
+        <label>x <input type="number" id="bx" min="0" step="1"></label>
+        <label>y <input type="number" id="by" min="0" step="1"></label>
+        <label>w <input type="number" id="bw" min="1" step="1"></label>
+        <label>h <input type="number" id="bh" min="1" step="1"></label>
+        <div class="bbox-actions">
+          <button type="button" class="link-btn" id="whole-frame">весь кадр</button>
+          <button type="button" class="link-btn" id="clear-box">сбросить</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="params">
+        <legend>Параметры поиска</legend>
+        <label class="p">Кандидатов, top-k
+          <input type="number" id="topk" min="1" max="100" value="10"></label>
+        <label class="p">Порог отказа
+          <input type="number" id="thr" step="0.000001" placeholder="по умолчанию"></label>
+        <p class="hint" id="thr-hint">Пусто — порог сервиса.</p>
+      </fieldset>
+
+      <button type="button" id="run" class="primary" disabled>Найти кандидатов</button>
+      <p id="error" class="error" hidden></p>
+    </div>
+  </section>
+
+  <section class="panel results" aria-labelledby="h-results">
+    <div class="results-head">
+      <h2 id="h-results">Результат</h2>
+      <div class="export" id="export" hidden>
+        <span class="k">Выгрузить</span>
+        <button type="button" class="link-btn" id="exp-csv">CSV</button>
+        <button type="button" class="link-btn" id="exp-json">JSON</button>
+      </div>
+    </div>
+
+    <p id="placeholder" class="placeholder">
+      Результат появится здесь: кандидаты с оценкой уверенности либо
+      обоснованный отказ, если уверенного совпадения в галерее нет.
+    </p>
+
+    <!-- Отказ — не ошибка и не пустота: система проверила и не нашла. -->
+    <div id="refusal" class="refusal" hidden>
+      <h3>Уверенного совпадения нет</h3>
+      <p class="refusal-body">Галерея просмотрена целиком, ни один объект не
+        прошёл порог. Это ответ системы, а не сбой.</p>
+      <div class="scale" id="scale"></div>
+      <dl class="facts" id="refusal-facts"></dl>
+      <button type="button" class="link-btn" id="show-below">
+        Показать ближайшие ниже порога</button>
+      <p class="hint" id="below-note" hidden>Ниже показаны объекты, НЕ прошедшие
+        порог. Совпадением они не являются — это материал для ручной проверки.</p>
+    </div>
+
+    <div id="summary" class="summary" hidden></div>
+    <ol id="cards" class="cards" hidden></ol>
+  </section>
+</main>
+
+<!-- Разбор пары: точное разложение косинуса по областям изображения. -->
+<section id="explain" class="panel explain" hidden aria-labelledby="h-explain">
+  <div class="results-head">
+    <h2 id="h-explain">На что смотрела модель</h2>
+    <button type="button" class="link-btn" id="explain-close">закрыть</button>
+  </div>
+  <p class="explain-lead" id="explain-lead"></p>
+  <div class="explain-body">
+    <figure class="tile">
+      <canvas id="ex-q"></canvas>
+      <figcaption>Запрос<span class="muted" id="ex-q-note"></span></figcaption>
+    </figure>
+    <figure class="tile">
+      <canvas id="ex-g"></canvas>
+      <figcaption>Кандидат<span class="muted" id="ex-g-note"></span></figcaption>
+    </figure>
+    <div class="explain-side">
+      <canvas id="ex-bar" class="bar" height="16"></canvas>
+      <div class="bar-ticks" id="ex-ticks"></div>
+      <ul class="legend">
+        <li><i class="sw sw-pos"></i>область <b>поддерживает</b> совпадение</li>
+        <li><i class="sw sw-neg"></i>область <b>снижает</b> близость</li>
+      </ul>
+      <dl class="facts" id="ex-facts"></dl>
+      <p class="hint">Разложение точное: сумма вкладов и свободного члена равна
+        косинусу. Невязка — уровень округления float32, она показана выше.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span id="foot-service">—</span>
+  <span id="foot-model" class="muted"></span>
+</footer>
+
+<script src="/static/app.js"></script>
 </body>
 </html>
