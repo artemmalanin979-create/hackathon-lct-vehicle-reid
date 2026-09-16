@@ -1,0 +1,29 @@
+{
+  "threshold": 0.49937235233589916,
+  "queries_with_candidates": 1078,
+  "queries_refused": 32,
+  "refused_share": 0.0288,
+  "rerank": true,
+  "score_scale": "rerank_confidence_1_minus_distance",
+  "rerank_params": [
+    6,
+    3,
+    0.3
+  ],
+  "queries": 1110,
+  "gallery": 750,
+  "embeddings_shape": [
+    1860,
+    512
+  ],
+  "embed_elapsed_s": 89.73,
+  "rank_elapsed_s": 1.058,
+  "total_elapsed_s": 91.092,
+  "model": "osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)",
+  "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+  "versions": {
+    "python": "3.13.15",
+    "numpy": "2.5.3",
+    "onnxruntime": "1.30.0"
+  }
+}

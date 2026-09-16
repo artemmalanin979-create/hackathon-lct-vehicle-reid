@@ -41,3 +41,8 @@ mlruns/
 # Вырожденные прогоны сплита — воспроизводятся eval_degenerate.py
 04-solution/split/out/evalrun/*.npz
 04-solution/split/out/evalrun/cli_*.json
+
+# Финальные сдаваемые артефакты — исключение из правила *.npy:
+# embeddings.npy входит в состав сдачи (ТЗ разд. 8)
+!04-solution/service/artifacts-final/
+!04-solution/service/artifacts-final/embeddings.npy
