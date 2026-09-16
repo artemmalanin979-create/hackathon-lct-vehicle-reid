@@ -37,3 +37,7 @@ mlruns/
 
 # Персональные данные участников — не в git (уезжают только в презентацию)
 05-presentation/team-data.md
+
+# Вырожденные прогоны сплита — воспроизводятся eval_degenerate.py
+04-solution/split/out/evalrun/*.npz
+04-solution/split/out/evalrun/cli_*.json
