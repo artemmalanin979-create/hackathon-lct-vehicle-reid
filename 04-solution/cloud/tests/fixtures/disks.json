@@ -1,0 +1,5 @@
+[
+  {"id":"epd1","name":"lct-gpu-boot","type_id":"network-ssd","zone_id":"ru-central1-d","size":"64424509440","status":"READY","instance_ids":["fhm1"]},
+  {"id":"epd2","name":"lct-gpu-preempt-boot","type_id":"network-ssd","zone_id":"ru-central1-d","size":"64424509440","status":"READY","instance_ids":["fhm2"]},
+  {"id":"epd3","name":"old-hdd","type_id":"network-hdd","zone_id":"ru-central1-a","size":"107374182400","status":"READY","instance_ids":[]}
+]

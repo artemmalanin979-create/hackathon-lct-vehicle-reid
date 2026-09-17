@@ -1,0 +1,112 @@
+=============== fd8qb5sstf8h1lk8pmb8
+id: fd8qb5sstf8h1lk8pmb8
+folder_id: standard-images
+created_at: "2026-08-13T10:15:57Z"
+name: ubuntu-2204-lts-cuda-12-2-v20260813
+description: ubuntu-2204-lts-cuda-12-2 image
+labels:
+  abc_svc: yc_infra
+  x-hopper-operation-id: d9pph57vop3m19bc477c
+  x-hopper-source-image-id: fd86or2gmib1ghschkb4
+family: ubuntu-2204-lts-cuda-12-2
+size: "32212254720"
+storage_size: "13086228480"
+min_disk_size: "32212254720"
+product_ids:
+  - f2ekp8luu7a0vuhvmisf
+status: READY
+os:
+  type: LINUX
+pooled: true
+hardware_generation:
+  legacy_features:
+    pci_topology: PCI_TOPOLOGY_V2
+
+=============== fd8d70pq4ici5rur6o45
+id: fd8d70pq4ici5rur6o45
+folder_id: standard-images
+created_at: "2026-08-13T14:43:32Z"
+name: ubuntu-2404-lts-secureboot-cuda-13-0-v20260813
+description: ubuntu-2404-lts-secureboot-cuda-13-0 v202608131649
+labels:
+  yc-gpu-version: "202608131649"
+family: ubuntu-2404-lts-secureboot-cuda-13-0
+size: "32212254720"
+storage_size: "14365491200"
+min_disk_size: "32212254720"
+product_ids:
+  - f2e66ejl40br0gt2sk82
+status: READY
+os:
+  type: LINUX
+pooled: true
+hardware_generation:
+  generation2_features:
+    secure_boot_template_id: fd8rpu5v7oi5n9t27483
+
+=============== fd8rtdtnvblq825b3k8s
+id: fd8rtdtnvblq825b3k8s
+folder_id: standard-images
+created_at: "2026-04-27T11:22:39Z"
+name: ubuntu-2204-lts-cuda-11-4-v20260427
+description: ubuntu-2204-lts-cuda-11-4 image
+labels:
+  abc_svc: yc_infra
+  x-hopper-operation-id: d9ptpgpp1q4f27oiaeas
+  x-hopper-source-image-id: fd8ara646353nvapu1n3
+family: ubuntu-2204-lts-cuda-11-4
+size: "32212254720"
+storage_size: "27032289280"
+min_disk_size: "32212254720"
+product_ids:
+  - f2e9s8mjqb93v7otv7ra
+status: READY
+os:
+  type: LINUX
+pooled: true
+hardware_generation:
+  legacy_features:
+    pci_topology: PCI_TOPOLOGY_V1
+
+=============== fd8til7icaqj041vlb4j
+id: fd8til7icaqj041vlb4j
+folder_id: standard-images
+created_at: "2026-08-13T14:04:32Z"
+name: ubuntu-2004-lts-secureboot-cuda-12-2-v20260813
+description: ubuntu-2004-lts-secureboot-cuda-12-2 v202608131647
+labels:
+  yc-gpu-version: "202608131647"
+family: ubuntu-2004-lts-secureboot-cuda-12-2
+size: "32212254720"
+storage_size: "19889389568"
+min_disk_size: "32212254720"
+product_ids:
+  - f2eqmphuroohnvhdjr8p
+status: READY
+os:
+  type: LINUX
+pooled: true
+hardware_generation:
+  generation2_features:
+    secure_boot_template_id: fd8rpu5v7oi5n9t27483
+
+=============== fd8jsf3sgh6ivanade5j
+id: fd8jsf3sgh6ivanade5j
+folder_id: standard-images
+created_at: "2026-09-14T18:23:01Z"
+name: container-optimized-image-gpu-v20260914
+description: Container Optimized Image GPU 3.1.102
+family: container-optimized-image-gpu
+size: "53687091200"
+storage_size: "13715374080"
+min_disk_size: "53687091200"
+product_ids:
+  - f2ea6s2emfmguno508es
+status: READY
+os:
+  type: LINUX
+pooled: true
+hardware_generation:
+  legacy_features:
+    pci_topology: PCI_TOPOLOGY_V2
+

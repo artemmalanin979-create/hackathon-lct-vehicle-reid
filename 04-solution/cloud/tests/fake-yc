@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Заглушка yc для локального теста status.sh/up.sh/down.sh: отдаёт фикстуры, ничего не делает.
+# Изменяющие команды (create/delete/start/...) — печатают в stderr и завершаются ошибкой, чтобы тест это заметил.
+set -euo pipefail
+FX="$(dirname "$0")/fixtures"
+args="$*"
+case "$args" in
+  "version") echo "Yandex Cloud CLI 1.34.0 linux/amd64" ;;
+  "config profile list") echo "lct2026 ACTIVE" ;;
+  "config get folder-id") echo "b1grruo0n4tcqspfngdf" ;;
+  "compute image get --id "*) echo '{"id":"fd8qb5sstf8h1lk8pmb8","name":"ubuntu-2204-lts-cuda-12-2-v20260813","family":"ubuntu-2204-lts-cuda-12-2","created_at":"2026-08-13T10:15:57Z"}' ;;
+  "compute image get-latest-from-family "*) echo '{"id":"fd8qb5sstf8h1lk8pmb8"}' ;;
+  "vpc network get --name lct-net"*) echo 'ERROR: execute command: run command: network with name "lct-net" not found' >&2; exit 1 ;;
+  "vpc subnet get --name lct-subnet"*) echo 'ERROR: execute command: run command: subnet with name "lct-subnet" not found' >&2; exit 1 ;;
+  "compute instance get --name lct-gpu"*) echo 'ERROR: instance with name "lct-gpu" not found' >&2; exit 1 ;;
+  "compute instance list"*) cat "$FX/instances.json" ;;
+  "compute disk list"*) cat "$FX/disks.json" ;;
+  "vpc address list"*) cat "$FX/addresses.json" ;;
+  "compute snapshot list"*) cat "$FX/snapshots.json" ;;
+  "compute image list"*) echo "[]" ;;
+  "compute filesystem list"*) echo "[]" ;;
+  "vpc network list"*) echo '[{"id":"enp1","name":"default"},{"id":"enp2","name":"lct-net"}]' ;;
+  "vpc subnet list"*) echo '[{"id":"e9b1","name":"default-ru-central1-a","zone_id":"ru-central1-a"},{"id":"e9b2","name":"lct-subnet","zone_id":"ru-central1-d"}]' ;;
+  *create*|*delete*|*start*|*stop*|*update*|*attach*) echo "FAKE-YC: изменяющая команда вызвана: $args" >&2; exit 99 ;;
+  *) echo "FAKE-YC: нет фикстуры для: $args" >&2; exit 98 ;;
+esac

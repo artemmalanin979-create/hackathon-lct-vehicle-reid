@@ -1,0 +1,14 @@
+[
+  {"id":"fhm1","name":"lct-gpu","status":"RUNNING","zone_id":"ru-central1-d","platform_id":"standard-v3-t4",
+   "resources":{"memory":"17179869184","cores":"4","core_fraction":"100","gpus":"1"},
+   "network_interfaces":[{"primary_v4_address":{"address":"10.10.0.5","one_to_one_nat":{"address":"158.160.1.2"}}}],
+   "scheduling_policy":{"preemptible":false},"boot_disk":{"auto_delete":true,"disk_id":"epd1"}},
+  {"id":"fhm2","name":"lct-gpu-preempt","status":"RUNNING","zone_id":"ru-central1-d","platform_id":"standard-v3-t4i",
+   "resources":{"memory":"17179869184","cores":"4","core_fraction":"100","gpus":"1"},
+   "network_interfaces":[{"primary_v4_address":{"address":"10.10.0.6"}}],
+   "scheduling_policy":{"preemptible":true},"boot_disk":{"auto_delete":true,"disk_id":"epd2"}},
+  {"id":"fhm3","name":"stopped-vm","status":"STOPPED","zone_id":"ru-central1-a","platform_id":"standard-v3",
+   "resources":{"memory":"2147483648","cores":"2","core_fraction":"20","gpus":"0"},
+   "network_interfaces":[{"primary_v4_address":{"address":"10.128.0.7"}}],
+   "scheduling_policy":{},"boot_disk":{"auto_delete":true,"disk_id":"epd3"}}
+]

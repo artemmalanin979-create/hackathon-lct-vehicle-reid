@@ -1,0 +1,54 @@
+{
+  "_comment": "Цены Yandex Cloud, регион Россия, RUB с НДС, за час. Снято 2026-09-17 из таблицы «Цены для региона Россия» страниц docs/compute/pricing и docs/vpc/pricing (таблица рендерится компонентом PriceList из API https://yandex.cloud/api/priceList/getPriceList; полный JSON — docs/pricelist-compute.json, docs/pricelist-vpc.json). Действуют с 2026-05-01 (T4i preemptible GPU — с 2026-07-30, IP — с 2026-01-01).",
+  "_sources": [
+    "https://yandex.cloud/ru/docs/compute/pricing#prices",
+    "https://yandex.cloud/ru/docs/vpc/pricing#prices-public-ip",
+    "https://yandex.cloud/ru/price-list?services=dn22pas77ftg9h3f2djj%2Cdn28okfvqh19eiue6l2m"
+  ],
+  "platform": {
+    "standard-v3-t4": {
+      "label": "Intel Ice Lake with NVIDIA T4 (16 ГБ VRAM)",
+      "gpu": 70.27,  "gpu_sku": "dn20ml8ifdps6m7048an compute_gpu.vm.gpu.standard.v3-t4",
+      "cpu": 1.15,   "cpu_sku": "dn24b7m6qol7tb7tukga compute_gpu.vm.cpu.c100.standard.v3-t4",
+      "ram": 0.3074, "ram_sku": "dn2lg2hrvbn5b8lm7em4 compute_gpu.vm.ram.standard.v3-t4",
+      "gpu_preemptible": 17.56,  "gpu_preemptible_sku": "dn2cpk4mc82b1vib72e5 compute_gpu.vm.gpu.standard.v3-t4.preemptible",
+      "cpu_preemptible": 0.3184, "cpu_preemptible_sku": "dn2lsfskfirek2985fnd compute_gpu.vm.cpu.c100.standard.v3-t4.preemptible",
+      "ram_preemptible": 0.0768, "ram_preemptible_sku": "dn2im0g43iedeohe4sac compute_gpu.vm.ram.standard.v3-t4.preemptible"
+    },
+    "standard-v3-t4i": {
+      "label": "Intel Ice Lake with T4i (24 ГБ VRAM)",
+      "gpu": 158.11, "gpu_sku": "dn2hql9evci880d8jq7i compute_gpu.vm.gpu.gpu-standard.t4i",
+      "cpu": 1.15,   "cpu_sku": "dn242l2ivnhdd5so2oga compute_gpu.vm.cpu.c100.gpu-standard.t4i",
+      "ram": 0.3074, "ram_sku": "dn290pbmohupnus9ajb7 compute_gpu.vm.ram.gpu-standard.t4i",
+      "gpu_preemptible": 21.09,  "gpu_preemptible_sku": "dn2qlml2u48bng4jgilh compute_gpu.vm.gpu.gpu-standard.preemptible.t4i",
+      "cpu_preemptible": 1.15,   "cpu_preemptible_sku": "dn2960mi7268n67o8iae compute_gpu.vm.cpu.c100.gpu-standard.preemptible.t4i",
+      "ram_preemptible": 0.3074, "ram_preemptible_sku": "dn25rffeums4j1ku5649 compute_gpu.vm.ram.gpu-standard.preemptible.t4i"
+    },
+    "standard-v3": {
+      "label": "Intel Ice Lake (без GPU, 100% vCPU)",
+      "gpu": 0, "cpu": 1.24, "ram": 0.33,
+      "gpu_preemptible": 0, "cpu_preemptible": 0.34, "ram_preemptible": 0.083
+    }
+  },
+  "disk": {
+    "network-ssd": 0.0199,
+    "network-ssd_sku": "dn27ajm6m8mnfcshbi61 nbs.network-nvme.allocated «Быстрый диск (SSD)»",
+    "network-hdd": 0.0048,
+    "network-hdd_sku": "dn2al287u6jr3a710u8g nbs.network-hdd.allocated «Стандартный диск (HDD)»",
+    "network-ssd-nonreplicated": 0.0147,
+    "network-ssd-nonreplicated_sku": "dn24kdllggk8ahsol15g nbs.network-ssd-nonreplicated.allocated"
+  },
+  "public_ip": {
+    "active": 0.26352,
+    "active_sku": "dn229q5mnmp58t58tfel network.public_fips «Публичный IP-адрес (динамический или статический)»",
+    "inactive_reserved_extra": 0.34038,
+    "inactive_reserved_extra_sku": "dn2nqa0nqffbhihsq2n5 network.public_fips.deallocated «Резервирование неактивного публичного статического IP-адреса»"
+  },
+  "snapshot_gb": 0.0051,
+  "snapshot_sku": "dn2d7s257l01hsl9rc6d compute.snapshot",
+  "image_gb": 0.0051,
+  "image_sku": "dn2gnu9gs67vf056r8dj compute.image",
+  "filesystem_ssd_gb": 0.0229,
+  "filesystem_ssd_sku": "dn2c1s62eq7fouf72mu1 compute.filesystem.ssd.v1",
+  "egress_traffic": {"free_gb_per_month": 100, "over_free_per_gb": 1.42, "sku": "dn28ml7sjbb5v98jkuj3 network.egress.inet"}
+}

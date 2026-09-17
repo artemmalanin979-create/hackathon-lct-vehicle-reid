@@ -1,0 +1,4 @@
+[
+  {"id":"e2a1","name":"lct-static","external_ipv4_address":{"address":"158.160.9.9","zone_id":"ru-central1-d"},"reserved":true,"used":false},
+  {"id":"e2a2","name":"someone-else","external_ipv4_address":{"address":"158.160.9.10","zone_id":"ru-central1-a"},"reserved":true,"used":true}
+]

@@ -1,0 +1,79 @@
+# checks.txt — проверки синтаксиса, 2026-09-17 11:58:19
+
+## bash -n
+OK   up.sh
+OK   down.sh
+OK   status.sh
+OK   lct-lib.sh
+OK   lct.env
+OK   tests/fake-yc
+OK   tests/container-test.sh
+OK   tests/ci-extract/lct-provision.sh
+
+## shellcheck 0.11.0 (tools/shellcheck, статический бинарник; -x = следовать source)
+OK   up.sh (0 замечаний)
+OK   down.sh (0 замечаний)
+OK   status.sh (0 замечаний)
+OK   tests/fake-yc (0 замечаний)
+OK   tests/container-test.sh (0 замечаний)
+OK   lct-lib.sh (0 замечаний)
+OK   lct.env (0 замечаний)
+OK   tests/ci-extract/lct-provision.sh (0 замечаний)
+
+## cloud-init.yaml
+OK   валидный YAML (PyYAML 6.0.2); верхний уровень: hostname, manage_etc_hosts, ssh_pwauth, timezone, users, package_update, package_upgrade, write_files, runcmd, final_message
+OK   write_files: /etc/profile.d/lct.sh, /opt/lct/smoke.py, /opt/lct/blender-smoke.py, /usr/local/sbin/lct-provision.sh
+OK   первая строка: #cloud-config
+OK   плейсхолдер __SSH_PUBKEY__ присутствует: True
+OK   py_compile tests/ci-extract/smoke.py
+OK   py_compile tests/ci-extract/blender-smoke.py
+
+## jq
+OK   prices.json — валидный JSON
+
+## yc --help: используемые команды/флаги (yc-help/*.txt, CLI 1.34.0)
+OK   yc-help/compute_instance_create.txt: --
+OK   yc-help/compute_instance_create.txt: --name
+OK   yc-help/compute_instance_create.txt: --hostname
+OK   yc-help/compute_instance_create.txt: --zone
+OK   yc-help/compute_instance_create.txt: --platform
+OK   yc-help/compute_instance_create.txt: --cores
+OK   yc-help/compute_instance_create.txt: --memory
+OK   yc-help/compute_instance_create.txt: --gpus
+OK   yc-help/compute_instance_create.txt: --preemptible
+OK   yc-help/compute_instance_create.txt: --create-boot-disk
+OK   yc-help/compute_instance_create.txt: --network-interface
+OK   yc-help/compute_instance_create.txt: --metadata-from-file
+OK   yc-help/compute_instance_create.txt: --metadata
+OK   yc-help/compute_instance_create.txt: --labels
+OK   yc-help/compute_instance_create.txt: --description
+OK   yc-help/compute_instance_create.txt: image-id
+OK   yc-help/compute_instance_create.txt: auto-delete
+OK   yc-help/compute_instance_create.txt: subnet-name
+OK   yc-help/compute_instance_create.txt: nat-ip-version
+OK   yc-help/vpc_network_create.txt: --
+OK   yc-help/vpc_network_create.txt: --name
+OK   yc-help/vpc_network_create.txt: --description
+OK   yc-help/vpc_subnet_create.txt: --
+OK   yc-help/vpc_subnet_create.txt: --name
+OK   yc-help/vpc_subnet_create.txt: --network-name
+OK   yc-help/vpc_subnet_create.txt: --zone
+OK   yc-help/vpc_subnet_create.txt: --range
+OK   yc-help/vpc_subnet_create.txt: --description
+OK   yc-help/compute_instance_delete.txt: --
+OK   yc-help/compute_instance_delete.txt: --name
+OK   yc-help/compute_disk_delete.txt: --
+OK   yc-help/compute_disk_delete.txt: --id
+OK   yc-help/vpc_address_delete.txt: --
+OK   yc-help/vpc_address_delete.txt: --id
+OK   yc-help/vpc_subnet_delete.txt: --
+OK   yc-help/vpc_subnet_delete.txt: --name
+OK   yc-help/vpc_network_delete.txt: --
+OK   yc-help/vpc_network_delete.txt: --name
+OK   yc-help/compute_instance_stop.txt: --
+OK   yc-help/compute_instance_stop.txt: --name
+
+## тесты
+OK   tests/fake-yc: status.sh = 114.50 ₽/ч на фикстурах (ручной расчёт 114.50); up.sh/down.sh --dry-run — команды напечатаны, изменяющие вызовы не выполнялись
+OK   реальные ./up.sh --dry-run, ./down.sh --dry-run, ./status.sh — только get/list, отработали
+OK   tests/container-test.sh (podman, ubuntu:22.04, без GPU/torch): apt upgrade+deps, uv → Python 3.12.14, dry-run резолва torch 2.14.0+cu126, onnxruntime-gpu 1.26.0 + onnx/numpy/pillow, Blender 4.5.14 (sha256 ок, blender -b --version ок), идемпотентный повтор шагов — CONTAINER_TEST_OK (лог tests/ci-out/container-test.log). Найдена и исправлена ошибка: пакет libxrandr1 → libxrandr2
