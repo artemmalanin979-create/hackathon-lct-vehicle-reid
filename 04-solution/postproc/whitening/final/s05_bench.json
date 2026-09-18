@@ -1,0 +1,97 @@
+{
+  "n_images": 120,
+  "cpu": "Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz",
+  "threads4": {
+    "osnet": {
+      "full_pipeline_b1_ms": 256.3,
+      "net_only_b1_ms": 127.1
+    },
+    "ainv2": {
+      "full_pipeline_b1_ms": 230.4,
+      "net_only_b1_ms": 139.3
+    },
+    "preprocess_only_b1_ms": 46.1
+  },
+  "threads1": {
+    "osnet": {
+      "full_pipeline_b1_ms": 243.8,
+      "net_only_b1_ms": 193.8
+    },
+    "ainv2": {
+      "full_pipeline_b1_ms": 277.7,
+      "net_only_b1_ms": 233.7
+    },
+    "preprocess_only_b1_ms": 44.9
+  },
+  "lw_matmul_512_us": 98.8,
+  "lw_matmul_1024_us": 161.6,
+  "weights": {
+    "osnet.onnx": {
+      "bytes": 8836743,
+      "sha256_16": "4aaad3e5db648618"
+    },
+    "ain_v2.onnx": {
+      "bytes": 8742779,
+      "sha256_16": "310d74bddf9e12bb"
+    },
+    "lw_osnet_P.npy": {
+      "bytes": 1048704,
+      "sha256_16": "ae4acd9954fbd2ab"
+    },
+    "lw_osnet_m.npy": {
+      "bytes": 2176,
+      "sha256_16": "cabb521a9ad8c9f0"
+    },
+    "lw_ainv2_P.npy": {
+      "bytes": 1048704,
+      "sha256_16": "ba645116725cef5d"
+    },
+    "lw_ainv2_m.npy": {
+      "bytes": 2176,
+      "sha256_16": "2371ac7ac8b9a320"
+    },
+    "lw_ens_w1.0_P.npy": {
+      "bytes": 1048704,
+      "sha256_16": "842d8e4be63d37ec"
+    },
+    "lw_ens_w1.0_m.npy": {
+      "bytes": 2176,
+      "sha256_16": "9ace3aca2b3a3498"
+    },
+    "lw_ens_w0.5_P.npy": {
+      "bytes": 1048704,
+      "sha256_16": "824ae5dcf35d4bbe"
+    },
+    "lw_ens_w0.5_m.npy": {
+      "bytes": 2176,
+      "sha256_16": "c94fc559ca14accf"
+    },
+    "lw_cat_w1.0_P.npy": {
+      "bytes": 4194432,
+      "sha256_16": "e885fdfe091935e8"
+    },
+    "lw_cat_w1.0_m.npy": {
+      "bytes": 4224,
+      "sha256_16": "6836d95640518e10"
+    },
+    "lw_cat_w0.5_P.npy": {
+      "bytes": 4194432,
+      "sha256_16": "00dd73c06b93f4b4"
+    },
+    "lw_cat_w0.5_m.npy": {
+      "bytes": 4224,
+      "sha256_16": "cd17762b7aeedc23"
+    }
+  },
+  "config_bytes": {
+    "a: OSNet": 8836743,
+    "b: OSNet + Lw": 9887623,
+    "c: OSNet + ain_v2": 17579522,
+    "d1_w1.0: OSNet + ain_v2 + Lw_ens": 18630402,
+    "d2_w1.0: OSNet + ain_v2 + Lw_osnet + Lw_ainv2": 19681282,
+    "d3_w1.0: OSNet + ain_v2 + Lw_cat(1024)": 21778178,
+    "d1_w0.5: OSNet + ain_v2 + Lw_ens": 18630402,
+    "d2_w0.5: OSNet + ain_v2 + Lw_osnet + Lw_ainv2": 19681282,
+    "d3_w0.5: OSNet + ain_v2 + Lw_cat(1024)": 21778178
+  }
+}

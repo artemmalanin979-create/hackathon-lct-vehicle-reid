@@ -1,0 +1,38 @@
+{
+  "n": 64,
+  "variants_in_stage_code": [
+    "base",
+    "plate_ring",
+    "shift_ring",
+    "mirror_ring",
+    "side_ring",
+    "rand1_ring",
+    "rand2_ring",
+    "platepad_ring",
+    "shiftpad_ring",
+    "plate_gray127",
+    "shift_gray127",
+    "plate_desat",
+    "shift_desat"
+  ],
+  "osnet": {
+    "model": "/home/fedora/lct-reid/repo/04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx",
+    "sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "cos_min": 0.9999999999992549,
+    "cos_mean": 0.999999999999569,
+    "max_abs_diff": 2.8079403944364367e-07,
+    "pass_cos_ge_0.9999": true,
+    "batch64_seconds": 11.64,
+    "img_per_s": 5.5
+  },
+  "ainv2": {
+    "model": "/home/fedora/lct-reid/weights/ain_v2_s2.onnx",
+    "sha256": "310d74bddf9e12bbf3f1e66f1f2c882afec14e8d21b902a6fc8adb59bac64244",
+    "cos_min": 0.9999999999992278,
+    "cos_mean": 0.9999999999995774,
+    "max_abs_diff": 2.3088771023208055e-07,
+    "pass_cos_ge_0.9999": true,
+    "batch64_seconds": 12.96,
+    "img_per_s": 4.9
+  }
+}
