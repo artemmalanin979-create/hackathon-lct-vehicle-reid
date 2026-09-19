@@ -1,0 +1,86 @@
+{
+ "T0_canon": {
+  "mAP": 0.7620600309577549,
+  "Rank-1": 0.7175480769230769,
+  "Rank-5": 0.8653846153846154,
+  "mINP": 0.7361266909460582,
+  "num_valid_queries": 832,
+  "scope": "full_gallery",
+  "mAP_by_query_average": {
+   "valid_queries": 0.7620600309577549,
+   "all_queries_zero": 0.5712017529341009
+  },
+  "mAP_query_average": "valid_queries",
+  "mAP_denominator": 832
+ },
+ "T1_consistent_perm": {
+  "mAP": 0.7620600309577549,
+  "Rank-1": 0.7175480769230769,
+  "Rank-5": 0.8653846153846154,
+  "mINP": 0.7361266909460582,
+  "num_valid_queries": 832,
+  "scope": "full_gallery",
+  "mAP_by_query_average": {
+   "valid_queries": 0.7620600309577549,
+   "all_queries_zero": 0.5712017529341009
+  },
+  "mAP_query_average": "valid_queries",
+  "mAP_denominator": 832
+ },
+ "T1b_scores_only_perm": {
+  "mAP": 0.011601121641871517,
+  "Rank-1": 0.002403846153846154,
+  "Rank-5": 0.013221153846153846,
+  "mINP": 0.008875869290291227,
+  "num_valid_queries": 832,
+  "scope": "full_gallery",
+  "mAP_by_query_average": {
+   "valid_queries": 0.011601121641871517,
+   "all_queries_zero": 0.008695615500934326
+  },
+  "mAP_query_average": "valid_queries",
+  "mAP_denominator": 832
+ },
+ "T2_gallery_vid_subst": {
+  "mAP": 0.008935437507323545,
+  "Rank-1": 0.0,
+  "Rank-5": 0.006024096385542169,
+  "mINP": 0.005598654905004868,
+  "num_valid_queries": 830,
+  "scope": "full_gallery",
+  "mAP_by_query_average": {
+   "valid_queries": 0.008935437507323545,
+   "all_queries_zero": 0.00668145327124193
+  },
+  "mAP_query_average": "valid_queries",
+  "mAP_denominator": 830
+ },
+ "T3_all_cams_equal": {
+  "mAP": null,
+  "Rank-1": null,
+  "Rank-5": null,
+  "mINP": null,
+  "num_valid_queries": 0,
+  "scope": "full_gallery",
+  "mAP_by_query_average": {
+   "valid_queries": null,
+   "all_queries_zero": 0.0
+  },
+  "mAP_query_average": "valid_queries",
+  "mAP_denominator": 0
+ },
+ "T3b_all_cams_distinct": {
+  "mAP": 0.8764525667709537,
+  "Rank-1": 0.9759615384615384,
+  "Rank-5": 0.9903846153846154,
+  "mINP": 0.7672764783009897,
+  "num_valid_queries": 832,
+  "scope": "full_gallery",
+  "mAP_by_query_average": {
+   "valid_queries": 0.8764525667709537,
+   "all_queries_zero": 0.6569446266247149
+  },
+  "mAP_query_average": "valid_queries",
+  "mAP_denominator": 832
+ }
+}

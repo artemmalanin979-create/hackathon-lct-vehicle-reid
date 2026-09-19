@@ -1,0 +1,164 @@
+{
+ "baseline": {
+  "tests": 60,
+  "failed": [],
+  "errors": [],
+  "passed": [
+   "test_metrics.BlindSpotTests.test_audit_counts_and_one_based_ranks",
+   "test_metrics.BlindSpotTests.test_distance_pr_curve_all_fields",
+   "test_metrics.BlindSpotTests.test_distance_top_score_original_units",
+   "test_metrics.BlindSpotTests.test_float32_scores_are_honest_exact_ties",
+   "test_metrics.BlindSpotTests.test_float64_near_float32_ranking",
+   "test_metrics.BlindSpotTests.test_float64_near_float32_unknown_threshold",
+   "test_metrics.BlindSpotTests.test_full_output_fraction_oracle",
+   "test_metrics.BlindSpotTests.test_keys_combined_with_every_filter",
+   "test_metrics.BlindSpotTests.test_keys_three_cycle_and_permutations",
+   "test_metrics.BlindSpotTests.test_unknown_threshold_equality_all_modes",
+   "test_metrics.MetricTests.test_H01_single_perfect",
+   "test_metrics.MetricTests.test_H02_single_rank2_matlab",
+   "test_metrics.MetricTests.test_H02_single_rank2_step",
+   "test_metrics.MetricTests.test_H03_multiple_matches",
+   "test_metrics.MetricTests.test_H04_cmc_first_inp_last",
+   "test_metrics.MetricTests.test_H05_rank5_boundary",
+   "test_metrics.MetricTests.test_H06_remove_same_id_camera",
+   "test_metrics.MetricTests.test_H07_macro_queries_not_positives",
+   "test_metrics.MetricTests.test_H08_invalid_queries_excluded",
+   "test_metrics.MetricTests.test_H09_camera_policy_distinction",
+   "test_metrics.MetricTests.test_H10_ties_column_order",
+   "test_metrics.MetricTests.test_H11_empty_gallery",
+   "test_metrics.MetricTests.test_H12_identity_confusion_and_recall_ceiling",
+   "test_metrics.MetricTests.test_H12_presence_confusion",
+   "test_metrics.MetricTests.test_H13_wrong_identity_not_tp",
+   "test_metrics.MetricTests.test_H14_pr_ties_are_threshold_groups",
+   "test_metrics.MetricTests.test_H15_pairwise_counts",
+   "test_metrics.MetricTests.test_absent_query_survives_for_refusal",
+   "test_metrics.MetricTests.test_all_positives_filtered",
+   "test_metrics.MetricTests.test_camera_exclusion_applies_before_threshold",
+   "test_metrics.MetricTests.test_distance_and_similarity_agree",
+   "test_metrics.MetricTests.test_embeddings",
+   "test_metrics.MetricTests.test_empty_queries",
+   "test_metrics.MetricTests.test_exhaustive_small_random_levels",
+   "test_metrics.MetricTests.test_frame_number_is_scoped_by_camera",
+   "test_metrics.MetricTests.test_junk_frame_and_explicit_exclusions",
+   "test_metrics.MetricTests.test_masked_items_have_zero_influence",
+   "test_metrics.MetricTests.test_no_magic_junk_id",
+   "test_metrics.MetricTests.test_query_weight_not_identity_weight",
+   "test_metrics.MetricTests.test_ranking_invariant_under_monotone_score_transform",
+   "test_metrics.MetricTests.test_reject_all_and_accept_all",
+   "test_metrics.MetricTests.test_threshold_inclusive",
+   "test_metrics.MetricTests.test_ties_fixed_keys_survive_permutation",
+   "test_metrics.MetricTests.test_tnr_is_per_unknown_query_not_pair",
+   "test_metrics.MetricTests.test_train_test_disjoint",
+   "test_metrics.MetricTests.test_validation_contradictory_flags",
+   "test_metrics.MetricTests.test_validation_shapes_ids_and_nonfinite",
+   "test_protocols.ProtocolTests.test_ap_denominators_are_both_reported",
+   "test_protocols.ProtocolTests.test_filter_order_changes_submitted_list",
+   "test_protocols.ProtocolTests.test_filtered_query_refusal_policies",
+   "test_protocols.ProtocolTests.test_float32_embeddings_accumulate_in_float64",
+   "test_protocols.ProtocolTests.test_invalid_new_switches_and_ranks",
+   "test_protocols.ProtocolTests.test_large_k_recovers_full_metrics",
+   "test_protocols.ProtocolTests.test_missed_positive_query_stays_in_denominator",
+   "test_protocols.ProtocolTests.test_new_fields_fraction_oracle",
+   "test_protocols.ProtocolTests.test_protocol_defaults_are_explicit",
+   "test_protocols.ProtocolTests.test_query_average_switch_and_empty_denominators",
+   "test_protocols.ProtocolTests.test_rank12_is_missing_from_default_submission",
+   "test_protocols.ProtocolTests.test_top_k_exhaustive_fraction_oracle",
+   "test_protocols.ProtocolTests.test_top_k_ties_and_keys_at_boundary"
+  ]
+ },
+ "differential_all_fields": {
+  "trials": 6000,
+  "seed": 20260916,
+  "mismatches": 0,
+  "coverage": {
+   "distance": 3000,
+   "similarity": 3000,
+   "keys_with_filters": 4000,
+   "empty_gallery": 640,
+   "empty_queries": 1158,
+   "exact_threshold": 2874,
+   "near_float32": 1500
+  },
+  "scope": "Every legacy field: protocol/counts/ranking/per_query/refusal/pr_curve"
+ },
+ "differential_new_fields": {
+  "trials": 1800,
+  "seed": 20260917,
+  "mismatches": 0,
+  "scope": "All new metric/count/PR/list fields, all convention branches, exact Fraction oracle"
+ },
+ "differential_ranking": {
+  "trials": 200,
+  "seed": 61704,
+  "max_absolute_error": {
+   "fastreid_map": 5.551115123125783e-17,
+   "torchreid_map": 5.551115123125783e-17,
+   "fastreid_minp": 2.7755575615628914e-17,
+   "cmc_float32": 2.6490953208835322e-08
+  },
+  "scope": "Python eval_market1501, 96 gallery, unique continuous scores; Cython/MATLAB not executed"
+ },
+ "differential_tied_external": {
+  "trials": 160,
+  "source_calls": 640,
+  "seed": 61705,
+  "max_absolute_metric_error": 1.1102230246251565e-16,
+  "native_vs_stable_mAP_disagreements": 320,
+  "first_tie_policy_difference": {
+   "trial": 0,
+   "source": "fastreid_rank.py",
+   "native_mAP": 0.26054757817148266,
+   "stable_mAP": 0.2623510617300563
+  },
+  "scope": "Actual tied inputs; unmodified upstream vs Fraction in its native order; stable-argsort adapter vs evaluator; 2 measures; keys+junk+camera; CMC ranks 1..7"
+ },
+ "differential_refusal": {
+  "comparisons": 600,
+  "seed": 78401,
+  "max_absolute_error": 2.220446049250313e-16,
+  "scope": "All 3 refusal units x 2 camera masks, discrete tied scores, junk, excluded queries, exact rational PR oracle"
+ },
+ "random_level": {
+  "seed": 20260915,
+  "queries": 5000,
+  "gallery": 100,
+  "positives_per_query": 4,
+  "acceptance": "absolute difference <= 5 empirical standard errors; mAP < .15",
+  "metrics": {
+   "mAP": {
+    "observed": 0.08126041004579869,
+    "expected": 0.0806048728983236,
+    "standard_error": 0.0009485279430807525,
+    "z": 0.6911100007722983
+   },
+   "Rank-1": {
+    "observed": 0.0408,
+    "expected": 0.04,
+    "standard_error": 0.0027979702871091233,
+    "z": 0.28592154951958626
+   },
+   "Rank-5": {
+    "observed": 0.1838,
+    "expected": 0.18812488444299935,
+    "standard_error": 0.005478094002733118,
+    "z": -0.7894870808791524
+   },
+   "mINP": {
+    "observed": 0.0528925128401258,
+    "expected": 0.052554813990507925,
+    "standard_error": 0.0002698464733214035,
+    "z": 1.2514480751269765
+   }
+  }
+ },
+ "compatibility_edges": {
+  "reproduced": 4
+ },
+ "mutations": {
+  "total": 25,
+  "killed": 25,
+  "original_killed": 25,
+  "runtime_errors": 0,
+  "survivors": []
+ }
+}
