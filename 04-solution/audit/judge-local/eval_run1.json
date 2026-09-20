@@ -1,0 +1,1635 @@
+{
+ "summary": {
+  "tag": "run1",
+  "subset": "all",
+  "n_items": 30,
+  "noul": {
+   "accuracy": 0.7,
+   "correct": 21,
+   "fn": [
+    "a01",
+    "a02",
+    "a03",
+    "a04",
+    "a06",
+    "a10"
+   ],
+   "fp": [
+    "c06",
+    "c08",
+    "c09"
+   ]
+  },
+  "choice": {
+   "accuracy": 0.5,
+   "correct": 15,
+   "fn": [],
+   "fp": [
+    "b01",
+    "b05",
+    "b06",
+    "b07",
+    "b08",
+    "b09",
+    "c01",
+    "c03",
+    "c04",
+    "c05",
+    "c06",
+    "c07",
+    "c08",
+    "c09",
+    "c10"
+   ]
+  },
+  "ece_noul": 0.2784,
+  "latency_ms": {
+   "noul": {
+    "p50": 161131.05,
+    "p95": 342431.05000000005,
+    "max": 392957.1
+   },
+   "choice": {
+    "p50": 27833.699999999997,
+    "p95": 237267.17500000002,
+    "max": 257933.5
+   }
+  },
+  "tokens": {
+   "prompt_p50": 1236.5,
+   "prompt_max": 1533,
+   "gen_total": 459,
+   "gen_per_call_p50": 7.0
+  }
+ },
+ "results": [
+  {
+   "id": "a01",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Калибровка обоих порогов прошла 185 прямых сверок, максимальная абсолютная ошибка составила 0.0.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/audit/jury-path/evidence/calibration-verification-summary.json",
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 2676.4,
+    "prompt_n": 1053,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/audit/jury-path/evidence/calibration-verification-summary.json",
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/calibration-verification-summary.json": 1.0,
+     "04-solution/audit/jury-path/evidence/calibration-headline.json": 0.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/image-layers.txt": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 17427.1,
+    "prompt_n": 1132,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a02",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Пакетный прогон записал: из 1110 запросов 1078 получили кандидатов и 32 отказались; форма эмбеддингов (1860, 512); извлечение заняло 317.744 с.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.1157,
+    "p_no": 0.8843,
+    "raw_mass": 1.0,
+    "confidence": 0.8843,
+    "latency_ms": 106559.4,
+    "prompt_n": 1173,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "0",
+      0.88433
+     ],
+     [
+      "1",
+      0.11567
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/run_info.batch-test.json": 1.0,
+     "04-solution/audit/jury-path/evidence/R.log": 0.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/pip-freeze-all.txt": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 23313.6,
+    "prompt_n": 1250,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a03",
+   "kind": "a",
+   "holdout": true,
+   "claim": "Мой повторный прогон из чистого клона дал submission.csv с SHA-256 fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/audit/jury-path/evidence/sha256-my-run.txt",
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 95448.7,
+    "prompt_n": 1057,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/audit/jury-path/evidence/sha256-my-run.txt",
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/sha256-my-run.txt": 1.0,
+     "04-solution/audit/jury-path/evidence/calibration-verification-summary.json": 0.0,
+     "04-solution/audit/jury-path/evidence/run_info.batch-test.json": 0.0,
+     "04-solution/audit/jury-path/evidence/pip-freeze-all.txt": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 20080.4,
+    "prompt_n": 1143,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a04",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Переранжирование с параметрами (6,3,0.3) на базовых векторах 208 даёт mAP 0.69366 и Rank-1 0.66346 на вал-сплите.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/postproc/out/final_val.json",
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 144372.9,
+    "prompt_n": 1370,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/final_val.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/final_val.json": 1.0,
+     "04-solution/postproc/out/tta_tune.json": 0.0,
+     "04-solution/postproc/out/fusion.json": 0.0,
+     "04-solution/postproc/out/halves.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 24202.9,
+    "prompt_n": 1431,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a05",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Лучшая TTA-комбинация на протоколе подбора — 208+208f+256, три прохода, mAP 0.59642.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/postproc/out/tta_tune.json",
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 0.933,
+    "p_no": 0.067,
+    "raw_mass": 1.0,
+    "confidence": 0.933,
+    "latency_ms": 148943.8,
+    "prompt_n": 1370,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      0.93301
+     ],
+     [
+      "0",
+      0.06699
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/tta_tune.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/tta_tune.json": 1.0,
+     "04-solution/postproc/out/final_val.json": 0.0,
+     "04-solution/postproc/out/halves.json": 0.0,
+     "04-solution/postproc/out/grid_tune_base.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 19622.7,
+    "prompt_n": 1433,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a06",
+   "kind": "a",
+   "holdout": true,
+   "claim": "Измерение скорости: базовая модель при одном проходе (208) даёт 43.8 мс/объект, конфигурация из трёх проходов (208+208f+256) — 133.9 мс/объект.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/postproc/out/s09_timing.json",
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.1666,
+    "p_no": 0.8334,
+    "raw_mass": 1.0,
+    "confidence": 0.8334,
+    "latency_ms": 117045.7,
+    "prompt_n": 1157,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.83344
+     ],
+     [
+      "1",
+      0.16656
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/s09_timing.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/s09_timing.json": 1.0,
+     "04-solution/postproc/out/s03_timings.json": 0.0,
+     "04-solution/postproc/out/fr_batch1_timing.json": 0.0,
+     "04-solution/postproc/out/final_val.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 18291.1,
+    "prompt_n": 1222,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a07",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Дообученные веса ain_v2 с переранжированием (6,3,0.3) дают mAP 0.70002 и Rank-1 0.64904.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/training/attempt-2/out/table_ainv2.json",
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 1.0,
+    "p_no": 0.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 190771.1,
+    "prompt_n": 1420,
+    "predicted_n": 9,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/table_ainv2.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/table_ainv2.json": 1.0,
+     "04-solution/training/attempt-2/out/table_ainv1.json": 0.0,
+     "04-solution/training/attempt-2/out/table_osnet.json": 0.0,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 32583.6,
+    "prompt_n": 1501,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a08",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Попарный бутстрэп osnet против ainv1: разница mAP 0.18979, 95% доверительный интервал [0.16623; 0.21405], двусторонний p равен 0.0.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/training/attempt-2/out/boot_ainv1.json",
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 0.5466,
+    "p_no": 0.4534,
+    "raw_mass": 1.0,
+    "confidence": 0.5466,
+    "latency_ms": 171735.4,
+    "prompt_n": 1266,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      0.54659
+     ],
+     [
+      "0",
+      0.45341
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/boot_ainv1.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/boot_ainv1.json": 1.0,
+     "04-solution/training/attempt-2/out/table_osnet.json": 0.0,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "04-solution/training/attempt-2/out/timing_ainv1_query.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 32770.5,
+    "prompt_n": 1349,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a09",
+   "kind": "a",
+   "holdout": true,
+   "claim": "Диагностика утечки камер: для ainv2 статистика F2_CH_cameras равна 2.3692 против ~1.0 на перемешанных метках; камерный оракул F1 даёт mAP 0.0228.",
+   "gold_yes": true,
+   "gold_choice": "04-solution/training/attempt-2/out/camera_diag.json",
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 1.0,
+    "p_no": 0.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 172276.2,
+    "prompt_n": 1263,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/camera_diag.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/camera_diag.json": 1.0,
+     "04-solution/training/attempt-2/out/boot_ainv1.json": 0.0,
+     "04-solution/training/attempt-2/out/table_ainv2.json": 0.0,
+     "04-solution/training/attempt-2/out/timing_cam_query.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 34358.4,
+    "prompt_n": 1345,
+    "predicted_n": 9,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "a10",
+   "kind": "a",
+   "holdout": false,
+   "claim": "Источник с именем whitening.pdf ведёт на https://arxiv.org/pdf/1711.02512.",
+   "gold_yes": true,
+   "gold_choice": "02-research/ideas-08/sources/metric-SOURCES.tsv",
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.165,
+    "p_no": 0.835,
+    "raw_mass": 1.0,
+    "confidence": 0.835,
+    "latency_ms": 111125.8,
+    "prompt_n": 872,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "0",
+      0.83505
+     ],
+     [
+      "1",
+      0.16495
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "02-research/ideas-08/sources/metric-SOURCES.tsv",
+    "probs_by_file": {
+     "02-research/ideas-08/sources/metric-SOURCES.tsv": 1.0,
+     "02-research/ideas-08/sources/local-cues-SOURCES.tsv": 0.0,
+     "02-research/ideas-08/arithmetic-checks.json": 0.0,
+     "02-research/ideas-08/README.md": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 29101.3,
+    "prompt_n": 946,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b01",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл evidence/calibration-matrix.json фиксирует проверку матрицы отбеливания на 200 сверках с ошибкой 0.0.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 130635.7,
+    "prompt_n": 1056,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/audit/jury-path/evidence/calibration-verification-summary.json",
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/calibration-verification-summary.json": 1.0,
+     "04-solution/audit/jury-path/evidence/calibration-headline.json": 0.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/image-layers.txt": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 26993.1,
+    "prompt_n": 1135,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b02",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл evidence/podman-version.txt подтверждает, что в среде сборки использовался podman версии 5.8.2.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 126581.6,
+    "prompt_n": 1098,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "4",
+    "picked": null,
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/pip-freeze-all.txt": 0.0,
+     "04-solution/audit/jury-path/evidence/image-layers.txt": 0.0,
+     "04-solution/audit/jury-path/evidence/R.log": 0.0,
+     "04-solution/audit/jury-path/evidence/run_info.batch-test.json": 0.0,
+     "null": 1.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 27498.8,
+    "prompt_n": 1176,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 4}",
+    "top_debug": [
+     [
+      "4",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b03",
+   "kind": "b",
+   "holdout": true,
+   "claim": "Файл evidence/selinux-audit.log фиксирует AVC-отказы доступа при пакетном прогоне без флага label=disable.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 5466.8,
+    "prompt_n": 1120,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "4",
+    "picked": null,
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/R.log": 0.0,
+     "04-solution/audit/jury-path/evidence/run_info.batch-test.json": 0.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/image-layers.txt": 0.0,
+     "null": 1.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 25461.0,
+    "prompt_n": 1195,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 4}",
+    "top_debug": [
+     [
+      "4",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b04",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл out/whitening_Lw.npz содержит обученную на train_fit матрицу дискриминантного отбеливания Lw.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 168664.0,
+    "prompt_n": 1345,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "4",
+    "picked": null,
+    "probs_by_file": {
+     "04-solution/postproc/out/final_val.json": 0.0,
+     "04-solution/postproc/out/tta_tune.json": 0.0,
+     "04-solution/postproc/out/fusion.json": 0.0,
+     "04-solution/postproc/out/halves.json": 0.0,
+     "null": 1.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 26857.8,
+    "prompt_n": 1406,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 4}",
+    "top_debug": [
+     [
+      "4",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b05",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл out/grid_whitening.json хранит сетку параметров отбеливания по двум уровням регуляризации.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 162360.3,
+    "prompt_n": 1353,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/grid_tune_base.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/grid_tune_base.json": 1.0,
+     "04-solution/postproc/out/halves.json": 0.0,
+     "04-solution/postproc/out/tta_tune.json": 0.0,
+     "04-solution/postproc/out/final_val.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 25284.7,
+    "prompt_n": 1416,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b06",
+   "kind": "b",
+   "holdout": true,
+   "claim": "Файл out/fr_final_val.json фиксирует итоговое качество модели FR на вал-сплите: mAP 0.31.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 177856.2,
+    "prompt_n": 1362,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "1",
+    "picked": "04-solution/postproc/out/final_val.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/fusion.json": 0.0,
+     "04-solution/postproc/out/final_val.json": 1.0,
+     "04-solution/postproc/out/tta_tune.json": 0.0,
+     "04-solution/postproc/out/s09_timing.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 23711.5,
+    "prompt_n": 1424,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b07",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл work/acceptance.json подтверждает приёмку стартовых весов: минимальный cos 0.99999988 на 64 боевых кропах.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 138151.6,
+    "prompt_n": 1240,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/table_osnet.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/table_osnet.json": 0.9409,
+     "04-solution/training/attempt-2/out/boot_ainv1.json": 0.0,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "04-solution/training/attempt-2/out/timing_ainv1_query.json": 0.0,
+     "null": 0.0591
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.9409,
+    "latency_ms": 23848.2,
+    "prompt_n": 1323,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.94088
+     ],
+     [
+      "4",
+      0.05912
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b08",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл out/ensemble_weights.json задаёт веса слияния ансамбля osnet+ainv2 равные 0.6 и 0.4.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 159901.8,
+    "prompt_n": 1408,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/table_ainv2.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/table_ainv2.json": 0.7475,
+     "04-solution/training/attempt-2/out/table_osnet.json": 0.0773,
+     "04-solution/training/attempt-2/out/boot_ainv1.json": 0.0,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "null": 0.1752
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.7475,
+    "latency_ms": 28168.6,
+    "prompt_n": 1489,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 4}",
+    "top_debug": [
+     [
+      "0",
+      0.74751
+     ],
+     [
+      "4",
+      0.17517
+     ],
+     [
+      "1",
+      0.07732
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b09",
+   "kind": "b",
+   "holdout": true,
+   "claim": "Файл out/lr_sweep.json содержит перебор скоростей обучения при дообучении ain_v2.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 157484.0,
+    "prompt_n": 1267,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/table_ainv2.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/table_ainv2.json": 0.9112,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "04-solution/training/attempt-2/out/timing_ainv2_query.json": 0.0,
+     "04-solution/training/attempt-2/out/val_gallery.ids": 0.0,
+     "null": 0.0888
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.9112,
+    "latency_ms": 28874.7,
+    "prompt_n": 1350,
+    "predicted_n": 8,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.91119
+     ],
+     [
+      "4",
+      0.08881
+     ]
+    ]
+   }
+  },
+  {
+   "id": "b10",
+   "kind": "b",
+   "holdout": false,
+   "claim": "Файл sources/datasets-SOURCES.tsv содержит список открытых датасетов Re-ID с лицензиями.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 87273.8,
+    "prompt_n": 865,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "4",
+    "picked": null,
+    "probs_by_file": {
+     "02-research/ideas-08/sources/metric-SOURCES.tsv": 0.0857,
+     "02-research/ideas-08/sources/local-cues-SOURCES.tsv": 0.0,
+     "02-research/ideas-08/arithmetic-checks.json": 0.0,
+     "02-research/ideas-08/README.md": 0.0,
+     "null": 0.9143
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.9143,
+    "latency_ms": 25403.9,
+    "prompt_n": 939,
+    "predicted_n": 8,
+    "gen_text": "{\"answer\": 4}",
+    "top_debug": [
+     [
+      "4",
+      0.91426
+     ],
+     [
+      "0",
+      0.08574
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c01",
+   "kind": "c",
+   "holdout": false,
+   "claim": "Файл run_info.batch-test.json фиксирует 185 сверок калибровки порогов с максимальной ошибкой 0.0.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0748,
+    "p_no": 0.9252,
+    "raw_mass": 1.0,
+    "confidence": 0.9252,
+    "latency_ms": 163545.5,
+    "prompt_n": 1188,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.92518
+     ],
+     [
+      "1",
+      0.07482
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/run_info.batch-test.json": 1.0,
+     "04-solution/audit/jury-path/evidence/calibration-headline.json": 0.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/R.log": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 29557.2,
+    "prompt_n": 1264,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c02",
+   "kind": "c",
+   "holdout": false,
+   "claim": "Файл image-layers.txt содержит SHA-256-отпечатки воспроизведённых артефактов прогона.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 4201.4,
+    "prompt_n": 1144,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "4",
+    "picked": null,
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/image-layers.txt": 0.1286,
+     "04-solution/audit/jury-path/evidence/R.log": 0.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/pip-freeze-all.txt": 0.0,
+     "null": 0.8714
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.8714,
+    "latency_ms": 28345.3,
+    "prompt_n": 1220,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 4}",
+    "top_debug": [
+     [
+      "4",
+      0.8714
+     ],
+     [
+      "0",
+      0.1286
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c03",
+   "kind": "c",
+   "holdout": true,
+   "claim": "Файл calibration-headline.json хранит полный список отпечатков submission.csv и candidates.csv.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.071,
+    "p_no": 0.929,
+    "raw_mass": 1.0,
+    "confidence": 0.929,
+    "latency_ms": 176242.8,
+    "prompt_n": 1172,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.92902
+     ],
+     [
+      "1",
+      0.07098
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/audit/jury-path/evidence/calibration-headline.json",
+    "probs_by_file": {
+     "04-solution/audit/jury-path/evidence/calibration-headline.json": 1.0,
+     "04-solution/audit/jury-path/evidence/metrics.json": 0.0,
+     "04-solution/audit/jury-path/evidence/run_info.batch-test.json": 0.0,
+     "04-solution/audit/jury-path/evidence/R.log": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 30366.1,
+    "prompt_n": 1248,
+    "predicted_n": 8,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c04",
+   "kind": "c",
+   "holdout": false,
+   "claim": "Файл fusion.json фиксирует лучшую TTA-комбинацию (208+208f+256) по протоколу подбора.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 227187.4,
+    "prompt_n": 1357,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/fusion.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/fusion.json": 0.839,
+     "04-solution/postproc/out/halves.json": 0.0,
+     "04-solution/postproc/out/final_val.json": 0.0,
+     "04-solution/postproc/out/grid_tune_base.json": 0.0,
+     "null": 0.161
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.839,
+    "latency_ms": 27383.6,
+    "prompt_n": 1418,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.83897
+     ],
+     [
+      "4",
+      0.16103
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c05",
+   "kind": "c",
+   "holdout": false,
+   "claim": "Файл halves.json содержит результаты TTA-комбинаций по числу проходов.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 218800.4,
+    "prompt_n": 1170,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/halves.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/halves.json": 1.0,
+     "04-solution/postproc/out/fusion.json": 0.0,
+     "04-solution/postproc/out/s01_verify_baseline.json": 0.0,
+     "04-solution/postproc/out/fr_batch1_timing.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 47830.4,
+    "prompt_n": 1233,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c06",
+   "kind": "c",
+   "holdout": true,
+   "claim": "Файл s01_verify_baseline.json фиксирует итоговое качество TTA-ансамбля на подборе (mAP около 0.596).",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 0.7886,
+    "p_no": 0.2114,
+    "raw_mass": 1.0,
+    "confidence": 0.7886,
+    "latency_ms": 198524.6,
+    "prompt_n": 1188,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "1",
+      0.78864
+     ],
+     [
+      "0",
+      0.21136
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/postproc/out/s01_verify_baseline.json",
+    "probs_by_file": {
+     "04-solution/postproc/out/s01_verify_baseline.json": 1.0,
+     "04-solution/postproc/out/fusion.json": 0.0,
+     "04-solution/postproc/out/fr_batch1_timing.json": 0.0,
+     "04-solution/postproc/out/halves.json": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 225216.4,
+    "prompt_n": 1251,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c07",
+   "kind": "c",
+   "holdout": false,
+   "claim": "Файл table_ainv2.json содержит результаты бутстрэп-попарных сравнений моделей (разница mAP с доверительными интервалами).",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 392957.1,
+    "prompt_n": 1454,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/table_ainv2.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/table_ainv2.json": 1.0,
+     "04-solution/training/attempt-2/out/table_osnet.json": 0.0,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "04-solution/training/attempt-2/out/val_gallery.ids": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 257933.5,
+    "prompt_n": 1533,
+    "predicted_n": 10,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c08",
+   "kind": "c",
+   "holdout": false,
+   "claim": "Файл camera_diag.json — это таблица итоговых mAP дообученных весов ain_v1 и ain_v2.",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 0.7714,
+    "p_no": 0.2286,
+    "raw_mass": 1.0,
+    "confidence": 0.7714,
+    "latency_ms": 321967.2,
+    "prompt_n": 1110,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      0.77136
+     ],
+     [
+      "0",
+      0.22864
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/camera_diag.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/camera_diag.json": 1.0,
+     "04-solution/training/attempt-2/out/timing_ainv1_query.json": 0.0,
+     "04-solution/training/attempt-2/out/timing_ainv2_gallery.json": 0.0,
+     "04-solution/training/attempt-2/out/val_query.ids": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 98140.0,
+    "prompt_n": 1195,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c09",
+   "kind": "c",
+   "holdout": true,
+   "claim": "Файл timing_ainv1_query.json фиксирует метрики качества запросных векторов ainv1 (mAP и Rank-1).",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "да",
+    "p_yes": 1.0,
+    "p_no": 0.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 359174.2,
+    "prompt_n": 1120,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 1}",
+    "top_debug": [
+     [
+      "1",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "04-solution/training/attempt-2/out/timing_ainv1_query.json",
+    "probs_by_file": {
+     "04-solution/training/attempt-2/out/timing_ainv1_query.json": 1.0,
+     "04-solution/training/attempt-2/out/timing_ainv1_gallery.json": 0.0,
+     "04-solution/training/attempt-2/out/camera_diag.json": 0.0,
+     "04-solution/training/attempt-2/out/val_query_ainv1.ids": 0.0,
+     "null": 0.0
+    },
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 204878.3,
+    "prompt_n": 1209,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "c10",
+   "kind": "c",
+   "holdout": true,
+   "claim": "Файл local-cues-SOURCES.tsv — это список источников по дискриминантному отбеливанию (whitening).",
+   "gold_yes": false,
+   "gold_choice": null,
+   "noul": {
+    "type": "noul",
+    "answer": "нет",
+    "p_yes": 0.0,
+    "p_no": 1.0,
+    "raw_mass": 1.0,
+    "confidence": 1.0,
+    "latency_ms": 290209.1,
+    "prompt_n": 968,
+    "predicted_n": 9,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      1.0
+     ]
+    ]
+   },
+   "choice": {
+    "type": "choice",
+    "answer": "0",
+    "picked": "02-research/ideas-08/sources/local-cues-SOURCES.tsv",
+    "probs_by_file": {
+     "02-research/ideas-08/sources/local-cues-SOURCES.tsv": 0.8368,
+     "02-research/ideas-08/arithmetic-checks.json": 0.0,
+     "02-research/ideas-08/README.md": 0.0,
+     "02-research/ideas-08/gallery-evidence.md": 0.0,
+     "null": 0.1632
+    },
+    "raw_mass": 1.0,
+    "confidence": 0.8368,
+    "latency_ms": 247126.9,
+    "prompt_n": 1040,
+    "predicted_n": 7,
+    "gen_text": "{\"answer\": 0}",
+    "top_debug": [
+     [
+      "0",
+      0.83682
+     ],
+     [
+      "4",
+      0.16318
+     ]
+    ]
+   }
+  }
+ ]
+}
