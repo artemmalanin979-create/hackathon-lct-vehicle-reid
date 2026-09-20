@@ -1,0 +1,7 @@
+{
+ "train_gated_mAP": 0.6370181154246972,
+ "tau_L": 37.280038299560545,
+ "night_model": "d1_j48",
+ "day_model": "d1_j48",
+ "night_share_train": 0.02000551876379691
+}
