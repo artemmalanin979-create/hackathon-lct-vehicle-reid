@@ -1,0 +1,1242 @@
+{
+  "schema_version": 1,
+  "configuration": "d1_j48",
+  "status": "complete",
+  "started_utc": "2026-09-21T06:36:33.194929+00:00",
+  "order_check": {
+    "status": "passed",
+    "splits": {
+      "val_query": {
+        "rows": 1110,
+        "unique_image_ids": 1110,
+        "ids_equal_to_csv": true,
+        "ids_byte_equal": true,
+        "ids_files": [
+          "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query.ids",
+          "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.ids"
+        ],
+        "ids_sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf",
+        "boxes_detected": 1104,
+        "models": {
+          "osnet": {
+            "available_variants": [
+              "base",
+              "mirror_ring",
+              "plate_desat",
+              "plate_gray127",
+              "plate_ring",
+              "platepad_ring",
+              "rand1_ring",
+              "rand2_ring",
+              "shift_desat",
+              "shift_gray127",
+              "shift_ring",
+              "shiftpad_ring",
+              "side_ring"
+            ],
+            "extra_variants_not_used": [
+              "mirror_ring",
+              "plate_desat",
+              "rand1_ring",
+              "rand2_ring",
+              "shift_desat",
+              "side_ring"
+            ],
+            "arrays": {
+              "base": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_base.npy",
+                "sha256": "84340eb121a37452d5227c8808cb21871185b54b911cecb20a6e31fa02935914",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_base.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.484211056978495e-09
+              },
+              "plate_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_ring.npy",
+                "sha256": "5ed18b42f178ccf85cfb32ab3e8eb0845b4392e6f31e857f023c7d68678b3825",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 7.997312256868838e-09
+              },
+              "shift_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_ring.npy",
+                "sha256": "99b067b65bea08ee0660714669e92a5f84521c750140be26d8d46edd60cfa110",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.456126439540299e-09
+              },
+              "platepad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_platepad_ring.npy",
+                "sha256": "edc34973fb5f447cd9a34c48b8e6f3ff890ccbb757633d45ead8aabe7e4ae38d",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_platepad_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.8568078992470305e-09
+              },
+              "shiftpad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shiftpad_ring.npy",
+                "sha256": "7f29dc84a9a0cbb45927ca618c1fa43ada6c4e91e71c6bcb3beba85079900238",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shiftpad_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.908735028510193e-09
+              },
+              "plate_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_gray127.npy",
+                "sha256": "a9d1cad7f5c7d0e13a2d947932eb8ac50a3812169d6ff765d19c1d8d3170b322",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_gray127.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.986257128360762e-09
+              },
+              "shift_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_gray127.npy",
+                "sha256": "2cc7a8d4af4452b26506b26e969281644d42859ed37395b85562ae63d9058179",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_gray127.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.16223827520912e-09
+              }
+            },
+            "base_to_canonical": {
+              "reference": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query_osnet.npy",
+              "all_nearest_rows_are_identity": true,
+              "minimum_identity_cosine_margin": 0.00780130914762911,
+              "raw_arrays_equal": false,
+              "max_raw_abs_diff": 2.7939677238464355e-07,
+              "max_normalized_row_l2_diff": 1.8137559542479833e-06
+            }
+          },
+          "combined_v1": {
+            "available_variants": [
+              "base",
+              "plate_gray127",
+              "plate_ring",
+              "platepad_ring",
+              "shift_gray127",
+              "shift_ring",
+              "shiftpad_ring"
+            ],
+            "extra_variants_not_used": [],
+            "arrays": {
+              "base": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_base.npy",
+                "sha256": "d36d5599db25789cafb42d4b2d4937eb9b7da1e0f7921ef82017433ababa7dc2",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_base.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.15352879762554e-09
+              },
+              "plate_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_ring.npy",
+                "sha256": "6bd5464fdffd2344df616fbc0a26578fa5bd92106f740e22ef84c556f7a3550e",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.597931090368547e-09
+              },
+              "shift_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_ring.npy",
+                "sha256": "d50d430e927916f0cce0bd6c4e073c47032827bd0b9745f212012a96ddec8eb9",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 8.260206851851137e-09
+              },
+              "platepad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_platepad_ring.npy",
+                "sha256": "3407b0f6fe1d0b84bd33934bdb4560b2a7d16b17676d8b3820a1aded0f8ca248",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_platepad_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.627777771051058e-09
+              },
+              "shiftpad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shiftpad_ring.npy",
+                "sha256": "7cd6db4dfb41b46b8f226ed30e04e63c28236c71e9ae2b13208d7d203cc0df78",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shiftpad_ring.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.7038720413515875e-09
+              },
+              "plate_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_gray127.npy",
+                "sha256": "00dc8cfd4d109d9b4ba062ec113929a5b21a0ded9a30494bcb0c8d899cd99c38",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_gray127.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.1924498861998245e-09
+              },
+              "shift_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_gray127.npy",
+                "sha256": "7232f55fee8b961c165e4a6dbfc265a61549eaa12ae2ce0e4ba19f06607956f6",
+                "bytes": 2273408,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_gray127.npy",
+                "shape": [
+                  1110,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.747614273410306e-09
+              }
+            },
+            "base_to_canonical": {
+              "reference": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.npy",
+              "all_nearest_rows_are_identity": true,
+              "minimum_identity_cosine_margin": 0.004531808983845309,
+              "raw_arrays_equal": true,
+              "max_raw_abs_diff": 0.0,
+              "max_normalized_row_l2_diff": 0.0
+            }
+          }
+        }
+      },
+      "val_gallery": {
+        "rows": 750,
+        "unique_image_ids": 750,
+        "ids_equal_to_csv": true,
+        "ids_byte_equal": true,
+        "ids_files": [
+          "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery.ids",
+          "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.ids"
+        ],
+        "ids_sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c",
+        "boxes_detected": 743,
+        "models": {
+          "osnet": {
+            "available_variants": [
+              "base",
+              "mirror_ring",
+              "plate_desat",
+              "plate_gray127",
+              "plate_ring",
+              "platepad_ring",
+              "rand1_ring",
+              "rand2_ring",
+              "shift_desat",
+              "shift_gray127",
+              "shift_ring",
+              "shiftpad_ring",
+              "side_ring"
+            ],
+            "extra_variants_not_used": [
+              "mirror_ring",
+              "plate_desat",
+              "rand1_ring",
+              "rand2_ring",
+              "shift_desat",
+              "side_ring"
+            ],
+            "arrays": {
+              "base": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_base.npy",
+                "sha256": "5e20eb18fc0bc94ca2a62ca8ac7be495f3e660240df7e3ff0f66cf38a35ba0c9",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_base.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 7.287469294681159e-09
+              },
+              "plate_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_ring.npy",
+                "sha256": "cf135023d324e340e5b9cd50611a5c2089cf2e0ec30893edecebd60a378d6155",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.3816814055428495e-09
+              },
+              "shift_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_ring.npy",
+                "sha256": "c36e468dbff8def117d6a6afae8509a9d3580abe7082622d3fd9db2eb8643068",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.439355410530311e-09
+              },
+              "platepad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_platepad_ring.npy",
+                "sha256": "0b2f72f860e32ec76480040b2c69c824f33ab783890325f2b3eb0a3835e08072",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_platepad_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.276225983370409e-09
+              },
+              "shiftpad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shiftpad_ring.npy",
+                "sha256": "8e0c8b713932540a5ccf15006409be24a63651eaea79b74554a9b6f406224b42",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shiftpad_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.829717014156245e-09
+              },
+              "plate_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_gray127.npy",
+                "sha256": "28ec2bc92f472844e12d7233449057aafc99b8732e202305888ff75e098d12bf",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_gray127.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.539977226438509e-09
+              },
+              "shift_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_gray127.npy",
+                "sha256": "70d2677c7e48d1a28c5e7ea779bfb7c3d37653a3a2dc2c7943bcca97af88a812",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_gray127.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 7.0485759451344165e-09
+              }
+            },
+            "base_to_canonical": {
+              "reference": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery_osnet.npy",
+              "all_nearest_rows_are_identity": true,
+              "minimum_identity_cosine_margin": 0.12290855852628024,
+              "raw_arrays_equal": false,
+              "max_raw_abs_diff": 3.129243850708008e-07,
+              "max_normalized_row_l2_diff": 1.6767993846515967e-06
+            }
+          },
+          "combined_v1": {
+            "available_variants": [
+              "base",
+              "plate_gray127",
+              "plate_ring",
+              "platepad_ring",
+              "shift_gray127",
+              "shift_ring",
+              "shiftpad_ring"
+            ],
+            "extra_variants_not_used": [],
+            "arrays": {
+              "base": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_base.npy",
+                "sha256": "9cf6b810151761f60994d3b7364b07c51faaa7775d073b8507607281efc98cea",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_base.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.955851589689587e-09
+              },
+              "plate_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_ring.npy",
+                "sha256": "fd62ada1b3d4da73155a491d6796d7e97f31ce5abcc8a10369c3b72707aab916",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 7.079033581547378e-09
+              },
+              "shift_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_ring.npy",
+                "sha256": "6909dcd1bff9b0a4ed6a04dc39a46ad2bb68a8198972ef1ec3e3660ab4cee8f2",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.893515120369841e-09
+              },
+              "platepad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_platepad_ring.npy",
+                "sha256": "fbc7cc63ecd4164d7e29bb2ca5fe46629756f9a8438f002b770872a1c43d9eeb",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_platepad_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.701504684514248e-09
+              },
+              "shiftpad_ring": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shiftpad_ring.npy",
+                "sha256": "132a3e6ae339acf4cf6592f2832c2395d7b84cab7d2209f3a3960ef8573fb362",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shiftpad_ring.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.036254718289058e-09
+              },
+              "plate_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_gray127.npy",
+                "sha256": "b70d3637978120d7b5a211680a32767c1f484bcc7e80d20e8b49410cadbd1b64",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_gray127.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 6.276970720975328e-09
+              },
+              "shift_gray127": {
+                "path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_gray127.npy",
+                "sha256": "0f9e0c836d233531f57a2f55f2d53d5bb53fa09fb2f642ec656a3f8ee9437f95",
+                "bytes": 1536128,
+                "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_gray127.npy",
+                "shape": [
+                  750,
+                  512
+                ],
+                "dtype": "float32",
+                "max_abs_norm_minus_one": 5.8345923648062126e-09
+              }
+            },
+            "base_to_canonical": {
+              "reference": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.npy",
+              "all_nearest_rows_are_identity": true,
+              "minimum_identity_cosine_margin": 0.04658195136218535,
+              "raw_arrays_equal": true,
+              "max_raw_abs_diff": 0.0,
+              "max_normalized_row_l2_diff": 0.0
+            }
+          }
+        }
+      }
+    },
+    "variants": [
+      "base",
+      "plate_ring",
+      "shift_ring",
+      "platepad_ring",
+      "shiftpad_ring",
+      "plate_gray127",
+      "shift_gray127"
+    ],
+    "variant_ids_sidecars_present": false,
+    "order_evidence": "Canonical model ids agree byte-for-byte and match CSV; both extraction scripts write every variant in that same CSV order. Base rows are anchored to canonical vectors by identity nearest-row correspondence. No per-variant ids sidecars exist.",
+    "shared_split_directory": "/home/fedora/lct-reid/repo/04-solution/split/files",
+    "same_mask_ops_sha256": "2226819fa1e69d7f396ad6a78f8fb763ef820ce4b6ddb73f2ae7fc4ce9f91309",
+    "same_boxes_sha256": "4f26327ca6d51a379cc7d50d10eaf221f27db9cb3ec7e994c7410405c3553f3d",
+    "combined_model_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "pad_fraction": 0.12,
+    "box_seed": 1000
+  },
+  "pipeline": "l2((l2(l2(OSNet) + l2(combined_v1)) - m) @ P.T)",
+  "pipeline_note": "Normalized sum equals normalized equal-weight mean; exact s02_eval.py arithmetic. Frozen train_fit whitening, no refit, float64 throughout.",
+  "kr_parameters": {
+    "k1": 6,
+    "k2": 3,
+    "lambda": 0.3
+  },
+  "whitening": {
+    "path": "/home/fedora/lct-reid/jobs/job_48/out/lw_ens_j48_rho0.5_f64.npz",
+    "sha256": "4b02f158fa54d89a54f9ad30d7e471f1baa14d7019ea9ea26b42ea7c267eb625",
+    "dtype": "float64"
+  },
+  "environment": {
+    "python": "3.14.3 (main, Mar 26 2026, 00:00:00) [GCC 16.0.1 20260321 (Red Hat 16.0.1-0)]",
+    "numpy": "2.4.6",
+    "platform": "Linux-6.19.10-300.fc44.x86_64-x86_64-with-glibc2.43",
+    "executable": "/home/fedora/lct-reid/jobs/job_61/../job_45b/venv/bin/python",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "metrics": {
+    "base": {
+      "cos": {
+        "mAP": 0.7316093422310448,
+        "Rank-1": 0.6850961538461539,
+        "Rank-5": 0.8822115384615384,
+        "mINP": 0.6928460434032722,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7740915539438481,
+        "Rank-1": 0.7307692307692307,
+        "Rank-5": 0.8810096153846154,
+        "mINP": 0.7488060309838231,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.699874893995002
+      }
+    },
+    "plate_ring": {
+      "cos": {
+        "mAP": 0.7294350244281588,
+        "Rank-1": 0.6838942307692307,
+        "Rank-5": 0.8798076923076923,
+        "mINP": 0.6894792572378652,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7679102900831933,
+        "Rank-1": 0.7247596153846154,
+        "Rank-5": 0.8810096153846154,
+        "mINP": 0.7429564786717584,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.463886482990347
+      }
+    },
+    "shift_ring": {
+      "cos": {
+        "mAP": 0.7306406493634043,
+        "Rank-1": 0.6862980769230769,
+        "Rank-5": 0.8762019230769231,
+        "mINP": 0.6901206089924579,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7697751958996423,
+        "Rank-1": 0.7283653846153846,
+        "Rank-5": 0.875,
+        "mINP": 0.7426966561263668,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.6017696610069834
+      }
+    },
+    "platepad_ring": {
+      "cos": {
+        "mAP": 0.7241184770096569,
+        "Rank-1": 0.6778846153846154,
+        "Rank-5": 0.8725961538461539,
+        "mINP": 0.6818670862816971,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7620843346044901,
+        "Rank-1": 0.7175480769230769,
+        "Rank-5": 0.8701923076923077,
+        "mINP": 0.7379407011830287,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.5669475590111688
+      }
+    },
+    "shiftpad_ring": {
+      "cos": {
+        "mAP": 0.7222169971142721,
+        "Rank-1": 0.6694711538461539,
+        "Rank-5": 0.8774038461538461,
+        "mINP": 0.6831187645333573,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7631606191065681,
+        "Rank-1": 0.7199519230769231,
+        "Rank-5": 0.8725961538461539,
+        "mINP": 0.7354286148967623,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.3834756730357185
+      }
+    },
+    "plate_gray127": {
+      "cos": {
+        "mAP": 0.7239059001363608,
+        "Rank-1": 0.6766826923076923,
+        "Rank-5": 0.8725961538461539,
+        "mINP": 0.6828193934342784,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7650152263859759,
+        "Rank-1": 0.7223557692307693,
+        "Rank-5": 0.8641826923076923,
+        "mINP": 0.7380070662523146,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.486491293995641
+      }
+    },
+    "shift_gray127": {
+      "cos": {
+        "mAP": 0.7321241901822579,
+        "Rank-1": 0.6911057692307693,
+        "Rank-5": 0.8725961538461539,
+        "mINP": 0.6908675308860026,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        }
+      },
+      "kr": {
+        "mAP": 0.7702449890289633,
+        "Rank-1": 0.7331730769230769,
+        "Rank-5": 0.8713942307692307,
+        "mINP": 0.7416505727723728,
+        "num_valid_queries": 832,
+        "query_status_counts": {
+          "unknown": 278,
+          "known": 832
+        },
+        "rerank_seconds": 2.6806450560106896
+      }
+    }
+  },
+  "base_checkpoint": {
+    "cos": {
+      "mAP": {
+        "actual": 0.7316093422310448,
+        "expected_4dp": "0.7316",
+        "pass": true,
+        "reference_job48": 0.7316093422310448,
+        "delta_from_reference": 0.0
+      },
+      "per_query_ap_max_abs_diff_from_job48": 0.0
+    },
+    "kr": {
+      "mAP": {
+        "actual": 0.7740915539438481,
+        "expected_4dp": "0.7741",
+        "pass": true,
+        "reference_job48": 0.7740915539438481,
+        "delta_from_reference": 0.0
+      },
+      "Rank-1": {
+        "actual": 0.7307692307692307,
+        "expected_4dp": "0.7308",
+        "pass": true,
+        "reference_job48": 0.7307692307692307,
+        "delta_from_reference": 0.0
+      },
+      "per_query_ap_max_abs_diff_from_job48": 0.0
+    }
+  },
+  "contrasts": {
+    "cos": {
+      "plate_ring_vs_shift_ring": {
+        "plate": "plate_ring",
+        "control": "shift_ring",
+        "mAP_plate": 0.7294350244281588,
+        "mAP_control": 0.7306406493634044,
+        "delta_plate_minus_control": -0.001205624935245675,
+        "ci95": [
+          -0.009898012168847633,
+          0.007302888057010741
+        ],
+        "p_two_sided": 0.7745,
+        "ci95_contains_zero": true,
+        "delta_control_minus_plate": 0.001205624935245675,
+        "ci95_control_minus_plate": [
+          -0.007302888057010741,
+          0.009898012168847633
+        ]
+      },
+      "platepad_ring_vs_shiftpad_ring": {
+        "plate": "platepad_ring",
+        "control": "shiftpad_ring",
+        "mAP_plate": 0.7241184770096571,
+        "mAP_control": 0.7222169971142721,
+        "delta_plate_minus_control": 0.0019014798953850276,
+        "ci95": [
+          -0.007569382058864746,
+          0.010825288079331075
+        ],
+        "p_two_sided": 0.67,
+        "ci95_contains_zero": true,
+        "delta_control_minus_plate": -0.0019014798953850276,
+        "ci95_control_minus_plate": [
+          -0.010825288079331075,
+          0.007569382058864746
+        ]
+      },
+      "plate_gray127_vs_shift_gray127": {
+        "plate": "plate_gray127",
+        "control": "shift_gray127",
+        "mAP_plate": 0.7239059001363608,
+        "mAP_control": 0.7321241901822579,
+        "delta_plate_minus_control": -0.008218290045897136,
+        "ci95": [
+          -0.016975440969536366,
+          0.00028944269601098794
+        ],
+        "p_two_sided": 0.0625,
+        "ci95_contains_zero": true,
+        "delta_control_minus_plate": 0.008218290045897136,
+        "ci95_control_minus_plate": [
+          -0.00028944269601098794,
+          0.016975440969536366
+        ]
+      }
+    },
+    "kr": {
+      "plate_ring_vs_shift_ring": {
+        "plate": "plate_ring",
+        "control": "shift_ring",
+        "mAP_plate": 0.7679102900831933,
+        "mAP_control": 0.7697751958996424,
+        "delta_plate_minus_control": -0.0018649058164490473,
+        "ci95": [
+          -0.011670740236326586,
+          0.007608151672215995
+        ],
+        "p_two_sided": 0.6825,
+        "ci95_contains_zero": true,
+        "delta_control_minus_plate": 0.0018649058164490473,
+        "ci95_control_minus_plate": [
+          -0.007608151672215995,
+          0.011670740236326586
+        ]
+      },
+      "platepad_ring_vs_shiftpad_ring": {
+        "plate": "platepad_ring",
+        "control": "shiftpad_ring",
+        "mAP_plate": 0.7620843346044901,
+        "mAP_control": 0.7631606191065681,
+        "delta_plate_minus_control": -0.0010762845020779732,
+        "ci95": [
+          -0.010649339938650115,
+          0.00875755746475055
+        ],
+        "p_two_sided": 0.841,
+        "ci95_contains_zero": true,
+        "delta_control_minus_plate": 0.0010762845020779732,
+        "ci95_control_minus_plate": [
+          -0.00875755746475055,
+          0.010649339938650115
+        ]
+      },
+      "plate_gray127_vs_shift_gray127": {
+        "plate": "plate_gray127",
+        "control": "shift_gray127",
+        "mAP_plate": 0.7650152263859759,
+        "mAP_control": 0.7702449890289633,
+        "delta_plate_minus_control": -0.005229762642987468,
+        "ci95": [
+          -0.015513236542515515,
+          0.0052879529229438536
+        ],
+        "p_two_sided": 0.303,
+        "ci95_contains_zero": true,
+        "delta_control_minus_plate": 0.005229762642987468,
+        "ci95_control_minus_plate": [
+          -0.0052879529229438536,
+          0.015513236542515515
+        ]
+      }
+    }
+  },
+  "evaluation_protocol": {
+    "cos": {
+      "camera_policy": "market",
+      "ap_method": "step",
+      "refusal_mode": "presence",
+      "score_kind": "similarity",
+      "tie_policy": "column_index",
+      "filtered_positive_policy": "drop",
+      "empty_denominator": null,
+      "threshold_rule": ">=",
+      "ranking_scope": "full_gallery",
+      "auc_pr_method": "trapezoid",
+      "schema_version": 2,
+      "ranking_scopes": [
+        "full_gallery",
+        "top_k"
+      ],
+      "ranking_alias": "ranking_full_gallery",
+      "top_k": 10,
+      "ap_denominator": "all_gallery_positives",
+      "query_average": "valid_queries",
+      "incomplete_inp": "undefined_if_incomplete",
+      "rank_beyond_k": "undefined",
+      "rank_ks": [
+        1,
+        5
+      ],
+      "truncation_order": "top_k_then_filter",
+      "rank_and_inp_query_average": "valid_queries",
+      "refusal_scope": "full_eligible_gallery",
+      "score_precision": "float64_no_downcast",
+      "threshold_precision": "float64_no_downcast",
+      "score_input_dtype": "float64",
+      "tie_equality": "exact_represented_value",
+      "embedding_accumulation": "float64",
+      "missing_ap_all_queries": "zero",
+      "empty_retrieved_ap_for_valid_query": 0.0,
+      "incomplete_inp_mean": "propagate_undefined_or_assign_zero; never_drop_query"
+    },
+    "kr": {
+      "camera_policy": "market",
+      "ap_method": "step",
+      "refusal_mode": "presence",
+      "score_kind": "similarity",
+      "tie_policy": "column_index",
+      "filtered_positive_policy": "drop",
+      "empty_denominator": null,
+      "threshold_rule": ">=",
+      "ranking_scope": "full_gallery",
+      "auc_pr_method": "trapezoid",
+      "schema_version": 2,
+      "ranking_scopes": [
+        "full_gallery",
+        "top_k"
+      ],
+      "ranking_alias": "ranking_full_gallery",
+      "top_k": 10,
+      "ap_denominator": "all_gallery_positives",
+      "query_average": "valid_queries",
+      "incomplete_inp": "undefined_if_incomplete",
+      "rank_beyond_k": "undefined",
+      "rank_ks": [
+        1,
+        5
+      ],
+      "truncation_order": "top_k_then_filter",
+      "rank_and_inp_query_average": "valid_queries",
+      "refusal_scope": "full_eligible_gallery",
+      "score_precision": "float64_no_downcast",
+      "threshold_precision": "float64_no_downcast",
+      "score_input_dtype": "float64",
+      "tie_equality": "exact_represented_value",
+      "embedding_accumulation": "float64",
+      "missing_ap_all_queries": "zero",
+      "empty_retrieved_ap_for_valid_query": 0.0,
+      "incomplete_inp_mean": "propagate_undefined_or_assign_zero; never_drop_query"
+    }
+  },
+  "bootstrap": {
+    "unit": "valid query, paired AP",
+    "n": 832,
+    "B": 4000,
+    "seed": 20260915,
+    "ci": "percentile 2.5%, 97.5%",
+    "p": "2*min(P(delta<=0),P(delta>=0))",
+    "contrast_sign": "plate minus control",
+    "same_draws_for_all_contrasts": true,
+    "rerank_recomputed_inside_bootstrap": false,
+    "multiple_testing_correction": null,
+    "reference": "job_48/scripts/s03_plate.py and plate-ablation/scripts/eval_variants.py (opposite sign in the latter)"
+  },
+  "input_manifest": {
+    "/home/fedora/lct-reid/jobs/job_61/run_ablation.py": {
+      "sha256": "217311bd3c5a21a65a762d5eb8781c7474a87bc1c41867c4c5364e9a6ad493a6",
+      "bytes": 17080,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_61/run_ablation.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_45/scripts/lib45.py": {
+      "sha256": "8a03c39489e463529ea5814753b6be435989fe14ea972d2848851bad09fb6983",
+      "bytes": 10706,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45/scripts/lib45.py"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/postproc/scripts/common.py": {
+      "sha256": "37329f0a6699936cc6a1b162ef158c1b5a4e4923d6286ce3a5f67eef7e977fef",
+      "bytes": 6563,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/postproc/scripts/common.py"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/eval/reid_metrics.py": {
+      "sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+      "bytes": 23529,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/eval/reid_metrics.py"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/eval/scope_metrics.py": {
+      "sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+      "bytes": 6347,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/eval/scope_metrics.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/lw_ens_j48_rho0.5_f64.npz": {
+      "sha256": "4b02f158fa54d89a54f9ad30d7e471f1baa14d7019ea9ea26b42ea7c267eb625",
+      "bytes": 2101738,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/lw_ens_j48_rho0.5_f64.npz"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/scripts/extract_variants.py": {
+      "sha256": "e8aad3a19d4d8fbaab3ce08ccdf58cfd208822c682cdf1a18e96b801a0fe56a0",
+      "bytes": 4863,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/scripts/extract_variants.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/scripts/s03_plate.py": {
+      "sha256": "ad6f0de4a8a234445226a29c804217131e8c8931ca6b5cc150a21ef70f0aa059",
+      "bytes": 7476,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/scripts/s03_plate.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/scripts/mask_ops.py": {
+      "sha256": "2226819fa1e69d7f396ad6a78f8fb763ef820ce4b6ddb73f2ae7fc4ce9f91309",
+      "bytes": 4451,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/scripts/mask_ops.py"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/plate-ablation/scripts/mask_ops.py": {
+      "sha256": "2226819fa1e69d7f396ad6a78f8fb763ef820ce4b6ddb73f2ae7fc4ce9f91309",
+      "bytes": 4451,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/plate-ablation/scripts/mask_ops.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/boxes.json": {
+      "sha256": "4f26327ca6d51a379cc7d50d10eaf221f27db9cb3ec7e994c7410405c3553f3d",
+      "bytes": 78251,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/boxes.json"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/out/boxes.json": {
+      "sha256": "4f26327ca6d51a379cc7d50d10eaf221f27db9cb3ec7e994c7410405c3553f3d",
+      "bytes": 78251,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/out/boxes.json"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/scripts/s01_extract.py": {
+      "sha256": "ff9589ad7863e83422dc37c4bd8dfb657ef8f00fe79fb2b37b7741ea04e65e3b",
+      "bytes": 5353,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/scripts/s01_extract.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/scripts/s02_eval.py": {
+      "sha256": "80f3a7820e1f1184ce4a7e71dd930d121f544259c281d216c2b651e062449830",
+      "bytes": 5789,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/scripts/s02_eval.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/scripts/s03_ablation.py": {
+      "sha256": "b3a212c3fda1a66b79b0cc15eb0adbc868fa79b3d0794435c2bff0c3d9fef3d3",
+      "bytes": 7075,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/scripts/s03_ablation.py"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/plate-ablation/scripts/eval_variants.py": {
+      "sha256": "d021353274e0eb958d829400b2b0306c2479b29e67ea6fd656ea75c22009079f",
+      "bytes": 5669,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/plate-ablation/scripts/eval_variants.py"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/extract_info.json": {
+      "sha256": "d0edb49d77ad8120823c033b9404ebbbfc250e1c0a4886a90ec8afed96cc3fed",
+      "bytes": 302,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/extract_info.json"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/s01_extract_info.json": {
+      "sha256": "27cb82ed0b4f32c3a9bc3fc4b795c728fdf78bb92e6d8c0b0960519cfb92a1f2",
+      "bytes": 450,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/s01_extract_info.json"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/s02_metrics.json": {
+      "sha256": "a97850571376fa827059180a8ccb2c748296b4f295a40d359d9a8243b473f82c",
+      "bytes": 11361,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/s02_metrics.json"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/s02_perquery_j48.npz": {
+      "sha256": "43d24b7aa5ec9a40630208243b3db1c75827c66241b12993a2b0221b9f24ffab",
+      "bytes": 138242,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/s02_perquery_j48.npz"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/split/files/val_query.csv": {
+      "sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+      "bytes": 64609,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/split/files/val_query.csv"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query.ids": {
+      "sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf",
+      "bytes": 36630,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query.ids"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.ids": {
+      "sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf",
+      "bytes": 36630,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.ids"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_base.npy": {
+      "sha256": "84340eb121a37452d5227c8808cb21871185b54b911cecb20a6e31fa02935914",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_base.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_ring.npy": {
+      "sha256": "5ed18b42f178ccf85cfb32ab3e8eb0845b4392e6f31e857f023c7d68678b3825",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_ring.npy": {
+      "sha256": "99b067b65bea08ee0660714669e92a5f84521c750140be26d8d46edd60cfa110",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_platepad_ring.npy": {
+      "sha256": "edc34973fb5f447cd9a34c48b8e6f3ff890ccbb757633d45ead8aabe7e4ae38d",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_platepad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shiftpad_ring.npy": {
+      "sha256": "7f29dc84a9a0cbb45927ca618c1fa43ada6c4e91e71c6bcb3beba85079900238",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shiftpad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_gray127.npy": {
+      "sha256": "a9d1cad7f5c7d0e13a2d947932eb8ac50a3812169d6ff765d19c1d8d3170b322",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_plate_gray127.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_gray127.npy": {
+      "sha256": "2cc7a8d4af4452b26506b26e969281644d42859ed37395b85562ae63d9058179",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_query_shift_gray127.npy"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query_osnet.npy": {
+      "sha256": "4bf81dce5f9608340dc419f78944b5b426daf37f134830189940cc59e6ac005d",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query_osnet.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_base.npy": {
+      "sha256": "d36d5599db25789cafb42d4b2d4937eb9b7da1e0f7921ef82017433ababa7dc2",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_base.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_ring.npy": {
+      "sha256": "6bd5464fdffd2344df616fbc0a26578fa5bd92106f740e22ef84c556f7a3550e",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_ring.npy": {
+      "sha256": "d50d430e927916f0cce0bd6c4e073c47032827bd0b9745f212012a96ddec8eb9",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_platepad_ring.npy": {
+      "sha256": "3407b0f6fe1d0b84bd33934bdb4560b2a7d16b17676d8b3820a1aded0f8ca248",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_platepad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shiftpad_ring.npy": {
+      "sha256": "7cd6db4dfb41b46b8f226ed30e04e63c28236c71e9ae2b13208d7d203cc0df78",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shiftpad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_gray127.npy": {
+      "sha256": "00dc8cfd4d109d9b4ba062ec113929a5b21a0ded9a30494bcb0c8d899cd99c38",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_plate_gray127.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_gray127.npy": {
+      "sha256": "7232f55fee8b961c165e4a6dbfc265a61549eaa12ae2ce0e4ba19f06607956f6",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_query_shift_gray127.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.npy": {
+      "sha256": "d36d5599db25789cafb42d4b2d4937eb9b7da1e0f7921ef82017433ababa7dc2",
+      "bytes": 2273408,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.npy"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/split/files/val_gallery.csv": {
+      "sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+      "bytes": 42132,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/split/files/val_gallery.csv"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery.ids": {
+      "sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c",
+      "bytes": 24750,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery.ids"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.ids": {
+      "sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c",
+      "bytes": 24750,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.ids"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_base.npy": {
+      "sha256": "5e20eb18fc0bc94ca2a62ca8ac7be495f3e660240df7e3ff0f66cf38a35ba0c9",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_base.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_ring.npy": {
+      "sha256": "cf135023d324e340e5b9cd50611a5c2089cf2e0ec30893edecebd60a378d6155",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_ring.npy": {
+      "sha256": "c36e468dbff8def117d6a6afae8509a9d3580abe7082622d3fd9db2eb8643068",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_platepad_ring.npy": {
+      "sha256": "0b2f72f860e32ec76480040b2c69c824f33ab783890325f2b3eb0a3835e08072",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_platepad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shiftpad_ring.npy": {
+      "sha256": "8e0c8b713932540a5ccf15006409be24a63651eaea79b74554a9b6f406224b42",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shiftpad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_gray127.npy": {
+      "sha256": "28ec2bc92f472844e12d7233449057aafc99b8732e202305888ff75e098d12bf",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_plate_gray127.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_gray127.npy": {
+      "sha256": "70d2677c7e48d1a28c5e7ea779bfb7c3d37653a3a2dc2c7943bcca97af88a812",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_45b/mirror/osnet/04-solution/plate-ablation/work/emb/val_gallery_shift_gray127.npy"
+    },
+    "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery_osnet.npy": {
+      "sha256": "c342bfd967ea827bdb1609142396f91509260dd969eb20b85972fcc802dc79ed",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery_osnet.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_base.npy": {
+      "sha256": "9cf6b810151761f60994d3b7364b07c51faaa7775d073b8507607281efc98cea",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_base.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_ring.npy": {
+      "sha256": "fd62ada1b3d4da73155a491d6796d7e97f31ce5abcc8a10369c3b72707aab916",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_ring.npy": {
+      "sha256": "6909dcd1bff9b0a4ed6a04dc39a46ad2bb68a8198972ef1ec3e3660ab4cee8f2",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_platepad_ring.npy": {
+      "sha256": "fbc7cc63ecd4164d7e29bb2ca5fe46629756f9a8438f002b770872a1c43d9eeb",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_platepad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shiftpad_ring.npy": {
+      "sha256": "132a3e6ae339acf4cf6592f2832c2395d7b84cab7d2209f3a3960ef8573fb362",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shiftpad_ring.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_gray127.npy": {
+      "sha256": "b70d3637978120d7b5a211680a32767c1f484bcc7e80d20e8b49410cadbd1b64",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_plate_gray127.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_gray127.npy": {
+      "sha256": "0f9e0c836d233531f57a2f55f2d53d5bb53fa09fb2f642ec656a3f8ee9437f95",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/plate/val_gallery_shift_gray127.npy"
+    },
+    "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.npy": {
+      "sha256": "9cf6b810151761f60994d3b7364b07c51faaa7775d073b8507607281efc98cea",
+      "bytes": 1536128,
+      "resolved_path": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.npy"
+    }
+  },
+  "inputs_unchanged_during_run": true,
+  "n_valid_queries": 832,
+  "verdict": {
+    "all_six_intervals_include_zero": true,
+    "significant_contrasts": [],
+    "statement_ru": "Все шесть 95%-ных интервалов включают ноль. В данном протоколе значимая разница между маской номера и контрольной области для d1_j48 не обнаружена.",
+    "limitation_ru": "Отсутствие значимости не доказывает независимость от номера или эквивалентность эффектов. Вывод ограничен этим split, масками и прежним парным бутстрэпом по запросам; галерея и KR-граф фиксированы."
+  },
+  "completed_utc": "2026-09-21T06:37:19.526903+00:00",
+  "elapsed_seconds": 46.33198724599788
+}

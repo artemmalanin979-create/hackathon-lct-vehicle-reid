@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "utc": "2026-09-21T06:39:10.377053+00:00",
+  "source_inputs_rechecked": 58,
+  "base_matches_job48_per_query_exactly": true,
+  "all_14_metric_summaries_match_saved_per_query": true,
+  "bootstrap_reference_checks": {
+    "cos/plate_ring_vs_shift_ring": "exact match to lib45.paired_bootstrap(B=4000, seed=20260915)",
+    "cos/platepad_ring_vs_shiftpad_ring": "exact match to lib45.paired_bootstrap(B=4000, seed=20260915)",
+    "cos/plate_gray127_vs_shift_gray127": "exact match to lib45.paired_bootstrap(B=4000, seed=20260915)",
+    "kr/plate_ring_vs_shift_ring": "exact match to lib45.paired_bootstrap(B=4000, seed=20260915)",
+    "kr/platepad_ring_vs_shiftpad_ring": "exact match to lib45.paired_bootstrap(B=4000, seed=20260915)",
+    "kr/plate_gray127_vs_shift_gray127": "exact match to lib45.paired_bootstrap(B=4000, seed=20260915)"
+  },
+  "artifact_sha256": {
+    "plate_ablation_d1_j48.json": "8234e62ccef246941e47069704720c13cb7a031fab00f3f2c2fc7998eb58bbce",
+    "order_check.json": "832a6f6473bbce0c2f7bcacaa222dd332d0a7d1bde0a929f6b2c7f44817fd9bb",
+    "per_query_d1_j48.npz": "8e1d02750e1a218a6b0740827ddc700e1c4b0e307045dc76847d0b0ade699c79",
+    "run.log": "cdd1a65c9a8aedb101928e26e2dd798a70d862cb62acb03730007cc3576750dc",
+    "val_query.ids": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf",
+    "val_gallery.ids": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c"
+  }
+}
