@@ -1,0 +1,17 @@
+{
+  "state": "passed",
+  "same_torch_state_shapes": true,
+  "same_model_source": true,
+  "same_onnx_initializer_shapes": true,
+  "same_operation_sequence": true,
+  "same_compute_layer_counts": true,
+  "no_resize_nodes": true,
+  "onnx_nodes": 399,
+  "initializer_count": 261,
+  "input_size": 256,
+  "torch_onnx_min_cosine": 0.9999999999971123,
+  "gpu_onnx_min_cosine": 0.9999999999974442,
+  "torch_onnx_max_abs": 2.7567148208618164e-06,
+  "candidate_sha256": "a72ab401e54758425a53a90b6cc3681c276c109cdea2848a8834d0dc9426ed34",
+  "candidate_bytes": 8742779
+}

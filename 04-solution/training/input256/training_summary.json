@@ -1,0 +1,14 @@
+{
+  "1": {
+    "epochs": 5,
+    "train_seconds": 1531.0,
+    "mean_epoch_seconds": 306.2,
+    "peak_allocated_MiB": 2701
+  },
+  "2": {
+    "epochs": 15,
+    "train_seconds": 5864.5,
+    "mean_epoch_seconds": 390.96666666666664,
+    "peak_allocated_MiB": 2701
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "experiment": "job_68",
+  "run": "combined_v1_256_job68",
+  "input": [
+    3,
+    256,
+    256
+  ],
+  "training_source": "D:/lct-reid/reid_train5.py (actual combined_v1, derived from reid_train2)",
+  "model_source": "D:/lct-reid/osnet_ain.py",
+  "model_changes": null,
+  "initial_weights": "D:/lct-reid/osnet_ain_start.pt",
+  "batch": 64,
+  "sampler": {
+    "C": 4,
+    "P": 4,
+    "K": 4,
+    "own_k": 2,
+    "seed": 20260916
+  },
+  "data": {
+    "rows": 20576,
+    "ids": 2287,
+    "cameras": 114,
+    "dev_own_ids": 100,
+    "train_rows": 19967,
+    "train_ids": 2187,
+    "batches_per_epoch": 311
+  },
+  "loss": {
+    "MCNL_m1": 0.1,
+    "MCNL_m2": 0.1,
+    "CE_label_smoothing": 0.1,
+    "w_id": 1.0,
+    "same_camera_negative": true
+  },
+  "augment": {
+    "flip": 0.5,
+    "pad_crop": 10,
+    "MixStyle_p": 0.5,
+    "MixStyle_alpha": 0.1,
+    "random_erasing": false
+  },
+  "optimizer": {
+    "name": "Adam",
+    "weight_decay": 0.0005,
+    "foreach": false,
+    "warmup_epochs": 2,
+    "schedule": "cosine"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "epochs": 5,
+      "freeze_fc": true,
+      "lr": 0.00035
+    },
+    {
+      "stage": 2,
+      "epochs": 15,
+      "unfrozen": [
+        "conv4",
+        "conv5",
+        "fc",
+        "classifier"
+      ],
+      "lr": 3.5e-05,
+      "cls_lr": 0.00035
+    },
+    {
+      "stage": 3,
+      "epochs": 6,
+      "unfrozen": "all",
+      "lr": 1.5e-05,
+      "cls_lr": 0.00035,
+      "conditional": true
+    }
+  ],
+  "stage3_gate": "best stage2 dev mAP > epoch0 baseline and not CH[-3] < CH[-2] < CH[-1]",
+  "checkpoint_selection": "Preserve actual job48 chain: compare best dev across stages; export final weights of selected stage (no best-epoch weights exist). Tie: smaller final CH.",
+  "memory_gate": "Five stage2 steps at batch64, unchanged FP32 code. Stop on OOM, no batch/model reduction. If stage3 gate opens, verify full-stage memory before executing it.",
+  "evaluation": {
+    "baseline_d1_j48_KR_mAP": 0.7741,
+    "baseline_d1_j48_KR_Rank1": 0.7308,
+    "sigma": 0.0134,
+    "bootstrap_B": 4000,
+    "bootstrap_seed": 20260921,
+    "rerank": [
+      6,
+      3,
+      0.3
+    ],
+    "whitening_rho": 0.5,
+    "whitening_fit": "train_fit only",
+    "plate_ablation": "mandatory on any gain"
+  },
+  "threads": 2,
+  "attempts": 1,
+  "reid_train5.py_sha256": "17df40eb016c39eeeea17a609a1bcbb07a16f50c35a17378ec275f2d90e17e9c",
+  "osnet_ain.py_sha256": "6fd22d609f94798adf1748a4989cceb5b8a8261edfec3620eeb12507c667746b",
+  "job48_chain.py_sha256": "746df226cabc9e674360a0f940cacb5afc00da7288670daaae0d09664fe21924"
+}
