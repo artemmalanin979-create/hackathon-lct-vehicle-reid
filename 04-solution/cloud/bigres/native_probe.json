@@ -1,0 +1,87 @@
+{
+  "osnet_ain_combined_v1.onnx": {
+    "input": [
+      "batch",
+      3,
+      208,
+      208
+    ],
+    "output": [
+      "batch",
+      512
+    ],
+    "attempts": {
+      "208": {
+        "ok": true,
+        "shape": [
+          1,
+          512
+        ],
+        "seconds": 0.2290074650081806,
+        "finite": true
+      },
+      "256": {
+        "ok": false,
+        "error": "[ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: input for the following indices\n index: 2 Got: 256 Expected: 208\n index: 3 Got: 256 Expected: 208\n Please fix either the inputs/outputs or the model."
+      },
+      "320": {
+        "ok": false,
+        "error": "[ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: input for the following indices\n index: 2 Got: 320 Expected: 208\n index: 3 Got: 320 Expected: 208\n Please fix either the inputs/outputs or the model."
+      },
+      "384": {
+        "ok": false,
+        "error": "[ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Got invalid dimensions for input: input for the following indices\n index: 2 Got: 384 Expected: 208\n index: 3 Got: 384 Expected: 208\n Please fix either the inputs/outputs or the model."
+      }
+    }
+  },
+  "osnet_ain_x1_0_vehicle_reid.onnx": {
+    "input": [
+      "batch_size",
+      "channels",
+      "height",
+      "width"
+    ],
+    "output": [
+      "batch_size",
+      512
+    ],
+    "attempts": {
+      "208": {
+        "ok": true,
+        "shape": [
+          1,
+          512
+        ],
+        "seconds": 0.121845766028855,
+        "finite": true
+      },
+      "256": {
+        "ok": true,
+        "shape": [
+          1,
+          512
+        ],
+        "seconds": 0.2992547749890946,
+        "finite": true
+      },
+      "320": {
+        "ok": true,
+        "shape": [
+          1,
+          512
+        ],
+        "seconds": 0.4232272889930755,
+        "finite": true
+      },
+      "384": {
+        "ok": true,
+        "shape": [
+          1,
+          512
+        ],
+        "seconds": 0.6080728530068882,
+        "finite": true
+      }
+    }
+  }
+}
