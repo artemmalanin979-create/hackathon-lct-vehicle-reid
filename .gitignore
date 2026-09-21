@@ -1,6 +1,10 @@
 # Данные и веса — не в git
 data/
 datasets/
+# Исключение: скрипты подготовки обучающих наборов — часть исходного кода решения,
+# ТЗ п.13 требует открытый код. Под общее правило datasets/ они попали случайно.
+!04-solution/training/src/datasets/
+!04-solution/training/src/evidence/datasets/
 *.pt
 *.pth
 *.onnx

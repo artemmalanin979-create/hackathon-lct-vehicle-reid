@@ -82,8 +82,8 @@ python3 04-solution/reproduce/check_inputs.py --mode val --data-dir "$DATA_DIR" 
 
 Соберите или импортируйте `vehicle-reid-service` по [SOLUTION.md §3–4](../../SOLUTION.md).
 Для офлайн-сборки нужен локальный Python base, для этих batch-команд Qdrant не нужен.
-Текущий [base-images.tar.gz](../service/offline/README.md) содержит один Python с
-двумя тегами и требует исправления перед использованием как комплекта Python/Qdrant.
+Базовые образы лежат в [offline/](../service/offline/README.md) отдельными архивами и
+проверены загрузкой в отдельное хранилище.
 
 ```bash
 docker run --rm --network none --cpus 2 --memory 4g \

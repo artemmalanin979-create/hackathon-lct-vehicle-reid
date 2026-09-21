@@ -1,0 +1,13 @@
+own: imgs=7248 ids=1171 cams=95 raw=(7248, 208, 208, 3)
+carla: files=51377 ids=605 -> using ids=605
+roundabout: files=1033 ids=511 -> using ids=511
+foreign ids total=1116 (cap 1171) OK
+WROTE /home/fedora/lct-reid/jobs/job_44/combined_crops_208.npy shape=(20576, 208, 208, 3)
+WROTE /home/fedora/lct-reid/jobs/job_44/combined_train.npz: imgs=20576 ids=2287 cams=114
+by source: {'own': 7248, 'carla': 7260, 'roundabout': 6068}
+BUILD_RC=0
+c1ee49dee0873a5748e7b799613fd1e14b4d3689bcd93b3cf51d24d08c42652c  combined_train.npz
+babd228fbe649999a09e9b2d83f3701de9c1b17424a72e23331940dcca3521cc  combined_crops_208.npy
+-rw-r--r--. 1 fedora fedora 2670600320 Sep 17 12:36 combined_crops_208.npy
+-rw-r--r--. 1 fedora fedora  524090549 Sep 17 12:37 combined_train.npz
+FULLBUILD_DONE
