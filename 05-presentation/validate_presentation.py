@@ -18,7 +18,7 @@ def render_check(preview):
     """Render the technical copy and confirm no editable text is lost or clipped."""
     deck = Presentation(preview)
     blocks = []
-    for slide in deck.slides:
+    for page_number, slide in enumerate(deck.slides, 1):
         for shape in slide.shapes:
             frames = ([shape.text_frame] if shape.has_text_frame
                       else [c.text_frame for row in shape.table.rows for c in row.cells] if shape.has_table
@@ -27,7 +27,7 @@ def render_check(preview):
                 for paragraph in tf.paragraphs:
                     text = ''.join(r.text for r in paragraph.runs).strip()
                     if text:
-                        blocks.append(text)
+                        blocks.append((page_number, text))
     with tempfile.TemporaryDirectory() as tmp:
         subprocess.run(['libreoffice', '--headless', '-env:UserInstallation=file://' + tmp + '/profile',
                         '--convert-to', 'pdf', '--outdir', tmp, str(preview)],
@@ -41,9 +41,9 @@ def render_check(preview):
         boxes = subprocess.run(['pdftotext', '-bbox', str(pdf), '-'],
                                check=True, capture_output=True, text=True).stdout
         shutil.copy(pdf, preview.with_suffix('.pdf'))
-    flat = re.sub(r'\s+', '', ' '.join(pages))
-    issues = [dict(kind='text_missing_from_render', text=b)
-              for b in blocks if re.sub(r'\s+', '', b) not in flat]
+    flat_pages = [re.sub(r'\s+', '', page) for page in pages]
+    issues = [dict(kind='text_missing_from_render', page=n, text=b)
+              for n, b in blocks if n > len(flat_pages) or re.sub(r'\s+', '', b) not in flat_pages[n - 1]]
     # Any rendered word reaching outside the page box would be cut off on screen.
     tree = etree.fromstring(boxes.encode())
     ns = {'x': tree.tag.split('}')[0].strip('{')}
@@ -68,7 +68,7 @@ TEAM = ROOT / 'team-data.md'
 CHECKS = ROOT / 'checks'
 prs = Presentation(OUTPUT)
 template = Presentation(SOURCE)
-assert len(prs.slides) == 15
+assert len(prs.slides) == 16
 empty = []
 fonts = set()
 pictures = 0
@@ -157,7 +157,7 @@ fit = json.loads((CHECKS / 'fit_check.json').read_text())
 assert all(item['fits'] for item in fit)
 render = render_check(CHECKS / 'content_preview.pptx')
 (CHECKS / 'render_check.json').write_text(json.dumps(render, ensure_ascii=False, indent=2))
-assert render['rendered_pages'] == 10 and not render['issues']
+assert render['rendered_pages'] == 11 and not render['issues']
 
 summary = {
     'slide_count': len(prs.slides),
