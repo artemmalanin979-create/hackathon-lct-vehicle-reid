@@ -1,0 +1,941 @@
+{
+  "checks": 187,
+  "max_abs_error": 0.0,
+  "detail": [
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.2366281200487585,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.311626562498089,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.3421283716587923,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.36782148538732634,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.3687716719891095,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.3935642739390282,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.42870662397568293,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.46387974703003426,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.49393663607040567,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.5141977018197194,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.5244802877683532,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.5461719508757918,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.5988712102492545,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.762585882959338,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_presence",
+      "threshold": 0.9572003303237866,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.2366281200487585,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.311626562498089,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.3421283716587923,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.36782148538732634,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.3935642739390282,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.42870662397568293,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.46387974703003426,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.4758743904959186,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.49393663607040567,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.5461719508757918,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.5988712102492545,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.762585882959338,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_market_top1",
+      "threshold": 0.9572003303237866,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.23032202235569899,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.311626562498089,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.3167687019739336,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.3418679580204071,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.36560953268205904,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.3923333736032351,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.4241132640496194,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.46372393661108396,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.49393663607040567,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.5097538296357345,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.5228492959199754,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.5461719508757918,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.5932574287701881,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.762585882959338,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_presence",
+      "threshold": 0.8705580268127878,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.23032202235569899,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.311626562498089,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.3418679580204071,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.36560953268205904,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.3923333736032351,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.4098295366796196,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.4241132640496194,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.46372393661108396,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.4758743904959186,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.49393663607040567,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.5461719508757918,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.5932574287701881,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.762585882959338,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_all_same_camera_top1",
+      "threshold": 0.8705580268127878,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.2366281200487585,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.311626562498089,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.3421283716587923,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.36782148538732634,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.3935642739390282,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.42870662397568293,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.46387974703003426,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.49393663607040567,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.5461719508757918,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.5988712102492545,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.60444591416054,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.6583299668422207,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.6719655600444963,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.762585882959338,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_presence",
+      "threshold": 0.9939183269649466,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.2366281200487585,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.311626562498089,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.3421283716587923,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.34921352213815304,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.36782148538732634,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.3935642739390282,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.42870662397568293,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.46387974703003426,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.49393663607040567,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.5461719508757918,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.5495953464415451,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.5988712102492545,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.60444591416054,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.637288341802267,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.6583299668422207,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.762585882959338,
+      "max_error": 0.0
+    },
+    {
+      "case": "cosine_unfiltered_top1",
+      "threshold": 0.9939183269649466,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.10852807899827854,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.13610335035701907,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.14953789332244607,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.174736625279619,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.19567151520495088,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.20426514456554123,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.2485253982210394,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.30662566497402904,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.34890017222478337,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.5282812332956895,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.5603712756590539,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.5605996745793298,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.7559593585536807,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.890065803682752,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_presence",
+      "threshold": 0.9893406670972188,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.10852807899827854,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.13610335035701907,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.14953789332244607,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.174736625279619,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.19567151520495088,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.2485253982210394,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.30662566497402904,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.34890017222478337,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.35505943587488553,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.5377597063497441,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.5603712756590539,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.7559593585536807,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.890065803682752,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_market_top1",
+      "threshold": 0.9893406670972188,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.10852807899827854,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.13610335035701907,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.14915586195523314,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.17261398535884767,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.19487217245597202,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.2003127538855658,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.2485253982210394,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.30391548320406697,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.3485152346884211,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.5099913696473518,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.549904717725078,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.5603712756590539,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.753502525591213,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.890065803682752,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_presence",
+      "threshold": 0.9596331884847653,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.10852807899827854,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.13610335035701907,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.14915586195523314,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.17261398535884767,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.19487217245597202,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.2485253982210394,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.30391548320406697,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.3485152346884211,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.35505943587488553,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.4623012847189718,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.5603712756590539,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.753502525591213,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.890065803682752,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_all_same_camera_top1",
+      "threshold": 0.9596331884847653,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.10852807899827854,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.13610335035701907,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.14953789332244607,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.174736625279619,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.19567151520495088,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.2485253982210394,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.30662566497402904,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.34890017222478337,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.5603712756590539,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.5771497351068859,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.7559593585536807,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.8205390408927437,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.869813586244865,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.890065803682752,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_presence",
+      "threshold": 0.9984892200650642,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.10852807899827854,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.13610335035701907,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.14953789332244607,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.174736625279619,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.19567151520495088,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.2485253982210394,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.30662566497402904,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.34890017222478337,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.5603712756590539,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.5771497351068859,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.7559593585536807,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.8441251607845024,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.869813586244865,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.890065803682752,
+      "max_error": 0.0
+    },
+    {
+      "case": "rerank_unfiltered_top1",
+      "threshold": 0.9984892200650642,
+      "max_error": 0.0
+    }
+  ]
+}

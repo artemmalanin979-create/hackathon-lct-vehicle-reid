@@ -1,0 +1,20 @@
+COMMAND: python3 -S /home/artem/projects/hackathon-lct-vehicle-reid/04-solution/reproduce/run.py --mode val --data-dir /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data --out-dir /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/missing-input-check
+Входы val не готовы: нет файлов — 1860; не совпали отпечатки — 0; не читаются — 0.
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/0020d9ccf91f4944afe069070529bd34.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/004b6e6d393f4f0e9fab6d188be7ee26.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/00b198c9bd9f45079a7bbcd420f09c49.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/00c992c0c3ee49948906a09b6a1b7464.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/00efbe470e694d8893138ab861d8c8be.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/00fd07d04ef3441fa47961f52a59505f.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/0115e7920895461aa56662639a207ee1.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/015a59a8e3a9439d98adfb7b64e41c6b.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/01c6654b1e854717a12be47934bf382c.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/01d60f6e097b4f53afed1724c2accb42.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/021b1f5e4f3d4ed4ad4e6aeb993977ed.jpg
+  Нет: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images/0229c22568454a6da9631c2e550cf912.jpg
+Положите исходные файлы набора организатора в /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data, изображения — в /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/absent-organizer-data/images. Сохраняйте имена файлов из архива. CSV сплита восстанавливаются из Git.
+Участник получает набор из личного кабинета задачи №7; жюри — из того же выданного набора у организатора. Инструкция: 04-solution/reproduce/README.md.
+Инференс не запущен. Полный список доступен в JSON-отчёте (--report).
+Полный список: /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_73/missing-input-check/inputs-val.json
+
+EXIT_CODE: 2

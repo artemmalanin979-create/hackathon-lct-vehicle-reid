@@ -1,0 +1,7 @@
+COMMAND: ssh worker-vm 'podman run --rm --pull=never --network=none --cpus=1 --memory=4g --security-opt label=disable -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 -e PYTHONDONTWRITEBYTECODE=1 -v /home/fedora/lct-reid/jobs/job_73-OQZJggyo/repo:/repo:ro -w /repo/04-solution/eval localhost/job72-jury:6179b69 python -B -m unittest -q test_metrics test_protocols'
+----------------------------------------------------------------------
+Ran 60 tests in 7.452s
+
+OK
+
+EXIT_CODE: 0

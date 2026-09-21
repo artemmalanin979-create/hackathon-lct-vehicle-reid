@@ -1,0 +1,85 @@
+{
+  "measured_on": "2026-09-21",
+  "files": [
+    {
+      "path": "/home/fedora/lct-reid/datasets/VeRi_CARLA_dataset.zip",
+      "sha256": "55153a24d2c6c95eb88d9eb44b93b03f7cddc05f28dbc58e03c4c4a5e913908d",
+      "bytes": 2529020889,
+      "zip_members": 55199,
+      "sample_members": [
+        "image_gallery/",
+        "image_gallery/20220713030732_6_22.jpg",
+        "image_gallery/20220711020510_70_32.jpg",
+        "image_gallery/20220713003806_75_4.jpg",
+        "image_gallery/20220710182420_34_1.jpg",
+        "image_gallery/20220710180018_13_12.jpg",
+        "image_gallery/20220711020512_71_32.jpg",
+        "image_gallery/20220711020323_17_32.jpg",
+        "image_gallery/20220710192206_24_6.jpg",
+        "image_gallery/20220712190900_35_47.jpg",
+        "image_gallery/20220711020446_58_32.jpg",
+        "image_gallery/20220711224417_9_11.jpg"
+      ]
+    },
+    {
+      "path": "/home/fedora/lct-reid/datasets/RoundaboutHD.zip",
+      "sha256": "fad611b70065bb67dbd7eb6a1c03280b8c1252fe46c291537ccd0b9230f1dd54",
+      "bytes": 8075314494,
+      "zip_members": 65587,
+      "sample_members": [
+        "RoundaboutHD/",
+        "RoundaboutHD/layout.jpg",
+        "RoundaboutHD/Multi_CAM_Ground_Turth.txt",
+        "RoundaboutHD/Vehicle_statistic.xlsx",
+        "RoundaboutHD/README.md",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/test_images/",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/test_images/0654_cam02_000817.jpg",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/test_images/0655_cam03_001901.jpg",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/test_images/0655_cam04_002575.jpg",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/test_images/0655_cam04_002600.jpg",
+        "RoundaboutHD/RoundaboutHD_Reid_subset/test_images/0004_cam01_000263.jpg"
+      ]
+    },
+    {
+      "path": "/home/fedora/lct-reid/jobs/job_44/combined_train.npz",
+      "sha256": "c1ee49dee0873a5748e7b799613fd1e14b4d3689bcd93b3cf51d24d08c42652c",
+      "bytes": 524090549
+    },
+    {
+      "path": "/home/fedora/lct-reid/jobs/job_44/combined_crops_208.npy",
+      "sha256": "babd228fbe649999a09e9b2d83f3701de9c1b17424a72e23331940dcca3521cc",
+      "bytes": 2670600320
+    },
+    {
+      "path": "/home/fedora/lct-reid/data/train_crops.npz",
+      "sha256": "a910e8a3a10986845fb83f3a3fcd401bfc8213ac697d50864e36b8c84fefff9d",
+      "bytes": 259339316
+    },
+    {
+      "path": "/home/fedora/lct-reid/data/crops_208.npy",
+      "sha256": "ea77290d1ad1ae6c245bc33e2ba19bc7c676a8185eda69f9028fe4d1b9e05057",
+      "bytes": 940732544
+    },
+    {
+      "path": "/home/fedora/lct-reid/jobs/job_48/job48_combined_s2.onnx",
+      "sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+      "bytes": 8742779
+    },
+    {
+      "path": "/home/fedora/lct-reid/jobs/job_48/runs/combined_v1/stage1.pt",
+      "sha256": "53e186af31f9886fbd914ad09f8da7eb18018fa672c48ce6b2060c96c1c7e28f",
+      "bytes": 13434846
+    },
+    {
+      "path": "/home/fedora/lct-reid/jobs/job_48/runs/combined_v1/stage2.pt",
+      "sha256": "826a7e7a6d826b9077bf6cf14203649a826ea129800baf1f193a2e3faad58965",
+      "bytes": 13434846
+    },
+    {
+      "path": "/home/fedora/lct-reid/jobs/job_48/out/lw_ens_j48_rho0.5_f64.npz",
+      "sha256": "4b02f158fa54d89a54f9ad30d7e471f1baa14d7019ea9ea26b42ea7c267eb625",
+      "bytes": 2101738
+    }
+  ]
+}

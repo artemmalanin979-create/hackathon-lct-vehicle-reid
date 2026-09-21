@@ -1,0 +1,16 @@
+{
+  "source": "Original job_42/job_48 train_fit embeddings; this check does not re-extract all training features",
+  "n_pairs": 13485,
+  "files": {
+    "lw_f64.npz": {
+      "sha256": "4b02f158fa54d89a54f9ad30d7e471f1baa14d7019ea9ea26b42ea7c267eb625",
+      "expected_sha256": "4b02f158fa54d89a54f9ad30d7e471f1baa14d7019ea9ea26b42ea7c267eb625",
+      "matches": true
+    },
+    "lw_f32.npz": {
+      "sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+      "expected_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+      "matches": true
+    }
+  }
+}

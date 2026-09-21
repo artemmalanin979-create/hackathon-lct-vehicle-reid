@@ -19,7 +19,8 @@
 Проверочный сплит: 1110 запросов против 750 объектов галереи, совпадения с камеры
 запроса исключены — как это делает организатор. Сдаваемая конфигурация **d1_j48**:
 OSNet-AIN (OMZ, MIT) + combined_v1 (наш LP-FT: RoundaboutHD MIT + CARLA Apache-2.0 +
-train организатора), среднее после L2, whitening (ρ=0,5), k-reciprocal (6,3,0,3).
+train организатора), L2 каждого → среднее → L2 среднего → whitening (ρ=0,5) → L2,
+k-reciprocal (6,3,0,3).
 Источник и отбор — [`training/combined/`](training/combined/).
 
 | | mAP | Rank-1 | Rank-5 |

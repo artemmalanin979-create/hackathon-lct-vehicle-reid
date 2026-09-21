@@ -1,0 +1,12 @@
+{
+  "osnet": {
+    "rows": 32,
+    "max_abs_delta": 0.0,
+    "tolerance": 1e-06
+  },
+  "j48": {
+    "rows": 32,
+    "max_abs_delta": 0.0,
+    "tolerance": 1e-06
+  }
+}

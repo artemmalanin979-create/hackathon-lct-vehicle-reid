@@ -1,0 +1,50 @@
+{
+  "metric-tests": {
+    "returncode": 0,
+    "expected_returncode": 0
+  },
+  "input-tests": {
+    "returncode": 0,
+    "expected_returncode": 0
+  },
+  "missing-validation": {
+    "returncode": 2,
+    "expected_returncode": 2
+  },
+  "ui-syntax": {
+    "returncode": 0,
+    "expected_returncode": 0
+  },
+  "source-transfer": {
+    "returncode": 0,
+    "expected_returncode": 0
+  },
+  "final-artifacts": {
+    "returncode": 0,
+    "expected_returncode": 0
+  },
+  "validation-full": {
+    "returncode": 0,
+    "expected_returncode": 0,
+    "evidence": "validation-metrics.json"
+  },
+  "test-full": {
+    "returncode": 0,
+    "expected_returncode": 0,
+    "matching_deliverable_files": 3
+  },
+  "calibration-service": {
+    "returncode": 0,
+    "expected_returncode": 0,
+    "checks": 187,
+    "max_abs_error": 0,
+    "evidence": "calibration-verification.json"
+  },
+  "base-images-contents": {
+    "sha256": "cde3ec69c78e1da5881dc8c42afb06a487a37f9944e8384d397fb1e85996bb3c",
+    "distinct_image_configs": 1,
+    "expected_image_configs": 2,
+    "complete": false,
+    "finding": "Only the Python image exists; both Python and Qdrant tags point to it. Archive unchanged; documentation corrected."
+  }
+}

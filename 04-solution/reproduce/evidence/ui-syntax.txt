@@ -1,0 +1,3 @@
+COMMAND: node --check /home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/app/static/app.js
+
+EXIT_CODE: 0

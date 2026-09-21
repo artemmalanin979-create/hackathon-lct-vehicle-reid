@@ -1,0 +1,28 @@
+{
+  "python": "3.14.3 (main, Mar 26 2026, 00:00:00) [GCC 16.0.1 20260321 (Red Hat 16.0.1-0)]",
+  "numpy": "2.5.3",
+  "pillow": "12.3.0",
+  "selection_order": [
+    "own",
+    "carla",
+    "roundabout"
+  ],
+  "counts": {
+    "carla": {
+      "selected_frames": 7260,
+      "ids": 605,
+      "discovered_jpg": 55196
+    },
+    "roundabout": {
+      "selected_frames": 6068,
+      "ids": 511,
+      "discovered_jpg": 65522
+    }
+  },
+  "archive_bytes_match": true,
+  "combined_jpeg_bytes_match": true,
+  "combined_raw_pixels_match": true,
+  "own_prefix_matches_train_crops": true,
+  "own_raw_prefix_matches_crops_208": true,
+  "foreign_rows_checked": 13328
+}

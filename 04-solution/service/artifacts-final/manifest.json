@@ -1,0 +1,74 @@
+{
+  "release_date": "2026-09-21",
+  "recorded_on": "2026-09-21",
+  "note": "Retrospective manifest of the existing release; files were not regenerated or replaced by job_73.",
+  "date_evidence": [
+    "README.md",
+    "../README.md",
+    "../../audit/jury-path-2/REPORT.md"
+  ],
+  "configuration": "d1_j48; KR(6,3,0.3); threshold=0.5282812306342437",
+  "files": {
+    "submission.csv": {
+      "bytes": 404181,
+      "sha256": "9f08068971d10efe815f6c5817d3f2adce59d343b1a3feb130aac1d22407bca8"
+    },
+    "embeddings.npy": {
+      "bytes": 3809408,
+      "sha256": "a64fecfe3d2c21d2e27142260bb12749987f6f4d663ab81c8192a0be3575cc57"
+    },
+    "candidates.csv": {
+      "bytes": 155680,
+      "sha256": "204559a5c9b50a6130801c2141ec2d5a305bbcf0ae1b28c84d20c1bf98aaf0b1"
+    },
+    "run_info.json": {
+      "bytes": 977,
+      "sha256": "16391afcdf853790dc9ba0e043f457c84d3565c8a92e7546c7ec5e05cb3a33c3"
+    }
+  },
+  "input_csvs": [
+    {
+      "path": "test_query.csv",
+      "bytes": 54288,
+      "sha256": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c"
+    },
+    {
+      "path": "test_gallery.csv",
+      "bytes": 36693,
+      "sha256": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496"
+    }
+  ],
+  "image_manifest": "../../reproduce/inputs-manifest.json",
+  "run_info": {
+    "threshold": 0.5282812306342437,
+    "queries_with_candidates": 1076,
+    "queries_refused": 34,
+    "refused_share": 0.0306,
+    "rerank": true,
+    "score_scale": "rerank_confidence_1_minus_distance",
+    "rerank_params": [
+      6,
+      3,
+      0.3
+    ],
+    "queries": 1110,
+    "gallery": 750,
+    "embeddings_shape": [
+      1860,
+      512
+    ],
+    "embed_elapsed_s": 765.252,
+    "rank_elapsed_s": 2.785,
+    "total_elapsed_s": 769.082,
+    "model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model2": "osnet_ain_combined_v1 (fine-tuned OSNet-AIN: RoundaboutHD MIT + CARLA Apache-2.0 + train organizer)",
+    "model2_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+    "versions": {
+      "python": "3.13.15",
+      "numpy": "2.5.3",
+      "onnxruntime": "1.30.0"
+    }
+  }
+}

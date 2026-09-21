@@ -1,0 +1,14 @@
+{
+  "npz_sha256": "35ca9af6702642f63b437df867db14da955669feab5f98fb47a00c95415292c7",
+  "npz_bytes": 8927256,
+  "npz_count": 559,
+  "pt_keys_match": true,
+  "pt_tensor_mismatches": [],
+  "onnx_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+  "onnx_initializer_count": 559,
+  "only_in_npz": [],
+  "only_in_onnx": [],
+  "tensor_mismatches": [],
+  "new_adapter_npz_sha256": "35ca9af6702642f63b437df867db14da955669feab5f98fb47a00c95415292c7",
+  "new_adapter_matches_original_npz": true
+}

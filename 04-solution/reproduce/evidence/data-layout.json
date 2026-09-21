@@ -1,0 +1,14 @@
+{
+  "val_images": 1860,
+  "test_images": 1860,
+  "shared_image_names": 0,
+  "validation_has_test_csvs": [
+    false,
+    false
+  ],
+  "test_has_test_csvs": [
+    true,
+    true
+  ],
+  "runtime_image_id": "f04d50ee90c845b60e4ce2e20820d006dee893024e1a1fcca347c374e494ae43"
+}

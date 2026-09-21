@@ -1,0 +1,103 @@
+{
+  "verified_at": "2026-09-21T23:56:00.845743+03:00",
+  "runtime": {
+    "image": "localhost/job72-jury:6179b69",
+    "image_id": "f04d50ee90c845b60e4ce2e20820d006dee893024e1a1fcca347c374e494ae43",
+    "source_snapshot": "/home/fedora/lct-reid/jobs/job_73-OQZJggyo/repo",
+    "validation_cpu_quota": 2,
+    "test_cpu_quota": 1,
+    "memory_each": "4 GiB",
+    "threads": 2,
+    "batch_size": 32,
+    "network": "none",
+    "new_build_or_fresh_clone": false
+  },
+  "validation": {
+    "cosine": {
+      "mAP": 0.7316093422310448,
+      "Rank-1": 0.6850961538461539
+    },
+    "rerank": {
+      "mAP": 0.7740915539438481,
+      "Rank-1": 0.7307692307692307
+    }
+  },
+  "threshold_abs_deltas": {
+    "calibration": 1.040067176827364e-08,
+    "rerank_calibration": 2.6614458414897513e-09
+  },
+  "test_output_comparison": {
+    "submission.csv": {
+      "expected": {
+        "bytes": 404181,
+        "sha256": "9f08068971d10efe815f6c5817d3f2adce59d343b1a3feb130aac1d22407bca8"
+      },
+      "actual": {
+        "bytes": 404181,
+        "sha256": "9f08068971d10efe815f6c5817d3f2adce59d343b1a3feb130aac1d22407bca8"
+      },
+      "equal": true
+    },
+    "embeddings.npy": {
+      "expected": {
+        "bytes": 3809408,
+        "sha256": "a64fecfe3d2c21d2e27142260bb12749987f6f4d663ab81c8192a0be3575cc57"
+      },
+      "actual": {
+        "bytes": 3809408,
+        "sha256": "a64fecfe3d2c21d2e27142260bb12749987f6f4d663ab81c8192a0be3575cc57"
+      },
+      "equal": true
+    },
+    "candidates.csv": {
+      "expected": {
+        "bytes": 155680,
+        "sha256": "204559a5c9b50a6130801c2141ec2d5a305bbcf0ae1b28c84d20c1bf98aaf0b1"
+      },
+      "actual": {
+        "bytes": 155680,
+        "sha256": "204559a5c9b50a6130801c2141ec2d5a305bbcf0ae1b28c84d20c1bf98aaf0b1"
+      },
+      "equal": true
+    },
+    "run_info.json": {
+      "expected": {
+        "bytes": 977,
+        "sha256": "16391afcdf853790dc9ba0e043f457c84d3565c8a92e7546c7ec5e05cb3a33c3"
+      },
+      "actual": {
+        "bytes": 979,
+        "sha256": "2d016556f28e7c3e4b7a23bc523591aa0d8c6a86a0943eb660f20e74aa089678"
+      },
+      "equal": false
+    }
+  },
+  "test_run_info_differences": {
+    "embed_elapsed_s": {
+      "expected": 765.252,
+      "actual": 1093.573
+    },
+    "rank_elapsed_s": {
+      "expected": 2.785,
+      "actual": 2.702
+    },
+    "total_elapsed_s": {
+      "expected": 769.082,
+      "actual": 1097.194
+    }
+  },
+  "calibration": {
+    "checks": 187,
+    "max_abs_error": 0.0
+  },
+  "note": "Quality metrics for unlabeled test are not computed. Original release files are unchanged.",
+  "validation_returncode": 0,
+  "test_returncode": 0,
+  "base_images_archive": {
+    "sha256": "cde3ec69c78e1da5881dc8c42afb06a487a37f9944e8384d397fb1e85996bb3c",
+    "distinct_image_configs": 1,
+    "expected_image_configs": 2,
+    "complete": false,
+    "finding": "Only the Python image exists; both Python and Qdrant tags point to it. Archive unchanged; documentation corrected."
+  }
+}

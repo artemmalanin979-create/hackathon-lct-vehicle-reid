@@ -20,11 +20,13 @@ CPU batch=1: **564.7 мс** вместо **413.5 мс**, на **36.6% медле
 
 Наши 7248 изображений декодированы из существующих JPEG 256×256 RGB в train_crops.npz, без повторной нарезки, ресайза или JPEG-перекодирования. Копии NPZ на Windows и VM совпали по SHA-256; JPEG-байты совпали с own-префиксом combined_train.npz. Пути к own-кадрам в унаследованном manifest не использовались. CARLA/RoundaboutHD нарезаны из исходников по точному отбору job_44, BILINEAR 256.
 
-SHA-256 raw-набора: `2576e12e73e5a6d822724db526620918b140f253e608af96ff20f01187715334`. Перенос VM→Windows выполнен по localhost VirtualBox, хешы совпали. Полные доказательства: [crop_info.json](crop_info.json), [download_status.json](download_status.json), [plate_input_info.json](plate_input_info.json).
+SHA-256 raw-набора: `2576e12e73e5a6d822724db526620918b140f253e608af96ff20f01187715334`. Перенос VM→Windows выполнен по localhost VirtualBox, хешы совпали. Полные доказательства: [crop_info.json](crop_info.json), `download_status.json` (авторский каталог, вне Git), `plate_input_info.json` (авторский каталог, вне Git).
 
 ## 2. Параметры до старта и память
 
-Параметры записаны до обучения в [preflight_parameters.json](preflight_parameters.json). Использован фактический trainer combined_v1 — reid_train5.py, производный от указанного в брифе reid_train2.py. Старый reid_train2 не содержит уже принятых исправлений LP, раздельных LR и own-only dev. Исходники сохранены в reference/.
+Параметры записаны до обучения в [preflight_parameters.json](preflight_parameters.json). Использован фактический trainer combined_v1 — reid_train5.py, производный от указанного в брифе reid_train2.py. Старый reid_train2 не содержит уже принятых исправлений LP, раздельных LR и own-only dev. Архивный отчёт ссылался на `reference/`, но этот каталог в Git не был передан.
+Фактический исходный trainer 208 теперь доступен в [../src/windows/](../src/windows/)
+с происхождением и хешами; это не полный комплект опыта 256.
 
 - OSNet-AIN x1.0 целиком, FP32, начальные osnet_ain_start.pt; число слоёв/каналов сохранено, дополнительное уменьшение разрешения внутри сети не добавлялось.
 - C4×P4×K4 = batch 64, own_k=2, seed=20260916. После отвода 100 own-ID в dev: 19 967 обучающих кадров, 2187 ID, 107 используемых камер, 311 batch/эпоху. Dev: 372 запроса / 237 изображений галереи.
@@ -34,7 +36,7 @@ SHA-256 raw-набора: `2576e12e73e5a6d822724db526620918b140f253e608af96ff20f
 
 Автоматическая сверка фактических config этапов 1/2 с эталоном показала только три различия: имя прогона, размер 208→256 и путь к raw-кропам; все прочие значения совпали ([recipe_difference.json](recipe_difference.json)). CPU-потоки служебных запусков ограничены двумя; тяжёлая работа выполнена на worker/worker-vm.
 
-Проба: **5 настоящих обновлений stage2**, batch 64, вход 256, исходный код. Пик allocated **2701.0 MiB**, reserved **3136 MiB** при физических 4095,9 MiB. Проба прошла; её веса не использовались в обучении. [probe_status.json](probe_status.json), [probe.log](probe.log).
+Проба: **5 настоящих обновлений stage2**, batch 64, вход 256, исходный код. Пик allocated **2701.0 MiB**, reserved **3136 MiB** при физических 4095,9 MiB. Проба прошла; её веса не использовались в обучении. `probe_status.json` (авторский каталог, вне Git), `probe.log` (авторский каталог, вне Git).
 
 ## 3. Ход единственного обучения
 
@@ -67,7 +69,7 @@ SHA-256 raw-набора: `2576e12e73e5a6d822724db526620918b140f253e608af96ff20f
 
 Лучший dev mAP 0,78024 на эпохе 12. В соответствии с **фактической семантикой combined_v1** экспортированы конечные веса выбранного этапа (эпоха 15: 0,77545), а не веса лучшей эпохи. Условие допуска stage3 не выполнено: CH последних трёх эпох **3,1095 < 3,1098 < 3,1129**. Полная разморозка пропущена штатно; дополнительных попыток не было.
 
-Логи, config и checkpoint: [artifacts/runs/combined_v1_256_job68](artifacts/runs/combined_v1_256_job68). [training_epochs.json](training_epochs.json), [training_package.json](training_package.json).
+Логи, config и checkpoint: `artifacts/runs/combined_v1_256_job68` (авторский каталог, вне Git). [training_epochs.json](training_epochs.json), `training_package.json` (авторский каталог, вне Git).
 
 ## 4. Внешняя валидация и bootstrap
 
@@ -149,15 +151,18 @@ SHA-256 raw-набора: `2576e12e73e5a6d822724db526620918b140f253e608af96ff20f
 
 CPUExecutionProvider на worker-vm/ThinkPad P50, 2 потока, batch 1, 50 одинаковых объектов и 5 warmup. Forward+L2; для d1 обе модели+whitening. JPEG-декодирование, crop/resize и загрузка сессий исключены. Общий вычислительный узел; сырые времена сохранены. [cpu_batch1_benchmark.json](cpu_batch1_benchmark.json).
 
-Веса новой модели: [combined_256_s2.onnx](artifacts/job68/combined_256_s2.onnx), **8742779 байт**, SHA-256 `a72ab401e54758425a53a90b6cc3681c276c109cdea2848a8834d0dc9426ed34`. Архитектура не урезана, выигрыш в размере отсутствует.
+Веса новой модели: `artifacts/job68/combined_256_s2.onnx` (авторский каталог, вне Git), **8742779 байт**, SHA-256 `a72ab401e54758425a53a90b6cc3681c276c109cdea2848a8834d0dc9426ed34`. Архитектура не урезана, выигрыш в размере отсутствует.
 
 ## 7. Артефакты и завершение
 
 - Полные метрики, per-query AP/R1, whitening и данные абляции — `evaluation/`; исходные GPU-векторы, checkpoint и журналы — `artifacts/`.
-- Гиперпараметры до старта — `preflight_parameters.json`; точное различие с 208 — `recipe_difference.json`; исходники trainer и оценок — `reference/`. Все вспомогательные скрипты сохранены рядом.
+- Гиперпараметры до старта — `preflight_parameters.json`; точное различие с 208 — `recipe_difference.json`; исходники trainer 208 — [../src/windows/](../src/windows/).
+  `reference/`, `artifacts/`, `evaluation/` и часть связанных файлов опыта 256 в Git
+  отсутствуют: ссылки выше описывают рабочий каталог автора, а не комплект клона.
+  Полная воспроизводимость этого исследовательского опыта не заявляется.
 - Большие raw-кропы оставлены на worker-vm в `~/lct-reid/jobs/job_68/` и на Windows в `D:\lct-reid\job68\`; их размеры и хеши зафиксированы. Train-кадры не переносились.
-- Временные HTTP-раздачи и NAT-пробросы закрыты. Собственный GPU.lock снят в 19:01:51 MSK после завершения всех GPU-процессов; GPU 0 MiB/0%. [gpu_release.json](gpu_release.json). Финальные проверки: [Windows](final_windows_audit.json), [VM](vm_evidence/final_vm_audit.json).
-- Сверены SHA-256 четырёх архивов, 114 файлов с VM и 18 массивов признаков. Итог проверки комплектности: [deliverables_verification.json](deliverables_verification.json); повторная проверка — `python3 verify_deliverables.py`.
+- Временные HTTP-раздачи и NAT-пробросы закрыты. Собственный GPU.lock снят в 19:01:51 MSK после завершения всех GPU-процессов; GPU 0 MiB/0%. `gpu_release.json` (авторский каталог, вне Git). Финальные проверки: `final_windows_audit.json` (авторский каталог, вне Git), `vm_evidence/final_vm_audit.json` (авторский каталог, вне Git).
+- Сверены SHA-256 четырёх архивов, 114 файлов с VM и 18 массивов признаков. Итог проверки комплектности: `deliverables_verification.json` (авторский каталог, вне Git); повторная проверка в авторском каталоге — `python3 verify_deliverables.py` (этого скрипта в Git нет).
 - Коммитов, push и изменений сдаваемой конфигурации не было. Одна попытка; отрицательный результат сохранён полностью.
 
 Bootstrap отражает неопределённость по запросам/ID при этих весах. Он не измеряет вариацию между независимыми обучениями; по заданию выполнялась ровно одна попытка.

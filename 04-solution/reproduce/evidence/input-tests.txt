@@ -1,0 +1,13 @@
+COMMAND: python3 -B -m unittest -v test_check_inputs
+test_missing_files_collected_together (test_check_inputs.InputGateTests.test_missing_files_collected_together) ... ok
+test_runner_fails_before_ml_imports (test_check_inputs.InputGateTests.test_runner_fails_before_ml_imports) ... ok
+test_same_size_corruption_rejected (test_check_inputs.InputGateTests.test_same_size_corruption_rejected) ... ok
+test_test_does_not_require_validation (test_check_inputs.InputGateTests.test_test_does_not_require_validation) ... ok
+test_validation_without_test_files (test_check_inputs.InputGateTests.test_validation_without_test_files) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.073s
+
+OK
+
+EXIT_CODE: 0

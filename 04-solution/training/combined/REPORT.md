@@ -21,7 +21,10 @@ GPU.lock на момент старта принадлежал job_48; пост�
 Скрипт `D:\lct-reid\reid_train5.py` (= reid_train4.py прогона ain_v2 с двумя правками:
 combined-данные и dev-пул только из own-ID), оркестратор `job48_chain.py` (WMI, PID 18264).
 Полная запись параметров — `journal.md` §«Параметры попытки» и
-`runs/combined_v1/stage{1,2,3}_config.json`.
+[stage1_config.json](../src/evidence/combined_v1/stage1_config.json) и
+[stage2_config.json](../src/evidence/combined_v1/stage2_config.json).
+Stage3 не запускался, его config отсутствует и не восстанавливается по догадке.
+Фактические исходники, команды и provenance — [../src/README.md](../src/README.md).
 
 Кратко: MCNL-сэмплер C4×P4×K4=64 own_k=2 (camera-balanced), MCNL m1=m2=0.1 + CE ls 0.1
 (BNNeck-голова OSNet-AIN), MixStyle p=0.5 после stem/mid, REA снят, Adam wd 5e-4,
@@ -83,6 +86,12 @@ best dev mAP этапа 2 > 0.71358 И CH-хвост не растёт стро�
 [3.0706, 3.0717, 3.0731] — строго растёт → **этап 3 пропущен по правилу**
 (признак роста камеро-специфичности; вмешательство запрещено — один прогон).
 Победитель: **этап 2** (единственный этап с ростом dev).
+Экспортирован `stage2.pt` после **эпохи 15** (dev mAP 0.77211),
+а не лучший checkpoint эпохи 13: trainer перезаписывает checkpoint по эпохам и
+сохраняет конечное состояние. `job48_chain.py` сравнивает максимумы dev по этапам
+для выбора этапа; фраза о выборе по конечной dev выше не описывала этот код точно.
+Повторный экспорт сохранённого stage2.pt 21.09 совпал со сдаваемым ONNX
+по полному SHA-256 ([проверка](../src/evidence/windows-environment.json)).
 Экспорт rc=0 (17:52:17): `job48_combined_s2.onnx`, SHA256
 `b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2`,
 8 742 779 байт, opset 13, вход 1×3×208×208, выход 512-d. GPU.lock удалён.

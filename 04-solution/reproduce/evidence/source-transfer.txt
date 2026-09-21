@@ -1,0 +1,31 @@
+COMMAND: sha256sum -c SHA256SUMS
+windows/reid_train5.py: OK
+windows/job48_chain.py: OK
+windows/export_onnx2.py: OK
+windows/osnet_ain.py: OK
+windows/build_from_onnx.py: OK
+windows/reid_metrics.py: OK
+windows/scope_metrics.py: OK
+datasets/build_combined.py: OK
+postprocess/s01_extract.py: OK
+postprocess/s02_eval.py: OK
+postprocess/s03_plate.py: OK
+postprocess/lib45.py: OK
+postprocess/lib42.py: OK
+postprocess/delta.py: OK
+evidence/combined_v1/chain.log.txt: OK
+evidence/combined_v1/chain_s1.out.txt: OK
+evidence/combined_v1/chain_s2.out.txt: OK
+evidence/combined_v1/chain_status.json: OK
+evidence/combined_v1/stage1_config.json: OK
+evidence/combined_v1/stage2_config.json: OK
+evidence/combined_v1/stage1_log.jsonl: OK
+evidence/combined_v1/stage2_log.jsonl: OK
+evidence/datasets/build.log.txt: OK
+evidence/datasets/download.sh: OK
+evidence/datasets/download2.sh: OK
+evidence/datasets/download3.sh: OK
+evidence/datasets/finish_carla.sh: OK
+evidence/datasets/dl_roundabout.sh: OK
+
+EXIT_CODE: 0

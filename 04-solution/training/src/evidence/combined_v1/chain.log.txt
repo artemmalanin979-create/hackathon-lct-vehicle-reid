@@ -1,0 +1,28 @@
+[16:19:52] === job_48 chain старт ===
+[16:19:52] START stage1: --run combined_v1 --stage 1 --epochs 5 --freeze-fc --lr 3.5e-4
+[16:39:18] DONE stage1 за 19.4 мин
+[16:39:18] baseline dev mAP (эпоха 0): 0.71358
+[16:39:18] START stage2: --run combined_v1 --stage 2 --epochs 15 --resume-from stage1.pt --lr 3.5e-5 --cls-lr 3.5e-4
+[17:52:04] DONE stage2 за 72.8 мин
+[17:52:04] stage2: лучшая dev mAP 0.77719 @ эпоха 13; последние CH: [3.0706, 3.0717, 3.0731]
+[17:52:04] ворота этапа 3: mAP 0.77719 > base 0.71358 = True; CH rising tail = True
+[17:52:04] этап 3 пропущен по воротам
+[17:52:17] export stage2 -> D:\lct-reid\job48_combined_s2.onnx: rc=0
+D:\lct-reid\py312\Lib\site-packages\torch\onnx\symbolic_helper.py:1454: UserWarning: ONNX export mode is set to TrainingMode.EVAL, but operator 'instance_norm' is set to train=True. Exporting with train=True.
+  warnings.warn(
+{
+ "weights": "D:\\lct-reid\\runs\\combined_v1\\stage2.pt",
+ "onnx": "D:\\lct-reid\\job48_combined_s2.onnx",
+ "bytes": 8742779,
+ "sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+ "opset": 13,
+ "input": [
+  1,
+  3,
+  208,
+  208
+ ],
+ "dim": 512
+}
+
+[17:52:17] === ГОТОВО: победитель этап 2 ===

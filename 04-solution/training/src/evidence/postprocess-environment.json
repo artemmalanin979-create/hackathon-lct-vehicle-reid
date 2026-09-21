@@ -1,0 +1,16 @@
+{
+  "captured_on": "2026-09-21",
+  "scope": "current postprocessing environment, job_45 venv",
+  "python": "3.14.3 (main, Mar 26 2026, 00:00:00) [GCC 16.0.1 20260321 (Red Hat 16.0.1-0)]",
+  "executable": "/home/fedora/lct-reid/jobs/job_45/venv/bin/python",
+  "platform": "Linux-6.19.10-300.fc44.x86_64-x86_64-with-glibc2.43",
+  "pip_freeze_all": [
+    "flatbuffers==25.12.19",
+    "numpy==2.4.6",
+    "onnxruntime==1.30.0",
+    "packaging==26.3",
+    "pillow==12.3.0",
+    "pip==26.0.1",
+    "protobuf==7.36.1"
+  ]
+}

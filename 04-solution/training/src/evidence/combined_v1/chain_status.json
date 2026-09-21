@@ -1,0 +1,9 @@
+{
+ "state": "done",
+ "run": "combined_v1",
+ "ts": "2026-09-19 17:52:17",
+ "winner": 2,
+ "baseline_dev_mAP": 0.71358,
+ "best_s2_dev_mAP": 0.77719,
+ "onnx": "D:\\lct-reid\\job48_combined_s2.onnx"
+}

@@ -1,0 +1,7 @@
+COMMAND: sha256sum -c SHA256SUMS
+submission.csv: OK
+embeddings.npy: OK
+candidates.csv: OK
+run_info.json: OK
+
+EXIT_CODE: 0

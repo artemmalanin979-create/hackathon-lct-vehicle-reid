@@ -1,0 +1,16 @@
+{
+  "returncode": 0,
+  "command": [
+    "D:\\lct-reid\\py312\\python.exe",
+    "D:\\lct-reid\\export_onnx2.py",
+    "--weights",
+    "D:\\lct-reid\\runs\\combined_v1\\stage2.pt",
+    "--probe",
+    "D:\\lct-reid\\job73\\probe-synthetic.npz",
+    "--out",
+    "D:\\lct-reid\\job73\\reexport-synthetic.onnx"
+  ],
+  "sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+  "matches_shipped": true,
+  "stderr": "D:\\lct-reid\\py312\\Lib\\site-packages\\torch\\onnx\\symbolic_helper.py:1454: UserWarning: ONNX export mode is set to TrainingMode.EVAL, but operator 'instance_norm' is set to train=True. Exporting with train=True.\n  warnings.warn(\n"
+}

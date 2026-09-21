@@ -672,8 +672,9 @@ async function explain(gid) {
   const scale = Math.max(
     ...data.query.flat().map(Math.abs), ...data.gallery.flat().map(Math.abs));
   $("explain-lead").textContent =
-    "Оценка близости раскладывается по областям изображения точно: сумма вкладов "
-    + "всех областей и свободного члена равна косинусу. Красным — то, что "
+    "Объяснение первой модели OSNet-AIN (OMZ): сумма вкладов областей и свободного "
+    + "члена равна её косинусу. Поиск использует d1_j48 — две модели и whitening, "
+    + "поэтому его оценка может отличаться от числа ниже. Красным — то, что "
     + "поддерживает совпадение, синим — то, что ему мешает.";
 
   drawTile($("ex-q"), () => drawQueryCrop(), data.query, scale);
@@ -684,7 +685,8 @@ async function explain(gid) {
   $("ex-q-note").textContent = "\u03a3 вкладов " + sumOf(data.query).toFixed(4);
   $("ex-g-note").textContent = "\u03a3 вкладов " + sumOf(data.gallery).toFixed(4);
   $("ex-facts").innerHTML =
-    dt("Близость пары", fmt6(data.cos))
+    dt("Модель объяснения", "OSNet-AIN · OMZ")
+    + dt("Косинус OSNet-AIN", fmt6(data.cos))
     + dt("Сетка признаков", data.grid.join(" × "))
     + dt("10 % ячеек дают", share(data.query, 0.1) + " вклада запроса")
     + dt("Невязка разложения", String(data.residual.query))
