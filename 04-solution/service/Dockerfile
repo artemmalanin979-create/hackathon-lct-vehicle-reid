@@ -51,23 +51,34 @@ WORKDIR /srv
 COPY --from=deps /install /usr/local
 
 # Веса — в составе решения. Если файла нет (например, клон без бинарников),
-# model/fetch_model.sh скачает и проверит его ДО сборки образа.
+# model/fetch_model.sh скачает и проверит его ДО сборки образа. combined_v1 и
+# матрица whitening поставляются в git-репозитории решения.
 COPY model/ model/
 RUN python - <<'EOF'
 import hashlib, pathlib, sys
-expected = "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f"
-p = pathlib.Path("model/osnet_ain_x1_0_vehicle_reid.onnx")
-if not p.is_file():
-    sys.exit("нет файла весов model/osnet_ain_x1_0_vehicle_reid.onnx — "
-             "запустите model/fetch_model.sh перед сборкой")
-digest = hashlib.sha256(p.read_bytes()).hexdigest()
-assert digest == expected, f"sha256 весов не совпал: {digest}"
-print("веса модели в образе, sha256 OK")
+expected = {
+    "model/osnet_ain_x1_0_vehicle_reid.onnx":
+        "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model/osnet_ain_combined_v1.onnx":
+        "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "model/lw_ens_j48_rho0.5.npz":
+        "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+}
+for name, want in expected.items():
+    p = pathlib.Path(name)
+    if not p.is_file():
+        sys.exit(f"нет файла весов {name} — для OSNet запустите model/fetch_model.sh "
+                 "перед сборкой, остальные файлы поставляются в репозитории")
+    digest = hashlib.sha256(p.read_bytes()).hexdigest()
+    assert digest == want, f"sha256 {name} не совпал: {digest}"
+print("все три файла весов в образе, sha256 OK")
 EOF
 
 COPY app/ app/
 
-ENV MODEL_PATH=/srv/model/osnet_ain_x1_0_vehicle_reid.onnx
+ENV MODEL_PATH=/srv/model/osnet_ain_x1_0_vehicle_reid.onnx \
+    MODEL2_PATH=/srv/model/osnet_ain_combined_v1.onnx \
+    WHITENING_PATH=/srv/model/lw_ens_j48_rho0.5.npz
 
 EXPOSE 8000
 # По умолчанию — HTTP-API; пакетный прогон запускается тем же образом:

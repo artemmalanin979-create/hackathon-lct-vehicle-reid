@@ -106,6 +106,9 @@ def main() -> None:
         "total_elapsed_s": round(time.perf_counter() - t0, 3),
         "model": config.MODEL_NAME,
         "model_sha256": config.MODEL_SHA256,
+        "model2": config.MODEL2_NAME,
+        "model2_sha256": config.MODEL2_SHA256,
+        "whitening_sha256": config.WHITENING_SHA256,
         "versions": {
             "python": platform.python_version(),
             "numpy": np.__version__,

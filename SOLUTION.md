@@ -1,17 +1,17 @@
 # Vehicle ReID: сборка, запуск и воспроизведение результатов
 
-Документация решения по разделам 7–9 и 12 ТЗ. Проверка выполнена 15–16 сентября 2026 года на Linux x86_64 с Podman 5.8.2 и podman-compose 1.6.0. Ниже приведены команды **Docker** для жюри; непосредственно Docker на машине проверки отсутствует.
+Документация решения по разделам 7–9 и 12 ТЗ. Проверка выполнена 15–16 сентября 2026 года на Linux x86_64 с Podman 5.8.2 и podman-compose 1.6.0; **20 сентября 2026 года** конфигурация признака сменилась на d1_j48 (две модели + whitening, §2) и вся цепочка перепроверена из отдельного чистого дерева на Podman 5.8.1 (офлайн-сборка, пакетный прогон, побайтовая сверка артефактов, 60 тестов контура — §8). Ниже приведены команды **Docker** для жюри; непосредственно Docker на машине проверки отсутствует.
 
 **Подтверждены сборка образа без обращения к PyPI, инференс без сети, работа API с Qdrant и пересчёт основных метрик из изображений. Полное воспроизведение всех исследовательских отчётов из одного git-репозитория пока не обеспечено.** Зависимости едут колёсами в составе решения (раздел 3), из внешнего на сборке остаются только базовые образы. Недостающие материалы и непроверенные числа перечислены в разделах 8–11.
 
 ## 1. Назначение и архитектура
 
-Сервис принимает изображение автомобиля и предоставленный bbox `(x, y, w, h)`, извлекает признак, ищет похожие объекты в галерее и возвращает кандидатов либо пустой ответ. Самостоятельное обучение сдаваемой модели не проводилось. OCR, распознавание номера и детекция автомобиля в вычислительный путь не входят; влияние области пластины исследовалось отдельно.
+Сервис принимает изображение автомобиля и предоставленный bbox `(x, y, w, h)`, извлекает признак, ищет похожие объекты в галерее и возвращает кандидатов либо пустой ответ. Сдаваемый признак — двумодельный ансамбль **d1_j48**: публичный OSNet-AIN (OMZ 2022.1) плюс наш дообученный OSNet-AIN **combined_v1** (LP-FT на RoundaboutHD, MIT + CARLA, Apache-2.0 + train организатора; журнал обучения — [training/combined/](04-solution/training/combined/)), с общим whitening. OCR, распознавание номера и детекция автомобиля в вычислительный путь не входят; влияние области пластины исследовалось отдельно для обеих моделей ([training/combined/REPORT.md §5](04-solution/training/combined/REPORT.md), [plate-ablation/](04-solution/plate-ablation/)).
 
 | Компонент | Код | Ответственность |
 |---|---|---|
 | Подготовка изображения | [preprocess.py](04-solution/service/app/core/preprocess.py) | Чтение JPEG/PNG, bbox, RGB, изменение размера |
-| Модель | [model.py](04-solution/service/app/core/model.py) | Проверка SHA-256 весов, ONNX Runtime CPU, нормированные векторы |
+| Модель | [model.py](04-solution/service/app/core/model.py) | Проверка SHA-256 трёх файлов весов (две ONNX-модели + матрица whitening), ONNX Runtime CPU, двумодельный признак со whitening |
 | Пакетная обработка | [batch.py](04-solution/service/app/batch.py) | Последовательное чтение CSV, извлечение векторов, ранжирование, три сдаваемых файла |
 | Переранжирование | [rerank.py](04-solution/service/app/core/rerank.py) | Совместная обработка всех запросов и галереи по k-взаимным соседям |
 | HTTP API | [main.py](04-solution/service/app/api/main.py) | Получение файла/bbox или вектора, валидация, поиск, OpenAPI |
@@ -26,13 +26,17 @@ API и Qdrant запускаются отдельными контейнерам
 
 ### Признак
 
-Путь обработки: bbox в пикселях исходного кадра → RGB → PIL bilinear, `208×208` → `float32`, диапазон `0…255`, NCHW → OSNet-AIN из OMZ → вектор размерности `512` → L2-нормировка с накоплением в `float64`, сохранение в `float32`. Внешняя ImageNet-нормировка не применяется: модель уже содержит нормировку входа. Инференс выполняется через `CPUExecutionProvider`.
+Путь обработки: bbox в пикселях исходного кадра → RGB → PIL bilinear, `208×208` → `float32`, диапазон `0…255`, NCHW → **две модели на одном препроцессированном батче**: OSNet-AIN (OMZ 2022.1) и combined_v1 (наш дообученный OSNet-AIN) → L2-нормировка каждого сырого вектора `512` → покомпонентное среднее → whitening `y = (x − m) @ P.T` в `float32` (матрица `P` и вектор `m` обучены на `train_fit` по дельтам ансамбля, ρ=0,5; обучение и проверка — [training/combined/](04-solution/training/combined/)) → L2-нормировка с накоплением в `float64`, сохранение в `float32`. Порядок важен: среднее нормируется до whitening, потому что `m` обучена на нормированных входах. Внешняя ImageNet-нормировка не применяется: обе модели уже содержат нормировку входа. Инференс выполняется через `CPUExecutionProvider`.
+
+Происхождение **combined_v1**: LP-FT дообучение OSNet-AIN (заморозка классификатора → частичная → полная разморозка по заранее зафиксированным воротам) на объединённом наборе RoundaboutHD (лицензия MIT) + CARLA (лицензия Apache-2.0) + train организатора. Полный журнал: [training/combined/journal.md](04-solution/training/combined/journal.md), отчёт с метриками и бутстрэпом — [training/combined/REPORT.md](04-solution/training/combined/REPORT.md). Веса поставляются файлом `model/osnet_ain_combined_v1.onnx` (SHA-256 — §9); в git по `*.onnx`-исключению не входят и приложены к поставке.
+
+Дельта от хранения whitening в `float32` вместо `float64`-оригинала измерена отдельно: метрики валидации не меняются ни в одной из 16 печатных цифр, максимальное отличие эмбеддинга `1.43e-08` (раздел 8).
 
 ### Ранжирование и отказ
 
 Пакетный режим по умолчанию применяет k-reciprocal re-ranking на объединении **всех запросов данного прогона и всей галереи**. Он смешивает жаккардову дистанцию между взаимными окрестностями и нормированную косинусную дистанцию. Внешняя оценка `s = 1 − d`: больше означает ближе. Сохраняемые эмбеддинги от этой операции не меняются.
 
-**Рабочая строка конфигурации:** `batch: k1=6, k2=3, λ=0.3, t_rr=0.49937235233589916; API / batch --no-rerank: t_cos=0.5495953464415451`.
+**Рабочая строка конфигурации (с 20.09.2026):** `batch: k1=6, k2=3, λ=0.3, t_rr=0.5282812306342437; API / batch --no-rerank: t_cos=0.5141976914190476`. До 20.09 сдавалась одномодельная конфигурация OSNet+KR с `t_rr=0.49937235233589916`, `t_cos=0.5495953464415451` (её числа сохранены в истории раздела 6). Пороги перекалиброваны на эмбеддингах d1_j48 тем же правилом, что и раньше (раздел 6).
 
 Исполняемый источник значений — [config.py](04-solution/service/app/core/config.py). После изменения калибровки обновляется строка выше; команды ниже читают значения из кода и заново рассчитывают порог. Фактическая конфигурация batch записывается в `run_info.json`, конфигурация API доступна в `/api/version`.
 
@@ -66,7 +70,7 @@ test -f "$DATA_DIR/test_gallery.csv"
 (cd "$REPO/04-solution/service" && sh model/fetch_model.sh)
 ```
 
-Скрипт скачивает ONNX по прямой ссылке OMZ и проверяет полный SHA-256. После него файл находится в `04-solution/service/model/`. При несовпадении хеша сборку не продолжать. Наличие файла в рабочем каталоге не означает, что он включён в git: `*.onnx` исключён `.gitignore`.
+Скрипт проверяет по полному SHA-256 все три сдаваемых файла весов и скачивает по прямой ссылке OMZ только то, чего нет рядом (OSNet). После него файлы находятся в `04-solution/service/model/`. При несовпадении любого хеша сборку не продолжать. Наличие файла в рабочем каталоге не означает, что он включён в git: `*.onnx` исключён `.gitignore`, оба ONNX должны приехать в архиве поставки.
 
 ### Шаг 3. Образы
 
@@ -177,7 +181,7 @@ sha256sum "$OUT_DIR/runtime-images.tar" > "$OUT_DIR/runtime-images.tar.sha256"
 | `candidates.csv` | `query_id,gallery_id,confidence`; все пары выше порога; уверенность записана с шестью знаками после точки; отсутствие строк для query означает отказ |
 | `run_info.json` | Служебный протокол: модель, хеш, версии, порог, режим и шкала, размеры, счётчики, время |
 
-Переранжирование меняет `submission.csv` и `candidates.csv`. Оно не меняет `embeddings.npy`. Старые файлы [baseline/artifacts](04-solution/baseline/artifacts/) сняты в другом режиме/при другом пороге и не служат эталоном новой выдачи. У проверенного выданного теста 1110 query и 750 gallery: ожидается матрица `(1860, 512)`.
+Переранжирование меняет `submission.csv` и `candidates.csv`. Оно не меняет `embeddings.npy`. Старые файлы [baseline/artifacts](04-solution/baseline/artifacts/) сняты в другом режиме/при другом пороге и не служат эталоном новой выдачи. Каталог [service/artifacts-final/](04-solution/service/artifacts-final/) обновлён 20.09.2026: прогон текущей конфигурации d1_j48 с рабочими порогами раздела 2, сверен побайтово с пересчётом из чистого дерева (раздел 8). У проверенного выданного теста 1110 query и 750 gallery: ожидается матрица `(1860, 512)`.
 
 ## 6. Протокол метрик и достигнутые значения
 
@@ -189,10 +193,13 @@ AP — среднее precision в позициях всех верных доп
 
 | Метод | mAP, вся галерея | Rank-1 | Rank-5 | mINP | mAP@10 |
 |---|---:|---:|---:|---:|---:|
-| OSNet, косинус | 0.6565692725 | 0.6310096154 | 0.7872596154 | 0.6070423065 | 0.6451091747 |
-| OSNet, переранжирование | 0.6936584725 | 0.6634615385 | 0.7872596154 | 0.6608640365 | 0.6834008859 |
+| **d1_j48, косинус** | 0.7316093422 | 0.6850961538 | 0.8822115385 | 0.6928460434 | 0.7242262382 |
+| **d1_j48, переранжирование** | **0.7740915539** | **0.7307692308** | 0.8810096154 | 0.7488060310 | **0.7684546226** |
+| Прежняя сдаваемая конфигурация OSNet+KR, переранжирование (до 20.09) | 0.6936584725 | 0.6634615385 | 0.7872596154 | 0.6608640365 | 0.6834008859 |
 
-Прирост mAP — **0.0370892000**. Значения воспроизведены из изображений и совпали с [отчётом постобработки](04-solution/postproc/REPORT.md) и [final_val.json](04-solution/postproc/out/final_val.json). Числа полного ранжирования нельзя объявлять метрикой усечённого `submission.csv`. Метрики закрытого теста организатора неизвестны: в доступных test-CSV нет идентичностей и камер.
+Прирост mAP от переранжирования у d1_j48 — **0.0424822117** (косинус → переранжирование). Значения воспроизведены сервисным конвейером из изображений и совпали с измерительным контуром до всех 16 цифр (валидационный батч сервиса, прогнанный через `tools/eval_split.py`, даёт ровно `0.7740915539438481 / 0.7307692307692307 / 0.7684546226343101` и косинус `0.7316093422310448`); источник чисел и методика — [training/combined/s02_metrics.json](04-solution/training/combined/s02_metrics.json) и [training/combined/REPORT.md](04-solution/training/combined/REPORT.md). Числа полного ранжирования нельзя объявлять метрикой усечённого `submission.csv`. Метрики закрытого теста организатора неизвестны: в доступных test-CSV нет идентичностей и камер.
+
+> **Пометка честности (переключение 20.09.2026).** Сдаваемая конфигурация сменилась: OSNet+KR (0.6937 / 0.6635) → d1_j48 (0.7741 / 0.7308). Отрыв d1_j48 от **прежнего чемпиона измерительного контура** d1 (0.7621 / 0.7175) составляет **+0.0120 — меньше заранее зафиксированной приёмочной σ(mAP) = 0.0134**, то есть по приёмочному правилу прирост против чемпиона **не засчитывается**. Парный бутстрэп при этом значим (Δ = +0.0120, CI95 [+0.0040, +0.0205], p = 0.003, B = 4000); переключение выполнено **по явному решению Артёма** при этом значимом бутстрэпе. Полное сравнение кандидатов и критерий приёмки — [training/combined/REPORT.md §4–§6](04-solution/training/combined/REPORT.md). Разрыв по камере (KR mAP: без исключения same-camera минус market) у сдаваемой конфигурации **+0.1103** — лучше, чем у прежнего чемпиона (+0.1144) и у исходного OSNet (+0.1417); абляция зоны номерной пластины для combined_v1 пройдена — снижение при её маскировании статистически неотличимо от контрольной зоны той же площади (все контрасты накрывают 0, REPORT.md §5).
 
 ### Обоснование порога
 
@@ -200,15 +207,19 @@ AP — среднее precision в позициях всех верных доп
 
 Правило: выбрать порог, максимизирующий `min(TNR, F1_0.10, F1_0.25, F1_0.40)`. Индексы — предполагаемые доли запросов без пары. Для каждого порога вычисляются recall `r` и доля ложных принятий `f`; при доле отсутствующих `p` используется `F1_p = 2(1−p)r / ((1−p)(1+r)+pf)`, `TNR=1−f`. При изменении только доли классов TNR и recall сохраняются. Это обоснование выбора компромисса, а не модель распределения скрытого теста.
 
+**Доопределение при равенстве — часть правила.** Кандидаты — все различные значения уверенности top-1 на валидации. Максимум не всегда единственный: когда минимум даёт `TNR`, целевая функция постоянна на участках сетки, где не сдвигается ни один запрос **без** пары. При равенстве берётся больший `F1`, затем больший `TNR`. На косинусе это не формальность: плато состоит из двух порогов — `0.5141976914190476` (TP 566, F1 0.7684996606) и `0.5145892426611729` (TP 565, F1 0.7676630435), у обоих `TNR` 0.7302158273; без доопределения выбор между ними произволен, а расходятся они на 3.9e-04 — в 400 раз больше допуска сверки в команде R. Правило записано так во всех реализациях: [`calibrate_threshold.py`](04-solution/service/tools/calibrate_threshold.py) (им посчитаны рабочие пороги), [`refusal/scripts/analyze.py`](04-solution/refusal/scripts/analyze.py), [`s06_refusal.py`](04-solution/training/ensemble/scripts/s06_refusal.py) и команда R (разд. 7).
+
 | Режим | TP / FP / FN / TN отсутствующих | F1 | TNR | Recall | AUC-PR, трапеции |
 |---|---|---:|---:|---:|---:|
-| Исторический максимум F1 на косинусе | 819 / 238 / 13 / 40 | 0.8671254632 | 0.1438848921 | 0.9843750000 | 0.8876079348 |
-| Косинус, `t_cos` | 530 / 84 / 302 / 194 | 0.7330567082 | 0.6978417266 | 0.6370192308 | 0.8876079348 |
-| Переранжирование, `t_rr` | 603 / 62 / 229 / 216 | 0.8056112224 | 0.7769784173 | 0.7247596154 | 0.9218838676 |
+| Максимум F1 на косинусе d1_j48 (не рабочая точка) | 785 / 194 / 47 / 84 | 0.8669243512 | 0.3021582734 | 0.9435096154 | 0.9094743821 |
+| Косинус d1_j48, `t_cos` | 566 / 75 / 266 / 203 | 0.7684996606 | 0.7302158273 | 0.6802884615 | 0.9094743821 |
+| Переранжирование d1_j48, `t_rr` | 606 / 60 / 226 / 218 | 0.8090787717 | 0.7841726619 | 0.7283653846 | 0.9182837159 |
 
-**Какая строка относится к сдаваемому режиму.** По умолчанию batch работает с переранжированием, поэтому заявленные в задании **F1 0.8056112224 и TNR 0.7769784173 — это строка «Переранжирование, `t_rr`»**, и в `metrics.json` она лежит в `rerank_refusal`. Пара 0.7330567082 / 0.6978417266 из строки «Косинус, `t_cos`» относится к косинусной ветви — это режим HTTP API и `batch --no-rerank`, в `metrics.json` это `base.refusal`. Числа одинаковые по смыслу и разные по конфигурации; команда R (раздел 7) печатает **обе пары с подписями**, чтобы их нельзя было перепутать при сверке.
+Значения перекалиброваны 20.09.2026 на эмбеддингах d1_j48 прежним правилом; инструмент — `tools/calibrate_threshold.py`, 187 прямых сверок объявленных точек с неизменённым контуром (max |ошибка| < 2e-12). До 20.09 (прежняя конфигурация OSNet+KR, калибровка [refusal/](04-solution/refusal/)): `t_cos` 0.5495953464415451 → F1 0.7330567082 / TNR 0.6978417266; `t_rr` 0.49937235233589916 → F1 0.8056112224 / TNR 0.7769784173.
 
-Косинусная калибровка описана в [refusal/REPORT.md](04-solution/refusal/REPORT.md); новая шкала проверена тем же правилом. Числа порога и F1/TNR пересчитываются командой R ниже. Порог нельзя округлять перед сравнением или переносить между шкалами.
+**Какая строка относится к сдаваемому режиму.** По умолчанию batch работает с переранжированием, поэтому заявленные в задании **F1 0.8090787717 и TNR 0.7841726619 — это строка «Переранжирование d1_j48, `t_rr`»**, и в `metrics.json` она лежит в `rerank_refusal`. Пара 0.7684996606 / 0.7302158273 из строки «Косинус d1_j48, `t_cos`» относится к косинусной ветви — это режим HTTP API и `batch --no-rerank`, в `metrics.json` это `base.refusal`. Числа одинаковые по смыслу и разные по конфигурации; команда R (раздел 7) печатает **обе пары с подписями**, чтобы их нельзя было перепутать при сверке.
+
+Косинусная калибровка прежней конфигурации описана в [refusal/REPORT.md](04-solution/refusal/REPORT.md); текущие обе точки пересчитываются командой R и сверяются `calibrate_threshold.py`. Порог нельзя округлять перед сравнением или переносить между шкалами.
 
 Параметры переранжирования выбраны на отдельном протоколе из `train_fit`, но рабочие пороги выбраны и показаны на одной валидации. Новая калибровка не имеет независимого holdout-замера. В сервисе нет скрытых идентичностей для камерной фильтрации: число непустых ответов сырого batch на validation может отличаться от TP+FP в таблице. На выданном тесте число отказов проверяемо, их правильность — нет.
 
@@ -258,9 +269,14 @@ for name, digest in manifest["sha256"].items():
     assert hashlib.sha256((split / name).read_bytes()).hexdigest() == digest, name
 assert not {r["vehicle_id"] for r in rows(split / "train_fit.csv")} & {r["vehicle_id"] for r in qm + gm}
 
-selected = {r["selection"]: r for r in rows(repo / "04-solution/refusal/results/selected_market_absolute_presence.csv")}
-tau = float(selected["robust_balanced"]["threshold"])
-old_tau = float(selected["best_f1"]["threshold"])
+# Якоря калибровки 20.09.2026 (конфигурация d1_j48): рабочие пороги и черновой
+# argmax-F1 из сохранённого прогона tools/calibrate_threshold.py.
+calib_dir = repo / "04-solution/service/calib-d1_j48"
+headline = json.loads((calib_dir / "headline.json").read_text())
+summary = json.loads((calib_dir / "summary.json").read_text())
+tau = float(headline["cosine_rule_reproduced"]["threshold"])   # рабочий t_cos
+rr_tau = float(headline["rerank_threshold"])                   # рабочий t_rr
+old_tau = float(summary["cosine_market_presence"]["selected"]["best_f1"]["threshold"])
 for name, query, gallery in (("val", split / "val_query.csv", split / "val_gallery.csv"),
                              ("test", data / "test_query.csv", data / "test_gallery.csv")):
     cmd = [sys.executable, "-B", "-m", "app.batch", "--images-dir", str(data / "images"),
@@ -292,6 +308,10 @@ report = {
                     "onnxruntime": __import__("onnxruntime").__version__, "threads": 2, "batch": 32},
     "model": {"bytes": config.MODEL_PATH.stat().st_size,
               "sha256": hashlib.sha256(config.MODEL_PATH.read_bytes()).hexdigest()},
+    "model2": {"bytes": config.MODEL2_PATH.stat().st_size,
+               "sha256": hashlib.sha256(config.MODEL2_PATH.read_bytes()).hexdigest()},
+    "whitening": {"bytes": config.WHITENING_PATH.stat().st_size,
+                  "sha256": hashlib.sha256(config.WHITENING_PATH.read_bytes()).hexdigest()},
     "split": {"query": len(qm), "gallery": len(gm), "known": int(sum(r["has_mate"] == "1" for r in qm)),
               "unknown": int(sum(r["has_mate"] == "0" for r in qm))},
     "base": base, "old_threshold": assess(scores, old_tau), "reranked": reranked,
@@ -300,30 +320,41 @@ report = {
     "service_config": {k: getattr(config, k) for k in dir(config) if k.startswith(("DEFAULT_THRESHOLD", "RERANK"))},
     "batch": {name: json.loads((out / name / "run_info.json").read_text()) for name in ("val", "test")},
 }
-# Select the robust threshold anew from the evaluator's full threshold sweep.
-curve = evaluate(scores, threshold=0., **metadata)["refusal"]["pr_curve"]
-candidates = []
-for t, tp, fp in zip(curve["thresholds"], curve["tp"], curve["fp"]):
-    if t is None:
-        continue
-    recall, fpr = tp / report["split"]["known"], fp / report["split"]["unknown"]
-    f1s = [2*(1-p)*recall / ((1-p)*(1+recall)+p*fpr) for p in (.10, .25, .40)]
-    candidates.append((min(1-fpr, *f1s), float(t), f1s))
-best = max(candidates, key=lambda row: row[0])
-report["calibration"] = {"threshold": best[1], "objective": best[0], "f1_at_priors_0.10_0.25_0.40": best[2],
-                         "historical_threshold": tau, "threshold_abs_delta": abs(best[1] - tau)}
-rr_curve = evaluate(1-distance, threshold=0., **metadata)["refusal"]["pr_curve"]
-rr_candidates = []
-for t, tp, fp in zip(rr_curve["thresholds"], rr_curve["tp"], rr_curve["fp"]):
-    if t is None:
-        continue
-    recall, fpr = tp / report["split"]["known"], fp / report["split"]["unknown"]
-    f1s = [2*(1-p)*recall / ((1-p)*(1+recall)+p*fpr) for p in (.10, .25, .40)]
-    rr_candidates.append((min(1-fpr, *f1s), float(t), f1s))
-rr_best = max(rr_candidates, key=lambda row: row[0])
-report["rerank_calibration"] = {"threshold": rr_best[1], "objective": rr_best[0], "f1_at_priors": rr_best[2]}
-report["rerank_refusal"] = assess(1-distance, rr_best[1])["refusal"]
-report["rerank_at_service_threshold"] = assess(1-distance, getattr(config, "DEFAULT_THRESHOLD_RERANK", rr_best[1]))["refusal"]
+# Перекалибровка обоих порогов — тем же правилом и в той же записи, что у
+# инструмента, которым посчитаны рабочие пороги (service/tools/calibrate_threshold.py,
+# он же в refusal/scripts/analyze.py и training/ensemble/scripts/s06_refusal.py):
+# максимум от min(TNR, F1 при долях отказных 0.10/0.25/0.40), при равенстве —
+# больший F1, затем больший TNR. Тай-брейк здесь — часть правила, а не оформление:
+# на косинусе минимум даёт именно TNR, а TNR постоянен на участках сетки без
+# «неизвестных» событий, поэтому максимум достигается на плато; его концы
+# (0.5141977 и 0.5145892, tp 566 против 565) расходятся на 3.9e-04 — в 400 раз
+# больше допуска сверки ниже.
+def recalibrate(matrix):
+    """Операционные точки контура -> порог. Сетка кандидатов — каждое различное
+    значение уверенности top-1; сентинел «ничего не принято» (threshold None)
+    пропускается: recall 0 даёт F1 0, то есть цель 0, и выиграть он не может."""
+    known, unknown = report["split"]["known"], report["split"]["unknown"]
+    curve = evaluate(matrix, threshold=0., **metadata)["refusal"]["pr_curve"]
+    rows = []
+    for t, tp, fp in zip(curve["thresholds"], curve["tp"], curve["fp"]):
+        if t is None:
+            continue
+        recall, fpr = tp / known, fp / unknown
+        f1s = [2*(1-p)*recall / ((1-p)*(1+recall)+p*fpr) for p in (.10, .25, .40)]
+        rows.append({"threshold": float(t), "objective": min(1-fpr, *f1s),
+                     "f1_at_priors_0.10_0.25_0.40": f1s, "f1": 2*tp / (tp + known + fp),
+                     "tnr": 1-fpr, "tp": tp, "fp": fp})
+    return max(rows, key=lambda r: (r["objective"], r["f1"], r["tnr"], r["threshold"]))
+
+best = recalibrate(scores)
+report["calibration"] = dict(best, historical_threshold=tau,
+                             threshold_abs_delta=abs(best["threshold"] - tau))
+rr_best = recalibrate(1 - distance)
+report["rerank_calibration"] = dict(rr_best, historical_threshold=rr_tau,
+                                    threshold_abs_delta=abs(rr_best["threshold"] - rr_tau))
+report["rerank_refusal"] = assess(1-distance, rr_best["threshold"])["refusal"]
+report["rerank_at_service_threshold"] = assess(
+    1-distance, getattr(config, "DEFAULT_THRESHOLD_RERANK", rr_best["threshold"]))["refusal"]
 # Check model-to-row order by independently inferring boundary rows at batch 1.
 model = Embedder(threads=2)
 meta_rows = read_rows(split / "val_query.csv") + read_rows(split / "val_gallery.csv")
@@ -342,29 +373,39 @@ for _ in range(2):
 report["current_batch1_ms_per_object"] = timings
 report["files"] = {str(p.relative_to(out)): {"bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                    for name in ("val", "test") for p in (out / name).iterdir() if p.is_file()}
-reference = json.loads((repo / "04-solution/postproc/out/final_val.json").read_text())
-for name, block in (("base", base), ("rerank_tuned", reranked)):
+# Контрольная сверка с эталоном контура (конфигурация d1_j48, f64-конвейер
+# job_48). Допуск 1e-6: это в 3 порядка жёстче различимого, при этом честно для
+# пересчёта на другом CPU/потоках (последние биты float32-инференса плавают).
+reference = json.loads((repo / "04-solution/training/combined/s02_metrics.json").read_text())["d1_j48"]
+for name, block, key in (("base", base, "cos"), ("rerank_tuned", reranked, "kr")):
     for metric in ("mAP", "Rank-1", "Rank-5"):
-        assert abs(block["ranking"][metric] - reference[name][metric]) < 1e-9, (name, metric)
+        assert abs(block["ranking"][metric] - reference[key][metric]) < 1e-6, (name, metric)
+# И перекалибровка тем же правилом сходится к сохранённым порогам 20.09. Допуск
+# тот же 1e-6 и по той же причине: порог — это значение уверенности, оно едет
+# вместе с последними битами float32-инференса. Измерено: векторы этого прогона
+# расходятся с векторами прогона калибровки (job_55, другой хост и 4 потока) до
+# 1.2e-07, что даёт |Δ| порога 1.0e-08 на косинусе и 2.7e-09 на переранжировании.
+for scale, got, want in (("cos", best["threshold"], tau), ("rr", rr_best["threshold"], rr_tau)):
+    assert abs(got - want) < 1e-6, (scale, got, want, abs(got - want))
 (out / "metrics.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
 # Обе конфигурации печатаются рядом и подписанными: одни и те же имена метрик
 # у косинуса и у переранжирования значат разные числа, и §6 приводит обе строки.
 for label, ranking, threshold, refusal in (
         ("cosine  (t_cos; HTTP API и batch --no-rerank; metrics.json -> base)",
-         base["ranking"], best[1], base["refusal"]),
+         base["ranking"], best["threshold"], base["refusal"]),
         ("rerank  (t_rr;  batch по умолчанию — числа §6; metrics.json -> rerank_refusal)",
-         reranked["ranking"], rr_best[1], report["rerank_refusal"])):
+         reranked["ranking"], rr_best["threshold"], report["rerank_refusal"])):
     print("REPRODUCED", label, json.dumps({
         "mAP": ranking["mAP"], "Rank-1": ranking["Rank-1"], "threshold": threshold,
         "F1": refusal["f1"], "TNR": refusal["tnr"]}))
 PY
 ```
 
-Ожидаемый вывод последних двух строк — обе конфигурации подписаны, сверять §6 нужно с той, что относится к нужному режиму:
+Ожидаемый вывод последних двух строк — обе конфигурации подписаны, сверять §6 нужно с той, что относится к нужному режиму (значения соответствуют перекалибровке 20.09; при пересчёте на другой машине допуск сравнения 1e-6, см. assert внутри R)). Поле `threshold` — порог, выбранный **заново** внутри R по правилу из §6, а не прочитанный из `config.py`: на другой машине его последние цифры поедут вместе с последними битами float32-инференса. Ниже — фактический вывод прогона 21.09.2026 (2 CPU, 2 потока); отклонение от рабочих порогов `0.5141976914190476` и `0.5282812306342437` составило 1.0e-08 и 2.7e-09, остальные поля совпали до всех печатных цифр:
 
 ```text
-REPRODUCED cosine  (t_cos; HTTP API и batch --no-rerank; metrics.json -> base) {"mAP": 0.6565692724907637, "Rank-1": 0.6310096153846154, "threshold": 0.5495953464415451, "F1": 0.7330567081604425, "TNR": 0.697841726618705}
-REPRODUCED rerank  (t_rr;  batch по умолчанию — числа §6; metrics.json -> rerank_refusal) {"mAP": 0.6936584724586873, "Rank-1": 0.6634615384615384, "threshold": 0.49937235233589916, "F1": 0.8056112224448898, "TNR": 0.7769784172661871}
+REPRODUCED cosine  (t_cos; HTTP API и batch --no-rerank; metrics.json -> base) {"mAP": 0.7316093422310448, "Rank-1": 0.6850961538461539, "threshold": 0.5141977018197194, "F1": 0.7684996605566871, "TNR": 0.7302158273381295}
+REPRODUCED rerank  (t_rr;  batch по умолчанию — числа §6; metrics.json -> rerank_refusal) {"mAP": 0.7740915539438481, "Rank-1": 0.7307692307692307, "threshold": 0.5282812332956895, "F1": 0.8090787716955942, "TNR": 0.7841726618705036}
 ```
 
 Для проверки самого контура — **команда T**:
@@ -381,20 +422,22 @@ docker run --rm --network none -e PYTHONDONTWRITEBYTECODE=1 \
 docker run --rm --network none vehicle-reid-service python -m pip freeze --all
 ```
 
-Дополнительно в сервисе есть [tools/eval_split.py](04-solution/service/tools/eval_split.py) и [tools/calibrate_threshold.py](04-solution/service/tools/calibrate_threshold.py). Они проверены на векторах, заново полученных командой R: ранжирование совпало, калибровка прошла 185 прямых сверок с контуром. Эти скрипты не копируются в образ Dockerfile и требуют доступа к исходному репозиторию; для калибровки нужно явно передать выходной каталог.
+Дополнительно в сервисе есть [tools/eval_split.py](04-solution/service/tools/eval_split.py) и [tools/calibrate_threshold.py](04-solution/service/tools/calibrate_threshold.py). Они проверены на векторах, заново полученных командой R: ранжирование совпало до всех 16 цифр, калибровка прошла 187 прямых сверок с контуром. Эти скрипты не копируются в образ Dockerfile и требуют доступа к исходному репозиторию; для калибровки нужно явно передать выходной каталог.
 
 ## 8. Таблица «число → команда» и границы воспроизведения
 
 | Числа/утверждение | Как получить | Результат проверки |
 |---|---|---|
 | 1110 query, 750 gallery, 832 с парой, 278 без пары; размерность 512 | R → `split`, `batch`, `row_order` | Пересчитано; SHA-256 сплита и разделение идентичностей проверены |
-| Все mAP, Rank-1/5, mINP, mAP@10 из §6 и прирост 0.0370892000 | R → `base`, `reranked`, `delta_mAP` | Совпали с опубликованными значениями; допуск проверки `1e-9` |
-| Оба рабочих порога, F1/TNR/Recall, TP/FP/FN/TN, AUC-PR из §6 | R → `calibration`, `rerank_calibration`, `base.refusal`, `rerank_refusal`, `old_threshold` | Пересчитаны через настоящий `evaluate()` |
+| Все mAP, Rank-1/5, mINP, mAP@10 из §6 и прирост 0.0424822117 | R → `base`, `reranked`, `delta_mAP` | Совпали с [s02_metrics.json](04-solution/training/combined/s02_metrics.json); допуск проверки `1e-6`. На референс-окружении VM сервисный батч совпал с контуром точно, до всех 16 цифр (`tools/eval_split.py`) |
+| Оба рабочих порога, F1/TNR/Recall, TP/FP/FN/TN, AUC-PR из §6 | R → `calibration`, `rerank_calibration`, `base.refusal`, `rerank_refusal`, `old_threshold` | Пересчитаны через настоящий `evaluate()`; сверены с калибровкой 20.09 ([service/calib-d1_j48/](04-solution/service/calib-d1_j48/)) |
 | Параметры `(6,3,0.3)` как оптимум подбора | **Не команда, а историческая справка.** Сетку считал `s04_grid.py <label> <query.npy> <gallery.npy> <query_meta.csv> <gallery_meta.csv>` — пять обязательных аргументов, без них `ValueError` на разборе `argv`. Векторов, которые он ждёт (`04-solution/postproc/out/*.npy` из `s03_extract.py`), в git нет: `.gitignore` исключает `*.npy`. Сохранён результат: [grid_tune_base.json](04-solution/postproc/out/grid_tune_base.json) | Применение параметров проверено командой R; исходная сетка заново не воспроизведена из чистого git |
-| 8 836 743 байта и SHA-256 ONNX | R → `model`; `sha256sum 04-solution/service/model/*.onnx` | Скачано заново, размер и хеш совпали |
+| 8 836 743 байта и SHA-256 сдаваемого OSNet | R → `model`; `sha256sum 04-solution/service/model/*.onnx` | Скачано заново, размер и хеш совпали |
+| Второй ONNX combined_v1: 8 742 779 байт, `b1ba5021…02efb2`; матрица whitening f32: 1 051 114 байт, `eb4433ff…4b3c5b5`; f64-оригинал матрицы: 2 101 738 байт, `4b02f158…267eb625` | `sha256sum 04-solution/service/model/osnet_ain_combined_v1.onnx 04-solution/service/model/lw_ens_j48_rho0.5.npz 04-solution/training/combined/lw_ens_j48_rho0.5_f64.npz` | Совпали с `config.py` и проверкой в Dockerfile; f64-оригинал нужен только для пересчёта дельты f32 |
+| Дельта метрик от f32-хранения whitening | скрипт прогона job_55 (сравнение A f64 / B f32-хранение / C f32-сервис на одних векторах валидации) | `d_kr_mAP = 0.0`, `d_cos_mAP = 0.0` (все 16 печатных цифр совпали); max |Δэмбеддинг| = 1.4282077284710759e-08 |
 | Порядок `(query; gallery)` в `embeddings.npy` | R → `row_order`, независимый batch=1 на границах | Проверено переизвлечением, а не чтением отчёта |
-| 60 тестов метрик | T | Пройдены |
-| 185 прямых сверок новой калибровки | `docker run --rm --network none -v "$REPO:/repo:ro" -v "$OUT_DIR:/out" vehicle-reid-service python -B /repo/04-solution/service/tools/calibrate_threshold.py /out/val/embeddings.npy /out/calibration` | Пройдены на независимо извлечённых векторах; результат — `headline.json` и `verification.json` |
+| 60 тестов метрик | T | Пройдены (15–16.09); повторно пройдены 20.09.2026 из чистого дерева после переключения на d1_j48 |
+| 187 прямых сверок новой калибровки (20.09) | `docker run --rm --network none -v "$REPO:/repo:ro" -v "$OUT_DIR:/out" vehicle-reid-service python -B /repo/04-solution/service/tools/calibrate_threshold.py /out/val/embeddings.npy /out/calibration` | Пройдены на независимо извлечённых векторах конфигурации d1_j48; результат — [headline.json](04-solution/service/calib-d1_j48/headline.json) и `verification.json` |
 | Точные версии всех пакетов образа | V | Полный freeze проверенной сборки — §10 |
 | Исторические 43.8 мс/объект и 0.55 с на rerank | **Не команда, а историческая справка.** Замер делал `s09_timing.py`. Ему нужны исследовательское окружение (раздел 10), каталог изображений (`REID_DATA_DIR`) и промежуточные векторы `04-solution/postproc/out/*.npy` из шага `s03_extract.py`; `.npy` в git не входят. Из чистого клона скрипт падает трейсбеком `FileNotFoundError` на первом же недостающем входе — запускать его не нужно. Сохранён результат: [s09_timing.json](04-solution/postproc/out/s09_timing.json) | Точные исторические тайминги не воспроизведены. R выполняет новый ограниченный замер, с другим объёмом выборки и лимитом CPU |
 | Эффект зоны пластины около −0.003 mAP, 95% CI [−0.011; +0.004]; расширенная маска: верхняя граница +0.016 | **Не команда, а историческая справка.** Считал `eval_variants.py` по векторам 13 вариантов из `plate-ablation/work/emb/`; их в git нет. Запущенный в исследовательском окружении (раздел 10), скрипт это и сообщает — понятным сообщением, а не трейсбеком: `нет векторов вариантов в …/work/emb (13 из 13, например base)` | **Не воспроизведено из git:** нет `work/emb`, детекций и исходной ручной разметки. Числа только из [ablation.json](04-solution/plate-ablation/out/ablation.json) и [отчёта](04-solution/plate-ablation/REPORT.md) |
@@ -411,11 +454,13 @@ docker run --rm --network none vehicle-reid-service python -m pip freeze --all
 
 | Назначение | Версия, источник и лицензия | Размер и SHA-256 |
 |---|---|---|
-| Сдаваемый OSNet-AIN | Open Model Zoo **2022.1**, `vehicle-reid-0001`. [Прямой ONNX](https://storage.openvinotoolkit.org/repositories/open_model_zoo/public/2022.1/vehicle-reid-0001/osnet_ain_x1_0_vehicle_reid.onnx), [карточка релиза 2022.1.0](https://github.com/openvinotoolkit/open_model_zoo/blob/2022.1.0/models/public/vehicle-reid-0001/model.yml). MIT для оригинальной модели, [текст лицензии](https://raw.githubusercontent.com/sovrasov/deep-person-reid/ea27fd23c962addbd24d8586c5aaf8afe60db0db/LICENSE) | **8 836 743 байта** (8.427 MiB; 8.837 MB). `4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f` |
+| Сдаваемый OSNet-AIN (модель 1 конвейера) | Open Model Zoo **2022.1**, `vehicle-reid-0001`. [Прямой ONNX](https://storage.openvinotoolkit.org/repositories/open_model_zoo/public/2022.1/vehicle-reid-0001/osnet_ain_x1_0_vehicle_reid.onnx), [карточка релиза 2022.1.0](https://github.com/openvinotoolkit/open_model_zoo/blob/2022.1.0/models/public/vehicle-reid-0001/model.yml). MIT для оригинальной модели, [текст лицензии](https://raw.githubusercontent.com/sovrasov/deep-person-reid/ea27fd23c962addbd24d8586c5aaf8afe60db0db/LICENSE) | **8 836 743 байта** (8.427 MiB; 8.837 MB). `4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f` |
+| Сдаваемый combined_v1 (модель 2 конвейера) | Наш дообученный OSNet-AIN: LP-FT на RoundaboutHD (MIT) + CARLA (Apache-2.0) + train организатора. Внешнего URL нет; журнал — [training/combined/](04-solution/training/combined/). Поставляется в архиве решения (`*.onnx` в git исключён) | **8 742 779 байт**. `b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2` |
+| Сдаваемая матрица whitening | Наш артефакт: `P`, `m` (ρ=0,5), обучены на `train_fit` по дельтам ансамбля; поставляется в `float32`, f64-оригинал — [training/combined/lw_ens_j48_rho0.5_f64.npz](04-solution/training/combined/lw_ens_j48_rho0.5_f64.npz) | **1 051 114 байт**. `eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5` (f64: 2 101 738 байт, `4b02f158fa54d89a54f9ad30d7e471f1baa14d7019ea9ea26b42ea7c267eb625`) |
 | Сравнение второй модели, в сервис не включено | FastReID SBS ResNet50-IBN, веса релиза **v0.1.1**. [Прямая загрузка](https://github.com/JDAI-CV/fast-reid/releases/download/v0.1.1/veri_sbs_R50-ibn.pth), [Model Zoo](https://github.com/JDAI-CV/fast-reid/blob/c9bc3ceb2f7a6438b62fb515ea3df6d1e999e95d/MODEL_ZOO.md). Код Apache-2.0; отдельная лицензия checkpoint в исследовательском пакете не найдена | **198 261 759 байт**. `57fb9c17d88911ea64390bf5427f43511435e7f88f6eed9dbc969d4b611e53cd` |
 | Локальная производная предыдущего checkpoint | `veri_sbs_R50-ibn.model_only.pth`, сохранение `ckpt["model"]` скриптом [s07_fastreid_extract.py](04-solution/postproc/scripts/s07_fastreid_extract.py); отдельного внешнего URL нет | **99 273 627 байт**. `8595fa79eeb09f35c565729be1e8826e3b1de7951c86bff0aff048c78529076f` |
 
-Весовой лимит проверяется по единственному сдаваемому ONNX. Вторая модель использовалась при исследовании, поэтому раскрыта, хотя в runtime не нужна. [Отчёт постобработки](04-solution/postproc/REPORT.md) объясняет отказ от ансамбля и TTA.
+Весовой лимит ТЗ (≤ 2 ГБ) проверяется по сумме трёх сдаваемых файлов: 8 836 743 + 8 742 779 + 1 051 114 = **18 630 636 байт**. Два ONNX поставляются вне git (`*.onnx` в `.gitignore`) и проверяются по SHA-256 при сборке образа и при загрузке модели; матрица whitening входит в git. FastReID использовался при исследовании, поэтому раскрыт, хотя в runtime не нужна. [Отчёт постобработки](04-solution/postproc/REPORT.md) объясняет отказ от ансамбля и TTA на том этапе; итоговый ансамбль d1_j48 — [training/combined/REPORT.md](04-solution/training/combined/REPORT.md).
 
 ### Обучающие источники публичных весов
 
@@ -423,14 +468,16 @@ docker run --rm --network none vehicle-reid-service python -m pip freeze --all
 
 | Датасет | Как использован | Версия, доступ и условия |
 |---|---|---|
-| Набор организатора LCT 2026, задача №7 | Единственные изображения, непосредственно использованные нашим baseline, подбором, калибровкой и абляциями | Именованной версии нет; идентификация по SHA-256 ниже. Доступ через кабинет организатора. Отдельная лицензия/прямой URL архива не приложены |
+| Набор организатора LCT 2026, задача №7 | Подбор, калибровка, абляции; вход дообучения combined_v1 (train-часть) | Именованной версии нет; идентификация по SHA-256 ниже. Доступ через кабинет организатора. Отдельная лицензия/прямой URL архива не приложены |
+| [RoundaboutHD](https://huggingface.co/datasets/yl4300/RoundaboutHD) | Дообучение combined_v1: 511 ID / 6 068 кадров ReID-сабсета | MIT по [карточке репозитория данных Bath](https://researchdata.bath.ac.uk/1574/) (с оговоркой о формулировке — [datasets-open/REPORT.md](02-research/datasets-open/REPORT.md) §6); снапшот зафиксирован в [training/combined/journal.md](04-solution/training/combined/journal.md) |
+| [CARLA-ReID](https://github.com/sekilab/VehicleReIdentificationDataset) | Дообучение combined_v1: 605 ID / 7 260 кадров | Apache-2.0 на репозиторий (подтверждена GitHub API); данные лежат на Dropbox без отдельного файла лицензии — та же оговорка; снапшот — [training/combined/journal.md](04-solution/training/combined/journal.md) |
 | [VeRi-776](https://vehiclereid.github.io/VeRi/) | Предобучение OSNet и сравнивавшегося FastReID | Семейство VeRi-776; точный архив автора весов, размер и SHA-256 **неизвестны**. Официальный доступ по запросу; некоммерческое использование |
 | [VERI-Wild](https://github.com/PKU-IMRE/VERI-Wild) | Предобучение OSNet | В upstream не зафиксировано, какой выпуск/ревизия архива; нельзя автоматически подставлять 2.0. Размер и SHA-256 неизвестны. Доступ по запросу, некоммерческое использование |
 | [CompCars](https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/) | Предобучение OSNet, объединение с VMMRdb | Датасет 2015 года; точные части и ревизия набора автора весов неизвестны. [Инструкция загрузки](https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/instruction.txt). Только некоммерческие исследования, ограничено дальнейшее распространение; размер/SHA-256 использованных архивов неизвестны |
 | [VMMRdb](https://github.com/faezetta/VMMRdb) | Предобучение OSNet, объединение с CompCars | Датасет из публикации 2017 года; полный набор или подмножество автора весов не указаны. [Архив автора](https://www.dropbox.com/s/uwa7c5uz7cac7cw/VMMRdb.zip?dl=0). В репозитории MIT, отдельное подтверждение условий для всех изображений отсутствует; размер/SHA-256 использованного архива неизвестны |
 | [ImageNet](https://www.image-net.org/download.php) | FastReID Model Zoo указывает ImageNet-предобучение backbone | Точная ревизия и исходный checkpoint не указаны в переданных материалах. Изображения нами не скачивались. OSNet YAML также включает `pretrained=True`, но происхождение его исходной инициализации полностью не установлено |
 
-Прямое использование изображений перечисленных внешних обучающих наборов нашей командой не обнаружено: использованы готовые веса. Публичный checkpoint с MIT/Apache-лицензией не заполняет отсутствующие сведения о версиях обучающих данных. Полная цепочка их происхождения остаётся документированным пробелом по разделам 7 и 12 ТЗ; нельзя писать, что все использованные данные безусловно открыты и воспроизводимы.
+Изображения RoundaboutHD и CARLA-ReID нашей командой скачаны и использованы для дообучения combined_v1 (состав и хэши собранного набора — [training/combined/journal.md](04-solution/training/combined/journal.md), [datasets-open/REPORT.md](02-research/datasets-open/REPORT.md) §5); VeRi, VERI-Wild, CompCars, VMMRdb — только готовые веса, сами изображения нами не скачивались. Публичный checkpoint с MIT/Apache-лицензией не заполняет отсутствующие сведения о версиях обучающих данных. Полная цепочка их происхождения остаётся документированным пробелом по разделам 7 и 12 ТЗ; нельзя писать, что все использованные данные безусловно открыты и воспроизводимы.
 
 ### Отпечатки фактически выданного набора
 
@@ -578,16 +625,17 @@ yacs==0.1.8
 ## 11. Известные ограничения и недостающие материалы
 
 - **Полная исследовательская воспроизводимость пока не достигнута.** Часть скриптов содержит `/home/artem/projects/...` и ссылки на временные `work/`, `metadata/`, `evaluator_snapshot/`, `.ids`, `.npy`, которых нет в git. Команда R обходит эти зависимости для основных метрик, но не восстанавливает все старые эксперименты.
-- **Абляция пластины не является доказательством полного отсутствия использования ГРЗ.** В репозитории есть результаты, код и картинки, но не исходная ручная разметка/детекции/эмбеддинги вариантов. Основной статистический интервал относится к старому косинусному ранжированию; перенос на новый scorer отдельно не проверен. Верхнюю границу `+0.016 mAP` нельзя называть «меньше процента метрики».
-- **Неизвестны точные версии внешних обучающих архивов и часть условий их распространения.** Все обнаруженные источники раскрыты в §9; отсутствующие сведения названы отсутствующими. Это не закрывается фразой «обучения не было».
+- **Абляция пластины — не доказательство полного отсутствия использования ГРЗ, но проверена для обеих сдаваемых моделей.** Для combined_v1 маскирование зоны номера статистически неотличимо от контрольной зоны той же площади (все контрасты накрывают 0, [training/combined/REPORT.md §5](04-solution/training/combined/REPORT.md)); для исходного OSNet — [plate-ablation/](04-solution/plate-ablation/). Исходной ручной разметки/детекций/эмбеддингов вариантов в git нет — числа берутся из сохранённых json. Верхнюю границу `+0.016 mAP` нельзя называть «меньше процента метрики».
+- **Не полностью известны версии внешних обучающих архивов и часть условий их распространения.** RoundaboutHD и CARLA-ReID зафиксированы по снапшоту в журнале обучения; цепочка происхождения предобучения OSNet (VeRi, VERI-Wild, CompCars, VMMRdb) остаётся документированным пробелом. Все обнаруженные источники раскрыты в §9; отсутствующие сведения названы отсутствующими.
 - **Офлайн-сборка закрыта не полностью: остаются базовые образы.** Пакеты ставятся из `wheels/` в составе решения, PyPI на сборке не нужен, инференс и запуск сети не требуют. Но `python:3.13-slim` и `qdrant/qdrant:v1.15.5` в репозиторий не кладутся — их нужно либо вытянуть заранее на машине с сетью, либо привезти архивом образов (раздел 4). Флаг `--network none` эту дыру не закрывает и не проверяет: он отрезает сеть только у шагов `RUN`, а базовый образ сборка тянет из реестра — проверка изолированности требует `--pull=never` (раздел 3). Версии всех пакетов закреплены constraints-файлом, но хешей wheel в нём нет, колёса лежат без подписей и отдельной сверки хешей, а базовые образы в Dockerfile/Compose заданы тегами, а не digest; необходимые уведомления о сторонних лицензиях приложены не ко всем vendored-файлам.
 - **API и batch используют разные алгоритмы поиска.** API — cosine, batch — совместное переранжирование. Порог batch зависит от шкалы; качество пакетного ранжирования не является измерением качества одиночного API-запроса.
 - **Параметры протокола жюри не полностью определены.** Это касается усечения top-10, порядка камерной фильтрации, знаменателя mAP и единицы F1. В документации выбрана и названа одна ветвь, альтернативы доступны в контуре.
-- **Нет подтверждённого обучения с нуля, GPU-замера жюри, ANN на миллион объектов и испытания длительного потока.** Одновременно хранятся матрицы попарных оценок; ограничение по памяти относится ко всему поиску, а не только к одному батчу изображений.
+- **Обучение проводилось (LP-FT combined_v1), но нет GPU-замера жюри, ANN на миллион объектов и испытания длительного потока.** Одновременно хранятся матрицы попарных оценок; ограничение по памяти относится ко всему поиску, а не только к одному батчу изображений.
 - **Валидация ввода неодинакова:** API проверяет границы bbox и тип изображения; batch в основном доверяет CSV и допускает PIL-padding при выходе bbox за кадр. Формат сдачи рассчитан на уникальные `image_id` и галерею, достаточную для десяти кандидатов.
+- **Переключение конфигурации 20.09 по честной пометке §6:** против прежнего чемпиона контура прирост по приёмочному правилу не засчитан (+0.0120 < σ 0.0134), хотя бутстрэп значим (p=0.003); решение о переключении — человеческое, зафиксировано в [training/combined/REPORT.md §6](04-solution/training/combined/REPORT.md).
 
 ## 12. Что подготовить к передаче жюри
 
-Код вместе с этим `SOLUTION.md`, три файла из test-прогона, ONNX с полным SHA-256, оба контейнерных образа для офлайн-работы, инструкция с путями к данным и версиями. Каталог `04-solution/service/wheels/` входит в код и выгружается вместе с ним — это то, чем закрыт разд. 9 ТЗ (сборка в изолированной среде), вырезать его из поставки нельзя. Требование ТЗ буквально называет `Readme.md`; здесь документ называется `SOLUTION.md`, поскольку главный README занят описанием проекта. При оформлении сдачи нужно явно указать ссылку на этот файл как документацию решения; наличие нужного содержания само по себе не подтверждает соблюдение буквального имени файла.
+Код вместе с этим `SOLUTION.md`, три файла из test-прогона, **три файла весов** с полными SHA-256 (OSNet — публичный, скачивается `fetch_model.sh`; combined_v1 и матрица whitening — наши, поставляются в архиве/git), оба контейнерных образа для офлайн-работы, инструкция с путями к данным и версиями. Каталог `04-solution/service/wheels/` входит в код и выгружается вместе с ним — это то, чем закрыт разд. 9 ТЗ (сборка в изолированной среде), вырезать его из поставки нельзя. Требование ТЗ буквально называет `Readme.md`; здесь документ называется `SOLUTION.md`, поскольку главный README занят описанием проекта. При оформлении сдачи нужно явно указать ссылку на этот файл как документацию решения; наличие нужного содержания само по себе не подтверждает соблюдение буквального имени файла.
 
 Недостающие исходники исследовательских протоколов, лицензии и provenance нужно приложить до заявления о полном воспроизведении **всех** результатов. Презентация, публикация прототипа и загрузка на платформу этой документацией не выполняются.

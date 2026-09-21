@@ -44,10 +44,13 @@ state: dict = {}
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    # Модель загружается один раз на старте; sha256 весов проверяется здесь же,
-    # чтобы повреждённый файл валил запуск, а не первый запрос.
+    # Модель загружается один раз на старте; sha256 всех трёх файлов весов
+    # (две ONNX-модели + матрица whitening) проверяется здесь же, чтобы
+    # повреждённый файл валил запуск, а не первый запрос.
     state["embedder"] = Embedder()
     state["model_sha256"] = model_file_sha256()
+    state["model2_sha256"] = model_file_sha256(config.MODEL2_PATH)
+    state["whitening_sha256"] = model_file_sha256(config.WHITENING_PATH)
     state["store"] = GalleryStore()
     yield
     state.clear()
@@ -198,11 +201,14 @@ def health() -> dict:
 
 @app.get("/api/version", tags=["service"])
 def version() -> dict:
-    """Версия сервиса, модель и численные параметры конвейера."""
+    """Версия сервиса, состав конвейера и численные параметры."""
     return {
         "service": config.SERVICE_VERSION,
         "model": config.MODEL_NAME,
         "model_sha256": state["model_sha256"],
+        "model2": config.MODEL2_NAME,
+        "model2_sha256": state["model2_sha256"],
+        "whitening_sha256": state["whitening_sha256"],
         "embedding_dim": config.EMBEDDING_DIM,
         "input_size": config.INPUT_SIZE,
         "score_scale": "cosine",
@@ -350,8 +356,11 @@ async def explain(file: UploadFile = File(description="кадр запроса J
     Возвращаются обе карты и невязка разложения — оператор видит и картинку,
     и меру её достоверности.
 
-    На выдачу поиска не влияет: отдельный метод, отдельная сессия, вызывается
-    только по явному действию оператора.
+    Работает на ПЕРВОЙ модели конвейера (OSNet-AIN, config.MODEL_PATH) — это
+    зафиксировано осознанно: разложение опирается на аффинную голову именно
+    её графа, а возвращаемый cos — на шкале признаков OSNet, а не на шкале
+    поиска (d1_j48: whitening-ансамбль). На выдачу поиска не влияет: отдельный
+    метод, отдельная сессия, вызывается только по явному действию оператора.
     """
     q_crop = _crop_from_upload(await file.read(), x, y, w, h)
     frame, box = _gallery_frame(gallery_id)

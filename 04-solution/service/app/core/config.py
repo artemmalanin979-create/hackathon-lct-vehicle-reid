@@ -12,15 +12,37 @@ from pathlib import Path
 # /srv/..., и при запуске из репозитория).
 SERVICE_ROOT = Path(__file__).resolve().parents[2]
 
-# Модель: OSNet-AIN x1.0 (vehicle-reid-0001, Open Model Zoo 2022.1, лицензия MIT).
-# Веса поставляются в составе решения (model/), интернет на запуске не нужен.
+# Сдаваемая конфигурация d1_j48 (переключение 20.09.2026 по решению Артёма):
+# две модели с общим препроцессингом -> L2-нормировка каждого вектора -> среднее
+# -> whitening (P, m; rho=0.5, обучена на train_fit) -> L2-нормировка.
+# Метрики контура (04-solution/eval, market+presence, валидация): KR mAP 0.7741,
+# Rank-1 0.7308; косинус mAP 0.7316, Rank-1 0.6851. Источник чисел и обучения
+# whitening — 04-solution/training/combined/ (s02_metrics.json).
+#
+# Модель 1: OSNet-AIN x1.0 (vehicle-reid-0001, Open Model Zoo 2022.1, лицензия MIT).
+# Это же «первая модель» объяснимости (app/core/explain.py): разложение по картам
+# признаков строится на её графе и её шкале близости.
 MODEL_PATH = Path(os.environ.get("MODEL_PATH", SERVICE_ROOT / "model" / "osnet_ain_x1_0_vehicle_reid.onnx"))
-MODEL_NAME = "osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)"
+MODEL_NAME = "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5"
 MODEL_SHA256 = "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f"
 
-# Вход модели: RGB 208x208 без внешней нормализации (первый узел графа —
-# InstanceNormalization, см. отчёт бейзлайна). Выход — 512-мерный вектор,
-# сравнение по косинусу после L2-нормировки.
+# Модель 2: combined_v1 — дообученный нами OSNet-AIN (LP-FT, этап 2 выбран воротами
+# по dev mAP). Обучающие данные: RoundaboutHD (MIT) + CARLA (Apache-2.0) + train
+# организатора. Происхождение и журнал — 04-solution/training/combined/.
+MODEL2_PATH = Path(os.environ.get("MODEL2_PATH", SERVICE_ROOT / "model" / "osnet_ain_combined_v1.onnx"))
+MODEL2_NAME = "osnet_ain_combined_v1 (fine-tuned OSNet-AIN: RoundaboutHD MIT + CARLA Apache-2.0 + train organizer)"
+MODEL2_SHA256 = "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2"
+
+# Whitening: y = l2n((x - m) @ P.T). Обучена на train_fit (7248 кропов, 1171 ID
+# с межкамерными парами) по дельтам векторов ансамбля l2n(OSNet+j48), rho=0.5.
+# Файл поставляется в float32 (f64-оригинал — 04-solution/training/combined/
+# lw_ens_j48_rho0.5_f64.npz; дельта метрик от конверсии — в SOLUTION.md, ~1e-6).
+WHITENING_PATH = Path(os.environ.get("WHITENING_PATH", SERVICE_ROOT / "model" / "lw_ens_j48_rho0.5.npz"))
+WHITENING_SHA256 = "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+
+# Вход моделей: RGB 208x208 без внешней нормализации (первый узел графа —
+# InstanceNormalization, см. отчёт бейзлайна); обе модели — близнецы по входу,
+# один препроцессинг на обе. Выход каждой — 512-мерный вектор.
 INPUT_SIZE = 208
 EMBEDDING_DIM = 512
 
@@ -42,24 +64,37 @@ RERANK_LAMBDA = float(os.environ.get("REID_RERANK_LAMBDA", "0.3"))
 # порог с одной шкалы на другой бессмысленен.
 #
 # Оба выбраны одним правилом, зафиксированным до просмотра результатов: максимум
-# от min(TNR, F1 при долях отказных 0.10/0.25/0.40). ТЗ (разд. 9) вводит TNR
-# именно затем, чтобы решение не принимало всё подряд, поэтому максимум F1 здесь
-# не годится (он давал F1 0.867 при TNR 0.144).
+# от min(TNR, F1 при долях отказных 0.10/0.25/0.40), при равенстве — больший F1,
+# затем больший TNR. Доопределение при равенстве — часть правила, а не оформление:
+# когда минимум даёт TNR, целевая функция постоянна на участках сетки без запросов
+# без пары, и на косинусе максимум достигается сразу на двух порогах (0.5141976914190476
+# при TP 566 и 0.5145892426611729 при TP 565). ТЗ (разд. 9) вводит TNR именно затем,
+# чтобы решение не принимало всё подряд, поэтому максимум F1 здесь не годится
+# (он давал F1 0.867 при TNR 0.144).
 #
-# DEFAULT_THRESHOLD — шкала косинуса, режим --no-rerank. Калибровка
-# 04-solution/refusal/: F1 0.733, TNR 0.698 (воспроизведено на векторах сервиса).
-# DEFAULT_THRESHOLD_RERANK — шкала уверенности переранжирования (1 - дистанция),
-# режим по умолчанию. Та же методика на той же валидации: F1 0.806, TNR 0.777,
-# то есть новая шкала лучше старой сразу по обоим показателям (AUC-PR 0.922
-# против 0.888). Порог со старой шкалы не переносится: 0.5496, применённый к
-# уверенности переранжирования, попадает в другую точку (F1 0.786, TNR 0.799) —
-# не провал, но и не выбор правила.
+# Текущие значения — перекалибровка 20.09.2026 на эмбеддингах новой конфигурации
+# d1_j48 (сервисный конвейер, инструмент tools/calibrate_threshold.py). Срез —
+# валидационный сплит целиком: 1110 запросов (832 с парой, 278 без) против 750
+# объектов галереи, протокол market + presence. Отдельного holdout под калибровку
+# нет — F1/TNR ниже заявлены на том же срезе, на котором выбран порог (оговорено
+# в SOLUTION.md, разд. 6). Правило выбора прежнее, применено к новой шкале:
+# DEFAULT_THRESHOLD — косинус, режим --no-rerank: t = 0.5141976914190476,
+# F1 0.7685, TNR 0.7302 (AUC-PR 0.9095).
+# DEFAULT_THRESHOLD_RERANK — уверенность переранжирования (1 - дистанция),
+# режим по умолчанию: t = 0.5282812306342437, F1 0.8091, TNR 0.7842
+# (AUC-PR 0.9183). Как и раньше, шкала переранжирования сильнее косинуса.
+# Порог со шкалы на шкалу не переносится.
+#
+# Прежние значения (сдаваемая ранее конфигурация OSNet+KR, калибровка
+# 04-solution/refusal/): t_cos 0.5495953464415451 (F1 0.733, TNR 0.698),
+# t_rr 0.49937235233589916 (F1 0.806, TNR 0.777). На векторах d1_j48 они дают
+# другие точки, оставлены в истории.
 #
 # Прежний черновой порог argmax F1 — 0.34921352213815304; сохранён в истории для
 # сверки со старыми артефактами бейзлайна.
-DEFAULT_THRESHOLD = float(os.environ.get("REID_THRESHOLD", "0.5495953464415451"))
+DEFAULT_THRESHOLD = float(os.environ.get("REID_THRESHOLD", "0.5141976914190476"))
 DEFAULT_THRESHOLD_RERANK = float(
-    os.environ.get("REID_THRESHOLD_RERANK", "0.49937235233589916"))
+    os.environ.get("REID_THRESHOLD_RERANK", "0.5282812306342437"))
 
 # Хранилище галереи (Qdrant). Пакетный прогон его НЕ использует.
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
@@ -72,4 +107,4 @@ QDRANT_COLLECTION = os.environ.get("QDRANT_COLLECTION", "gallery")
 # работают как прежде, но без картинок (состояние видно в /api/ui/state).
 IMAGES_DIR = Path(os.environ.get("IMAGES_DIR", "/data/images"))
 
-SERVICE_VERSION = "0.1.0"
+SERVICE_VERSION = "0.2.0"
