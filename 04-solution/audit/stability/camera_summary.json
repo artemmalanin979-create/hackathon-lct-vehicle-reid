@@ -1,0 +1,392 @@
+{
+  "method": "leave-one-gallery-camera-out, not bootstrap with replacement",
+  "n_cameras": 87,
+  "n_gallery": 750,
+  "n_original_known": 832,
+  "full": {
+    "AB": {
+      "mAP": 0.7740915539438481,
+      "Rank-1": 0.7307692307692307,
+      "Rank-5": 0.8810096153846154,
+      "mINP": 0.7488060309838231,
+      "num_valid_queries": 832
+    },
+    "A": {
+      "mAP": 0.6936584724586873,
+      "Rank-1": 0.6634615384615384,
+      "Rank-5": 0.7872596153846154,
+      "mINP": 0.6608640365042834,
+      "num_valid_queries": 832
+    }
+  },
+  "full_gain": 0.08043308148516082,
+  "gain_distribution": {
+    "n": 87,
+    "mean": 0.0803762025056149,
+    "sd": 0.0015687346626561808,
+    "min": 0.0757464970080256,
+    "p025": 0.07688121344439156,
+    "q25": 0.07966483075143493,
+    "median": 0.0805279317683476,
+    "q75": 0.08108910968210137,
+    "p975": 0.08310757532412225,
+    "max": 0.08493111157073974,
+    "iqr": 0.0014242789306664339
+  },
+  "d1_distribution": {
+    "n": 87,
+    "mean": 0.7744297785783882,
+    "sd": 0.0037932715389460457,
+    "min": 0.76535687764404,
+    "p025": 0.7699941668347906,
+    "q25": 0.7733031619809441,
+    "median": 0.7740474260532249,
+    "q75": 0.775103086860118,
+    "p975": 0.7796199281229327,
+    "max": 0.7972201135337461,
+    "iqr": 0.0017999248791739086
+  },
+  "baseline_distribution": {
+    "n": 87,
+    "mean": 0.6940535760727733,
+    "sd": 0.003925444941170692,
+    "min": 0.687766122372829,
+    "p025": 0.6904135505568867,
+    "q25": 0.6926522559071594,
+    "median": 0.6935741712329686,
+    "q75": 0.6946464719374661,
+    "p975": 0.7003946736919997,
+    "max": 0.7206430488401812,
+    "iqr": 0.0019942160303066947
+  },
+  "n_known_remaining_distribution": {
+    "n": 87,
+    "mean": 826.0919540229885,
+    "sd": 12.084616575022288,
+    "min": 740.0,
+    "p025": 812.15,
+    "q25": 825.0,
+    "median": 830.0,
+    "q75": 831.0,
+    "p975": 832.0,
+    "max": 832.0,
+    "iqr": 6.0
+  },
+  "gain_nonpositive_n": 0,
+  "gain_zero_if_lost_distribution": {
+    "n": 87,
+    "mean": 0.07980972322195909,
+    "sd": 0.002091487040702745,
+    "min": 0.06810940850148806,
+    "p025": 0.07605803870004156,
+    "q25": 0.0793460182707732,
+    "median": 0.08036938646790559,
+    "q75": 0.08085164827864838,
+    "p975": 0.08288759571915752,
+    "max": 0.08409955837912442,
+    "iqr": 0.0015056300078751805
+  },
+  "largest_gain_loss": {
+    "camera_id": "95",
+    "n_gallery_removed": 8,
+    "n_gallery_remaining": 742,
+    "models": {
+      "AB": {
+        "metrics": {
+          "mAP": 0.7714377045713967,
+          "Rank-1": 0.7269417475728155,
+          "Rank-5": 0.8810679611650486,
+          "mINP": 0.7462624221630976,
+          "mAP@10": 0.7659316246725227,
+          "valid": 824,
+          "mAP_1110": 0.5726708725827305
+        },
+        "mAP": 0.7714377045713967,
+        "mAP_full_gallery_same_queries": 0.7718982680598078,
+        "mAP_original832_zero_if_lost": 0.7640200343351332,
+        "rerank_seconds": 2.783192796050571,
+        "counts": {
+          "queries": 1110,
+          "gallery": 742,
+          "known_queries": 824,
+          "unknown_queries": 278,
+          "filtered_queries": 8,
+          "refusal_queries": 1102,
+          "relevant_pairs": 1224
+        }
+      },
+      "A": {
+        "metrics": {
+          "mAP": 0.6956912075633711,
+          "Rank-1": 0.6662621359223301,
+          "Rank-5": 0.7864077669902912,
+          "mINP": 0.6637635405313989,
+          "mAP@10": 0.6855522968356706,
+          "valid": 824,
+          "mAP_1110": 0.5164410405695656
+        },
+        "mAP": 0.6956912075633711,
+        "mAP_full_gallery_same_queries": 0.6954065844128837,
+        "mAP_original832_zero_if_lost": 0.689001869029108,
+        "rerank_seconds": 2.789851189008914,
+        "counts": {
+          "queries": 1110,
+          "gallery": 742,
+          "known_queries": 824,
+          "unknown_queries": 278,
+          "filtered_queries": 8,
+          "refusal_queries": 1102,
+          "relevant_pairs": 1224
+        }
+      }
+    },
+    "n_known_remaining": 824,
+    "n_known_lost": 8,
+    "lost_query_indices": [
+      148,
+      151,
+      266,
+      268,
+      397,
+      398,
+      940,
+      941
+    ],
+    "gain": 0.0757464970080256,
+    "gain_change_from_full": -0.004686584477135214,
+    "gain_before_deletion_same_queries": 0.07649168364692405,
+    "gain_change_cohort": -0.003941397838236771,
+    "gain_change_within_cohort": -0.0007451866388984429,
+    "gain_original832_zero_if_lost": 0.07501816530602523
+  },
+  "largest_gain_increase": {
+    "camera_id": "43",
+    "n_gallery_removed": 23,
+    "n_gallery_remaining": 727,
+    "models": {
+      "AB": {
+        "metrics": {
+          "mAP": 0.776374890849055,
+          "Rank-1": 0.7334152334152334,
+          "Rank-5": 0.8832923832923832,
+          "mINP": 0.7523056188340999,
+          "mAP@10": 0.7708365995865997,
+          "valid": 814,
+          "mAP_1110": 0.5693415866226403
+        },
+        "mAP": 0.776374890849055,
+        "mAP_full_gallery_same_queries": 0.7776256523861397,
+        "mAP_original832_zero_if_lost": 0.7595783186912629,
+        "rerank_seconds": 2.714626875007525,
+        "counts": {
+          "queries": 1110,
+          "gallery": 727,
+          "known_queries": 814,
+          "unknown_queries": 278,
+          "filtered_queries": 18,
+          "refusal_queries": 1092,
+          "relevant_pairs": 1205
+        }
+      },
+      "A": {
+        "metrics": {
+          "mAP": 0.6914437792783152,
+          "Rank-1": 0.6597051597051597,
+          "Rank-5": 0.7862407862407862,
+          "mINP": 0.6581459949407773,
+          "mAP@10": 0.6811563024063024,
+          "valid": 814,
+          "mAP_1110": 0.5070587714707645
+        },
+        "mAP": 0.6914437792783152,
+        "mAP_full_gallery_same_queries": 0.6956820096890938,
+        "mAP_original832_zero_if_lost": 0.6764846590535439,
+        "rerank_seconds": 2.770570330962073,
+        "counts": {
+          "queries": 1110,
+          "gallery": 727,
+          "known_queries": 814,
+          "unknown_queries": 278,
+          "filtered_queries": 18,
+          "refusal_queries": 1092,
+          "relevant_pairs": 1205
+        }
+      }
+    },
+    "n_known_remaining": 814,
+    "n_known_lost": 18,
+    "lost_query_indices": [
+      6,
+      59,
+      61,
+      142,
+      143,
+      270,
+      271,
+      295,
+      588,
+      745,
+      816,
+      817,
+      990,
+      991,
+      995,
+      1021,
+      1022,
+      1063
+    ],
+    "gain": 0.08493111157073974,
+    "gain_change_from_full": 0.004498030085578919,
+    "gain_before_deletion_same_queries": 0.0819436426970459,
+    "gain_change_cohort": 0.0015105612118850864,
+    "gain_change_within_cohort": 0.0029874688736938326,
+    "gain_original832_zero_if_lost": 0.08309365963771898
+  },
+  "largest_absolute_gain_change": {
+    "camera_id": "95",
+    "n_gallery_removed": 8,
+    "n_gallery_remaining": 742,
+    "models": {
+      "AB": {
+        "metrics": {
+          "mAP": 0.7714377045713967,
+          "Rank-1": 0.7269417475728155,
+          "Rank-5": 0.8810679611650486,
+          "mINP": 0.7462624221630976,
+          "mAP@10": 0.7659316246725227,
+          "valid": 824,
+          "mAP_1110": 0.5726708725827305
+        },
+        "mAP": 0.7714377045713967,
+        "mAP_full_gallery_same_queries": 0.7718982680598078,
+        "mAP_original832_zero_if_lost": 0.7640200343351332,
+        "rerank_seconds": 2.783192796050571,
+        "counts": {
+          "queries": 1110,
+          "gallery": 742,
+          "known_queries": 824,
+          "unknown_queries": 278,
+          "filtered_queries": 8,
+          "refusal_queries": 1102,
+          "relevant_pairs": 1224
+        }
+      },
+      "A": {
+        "metrics": {
+          "mAP": 0.6956912075633711,
+          "Rank-1": 0.6662621359223301,
+          "Rank-5": 0.7864077669902912,
+          "mINP": 0.6637635405313989,
+          "mAP@10": 0.6855522968356706,
+          "valid": 824,
+          "mAP_1110": 0.5164410405695656
+        },
+        "mAP": 0.6956912075633711,
+        "mAP_full_gallery_same_queries": 0.6954065844128837,
+        "mAP_original832_zero_if_lost": 0.689001869029108,
+        "rerank_seconds": 2.789851189008914,
+        "counts": {
+          "queries": 1110,
+          "gallery": 742,
+          "known_queries": 824,
+          "unknown_queries": 278,
+          "filtered_queries": 8,
+          "refusal_queries": 1102,
+          "relevant_pairs": 1224
+        }
+      }
+    },
+    "n_known_remaining": 824,
+    "n_known_lost": 8,
+    "lost_query_indices": [
+      148,
+      151,
+      266,
+      268,
+      397,
+      398,
+      940,
+      941
+    ],
+    "gain": 0.0757464970080256,
+    "gain_change_from_full": -0.004686584477135214,
+    "gain_before_deletion_same_queries": 0.07649168364692405,
+    "gain_change_cohort": -0.003941397838236771,
+    "gain_change_within_cohort": -0.0007451866388984429,
+    "gain_original832_zero_if_lost": 0.07501816530602523
+  },
+  "largest_within_cohort_gain_loss": {
+    "camera_id": "59",
+    "n_gallery_removed": 11,
+    "n_gallery_remaining": 739,
+    "models": {
+      "AB": {
+        "metrics": {
+          "mAP": 0.7705437923006913,
+          "Rank-1": 0.7245145631067961,
+          "Rank-5": 0.8786407766990292,
+          "mINP": 0.7458733617861292,
+          "mAP@10": 0.7652805228078285,
+          "valid": 824,
+          "mAP_1110": 0.5720072836538465
+        },
+        "mAP": 0.7705437923006913,
+        "mAP_full_gallery_same_queries": 0.7728691418462156,
+        "mAP_original832_zero_if_lost": 0.763134717374723,
+        "rerank_seconds": 2.5223304639803246,
+        "counts": {
+          "queries": 1110,
+          "gallery": 739,
+          "known_queries": 824,
+          "unknown_queries": 278,
+          "filtered_queries": 8,
+          "refusal_queries": 1102,
+          "relevant_pairs": 1223
+        }
+      },
+      "A": {
+        "metrics": {
+          "mAP": 0.6937877921198561,
+          "Rank-1": 0.662621359223301,
+          "Rank-5": 0.787621359223301,
+          "mINP": 0.6615183925510151,
+          "mAP@10": 0.6839614636307597,
+          "valid": 824,
+          "mAP_1110": 0.5150280546907761
+        },
+        "mAP": 0.6937877921198561,
+        "mAP_full_gallery_same_queries": 0.6930103346508429,
+        "mAP_original832_zero_if_lost": 0.6871167556571651,
+        "rerank_seconds": 2.794362599030137,
+        "counts": {
+          "queries": 1110,
+          "gallery": 739,
+          "known_queries": 824,
+          "unknown_queries": 278,
+          "filtered_queries": 8,
+          "refusal_queries": 1102,
+          "relevant_pairs": 1223
+        }
+      }
+    },
+    "n_known_remaining": 824,
+    "n_known_lost": 8,
+    "lost_query_indices": [
+      182,
+      403,
+      404,
+      491,
+      854,
+      856,
+      1029,
+      1030
+    ],
+    "gain": 0.07675600018083517,
+    "gain_change_from_full": -0.0036770813043256467,
+    "gain_before_deletion_same_queries": 0.07985880719537264,
+    "gain_change_cohort": -0.0005742742897881792,
+    "gain_change_within_cohort": -0.0031028070145374675,
+    "gain_original832_zero_if_lost": 0.07601796171755792
+  },
+  "note": "All queries remain in the transductive pool; only gallery observations are removed. Models and whitening stay fixed."
+}

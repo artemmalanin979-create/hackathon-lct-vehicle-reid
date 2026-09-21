@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "checks": {
+    "mAP": true,
+    "Rank-1": true,
+    "832_known": true,
+    "AP_bitwise_job48": true,
+    "Rank1_bitwise_job48": true
+  },
+  "expected": {
+    "mAP": 0.7740915539438481,
+    "Rank-1": 0.7307692307692307
+  },
+  "actual": {
+    "mAP": 0.7740915539438481,
+    "Rank-1": 0.7307692307692307,
+    "Rank-5": 0.8810096153846154,
+    "mINP": 0.7488060309838231,
+    "mAP@10": 0.7684546226343101,
+    "valid": 832,
+    "mAP_1110": 0.5802199755687222
+  },
+  "float_hex": {
+    "mAP": "0x1.8c55ba6898e85p-1",
+    "Rank-1": "0x1.7627627627627p-1"
+  },
+  "timestamp_utc": "2026-09-21T17:21:02.842508+00:00",
+  "hostname": "sespel-worker.local",
+  "python": "3.14.3 (main, Mar 26 2026, 00:00:00) [GCC 16.0.1 20260321 (Red Hat 16.0.1-0)]",
+  "numpy": "2.4.6",
+  "rerank_seconds": 2.1081128049991094,
+  "threads": 2,
+  "input_sha256": {
+    "/home/fedora/lct-reid/jobs/job_69/out/AB_query.npy": "d1f22b55cfd0bac14c44f2d0db8ea9f456fd6ec9743fac033b4b23cf96e42aae",
+    "/home/fedora/lct-reid/jobs/job_69/out/AB_gallery.npy": "6c8476f49ccea53e04c471d831bf79d1b958e4d965a835bfef3c2f7c6af6d4d0",
+    "/home/fedora/lct-reid/jobs/job_69/out/AB_whitening.npz": "dde655a503321a77d18aa192a1f7669241ca457cc7ee628daa2cadb33ccac7ae",
+    "/home/fedora/lct-reid/jobs/job_48/out/s02_perquery_j48.npz": "43d24b7aa5ec9a40630208243b3db1c75827c66241b12993a2b0221b9f24ffab",
+    "/home/fedora/lct-reid/repo/04-solution/eval/reid_metrics.py": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+    "/home/fedora/lct-reid/repo/04-solution/eval/scope_metrics.py": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+    "/home/fedora/lct-reid/repo/04-solution/postproc/scripts/common.py": "37329f0a6699936cc6a1b162ef158c1b5a4e4923d6286ce3a5f67eef7e977fef",
+    "/home/fedora/lct-reid/jobs/job_45/scripts/lib45.py": "8a03c39489e463529ea5814753b6be435989fe14ea972d2848851bad09fb6983",
+    "/home/fedora/lct-reid/repo/04-solution/split/files/val_query.csv": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+    "/home/fedora/lct-reid/repo/04-solution/split/files/val_gallery.csv": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+    "/home/fedora/lct-reid/repo/04-solution/split/files/train_fit.csv": "4eae49f6e50795445ef9281181571565298cc69828ba3d54b345386acb8441b8"
+  }
+}

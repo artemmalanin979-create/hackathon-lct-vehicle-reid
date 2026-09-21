@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "timestamp_utc": "2026-09-21T17:41:10.196902+00:00",
+  "original_input_hashes_unchanged": 62,
+  "splits": 200,
+  "vehicle_overlap_in_each_split": 0,
+  "known_query_coverage": 832,
+  "vehicles_per_half": 142,
+  "replayed_seeds": 200,
+  "half_metric_rows_checked": 9600,
+  "selected_model_rows_checked": 400,
+  "camera_deletions_checked": 87,
+  "camera_positive_availability_and_denominators_checked": true,
+  "canonical_subset_evaluation_checks": 48,
+  "source_sha256": {
+    "checkpoint.py": "2a0914c77d20d8eea254d36ae3a7669d8481ce14d9ab54ad448d4f519fe2fb16",
+    "analyze.py": "c8bc80b76c05fb81c6f529063b1807f78b1e30b9989ac6df1f672d6aaa4e6d98",
+    "cameras.py": "6c95a8525409f2f2b02740f047f38903ae5a005f3f32a39975f69bcf6160ef1c",
+    "history.py": "9e1f372b65eb63979c2f37a12f02eeda5946747afff59b17d60f81ad546e48b1",
+    "verify.py": "43bdb3762ba3d27e3ce39291c329f5d3ec35ed83eee83042fb506710f4a5d18e",
+    "figures.py": "aab074aa3b338c585f0841e92eba9e71144ef84cd4e84bfd3059f91e537fee22",
+    "build_report.py": "c796b9102a638b890dabfb757f7ec35cf5b4d2ccb6ac74918bca5922407efd33"
+  }
+}
