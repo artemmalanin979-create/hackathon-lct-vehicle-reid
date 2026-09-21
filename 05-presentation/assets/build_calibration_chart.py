@@ -1,4 +1,4 @@
-"""Render the existing calibration CSV; do not run inference or calibration."""
+"""Render saved calibration measurements; do not run inference or calibration."""
 
 import csv
 import hashlib
@@ -17,7 +17,7 @@ from matplotlib.ticker import FuncFormatter
 
 
 HERE = Path(__file__).resolve().parent
-SOURCE = HERE.parent.parent / "04-solution/service/calib"
+SOURCE = HERE.parent.parent / "04-solution/service/calib-d1_j48"
 DEST = HERE
 BRANCH = "rerank_market_presence"
 
@@ -25,14 +25,24 @@ BRANCH = "rerank_market_presence"
 def render():
     curve_path = SOURCE / f"curve_{BRANCH}.csv"
     summary_path = SOURCE / "summary.json"
-    with curve_path.open(newline="") as stream:
-        rows = list(csv.DictReader(stream))
-    selected = json.loads(summary_path.read_text())[BRANCH]["selected"]["robust_balanced"]
+    saved_points = json.loads(summary_path.read_text())[BRANCH]["selected"]
+    selected = saved_points["robust_balanced"]
     threshold = selected["threshold"]
+    sources = [summary_path]
+    full_curve = curve_path.is_file()
+    if full_curve:
+        with curve_path.open(newline="") as stream:
+            rows = list(csv.DictReader(stream))
+        sources.append(curve_path)
+    else:
+        # The committed d1_j48 summary contains measured operating points, not
+        # the full threshold sweep. Plot only those points: connecting them
+        # would imply unmeasured values between the saved thresholds.
+        rows = list({point["threshold"]: point for point in saved_points.values()}.values())
 
     # Pin the plotted result to the report used for this presentation draft.
-    assert threshold == 0.49937235233589916
-    assert tuple(selected[k] for k in ("tp", "fp", "fn", "tn_unknown")) == (603, 62, 229, 216)
+    assert threshold == 0.5282812306342437
+    assert tuple(selected[k] for k in ("tp", "fp", "fn", "tn_unknown")) == (606, 60, 226, 218)
     matching = [row for row in rows if float(row["threshold"]) == threshold]
     assert len(matching) == 1
     for key in ("f1", "tnr"):
@@ -52,24 +62,30 @@ def render():
         "xtick.color": "#1C1D22",
         "ytick.color": "#1C1D22",
         "svg.fonttype": "none",
+        "svg.hashsalt": "d1_j48",
         "savefig.facecolor": "white",
     })
     fig, ax = plt.subplots(figsize=(10.2, 5.6))
     fig.subplots_adjust(left=0.09, right=0.96, bottom=0.24, top=0.79)
     fig.text(0.09, 0.94, "F1 и доля корректных отказов", fontsize=19, weight="bold")
     fig.text(0.09, 0.885,
-             "Пакетное переранжирование · market / presence · наша валидация",
+             "d1_j48 · переранжирование · market / presence · наша валидация",
              fontsize=10.5)
 
-    # For acceptance s >= t, the value between two observed scores equals
-    # the value at the higher threshold. No smoothing or invented samples.
-    ax.step(thresholds, f1, where="pre", color="#520978", linewidth=2.3, label="F1")
-    ax.step(thresholds, tnr, where="pre", color="#FF0053", linewidth=2.3,
-            linestyle=(0, (5, 2)), label="TNR — корректные отказы")
+    if full_curve:
+        # For acceptance s >= t, the value between two observed scores equals
+        # the value at the higher threshold. No smoothing or invented samples.
+        ax.step(thresholds, f1, where="pre", color="#520978", linewidth=2.3, label="F1")
+        ax.step(thresholds, tnr, where="pre", color="#FF0053", linewidth=2.3,
+                linestyle=(0, (5, 2)), label="TNR — корректные отказы")
+    else:
+        ax.scatter(thresholds, f1, color="#520978", s=25, label="F1")
+        ax.scatter(thresholds, tnr, color="#FF0053", marker="s", s=23,
+                   label="TNR — корректные отказы")
     ax.axvline(threshold, color="#1C1D22", linewidth=1.1, linestyle=":")
     ax.scatter([threshold, threshold], [selected["f1"], selected["tnr"]],
                color=["#520978", "#FF0053"], edgecolors="white", s=54, zorder=5)
-    ax.annotate("Порог 0,4994\nF1 0,806 · TNR 0,777",
+    ax.annotate("Порог 0,52828\nF1 0,809 · TNR 0,784",
                 xy=(threshold, selected["tnr"]), xytext=(0.41, 0.37),
                 fontsize=11, ha="left", va="center",
                 arrowprops={"arrowstyle": "-", "color": "#1C1D22", "lw": 0.9},
@@ -89,33 +105,41 @@ def render():
         ax.spines[side].set_color("#8E8993")
     ax.legend(loc="lower left", bbox_to_anchor=(0, 1.015), borderaxespad=0,
               ncol=2, frameon=False, fontsize=10)
-    fig.text(0.09, 0.105, "Валидация: 1110 запросов; 832 с парой, 278 без пары.", fontsize=10)
-    fig.text(0.09, 0.058, "Порог выбран на этой валидации; независимого замера нет.", fontsize=10)
+    if full_curve:
+        fig.text(0.09, 0.105, "Валидация: 1110 запросов; 832 с парой, 278 без пары.", fontsize=10)
+        fig.text(0.09, 0.058, "Порог выбран на этой валидации; независимого замера нет.", fontsize=10)
+    else:
+        fig.text(0.09, 0.105, f"{len(rows)} сохранённых точек; 1110 запросов: 832 с парой, 278 без пары.", fontsize=10)
+        fig.text(0.09, 0.058, "Без интерполяции. Порог выбран здесь; независимого замера нет.", fontsize=10)
 
     DEST.mkdir(exist_ok=True)
     svg_path = DEST / "f1_tnr_threshold.svg"
     png_path = DEST / "f1_tnr_threshold.png"
-    fig.savefig(svg_path, metadata={"Description":
-        "Existing calibration data, no new model run. Source: " + str(curve_path)})
+    fig.savefig(svg_path, metadata={"Date": None, "Description":
+        "Existing calibration data, no new model run. Sources: " + ", ".join(str(p) for p in sources)})
+    svg_path.write_text("\n".join(line.rstrip() for line in svg_path.read_text().splitlines()) + "\n")
     fig.savefig(png_path, dpi=160)
     plt.close(fig)
 
     provenance = {
+        "configuration": "d1_j48",
         "branch": BRANCH,
         "selection": "selected.robust_balanced",
-        "curve_rows": len(rows),
+        "full_curve_available": full_curve,
+        "plotted_points": len(rows),
         "selected": selected,
         "sources": {
             str(path): hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in (curve_path, summary_path)
+            for path in sources
         },
-        "rendering": "steps-pre, existing CSV rows only, no smoothing",
-        "notice": "Calibration validation; untrained weights; not a holdout result.",
+        "rendering": ("steps-pre, existing CSV rows only, no smoothing" if full_curve else
+                      "saved measured operating points only, no lines or interpolation"),
+        "notice": "d1_j48 calibration validation; two models plus whitening; not a holdout result.",
         "outputs": [str(svg_path), str(png_path)],
     }
     (DEST / "calibration-provenance.json").write_text(
         json.dumps(provenance, ensure_ascii=False, indent=2) + "\n")
-    print(json.dumps({"curve_rows": len(rows), "selected": {
+    print(json.dumps({"full_curve_available": full_curve, "plotted_points": len(rows), "selected": {
         key: selected[key] for key in ("threshold", "f1", "tnr", "tp", "fp", "fn", "tn_unknown")
     }, "outputs": [str(svg_path), str(png_path)]}, ensure_ascii=False))
 
