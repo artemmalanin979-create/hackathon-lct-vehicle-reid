@@ -1,0 +1,35 @@
+{
+  "val_query": {
+    "path": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.npy",
+    "sha256": "d36d5599db25789cafb42d4b2d4937eb9b7da1e0f7921ef82017433ababa7dc2",
+    "shape": [
+      1110,
+      512
+    ],
+    "dtype": "float32",
+    "ids_path": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.ids",
+    "ids_sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf"
+  },
+  "val_gallery": {
+    "path": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.npy",
+    "sha256": "9cf6b810151761f60994d3b7364b07c51faaa7775d073b8507607281efc98cea",
+    "shape": [
+      750,
+      512
+    ],
+    "dtype": "float32",
+    "ids_path": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.ids",
+    "ids_sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c"
+  },
+  "train_fit": {
+    "path": "/home/fedora/lct-reid/jobs/job_48/out/train_fit_j48.npy",
+    "sha256": "172ea47e65bae357904c0293f928367412768f5e071cfe47de5cb1e01b675cd8",
+    "shape": [
+      7248,
+      512
+    ],
+    "dtype": "float32",
+    "ids_path": "/home/fedora/lct-reid/jobs/job_48/out/train_fit_j48.ids",
+    "ids_sha256": "4c17a2909ee3e4dd268408e92e0fd5726eb253ceed112d6e1aabc2f5e19dc19f"
+  }
+}

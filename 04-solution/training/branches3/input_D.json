@@ -1,0 +1,35 @@
+{
+  "val_query": {
+    "path": "/home/fedora/lct-reid/jobs/job_68/features/val_query_osnet.npy",
+    "sha256": "ac0ede07c905fbcf45db9d172feaf57391e248a07d29c948e7377539e260c096",
+    "shape": [
+      1110,
+      512
+    ],
+    "dtype": "float32",
+    "ids_path": "/home/fedora/lct-reid/jobs/job_68/features/val_query_osnet.ids",
+    "ids_sha256": "9a8c3e4e0bb2ea5e8f91a298dd129eedaba5b5beb29c58452d07bf733a09f690"
+  },
+  "val_gallery": {
+    "path": "/home/fedora/lct-reid/jobs/job_68/features/val_gallery_osnet.npy",
+    "sha256": "6fceb006f921c08dd0c98b4b73bc63136764041c19cc5eb684f3c8fa3cddb115",
+    "shape": [
+      750,
+      512
+    ],
+    "dtype": "float32",
+    "ids_path": "/home/fedora/lct-reid/jobs/job_68/features/val_gallery_osnet.ids",
+    "ids_sha256": "aebd7c5ca52ca53a915aec621d9229d808a027dbbeec8d1c2fc20ad384e7cf72"
+  },
+  "train_fit": {
+    "path": "/home/fedora/lct-reid/jobs/job_68/features/train_fit_osnet.npy",
+    "sha256": "81e4f4e6074bb0557977d4e5a90f5915bd40757fbf5fe2864e4baf7f2731356f",
+    "shape": [
+      7248,
+      512
+    ],
+    "dtype": "float32",
+    "ids_path": "/home/fedora/lct-reid/jobs/job_68/features/train_fit_osnet.ids",
+    "ids_sha256": "2f6d061c410229be6b9773721ad4cffbbbeceeea90d868716f8a30d574758f8a"
+  }
+}

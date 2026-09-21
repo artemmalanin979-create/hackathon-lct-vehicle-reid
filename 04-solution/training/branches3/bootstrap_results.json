@@ -1,0 +1,847 @@
+{
+  "B": 4000,
+  "seed": 20260921,
+  "sigma": 0.0134,
+  "N": 6,
+  "alpha": 0.05,
+  "primary_family": "six KR mAP comparisons against AB",
+  "p_method": "two-sided sign-tail paired bootstrap, add-one correction, Holm step-down",
+  "ci_method": "percentile; individual 99.1666667% intervals give conservative familywise 95% coverage by Bonferroni",
+  "same_resamples_for_all_candidates": true,
+  "diagnostics": "Cosine mAP and Rank-1 families are descriptive; they do not determine adoption",
+  "comparisons": {
+    "ABC": {
+      "kr|ap": {
+        "query": {
+          "delta": 0.00010440126895463537,
+          "delta_over_sigma": 0.00779113947422652,
+          "ci95_pointwise": [
+            -0.007561025828285806,
+            0.0073537459591601845
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.009937276286513046,
+            0.010303259315813629
+          ],
+          "p_raw_two_sided": 0.9837540614846289,
+          "bootstrap_sd_delta": 0.0037232621593212526,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.00010440126895463537,
+          "delta_over_sigma": 0.00779113947422652,
+          "ci95_pointwise": [
+            -0.009741325798797414,
+            0.00985518847507052
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.012776370126751375,
+            0.013064691304103438
+          ],
+          "p_raw_two_sided": 0.9927518120469883,
+          "bootstrap_sd_delta": 0.005028679389417173,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "kr|rank1": {
+        "query": {
+          "delta": 0.006009615384615385,
+          "delta_over_sigma": 0.44847876004592424,
+          "ci95_pointwise": [
+            -0.006009615384615385,
+            0.018028846153846152
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.009615384615384616,
+            0.021634615384615384
+          ],
+          "p_raw_two_sided": 0.33791552111972006,
+          "bootstrap_sd_delta": 0.005913249256350598,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.006009615384615385,
+          "delta_over_sigma": 0.44847876004592424,
+          "ci95_pointwise": [
+            -0.009651057167975652,
+            0.022222908941079526
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.014320400822199384,
+            0.02749072818117822
+          ],
+          "p_raw_two_sided": 0.5043739065233691,
+          "bootstrap_sd_delta": 0.008000855971296551,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|ap": {
+        "query": {
+          "delta": 0.005398774524745946,
+          "delta_over_sigma": 0.4028936212496974,
+          "ci95_pointwise": [
+            -0.0008476316460155238,
+            0.01185323163365873
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.0034836399908866884,
+            0.01388590601121674
+          ],
+          "p_raw_two_sided": 0.0894776305923519,
+          "bootstrap_sd_delta": 0.003283575097945035,
+          "p_holm": 0.44738815296175954,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.005398774524745946,
+          "delta_over_sigma": 0.4028936212496974,
+          "ci95_pointwise": [
+            -0.002348266899747567,
+            0.013226954339355937
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.005236490258461079,
+            0.015559294129898165
+          ],
+          "p_raw_two_sided": 0.17395651087228192,
+          "bootstrap_sd_delta": 0.0039861958273777216,
+          "p_holm": 0.8022994251437141,
+          "confirmed_positive": false
+        }
+      },
+      "cos|rank1": {
+        "query": {
+          "delta": 0.002403846153846154,
+          "delta_over_sigma": 0.1793915040183697,
+          "ci95_pointwise": [
+            -0.007211538461538462,
+            0.013221153846153846
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.010817307692307692,
+            0.017232572115384724
+          ],
+          "p_raw_two_sided": 0.7193201699575106,
+          "bootstrap_sd_delta": 0.005338917758537826,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.002403846153846154,
+          "delta_over_sigma": 0.1793915040183697,
+          "ci95_pointwise": [
+            -0.008433734939759036,
+            0.013269801030655665
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.012862692036703711,
+            0.016706443914081145
+          ],
+          "p_raw_two_sided": 0.759810047488128,
+          "bootstrap_sd_delta": 0.005614593649172919,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      }
+    },
+    "ABD": {
+      "kr|ap": {
+        "query": {
+          "delta": 0.00378210134622769,
+          "delta_over_sigma": 0.2822463691214694,
+          "ci95_pointwise": [
+            -0.0033033548143782533,
+            0.010958518730778742
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.005818638511263845,
+            0.01343855387996766
+          ],
+          "p_raw_two_sided": 0.30942264433891525,
+          "bootstrap_sd_delta": 0.0036682887278640173,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.00378210134622769,
+          "delta_over_sigma": 0.2822463691214694,
+          "ci95_pointwise": [
+            -0.006255445482105854,
+            0.013657868312842762
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.009451446708426214,
+            0.01763431812471857
+          ],
+          "p_raw_two_sided": 0.47588102974256435,
+          "bootstrap_sd_delta": 0.005136919040176443,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "kr|rank1": {
+        "query": {
+          "delta": 0.008413461538461538,
+          "delta_over_sigma": 0.6278702640642939,
+          "ci95_pointwise": [
+            -0.003605769230769231,
+            0.020432692307692308
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.007211538461538462,
+            0.02403846153846154
+          ],
+          "p_raw_two_sided": 0.19595101224693826,
+          "bootstrap_sd_delta": 0.005964943567688576,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.008413461538461538,
+          "delta_over_sigma": 0.6278702640642939,
+          "ci95_pointwise": [
+            -0.0072291336637260745,
+            0.023810233270900732
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.011835556062160416,
+            0.028830373201438865
+          ],
+          "p_raw_two_sided": 0.3284178955261185,
+          "bootstrap_sd_delta": 0.007749551822668318,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|ap": {
+        "query": {
+          "delta": 0.0003409748242505853,
+          "delta_over_sigma": 0.025445882406760094,
+          "ci95_pointwise": [
+            -0.0055818377551408544,
+            0.006424301431764203
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.00786170576394736,
+            0.008781226783844846
+          ],
+          "p_raw_two_sided": 0.8962759310172457,
+          "bootstrap_sd_delta": 0.0031353862055804645,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.0003409748242505853,
+          "delta_over_sigma": 0.025445882406760094,
+          "ci95_pointwise": [
+            -0.00608395078504721,
+            0.00700363541836286
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.008817893572300672,
+            0.009417119856130177
+          ],
+          "p_raw_two_sided": 0.9282679330167458,
+          "bootstrap_sd_delta": 0.003375403626556876,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|rank1": {
+        "query": {
+          "delta": 0.001201923076923077,
+          "delta_over_sigma": 0.08969575200918485,
+          "ci95_pointwise": [
+            -0.009615384615384616,
+            0.01201923076923077
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.013221153846153846,
+            0.016826923076923076
+          ],
+          "p_raw_two_sided": 0.9132716820794802,
+          "bootstrap_sd_delta": 0.005736439845816214,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.001201923076923077,
+          "delta_over_sigma": 0.08969575200918485,
+          "ci95_pointwise": [
+            -0.010311361634246802,
+            0.013205678906177857
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.014342705492960161,
+            0.017674876241749453
+          ],
+          "p_raw_two_sided": 0.9227693076730817,
+          "bootstrap_sd_delta": 0.006010832204224885,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      }
+    },
+    "ABE": {
+      "kr|ap": {
+        "query": {
+          "delta": -0.006014341069441017,
+          "delta_over_sigma": -0.44883142309261315,
+          "ci95_pointwise": [
+            -0.01352620514930697,
+            0.0011398008125046214
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.016361209913849657,
+            0.003516117557999127
+          ],
+          "p_raw_two_sided": 0.10697325668582855,
+          "bootstrap_sd_delta": 0.003776816712645969,
+          "p_holm": 0.6418395401149712,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.006014341069441017,
+          "delta_over_sigma": -0.44883142309261315,
+          "ci95_pointwise": [
+            -0.017476304261719998,
+            0.005288612263825544
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.021687345748415802,
+            0.008857662405298823
+          ],
+          "p_raw_two_sided": 0.2894276430892277,
+          "bootstrap_sd_delta": 0.005753658309794506,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "kr|rank1": {
+        "query": {
+          "delta": -0.004807692307692308,
+          "delta_over_sigma": -0.3587830080367394,
+          "ci95_pointwise": [
+            -0.015625,
+            0.007211538461538462
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.020432692307692308,
+            0.009615384615384616
+          ],
+          "p_raw_two_sided": 0.47888027993001747,
+          "bootstrap_sd_delta": 0.005829886867473697,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.004807692307692308,
+          "delta_over_sigma": -0.3587830080367394,
+          "ci95_pointwise": [
+            -0.02088516308996014,
+            0.01066350710900474
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.027537959125553648,
+            0.016411439594421835
+          ],
+          "p_raw_two_sided": 0.6003499125218695,
+          "bootstrap_sd_delta": 0.008120213934358531,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|ap": {
+        "query": {
+          "delta": 0.0031862470580091857,
+          "delta_over_sigma": 0.23777963119471535,
+          "ci95_pointwise": [
+            -0.003086856479676753,
+            0.009595637094528845
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.005218247180347873,
+            0.011771889534554058
+          ],
+          "p_raw_two_sided": 0.31542114471382154,
+          "bootstrap_sd_delta": 0.0032374791375027515,
+          "p_holm": 0.9462634341414646,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.0031862470580091857,
+          "delta_over_sigma": 0.23777963119471535,
+          "ci95_pointwise": [
+            -0.004405108280775991,
+            0.010811906741063127
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.007443019714042511,
+            0.013067588588836736
+          ],
+          "p_raw_two_sided": 0.4073981504623844,
+          "bootstrap_sd_delta": 0.00391707087360253,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|rank1": {
+        "query": {
+          "delta": -0.004807692307692308,
+          "delta_over_sigma": -0.3587830080367394,
+          "ci95_pointwise": [
+            -0.015625,
+            0.006009615384615385
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.019230769230769232,
+            0.009615384615384616
+          ],
+          "p_raw_two_sided": 0.46988252936765806,
+          "bootstrap_sd_delta": 0.005562900079039097,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.004807692307692308,
+          "delta_over_sigma": -0.3587830080367394,
+          "ci95_pointwise": [
+            -0.01674641148325359,
+            0.006219099087377559
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.020617078234265732,
+            0.010067382366377347
+          ],
+          "p_raw_two_sided": 0.4928767808047988,
+          "bootstrap_sd_delta": 0.005957780492786092,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      }
+    },
+    "ABCD": {
+      "kr|ap": {
+        "query": {
+          "delta": 0.0022770302482212927,
+          "delta_over_sigma": 0.16992763046427556,
+          "ci95_pointwise": [
+            -0.004816694282230634,
+            0.009558832755343881
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.006764988193739083,
+            0.012029009355748101
+          ],
+          "p_raw_two_sided": 0.5288677830542364,
+          "bootstrap_sd_delta": 0.003629539202299204,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.0022770302482212927,
+          "delta_over_sigma": 0.16992763046427556,
+          "ci95_pointwise": [
+            -0.007384138528383631,
+            0.011717467740302712
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.010853653677536655,
+            0.015280062956534647
+          ],
+          "p_raw_two_sided": 0.664833791552112,
+          "bootstrap_sd_delta": 0.004957319780544304,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "kr|rank1": {
+        "query": {
+          "delta": 0.004807692307692308,
+          "delta_over_sigma": 0.3587830080367394,
+          "ci95_pointwise": [
+            -0.007211538461538462,
+            0.018028846153846152
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.01201923076923077,
+            0.021634615384615384
+          ],
+          "p_raw_two_sided": 0.4978755311172207,
+          "bootstrap_sd_delta": 0.006372681586772234,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.004807692307692308,
+          "delta_over_sigma": 0.3587830080367394,
+          "ci95_pointwise": [
+            -0.011877546224863327,
+            0.020835899014778333
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.018964935656339076,
+            0.027305409450140563
+          ],
+          "p_raw_two_sided": 0.6328417895526118,
+          "bootstrap_sd_delta": 0.008347503504577969,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|ap": {
+        "query": {
+          "delta": 0.008979657742573704,
+          "delta_over_sigma": 0.670123712132366,
+          "ci95_pointwise": [
+            0.002430677830063158,
+            0.015760758568296472
+          ],
+          "ci95_familywise_bonferroni": [
+            0.00012106486390392406,
+            0.01750664242358402
+          ],
+          "p_raw_two_sided": 0.00849787553111722,
+          "bootstrap_sd_delta": 0.0033439796309921617,
+          "p_holm": 0.050987253186703316,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.008979657742573704,
+          "delta_over_sigma": 0.670123712132366,
+          "ci95_pointwise": [
+            0.0017854244935704346,
+            0.01627488200401702
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.0002822292806547928,
+            0.01941725312486536
+          ],
+          "p_raw_two_sided": 0.012496875781054736,
+          "bootstrap_sd_delta": 0.00375362048042296,
+          "p_holm": 0.07498125468632841,
+          "confirmed_positive": false
+        }
+      },
+      "cos|rank1": {
+        "query": {
+          "delta": 0.003605769230769231,
+          "delta_over_sigma": 0.26908725602755457,
+          "ci95_pointwise": [
+            -0.007211538461538462,
+            0.015625
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.01201923076923077,
+            0.019230769230769232
+          ],
+          "p_raw_two_sided": 0.5838540364908773,
+          "bootstrap_sd_delta": 0.005688072868501996,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.003605769230769231,
+          "delta_over_sigma": 0.26908725602755457,
+          "ci95_pointwise": [
+            -0.008293838862559242,
+            0.015348741630172967
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.012029005444856349,
+            0.01927710843373494
+          ],
+          "p_raw_two_sided": 0.6178455386153462,
+          "bootstrap_sd_delta": 0.005967358213268237,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      }
+    },
+    "ABCE": {
+      "kr|ap": {
+        "query": {
+          "delta": -0.006669125081479714,
+          "delta_over_sigma": -0.49769590160296373,
+          "ci95_pointwise": [
+            -0.01679637703288078,
+            0.0029398986164184634
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.019727894946441674,
+            0.006553613309605652
+          ],
+          "p_raw_two_sided": 0.1804548862784304,
+          "bootstrap_sd_delta": 0.005057070814500083,
+          "p_holm": 0.902274431392152,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.006669125081479714,
+          "delta_over_sigma": -0.49769590160296373,
+          "ci95_pointwise": [
+            -0.022369456177180013,
+            0.007378321433797205
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.028385246110477585,
+            0.011324629430957795
+          ],
+          "p_raw_two_sided": 0.38640339915021243,
+          "bootstrap_sd_delta": 0.0075771868499864385,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "kr|rank1": {
+        "query": {
+          "delta": -0.004807692307692308,
+          "delta_over_sigma": -0.3587830080367394,
+          "ci95_pointwise": [
+            -0.020432692307692308,
+            0.009615384615384616
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.02403846153846154,
+            0.015625
+          ],
+          "p_raw_two_sided": 0.5968507873031742,
+          "bootstrap_sd_delta": 0.007624063786815218,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.004807692307692308,
+          "delta_over_sigma": -0.3587830080367394,
+          "ci95_pointwise": [
+            -0.02693026563895597,
+            0.014852868827255401
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.03409693002960885,
+            0.02105954940698806
+          ],
+          "p_raw_two_sided": 0.7078230442389403,
+          "bootstrap_sd_delta": 0.01071250918206843,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|ap": {
+        "query": {
+          "delta": 0.0015416694060626393,
+          "delta_over_sigma": 0.11504995567631636,
+          "ci95_pointwise": [
+            -0.006474185980885678,
+            0.009923349438542449
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.009333050114180862,
+            0.012743736309787052
+          ],
+          "p_raw_two_sided": 0.7083229192701824,
+          "bootstrap_sd_delta": 0.0042424565274433316,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.0015416694060626393,
+          "delta_over_sigma": 0.11504995567631636,
+          "ci95_pointwise": [
+            -0.008713882041884212,
+            0.011607253792424175
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.011869119254175926,
+            0.015220690810895995
+          ],
+          "p_raw_two_sided": 0.759810047488128,
+          "bootstrap_sd_delta": 0.005215988947089776,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|rank1": {
+        "query": {
+          "delta": -0.008413461538461538,
+          "delta_over_sigma": -0.6278702640642939,
+          "ci95_pointwise": [
+            -0.021634615384615384,
+            0.004807692307692308
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.025240384615384616,
+            0.009615384615384616
+          ],
+          "p_raw_two_sided": 0.24893776555861036,
+          "bootstrap_sd_delta": 0.006627684533373488,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.008413461538461538,
+          "delta_over_sigma": -0.6278702640642939,
+          "ci95_pointwise": [
+            -0.02396017612139796,
+            0.006265860699427364
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.029597629630668275,
+            0.011053511705685637
+          ],
+          "p_raw_two_sided": 0.32441889527618095,
+          "bootstrap_sd_delta": 0.007794497581108817,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      }
+    },
+    "ABDE": {
+      "kr|ap": {
+        "query": {
+          "delta": -0.0022997983690252284,
+          "delta_over_sigma": -0.1716267439571066,
+          "ci95_pointwise": [
+            -0.010350587964383652,
+            0.005434984626937505
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.013318932598553126,
+            0.008119465565480297
+          ],
+          "p_raw_two_sided": 0.5463634091477131,
+          "bootstrap_sd_delta": 0.004006736094948738,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": -0.0022997983690252284,
+          "delta_over_sigma": -0.1716267439571066,
+          "ci95_pointwise": [
+            -0.012524154864543542,
+            0.008183763416585077
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.016339772536537078,
+            0.012113037068066117
+          ],
+          "p_raw_two_sided": 0.6823294176455886,
+          "bootstrap_sd_delta": 0.005376310209500219,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "kr|rank1": {
+        "query": {
+          "delta": 0.001201923076923077,
+          "delta_over_sigma": 0.08969575200918485,
+          "ci95_pointwise": [
+            -0.010817307692307692,
+            0.013221153846153846
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.015625,
+            0.017232572115384724
+          ],
+          "p_raw_two_sided": 0.9337665583604099,
+          "bootstrap_sd_delta": 0.006308850076294954,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.001201923076923077,
+          "delta_over_sigma": 0.08969575200918485,
+          "ci95_pointwise": [
+            -0.014744292556406276,
+            0.01758602733423061
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.02037678364772804,
+            0.024135286096396917
+          ],
+          "p_raw_two_sided": 0.939265183704074,
+          "bootstrap_sd_delta": 0.008290233507284134,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      },
+      "cos|ap": {
+        "query": {
+          "delta": 0.005229046504094077,
+          "delta_over_sigma": 0.39022735105179673,
+          "ci95_pointwise": [
+            -0.0014457586851838445,
+            0.01178722531834456
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.003703195524608796,
+            0.013705744911030323
+          ],
+          "p_raw_two_sided": 0.1284678830292427,
+          "bootstrap_sd_delta": 0.003367617326653449,
+          "p_holm": 0.5138715321169708,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.005229046504094077,
+          "delta_over_sigma": 0.39022735105179673,
+          "ci95_pointwise": [
+            -0.001978423051558894,
+            0.012936199479623055
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.0048896247528837904,
+            0.01542623997230051
+          ],
+          "p_raw_two_sided": 0.1604598850287428,
+          "bootstrap_sd_delta": 0.0037915175022331256,
+          "p_holm": 0.8022994251437141,
+          "confirmed_positive": false
+        }
+      },
+      "cos|rank1": {
+        "query": {
+          "delta": 0.0,
+          "delta_over_sigma": 0.0,
+          "ci95_pointwise": [
+            -0.01201923076923077,
+            0.010817307692307692
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.015625,
+            0.014423076923076924
+          ],
+          "p_raw_two_sided": 1.0,
+          "bootstrap_sd_delta": 0.005808232809638475,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        },
+        "vehicle_clusters": {
+          "delta": 0.0,
+          "delta_over_sigma": 0.0,
+          "ci95_pointwise": [
+            -0.012135922330097087,
+            0.012547840565643177
+          ],
+          "ci95_familywise_bonferroni": [
+            -0.01687467351146693,
+            0.016854022588549143
+          ],
+          "p_raw_two_sided": 1.0,
+          "bootstrap_sd_delta": 0.006311375821733455,
+          "p_holm": 1.0,
+          "confirmed_positive": false
+        }
+      }
+    }
+  },
+  "confirmed_improvements": [],
+  "n_queries": 832,
+  "n_vehicle_clusters": 284,
+  "plate_ablation_required": false,
+  "highest_observed_kr_mAP": "ABD"
+}
