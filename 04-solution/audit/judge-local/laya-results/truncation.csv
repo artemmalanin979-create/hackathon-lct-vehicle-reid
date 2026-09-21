@@ -1,0 +1,9 @@
+run,id,path,original_chars,kept_original_chars,sequence_tokens
+dev_ru_simple,c07,04-solution/training/attempt-2/out/table_ainv2.json,362,351,1022
+dev_ru_simple,c07,04-solution/training/attempt-2/out/table_osnet.json,362,351,1022
+dev_ru_simple,c07,04-solution/training/attempt-2/out/camera_diag.json,362,351,1022
+dev_ru_simple,c07,04-solution/training/attempt-2/out/val_gallery.ids,362,351,1022
+dev_en_strict,c07,04-solution/training/attempt-2/out/table_ainv2.json,362,358,1023
+dev_en_strict,c07,04-solution/training/attempt-2/out/table_osnet.json,362,358,1023
+dev_en_strict,c07,04-solution/training/attempt-2/out/camera_diag.json,362,358,1023
+dev_en_strict,c07,04-solution/training/attempt-2/out/val_gallery.ids,362,358,1023

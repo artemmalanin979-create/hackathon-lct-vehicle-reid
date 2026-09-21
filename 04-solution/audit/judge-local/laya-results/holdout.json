@@ -1,0 +1,1232 @@
+{
+  "summary": {
+    "n_items": 10,
+    "noul": {
+      "accuracy": 0.6,
+      "correct": 6,
+      "fn": [
+        "a03",
+        "a06",
+        "a09"
+      ],
+      "fp": [
+        "c09"
+      ]
+    },
+    "ece_noul": 0.3288,
+    "ece_bins": [
+      {
+        "bin": 5,
+        "n": 3,
+        "mean_confidence": 0.5504666666666667,
+        "accuracy": 0.0
+      },
+      {
+        "bin": 6,
+        "n": 4,
+        "mean_confidence": 0.6459999999999999,
+        "accuracy": 1.0
+      },
+      {
+        "bin": 7,
+        "n": 3,
+        "mean_confidence": 0.7402000000000001,
+        "accuracy": 0.6666666666666666
+      }
+    ],
+    "latency_ms": {
+      "noul": {
+        "p50": 74175.0745,
+        "p95": 81683.2726,
+        "max": 82078.927
+      }
+    },
+    "by_kind": {
+      "a": {
+        "n": 3,
+        "yes": 0
+      },
+      "b": {
+        "n": 3,
+        "yes": 0
+      },
+      "c": {
+        "n": 4,
+        "yes": 1
+      }
+    },
+    "truncated_ids": []
+  },
+  "results": [
+    {
+      "id": "a03",
+      "kind": "a",
+      "holdout": true,
+      "claim": "Мой повторный прогон из чистого клона дал submission.csv с SHA-256 fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba.",
+      "gold_yes": true,
+      "gold_choice": "04-solution/audit/jury-path/evidence/sha256-my-run.txt",
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:08:29Z",
+      "input_state": {
+        "claim": "Мой повторный прогон из чистого клона дал submission.csv с SHA-256 fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba.",
+        "files": [
+          {
+            "path": "04-solution/audit/jury-path/evidence/sha256-my-run.txt",
+            "excerpt": "fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_32/clean/outputs/reproduce/submission.csv 6acbeecaa147c1a30df8e910571a83075a43d020373d5211fc0311d72386b6df /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_32/clean/outputs/reproduce …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/calibration-verification-summary.json",
+            "excerpt": "{ \"checks\": 185, \"max_abs_error\": 0.0 }"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+            "excerpt": "… , \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 322.219, \"model\": \"osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)\", \"model_sha2 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/pip-freeze-all.txt",
+            "excerpt": "annotated-doc==0.0.5 annotated-types==0.8.0 anyio==4.15.1 certifi==2026.7.22 click==8.5.0 fastapi==0.141.1 flatbuffers==25.12.19 grpcio==1.84.0 h11==0.16.0 h2==4.4.1 hpack==4.2.0 httpcore==1.0.9 httpx==0.28.1 hyperframe==6.1.0 idna==3.19 numpy==2.5.3 onnxruntime==1.30.0 packaging==26.3 pillow==12.3.0 pip==26.2.1 portalocker==3.2.0 protobuf==7.36.1 pydantic== …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 737,
+        "state_tokens_used": 737,
+        "sequence_tokens": 819,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/audit/jury-path/evidence/sha256-my-run.txt",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_32/clean/outputs/reproduce/submission.csv 6acbeecaa147c1a30df8e910571a83075a43d020373d5211fc0311d72386b6df /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_32/clean/outputs/reproduce …",
+            "used_excerpt": "fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_32/clean/outputs/reproduce/submission.csv 6acbeecaa147c1a30df8e910571a83075a43d020373d5211fc0311d72386b6df /tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_32/clean/outputs/reproduce …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/calibration-verification-summary.json",
+            "original_chars": 39,
+            "used_chars": 39,
+            "kept_original_chars": 39,
+            "cut": false,
+            "original_excerpt": "{ \"checks\": 185, \"max_abs_error\": 0.0 }",
+            "used_excerpt": "{ \"checks\": 185, \"max_abs_error\": 0.0 }"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+            "original_chars": 364,
+            "used_chars": 364,
+            "kept_original_chars": 364,
+            "cut": false,
+            "original_excerpt": "… , \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 322.219, \"model\": \"osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)\", \"model_sha2 …",
+            "used_excerpt": "… , \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 322.219, \"model\": \"osnet_ain_x1_0_vehicle_reid (vehicle-reid-0001, OMZ 2022.1)\", \"model_sha2 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/pip-freeze-all.txt",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "annotated-doc==0.0.5 annotated-types==0.8.0 anyio==4.15.1 certifi==2026.7.22 click==8.5.0 fastapi==0.141.1 flatbuffers==25.12.19 grpcio==1.84.0 h11==0.16.0 h2==4.4.1 hpack==4.2.0 httpcore==1.0.9 httpx==0.28.1 hyperframe==6.1.0 idna==3.19 numpy==2.5.3 onnxruntime==1.30.0 packaging==26.3 pillow==12.3.0 pip==26.2.1 portalocker==3.2.0 protobuf==7.36.1 pydantic== …",
+            "used_excerpt": "annotated-doc==0.0.5 annotated-types==0.8.0 anyio==4.15.1 certifi==2026.7.22 click==8.5.0 fastapi==0.141.1 flatbuffers==25.12.19 grpcio==1.84.0 h11==0.16.0 h2==4.4.1 hpack==4.2.0 httpcore==1.0.9 httpx==0.28.1 hyperframe==6.1.0 idna==3.19 numpy==2.5.3 onnxruntime==1.30.0 packaging==26.3 pillow==12.3.0 pip==26.2.1 portalocker==3.2.0 protobuf==7.36.1 pydantic== …"
+          }
+        ],
+        "sequence_sha256": "570dedd73ed05df062c17c1fcb7a2c8ef1131381a9dc54c883b0c5741d21272a"
+      },
+      "preparation_ms": 6.372,
+      "process_cpu_ms": 122745.647,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.4656,
+            "confidence": 0.5344,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 819,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.4656,
+        "p_no": 0.5344,
+        "latency_ms": 64742.483
+      }
+    },
+    {
+      "id": "a06",
+      "kind": "a",
+      "holdout": true,
+      "claim": "Измерение скорости: базовая модель при одном проходе (208) даёт 43.8 мс/объект, конфигурация из трёх проходов (208+208f+256) — 133.9 мс/объект.",
+      "gold_yes": true,
+      "gold_choice": "04-solution/postproc/out/s09_timing.json",
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:09:34Z",
+      "input_state": {
+        "claim": "Измерение скорости: базовая модель при одном проходе (208) даёт 43.8 мс/объект, конфигурация из трёх проходов (208+208f+256) — 133.9 мс/объект.",
+        "files": [
+          {
+            "path": "04-solution/postproc/out/s09_timing.json",
+            "excerpt": "{ \"loadavg_start\": [ \"2.28\", \"5.82\", \"8.70\" ], \"osnet_batch1_ms_per_obj\": { \"208\": 43.8, \"208f\": 41.1, \"256\": 49.0, \"288\": 54.3 }, \"osnet_config_ms\": { \"1 проход (208)\": 43.8, \"2 прохода (208+256)\": 92.8, \"3 прохода (208+208f+256)\": 133.9, \"4 прохода (208+256+288+208f)\": 188.2 }, \"rerank_1860\": { \"(20, 6, 0.3)\": { \"best_s\": 1.07, \"runs_s\": [ 1.27, 1.07, 1.14 …"
+          },
+          {
+            "path": "04-solution/postproc/out/s03_timings.json",
+            "excerpt": "{ \"val_query_208\": { \"rows\": 1110, \"elapsed_s\": 108.44, \"ms_per_obj_batch16\": 97.69 }, \"val_query_208f\": { \"rows\": 1110, \"elapsed_s\": 116.8, \"ms_per_obj_batch16\": 105.23 }, \"val_query_256\": { \"rows\": 1110, \"elapsed_s\": 135.34, \"ms_per_obj_batch16\": 121.93 }, \"val_query_256f\": { \"rows\": 1110, \"elapsed_s\": 119.42, \"ms_per_obj_batch16\": 107.58 }, \"val_query_288 …"
+          },
+          {
+            "path": "04-solution/postproc/out/fr_batch1_timing.json",
+            "excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 40, \"batch\": 1, \"threads\": 8, \"elapsed_s\": 6.4, \"s_per_obj\": 0.161 }"
+          },
+          {
+            "path": "04-solution/postproc/out/final_val.json",
+            "excerpt": "{ \"base\": { \"vectors\": \"208\", \"rerank_params\": null, \"rerank_seconds\": 0.0, \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"vectors\": \"208\", \"rerank_params\": [ 20, 6, 0.3 ], \"rerank_seconds\": 1.17, \"mAP\": 0.666638444987006, \"Rank-1\": 0.632211538461 …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 774,
+        "state_tokens_used": 774,
+        "sequence_tokens": 856,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/postproc/out/s09_timing.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"loadavg_start\": [ \"2.28\", \"5.82\", \"8.70\" ], \"osnet_batch1_ms_per_obj\": { \"208\": 43.8, \"208f\": 41.1, \"256\": 49.0, \"288\": 54.3 }, \"osnet_config_ms\": { \"1 проход (208)\": 43.8, \"2 прохода (208+256)\": 92.8, \"3 прохода (208+208f+256)\": 133.9, \"4 прохода (208+256+288+208f)\": 188.2 }, \"rerank_1860\": { \"(20, 6, 0.3)\": { \"best_s\": 1.07, \"runs_s\": [ 1.27, 1.07, 1.14 …",
+            "used_excerpt": "{ \"loadavg_start\": [ \"2.28\", \"5.82\", \"8.70\" ], \"osnet_batch1_ms_per_obj\": { \"208\": 43.8, \"208f\": 41.1, \"256\": 49.0, \"288\": 54.3 }, \"osnet_config_ms\": { \"1 проход (208)\": 43.8, \"2 прохода (208+256)\": 92.8, \"3 прохода (208+208f+256)\": 133.9, \"4 прохода (208+256+288+208f)\": 188.2 }, \"rerank_1860\": { \"(20, 6, 0.3)\": { \"best_s\": 1.07, \"runs_s\": [ 1.27, 1.07, 1.14 …"
+          },
+          {
+            "path": "04-solution/postproc/out/s03_timings.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"val_query_208\": { \"rows\": 1110, \"elapsed_s\": 108.44, \"ms_per_obj_batch16\": 97.69 }, \"val_query_208f\": { \"rows\": 1110, \"elapsed_s\": 116.8, \"ms_per_obj_batch16\": 105.23 }, \"val_query_256\": { \"rows\": 1110, \"elapsed_s\": 135.34, \"ms_per_obj_batch16\": 121.93 }, \"val_query_256f\": { \"rows\": 1110, \"elapsed_s\": 119.42, \"ms_per_obj_batch16\": 107.58 }, \"val_query_288 …",
+            "used_excerpt": "{ \"val_query_208\": { \"rows\": 1110, \"elapsed_s\": 108.44, \"ms_per_obj_batch16\": 97.69 }, \"val_query_208f\": { \"rows\": 1110, \"elapsed_s\": 116.8, \"ms_per_obj_batch16\": 105.23 }, \"val_query_256\": { \"rows\": 1110, \"elapsed_s\": 135.34, \"ms_per_obj_batch16\": 121.93 }, \"val_query_256f\": { \"rows\": 1110, \"elapsed_s\": 119.42, \"ms_per_obj_batch16\": 107.58 }, \"val_query_288 …"
+          },
+          {
+            "path": "04-solution/postproc/out/fr_batch1_timing.json",
+            "original_chars": 174,
+            "used_chars": 174,
+            "kept_original_chars": 174,
+            "cut": false,
+            "original_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 40, \"batch\": 1, \"threads\": 8, \"elapsed_s\": 6.4, \"s_per_obj\": 0.161 }",
+            "used_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 40, \"batch\": 1, \"threads\": 8, \"elapsed_s\": 6.4, \"s_per_obj\": 0.161 }"
+          },
+          {
+            "path": "04-solution/postproc/out/final_val.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"base\": { \"vectors\": \"208\", \"rerank_params\": null, \"rerank_seconds\": 0.0, \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"vectors\": \"208\", \"rerank_params\": [ 20, 6, 0.3 ], \"rerank_seconds\": 1.17, \"mAP\": 0.666638444987006, \"Rank-1\": 0.632211538461 …",
+            "used_excerpt": "{ \"base\": { \"vectors\": \"208\", \"rerank_params\": null, \"rerank_seconds\": 0.0, \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"vectors\": \"208\", \"rerank_params\": [ 20, 6, 0.3 ], \"rerank_seconds\": 1.17, \"mAP\": 0.666638444987006, \"Rank-1\": 0.632211538461 …"
+          }
+        ],
+        "sequence_sha256": "20f65d9bf034c04703b67423069d4f7bf1ee58ff94f9c997e72870b0e531730d"
+      },
+      "preparation_ms": 6.537,
+      "process_cpu_ms": 134507.48,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.4175,
+            "confidence": 0.5825,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 856,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.4175,
+        "p_no": 0.5825,
+        "latency_ms": 71072.048
+      }
+    },
+    {
+      "id": "a09",
+      "kind": "a",
+      "holdout": true,
+      "claim": "Диагностика утечки камер: для ainv2 статистика F2_CH_cameras равна 2.3692 против ~1.0 на перемешанных метках; камерный оракул F1 даёт mAP 0.0228.",
+      "gold_yes": true,
+      "gold_choice": "04-solution/training/attempt-2/out/camera_diag.json",
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:10:45Z",
+      "input_state": {
+        "claim": "Диагностика утечки камер: для ainv2 статистика F2_CH_cameras равна 2.3692 против ~1.0 на перемешанных метках; камерный оракул F1 даёт mAP 0.0228.",
+        "files": [
+          {
+            "path": "04-solution/training/attempt-2/out/camera_diag.json",
+            "excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/boot_ainv1.json",
+            "excerpt": "{ \"osnet_minus_ainv1\": { \"mAP_a\": 0.6565692724907637, \"mAP_b\": 0.46678164516034276, \"delta\": 0.18978762733042093, \"ci95\": [ 0.16623463175476033, 0.21404807046087063 ], \"p_two_sided\": 0.0, \"sd_delta\": 0.01216918569466785, \"n_queries\": 832 }, \"osnet_rr_minus_ainv1_rr\": { \"mAP_a\": 0.6936584724586875, \"mAP_b\": 0.49964025991104033, \"delta\": 0.19401821254764717, \" …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/table_ainv2.json",
+            "excerpt": "{ \"ainv2\": { \"mAP\": 0.6641703877066983, \"Rank-1\": 0.6021634615384616, \"Rank-5\": 0.8353365384615384, \"mINP\": 0.6208063870144834, \"valid_queries\": 832 }, \"ainv2_no_camera_excl\": { \"mAP\": 0.8246603489393465, \"Rank-1\": 0.9651442307692307, \"Rank-5\": 0.9891826923076923, \"mINP\": 0.663215640098138, \"valid_queries\": 832 }, \"ainv2_rerank_6_3_0.3\": { \"mAP\": 0.700020044 …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/timing_cam_query.json",
+            "excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 128, \"batch\": 16, \"elapsed_s\": 77.498, \"obj_per_s\": 14.32, \"ms_per_obj\": 69.82 }"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 840,
+        "state_tokens_used": 840,
+        "sequence_tokens": 922,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/training/attempt-2/out/camera_diag.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …",
+            "used_excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/boot_ainv1.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"osnet_minus_ainv1\": { \"mAP_a\": 0.6565692724907637, \"mAP_b\": 0.46678164516034276, \"delta\": 0.18978762733042093, \"ci95\": [ 0.16623463175476033, 0.21404807046087063 ], \"p_two_sided\": 0.0, \"sd_delta\": 0.01216918569466785, \"n_queries\": 832 }, \"osnet_rr_minus_ainv1_rr\": { \"mAP_a\": 0.6936584724586875, \"mAP_b\": 0.49964025991104033, \"delta\": 0.19401821254764717, \" …",
+            "used_excerpt": "{ \"osnet_minus_ainv1\": { \"mAP_a\": 0.6565692724907637, \"mAP_b\": 0.46678164516034276, \"delta\": 0.18978762733042093, \"ci95\": [ 0.16623463175476033, 0.21404807046087063 ], \"p_two_sided\": 0.0, \"sd_delta\": 0.01216918569466785, \"n_queries\": 832 }, \"osnet_rr_minus_ainv1_rr\": { \"mAP_a\": 0.6936584724586875, \"mAP_b\": 0.49964025991104033, \"delta\": 0.19401821254764717, \" …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/table_ainv2.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"ainv2\": { \"mAP\": 0.6641703877066983, \"Rank-1\": 0.6021634615384616, \"Rank-5\": 0.8353365384615384, \"mINP\": 0.6208063870144834, \"valid_queries\": 832 }, \"ainv2_no_camera_excl\": { \"mAP\": 0.8246603489393465, \"Rank-1\": 0.9651442307692307, \"Rank-5\": 0.9891826923076923, \"mINP\": 0.663215640098138, \"valid_queries\": 832 }, \"ainv2_rerank_6_3_0.3\": { \"mAP\": 0.700020044 …",
+            "used_excerpt": "{ \"ainv2\": { \"mAP\": 0.6641703877066983, \"Rank-1\": 0.6021634615384616, \"Rank-5\": 0.8353365384615384, \"mINP\": 0.6208063870144834, \"valid_queries\": 832 }, \"ainv2_no_camera_excl\": { \"mAP\": 0.8246603489393465, \"Rank-1\": 0.9651442307692307, \"Rank-5\": 0.9891826923076923, \"mINP\": 0.663215640098138, \"valid_queries\": 832 }, \"ainv2_rerank_6_3_0.3\": { \"mAP\": 0.700020044 …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/timing_cam_query.json",
+            "original_chars": 199,
+            "used_chars": 199,
+            "kept_original_chars": 199,
+            "cut": false,
+            "original_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 128, \"batch\": 16, \"elapsed_s\": 77.498, \"obj_per_s\": 14.32, \"ms_per_obj\": 69.82 }",
+            "used_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 128, \"batch\": 16, \"elapsed_s\": 77.498, \"obj_per_s\": 14.32, \"ms_per_obj\": 69.82 }"
+          }
+        ],
+        "sequence_sha256": "a38a96ba15de72654350dec927517b87b8117451cc16b5f47eebfe205aa758f9"
+      },
+      "preparation_ms": 8.542,
+      "process_cpu_ms": 152210.968,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.2518,
+            "confidence": 0.7482,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 922,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.2518,
+        "p_no": 0.7482,
+        "latency_ms": 81199.695
+      }
+    },
+    {
+      "id": "b03",
+      "kind": "b",
+      "holdout": true,
+      "claim": "Файл evidence/selinux-audit.log фиксирует AVC-отказы доступа при пакетном прогоне без флага label=disable.",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:12:07Z",
+      "input_state": {
+        "claim": "Файл evidence/selinux-audit.log фиксирует AVC-отказы доступа при пакетном прогоне без флага label=disable.",
+        "files": [
+          {
+            "path": "04-solution/audit/jury-path/evidence/R.log",
+            "excerpt": "{\"threshold\": 0.49937235233589916, \"queries_with_candidates\": 882, \"queries_refused\": 228, \"refused_share\": 0.2054, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [6, 3, 0.3], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [1860, 512], \"embed_elapsed_s\": 310.841, \"rank_elapsed_s\": 1.73, \"total_elapsed_s\": 313.114, …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+            "excerpt": "{ \"threshold\": 0.49937235233589916, \"queries_with_candidates\": 1078, \"queries_refused\": 32, \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 32 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/metrics.json",
+            "excerpt": "{ \"environment\": { \"python\": \"3.13.15\", \"numpy\": \"2.5.3\", \"onnxruntime\": \"1.30.0\", \"threads\": 2, \"batch\": 32 }, \"model\": { \"bytes\": 8836743, \"sha256\": \"4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f\" }, \"split\": { \"query\": 1110, \"gallery\": 750, \"known\": 832, \"unknown\": 278 }, \"base\": { \"ranking\": { \"mAP\": 0.6565692724907637, \"Rank-1\": 0.631 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/image-layers.txt",
+            "excerpt": "0B /bin/sh -c #(nop) CMD [\"uvicorn\", \"app.api... 0B /bin/sh -c #(nop) EXPOSE 8000 0B /bin/sh -c #(nop) ENV MODEL_PATH=/srv/mode... 1.82MB /bin/sh -c #(nop) COPY dir:74364e73740a5e7... 1.02kB |1 PIP_SOURCE=offline /bin/sh -c python - ... 8.84MB /bin/sh -c #(nop) COPY dir:dce7c3e7ec969ee... 215MB |1 PIP_SOURCE=offline /bin/sh -c if [ \"$PI... 59.2MB /bin/sh -c  …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 800,
+        "state_tokens_used": 800,
+        "sequence_tokens": 882,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/audit/jury-path/evidence/R.log",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{\"threshold\": 0.49937235233589916, \"queries_with_candidates\": 882, \"queries_refused\": 228, \"refused_share\": 0.2054, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [6, 3, 0.3], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [1860, 512], \"embed_elapsed_s\": 310.841, \"rank_elapsed_s\": 1.73, \"total_elapsed_s\": 313.114, …",
+            "used_excerpt": "{\"threshold\": 0.49937235233589916, \"queries_with_candidates\": 882, \"queries_refused\": 228, \"refused_share\": 0.2054, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [6, 3, 0.3], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [1860, 512], \"embed_elapsed_s\": 310.841, \"rank_elapsed_s\": 1.73, \"total_elapsed_s\": 313.114, …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"threshold\": 0.49937235233589916, \"queries_with_candidates\": 1078, \"queries_refused\": 32, \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 32 …",
+            "used_excerpt": "{ \"threshold\": 0.49937235233589916, \"queries_with_candidates\": 1078, \"queries_refused\": 32, \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 32 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/metrics.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"environment\": { \"python\": \"3.13.15\", \"numpy\": \"2.5.3\", \"onnxruntime\": \"1.30.0\", \"threads\": 2, \"batch\": 32 }, \"model\": { \"bytes\": 8836743, \"sha256\": \"4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f\" }, \"split\": { \"query\": 1110, \"gallery\": 750, \"known\": 832, \"unknown\": 278 }, \"base\": { \"ranking\": { \"mAP\": 0.6565692724907637, \"Rank-1\": 0.631 …",
+            "used_excerpt": "{ \"environment\": { \"python\": \"3.13.15\", \"numpy\": \"2.5.3\", \"onnxruntime\": \"1.30.0\", \"threads\": 2, \"batch\": 32 }, \"model\": { \"bytes\": 8836743, \"sha256\": \"4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f\" }, \"split\": { \"query\": 1110, \"gallery\": 750, \"known\": 832, \"unknown\": 278 }, \"base\": { \"ranking\": { \"mAP\": 0.6565692724907637, \"Rank-1\": 0.631 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/image-layers.txt",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "0B /bin/sh -c #(nop) CMD [\"uvicorn\", \"app.api... 0B /bin/sh -c #(nop) EXPOSE 8000 0B /bin/sh -c #(nop) ENV MODEL_PATH=/srv/mode... 1.82MB /bin/sh -c #(nop) COPY dir:74364e73740a5e7... 1.02kB |1 PIP_SOURCE=offline /bin/sh -c python - ... 8.84MB /bin/sh -c #(nop) COPY dir:dce7c3e7ec969ee... 215MB |1 PIP_SOURCE=offline /bin/sh -c if [ \"$PI... 59.2MB /bin/sh -c  …",
+            "used_excerpt": "0B /bin/sh -c #(nop) CMD [\"uvicorn\", \"app.api... 0B /bin/sh -c #(nop) EXPOSE 8000 0B /bin/sh -c #(nop) ENV MODEL_PATH=/srv/mode... 1.82MB /bin/sh -c #(nop) COPY dir:74364e73740a5e7... 1.02kB |1 PIP_SOURCE=offline /bin/sh -c python - ... 8.84MB /bin/sh -c #(nop) COPY dir:dce7c3e7ec969ee... 215MB |1 PIP_SOURCE=offline /bin/sh -c if [ \"$PI... 59.2MB /bin/sh -c  …"
+          }
+        ],
+        "sequence_sha256": "2827c2bfd2d373e020f220094c937bf74af8fb1eb50e038e8d5692ea12635d23"
+      },
+      "preparation_ms": 20.2,
+      "process_cpu_ms": 145554.93,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.2635,
+            "confidence": 0.7365,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 882,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.2635,
+        "p_no": 0.7365,
+        "latency_ms": 76064.216
+      }
+    },
+    {
+      "id": "b06",
+      "kind": "b",
+      "holdout": true,
+      "claim": "Файл out/fr_final_val.json фиксирует итоговое качество модели FR на вал-сплите: mAP 0.31.",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:13:23Z",
+      "input_state": {
+        "claim": "Файл out/fr_final_val.json фиксирует итоговое качество модели FR на вал-сплите: mAP 0.31.",
+        "files": [
+          {
+            "path": "04-solution/postproc/out/fusion.json",
+            "excerpt": "…  \"mAP@10\": 0.4464966565552503, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 0.7, \"mAP\": 0.40681820827381787, \"Rank-1\": 0.36899038461538464, \"Rank-5\": 0.5384615384615384, \"mAP@10\": 0.39086677573005696, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 0.8, \"mAP\": 0.3289319057157851, \"Rank-1\": 0.2848557692307692, \"Rank-5\": 0.46875, \"mAP@10\": 0.3124862478378103, \" …"
+          },
+          {
+            "path": "04-solution/postproc/out/final_val.json",
+            "excerpt": "{ \"base\": { \"vectors\": \"208\", \"rerank_params\": null, \"rerank_seconds\": 0.0, \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"vectors\": \"208\", \"rerank_params\": [ 20, 6, 0.3 ], \"rerank_seconds\": 1.17, \"mAP\": 0.666638444987006, \"Rank-1\": 0.632211538461 …"
+          },
+          {
+            "path": "04-solution/postproc/out/tta_tune.json",
+            "excerpt": "{ \"set\": \"tune\", \"best\": { \"combo\": \"208+208f+256\", \"passes\": 3, \"mAP\": 0.596418834302865, \"Rank-1\": 0.546875, \"Rank-5\": 0.7355769230769231, \"mAP@10\": 0.5831144513761701, \"valid_queries\": 832 }, \"runs\": [ { \"combo\": \"208\", \"passes\": 1, \"mAP\": 0.5876891496603117, \"Rank-1\": 0.5420673076923077, \"Rank-5\": 0.7235576923076923, \"mAP@10\": 0.5737780528210216, \"valid_ …"
+          },
+          {
+            "path": "04-solution/postproc/out/s09_timing.json",
+            "excerpt": "{ \"loadavg_start\": [ \"2.28\", \"5.82\", \"8.70\" ], \"osnet_batch1_ms_per_obj\": { \"208\": 43.8, \"208f\": 41.1, \"256\": 49.0, \"288\": 54.3 }, \"osnet_config_ms\": { \"1 проход (208)\": 43.8, \"2 прохода (208+256)\": 92.8, \"3 прохода (208+208f+256)\": 133.9, \"4 прохода (208+256+288+208f)\": 188.2 }, \"rerank_1860\": { \"(20, 6, 0.3)\": { \"best_s\": 1.07, \"runs_s\": [ 1.27, 1.07, 1.14 …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 866,
+        "state_tokens_used": 866,
+        "sequence_tokens": 948,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/postproc/out/fusion.json",
+            "original_chars": 364,
+            "used_chars": 364,
+            "kept_original_chars": 364,
+            "cut": false,
+            "original_excerpt": "…  \"mAP@10\": 0.4464966565552503, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 0.7, \"mAP\": 0.40681820827381787, \"Rank-1\": 0.36899038461538464, \"Rank-5\": 0.5384615384615384, \"mAP@10\": 0.39086677573005696, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 0.8, \"mAP\": 0.3289319057157851, \"Rank-1\": 0.2848557692307692, \"Rank-5\": 0.46875, \"mAP@10\": 0.3124862478378103, \" …",
+            "used_excerpt": "…  \"mAP@10\": 0.4464966565552503, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 0.7, \"mAP\": 0.40681820827381787, \"Rank-1\": 0.36899038461538464, \"Rank-5\": 0.5384615384615384, \"mAP@10\": 0.39086677573005696, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 0.8, \"mAP\": 0.3289319057157851, \"Rank-1\": 0.2848557692307692, \"Rank-5\": 0.46875, \"mAP@10\": 0.3124862478378103, \" …"
+          },
+          {
+            "path": "04-solution/postproc/out/final_val.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"base\": { \"vectors\": \"208\", \"rerank_params\": null, \"rerank_seconds\": 0.0, \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"vectors\": \"208\", \"rerank_params\": [ 20, 6, 0.3 ], \"rerank_seconds\": 1.17, \"mAP\": 0.666638444987006, \"Rank-1\": 0.632211538461 …",
+            "used_excerpt": "{ \"base\": { \"vectors\": \"208\", \"rerank_params\": null, \"rerank_seconds\": 0.0, \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"vectors\": \"208\", \"rerank_params\": [ 20, 6, 0.3 ], \"rerank_seconds\": 1.17, \"mAP\": 0.666638444987006, \"Rank-1\": 0.632211538461 …"
+          },
+          {
+            "path": "04-solution/postproc/out/tta_tune.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"set\": \"tune\", \"best\": { \"combo\": \"208+208f+256\", \"passes\": 3, \"mAP\": 0.596418834302865, \"Rank-1\": 0.546875, \"Rank-5\": 0.7355769230769231, \"mAP@10\": 0.5831144513761701, \"valid_queries\": 832 }, \"runs\": [ { \"combo\": \"208\", \"passes\": 1, \"mAP\": 0.5876891496603117, \"Rank-1\": 0.5420673076923077, \"Rank-5\": 0.7235576923076923, \"mAP@10\": 0.5737780528210216, \"valid_ …",
+            "used_excerpt": "{ \"set\": \"tune\", \"best\": { \"combo\": \"208+208f+256\", \"passes\": 3, \"mAP\": 0.596418834302865, \"Rank-1\": 0.546875, \"Rank-5\": 0.7355769230769231, \"mAP@10\": 0.5831144513761701, \"valid_queries\": 832 }, \"runs\": [ { \"combo\": \"208\", \"passes\": 1, \"mAP\": 0.5876891496603117, \"Rank-1\": 0.5420673076923077, \"Rank-5\": 0.7235576923076923, \"mAP@10\": 0.5737780528210216, \"valid_ …"
+          },
+          {
+            "path": "04-solution/postproc/out/s09_timing.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"loadavg_start\": [ \"2.28\", \"5.82\", \"8.70\" ], \"osnet_batch1_ms_per_obj\": { \"208\": 43.8, \"208f\": 41.1, \"256\": 49.0, \"288\": 54.3 }, \"osnet_config_ms\": { \"1 проход (208)\": 43.8, \"2 прохода (208+256)\": 92.8, \"3 прохода (208+208f+256)\": 133.9, \"4 прохода (208+256+288+208f)\": 188.2 }, \"rerank_1860\": { \"(20, 6, 0.3)\": { \"best_s\": 1.07, \"runs_s\": [ 1.27, 1.07, 1.14 …",
+            "used_excerpt": "{ \"loadavg_start\": [ \"2.28\", \"5.82\", \"8.70\" ], \"osnet_batch1_ms_per_obj\": { \"208\": 43.8, \"208f\": 41.1, \"256\": 49.0, \"288\": 54.3 }, \"osnet_config_ms\": { \"1 проход (208)\": 43.8, \"2 прохода (208+256)\": 92.8, \"3 прохода (208+208f+256)\": 133.9, \"4 прохода (208+256+288+208f)\": 188.2 }, \"rerank_1860\": { \"(20, 6, 0.3)\": { \"best_s\": 1.07, \"runs_s\": [ 1.27, 1.07, 1.14 …"
+          }
+        ],
+        "sequence_sha256": "cd3402785707314650ba140fb8c0f3da8b49cbff2a42e845def164b31fd29b57"
+      },
+      "preparation_ms": 10.382,
+      "process_cpu_ms": 156436.852,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.2641,
+            "confidence": 0.7359,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 948,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.2641,
+        "p_no": 0.7359,
+        "latency_ms": 82078.927
+      }
+    },
+    {
+      "id": "b09",
+      "kind": "b",
+      "holdout": true,
+      "claim": "Файл out/lr_sweep.json содержит перебор скоростей обучения при дообучении ain_v2.",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:14:45Z",
+      "input_state": {
+        "claim": "Файл out/lr_sweep.json содержит перебор скоростей обучения при дообучении ain_v2.",
+        "files": [
+          {
+            "path": "04-solution/training/attempt-2/out/table_ainv2.json",
+            "excerpt": "{ \"ainv2\": { \"mAP\": 0.6641703877066983, \"Rank-1\": 0.6021634615384616, \"Rank-5\": 0.8353365384615384, \"mINP\": 0.6208063870144834, \"valid_queries\": 832 }, \"ainv2_no_camera_excl\": { \"mAP\": 0.8246603489393465, \"Rank-1\": 0.9651442307692307, \"Rank-5\": 0.9891826923076923, \"mINP\": 0.663215640098138, \"valid_queries\": 832 }, \"ainv2_rerank_6_3_0.3\": { \"mAP\": 0.700020044 …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/camera_diag.json",
+            "excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/timing_ainv2_query.json",
+            "excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 119.32, \"obj_per_s\": 9.3, \"ms_per_obj\": 107.5 }"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/val_gallery.ids",
+            "excerpt": "46c988eefbac489a80cbe8975086e6c3 05d9ddb9799143b49b6650a4a0b66cdb 9743703b56e0442786d2edcc2afc9063 6171986b4aa24f24a83bfc046a952033 b4afca198d5742ff936f88ca6dbf6066 45045370af73405dbeabd5b55f70be65 021b1f5e4f3d4ed4ad4e6aeb993977ed dceea955fdad4d9c9b816acecf3485e5 80d7334a8a7a426f9b18620ab7004ff1 d0f498e321f04791bda056261ff58ad3 679d0b1d23034073ac51357fed08bc …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 830,
+        "state_tokens_used": 830,
+        "sequence_tokens": 912,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/training/attempt-2/out/table_ainv2.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"ainv2\": { \"mAP\": 0.6641703877066983, \"Rank-1\": 0.6021634615384616, \"Rank-5\": 0.8353365384615384, \"mINP\": 0.6208063870144834, \"valid_queries\": 832 }, \"ainv2_no_camera_excl\": { \"mAP\": 0.8246603489393465, \"Rank-1\": 0.9651442307692307, \"Rank-5\": 0.9891826923076923, \"mINP\": 0.663215640098138, \"valid_queries\": 832 }, \"ainv2_rerank_6_3_0.3\": { \"mAP\": 0.700020044 …",
+            "used_excerpt": "{ \"ainv2\": { \"mAP\": 0.6641703877066983, \"Rank-1\": 0.6021634615384616, \"Rank-5\": 0.8353365384615384, \"mINP\": 0.6208063870144834, \"valid_queries\": 832 }, \"ainv2_no_camera_excl\": { \"mAP\": 0.8246603489393465, \"Rank-1\": 0.9651442307692307, \"Rank-5\": 0.9891826923076923, \"mINP\": 0.663215640098138, \"valid_queries\": 832 }, \"ainv2_rerank_6_3_0.3\": { \"mAP\": 0.700020044 …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/camera_diag.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …",
+            "used_excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/timing_ainv2_query.json",
+            "original_chars": 197,
+            "used_chars": 197,
+            "kept_original_chars": 197,
+            "cut": false,
+            "original_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 119.32, \"obj_per_s\": 9.3, \"ms_per_obj\": 107.5 }",
+            "used_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 119.32, \"obj_per_s\": 9.3, \"ms_per_obj\": 107.5 }"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/val_gallery.ids",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "46c988eefbac489a80cbe8975086e6c3 05d9ddb9799143b49b6650a4a0b66cdb 9743703b56e0442786d2edcc2afc9063 6171986b4aa24f24a83bfc046a952033 b4afca198d5742ff936f88ca6dbf6066 45045370af73405dbeabd5b55f70be65 021b1f5e4f3d4ed4ad4e6aeb993977ed dceea955fdad4d9c9b816acecf3485e5 80d7334a8a7a426f9b18620ab7004ff1 d0f498e321f04791bda056261ff58ad3 679d0b1d23034073ac51357fed08bc …",
+            "used_excerpt": "46c988eefbac489a80cbe8975086e6c3 05d9ddb9799143b49b6650a4a0b66cdb 9743703b56e0442786d2edcc2afc9063 6171986b4aa24f24a83bfc046a952033 b4afca198d5742ff936f88ca6dbf6066 45045370af73405dbeabd5b55f70be65 021b1f5e4f3d4ed4ad4e6aeb993977ed dceea955fdad4d9c9b816acecf3485e5 80d7334a8a7a426f9b18620ab7004ff1 d0f498e321f04791bda056261ff58ad3 679d0b1d23034073ac51357fed08bc …"
+          }
+        ],
+        "sequence_sha256": "d2f43390c34de04a3ea37a94cd3c5f5e10414af0fc866a75afb5513cdcb9269a"
+      },
+      "preparation_ms": 7.62,
+      "process_cpu_ms": 150237.619,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.3274,
+            "confidence": 0.6726,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 912,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.3274,
+        "p_no": 0.6726,
+        "latency_ms": 78779.567
+      }
+    },
+    {
+      "id": "c03",
+      "kind": "c",
+      "holdout": true,
+      "claim": "Файл calibration-headline.json хранит полный список отпечатков submission.csv и candidates.csv.",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:16:04Z",
+      "input_state": {
+        "claim": "Файл calibration-headline.json хранит полный список отпечатков submission.csv и candidates.csv.",
+        "files": [
+          {
+            "path": "04-solution/audit/jury-path/evidence/calibration-headline.json",
+            "excerpt": "{ \"rerank_threshold\": 0.49937235233589916, \"rerank_point\": { \"mode\": \"presence\", \"threshold\": 0.49937235233589916, \"tp\": 603, \"fp\": 62, \"fn\": 229, \"tn_unknown\": 216, \"fp_unknown\": 62, \"precision\": 0.9067669172932331, \"recall\": 0.7247596153846154, \"f1\": 0.8056112224448898, \"tnr\": 0.7769784172661871, \"auc_pr\": 0.921883867563915, \"auc_pr_trapezoid\": 0.921883867 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/metrics.json",
+            "excerpt": "… 0\": 1.0, \"1859\": 1.0 }, \"current_batch1_ms_per_object\": [ 175.55065865624897, 178.42825465626788 ], \"files\": { \"val/run_info.json\": { \"bytes\": 673, \"sha256\": \"cb28815363a3a442fdeef8e62bf0aaafdafe1ec9e27318a40b91dac02717c842\" }, \"val/candidates.csv\": { \"bytes\": 134476, \"sha256\": \"d20746ac2b3dd5c5b1274f6cbd95cd92626566f8c773ce7629eb3dda9579c11d\" }, \"val/submis …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+            "excerpt": "{ \"threshold\": 0.49937235233589916, \"queries_with_candidates\": 1078, \"queries_refused\": 32, \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 32 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/R.log",
+            "excerpt": "{\"threshold\": 0.49937235233589916, \"queries_with_candidates\": 882, \"queries_refused\": 228, \"refused_share\": 0.2054, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [6, 3, 0.3], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [1860, 512], \"embed_elapsed_s\": 310.841, \"rank_elapsed_s\": 1.73, \"total_elapsed_s\": 313.114, …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 779,
+        "state_tokens_used": 779,
+        "sequence_tokens": 861,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/audit/jury-path/evidence/calibration-headline.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"rerank_threshold\": 0.49937235233589916, \"rerank_point\": { \"mode\": \"presence\", \"threshold\": 0.49937235233589916, \"tp\": 603, \"fp\": 62, \"fn\": 229, \"tn_unknown\": 216, \"fp_unknown\": 62, \"precision\": 0.9067669172932331, \"recall\": 0.7247596153846154, \"f1\": 0.8056112224448898, \"tnr\": 0.7769784172661871, \"auc_pr\": 0.921883867563915, \"auc_pr_trapezoid\": 0.921883867 …",
+            "used_excerpt": "{ \"rerank_threshold\": 0.49937235233589916, \"rerank_point\": { \"mode\": \"presence\", \"threshold\": 0.49937235233589916, \"tp\": 603, \"fp\": 62, \"fn\": 229, \"tn_unknown\": 216, \"fp_unknown\": 62, \"precision\": 0.9067669172932331, \"recall\": 0.7247596153846154, \"f1\": 0.8056112224448898, \"tnr\": 0.7769784172661871, \"auc_pr\": 0.921883867563915, \"auc_pr_trapezoid\": 0.921883867 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/metrics.json",
+            "original_chars": 364,
+            "used_chars": 364,
+            "kept_original_chars": 364,
+            "cut": false,
+            "original_excerpt": "… 0\": 1.0, \"1859\": 1.0 }, \"current_batch1_ms_per_object\": [ 175.55065865624897, 178.42825465626788 ], \"files\": { \"val/run_info.json\": { \"bytes\": 673, \"sha256\": \"cb28815363a3a442fdeef8e62bf0aaafdafe1ec9e27318a40b91dac02717c842\" }, \"val/candidates.csv\": { \"bytes\": 134476, \"sha256\": \"d20746ac2b3dd5c5b1274f6cbd95cd92626566f8c773ce7629eb3dda9579c11d\" }, \"val/submis …",
+            "used_excerpt": "… 0\": 1.0, \"1859\": 1.0 }, \"current_batch1_ms_per_object\": [ 175.55065865624897, 178.42825465626788 ], \"files\": { \"val/run_info.json\": { \"bytes\": 673, \"sha256\": \"cb28815363a3a442fdeef8e62bf0aaafdafe1ec9e27318a40b91dac02717c842\" }, \"val/candidates.csv\": { \"bytes\": 134476, \"sha256\": \"d20746ac2b3dd5c5b1274f6cbd95cd92626566f8c773ce7629eb3dda9579c11d\" }, \"val/submis …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/run_info.batch-test.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"threshold\": 0.49937235233589916, \"queries_with_candidates\": 1078, \"queries_refused\": 32, \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 32 …",
+            "used_excerpt": "{ \"threshold\": 0.49937235233589916, \"queries_with_candidates\": 1078, \"queries_refused\": 32, \"refused_share\": 0.0288, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [ 6, 3, 0.3 ], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [ 1860, 512 ], \"embed_elapsed_s\": 317.744, \"rank_elapsed_s\": 3.307, \"total_elapsed_s\": 32 …"
+          },
+          {
+            "path": "04-solution/audit/jury-path/evidence/R.log",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{\"threshold\": 0.49937235233589916, \"queries_with_candidates\": 882, \"queries_refused\": 228, \"refused_share\": 0.2054, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [6, 3, 0.3], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [1860, 512], \"embed_elapsed_s\": 310.841, \"rank_elapsed_s\": 1.73, \"total_elapsed_s\": 313.114, …",
+            "used_excerpt": "{\"threshold\": 0.49937235233589916, \"queries_with_candidates\": 882, \"queries_refused\": 228, \"refused_share\": 0.2054, \"rerank\": true, \"score_scale\": \"rerank_confidence_1_minus_distance\", \"rerank_params\": [6, 3, 0.3], \"queries\": 1110, \"gallery\": 750, \"embeddings_shape\": [1860, 512], \"embed_elapsed_s\": 310.841, \"rank_elapsed_s\": 1.73, \"total_elapsed_s\": 313.114, …"
+          }
+        ],
+        "sequence_sha256": "16720d5dbec55cccb9d86944ed0111a34f9b87ce7ea32f60c20f6adf926dbc82"
+      },
+      "preparation_ms": 7.09,
+      "process_cpu_ms": 140007.406,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.3879,
+            "confidence": 0.6121,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 861,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.3879,
+        "p_no": 0.6121,
+        "latency_ms": 73468.827
+      }
+    },
+    {
+      "id": "c06",
+      "kind": "c",
+      "holdout": true,
+      "claim": "Файл s01_verify_baseline.json фиксирует итоговое качество TTA-ансамбля на подборе (mAP около 0.596).",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:17:17Z",
+      "input_state": {
+        "claim": "Файл s01_verify_baseline.json фиксирует итоговое качество TTA-ансамбля на подборе (mAP около 0.596).",
+        "files": [
+          {
+            "path": "04-solution/postproc/out/s01_verify_baseline.json",
+            "excerpt": "{ \"base\": { \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"mAP\": 0.666638444987006, \"Rank-1\": 0.6322115384615384, \"Rank-5\": 0.7764423076923077, \"mAP@10\": 0.6548916361416361, \"valid_queries\": 832, \"rerank_seconds\": 1.4 }, \"rerank_critique\": { \"mAP\" …"
+          },
+          {
+            "path": "04-solution/postproc/out/fusion.json",
+            "excerpt": "… 574472784024817, \"Rank-1\": 0.22596153846153846, \"Rank-5\": 0.3713942307692308, \"mAP@10\": 0.24000673299501424, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 1.0, \"mAP\": 0.18888139559191755, \"Rank-1\": 0.1622596153846154, \"Rank-5\": 0.2764423076923077, \"mAP@10\": 0.17241284467846968, \"valid_queries\": 832 }, { \"base\": \"TTA\", \"w\": 0.0, \"mAP\": 0.596418834302865, \"Ran …"
+          },
+          {
+            "path": "04-solution/postproc/out/fr_batch1_timing.json",
+            "excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 40, \"batch\": 1, \"threads\": 8, \"elapsed_s\": 6.4, \"s_per_obj\": 0.161 }"
+          },
+          {
+            "path": "04-solution/postproc/out/halves.json",
+            "excerpt": "… P\": 0.7347705039995895, \"Rank-1\": 0.7175925925925926, \"Rank-5\": 0.8564814814814815, \"mAP@10\": 0.7239891056731333, \"valid_queries\": 432 }, \"tuned_mAP_on_tune_half\": 0.7694267835734379, \"tuned_R1_on_tune_half\": 0.735, \"tuned_on_test_half\": { \"mAP\": 0.7651540877853104, \"Rank-1\": 0.75, \"Rank-5\": 0.8541666666666666, \"mAP@10\": 0.7551655735596708, \"valid_queries\":  …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 769,
+        "state_tokens_used": 769,
+        "sequence_tokens": 851,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/postproc/out/s01_verify_baseline.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"base\": { \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"mAP\": 0.666638444987006, \"Rank-1\": 0.6322115384615384, \"Rank-5\": 0.7764423076923077, \"mAP@10\": 0.6548916361416361, \"valid_queries\": 832, \"rerank_seconds\": 1.4 }, \"rerank_critique\": { \"mAP\" …",
+            "used_excerpt": "{ \"base\": { \"mAP\": 0.6565692724907637, \"Rank-1\": 0.6310096153846154, \"Rank-5\": 0.7872596153846154, \"mAP@10\": 0.6451091746794871, \"valid_queries\": 832 }, \"rerank_paper\": { \"mAP\": 0.666638444987006, \"Rank-1\": 0.6322115384615384, \"Rank-5\": 0.7764423076923077, \"mAP@10\": 0.6548916361416361, \"valid_queries\": 832, \"rerank_seconds\": 1.4 }, \"rerank_critique\": { \"mAP\" …"
+          },
+          {
+            "path": "04-solution/postproc/out/fusion.json",
+            "original_chars": 364,
+            "used_chars": 364,
+            "kept_original_chars": 364,
+            "cut": false,
+            "original_excerpt": "… 574472784024817, \"Rank-1\": 0.22596153846153846, \"Rank-5\": 0.3713942307692308, \"mAP@10\": 0.24000673299501424, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 1.0, \"mAP\": 0.18888139559191755, \"Rank-1\": 0.1622596153846154, \"Rank-5\": 0.2764423076923077, \"mAP@10\": 0.17241284467846968, \"valid_queries\": 832 }, { \"base\": \"TTA\", \"w\": 0.0, \"mAP\": 0.596418834302865, \"Ran …",
+            "used_excerpt": "… 574472784024817, \"Rank-1\": 0.22596153846153846, \"Rank-5\": 0.3713942307692308, \"mAP@10\": 0.24000673299501424, \"valid_queries\": 832 }, { \"base\": \"208\", \"w\": 1.0, \"mAP\": 0.18888139559191755, \"Rank-1\": 0.1622596153846154, \"Rank-5\": 0.2764423076923077, \"mAP@10\": 0.17241284467846968, \"valid_queries\": 832 }, { \"base\": \"TTA\", \"w\": 0.0, \"mAP\": 0.596418834302865, \"Ran …"
+          },
+          {
+            "path": "04-solution/postproc/out/fr_batch1_timing.json",
+            "original_chars": 174,
+            "used_chars": 174,
+            "kept_original_chars": 174,
+            "cut": false,
+            "original_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 40, \"batch\": 1, \"threads\": 8, \"elapsed_s\": 6.4, \"s_per_obj\": 0.161 }",
+            "used_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 40, \"batch\": 1, \"threads\": 8, \"elapsed_s\": 6.4, \"s_per_obj\": 0.161 }"
+          },
+          {
+            "path": "04-solution/postproc/out/halves.json",
+            "original_chars": 364,
+            "used_chars": 364,
+            "kept_original_chars": 364,
+            "cut": false,
+            "original_excerpt": "… P\": 0.7347705039995895, \"Rank-1\": 0.7175925925925926, \"Rank-5\": 0.8564814814814815, \"mAP@10\": 0.7239891056731333, \"valid_queries\": 432 }, \"tuned_mAP_on_tune_half\": 0.7694267835734379, \"tuned_R1_on_tune_half\": 0.735, \"tuned_on_test_half\": { \"mAP\": 0.7651540877853104, \"Rank-1\": 0.75, \"Rank-5\": 0.8541666666666666, \"mAP@10\": 0.7551655735596708, \"valid_queries\":  …",
+            "used_excerpt": "… P\": 0.7347705039995895, \"Rank-1\": 0.7175925925925926, \"Rank-5\": 0.8564814814814815, \"mAP@10\": 0.7239891056731333, \"valid_queries\": 432 }, \"tuned_mAP_on_tune_half\": 0.7694267835734379, \"tuned_R1_on_tune_half\": 0.735, \"tuned_on_test_half\": { \"mAP\": 0.7651540877853104, \"Rank-1\": 0.75, \"Rank-5\": 0.8541666666666666, \"mAP@10\": 0.7551655735596708, \"valid_queries\":  …"
+          }
+        ],
+        "sequence_sha256": "3e64b8b21b8c573eb3e90559eb99adb3219c6cdd44160814133226d7e12910a7"
+      },
+      "preparation_ms": 6.355,
+      "process_cpu_ms": 136009.349,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.3483,
+            "confidence": 0.6517,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 851,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.3483,
+        "p_no": 0.6517,
+        "latency_ms": 72011.517
+      }
+    },
+    {
+      "id": "c09",
+      "kind": "c",
+      "holdout": true,
+      "claim": "Файл timing_ainv1_query.json фиксирует метрики качества запросных векторов ainv1 (mAP и Rank-1).",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:18:29Z",
+      "input_state": {
+        "claim": "Файл timing_ainv1_query.json фиксирует метрики качества запросных векторов ainv1 (mAP и Rank-1).",
+        "files": [
+          {
+            "path": "04-solution/training/attempt-2/out/timing_ainv1_query.json",
+            "excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 41.01, \"obj_per_s\": 27.07, \"ms_per_obj\": 36.95 }"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/timing_ainv1_gallery.json",
+            "excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_gallery.csv\", \"rows\": 750, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 27.353, \"obj_per_s\": 27.42, \"ms_per_obj\": 36.47 }"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/camera_diag.json",
+            "excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/val_query_ainv1.ids",
+            "excerpt": "64a7b342e5654ac38e16ab1cc2d58037 623fc4c29e1149768b83ba2c4d014b4d b8a30a520bed491bb3147208519ae8f6 4234d7c91f814372a8da8633f9ed7ba7 ada9e89560ca4022b90625ce1239a5b5 fb2ef7a6ce5c4616b1753994854259d8 fbaef4353dc44881b42d894235ee09d2 d12c1e28e5314902a4d12ec257a077d2 d9c53691e52b48d89c8a084a2b2b8d1d a20d7ebd03784407be6c31012611177d 189dc7cb80634563b726c340433064 …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 748,
+        "state_tokens_used": 748,
+        "sequence_tokens": 830,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "04-solution/training/attempt-2/out/timing_ainv1_query.json",
+            "original_chars": 198,
+            "used_chars": 198,
+            "kept_original_chars": 198,
+            "cut": false,
+            "original_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 41.01, \"obj_per_s\": 27.07, \"ms_per_obj\": 36.95 }",
+            "used_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_query.csv\", \"rows\": 1110, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 41.01, \"obj_per_s\": 27.07, \"ms_per_obj\": 36.95 }"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/timing_ainv1_gallery.json",
+            "original_chars": 200,
+            "used_chars": 200,
+            "kept_original_chars": 200,
+            "cut": false,
+            "original_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_gallery.csv\", \"rows\": 750, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 27.353, \"obj_per_s\": 27.42, \"ms_per_obj\": 36.47 }",
+            "used_excerpt": "{ \"csv\": \"/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/split/files/val_gallery.csv\", \"rows\": 750, \"dim\": 512, \"batch\": 16, \"elapsed_s\": 27.353, \"obj_per_s\": 27.42, \"ms_per_obj\": 36.47 }"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/camera_diag.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …",
+            "used_excerpt": "{ \"osnet\": { \"F2_CH_cameras\": 2.6105, \"F2_CH_permuted_mean\": 1.0053, \"F1_camera_oracle\": { \"mAP\": 0.0164, \"Rank-1\": 0.0024 } }, \"ainv1\": { \"F2_CH_cameras\": 2.4437, \"F2_CH_permuted_mean\": 0.9713, \"F1_camera_oracle\": { \"mAP\": 0.0139, \"Rank-1\": 0.0024 } }, \"ainv2\": { \"F2_CH_cameras\": 2.3692, \"F2_CH_permuted_mean\": 0.9935, \"F1_camera_oracle\": { \"mAP\": 0.0228, \"R …"
+          },
+          {
+            "path": "04-solution/training/attempt-2/out/val_query_ainv1.ids",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "64a7b342e5654ac38e16ab1cc2d58037 623fc4c29e1149768b83ba2c4d014b4d b8a30a520bed491bb3147208519ae8f6 4234d7c91f814372a8da8633f9ed7ba7 ada9e89560ca4022b90625ce1239a5b5 fb2ef7a6ce5c4616b1753994854259d8 fbaef4353dc44881b42d894235ee09d2 d12c1e28e5314902a4d12ec257a077d2 d9c53691e52b48d89c8a084a2b2b8d1d a20d7ebd03784407be6c31012611177d 189dc7cb80634563b726c340433064 …",
+            "used_excerpt": "64a7b342e5654ac38e16ab1cc2d58037 623fc4c29e1149768b83ba2c4d014b4d b8a30a520bed491bb3147208519ae8f6 4234d7c91f814372a8da8633f9ed7ba7 ada9e89560ca4022b90625ce1239a5b5 fb2ef7a6ce5c4616b1753994854259d8 fbaef4353dc44881b42d894235ee09d2 d12c1e28e5314902a4d12ec257a077d2 d9c53691e52b48d89c8a084a2b2b8d1d a20d7ebd03784407be6c31012611177d 189dc7cb80634563b726c340433064 …"
+          }
+        ],
+        "sequence_sha256": "cd8a47f3ea5e575bab24cd6830d8bd10b0478c5266a9ad5153886e5842d65686"
+      },
+      "preparation_ms": 6.605,
+      "process_cpu_ms": 134917.194,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.5345,
+            "confidence": 0.5345,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 830,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "да",
+        "p_yes": 0.5345,
+        "p_no": 0.4655,
+        "latency_ms": 72437.992
+      }
+    },
+    {
+      "id": "c10",
+      "kind": "c",
+      "holdout": true,
+      "claim": "Файл local-cues-SOURCES.tsv — это список источников по дискриминантному отбеливанию (whitening).",
+      "gold_yes": false,
+      "gold_choice": null,
+      "prompt": "en_strict",
+      "started_utc": "2026-09-21T12:19:42Z",
+      "input_state": {
+        "claim": "Файл local-cues-SOURCES.tsv — это список источников по дискриминантному отбеливанию (whitening).",
+        "files": [
+          {
+            "path": "02-research/ideas-08/sources/local-cues-SOURCES.tsv",
+            "excerpt": "pushing_limits_2019 https://openaccess.thecvf.com/content_CVPRW_2019/papers/AI%20City/Ayala-Acevedo_Vehicle_Re-Identification_Pushing_the_limits_of_re-identification_CVPRW_2019_paper.pdf spatial_verification_2019 https://openaccess.thecvf.com/content_CVPRW_2019/papers/AI%20City/Nguyen_Vehicle_Re-identification_with_Learned_Representation_and_Spatial_Verifica …"
+          },
+          {
+            "path": "02-research/ideas-08/arithmetic-checks.json",
+            "excerpt": "{ \"diagnostic_query_ceiling_832_of_1110\": 0.7495495495495496, \"map_gap_using_rounded_baseline\": 0.1060000000000001, \"required_AP_sum_gain_if_832_queries\": 88.19200000000008, \"illustration_84_rank4_to1_single_positive\": 0.07572115384615384, \"two_repaired_queries_max_delta\": 0.002403846153846154, \"graph_750_square_float32_MiB\": 2.1457672119140625, \"graph_1860_ …"
+          },
+          {
+            "path": "02-research/ideas-08/README.md",
+            "excerpt": "# Идеи сверх отвергнутого: что ещё может дать прирост Исследование от 16.09.2026. Исполнитель работал по [BRIEF.md](BRIEF.md), первоисточники проверял по таблицам в самих статьях, PDF сохранены вне git (ссылки — в `sources/`). ## Главное, что нашлось **Метрика не определена однозначно, и от этого зависит потолок.** ТЗ говорит: mAP «по всем запросам». Если за …"
+          },
+          {
+            "path": "02-research/ideas-08/gallery-evidence.md",
+            "excerpt": "# Структура галереи: проверенные надбавки к k-reciprocal Исследовательская записка, 2026-09-16. Прочитаны `BRIEF.md` и `context-errors.md`; модели и данные проекта не запускались. Таблицы сверены по тексту PDF и визуально. Все разности ниже — **абсолютные процентные пункты**, не относительный процент. Нужный нам результат — улучшение относительно уже работаю …"
+          }
+        ]
+      },
+      "question": {
+        "type": "noul",
+        "instructions": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+      },
+      "token_audit": {
+        "head_tokens": 60,
+        "head_budget": 238,
+        "state_budget": 942,
+        "state_tokens_original": 788,
+        "state_tokens_used": 788,
+        "sequence_tokens": 870,
+        "uniform_character_cap": null,
+        "truncated": false,
+        "cuts": [
+          {
+            "path": "02-research/ideas-08/sources/local-cues-SOURCES.tsv",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "pushing_limits_2019 https://openaccess.thecvf.com/content_CVPRW_2019/papers/AI%20City/Ayala-Acevedo_Vehicle_Re-Identification_Pushing_the_limits_of_re-identification_CVPRW_2019_paper.pdf spatial_verification_2019 https://openaccess.thecvf.com/content_CVPRW_2019/papers/AI%20City/Nguyen_Vehicle_Re-identification_with_Learned_Representation_and_Spatial_Verifica …",
+            "used_excerpt": "pushing_limits_2019 https://openaccess.thecvf.com/content_CVPRW_2019/papers/AI%20City/Ayala-Acevedo_Vehicle_Re-Identification_Pushing_the_limits_of_re-identification_CVPRW_2019_paper.pdf spatial_verification_2019 https://openaccess.thecvf.com/content_CVPRW_2019/papers/AI%20City/Nguyen_Vehicle_Re-identification_with_Learned_Representation_and_Spatial_Verifica …"
+          },
+          {
+            "path": "02-research/ideas-08/arithmetic-checks.json",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "{ \"diagnostic_query_ceiling_832_of_1110\": 0.7495495495495496, \"map_gap_using_rounded_baseline\": 0.1060000000000001, \"required_AP_sum_gain_if_832_queries\": 88.19200000000008, \"illustration_84_rank4_to1_single_positive\": 0.07572115384615384, \"two_repaired_queries_max_delta\": 0.002403846153846154, \"graph_750_square_float32_MiB\": 2.1457672119140625, \"graph_1860_ …",
+            "used_excerpt": "{ \"diagnostic_query_ceiling_832_of_1110\": 0.7495495495495496, \"map_gap_using_rounded_baseline\": 0.1060000000000001, \"required_AP_sum_gain_if_832_queries\": 88.19200000000008, \"illustration_84_rank4_to1_single_positive\": 0.07572115384615384, \"two_repaired_queries_max_delta\": 0.002403846153846154, \"graph_750_square_float32_MiB\": 2.1457672119140625, \"graph_1860_ …"
+          },
+          {
+            "path": "02-research/ideas-08/README.md",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "# Идеи сверх отвергнутого: что ещё может дать прирост Исследование от 16.09.2026. Исполнитель работал по [BRIEF.md](BRIEF.md), первоисточники проверял по таблицам в самих статьях, PDF сохранены вне git (ссылки — в `sources/`). ## Главное, что нашлось **Метрика не определена однозначно, и от этого зависит потолок.** ТЗ говорит: mAP «по всем запросам». Если за …",
+            "used_excerpt": "# Идеи сверх отвергнутого: что ещё может дать прирост Исследование от 16.09.2026. Исполнитель работал по [BRIEF.md](BRIEF.md), первоисточники проверял по таблицам в самих статьях, PDF сохранены вне git (ссылки — в `sources/`). ## Главное, что нашлось **Метрика не определена однозначно, и от этого зависит потолок.** ТЗ говорит: mAP «по всем запросам». Если за …"
+          },
+          {
+            "path": "02-research/ideas-08/gallery-evidence.md",
+            "original_chars": 362,
+            "used_chars": 362,
+            "kept_original_chars": 362,
+            "cut": false,
+            "original_excerpt": "# Структура галереи: проверенные надбавки к k-reciprocal Исследовательская записка, 2026-09-16. Прочитаны `BRIEF.md` и `context-errors.md`; модели и данные проекта не запускались. Таблицы сверены по тексту PDF и визуально. Все разности ниже — **абсолютные процентные пункты**, не относительный процент. Нужный нам результат — улучшение относительно уже работаю …",
+            "used_excerpt": "# Структура галереи: проверенные надбавки к k-reciprocal Исследовательская записка, 2026-09-16. Прочитаны `BRIEF.md` и `context-errors.md`; модели и данные проекта не запускались. Таблицы сверены по тексту PDF и визуально. Все разности ниже — **абсолютные процентные пункты**, не относительный процент. Нужный нам результат — улучшение относительно уже работаю …"
+          }
+        ],
+        "sequence_sha256": "bbe9052045718a1f6434a7227ab8df7eb67965aa578749f2bc102ac44771b960"
+      },
+      "preparation_ms": 8.343,
+      "process_cpu_ms": 140910.809,
+      "raw": {
+        "model": "laya-rl-agent",
+        "answers": {
+          "supported": {
+            "type": "noul",
+            "noul": 0.3524,
+            "confidence": 0.6476,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 870,
+          "output_tokens": 0
+        },
+        "routing": {
+          "model": "typed-decisions",
+          "repo": "convaiinnovations/laya/typed-decisions",
+          "reason": "explicit model='typed-decisions'",
+          "detection": null,
+          "workflow": null
+        }
+      },
+      "noul": {
+        "type": "noul",
+        "answer": "нет",
+        "p_yes": 0.3524,
+        "p_no": 0.6476,
+        "latency_ms": 74881.322
+      }
+    }
+  ]
+}

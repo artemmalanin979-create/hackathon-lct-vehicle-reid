@@ -1,0 +1,201 @@
+{
+  "utc": "2026-09-21T11:41:20Z",
+  "prompt": "en_strict",
+  "threshold": 0.5,
+  "rule": "Highest dev accuracy, then fewest FP, then lowest dev ECE, then original prompt order. No threshold fitting or temperature fitting.",
+  "dev_summaries": {
+    "en_simple": {
+      "n_items": 20,
+      "noul": {
+        "accuracy": 0.65,
+        "correct": 13,
+        "fn": [
+          "a01",
+          "a02",
+          "a04",
+          "a05",
+          "a07",
+          "a08",
+          "a10"
+        ],
+        "fp": []
+      },
+      "ece_noul": 0.0477,
+      "ece_bins": [
+        {
+          "bin": 5,
+          "n": 2,
+          "mean_confidence": 0.52135,
+          "accuracy": 0.5
+        },
+        {
+          "bin": 6,
+          "n": 7,
+          "mean_confidence": 0.6706857142857142,
+          "accuracy": 0.5714285714285714
+        },
+        {
+          "bin": 7,
+          "n": 11,
+          "mean_confidence": 0.7469272727272728,
+          "accuracy": 0.7272727272727273
+        }
+      ],
+      "latency_ms": {
+        "noul": {
+          "p50": 73882.353,
+          "p95": 83792.63339999999,
+          "max": 84728.277
+        }
+      },
+      "by_kind": {
+        "a": {
+          "n": 7,
+          "yes": 0
+        },
+        "b": {
+          "n": 7,
+          "yes": 0
+        },
+        "c": {
+          "n": 6,
+          "yes": 0
+        }
+      },
+      "truncated_ids": []
+    },
+    "ru_simple": {
+      "n_items": 20,
+      "noul": {
+        "accuracy": 0.6,
+        "correct": 12,
+        "fn": [
+          "a01",
+          "a02",
+          "a04",
+          "a05",
+          "a07",
+          "a08",
+          "a10"
+        ],
+        "fp": [
+          "c01"
+        ]
+      },
+      "ece_noul": 0.094,
+      "ece_bins": [
+        {
+          "bin": 5,
+          "n": 13,
+          "mean_confidence": 0.5400846153846154,
+          "accuracy": 0.5384615384615384
+        },
+        {
+          "bin": 6,
+          "n": 6,
+          "mean_confidence": 0.6430166666666667,
+          "accuracy": 0.8333333333333334
+        },
+        {
+          "bin": 7,
+          "n": 1,
+          "mean_confidence": 0.7177,
+          "accuracy": 0.0
+        }
+      ],
+      "latency_ms": {
+        "noul": {
+          "p50": 76651.02100000001,
+          "p95": 86931.3574,
+          "max": 89885.39
+        }
+      },
+      "by_kind": {
+        "a": {
+          "n": 7,
+          "yes": 0
+        },
+        "b": {
+          "n": 7,
+          "yes": 0
+        },
+        "c": {
+          "n": 6,
+          "yes": 1
+        }
+      },
+      "truncated_ids": [
+        "c07"
+      ]
+    },
+    "en_strict": {
+      "n_items": 20,
+      "noul": {
+        "accuracy": 0.65,
+        "correct": 13,
+        "fn": [
+          "a01",
+          "a02",
+          "a04",
+          "a05",
+          "a07",
+          "a08",
+          "a10"
+        ],
+        "fp": []
+      },
+      "ece_noul": 0.0471,
+      "ece_bins": [
+        {
+          "bin": 5,
+          "n": 3,
+          "mean_confidence": 0.5592666666666667,
+          "accuracy": 0.3333333333333333
+        },
+        {
+          "bin": 6,
+          "n": 9,
+          "mean_confidence": 0.6501444444444444,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "bin": 7,
+          "n": 8,
+          "mean_confidence": 0.7355,
+          "accuracy": 0.75
+        }
+      ],
+      "latency_ms": {
+        "noul": {
+          "p50": 77719.337,
+          "p95": 95313.55055,
+          "max": 99966.414
+        }
+      },
+      "by_kind": {
+        "a": {
+          "n": 7,
+          "yes": 0
+        },
+        "b": {
+          "n": 7,
+          "yes": 0
+        },
+        "c": {
+          "n": 6,
+          "yes": 0
+        }
+      },
+      "truncated_ids": [
+        "c07"
+      ]
+    }
+  },
+  "frozen_files": {
+    "protocol.json": "d88f55986550a1e1c07029b431d42d31a8fc2ca768387480a03c2399451cc40f",
+    "scripts/run_laya.py": "72e2f269e41cd545f3bdc3af39e53272eae93db0ef5f87414ba8dd11a646a040",
+    "scripts/metrics.py": "bbb3e3f4cab4614527dd0a9da071508cb9e4ae5f7ea9d1e3acb91270d335ed0b",
+    "dev_claims_en.json": "97ae1c27cdbc974b6c3227c747ade0746626064b7c0db13da108566c054db509"
+  },
+  "holdout_predictions_so_far": 0
+}

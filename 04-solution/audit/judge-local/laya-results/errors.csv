@@ -1,0 +1,17 @@
+model,split,id,error,p_yes,claim,gold_source,input_truncated
+Laya typed-decisions,dev,a01,FN,0.3613,"Калибровка обоих порогов прошла 185 прямых сверок, максимальная абсолютная ошибка составила 0.0.",04-solution/audit/jury-path/evidence/calibration-verification-summary.json,False
+Laya typed-decisions,dev,a02,FN,0.3475,"Пакетный прогон записал: из 1110 запросов 1078 получили кандидатов и 32 отказались; форма эмбеддингов (1860, 512); извлечение заняло 317.744 с.",04-solution/audit/jury-path/evidence/run_info.batch-test.json,False
+Laya typed-decisions,dev,a04,FN,0.2765,"Переранжирование с параметрами (6,3,0.3) на базовых векторах 208 даёт mAP 0.69366 и Rank-1 0.66346 на вал-сплите.",04-solution/postproc/out/final_val.json,False
+Laya typed-decisions,dev,a05,FN,0.4569,"Лучшая TTA-комбинация на протоколе подбора — 208+208f+256, три прохода, mAP 0.59642.",04-solution/postproc/out/tta_tune.json,False
+Laya typed-decisions,dev,a07,FN,0.2514,"Дообученные веса ain_v2 с переранжированием (6,3,0.3) дают mAP 0.70002 и Rank-1 0.64904.",04-solution/training/attempt-2/out/table_ainv2.json,False
+Laya typed-decisions,dev,a08,FN,0.3436,"Попарный бутстрэп osnet против ainv1: разница mAP 0.18979, 95% доверительный интервал [0.16623; 0.21405], двусторонний p равен 0.0.",04-solution/training/attempt-2/out/boot_ainv1.json,False
+Laya typed-decisions,dev,a10,FN,0.403,Источник с именем whitening.pdf ведёт на https://arxiv.org/pdf/1711.02512.,02-research/ideas-08/sources/metric-SOURCES.tsv,False
+Qwen2.5-3B Q4_K_M,dev,a07,FN,0.3206,"Дообученные веса ain_v2 с переранжированием (6,3,0.3) дают mAP 0.70002 и Rank-1 0.64904.",04-solution/training/attempt-2/out/table_ainv2.json,False
+Qwen2.5-3B Q4_K_M,dev,a10,FN,0.493,Источник с именем whitening.pdf ведёт на https://arxiv.org/pdf/1711.02512.,02-research/ideas-08/sources/metric-SOURCES.tsv,False
+Qwen2.5-3B Q4_K_M,dev,c04,FP,0.735,Файл fusion.json фиксирует лучшую TTA-комбинацию (208+208f+256) по протоколу подбора.,,False
+Laya typed-decisions,holdout,a03,FN,0.4656,Мой повторный прогон из чистого клона дал submission.csv с SHA-256 fdf7aaae123b0858e372341340eb8f87dd59d06cd4d74e5d60a7f90489914eba.,04-solution/audit/jury-path/evidence/sha256-my-run.txt,False
+Laya typed-decisions,holdout,a06,FN,0.4175,"Измерение скорости: базовая модель при одном проходе (208) даёт 43.8 мс/объект, конфигурация из трёх проходов (208+208f+256) — 133.9 мс/объект.",04-solution/postproc/out/s09_timing.json,False
+Laya typed-decisions,holdout,a09,FN,0.2518,Диагностика утечки камер: для ainv2 статистика F2_CH_cameras равна 2.3692 против ~1.0 на перемешанных метках; камерный оракул F1 даёт mAP 0.0228.,04-solution/training/attempt-2/out/camera_diag.json,False
+Laya typed-decisions,holdout,c09,FP,0.5345,Файл timing_ainv1_query.json фиксирует метрики качества запросных векторов ainv1 (mAP и Rank-1).,,False
+Qwen2.5-3B Q4_K_M,holdout,c06,FP,0.9478,Файл s01_verify_baseline.json фиксирует итоговое качество TTA-ансамбля на подборе (mAP около 0.596).,,False
+Qwen2.5-3B Q4_K_M,holdout,c09,FP,0.9215,Файл timing_ainv1_query.json фиксирует метрики качества запросных векторов ainv1 (mAP и Rank-1).,,False

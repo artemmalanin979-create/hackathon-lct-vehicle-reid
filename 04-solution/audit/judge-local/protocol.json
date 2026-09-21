@@ -1,0 +1,28 @@
+{
+  "dataset_sha256": "f11de14e7c85de187feb0a088e53cab74ab1d2017fec4bad48ab31ccb8ef345a",
+  "model_repo": "convaiinnovations/laya-typed-decisions",
+  "model_revision": "f9ab0b228f0fc0f14d873dbc99038f135c2da1b2",
+  "weights_sha256": "4fa56de72383a9d3efa9cfa78955733c81b9fc8067a587ca4beb82c78107a24e",
+  "device": "cpu",
+  "threads": 2,
+  "interop_threads": 1,
+  "threshold": 0.5,
+  "tie_answer": false,
+  "question_type": "noul",
+  "max_len": 1024,
+  "prompt_order": ["en_simple", "ru_simple", "en_strict"],
+  "instructions": {
+    "en_simple": "Does at least one listed evidence file support the report claim? Check whether the content supports the claim and refers to the correct file, method or experiment. Do not calculate or verify numerical results.",
+    "ru_simple": "Подтверждает ли хотя бы один файл evidence утверждение? Если назван файл, нужен именно он. Сверяй смысл и тему, не пересчитывай числа.",
+    "en_strict": "Is the report claim supported by a provided evidence file? The claimed file must exist among the candidates. A file about a different method, experiment or artifact does not support the claim, even if numbers or words overlap. Match paraphrases. Do not compute or verify numerical results."
+  },
+  "selection": "Highest dev accuracy, then fewest FP, then lowest dev ECE, then original prompt order. No threshold fitting or temperature fitting.",
+  "state_format": "JSON with claim then files; no id, kind, report, gold labels or split in model inputs.",
+  "truncation": "Keep claim, all file paths and original order. If required, apply the largest uniform character cap to excerpts that fits the actual SDK token budget. Append an ellipsis to cut excerpts. Record complete original and used states, per-file cuts and actual sequence length. No gold-dependent selection.",
+  "numbers": "Original numbers are retained verbatim as factual identifiers to preserve the corpus. No arithmetic questions, recalculation or new numeric truth assessment is performed.",
+  "warmup": "One synthetic neutral evidence example after each model load; never a holdout item.",
+  "holdout": "Exactly one prediction for each of the 10 frozen holdout items, after writing selection.json. Atomic started marker prevents any rerun in the result directory.",
+  "language_diagnostic": "Dev only, after prompt selection: compare en_simple on original Russian claims against manually translated English claims, with identical already prepared evidence excerpts, file paths, instructions and threshold. Preserve numbers and technical identifiers. Diagnostic cannot affect selection and cannot be run on holdout.",
+  "latency": "perf_counter wall time of a single warm SDK Router.predict call, one noul question, batch size 1. Model load and explicit input preparation excluded and reported separately. Historical Qwen latency comes from saved noul HTTP requests, not a rerun.",
+  "metrics": "Original Qwen definitions: accuracy, FN positive a -> no, FP negative b/c -> yes; ECE of chosen-answer confidence using 10 equal-width bins; linearly interpolated p50/p95. Also report per-class counts and probabilities."
+}

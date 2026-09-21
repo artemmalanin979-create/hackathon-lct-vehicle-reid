@@ -1,0 +1,445 @@
+{
+  "comparison": [
+    {
+      "model": "Laya typed-decisions",
+      "split": "dev",
+      "n": 20,
+      "accuracy": 0.65,
+      "fn": 7,
+      "fp": 0,
+      "ece": 0.0471,
+      "p50_seconds": 77.719337,
+      "p95_seconds": 95.31355055
+    },
+    {
+      "model": "Qwen2.5-3B Q4_K_M",
+      "split": "dev",
+      "n": 20,
+      "accuracy": 0.85,
+      "fn": 2,
+      "fp": 1,
+      "ece": 0.1092,
+      "p50_seconds": 218.682,
+      "p95_seconds": 289.05370999999997
+    },
+    {
+      "model": "Laya typed-decisions",
+      "split": "holdout",
+      "n": 10,
+      "accuracy": 0.6,
+      "fn": 3,
+      "fp": 1,
+      "ece": 0.3288,
+      "p50_seconds": 74.17507450000001,
+      "p95_seconds": 81.6832726
+    },
+    {
+      "model": "Qwen2.5-3B Q4_K_M",
+      "split": "holdout",
+      "n": 10,
+      "accuracy": 0.8,
+      "fn": 0,
+      "fp": 2,
+      "ece": 0.2087,
+      "p50_seconds": 220.57275,
+      "p95_seconds": 266.730765
+    }
+  ],
+  "selected_prompt": "en_strict",
+  "paired_laya_left_qwen_right": {
+    "dev": {
+      "left_correct_only": [
+        "c04"
+      ],
+      "right_correct_only": [
+        "a01",
+        "a02",
+        "a04",
+        "a05",
+        "a08"
+      ],
+      "both_correct": [
+        "b01",
+        "b02",
+        "b04",
+        "b05",
+        "b07",
+        "b08",
+        "b10",
+        "c01",
+        "c02",
+        "c05",
+        "c07",
+        "c08"
+      ],
+      "both_wrong": [
+        "a07",
+        "a10"
+      ],
+      "exact_mcnemar_two_sided_p": 0.21875
+    },
+    "holdout": {
+      "left_correct_only": [
+        "c06"
+      ],
+      "right_correct_only": [
+        "a03",
+        "a06",
+        "a09"
+      ],
+      "both_correct": [
+        "b03",
+        "b06",
+        "b09",
+        "c03",
+        "c10"
+      ],
+      "both_wrong": [
+        "c09"
+      ],
+      "exact_mcnemar_two_sided_p": 0.625
+    }
+  },
+  "language_ru_left_en_right": {
+    "left_correct_only": [],
+    "right_correct_only": [
+      "a01",
+      "a10"
+    ],
+    "both_correct": [
+      "b01",
+      "b02",
+      "b04",
+      "b05",
+      "b07",
+      "b08",
+      "b10",
+      "c01",
+      "c02",
+      "c04",
+      "c05",
+      "c07",
+      "c08"
+    ],
+    "both_wrong": [
+      "a02",
+      "a04",
+      "a05",
+      "a07",
+      "a08"
+    ],
+    "exact_mcnemar_two_sided_p": 0.5
+  },
+  "dev_prompt_summaries": {
+    "en_simple": {
+      "n_items": 20,
+      "noul": {
+        "accuracy": 0.65,
+        "correct": 13,
+        "fn": [
+          "a01",
+          "a02",
+          "a04",
+          "a05",
+          "a07",
+          "a08",
+          "a10"
+        ],
+        "fp": []
+      },
+      "ece_noul": 0.0477,
+      "ece_bins": [
+        {
+          "bin": 5,
+          "n": 2,
+          "mean_confidence": 0.52135,
+          "accuracy": 0.5
+        },
+        {
+          "bin": 6,
+          "n": 7,
+          "mean_confidence": 0.6706857142857142,
+          "accuracy": 0.5714285714285714
+        },
+        {
+          "bin": 7,
+          "n": 11,
+          "mean_confidence": 0.7469272727272728,
+          "accuracy": 0.7272727272727273
+        }
+      ],
+      "latency_ms": {
+        "noul": {
+          "p50": 73882.353,
+          "p95": 83792.63339999999,
+          "max": 84728.277
+        }
+      },
+      "by_kind": {
+        "a": {
+          "n": 7,
+          "yes": 0
+        },
+        "b": {
+          "n": 7,
+          "yes": 0
+        },
+        "c": {
+          "n": 6,
+          "yes": 0
+        }
+      },
+      "truncated_ids": []
+    },
+    "ru_simple": {
+      "n_items": 20,
+      "noul": {
+        "accuracy": 0.6,
+        "correct": 12,
+        "fn": [
+          "a01",
+          "a02",
+          "a04",
+          "a05",
+          "a07",
+          "a08",
+          "a10"
+        ],
+        "fp": [
+          "c01"
+        ]
+      },
+      "ece_noul": 0.094,
+      "ece_bins": [
+        {
+          "bin": 5,
+          "n": 13,
+          "mean_confidence": 0.5400846153846154,
+          "accuracy": 0.5384615384615384
+        },
+        {
+          "bin": 6,
+          "n": 6,
+          "mean_confidence": 0.6430166666666667,
+          "accuracy": 0.8333333333333334
+        },
+        {
+          "bin": 7,
+          "n": 1,
+          "mean_confidence": 0.7177,
+          "accuracy": 0.0
+        }
+      ],
+      "latency_ms": {
+        "noul": {
+          "p50": 76651.02100000001,
+          "p95": 86931.3574,
+          "max": 89885.39
+        }
+      },
+      "by_kind": {
+        "a": {
+          "n": 7,
+          "yes": 0
+        },
+        "b": {
+          "n": 7,
+          "yes": 0
+        },
+        "c": {
+          "n": 6,
+          "yes": 1
+        }
+      },
+      "truncated_ids": [
+        "c07"
+      ]
+    },
+    "en_strict": {
+      "n_items": 20,
+      "noul": {
+        "accuracy": 0.65,
+        "correct": 13,
+        "fn": [
+          "a01",
+          "a02",
+          "a04",
+          "a05",
+          "a07",
+          "a08",
+          "a10"
+        ],
+        "fp": []
+      },
+      "ece_noul": 0.0471,
+      "ece_bins": [
+        {
+          "bin": 5,
+          "n": 3,
+          "mean_confidence": 0.5592666666666667,
+          "accuracy": 0.3333333333333333
+        },
+        {
+          "bin": 6,
+          "n": 9,
+          "mean_confidence": 0.6501444444444444,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "bin": 7,
+          "n": 8,
+          "mean_confidence": 0.7355,
+          "accuracy": 0.75
+        }
+      ],
+      "latency_ms": {
+        "noul": {
+          "p50": 77719.337,
+          "p95": 95313.55055,
+          "max": 99966.414
+        }
+      },
+      "by_kind": {
+        "a": {
+          "n": 7,
+          "yes": 0
+        },
+        "b": {
+          "n": 7,
+          "yes": 0
+        },
+        "c": {
+          "n": 6,
+          "yes": 0
+        }
+      },
+      "truncated_ids": [
+        "c07"
+      ]
+    }
+  },
+  "language_en_summary": {
+    "n_items": 20,
+    "noul": {
+      "accuracy": 0.75,
+      "correct": 15,
+      "fn": [
+        "a02",
+        "a04",
+        "a05",
+        "a07",
+        "a08"
+      ],
+      "fp": []
+    },
+    "ece_noul": 0.1402,
+    "ece_bins": [
+      {
+        "bin": 5,
+        "n": 7,
+        "mean_confidence": 0.5489714285714286,
+        "accuracy": 0.8571428571428571
+      },
+      {
+        "bin": 6,
+        "n": 11,
+        "mean_confidence": 0.6490272727272728,
+        "accuracy": 0.6363636363636364
+      },
+      {
+        "bin": 7,
+        "n": 2,
+        "mean_confidence": 0.7463,
+        "accuracy": 1.0
+      }
+    ],
+    "latency_ms": {
+      "noul": {
+        "p50": 81160.705,
+        "p95": 89768.1503,
+        "max": 92601.018
+      }
+    },
+    "by_kind": {
+      "a": {
+        "n": 7,
+        "yes": 2
+      },
+      "b": {
+        "n": 7,
+        "yes": 0
+      },
+      "c": {
+        "n": 6,
+        "yes": 0
+      }
+    },
+    "truncated_ids": []
+  },
+  "truncation": [
+    {
+      "run": "dev_ru_simple",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/table_ainv2.json",
+      "original_chars": 362,
+      "kept_original_chars": 351,
+      "sequence_tokens": 1022
+    },
+    {
+      "run": "dev_ru_simple",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/table_osnet.json",
+      "original_chars": 362,
+      "kept_original_chars": 351,
+      "sequence_tokens": 1022
+    },
+    {
+      "run": "dev_ru_simple",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/camera_diag.json",
+      "original_chars": 362,
+      "kept_original_chars": 351,
+      "sequence_tokens": 1022
+    },
+    {
+      "run": "dev_ru_simple",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/val_gallery.ids",
+      "original_chars": 362,
+      "kept_original_chars": 351,
+      "sequence_tokens": 1022
+    },
+    {
+      "run": "dev_en_strict",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/table_ainv2.json",
+      "original_chars": 362,
+      "kept_original_chars": 358,
+      "sequence_tokens": 1023
+    },
+    {
+      "run": "dev_en_strict",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/table_osnet.json",
+      "original_chars": 362,
+      "kept_original_chars": 358,
+      "sequence_tokens": 1023
+    },
+    {
+      "run": "dev_en_strict",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/camera_diag.json",
+      "original_chars": 362,
+      "kept_original_chars": 358,
+      "sequence_tokens": 1023
+    },
+    {
+      "run": "dev_en_strict",
+      "id": "c07",
+      "path": "04-solution/training/attempt-2/out/val_gallery.ids",
+      "original_chars": 362,
+      "kept_original_chars": 358,
+      "sequence_tokens": 1023
+    }
+  ]
+}

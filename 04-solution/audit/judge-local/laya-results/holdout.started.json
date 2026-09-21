@@ -1,0 +1,23 @@
+{
+  "utc": "2026-09-21T12:08:29Z",
+  "selection_sha256": "e59b8a9eae54aff2ce09f886656c880d03dec71dca77d5b58ced6e87d4dce4f7",
+  "prompt": "en_strict",
+  "frozen_files": {
+    "protocol.json": "d88f55986550a1e1c07029b431d42d31a8fc2ca768387480a03c2399451cc40f",
+    "scripts/run_laya.py": "72e2f269e41cd545f3bdc3af39e53272eae93db0ef5f87414ba8dd11a646a040",
+    "scripts/metrics.py": "bbb3e3f4cab4614527dd0a9da071508cb9e4ae5f7ea9d1e3acb91270d335ed0b",
+    "dev_claims_en.json": "97ae1c27cdbc974b6c3227c747ade0746626064b7c0db13da108566c054db509"
+  },
+  "ids": [
+    "a03",
+    "a06",
+    "a09",
+    "b03",
+    "b06",
+    "b09",
+    "c03",
+    "c06",
+    "c09",
+    "c10"
+  ]
+}

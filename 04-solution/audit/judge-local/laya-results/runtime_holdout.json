@@ -1,0 +1,98 @@
+{
+  "utc": "2026-09-21T12:08:29Z",
+  "phase": "holdout",
+  "python": "3.12.14 (main, Sep  1 2026, 14:16:52) [Clang 22.1.3 ]",
+  "platform": "Linux-6.19.10-300.fc44.x86_64-x86_64-with-glibc2.43",
+  "versions": {
+    "laya": "0.3.4",
+    "torch": "2.8.0+cpu",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "numpy": "2.5.3",
+    "huggingface-hub": "0.36.2"
+  },
+  "load_seconds": 36.71264295896981,
+  "warmup_seconds": 6.8986793759977445,
+  "warmup": {
+    "model": "laya-rl-agent",
+    "answers": {
+      "supported": {
+        "type": "noul",
+        "noul": 0.6562,
+        "confidence": 0.6562,
+        "action": {
+          "act_probability": 1.0
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 97,
+      "output_tokens": 0
+    },
+    "routing": {
+      "model": "typed-decisions",
+      "repo": "convaiinnovations/laya/typed-decisions",
+      "reason": "explicit model='typed-decisions'",
+      "detection": null,
+      "workflow": null
+    }
+  },
+  "threads": 2,
+  "interop_threads": 1,
+  "affinity": [
+    6,
+    7
+  ],
+  "nice": 15,
+  "device": "cpu",
+  "parameter_count": 421293827,
+  "parameter_bytes_runtime": 1685175308,
+  "parameter_dtypes": [
+    "torch.float32"
+  ],
+  "config": {
+    "encoder": "answerdotai/ModernBERT-large",
+    "head_layers": 2,
+    "max_len": 1024,
+    "head_max_len": 256,
+    "max_prefixes": 6,
+    "act_costs": {
+      "escalate": 0.5
+    },
+    "cost_wrong_act": 3.0,
+    "amp_dtype": "bf16",
+    "model_name": "laya-typed-decisions",
+    "temperature": [
+      1.0148024559020996,
+      1.0374259948730469,
+      1.0575125217437744
+    ],
+    "temperature_by_options": {
+      "choice:3-5": 1.7601518630981445,
+      "choice:6-10": 1.0000158548355103,
+      "score:3-5": 1.2514300346374512,
+      "noul:2": 1.983399510383606,
+      "choice:11+": 0.10058280825614929,
+      "choice:2": 1.9063563346862793
+    },
+    "training": {
+      "updates": 7313,
+      "epochs_completed": 1,
+      "hours": 1.96,
+      "world_size": 1,
+      "fine_tuned_from_checkpoint": true
+    },
+    "gradient_checkpointing": true,
+    "max_tokens_per_batch": 4096,
+    "fine_tuned": true
+  },
+  "frozen_files": {
+    "protocol.json": "d88f55986550a1e1c07029b431d42d31a8fc2ca768387480a03c2399451cc40f",
+    "scripts/run_laya.py": "72e2f269e41cd545f3bdc3af39e53272eae93db0ef5f87414ba8dd11a646a040",
+    "scripts/metrics.py": "bbb3e3f4cab4614527dd0a9da071508cb9e4ae5f7ea9d1e3acb91270d335ed0b",
+    "dev_claims_en.json": "97ae1c27cdbc974b6c3227c747ade0746626064b7c0db13da108566c054db509"
+  },
+  "max_rss_kib": 2849452,
+  "finished_utc": "2026-09-21T12:20:57Z"
+}

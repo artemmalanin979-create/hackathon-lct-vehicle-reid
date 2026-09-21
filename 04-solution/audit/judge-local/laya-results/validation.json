@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "holdout_predictions": 10,
+  "dev_prompt_predictions": 60,
+  "dev_language_diagnostic_predictions": 20,
+  "frozen_files_verified": {
+    "protocol.json": "d88f55986550a1e1c07029b431d42d31a8fc2ca768387480a03c2399451cc40f",
+    "scripts/run_laya.py": "72e2f269e41cd545f3bdc3af39e53272eae93db0ef5f87414ba8dd11a646a040",
+    "scripts/metrics.py": "bbb3e3f4cab4614527dd0a9da071508cb9e4ae5f7ea9d1e3acb91270d335ed0b",
+    "dev_claims_en.json": "97ae1c27cdbc974b6c3227c747ade0746626064b7c0db13da108566c054db509"
+  },
+  "all_metrics_recomputed": true,
+  "all_jsonl_match_json": true,
+  "no_gold_in_inputs": true,
+  "language_evidence_identical": true,
+  "runtime_constraints_verified": true
+}

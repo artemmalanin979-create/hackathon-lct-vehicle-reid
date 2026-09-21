@@ -1,0 +1,5 @@
+model,split,n,accuracy,fn,fp,ece,p50_seconds,p95_seconds
+Laya typed-decisions,dev,20,0.65,7,0,0.0471,77.719337,95.31355055
+Qwen2.5-3B Q4_K_M,dev,20,0.85,2,1,0.1092,218.682,289.05370999999997
+Laya typed-decisions,holdout,10,0.6,3,1,0.3288,74.17507450000001,81.6832726
+Qwen2.5-3B Q4_K_M,holdout,10,0.8,0,2,0.2087,220.57275,266.730765
