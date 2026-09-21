@@ -1,0 +1,29 @@
+{
+  "commit": "6179b695745122397681f7db0c92073fbc57ffb4",
+  "tracked_files": 1049,
+  "tracked_bytes": 306777324,
+  "worktree_path": "/var/tmp/job72-jury-dMALXs33/repo-upstream",
+  "weights": {
+    "osnet_ain_x1_0_vehicle_reid.onnx": {
+      "bytes": 8836743,
+      "sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f"
+    },
+    "osnet_ain_combined_v1.onnx": {
+      "bytes": 8742779,
+      "sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2"
+    },
+    "lw_ens_j48_rho0.5.npz": {
+      "bytes": 1051114,
+      "sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+    }
+  },
+  "data_paths": {
+    "data": false,
+    "data/images": false,
+    "data/train.csv": false,
+    "data/test_query.csv": false,
+    "data/test_gallery.csv": false
+  },
+  "wheel_count": 30,
+  "wheel_bytes": 59146237
+}

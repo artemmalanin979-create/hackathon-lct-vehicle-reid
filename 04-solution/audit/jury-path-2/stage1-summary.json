@@ -1,0 +1,58 @@
+{
+  "clone": {
+    "returncode": 0,
+    "seconds": 281.197
+  },
+  "git-fsck": {
+    "returncode": 0,
+    "seconds": 11.424
+  },
+  "clone-size": {
+    "returncode": 0,
+    "seconds": 0.009
+  },
+  "git-status-before": {
+    "returncode": 0,
+    "seconds": 0.263
+  },
+  "fetch-model-offline": {
+    "returncode": 0,
+    "seconds": 0.135
+  },
+  "qdrant-offline": {
+    "returncode": 125,
+    "seconds": 0.21
+  },
+  "build-offline": {
+    "returncode": 0,
+    "seconds": 98.187
+  },
+  "versions": {
+    "returncode": 0,
+    "seconds": 4.243
+  },
+  "pip-check": {
+    "returncode": 0,
+    "seconds": 4.168
+  },
+  "python-version": {
+    "returncode": 0,
+    "seconds": 0.479
+  },
+  "test-T": {
+    "returncode": 0,
+    "seconds": 8.19
+  },
+  "loader-original-data": {
+    "returncode": 1,
+    "seconds": 7.976
+  },
+  "command-R": {
+    "returncode": 1,
+    "seconds": 5.102
+  },
+  "git-status-after-stage1": {
+    "returncode": 0,
+    "seconds": 0.014
+  }
+}
