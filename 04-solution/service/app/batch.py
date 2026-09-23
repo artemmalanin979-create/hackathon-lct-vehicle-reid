@@ -25,11 +25,12 @@ from __future__ import annotations
 import argparse
 import json
 import platform
+import sys
 import time
 from pathlib import Path
 
 from .core import config
-from .input_checks import require_dataset, require_files
+from .input_checks import fail_inputs, require_dataset, require_files
 
 
 def main() -> None:
@@ -60,7 +61,7 @@ def main() -> None:
 
     import numpy as np
     from .core.model import Embedder
-    from .core.preprocess import read_rows
+    from .core.preprocess import CropInputError, crop_problems, read_rows
     from .core.ranking import cosine_scores, validate_scores
     from .core.rerank import rerank_scores
     from .core.submission import save_embeddings, write_candidates, write_submission
@@ -79,9 +80,21 @@ def main() -> None:
     if not q_rows or not g_rows:
         raise SystemExit("пустой query или gallery CSV — прогон не имеет смысла")
 
+    problems = (crop_problems(args.images_dir, q_rows, args.query)
+                + crop_problems(args.images_dir, g_rows, args.gallery))
+    if problems:
+        fail_inputs(problems, "Исправьте изображения/bbox и повторите запуск; "
+                    "частичный комплект не создаётся, строки не пропускаются.")
+
     embedder = Embedder(threads=args.threads)  # sha256 весов проверяется здесь
-    q_emb = embedder.embed_rows(args.images_dir, q_rows, args.batch)
-    g_emb = embedder.embed_rows(args.images_dir, g_rows, args.batch)
+    try:
+        q_emb = embedder.embed_rows(args.images_dir, q_rows, args.batch)
+        g_emb = embedder.embed_rows(args.images_dir, g_rows, args.batch)
+    except CropInputError as exc:
+        # Например, файл был изменён между проверкой и чтением. Не подменять
+        # его кропом и не выдавать частичный комплект за успешный прогон.
+        print(f"Ошибка входного кадра после проверки: {exc}", file=sys.stderr)
+        raise SystemExit(2) from None
     t_embed = time.perf_counter() - t0
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
