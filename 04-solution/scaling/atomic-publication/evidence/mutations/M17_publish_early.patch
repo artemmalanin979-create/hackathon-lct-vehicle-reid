@@ -1,0 +1,12 @@
+--- original
++++ M17_publish_early
+@@ -56,7 +56,8 @@
+     staging = Path(tempfile.mkdtemp(prefix=f".{destination.name}.incomplete-",
+                                     dir=destination.parent))
+     try:
+-        yield staging
++        _publish(staging, destination)
++        yield destination
+         if {p.name for p in staging.iterdir()} != OUTPUT_FILES:
+             raise RuntimeError("Неполный выходной комплект; публикация отменена")
+         try:

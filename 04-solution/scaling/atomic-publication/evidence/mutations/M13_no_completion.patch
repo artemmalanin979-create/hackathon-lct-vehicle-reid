@@ -1,0 +1,11 @@
+--- original
++++ M13_no_completion
+@@ -57,7 +57,7 @@
+                                     dir=destination.parent))
+     try:
+         yield staging
+-        if {p.name for p in staging.iterdir()} != OUTPUT_FILES:
++        if False:
+             raise RuntimeError("Неполный выходной комплект; публикация отменена")
+         try:
+             _publish(staging, destination)

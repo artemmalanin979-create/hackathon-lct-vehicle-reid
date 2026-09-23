@@ -1,0 +1,11 @@
+--- original
++++ M14_no_recheck
+@@ -24,7 +24,7 @@
+ 
+ 
+ def _publish(staging: Path, destination: Path) -> None:
+-    _check_destination(destination)
++    pass
+     if destination.exists():
+         # A single exchange also handles a previous non-empty result atomically.
+         # Never remove the old result before the new one is visible.

@@ -1,0 +1,1 @@
+Выходной каталог /work/manual-batch/destination_symlink/out — symlink; укажите обычный каталог

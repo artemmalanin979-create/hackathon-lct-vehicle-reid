@@ -1,0 +1,48 @@
+{
+  "source": "job_80-critic-20260922/scripts/run_mutations.py",
+  "source_sha256": "e8122fe28250e9366e690066237c74982d995b1b5d404c1a7274f6520a2cc5d5",
+  "mutations": [
+    {
+      "id": "M12_no_symlink",
+      "description": "Разрешить destination symlink",
+      "old": "if destination.is_symlink():",
+      "new": "if False:"
+    },
+    {
+      "id": "M13_no_completion",
+      "description": "Не проверять полный набор перед публикацией",
+      "old": "if {p.name for p in staging.iterdir()} != OUTPUT_FILES:",
+      "new": "if False:"
+    },
+    {
+      "id": "M14_no_recheck",
+      "description": "Убрать повторную проверку destination перед публикацией",
+      "old": "def _publish(staging: Path, destination: Path) -> None:\n    _check_destination(destination)",
+      "new": "def _publish(staging: Path, destination: Path) -> None:\n    pass"
+    },
+    {
+      "id": "M15_no_child_symlink",
+      "description": "Разрешить symlink файлов старого комплекта",
+      "old": " or p.is_symlink() for p in children",
+      "new": " for p in children"
+    },
+    {
+      "id": "M16_drop_required_file",
+      "description": "Убрать candidates.csv из обязательного набора",
+      "old": "\"submission.csv\", \"candidates.csv\", \"run_info.json\"",
+      "new": "\"submission.csv\", \"run_info.json\""
+    },
+    {
+      "id": "M17_publish_early",
+      "description": "Публиковать пустой каталог до начала записи",
+      "old": "yield staging",
+      "new": "_publish(staging, destination)\n        yield destination"
+    },
+    {
+      "id": "M18_nonatomic_replace",
+      "description": "Удалять старый комплект и переносить файлы по одному",
+      "new": "def _publish(staging: Path, destination: Path) -> None:\n    _check_destination(destination)\n    if destination.exists():\n        shutil.rmtree(destination)\n    destination.mkdir()\n    for item in staging.iterdir():\n        item.rename(destination / item.name)\n",
+      "old_function": "_publish"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+{"name": "j81-full-before", "returncode": 0, "wall_s": 975.4253610220039}
+{"name": "j81-full-after", "returncode": 0, "wall_s": 983.0789441859815}

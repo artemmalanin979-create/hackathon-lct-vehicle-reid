@@ -1,0 +1,15 @@
+RESULT_JSON={"tests": 9, "failed": [], "errors": [], "success": true}
+test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) ... ok
+test_exception_does_not_damage_old_result (test_batch_safety.PublicationTests.test_exception_does_not_damage_old_result) ... ok
+test_failed_rename_preserves_previous_complete_result (test_batch_safety.PublicationTests.test_failed_rename_preserves_previous_complete_result) ... ok
+test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published) ... ok
+test_replace_nonempty_result_in_one_exchange (test_batch_safety.PublicationTests.test_replace_nonempty_result_in_one_exchange) ... ok
+test_replace_precreated_empty_directory (test_batch_safety.PublicationTests.test_replace_precreated_empty_directory) ... ok
+test_success_is_invisible_until_all_files_are_ready (test_batch_safety.PublicationTests.test_success_is_invisible_until_all_files_are_ready) ... ok
+test_symlink_is_rejected_without_following_it (test_batch_safety.PublicationTests.test_symlink_is_rejected_without_following_it) ... ok
+test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_unrelated_files_are_not_removed) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.054s
+
+OK

@@ -1,0 +1,22 @@
+EMBEDDER_CREATED
+Traceback (most recent call last):
+  File "/work/scripts/manual_batch.py", line 247, in <module>
+    child(args.child, args.out, args.old)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/scripts/manual_batch.py", line 105, in child
+    batch.main()
+    ~~~~~~~~~~^^
+  File "/snapshot/04-solution/service/app/batch.py", line 81, in main
+    emb = save_embeddings(out_dir / "embeddings.npy", q_emb, g_emb)
+  File "/work/scripts/manual_batch.py", line 54, in save_then_pause
+    result = save(*args, **kwargs)
+  File "/snapshot/04-solution/service/app/core/submission.py", line 22, in save_embeddings
+    np.save(path, emb)
+    ~~~~~~~^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/numpy/lib/_npyio_impl.py", line 572, in save
+    format.write_array(fid, arr, allow_pickle=allow_pickle)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/numpy/lib/_format_impl.py", line 772, in write_array
+    array.tofile(fp)
+    ~~~~~~~~~~~~^^^^
+OSError: 1536 requested and 992 written

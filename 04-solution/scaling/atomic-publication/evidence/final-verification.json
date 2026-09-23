@@ -1,0 +1,13 @@
+{
+  "all_report_links_exist": true,
+  "changed_files_count": 85,
+  "main_code_commit": "46bc5ee92c49bde42d555adfa914185d01e47ff9",
+  "baseline": "7800f222094df0da26387399e23e9bf6f3c60dd4",
+  "guard_unchanged": "de1c68cf97b23ad9732f6da06dcf693495618676",
+  "all_four_byte_equal_on_worker_and_local": true,
+  "source_snapshot_matches_main": true,
+  "all_test_suites_pass": true,
+  "no_oom": true,
+  "push_performed": false,
+  "report_sha256": "b46b89de9fdbab446249284e1446de1e72d2dedb7a748c134c6eabacbd2aa80c"
+}

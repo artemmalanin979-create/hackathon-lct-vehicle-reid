@@ -1,0 +1,16 @@
+RESULT_JSON={"tests": 1, "failed": ["test_symlink_inside_previous_result_is_rejected (test_batch_safety.PublicationTests.test_symlink_inside_previous_result_is_rejected)"], "errors": [], "success": false}
+test_symlink_inside_previous_result_is_rejected (test_batch_safety.PublicationTests.test_symlink_inside_previous_result_is_rejected) ... FAIL
+
+======================================================================
+FAIL: test_symlink_inside_previous_result_is_rejected (test_batch_safety.PublicationTests.test_symlink_inside_previous_result_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M15_no_child_symlink/dedicated/tests/test_batch_safety.py", line 118, in test_symlink_inside_previous_result_is_rejected
+    self.fail('must reject before writing a new result')
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: must reject before writing a new result
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

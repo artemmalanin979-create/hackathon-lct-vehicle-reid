@@ -1,0 +1,11 @@
+--- original
++++ M12_no_symlink
+@@ -13,7 +13,7 @@
+ 
+ 
+ def _check_destination(destination: Path) -> None:
+-    if destination.is_symlink():
++    if False:
+         raise SystemExit(f"Выходной каталог {destination} — symlink; укажите обычный каталог")
+     if destination.exists():
+         if not destination.is_dir():

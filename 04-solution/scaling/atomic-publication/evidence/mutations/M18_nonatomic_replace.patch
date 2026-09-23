@@ -1,0 +1,28 @@
+--- original
++++ M18_nonatomic_replace
+@@ -26,21 +26,10 @@
+ def _publish(staging: Path, destination: Path) -> None:
+     _check_destination(destination)
+     if destination.exists():
+-        # A single exchange also handles a previous non-empty result atomically.
+-        # Never remove the old result before the new one is visible.
+-        libc = ctypes.CDLL(None, use_errno=True)
+-        try:
+-            renameat2 = libc.renameat2
+-        except AttributeError as exc:
+-            raise OSError(errno.ENOSYS, "renameat2 недоступен; нужен новый --out-dir") from exc
+-        renameat2.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p,
+-                              ctypes.c_uint]
+-        renameat2.restype = ctypes.c_int
+-        if renameat2(-100, os.fsencode(staging), -100, os.fsencode(destination), 2) != 0:
+-            code = ctypes.get_errno()
+-            raise OSError(code, os.strerror(code), str(destination))
+-    else:
+-        staging.rename(destination)
++        shutil.rmtree(destination)
++    destination.mkdir()
++    for item in staging.iterdir():
++        item.rename(destination / item.name)
+ 
+ 
+ @contextmanager

@@ -1,0 +1,12 @@
+{
+  "baseline": "7800f222094df0da26387399e23e9bf6f3c60dd4",
+  "guard": "de1c68cf97b23ad9732f6da06dcf693495618676",
+  "initial_status": "clean",
+  "service_tests_before": 9,
+  "publication_survivors": [
+    "M14",
+    "M15",
+    "M16",
+    "M18"
+  ]
+}

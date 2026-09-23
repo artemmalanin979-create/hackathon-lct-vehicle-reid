@@ -1,0 +1,1 @@
+В /work/manual-batch/file_symlink/out есть посторонние файлы; укажите отдельный --out-dir

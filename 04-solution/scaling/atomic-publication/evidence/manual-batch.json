@@ -1,0 +1,591 @@
+[
+  {
+    "case": "mid_write-previous-False",
+    "pid": 12,
+    "returncode": -9,
+    "final": null,
+    "expected_final": null,
+    "staging": {
+      ".out.incomplete-aw_ujvcc": {
+        "embeddings.npy": {
+          "size": 64,
+          "sha256": "4fb81bcb19c0d7d1213ae2d6f9cac9ec8080c4ea896a46fba05544a40ec87f7b"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "mid_write-previous-True",
+    "pid": 17,
+    "returncode": -9,
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "expected_final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "staging": {
+      ".out.incomplete-fifn1rgl": {
+        "embeddings.npy": {
+          "size": 64,
+          "sha256": "4fb81bcb19c0d7d1213ae2d6f9cac9ec8080c4ea896a46fba05544a40ec87f7b"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "after_first-previous-False",
+    "pid": 22,
+    "returncode": -9,
+    "final": null,
+    "expected_final": null,
+    "staging": {
+      ".out.incomplete-ij7rvvo8": {
+        "embeddings.npy": {
+          "size": 6272,
+          "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "after_first-previous-True",
+    "pid": 27,
+    "returncode": -9,
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "expected_final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "staging": {
+      ".out.incomplete-hyuuovlb": {
+        "embeddings.npy": {
+          "size": 6272,
+          "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "before_publish-previous-False",
+    "pid": 32,
+    "returncode": -9,
+    "final": null,
+    "expected_final": null,
+    "staging": {
+      ".out.incomplete-7l9qi3ie": {
+        "candidates.csv": {
+          "size": 184,
+          "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+        },
+        "embeddings.npy": {
+          "size": 6272,
+          "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+        },
+        "run_info.json": {
+          "size": 952,
+          "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+        },
+        "submission.csv": {
+          "size": 241,
+          "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "before_publish-previous-True",
+    "pid": 37,
+    "returncode": -9,
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "expected_final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "staging": {
+      ".out.incomplete-iyxc3w0w": {
+        "candidates.csv": {
+          "size": 184,
+          "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+        },
+        "embeddings.npy": {
+          "size": 6272,
+          "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+        },
+        "run_info.json": {
+          "size": 952,
+          "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+        },
+        "submission.csv": {
+          "size": 241,
+          "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "after_publish-previous-False",
+    "pid": 42,
+    "returncode": -9,
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "expected_final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "staging": {},
+    "passed": true
+  },
+  {
+    "case": "after_publish-previous-True",
+    "pid": 47,
+    "returncode": -9,
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "expected_final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "staging": {
+      ".out.incomplete-htlxbda8": {
+        "candidates.csv": {
+          "size": 184,
+          "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+        },
+        "embeddings.npy": {
+          "size": 6272,
+          "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+        },
+        "run_info.json": {
+          "size": 952,
+          "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+        },
+        "submission.csv": {
+          "size": 275,
+          "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+        }
+      }
+    },
+    "passed": true
+  },
+  {
+    "case": "new",
+    "returncode": 0,
+    "before": null,
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "rejected_before_model": false,
+    "target_preserved": false,
+    "staging": [],
+    "passed": true
+  },
+  {
+    "case": "empty",
+    "returncode": 0,
+    "before": {},
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "rejected_before_model": false,
+    "target_preserved": false,
+    "staging": [],
+    "passed": true
+  },
+  {
+    "case": "existing",
+    "returncode": 0,
+    "before": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "36f19b76b935eaec1c4e681c7f4ddfea92f756f5385853b762ca58d728e16cd4"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "ecc51a4e063218f1caeb34600d3dbacd09556da9b8652cee63f2073632e503fe"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "06096fdf0e927fb243885611a7b9b11863dfab4bc9a566427adb1ebf68f3a0dc"
+      },
+      "submission.csv": {
+        "size": 241,
+        "sha256": "8434a3f6a07b49bb8a337e019c39cc467a10d3aec49f64eac3790cb51688ad09"
+      }
+    },
+    "rejected_before_model": false,
+    "target_preserved": false,
+    "staging": [],
+    "passed": true
+  },
+  {
+    "case": "foreign",
+    "returncode": 1,
+    "before": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "notes.txt": {
+        "size": 22,
+        "sha256": "2b29a5c7327795cb703de1f0254ce64499e8173bcfc20083b0014e28c44235da"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "notes.txt": {
+        "size": 22,
+        "sha256": "2b29a5c7327795cb703de1f0254ce64499e8173bcfc20083b0014e28c44235da"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "rejected_before_model": true,
+    "target_preserved": false,
+    "staging": [],
+    "passed": true
+  },
+  {
+    "case": "destination_symlink",
+    "returncode": 1,
+    "before": {
+      "symlink": "/work/manual-batch/destination_symlink/target"
+    },
+    "final": {
+      "symlink": "/work/manual-batch/destination_symlink/target"
+    },
+    "rejected_before_model": true,
+    "target_preserved": true,
+    "staging": [],
+    "passed": true
+  },
+  {
+    "case": "file_symlink",
+    "returncode": 1,
+    "before": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 22,
+        "sha256": "2b29a5c7327795cb703de1f0254ce64499e8173bcfc20083b0014e28c44235da"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 22,
+        "sha256": "2b29a5c7327795cb703de1f0254ce64499e8173bcfc20083b0014e28c44235da"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "rejected_before_model": true,
+    "target_preserved": true,
+    "staging": [],
+    "passed": true
+  },
+  {
+    "case": "app_batch_ENOSPC_previous_False",
+    "returncode": 1,
+    "filesystem": "private 2 MiB tmpfs, one page free before batch",
+    "before": null,
+    "final": null,
+    "staging": [],
+    "stderr": "Traceback (most recent call last):\n  File \"/work/scripts/manual_batch.py\", line 247, in <module>\n    child(args.child, args.out, args.old)\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/work/scripts/manual_batch.py\", line 105, in child\n    batch.main()\n    ~~~~~~~~~~^^\n  File \"/snapshot/04-solution/service/app/batch.py\", line 81, in main\n    emb = save_embeddings(out_dir / \"embeddings.npy\", q_emb, g_emb)\n  File \"/work/scripts/manual_batch.py\", line 54, in save_then_pause\n    result = save(*args, **kwargs)\n  File \"/snapshot/04-solution/service/app/core/submission.py\", line 22, in save_embeddings\n    np.save(path, emb)\n    ~~~~~~~^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/site-packages/numpy/lib/_npyio_impl.py\", line 572, in save\n    format.write_array(fid, arr, allow_pickle=allow_pickle)\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/site-packages/numpy/lib/_format_impl.py\", line 772, in write_array\n    array.tofile(fp)\n    ~~~~~~~~~~~~^^^^\nOSError: 1536 requested and 992 written\n",
+    "passed": true
+  },
+  {
+    "case": "app_batch_ENOSPC_previous_True",
+    "returncode": 1,
+    "filesystem": "private 2 MiB tmpfs, one page free before batch",
+    "before": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "final": {
+      "candidates.csv": {
+        "size": 184,
+        "sha256": "e639b20200c5cce8de2a717020d0099a26cb302021694ef4379b2b7acb3dde5c"
+      },
+      "embeddings.npy": {
+        "size": 6272,
+        "sha256": "7f6347031402c6c0413a14548fdc018caf04b52e035c2631fe1519d33ff41c2a"
+      },
+      "run_info.json": {
+        "size": 952,
+        "sha256": "2e27601cb6b248fbd1e117f73ea26def4485da34e34843e82094f0ffad36a80f"
+      },
+      "submission.csv": {
+        "size": 275,
+        "sha256": "5140e0c02b5b88ee8261f9e059919e9fc63d95bc90031d48cc28413c9bc6d2e9"
+      }
+    },
+    "staging": [],
+    "stderr": "Traceback (most recent call last):\n  File \"/work/scripts/manual_batch.py\", line 247, in <module>\n    child(args.child, args.out, args.old)\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/work/scripts/manual_batch.py\", line 105, in child\n    batch.main()\n    ~~~~~~~~~~^^\n  File \"/snapshot/04-solution/service/app/batch.py\", line 81, in main\n    emb = save_embeddings(out_dir / \"embeddings.npy\", q_emb, g_emb)\n  File \"/work/scripts/manual_batch.py\", line 54, in save_then_pause\n    result = save(*args, **kwargs)\n  File \"/snapshot/04-solution/service/app/core/submission.py\", line 22, in save_embeddings\n    np.save(path, emb)\n    ~~~~~~~^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/site-packages/numpy/lib/_npyio_impl.py\", line 572, in save\n    format.write_array(fid, arr, allow_pickle=allow_pickle)\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/site-packages/numpy/lib/_format_impl.py\", line 772, in write_array\n    array.tofile(fp)\n    ~~~~~~~~~~~~^^^^\nOSError: 1536 requested and 992 written\n",
+    "passed": true
+  }
+]

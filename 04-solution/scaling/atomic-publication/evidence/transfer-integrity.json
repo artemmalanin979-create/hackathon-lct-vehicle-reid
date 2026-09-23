@@ -1,0 +1,22 @@
+{
+  "baseline": "7800f222094df0da26387399e23e9bf6f3c60dd4",
+  "guard": "de1c68cf97b23ad9732f6da06dcf693495618676",
+  "numerical_batch_ast_unchanged": true,
+  "publication_bodies_identical_to_guard": true,
+  "no_memory_preflight": true,
+  "protected_paths_unchanged": [
+    "04-solution/service/app/core",
+    "04-solution/service/model",
+    "04-solution/split",
+    "04-solution/eval"
+  ],
+  "functions": [
+    "_check_destination",
+    "_publish",
+    "atomic_output"
+  ],
+  "files": {
+    "04-solution/service/app/batch.py": "e80f2eb930b7d16f82d176a2cf4b0f48a1a45bb1daaefa273e49ddccf3642ebd",
+    "04-solution/service/app/batch_safety.py": "698344ba787f01896b80b2b29d4934a5fd01e797372bf37106927e5ccc41482f"
+  }
+}

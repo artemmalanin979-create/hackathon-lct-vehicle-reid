@@ -1,0 +1,1 @@
+В /work/manual-batch/foreign/out есть посторонние файлы; укажите отдельный --out-dir

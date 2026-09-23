@@ -1,0 +1,13 @@
+{
+  "local_unit_tests": {
+    "eval": 60,
+    "reproduce": 5,
+    "publication": 13
+  },
+  "all_existing_pass": true,
+  "manual_batch_cases": 16,
+  "syscall_cases": 4,
+  "publication_mutations_killed": 7,
+  "new_dedicated_tests": 4,
+  "script_syntax": "all parsed"
+}
