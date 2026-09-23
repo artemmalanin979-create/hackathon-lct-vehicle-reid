@@ -4,7 +4,7 @@ import io
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 from PIL import Image
@@ -14,6 +14,15 @@ from app.core.config import INPUT_SIZE
 
 
 class CropTests(unittest.TestCase):
+    def test_zero_or_negative_area_inside_image_is_rejected(self):
+        image = Image.new("RGB", (20, 30), (20, 60, 90))
+        # Keep x+w and y+h positive: the intersection check must not mask
+        # missing width/height validation, nor PIL's own negative-size error.
+        for box in ((8, 8, 0, 4), (8, 8, 4, 0), (8, 8, 0, 0),
+                    (8, 8, -1, 4), (8, 8, 4, -1)):
+            with self.subTest(box=box), self.assertRaisesRegex(CropInputError, "> 0"):
+                crop_to_input(image, *box)
+
     def test_zero_or_negative_area_is_rejected(self):
         image = Image.new("RGB", (20, 30), (20, 60, 90))
         for box in ((0, 0, 0, 5), (0, 0, 5, 0), (0, 0, 0, 0),
@@ -64,6 +73,19 @@ class InputValidationTests(unittest.TestCase):
             self.assertIn(f"image_id={name}", problem)
             self.assertIn(str(self.root / f"{name}.jpg"), problem)
 
+    def test_zero_or_negative_area_inside_image_is_reported_in_preflight(self):
+        csv_path = self.root / "query.csv"
+        for w, h in ((0, 4), (4, 0), (0, 0), (-1, 4), (4, -1)):
+            rows = [self.good, BBoxRow("good", 8, 8, w, h), self.good]
+            with self.subTest(w=w, h=h):
+                problems = crop_problems(self.root, rows, csv_path)
+                self.assertEqual(len(problems), 1)
+                self.assertIn(str(csv_path), problems[0])
+                self.assertIn("строка 3", problems[0])
+                self.assertIn("image_id=good", problems[0])
+                self.assertIn(str(self.root / "good.jpg"), problems[0])
+                self.assertIn("> 0", problems[0])
+
     def test_valid_black_image_is_allowed(self):
         Image.new("RGB", (64, 64)).save(self.root / "black.png")
         row = BBoxRow("black", 0, 0, 64, 64)
@@ -83,6 +105,62 @@ class InputValidationTests(unittest.TestCase):
         for name in ("broken", "truncated", "missing"):
             with self.subTest(name=name), self.assertRaisesRegex(CropInputError, f"image_id={name}"):
                 load_crop(self.root, BBoxRow(name, 0, 0, 64, 64))
+
+    def test_late_image_failure_is_controlled_rc2_without_publishing(self):
+        from app import batch
+        from app.core import model
+
+        query, gallery = self.root / "query.csv", self.root / "gallery.csv"
+        query.write_text("image_id,x,y,w,h\nlate-query,0,0,64,64\n")
+        gallery.write_text("image_id,x,y,w,h\nlate-gallery,0,0,64,64\n")
+        for role in ("query", "gallery"):
+            for existing_output in (False, True):
+                for name in ("late-query", "late-gallery"):
+                    (self.root / f"{name}.jpg").write_bytes((self.root / "good.jpg").read_bytes())
+                out = self.root / f"out-{role}-{existing_output}"
+                previous = {}
+                if existing_output:
+                    out.mkdir()
+                    for name in ("embeddings.npy", "submission.csv", "candidates.csv", "run_info.json"):
+                        previous[name] = f"previous complete {name}\n".encode()
+                        (out / name).write_bytes(previous[name])
+
+                damaged = self.root / f"late-{role}.jpg"
+                embedder = Mock()
+
+                def construct_model(**kwargs):
+                    # The real preflight has already decoded both valid images.
+                    damaged.write_bytes(b"damaged after preflight")
+                    return embedder
+
+                def embed_rows(images_dir, rows, batch_size):
+                    # Replace only ONNX computation; real decoding raises the error.
+                    for row in rows:
+                        load_crop(images_dir, row)
+                    return np.ones((len(rows), 512), dtype=np.float32)
+
+                embedder.embed_rows.side_effect = embed_rows
+                args = ["batch", "--images-dir", str(self.root), "--query", str(query),
+                        "--gallery", str(gallery), "--out-dir", str(out)]
+                stderr = io.StringIO()
+                with self.subTest(role=role, existing_output=existing_output), \
+                     patch("sys.argv", args), \
+                     patch.object(model, "Embedder", side_effect=construct_model) as constructor, \
+                     contextlib.redirect_stderr(stderr):
+                    with self.assertRaises(SystemExit) as exc:
+                        batch.main()
+                    self.assertEqual(exc.exception.code, 2)
+                    constructor.assert_called_once()
+                    self.assertEqual(embedder.embed_rows.call_count, 1 if role == "query" else 2)
+                    self.assertIn("Ошибка входного кадра после проверки", stderr.getvalue())
+                    self.assertIn(f"image_id=late-{role}", stderr.getvalue())
+                    self.assertIn(str(damaged), stderr.getvalue())
+                    self.assertNotIn("Traceback", stderr.getvalue())
+                    self.assertNotIn("Вычисления не запущены", stderr.getvalue())
+                    if existing_output:
+                        self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, previous)
+                    else:
+                        self.assertFalse(out.exists())
 
     def test_invalid_query_or_gallery_fails_before_model_and_preserves_old_output(self):
         from app import batch

@@ -1,10 +1,14 @@
 """F1: identical frames are matches; non-finite scores cannot become refusals."""
+import contextlib
+import io
 import sys
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import numpy as np
+from PIL import Image
 
 from app.core.ranking import accepted_candidates, ranked_indices
 from app.core.rerank import rerank_scores
@@ -50,6 +54,34 @@ class RerankTests(unittest.TestCase):
 
 
 class ThresholdTests(unittest.TestCase):
+    def test_nonfinite_cli_threshold_never_constructs_model(self):
+        from app import batch
+        from app.core import model
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            Image.new("RGB", (16, 16), (10, 20, 30)).save(root / "valid.png")
+            query, gallery, out = root / "query.csv", root / "gallery.csv", root / "out"
+            for csv_path in (query, gallery):
+                csv_path.write_text("image_id,x,y,w,h\nvalid,0,0,16,16\n")
+            args = ["batch", "--images-dir", str(root), "--query", str(query),
+                    "--gallery", str(gallery), "--out-dir", str(out)]
+            for mode in ("--rerank", "--no-rerank"):
+                for value in ("nan", "inf", "-inf"):
+                    stderr = io.StringIO()
+                    with self.subTest(mode=mode, threshold=value), \
+                         patch("sys.argv", [*args, mode, f"--threshold={value}"]), \
+                         patch.object(model, "Embedder", side_effect=AssertionError(
+                             "invalid threshold must fail before model construction")) as embedder, \
+                         contextlib.redirect_stderr(stderr):
+                        with self.assertRaises(SystemExit) as exc:
+                            batch.main()
+                        self.assertEqual(exc.exception.code, 2)
+                        embedder.assert_not_called()
+                    self.assertIn("threshold", stderr.getvalue())
+                    self.assertNotIn("Traceback", stderr.getvalue())
+                    self.assertFalse(out.exists())
+
     def test_bad_score_anywhere_cannot_be_silently_dropped(self):
         for bad in (np.nan, np.inf, -np.inf):
             for row in ([bad, .8], [.8, bad]):
