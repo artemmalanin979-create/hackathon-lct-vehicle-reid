@@ -51,6 +51,8 @@ def rerank_distances(query: np.ndarray, gallery: np.ndarray,
     query_num = len(q)
 
     feats = np.concatenate([q, g])
+    if not np.isfinite(feats).all():
+        raise ValueError("эмбеддинги содержат NaN или бесконечность")
     norms = np.linalg.norm(feats, axis=1, keepdims=True)
     if np.any(norms == 0):
         raise ValueError("переранжирование не определено для нулевого вектора")
@@ -60,7 +62,12 @@ def rerank_distances(query: np.ndarray, gallery: np.ndarray,
     # Канон (torch-версия Zhong): original_dist = квадрат евклида, затем нормировка
     # на максимум по столбцу. Для L2-нормированных векторов euclid^2 = 2*(1-cos);
     # множитель 2 сокращается нормировкой, поэтому достаточно 1-cos без возведения.
-    original_dist = (dist_all / np.max(dist_all, axis=0)).T
+    column_max = np.max(dist_all, axis=0)
+    # Нулевой максимум означает столбец совпадающих объектов: дистанции уже
+    # равны нулю. Нормировка на 1 сохраняет их, не создавая 0/0 -> NaN.
+    # Ненулевые максимумы и порядок всех остальных операций не меняются.
+    column_max[column_max == 0] = 1.0
+    original_dist = (dist_all / column_max).T
     all_num = original_dist.shape[0]
     initial_rank = np.argsort(original_dist, axis=1)
 

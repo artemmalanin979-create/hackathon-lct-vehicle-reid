@@ -61,13 +61,17 @@ def main() -> None:
     import numpy as np
     from .core.model import Embedder
     from .core.preprocess import read_rows
-    from .core.ranking import cosine_scores
+    from .core.ranking import cosine_scores, validate_scores
     from .core.rerank import rerank_scores
     from .core.submission import save_embeddings, write_candidates, write_submission
 
     if args.threshold is None:
         args.threshold = (config.DEFAULT_THRESHOLD_RERANK if args.rerank
                           else config.DEFAULT_THRESHOLD)
+    try:
+        validate_scores([], args.threshold)
+    except ValueError as exc:
+        ap.error(str(exc))
 
     t0 = time.perf_counter()
     q_rows = read_rows(args.query)

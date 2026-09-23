@@ -10,6 +10,14 @@ from __future__ import annotations
 import numpy as np
 
 
+def validate_scores(scores: np.ndarray, threshold: float | None = None) -> None:
+    """Неконечные числа — ошибка вычисления/ввода, а не отказ модели."""
+    if threshold is not None and not np.isfinite(threshold):
+        raise ValueError("порог threshold должен быть конечным (не NaN/Inf)")
+    if not np.isfinite(scores).all():
+        raise ValueError("scores содержат NaN или бесконечность")
+
+
 def cosine_scores(query: np.ndarray, gallery: np.ndarray) -> np.ndarray:
     """Матрица косинусов len(query) x len(gallery), float64."""
     q = np.asarray(query, dtype=np.float64)
@@ -35,10 +43,12 @@ def ranked_indices(score_row: np.ndarray) -> np.ndarray:
     Шкала любая, лишь бы «больше = лучше»: косинус или уверенность
     переранжирования. Для дистанции d это 1 - d (см. core/rerank.py).
     """
+    validate_scores(score_row)
     return np.argsort(-score_row, kind="stable")
 
 
 def accepted_candidates(score_row: np.ndarray, threshold: float) -> list[int]:
     """Индексы кандидатов со скором >= порога, по убыванию; пусто = отказ."""
+    validate_scores(score_row, threshold)
     order = ranked_indices(score_row)
     return [int(j) for j in order if score_row[j] >= threshold]

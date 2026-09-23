@@ -35,6 +35,7 @@ from ..core import config
 from ..core import explain as explain_mod
 from ..core.model import Embedder, model_file_sha256
 from ..core.preprocess import crop_to_input, resolve_image_path
+from ..core.ranking import validate_scores
 from .store import GalleryStore
 
 STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
@@ -165,12 +166,20 @@ def _search_by_vector(vec: np.ndarray, top_k: int, threshold: float) -> SearchRe
     шкалы в одном сервисе нельзя, поэтому API остаётся косинусным, а его порог —
     config.DEFAULT_THRESHOLD (см. README, раздел про две шкалы).
     """
+    try:
+        validate_scores([], threshold)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
     store: GalleryStore = state["store"]
     if not store.reachable():
         raise HTTPException(503, "хранилище галереи (Qdrant) недоступно")
     if not store.count():
         raise HTTPException(409, "галерея не загружена — выполните app.load_gallery")
     hits = store.search(vec, top_k)
+    try:
+        validate_scores([h["confidence"] for h in hits])
+    except ValueError as exc:
+        raise HTTPException(502, str(exc)) from exc
     best = hits[0]["confidence"] if hits else None
     accepted = [Candidate(gallery_id=h["gallery_id"],
                           confidence=round(h["confidence"], 6))

@@ -11,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .ranking import accepted_candidates, ranked_indices
+from .ranking import accepted_candidates, ranked_indices, validate_scores
 
 TOP_K_SUBMISSION = 10  # столько кандидатов принимает submission.csv
 
@@ -29,6 +29,7 @@ def write_submission(path: Path, q_ids: list[str], g_ids: list[str], scores: np.
     Скор — косинус либо уверенность переранжирования (1 - дистанция); шкалу
     выбирает вызывающий, порядок строк и формат от неё не зависят.
     """
+    validate_scores(scores)
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["query_id"] + [f"gallery_id_{k}" for k in range(1, TOP_K_SUBMISSION + 1)])
@@ -44,6 +45,7 @@ def write_candidates(path: Path, q_ids: list[str], g_ids: list[str],
     Порог обязан быть на той же шкале, что и скоры (см. config.DEFAULT_THRESHOLD
     для косинуса и config.DEFAULT_THRESHOLD_RERANK для переранжирования).
     """
+    validate_scores(scores, threshold)
     n_accepted = n_refused = 0
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
