@@ -28,14 +28,8 @@ import platform
 import time
 from pathlib import Path
 
-import numpy as np
-
 from .core import config
-from .core.model import Embedder
-from .core.preprocess import read_rows
-from .core.ranking import cosine_scores
-from .core.rerank import rerank_scores
-from .core.submission import save_embeddings, write_candidates, write_submission
+from .input_checks import require_dataset, require_files
 
 
 def main() -> None:
@@ -60,6 +54,17 @@ def main() -> None:
     ap.add_argument("--threads", type=int, default=0,
                     help="intra-op потоки onnxruntime (0 = по умолчанию)")
     args = ap.parse_args()
+    require_dataset([args.query, args.gallery], args.images_dir)
+    require_files([config.MODEL_PATH, config.MODEL2_PATH, config.WHITENING_PATH],
+                  hint="Восстановите веса из Git; см. service/model/fetch_model.sh.")
+
+    import numpy as np
+    from .core.model import Embedder
+    from .core.preprocess import read_rows
+    from .core.ranking import cosine_scores
+    from .core.rerank import rerank_scores
+    from .core.submission import save_embeddings, write_candidates, write_submission
+
     if args.threshold is None:
         args.threshold = (config.DEFAULT_THRESHOLD_RERANK if args.rerank
                           else config.DEFAULT_THRESHOLD)

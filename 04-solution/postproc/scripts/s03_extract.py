@@ -19,12 +19,7 @@ import sys
 import time
 from pathlib import Path
 
-import numpy as np
-import onnxruntime as ort
-from PIL import Image
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import JOB, REPO, SPLIT, DATA, read_meta, l2norm
+from inputs import JOB, REPO, SPLIT, DATA, require_dataset, require_files, BASE_HINT
 
 # Веса решения лежат в service/model (их кладёт service/model/fetch_model.sh).
 MODEL = Path(os.environ.get(
@@ -34,6 +29,8 @@ BATCH = 16
 
 
 def make_session():
+    import onnxruntime as ort
+
     opts = ort.SessionOptions()
     opts.log_severity_level = 3
     return ort.InferenceSession(str(MODEL), sess_options=opts,
@@ -41,6 +38,9 @@ def make_session():
 
 
 def load_crop(row, size, flip):
+    import numpy as np
+    from PIL import Image
+
     with Image.open(IMAGES / f"{row['image_id']}.jpg") as im:
         im = im.convert("RGB")
         crop = im.crop((int(row["x"]), int(row["y"]),
@@ -53,6 +53,9 @@ def load_crop(row, size, flip):
 
 
 def extract(session, rows, size, flip):
+    import numpy as np
+    from common import l2norm
+
     input_name = session.get_inputs()[0].name
     out = np.empty((len(rows), 512), dtype=np.float32)
     t0 = time.perf_counter()
@@ -78,6 +81,27 @@ def main():
     args = ap.parse_args()
     wanted_sets = [s.strip() for s in args.sets.split(",") if s.strip()]
     wanted_tags = [t.strip() for t in args.variants.split(",") if t.strip()]
+
+    csv_paths = {(sname, part): (SPLIT / f"val_{part}.csv" if sname == "val"
+                                else JOB / f"tune/tune_{part}.csv")
+                 for sname in ("val", "tune") if sname in wanted_sets
+                 for part in ("query", "gallery")}
+    require_files(csv_paths.values(), hint=BASE_HINT)
+    # Cached variants are skipped below: their source images are not required.
+    active_tags = [f"{size}{'f' if flip else ''}" for size, flip in ALL_VARIANTS
+                   if f"{size}{'f' if flip else ''}" in wanted_tags]
+    needed_csvs = [path for (sname, part), path in csv_paths.items()
+                   if any((sname == "val" and tag == "208")
+                          or not (JOB / f"out/{sname}_{part}_{tag}.npy").exists()
+                          for tag in active_tags)]
+    require_dataset(needed_csvs, IMAGES, suffixes=(".jpg",))
+    if "val" in wanted_sets and "208" in active_tags:
+        require_files([JOB / f"out/val_{part}.npy" for part in ("query", "gallery")],
+                      hint=BASE_HINT)
+    require_files([MODEL], hint="Веса — service/model/fetch_model.sh; проверьте REID_MODEL_PATH.")
+
+    import numpy as np
+    from common import read_meta
 
     session = make_session()
     all_sets = {

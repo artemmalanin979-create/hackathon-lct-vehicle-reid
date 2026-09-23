@@ -26,9 +26,7 @@ import json
 import time
 from pathlib import Path
 
-import numpy as np
-import onnxruntime as ort
-from PIL import Image
+from inputs import require_dataset, require_files
 
 INPUT_SIZE = 208
 
@@ -47,6 +45,9 @@ def read_rows(csv_path: Path):
 
 
 def load_crop(images_dir: Path, row, mask_bottom: float, grayscale: bool) -> np.ndarray:
+    import numpy as np
+    from PIL import Image
+
     image_id, x, y, w, h = row
     with Image.open(images_dir / f"{image_id}.jpg") as im:
         im = im.convert("RGB")
@@ -65,6 +66,8 @@ def load_crop(images_dir: Path, row, mask_bottom: float, grayscale: bool) -> np.
 
 
 def make_session(model_path: Path, threads: int) -> ort.InferenceSession:
+    import onnxruntime as ort
+
     opts = ort.SessionOptions()
     opts.log_severity_level = 3  # заглушить INFO/WARNING про неиспользуемые инициализаторы
     if threads:
@@ -75,6 +78,8 @@ def make_session(model_path: Path, threads: int) -> ort.InferenceSession:
 
 
 def l2norm(m: np.ndarray) -> np.ndarray:
+    import numpy as np
+
     return m / np.linalg.norm(m, axis=1, keepdims=True)
 
 
@@ -93,6 +98,10 @@ def main():
     ap.add_argument("--timing", type=Path, default=None, help="куда писать JSON замера")
     ap.add_argument("--limit", type=int, default=0, help="обработать только первые N строк")
     args = ap.parse_args()
+    require_dataset([args.csv], args.images_dir, suffixes=(".jpg",), limit=args.limit)
+    require_files([args.model], hint="Укажите --model; веса — service/model/fetch_model.sh.")
+
+    import numpy as np
 
     rows = read_rows(args.csv)
     if args.limit:

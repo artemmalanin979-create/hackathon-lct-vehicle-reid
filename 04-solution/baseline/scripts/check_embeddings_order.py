@@ -20,7 +20,7 @@ import os
 import sys
 from pathlib import Path
 
-import numpy as np
+from inputs import require_files, require_images, VECTOR_HINT
 
 JOB = Path(__file__).resolve().parent.parent
 REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
@@ -42,6 +42,14 @@ def read_rows(path: Path):
 
 
 def main():
+    require_files(
+        [JOB / "artifacts/embeddings.npy", MODEL]
+        + [DATA / f"test_{part}.csv" for part in ("query", "gallery")]
+        + [JOB / f"out/test_{part}.ids" for part in ("query", "gallery")],
+        hint="Сначала make_submission.py (baseline/README.md, шаг 3). " + VECTOR_HINT)
+
+    import numpy as np
+
     emb = np.load(JOB / "artifacts" / "embeddings.npy")
     q_rows = read_rows(DATA / "test_query.csv")
     g_rows = read_rows(DATA / "test_gallery.csv")
@@ -57,6 +65,7 @@ def main():
 
     rng = np.random.default_rng(20260915)
     picks = sorted(set(BOUNDARY) | set(rng.choice(len(all_rows), K_RANDOM, replace=False).tolist()))
+    require_images(DATA / "images", [all_rows[idx][0] for idx in picks], suffixes=(".jpg",))
     sess = make_session(MODEL, 0)
     inp = sess.get_inputs()[0].name
 

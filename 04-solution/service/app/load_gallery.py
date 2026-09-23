@@ -18,10 +18,8 @@ import json
 import time
 from pathlib import Path
 
-from .api.store import GalleryStore
 from .core import config
-from .core.model import Embedder
-from .core.preprocess import read_rows
+from .input_checks import require_dataset, require_files
 
 
 def main() -> None:
@@ -37,12 +35,13 @@ def main() -> None:
                     help="сколько секунд ждать готовности Qdrant (0 — не ждать)")
     args = ap.parse_args()
 
-    if not args.gallery.is_file():
-        raise SystemExit(f"нет CSV галереи {args.gallery}: проверьте каталог данных "
-                         "(в compose это DATA_DIR, внутри контейнера /data)")
-    if not args.images_dir.is_dir():
-        raise SystemExit(f"нет каталога изображений {args.images_dir}: проверьте каталог "
-                         "данных (в compose это DATA_DIR, внутри контейнера /data)")
+    require_dataset([args.gallery], args.images_dir)
+    require_files([config.MODEL_PATH, config.MODEL2_PATH, config.WHITENING_PATH],
+                  hint="Восстановите веса из Git; см. service/model/fetch_model.sh.")
+
+    from .api.store import GalleryStore
+    from .core.model import Embedder
+    from .core.preprocess import read_rows
 
     # Ждать хранилище ДО извлечения векторов: иначе минута работы модели
     # пропадает из-за ещё не поднявшейся БД.

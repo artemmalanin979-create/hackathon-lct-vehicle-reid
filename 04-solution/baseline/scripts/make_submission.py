@@ -20,13 +20,12 @@ import os
 import sys
 from pathlib import Path
 
-import numpy as np
+from inputs import require_files, VECTOR_HINT
 
 JOB = Path(__file__).resolve().parent.parent
 REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
 DATA = Path(os.environ.get("REID_DATA_DIR", REPO / "data"))
 sys.path.insert(0, str(REPO / "04-solution/eval"))
-from reid_metrics import scores_from_embeddings  # noqa: E402
 
 
 def read_ids(csv_path: Path):
@@ -38,6 +37,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--threshold", type=float, required=True)
     args = ap.parse_args()
+    require_files(
+        [DATA / f"test_{part}.csv" for part in ("query", "gallery")]
+        + [JOB / f"out/test_{part}.{ext}" for part in ("query", "gallery")
+           for ext in ("ids", "npy")], hint=VECTOR_HINT)
+
+    import numpy as np
+    from reid_metrics import scores_from_embeddings
 
     out, art = JOB / "out", JOB / "artifacts"
     art.mkdir(exist_ok=True)

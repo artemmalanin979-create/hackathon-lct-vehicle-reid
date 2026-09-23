@@ -12,6 +12,13 @@ import sys
 import time
 from pathlib import Path
 
+from inputs import JOB, SPLIT, require_files, BASE_HINT
+
+require_files(
+    [SPLIT / f"val_{part}.csv" for part in ("query", "gallery")]
+    + [JOB / f"out/val_{part}.{ext}" for part in ("query", "gallery")
+       for ext in ("ids", "npy")], hint=BASE_HINT)
+
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))

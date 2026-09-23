@@ -22,12 +22,21 @@ import os
 import sys
 from pathlib import Path
 
-import numpy as np
+from inputs import require_files, VECTOR_HINT
 
 JOB = Path(__file__).resolve().parent.parent
 REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
 EVAL_DIR = REPO / "04-solution/eval"
 SPLIT = REPO / "04-solution/split/files"
+if __name__ == "__main__":
+    require_files(
+        [SPLIT / f"val_{part}.csv" for part in ("query", "gallery")]
+        + [JOB / f"out/val_{part}.ids" for part in ("query", "gallery")]
+        + [JOB / f"out/val_{part}{suffix}.npy" for part in ("query", "gallery")
+           for suffix in ("", "_mask30", "_gray", "_mask30gray")], hint=VECTOR_HINT)
+
+import numpy as np
+
 sys.path.insert(0, str(EVAL_DIR))
 from reid_metrics import evaluate, scores_from_embeddings  # noqa: E402
 

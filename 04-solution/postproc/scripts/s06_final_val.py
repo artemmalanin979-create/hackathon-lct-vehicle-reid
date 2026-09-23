@@ -14,6 +14,13 @@ import json
 import sys
 from pathlib import Path
 
+from inputs import JOB, SPLIT, require_files, TTA_HINT
+
+require_files(
+    [SPLIT / f"val_{part}.csv" for part in ("query", "gallery")]
+    + [JOB / f"out/val_{part}_{tag}.npy" for part in ("query", "gallery")
+       for tag in ("208", "TTA", "TTA2")], hint=TTA_HINT)
+
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
