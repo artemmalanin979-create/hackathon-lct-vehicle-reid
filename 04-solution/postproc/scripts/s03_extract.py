@@ -19,7 +19,10 @@ import sys
 import time
 from pathlib import Path
 
-from inputs import JOB, REPO, SPLIT, DATA, require_dataset, require_files, BASE_HINT
+if __package__:
+    from .inputs import JOB, REPO, SPLIT, DATA, require_dataset, require_files, BASE_HINT
+else:
+    from inputs import JOB, REPO, SPLIT, DATA, require_dataset, require_files, BASE_HINT
 
 # Веса решения лежат в service/model (их кладёт service/model/fetch_model.sh).
 MODEL = Path(os.environ.get(
@@ -54,7 +57,10 @@ def load_crop(row, size, flip):
 
 def extract(session, rows, size, flip):
     import numpy as np
-    from common import l2norm
+    if __package__:
+        from .common import l2norm
+    else:
+        from common import l2norm
 
     input_name = session.get_inputs()[0].name
     out = np.empty((len(rows), 512), dtype=np.float32)
@@ -101,7 +107,10 @@ def main():
     require_files([MODEL], hint="Веса — service/model/fetch_model.sh; проверьте REID_MODEL_PATH.")
 
     import numpy as np
-    from common import read_meta
+    if __package__:
+        from .common import read_meta
+    else:
+        from common import read_meta
 
     session = make_session()
     all_sets = {

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import stat
 import sys
 from pathlib import Path
 
@@ -27,14 +28,24 @@ def fail_inputs(problems, hint):
 def require_files(paths, *, hint):
     problems = []
     for path in dict.fromkeys(map(Path, paths)):
-        if not path.is_file():
+        try:
+            mode = path.stat().st_mode
+        except FileNotFoundError:
             problems.append(f"Нет файла: {path}")
-        else:
+            continue
+        except OSError as exc:
+            problems.append(f"Не читается: {path}: {exc}")
+            continue
+        if stat.S_ISDIR(mode):
+            problems.append(f"Ожидался файл, найден каталог: {path}")
+        elif stat.S_ISREG(mode):
             try:
                 with path.open("rb"):
                     pass
             except OSError as exc:
                 problems.append(f"Не читается: {path}: {exc}")
+        # Do not open streams here: even opening a FIFO can block or consume its
+        # only writer. The actual loader checks readability on its single read.
     if problems:
         fail_inputs(problems, hint)
 
@@ -56,6 +67,10 @@ def require_dataset(csv_paths, images_dir, *, suffixes=(".jpg", ".jpeg", ".png",
     require_files(csv_paths, hint=DATA_HINT)
     image_ids = []
     for path in csv_paths:
+        # A pipe/FIFO cannot be replayed. Leave it intact for the actual loader;
+        # early image diagnostics are deliberately limited to regular CSV files.
+        if not Path(path).is_file():
+            continue
         try:
             with Path(path).open(newline="") as stream:
                 rows = list(csv.DictReader(stream))

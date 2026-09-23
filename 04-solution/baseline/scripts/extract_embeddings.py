@@ -26,7 +26,10 @@ import json
 import time
 from pathlib import Path
 
-from inputs import require_dataset, require_files
+if __package__:
+    from .inputs import require_dataset, require_files
+else:
+    from inputs import require_dataset, require_files
 
 INPUT_SIZE = 208
 
