@@ -22,6 +22,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 from urllib.parse import quote, unquote, urlsplit
 
@@ -72,6 +73,21 @@ img { max-width: 100%; height: auto; }
 """
 
 
+def check_freshness(source: Path, output: Path) -> dict:
+    """Read the PDF's own Subject, not a sidecar that can go stale separately."""
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    info = subprocess.run(["pdfinfo", "-enc", "UTF-8", str(output)],
+                          capture_output=True, text=True, env={**os.environ, "LC_ALL": "C"})
+    if info.returncode:
+        raise ValueError(f"Cannot read PDF metadata: {info.stderr.strip()}")
+    match = re.search(r"^Subject:\s+SOLUTION\.md SHA-256: ([0-9a-f]{64})\s*$",
+                      info.stdout, re.MULTILINE)
+    pdf_source_hash = match.group(1) if match else None
+    return {"ok": pdf_source_hash == source_hash, "source": str(source),
+            "output": str(output), "source_sha256": source_hash,
+            "pdf_source_sha256": pdf_source_hash}
+
+
 def preserve_table_text(source: str) -> str:
     """Keep surplus literal pipes in the last cell instead of dropping text.
 
@@ -104,7 +120,24 @@ def main() -> int:
     parser.add_argument('--source', type=Path, default=script_dir.parent / 'SOLUTION.md')
     parser.add_argument('--output', type=Path, default=script_dir / 'SOLUTION.pdf')
     parser.add_argument('--html', type=Path, help='Optionally save the rendered HTML for inspection')
+    parser.add_argument('--check', action='store_true',
+                        help='Check PDF freshness without rendering (requires pdfinfo / poppler-utils)')
     args = parser.parse_args()
+
+    source, output = args.source.resolve(), args.output.resolve()
+    if source == output or args.html and args.html.resolve() in (source, output):
+        parser.error('Source, PDF and optional HTML must have distinct paths.')
+    if args.check:
+        try:
+            result = check_freshness(source, output)
+        except (OSError, ValueError) as exc:
+            parser.error(f'{exc}. Freshness check requires pdfinfo (poppler-utils).')
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        if not result['ok']:
+            print('PDF устарел или не содержит SHA-256 источника. Пересоберите: '
+                  'python3 06-documentation/build_pdf.py (с теми же --source/--output).',
+                  file=sys.stderr)
+        return 0 if result['ok'] else 2
     try:
         import markdown
         import pydyf
@@ -112,9 +145,6 @@ def main() -> int:
     except ImportError as exc:
         parser.error(f'{exc}. Required: Markdown 3.7 and WeasyPrint 64.1; see script docstring.')
 
-    source, output = args.source.resolve(), args.output.resolve()
-    if source == output or args.html and args.html.resolve() in (source, output):
-        parser.error('Source, PDF and optional HTML must have distinct paths.')
     raw = source.read_bytes()
     source_hash = hashlib.sha256(raw).hexdigest()
     body = markdown.markdown(preserve_table_text(raw.decode('utf-8')),
@@ -157,6 +187,12 @@ def main() -> int:
                     url_fetcher=offline_fetch).render()
     # A deterministic identifier, without build timestamps or machine paths.
     document.write_pdf(output, finisher=portable_links, pdf_identifier=source_hash.encode('ascii'))
+    try:
+        freshness = check_freshness(source, output)
+    except (OSError, ValueError) as exc:
+        parser.error(f'PDF written but freshness not verified: {exc}. Install poppler-utils.')
+    if not freshness['ok']:
+        parser.error('Source changed during generation or PDF metadata does not match; rebuild.')
     if args.html:
         args.html.parent.mkdir(parents=True, exist_ok=True)
         args.html.write_text(document_html, encoding='utf-8')
@@ -165,6 +201,7 @@ def main() -> int:
         'output': str(output), 'bytes': output.stat().st_size,
         'pages': len(document.pages), 'relative_link_annotations': local_links,
         'pdf_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
+        'freshness_verified': True,
         'versions': {name: importlib.metadata.version(name)
                      for name in ('Markdown', 'weasyprint', 'pydyf')},
     }, ensure_ascii=False, indent=2))

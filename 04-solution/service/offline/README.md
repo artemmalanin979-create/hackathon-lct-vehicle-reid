@@ -19,19 +19,26 @@
 sha256sum -c SHA256SUMS
 docker load -i python-3.13-slim.tar.gz     # или podman load -i …
 docker load -i qdrant-v1.15.5.tar.gz
-docker images | grep -E 'python|qdrant'    # сверить идентификаторы и размеры
+docker images | grep -E 'python|qdrant'    # посмотреть загруженные теги
 ```
 
-Должно получиться ровно это:
+Размер и вид идентификатора в списке зависят от движка и хранилища образов.
+В проверке Podman показал 130/181 MB, Docker с classic image store — 126/178 MB
+для тех же config ID. Пример вывода Podman:
 
 ```
 python       3.13-slim   51cce855bb6e   130 MB
 qdrant       v1.15.5     0ad2e23181e5   181 MB
 ```
 
+Docker 29.7.2 с containerd image store для этих же архивов показывает manifest ID
+`cfd07ed85b05` / `da16f065092a` и CONTENT SIZE 130/181 MB; DISK USAGE — отдельная
+величина. Побайтовую целостность поставки проверяет `sha256sum -c SHA256SUMS`
+до загрузки, а не буквальное совпадение этой распечатки.
+
 Проверено загрузкой в **отдельное хранилище** (`podman --root /tmp/proverka --runroot
 /tmp/proverka-run load`), чтобы проверка не могла испортить рабочее: оба образа встают с
-правильными идентификаторами и размерами.
+правильными идентификаторами; архивы проверяются по `SHA256SUMS`.
 
 ## Сборка без обращения к реестру
 

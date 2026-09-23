@@ -26,7 +26,8 @@ podman build --no-cache --pull=never --network none -t vehicle-reid-offline .
 `--network none` изолирует только `RUN` и не запрещает загрузку базового образа.
 У Docker `--pull` — булев флаг: `--pull=never` к `docker build` неприменим.
 Для Docker с локальным base используется `--pull=false`, а внешний доступ
-отключают у daemon/BuildKit; этот путь ещё не проверен на Docker Engine.
+отключают у daemon/BuildKit. Этот путь проверен на Docker Engine 29.7.2 /
+Compose 2.40.3 — [отчёт](../../audit/docker-path/README.md).
 Семантика флагов: [Docker build reference](https://docs.docker.com/reference/cli/docker/buildx/build/).
 
 Этот аудит не воспроизвёл test-артефакты из кадров: исходных изображений в его
