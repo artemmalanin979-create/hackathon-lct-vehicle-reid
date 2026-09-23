@@ -1,0 +1,44 @@
+{
+  "initial_head": "46bc5ee92c49bde42d555adfa914185d01e47ff9",
+  "observed_head": "ec94cffc24762345dcf524220d09e6396a51704d",
+  "status": "",
+  "note": "Two commits from concurrent work added only scaling/atomic-publication evidence; job_82 performed no commits or repository writes.",
+  "input_checks": {
+    "04-solution/eval/scope_metrics.py": {
+      "sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+      "matches_current_main": true
+    },
+    "04-solution/eval/reid_metrics.py": {
+      "sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+      "matches_current_main": true
+    },
+    "04-solution/refusal/scripts/metric_adapter.py": {
+      "sha256": "1a1daadb32d6626682ddeefe4e58ca9efa848a815923518e5b464277d15e6351",
+      "matches_current_main": true
+    },
+    "04-solution/service/app/core/rerank.py": {
+      "sha256": "3b1d33338dcbe2a127b889893f7734d415de06ee879de1cf7cf6adf4dc0bd7d7",
+      "matches_current_main": true
+    },
+    "04-solution/service/app/core/ranking.py": {
+      "sha256": "b6c16d756f01c20723a87058e1e70cdc8c1e67205b78884bbb79135186eb9d94",
+      "matches_current_main": true
+    },
+    "04-solution/service/app/core/config.py": {
+      "sha256": "54d85b96bc7c8672a4de282c77a644ad9dd8ac96a1cc0c7dfd7dabd8af71a767",
+      "matches_current_main": true
+    },
+    "04-solution/split/files/val_gallery.csv": {
+      "sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+      "matches_current_main": true
+    },
+    "04-solution/split/files/val_query.csv": {
+      "sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+      "matches_current_main": true
+    },
+    "04-solution/audit/stability/seeds.csv": {
+      "sha256": "51ef96ee2f273aea56fb636d276adf98fd65d11a1c8d2c1334763e242a86be38",
+      "matches_current_main": true
+    }
+  }
+}
