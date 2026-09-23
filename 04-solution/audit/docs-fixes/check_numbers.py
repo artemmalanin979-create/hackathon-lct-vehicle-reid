@@ -1,20 +1,37 @@
 #!/usr/bin/env python3
-"""Compare documented metric tables directly with their unrounded JSON sources."""
+"""Check numeric claims against raw JSON, including prose and repeated deltas.
+
+Every fractional/scientific token in tracked README/entry documents is inventoried.
+Unbound occurrences are explicitly not verified; --require-complete rejects
+such incomplete coverage instead of treating a selected sample as a full audit.
+"""
+import argparse
+from decimal import Decimal, ROUND_HALF_EVEN
 import json
 from pathlib import Path
 import re
+import subprocess
 import sys
 
 REPO = Path(__file__).resolve().parents[3]
 CHECKS = []
+NUMBER = r"[+−-]?(?:\d+[.,]\d+(?:[eE][+−-]?\d+)?|\d+[eE][+−-]?\d+)"
+# A sentence-final dot is punctuation; a dot followed by a digit is a version
+# component. Treating both alike silently loses numeric claims in prose.
+NUMBER_RE = re.compile(r"(?<![\w.])" + NUMBER + r"(?!\w|\.\d)")
 
 
 def ref(file, *keys):
     path = REPO / "04-solution" / file
-    obj = json.loads(path.read_text())
+    obj = json.loads(path.read_text(), parse_float=Decimal)
     for key in keys:
         obj = obj[key]
     return obj, str(path.relative_to(REPO)) + "#" + "/".join(map(str, keys))
+
+
+def difference(left, right):
+    """Subtract raw source values, never already rounded documentation tokens."""
+    return left[0] - right[0], left[1] + " - " + right[1]
 
 
 def scores(file, keys, fields):
@@ -28,21 +45,126 @@ def table(file, marker, values, offset=0):
                 else marker in line.split("|")[1])]
     assert len(matches) == 1, (file, marker, matches)
     lineno, line = matches[0]
-    tokens = re.findall(r"[+−-]?\d+[.,]\d+", "|".join(line.split("|")[2:]))[offset:]
-    check_tokens(file, lineno, tokens, values)
+    start = line.index("|", 1) + 1
+    matches = list(NUMBER_RE.finditer(line, start))[offset:]
+    check_tokens(file, lineno, [m.group() for m in matches], values,
+                 [m.start() + 1 for m in matches])
 
 
-def check_tokens(file, lineno, tokens, values):
+def check_tokens(file, lineno, tokens, values, columns=None):
     assert len(tokens) >= len(values), (file, lineno, tokens, values)
-    for token, (value, source) in zip(tokens, values):
+    line = (REPO / file).read_text().splitlines()[lineno - 1]
+    cursor = 0
+    for index, (token, (value, source)) in enumerate(zip(tokens, values)):
         normalized = token.replace(",", ".").replace("−", "-").lstrip("+")
-        digits = len(normalized.split(".")[1])
-        expected = f"{value:.{digits}f}"
-        CHECKS.append({"file": file, "line": lineno, "claim": token, "source": source,
-                       "raw": value, "expected": expected, "ok": normalized == expected})
+        claim = Decimal(normalized)
+        expected = Decimal(value).quantize(Decimal(1).scaleb(claim.as_tuple().exponent),
+                                           rounding=ROUND_HALF_EVEN)
+        column = columns[index] if columns else line.index(token, cursor) + 1
+        cursor = column - 1 + len(token)
+        CHECKS.append({"file": file, "line": lineno, "column": column,
+                       "claim": token, "source": source, "raw": str(value),
+                       "expected": str(expected), "ok": claim == expected})
+
+
+def prose(file, patterns, value):
+    """Bind by surrounding meaning, not by the expected or known wrong digits.
+
+    Each pattern has a named `claim` group. Scan ALL occurrences (including
+    bullets/repetitions); a missing selector is a broken binding, not a pass.
+    """
+    for pattern in patterns:
+        count = 0
+        for lineno, line in enumerate((REPO / file).read_text().splitlines(), 1):
+            for match in re.finditer(pattern, line):
+                check_tokens(file, lineno, [match['claim']], [value],
+                             [match.start('claim') + 1])
+                count += 1
+        assert count, (file, "No numeric claim matched", pattern)
+
+
+def numeric_inventory(files, checks):
+    checked = {(c['file'], c['line'], c['column']) for c in checks}
+    inventory = []
+    for file in files:
+        fenced = False
+        for lineno, line in enumerate((REPO / file).read_text().splitlines(), 1):
+            if line.lstrip().startswith(('```', '~~~')):
+                fenced = not fenced
+            for match in NUMBER_RE.finditer(line):
+                key = (file, lineno, match.start() + 1)
+                inventory.append({'file': file, 'line': lineno, 'column': key[2],
+                                  'claim': match.group(), 'text': line,
+                                  'kind': 'code' if fenced else 'table' if line.startswith('|') else 'prose',
+                                  'status': 'checked' if key in checked else 'unbound'})
+    return inventory
+
+
+def coverage_status(inventory, require_complete):
+    return 2 if require_complete and any(c['status'] == 'unbound' for c in inventory) else 0
+
+
+def check_additional_claims():
+    """Extend the original table sample with the critic's independent cases."""
+    baseline = 'baseline/out/metrics_summary.json'
+    rank = ['mAP', 'Rank-1', 'Rank-5', 'mINP']
+    doc = '04-solution/baseline/REPORT.md'
+    for marker, key in [('**OSNet, market**', 'base_market'),
+                        ('Случайные векторы, среднее', 'random_mean'),
+                        ('OSNet, без исключения', 'base_no_camera_excl')]:
+        table(doc, marker, scores(baseline, [key, 'top_k10'], rank[:3]))
+    table(doc, '=OSNet, market', scores(baseline, ['base_market'],
+                                      ['threshold', 'F1', 'precision', 'recall', 'TNR', 'auc_pr']))
+    for marker, key in [('База (без', 'base_market'), ('Низ 30% закрыт', 'ablate_mask30'),
+                        ('Обесцвечено', 'ablate_gray'), ('Низ 30% +', 'ablate_mask30gray')]:
+        values = []
+        for field in rank:
+            value = ref(baseline, key, 'full_gallery', field)
+            values.append(value)
+            if field in rank[:2] and key != 'base_market':
+                values.append(difference(value, ref(baseline, 'base_market', 'full_gallery', field)))
+        table(doc, marker, values + [ref(baseline, key, 'top_k10', 'mAP')])
+    doc = '04-solution/refusal/README.md'
+    source = 'refusal/results/summary.json'
+    for marker, field in [('F1', 'f1'), ('TNR', 'tnr'), ('Recall', 'recall')]:
+        left = ref(source, 'market_absolute_presence', 'selected', 'best_f1', field)
+        right = ref(source, 'market_absolute_presence', 'selected', 'robust_balanced', field)
+        # This table is identified by its header; later historical tables may
+        # repeat row labels. Bind the selected rows under this header.
+        lines = (REPO / doc).read_text().splitlines()
+        header = lines.index('| | Было (max F1) | Стало | Изменение |')
+        lineno, line = next((i + 1, line) for i, line in enumerate(lines)
+                            if i > header and line.startswith('|')
+                            and line.split('|')[1].strip() == marker)
+        matches = list(NUMBER_RE.finditer(line))
+        check_tokens(doc, lineno, [m.group() for m in matches],
+                     [left, right, difference(right, left)], [m.start() + 1 for m in matches])
+    for size in (208, 256, 320, 384):
+        table('04-solution/cloud/bigres/results/README.md', str(size),
+              [ref('cloud/bigres/results/results.json', 'configs', f'{model}_{size}', 'metrics', 'kr', 'mAP')
+               for model in ('osnet', 'combined_v1', 'd1_j48')])
+    number = '(?P<claim>' + NUMBER + ')'
+    prose('04-solution/training/README.md',
+          [r'Формально порог превышен на\s+' + number,
+           r'\*\*' + number + r'\s+меньше разброса измерения',
+           r'парный бутстрэп по \d+ значениям AP: Δ =\s*' + number],
+          ref('training/attempt-2/out/boot_ainv2.json', 'ainv2rr_minus_osnetrr', 'delta'))
+    combined = 'training/combined/s02_metrics.json'
+    prose('SOLUTION.md',
+          [r'Прирост mAP от переранжирования у d1_j48 — \*\*' + number,
+           r'из §6 и прирост\s+' + number],
+          difference(ref(combined, 'd1_j48', 'kr', 'mAP'),
+                     ref(combined, 'd1_j48', 'cos', 'mAP')))
+    prose('SOLUTION.md', [r'278/1110 ≈\s*' + number],
+          (Decimal(278) / Decimal(1110), '278 / 1110'))
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--require-complete', action='store_true',
+                        help='Exit 2 if any inventoried numeric occurrence lacks a source binding')
+    args = parser.parse_args()
+    CHECKS.clear()
     rank = ["mAP", "Rank-1", "Rank-5", "mINP"]
     combined = "training/combined/s02_metrics.json"
     baseline = "baseline/out/metrics_summary.json"
@@ -72,7 +194,7 @@ def main():
         table("04-solution/baseline/review/README.md", marker, scores(final, [key], rank[:2]))
     grid_file = "postproc/out/grid_val_ttacrit.json"
     points, _ = ref(grid_file, "points")
-    chosen = next(i for i, p in enumerate(points) if (p["k1"], p["k2"], p["lam"]) == (6, 3, 0.3))
+    chosen = next(i for i, p in enumerate(points) if (p["k1"], p["k2"], p["lam"]) == (6, 3, Decimal('0.3')))
     tta4 = scores(grid_file, ["points", chosen], rank[:2])
     table("04-solution/baseline/review/README.md", "Вместе", tta4)
     table("04-solution/baseline/review/README.md", "Усреднение по четырём входам",
@@ -131,10 +253,21 @@ def main():
         file = "split/out/evalrun/degenerate_results.json"
         table("04-solution/split/README.md", f" {field} ", [ref(file, "random", 0, "expected", field)] +
               [ref(file, "random", i, "observed", field) for i in range(3)])
+    check_additional_claims()
+    tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=REPO).decode().split('\0')
+    files = [f for f in tracked if f.endswith('.md') and
+             (Path(f).name.startswith('README') or f in
+              ('SOLUTION.md', '04-solution/baseline/REPORT.md', '04-solution/postproc/REPORT.md'))]
+    inventory = numeric_inventory(files, CHECKS)
+    unbound = sum(c['status'] == 'unbound' for c in inventory)
     errors = [c for c in CHECKS if not c["ok"]]
     print(json.dumps({"checks": len(CHECKS), "documents": len({c['file'] for c in CHECKS}),
-                      "errors": errors, "claims": CHECKS}, ensure_ascii=False, indent=2))
-    return bool(errors)
+                      "errors": errors, "claims": CHECKS,
+                      "coverage": {"documents_scanned": len(files), "numeric_occurrences": len(inventory),
+                                   "unbound_occurrences": unbound, "complete": not unbound,
+                                   "note": "Unbound numbers include metrics, parameters, versions and timings; none are declared verified."},
+                      "inventory": inventory}, ensure_ascii=False, indent=2))
+    return 1 if errors else coverage_status(inventory, args.require_complete)
 
 
 if __name__ == "__main__":
