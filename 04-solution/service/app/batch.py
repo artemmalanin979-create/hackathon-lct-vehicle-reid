@@ -30,6 +30,7 @@ from pathlib import Path
 
 import numpy as np
 
+from .batch_safety import atomic_output
 from .core import config
 from .core.model import Embedder
 from .core.preprocess import read_rows
@@ -70,52 +71,52 @@ def main() -> None:
     if not q_rows or not g_rows:
         raise SystemExit("пустой query или gallery CSV — прогон не имеет смысла")
 
-    embedder = Embedder(threads=args.threads)  # sha256 весов проверяется здесь
-    q_emb = embedder.embed_rows(args.images_dir, q_rows, args.batch)
-    g_emb = embedder.embed_rows(args.images_dir, g_rows, args.batch)
-    t_embed = time.perf_counter() - t0
+    with atomic_output(args.out_dir) as out_dir:
+        embedder = Embedder(threads=args.threads)  # sha256 весов проверяется здесь
+        q_emb = embedder.embed_rows(args.images_dir, q_rows, args.batch)
+        g_emb = embedder.embed_rows(args.images_dir, g_rows, args.batch)
+        t_embed = time.perf_counter() - t0
 
-    args.out_dir.mkdir(parents=True, exist_ok=True)
-    # Сначала векторы: они не зависят от способа упорядочивания кандидатов.
-    emb = save_embeddings(args.out_dir / "embeddings.npy", q_emb, g_emb)
+        # Сначала векторы: они не зависят от способа упорядочивания кандидатов.
+        emb = save_embeddings(out_dir / "embeddings.npy", q_emb, g_emb)
 
-    t_rank = time.perf_counter()
-    if args.rerank:
-        scores = rerank_scores(q_emb, g_emb, config.RERANK_K1, config.RERANK_K2,
-                               config.RERANK_LAMBDA)
-    else:
-        scores = cosine_scores(q_emb, g_emb)
-    t_rank = time.perf_counter() - t_rank
-    q_ids = [r.image_id for r in q_rows]
-    g_ids = [r.image_id for r in g_rows]
-    write_submission(args.out_dir / "submission.csv", q_ids, g_ids, scores)
-    counts = write_candidates(args.out_dir / "candidates.csv", q_ids, g_ids,
-                              scores, args.threshold)
+        t_rank = time.perf_counter()
+        if args.rerank:
+            scores = rerank_scores(q_emb, g_emb, config.RERANK_K1, config.RERANK_K2,
+                                   config.RERANK_LAMBDA)
+        else:
+            scores = cosine_scores(q_emb, g_emb)
+        t_rank = time.perf_counter() - t_rank
+        q_ids = [r.image_id for r in q_rows]
+        g_ids = [r.image_id for r in g_rows]
+        write_submission(out_dir / "submission.csv", q_ids, g_ids, scores)
+        counts = write_candidates(out_dir / "candidates.csv", q_ids, g_ids,
+                                  scores, args.threshold)
 
-    info = {
-        **counts,
-        "rerank": bool(args.rerank),
-        "score_scale": "rerank_confidence_1_minus_distance" if args.rerank else "cosine",
-        "rerank_params": ([config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA]
-                          if args.rerank else None),
-        "queries": len(q_rows),
-        "gallery": len(g_rows),
-        "embeddings_shape": [int(x) for x in emb.shape],
-        "embed_elapsed_s": round(t_embed, 3),
-        "rank_elapsed_s": round(t_rank, 3),
-        "total_elapsed_s": round(time.perf_counter() - t0, 3),
-        "model": config.MODEL_NAME,
-        "model_sha256": config.MODEL_SHA256,
-        "model2": config.MODEL2_NAME,
-        "model2_sha256": config.MODEL2_SHA256,
-        "whitening_sha256": config.WHITENING_SHA256,
-        "versions": {
-            "python": platform.python_version(),
-            "numpy": np.__version__,
-            "onnxruntime": __import__("onnxruntime").__version__,
-        },
-    }
-    (args.out_dir / "run_info.json").write_text(json.dumps(info, indent=2) + "\n")
+        info = {
+            **counts,
+            "rerank": bool(args.rerank),
+            "score_scale": "rerank_confidence_1_minus_distance" if args.rerank else "cosine",
+            "rerank_params": ([config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA]
+                              if args.rerank else None),
+            "queries": len(q_rows),
+            "gallery": len(g_rows),
+            "embeddings_shape": [int(x) for x in emb.shape],
+            "embed_elapsed_s": round(t_embed, 3),
+            "rank_elapsed_s": round(t_rank, 3),
+            "total_elapsed_s": round(time.perf_counter() - t0, 3),
+            "model": config.MODEL_NAME,
+            "model_sha256": config.MODEL_SHA256,
+            "model2": config.MODEL2_NAME,
+            "model2_sha256": config.MODEL2_SHA256,
+            "whitening_sha256": config.WHITENING_SHA256,
+            "versions": {
+                "python": platform.python_version(),
+                "numpy": np.__version__,
+                "onnxruntime": __import__("onnxruntime").__version__,
+            },
+        }
+        (out_dir / "run_info.json").write_text(json.dumps(info, indent=2) + "\n")
     print(json.dumps(info))
 
 
