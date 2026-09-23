@@ -1,4 +1,8 @@
-"""Freshness regressions using the actual shipped PDF, without rendering."""
+"""Freshness regressions using the actual shipped PDF, without rendering.
+
+Also run `python -m unittest -v check_build_pdf_render` from this directory in
+the documented rendering environment to verify source changes during rendering.
+"""
 import json
 from pathlib import Path
 import subprocess
