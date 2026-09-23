@@ -4,8 +4,13 @@
 Tested system tools (no installation/download during generation): Python 3.13,
 Markdown 3.7, WeasyPrint 64.1 (pydyf 0.11.0), Pango 1.56.4, Fontconfig 2.16.0,
 DejaVu Sans / DejaVu Sans Mono 2.37. Rendering uses installed Python packages,
-system libraries and fonts, not the ReID runtime wheels. Poppler 25.02.0 is
-used for validation.
+system libraries and fonts, not the ReID runtime wheels. Poppler (pdfinfo;
+tested 25.02.0) is required to verify freshness after every build.
+
+Check the shipped PDF without rendering or importing the rendering packages:
+    python3 06-documentation/build_pdf.py --check
+Exit 0 means its embedded source SHA-256 matches; exit 2 means stale/missing
+metadata, missing inputs, or a missing validation dependency.
 
 The default output is SOLUTION.pdf next to this script. All Markdown content,
 including any appendices, is rendered; source files are never rewritten.
