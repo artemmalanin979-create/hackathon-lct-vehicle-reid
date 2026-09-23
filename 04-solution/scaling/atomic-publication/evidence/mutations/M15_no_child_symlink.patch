@@ -1,11 +1,5 @@
 --- original
 +++ M15_no_child_symlink
-@@ -19,7 +19,7 @@
-         if not destination.is_dir():
-             raise SystemExit(f"Выходной путь {destination} не является каталогом")
-         children = list(destination.iterdir())
+@@ -22 +22 @@
 -        if any(p.name not in OUTPUT_FILES or not p.is_file() or p.is_symlink() for p in children):
 +        if any(p.name not in OUTPUT_FILES or not p.is_file() for p in children):
-             raise SystemExit(f"В {destination} есть посторонние файлы; укажите отдельный --out-dir")
- 
- 

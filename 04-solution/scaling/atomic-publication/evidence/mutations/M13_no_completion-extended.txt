@@ -17,7 +17,7 @@ test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_un
 FAIL: test_candidates_are_required_even_when_other_three_files_exist (test_batch_safety.PublicationTests.test_candidates_are_required_even_when_other_three_files_exist)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M13_no_completion/extended/tests/test_batch_safety.py", line 126, in test_candidates_are_required_even_when_other_three_files_exist
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M13_no_completion/extended/tests/test_batch_safety.py", line 126, in test_candidates_are_required_even_when_other_three_files_exist
     with self.assertRaisesRegex(RuntimeError, 'Неполный'):
          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: RuntimeError not raised
@@ -26,12 +26,12 @@ AssertionError: RuntimeError not raised
 FAIL: test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M13_no_completion/extended/tests/test_batch_safety.py", line 66, in test_incomplete_set_is_not_published
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M13_no_completion/extended/tests/test_batch_safety.py", line 66, in test_incomplete_set_is_not_published
     with self.assertRaisesRegex(RuntimeError, 'Неполный'):
          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: RuntimeError not raised
 
 ----------------------------------------------------------------------
-Ran 13 tests in 0.108s
+Ran 13 tests in 0.103s
 
 FAILED (failures=2)

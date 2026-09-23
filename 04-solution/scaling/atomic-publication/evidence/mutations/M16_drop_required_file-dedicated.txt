@@ -5,7 +5,7 @@ test_candidates_are_required_even_when_other_three_files_exist (test_batch_safet
 FAIL: test_candidates_are_required_even_when_other_three_files_exist (test_batch_safety.PublicationTests.test_candidates_are_required_even_when_other_three_files_exist)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M16_drop_required_file/dedicated/tests/test_batch_safety.py", line 126, in test_candidates_are_required_even_when_other_three_files_exist
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M16_drop_required_file/dedicated/tests/test_batch_safety.py", line 126, in test_candidates_are_required_even_when_other_three_files_exist
     with self.assertRaisesRegex(RuntimeError, 'Неполный'):
          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: RuntimeError not raised

@@ -5,7 +5,7 @@ test_destination_is_rechecked_before_publication (test_batch_safety.PublicationT
 FAIL: test_destination_is_rechecked_before_publication (test_batch_safety.PublicationTests.test_destination_is_rechecked_before_publication)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M14_no_recheck/dedicated/tests/test_batch_safety.py", line 100, in test_destination_is_rechecked_before_publication
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M14_no_recheck/dedicated/tests/test_batch_safety.py", line 100, in test_destination_is_rechecked_before_publication
     with self.assertRaisesRegex(SystemExit, 'посторонние'):
          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: SystemExit not raised

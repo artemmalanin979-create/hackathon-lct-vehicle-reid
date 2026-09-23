@@ -64,7 +64,8 @@ for key, description, old, new in mutations:
         cp = subprocess.run(command, capture_output=True, text=True, timeout=40)
         log = ROOT / 'evidence' / 'mutations' / f'{key}-{label}.txt'
         log.parent.mkdir(exist_ok=True)
-        log.write_text(cp.stdout + cp.stderr)
+        # Normalize terminal trailing spaces in the checked-in transcript.
+        log.write_text('\n'.join(line.rstrip() for line in (cp.stdout + cp.stderr).splitlines()) + '\n')
         result_line = next(line for line in cp.stdout.splitlines() if line.startswith('RESULT_JSON='))
         record[label] = {**json.loads(result_line.split('=', 1)[1]), 'returncode': cp.returncode,
                          'log': str(log.relative_to(ROOT))}
@@ -75,7 +76,7 @@ for key, description, old, new in mutations:
         assert record['dedicated']['failed'] and not record['dedicated']['errors'], record
     patch_path = ROOT / 'evidence' / 'mutations' / f'{key}.patch'
     patch_path.write_text(''.join(difflib.unified_diff(source.splitlines(True), mutated.splitlines(True),
-                                                    fromfile='original', tofile=key)))
+                                                    fromfile='original', tofile=key, n=0)))
     records.append(record)
     print(key, 'KILLED', 'dedicated=' + str(record['new_test']), flush=True)
 (ROOT / 'evidence/mutations.json').write_text(json.dumps(records, ensure_ascii=False, indent=2) + '\n')

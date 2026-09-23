@@ -10,6 +10,6 @@ test_symlink_is_rejected_without_following_it (test_batch_safety.PublicationTest
 test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_unrelated_files_are_not_removed) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.054s
+Ran 9 tests in 0.045s
 
 OK

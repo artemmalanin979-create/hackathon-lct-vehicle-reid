@@ -13,12 +13,12 @@ test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_un
 FAIL: test_symlink_is_rejected_without_following_it (test_batch_safety.PublicationTests.test_symlink_is_rejected_without_following_it)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M12_no_symlink/original/tests/test_batch_safety.py", line 90, in test_symlink_is_rejected_without_following_it
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M12_no_symlink/original/tests/test_batch_safety.py", line 90, in test_symlink_is_rejected_without_following_it
     self.fail('must reject')
     ~~~~~~~~~^^^^^^^^^^^^^^^
 AssertionError: must reject
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.054s
+Ran 9 tests in 0.049s
 
 FAILED (failures=1)

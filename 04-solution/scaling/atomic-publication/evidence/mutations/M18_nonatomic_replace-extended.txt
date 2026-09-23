@@ -7,7 +7,7 @@ test_failed_rename_preserves_previous_complete_result (test_batch_safety.Publica
 test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published) ... ok
 test_replace_nonempty_result_in_one_exchange (test_batch_safety.PublicationTests.test_replace_nonempty_result_in_one_exchange) ... ok
 test_replace_precreated_empty_directory (test_batch_safety.PublicationTests.test_replace_precreated_empty_directory) ... ok
-test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) ... 
+test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) ...
   test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=False) ... FAIL
   test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True) ... FAIL
 test_success_is_invisible_until_all_files_are_ready (test_batch_safety.PublicationTests.test_success_is_invisible_until_all_files_are_ready) ... ok
@@ -19,29 +19,29 @@ test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_un
 FAIL: test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=False)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M18_nonatomic_replace/extended/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M18_nonatomic_replace/extended/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
     self.assertEqual({p.name for p in out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
-'candidates.csv'
+'run_info.json'
 'embeddings.npy'
 'submission.csv'
-'run_info.json'
+'candidates.csv'
 
 ======================================================================
 FAIL: test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M18_nonatomic_replace/extended/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M18_nonatomic_replace/extended/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
     self.assertEqual({p.name for p in out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
-'candidates.csv'
+'run_info.json'
 'embeddings.npy'
 'submission.csv'
-'run_info.json'
+'candidates.csv'
 
 ----------------------------------------------------------------------
-Ran 13 tests in 0.099s
+Ran 13 tests in 0.103s
 
 FAILED (failures=2)

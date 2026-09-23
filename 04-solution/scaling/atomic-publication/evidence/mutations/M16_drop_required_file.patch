@@ -1,11 +1,5 @@
 --- original
 +++ M16_drop_required_file
-@@ -9,7 +9,7 @@
- import shutil
- import tempfile
- 
+@@ -12 +12 @@
 -OUTPUT_FILES = {"embeddings.npy", "submission.csv", "candidates.csv", "run_info.json"}
 +OUTPUT_FILES = {"embeddings.npy", "submission.csv", "run_info.json"}
- 
- 
- def _check_destination(destination: Path) -> None:

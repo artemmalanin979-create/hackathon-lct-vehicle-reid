@@ -13,12 +13,12 @@ test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_un
 FAIL: test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M13_no_completion/original/tests/test_batch_safety.py", line 61, in test_incomplete_set_is_not_published
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M13_no_completion/original/tests/test_batch_safety.py", line 61, in test_incomplete_set_is_not_published
     with self.assertRaisesRegex(RuntimeError, 'Неполный'):
          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: RuntimeError not raised
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.049s
+Ran 9 tests in 0.050s
 
 FAILED (failures=1)

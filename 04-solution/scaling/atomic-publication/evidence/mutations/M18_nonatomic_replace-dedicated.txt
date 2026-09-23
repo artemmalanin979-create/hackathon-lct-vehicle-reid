@@ -1,5 +1,5 @@
 RESULT_JSON={"tests": 1, "failed": ["test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=False)", "test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True)"], "errors": [], "success": false}
-test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) ... 
+test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) ...
   test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=False) ... FAIL
   test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True) ... FAIL
 
@@ -7,29 +7,29 @@ test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.P
 FAIL: test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=False)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M18_nonatomic_replace/dedicated/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M18_nonatomic_replace/dedicated/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
     self.assertEqual({p.name for p in out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
 'submission.csv'
-'run_info.json'
 'embeddings.npy'
 'candidates.csv'
+'run_info.json'
 
 ======================================================================
 FAIL: test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M18_nonatomic_replace/dedicated/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M18_nonatomic_replace/dedicated/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
     self.assertEqual({p.name for p in out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
 'submission.csv'
-'run_info.json'
 'embeddings.npy'
 'candidates.csv'
+'run_info.json'
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.051s
+Ran 1 test in 0.048s
 
 FAILED (failures=2)

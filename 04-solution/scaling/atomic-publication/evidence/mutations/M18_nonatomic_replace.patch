@@ -1,9 +1,6 @@
 --- original
 +++ M18_nonatomic_replace
-@@ -26,21 +26,10 @@
- def _publish(staging: Path, destination: Path) -> None:
-     _check_destination(destination)
-     if destination.exists():
+@@ -29,15 +29,4 @@
 -        # A single exchange also handles a previous non-empty result atomically.
 -        # Never remove the old result before the new one is visible.
 -        libc = ctypes.CDLL(None, use_errno=True)
@@ -23,6 +20,3 @@
 +    destination.mkdir()
 +    for item in staging.iterdir():
 +        item.rename(destination / item.name)
- 
- 
- @contextmanager

@@ -1,5 +1,5 @@
 RESULT_JSON={"tests": 13, "failed": ["test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) (previous=False)", "test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) (previous=True)", "test_destination_is_rechecked_before_publication (test_batch_safety.PublicationTests.test_destination_is_rechecked_before_publication)", "test_exception_does_not_damage_old_result (test_batch_safety.PublicationTests.test_exception_does_not_damage_old_result)", "test_replace_nonempty_result_in_one_exchange (test_batch_safety.PublicationTests.test_replace_nonempty_result_in_one_exchange)", "test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True)", "test_success_is_invisible_until_all_files_are_ready (test_batch_safety.PublicationTests.test_success_is_invisible_until_all_files_are_ready)"], "errors": ["test_candidates_are_required_even_when_other_three_files_exist (test_batch_safety.PublicationTests.test_candidates_are_required_even_when_other_three_files_exist)", "test_failed_rename_preserves_previous_complete_result (test_batch_safety.PublicationTests.test_failed_rename_preserves_previous_complete_result)", "test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published)", "test_replace_precreated_empty_directory (test_batch_safety.PublicationTests.test_replace_precreated_empty_directory)"], "success": false}
-test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) ... 
+test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) ...
   test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) (previous=False) ... FAIL
   test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) (previous=True) ... FAIL
 test_candidates_are_required_even_when_other_three_files_exist (test_batch_safety.PublicationTests.test_candidates_are_required_even_when_other_three_files_exist) ... ERROR
@@ -9,7 +9,7 @@ test_failed_rename_preserves_previous_complete_result (test_batch_safety.Publica
 test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published) ... ERROR
 test_replace_nonempty_result_in_one_exchange (test_batch_safety.PublicationTests.test_replace_nonempty_result_in_one_exchange) ... FAIL
 test_replace_precreated_empty_directory (test_batch_safety.PublicationTests.test_replace_precreated_empty_directory) ... ERROR
-test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) ... 
+test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) ...
   test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True) ... FAIL
 test_success_is_invisible_until_all_files_are_ready (test_batch_safety.PublicationTests.test_success_is_invisible_until_all_files_are_ready) ... FAIL
 test_symlink_inside_previous_result_is_rejected (test_batch_safety.PublicationTests.test_symlink_inside_previous_result_is_rejected) ... ok
@@ -20,30 +20,30 @@ test_unrelated_files_are_not_removed (test_batch_safety.PublicationTests.test_un
 ERROR: test_candidates_are_required_even_when_other_three_files_exist (test_batch_safety.PublicationTests.test_candidates_are_required_even_when_other_three_files_exist)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 127, in test_candidates_are_required_even_when_other_three_files_exist
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 127, in test_candidates_are_required_even_when_other_three_files_exist
     with safety.atomic_output(self.out) as stage:
          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
   File "/usr/lib64/python3.13/contextlib.py", line 148, in __exit__
     next(self.gen)
     ~~~~^^^^^^^^^^
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/app/batch_safety.py", line 61, in atomic_output
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/app/batch_safety.py", line 61, in atomic_output
     if {p.name for p in staging.iterdir()} != OUTPUT_FILES:
                         ~~~~~~~~~~~~~~~^^
   File "/usr/lib64/python3.13/pathlib/_local.py", line 575, in iterdir
     with os.scandir(root_dir) as scandir_it:
          ~~~~~~~~~~^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmphg4cg76a/.out.incomplete-uvsvehe7'
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpzgnl6hl7/.out.incomplete-6yhna88g'
 
 ======================================================================
 ERROR: test_failed_rename_preserves_previous_complete_result (test_batch_safety.PublicationTests.test_failed_rename_preserves_previous_complete_result)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 76, in test_failed_rename_preserves_previous_complete_result
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 76, in test_failed_rename_preserves_previous_complete_result
     with safety.atomic_output(self.out) as stage:
          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
   File "/usr/lib64/python3.13/contextlib.py", line 141, in __enter__
     return next(self.gen)
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/app/batch_safety.py", line 59, in atomic_output
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/app/batch_safety.py", line 59, in atomic_output
     _publish(staging, destination)
     ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/lib64/python3.13/unittest/mock.py", line 1169, in __call__
@@ -60,31 +60,31 @@ OSError: simulated EBUSY
 ERROR: test_incomplete_set_is_not_published (test_batch_safety.PublicationTests.test_incomplete_set_is_not_published)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 67, in test_incomplete_set_is_not_published
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 67, in test_incomplete_set_is_not_published
     with safety.atomic_output(self.out) as stage:
          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
   File "/usr/lib64/python3.13/contextlib.py", line 148, in __exit__
     next(self.gen)
     ~~~~^^^^^^^^^^
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/app/batch_safety.py", line 61, in atomic_output
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/app/batch_safety.py", line 61, in atomic_output
     if {p.name for p in staging.iterdir()} != OUTPUT_FILES:
                         ~~~~~~~~~~~~~~~^^
   File "/usr/lib64/python3.13/pathlib/_local.py", line 575, in iterdir
     with os.scandir(root_dir) as scandir_it:
          ~~~~~~~~~~^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp7bh7mxi2/.out.incomplete-_t4tbsd0'
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp4h_kp_9j/.out.incomplete-66awy2dq'
 
 ======================================================================
 ERROR: test_replace_precreated_empty_directory (test_batch_safety.PublicationTests.test_replace_precreated_empty_directory)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 52, in test_replace_precreated_empty_directory
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 52, in test_replace_precreated_empty_directory
     with safety.atomic_output(self.out) as stage:
          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
   File "/usr/lib64/python3.13/contextlib.py", line 148, in __exit__
     next(self.gen)
     ~~~~^^^^^^^^^^
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/app/batch_safety.py", line 62, in atomic_output
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/app/batch_safety.py", line 62, in atomic_output
     raise RuntimeError("Неполный выходной комплект; публикация отменена")
 RuntimeError: Неполный выходной комплект; публикация отменена
 
@@ -92,7 +92,7 @@ RuntimeError: Неполный выходной комплект; публика
 FAIL: test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) (previous=False)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 208, in test_abrupt_death_leaves_only_explicitly_incomplete_staging
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 208, in test_abrupt_death_leaves_only_explicitly_incomplete_staging
     self.assertFalse(self.out.exists())
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
 AssertionError: True is not false
@@ -101,22 +101,22 @@ AssertionError: True is not false
 FAIL: test_abrupt_death_leaves_only_explicitly_incomplete_staging (test_batch_safety.PublicationTests.test_abrupt_death_leaves_only_explicitly_incomplete_staging) (previous=True)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 206, in test_abrupt_death_leaves_only_explicitly_incomplete_staging
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 206, in test_abrupt_death_leaves_only_explicitly_incomplete_staging
     self.assert_complete('old')
     ~~~~~~~~~~~~~~~~~~~~^^^^^^^
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 32, in assert_complete
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 32, in assert_complete
     self.assertEqual({p.name for p in self.out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
-'run_info.json'
-'candidates.csv'
 'submission.csv'
+'candidates.csv'
+'run_info.json'
 
 ======================================================================
 FAIL: test_destination_is_rechecked_before_publication (test_batch_safety.PublicationTests.test_destination_is_rechecked_before_publication)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 106, in test_destination_is_rechecked_before_publication
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 106, in test_destination_is_rechecked_before_publication
     self.assertEqual((self.out / name).read_text(), 'old')
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: 'new' != 'old'
@@ -128,25 +128,25 @@ AssertionError: 'new' != 'old'
 FAIL: test_exception_does_not_damage_old_result (test_batch_safety.PublicationTests.test_exception_does_not_damage_old_result)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 62, in test_exception_does_not_damage_old_result
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 62, in test_exception_does_not_damage_old_result
     self.assert_complete('old')
     ~~~~~~~~~~~~~~~~~~~~^^^^^^^
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 32, in assert_complete
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 32, in assert_complete
     self.assertEqual({p.name for p in self.out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
-'run_info.json'
-'candidates.csv'
 'submission.csv'
+'candidates.csv'
+'run_info.json'
 
 ======================================================================
 FAIL: test_replace_nonempty_result_in_one_exchange (test_batch_safety.PublicationTests.test_replace_nonempty_result_in_one_exchange)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 46, in test_replace_nonempty_result_in_one_exchange
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 46, in test_replace_nonempty_result_in_one_exchange
     self.assert_complete('old')
     ~~~~~~~~~~~~~~~~~~~~^^^^^^^
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 33, in assert_complete
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 33, in assert_complete
     self.assertTrue(all(p.read_text() == value for p in self.out.iterdir()))
     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: False is not true
@@ -155,25 +155,25 @@ AssertionError: False is not true
 FAIL: test_sigkill_during_publication_keeps_a_complete_generation (test_batch_safety.PublicationTests.test_sigkill_during_publication_keeps_a_complete_generation) (previous=True)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 180, in test_sigkill_during_publication_keeps_a_complete_generation
     self.assertEqual({p.name for p in out.iterdir()}, EXPECTED_FILES)
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AssertionError: Items in the second set but not the first:
 'submission.csv'
-'run_info.json'
 'candidates.csv'
 'embeddings.npy'
+'run_info.json'
 
 ======================================================================
 FAIL: test_success_is_invisible_until_all_files_are_ready (test_batch_safety.PublicationTests.test_success_is_invisible_until_all_files_are_ready)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 38, in test_success_is_invisible_until_all_files_are_ready
+  File "/tmp/claude-1000/-home-artem/5e2ca8be-cffa-4e23-9efe-426be88024de/scratchpad/job_81/mutation-final/mutations/M17_publish_early/extended/tests/test_batch_safety.py", line 38, in test_success_is_invisible_until_all_files_are_ready
     self.assertFalse(self.out.exists())
     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
 AssertionError: True is not false
 
 ----------------------------------------------------------------------
-Ran 13 tests in 0.109s
+Ran 13 tests in 0.102s
 
 FAILED (failures=7, errors=4)
