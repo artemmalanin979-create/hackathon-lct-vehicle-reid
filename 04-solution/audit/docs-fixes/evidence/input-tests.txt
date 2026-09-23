@@ -1,0 +1,15 @@
+test_missing_files_collected_together (test_check_inputs.InputGateTests.test_missing_files_collected_together) ... ok
+test_runner_fails_before_ml_imports (test_check_inputs.InputGateTests.test_runner_fails_before_ml_imports) ... ok
+test_same_size_corruption_rejected (test_check_inputs.InputGateTests.test_same_size_corruption_rejected) ... ok
+test_test_does_not_require_validation (test_check_inputs.InputGateTests.test_test_does_not_require_validation) ... ok
+test_validation_without_test_files (test_check_inputs.InputGateTests.test_validation_without_test_files) ... ok
+test_documented_commands_fail_before_site_packages (test_cli_inputs.CliInputTests.test_documented_commands_fail_before_site_packages) ... ok
+test_limit_does_not_require_unused_images (test_cli_inputs.CliInputTests.test_limit_does_not_require_unused_images) ... ok
+test_missing_files_listed_together (test_cli_inputs.CliInputTests.test_missing_files_listed_together) ... ok
+test_missing_image_before_ml_import (test_cli_inputs.CliInputTests.test_missing_image_before_ml_import) ... ok
+test_supported_extensions_and_named_file (test_cli_inputs.CliInputTests.test_supported_extensions_and_named_file) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.440s
+
+OK

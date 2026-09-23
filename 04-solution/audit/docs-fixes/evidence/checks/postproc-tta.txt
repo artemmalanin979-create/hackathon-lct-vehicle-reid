@@ -1,0 +1,4 @@
+val_query_TTA.npy: 208+208f+256
+val_query_TTA2.npy: 208+256
+val_gallery_TTA.npy: 208+208f+256
+val_gallery_TTA2.npy: 208+256

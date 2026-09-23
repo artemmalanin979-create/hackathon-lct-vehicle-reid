@@ -1,0 +1,1 @@
+{"csv": "/job/checks/fixture/04-solution/split/files/val_gallery.csv", "rows": 10, "batch": 16, "threads": 2, "mask_bottom": 0.0, "grayscale": true, "elapsed_s": 1.87, "throughput_obj_per_s": 5.35}

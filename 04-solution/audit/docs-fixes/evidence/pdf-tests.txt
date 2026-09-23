@@ -1,0 +1,8 @@
+test_changed_source_is_rejected_without_rewriting_pdf (test_build_pdf.PdfFreshnessTests.test_changed_source_is_rejected_without_rewriting_pdf) ... ok
+test_missing_and_invalid_pdf_are_diagnostic (test_build_pdf.PdfFreshnessTests.test_missing_and_invalid_pdf_are_diagnostic) ... ok
+test_shipped_pdf_is_current (test_build_pdf.PdfFreshnessTests.test_shipped_pdf_is_current) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.206s
+
+OK

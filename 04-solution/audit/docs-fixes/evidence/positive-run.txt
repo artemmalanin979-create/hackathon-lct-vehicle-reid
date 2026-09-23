@@ -1,0 +1,24 @@
+extract-val-query 0
+extract-val-query_mask30 0
+extract-val-query_gray 0
+extract-val-query_mask30gray 0
+extract-val-gallery 0
+extract-val-gallery_mask30 0
+extract-val-gallery_gray 0
+extract-val-gallery_mask30gray 0
+extract-test-query 0
+extract-test-gallery 0
+baseline-eval 0
+baseline-submission 0
+postproc-baseline 0
+postproc-extract 0
+postproc-tta 0
+postproc-final 0
+postproc-cached-without-images 0
+batch-before-rerank 0
+batch-after-rerank 0
+batch-before-cosine-flag 0
+batch-after-cosine-flag 0
+batch-before-cosine-env 0
+batch-after-cosine-env 0
+PASS: all commands, all supported image suffixes; batch outputs byte-identical

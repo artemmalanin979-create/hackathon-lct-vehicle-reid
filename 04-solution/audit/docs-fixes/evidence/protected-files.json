@@ -1,0 +1,145 @@
+{
+  "base": "3e2cc9a",
+  "files": [
+    {
+      "path": "04-solution/eval/reid_metrics.py",
+      "original_git_blob": "1e6dbf344a67f2246d6162237a028240fd12a97f",
+      "current_git_blob": "1e6dbf344a67f2246d6162237a028240fd12a97f",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/eval/scope_metrics.py",
+      "original_git_blob": "3e81197bab215d2728518e58fbb3b9e11191c9fc",
+      "current_git_blob": "3e81197bab215d2728518e58fbb3b9e11191c9fc",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/postproc/scripts/common.py",
+      "original_git_blob": "63fd7f4b880c455498296ca24fd27c7ef747809e",
+      "current_git_blob": "63fd7f4b880c455498296ca24fd27c7ef747809e",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/__init__.py",
+      "original_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "current_git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/config.py",
+      "original_git_blob": "c9e0017a83e6d19f47c157575f2b38844b4647bf",
+      "current_git_blob": "c9e0017a83e6d19f47c157575f2b38844b4647bf",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/explain.py",
+      "original_git_blob": "90a983e96b229bf66f07c3ce14b2ed174e4da464",
+      "current_git_blob": "90a983e96b229bf66f07c3ce14b2ed174e4da464",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/model.py",
+      "original_git_blob": "00ffd5e1edc79a3ab7ff991d88773d57910dbcca",
+      "current_git_blob": "00ffd5e1edc79a3ab7ff991d88773d57910dbcca",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/preprocess.py",
+      "original_git_blob": "46a85c1b3007699cad3eb0259d917d58fd3e3aee",
+      "current_git_blob": "46a85c1b3007699cad3eb0259d917d58fd3e3aee",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/ranking.py",
+      "original_git_blob": "a3cf8f0f8ac5bbcc535088cf8d6b1f703f2d6f56",
+      "current_git_blob": "a3cf8f0f8ac5bbcc535088cf8d6b1f703f2d6f56",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/rerank.py",
+      "original_git_blob": "293e0a15884bba85b75a24189a120a8dd3a3b6a4",
+      "current_git_blob": "293e0a15884bba85b75a24189a120a8dd3a3b6a4",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/app/core/submission.py",
+      "original_git_blob": "61fee999d5de727ad29ef8bac8eafd9494a5b670",
+      "current_git_blob": "61fee999d5de727ad29ef8bac8eafd9494a5b670",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/README.md",
+      "original_git_blob": "8c5de8ac87aafbc9c2a7e552aad3c3d81b6a69f0",
+      "current_git_blob": "8c5de8ac87aafbc9c2a7e552aad3c3d81b6a69f0",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/SHA256SUMS",
+      "original_git_blob": "61c31e628dfdcd760198d03fa9a95a8976937b79",
+      "current_git_blob": "61c31e628dfdcd760198d03fa9a95a8976937b79",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/candidates.csv",
+      "original_git_blob": "49cfb2980cef4a036723111c20fc437db96e410c",
+      "current_git_blob": "49cfb2980cef4a036723111c20fc437db96e410c",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/embeddings.npy",
+      "original_git_blob": "acfe9ce3653ee7fa832be236b051072cd91d004b",
+      "current_git_blob": "acfe9ce3653ee7fa832be236b051072cd91d004b",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/manifest.json",
+      "original_git_blob": "6fd50b7d44a4e3997b4f832ab226395ba7dc9485",
+      "current_git_blob": "6fd50b7d44a4e3997b4f832ab226395ba7dc9485",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/run_info.json",
+      "original_git_blob": "932a2bcbc35788433ca42927d1be875c8cfae7fb",
+      "current_git_blob": "932a2bcbc35788433ca42927d1be875c8cfae7fb",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/artifacts-final/submission.csv",
+      "original_git_blob": "d290202c19b5fd37e609e961a7fe3076eb5f555b",
+      "current_git_blob": "d290202c19b5fd37e609e961a7fe3076eb5f555b",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/docker-compose.yml",
+      "original_git_blob": "46ea221d98c7e4aa858efbbc1fc43fe16b1114f4",
+      "current_git_blob": "46ea221d98c7e4aa858efbbc1fc43fe16b1114f4",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/model/fetch_model.sh",
+      "original_git_blob": "249b30461baeebaefcc0ed00607514962f5dc4eb",
+      "current_git_blob": "249b30461baeebaefcc0ed00607514962f5dc4eb",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/model/lw_ens_j48_rho0.5.npz",
+      "original_git_blob": "ddae280d3f0dd3ba48cf5aad21a678655f617546",
+      "current_git_blob": "ddae280d3f0dd3ba48cf5aad21a678655f617546",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/model/osnet_ain_combined_v1.onnx",
+      "original_git_blob": "b87fd5a94fc4fc6e156359027bbba6968a909059",
+      "current_git_blob": "b87fd5a94fc4fc6e156359027bbba6968a909059",
+      "unchanged": true
+    },
+    {
+      "path": "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "original_git_blob": "970003fe143971091c2430cb37e408c6d23fc112",
+      "current_git_blob": "970003fe143971091c2430cb37e408c6d23fc112",
+      "unchanged": true
+    }
+  ],
+  "count": 23,
+  "unchanged": true
+}

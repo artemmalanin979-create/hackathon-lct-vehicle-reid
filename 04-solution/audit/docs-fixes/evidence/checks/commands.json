@@ -1,0 +1,484 @@
+[
+  {
+    "name": "extract-val-query",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_query.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_query.npy",
+      "--threads",
+      "2",
+      "--ids-out",
+      "out/val_query.ids"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-query.txt"
+  },
+  {
+    "name": "extract-val-query_mask30",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_query.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_query_mask30.npy",
+      "--threads",
+      "2",
+      "--mask-bottom",
+      "0.30"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-query_mask30.txt"
+  },
+  {
+    "name": "extract-val-query_gray",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_query.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_query_gray.npy",
+      "--threads",
+      "2",
+      "--grayscale"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-query_gray.txt"
+  },
+  {
+    "name": "extract-val-query_mask30gray",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_query.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_query_mask30gray.npy",
+      "--threads",
+      "2",
+      "--mask-bottom",
+      "0.30",
+      "--grayscale"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-query_mask30gray.txt"
+  },
+  {
+    "name": "extract-val-gallery",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_gallery.npy",
+      "--threads",
+      "2",
+      "--ids-out",
+      "out/val_gallery.ids"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-gallery.txt"
+  },
+  {
+    "name": "extract-val-gallery_mask30",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_gallery_mask30.npy",
+      "--threads",
+      "2",
+      "--mask-bottom",
+      "0.30"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-gallery_mask30.txt"
+  },
+  {
+    "name": "extract-val-gallery_gray",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_gallery_gray.npy",
+      "--threads",
+      "2",
+      "--grayscale"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-gallery_gray.txt"
+  },
+  {
+    "name": "extract-val-gallery_mask30gray",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/04-solution/split/files/val_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/val_gallery_mask30gray.npy",
+      "--threads",
+      "2",
+      "--mask-bottom",
+      "0.30",
+      "--grayscale"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-val-gallery_mask30gray.txt"
+  },
+  {
+    "name": "extract-test-query",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/data/test_query.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/test_query.npy",
+      "--threads",
+      "2",
+      "--ids-out",
+      "out/test_query.ids"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-test-query.txt"
+  },
+  {
+    "name": "extract-test-gallery",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/extract_embeddings.py",
+      "--csv",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/images",
+      "--model",
+      "/srv/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "--out",
+      "out/test_gallery.npy",
+      "--threads",
+      "2",
+      "--ids-out",
+      "out/test_gallery.ids"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "extract-test-gallery.txt"
+  },
+  {
+    "name": "baseline-eval",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/run_eval.py"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "baseline-eval.txt"
+  },
+  {
+    "name": "baseline-submission",
+    "cwd": "/job/checks/fixture/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/make_submission.py",
+      "--threshold",
+      "0.34921352213815304"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "baseline-submission.txt"
+  },
+  {
+    "name": "postproc-baseline",
+    "cwd": "/job/checks/fixture/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s01_verify_baseline.py"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "postproc-baseline.txt"
+  },
+  {
+    "name": "postproc-extract",
+    "cwd": "/job/checks/fixture/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s03_extract.py",
+      "--sets",
+      "val",
+      "--variants",
+      "208,208f,256"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "postproc-extract.txt"
+  },
+  {
+    "name": "postproc-tta",
+    "cwd": "/job/checks/fixture/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s05b_make_tta_vectors.py",
+      "--sets",
+      "val"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "postproc-tta.txt"
+  },
+  {
+    "name": "postproc-final",
+    "cwd": "/job/checks/fixture/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s06_final_val.py"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "postproc-final.txt"
+  },
+  {
+    "name": "postproc-cached-without-images",
+    "cwd": "/job/checks/fixture/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s03_extract.py",
+      "--sets",
+      "val",
+      "--variants",
+      "208f,256"
+    ],
+    "overrides": {
+      "REID_DATA_DIR": "/job/checks/fixture/absent-data"
+    },
+    "exit": 0,
+    "log": "postproc-cached-without-images.txt"
+  },
+  {
+    "name": "batch-before-rerank",
+    "cwd": "/job/before/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--query",
+      "/job/checks/fixture/data/test_query.csv",
+      "--gallery",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/mixed",
+      "--out-dir",
+      "/job/checks/batch-before-rerank",
+      "--threads",
+      "2"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "batch-before-rerank.txt"
+  },
+  {
+    "name": "batch-after-rerank",
+    "cwd": "/job/checks/fixture/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--query",
+      "/job/checks/fixture/data/test_query.csv",
+      "--gallery",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/mixed",
+      "--out-dir",
+      "/job/checks/batch-after-rerank",
+      "--threads",
+      "2"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "batch-after-rerank.txt"
+  },
+  {
+    "name": "batch-before-cosine-flag",
+    "cwd": "/job/before/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--query",
+      "/job/checks/fixture/data/test_query.csv",
+      "--gallery",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/mixed",
+      "--out-dir",
+      "/job/checks/batch-before-cosine-flag",
+      "--threads",
+      "2",
+      "--no-rerank"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "batch-before-cosine-flag.txt"
+  },
+  {
+    "name": "batch-after-cosine-flag",
+    "cwd": "/job/checks/fixture/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--query",
+      "/job/checks/fixture/data/test_query.csv",
+      "--gallery",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/mixed",
+      "--out-dir",
+      "/job/checks/batch-after-cosine-flag",
+      "--threads",
+      "2",
+      "--no-rerank"
+    ],
+    "overrides": {},
+    "exit": 0,
+    "log": "batch-after-cosine-flag.txt"
+  },
+  {
+    "name": "batch-before-cosine-env",
+    "cwd": "/job/before/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--query",
+      "/job/checks/fixture/data/test_query.csv",
+      "--gallery",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/mixed",
+      "--out-dir",
+      "/job/checks/batch-before-cosine-env",
+      "--threads",
+      "2"
+    ],
+    "overrides": {
+      "REID_RERANK": "0"
+    },
+    "exit": 0,
+    "log": "batch-before-cosine-env.txt"
+  },
+  {
+    "name": "batch-after-cosine-env",
+    "cwd": "/job/checks/fixture/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--query",
+      "/job/checks/fixture/data/test_query.csv",
+      "--gallery",
+      "/job/checks/fixture/data/test_gallery.csv",
+      "--images-dir",
+      "/job/checks/fixture/data/mixed",
+      "--out-dir",
+      "/job/checks/batch-after-cosine-env",
+      "--threads",
+      "2"
+    ],
+    "overrides": {
+      "REID_RERANK": "0"
+    },
+    "exit": 0,
+    "log": "batch-after-cosine-env.txt"
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "identical_except_timing": [
+    "/job/repo/04-solution/baseline/out/metrics_summary.json",
+    "/job/repo/04-solution/postproc/out/s01_verify_baseline.json",
+    "/job/repo/04-solution/postproc/out/final_val.json"
+  ],
+  "baseline_artifact_sha256": {
+    "submission.csv": "7259e7202bcbd5fd442df3de3d0d19d6b6febacefd7e76491dcbc4582fdfef74",
+    "candidates.csv": "213fa03aeca08182ff978da7e683a8796e8c37cee3982e379339f0d361a4f229",
+    "embeddings.npy": "4841420191d177f08b30f2646d81dc8d17470fa7b2dbdb05cd5db41be2fac379"
+  },
+  "baseline_order": {
+    "shape_ok": true,
+    "dtype": "float32",
+    "finite": true,
+    "l2_norm_max_dev": 5.960464477539063e-08,
+    "ids_order_ok": true,
+    "recompute_positions": [
+      0,
+      104,
+      342,
+      353,
+      455,
+      500,
+      603,
+      759,
+      960,
+      1022,
+      1088,
+      1109,
+      1110,
+      1120,
+      1149,
+      1195,
+      1264,
+      1369,
+      1481,
+      1575,
+      1689,
+      1705,
+      1726,
+      1859
+    ],
+    "recompute_min_cos_at_idx": 1.0,
+    "recompute_all_ok": true,
+    "failed": [],
+    "VERDICT": "OK"
+  }
+}

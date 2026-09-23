@@ -1,0 +1,1 @@
+{"shape_ok": true, "ids_order_ok": true, "recompute_min_cos_at_idx": 1.0, "recompute_all_ok": true, "VERDICT": "OK"}

@@ -1,0 +1,123 @@
+[
+  {
+    "name": "baseline-eval-full",
+    "cwd": "/job/repo/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/run_eval.py"
+    ],
+    "exit": 0,
+    "log": "baseline-eval-full.txt"
+  },
+  {
+    "name": "baseline-submission-full",
+    "cwd": "/job/repo/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/make_submission.py",
+      "--threshold",
+      "0.34921352213815304"
+    ],
+    "exit": 0,
+    "log": "baseline-submission-full.txt"
+  },
+  {
+    "name": "baseline-order-full",
+    "cwd": "/job/repo/04-solution/baseline",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/check_embeddings_order.py"
+    ],
+    "exit": 0,
+    "log": "baseline-order-full.txt"
+  },
+  {
+    "name": "postproc-baseline-full",
+    "cwd": "/job/repo/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s01_verify_baseline.py"
+    ],
+    "exit": 0,
+    "log": "postproc-baseline-full.txt"
+  },
+  {
+    "name": "postproc-tta-full",
+    "cwd": "/job/repo/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s05b_make_tta_vectors.py",
+      "--sets",
+      "val"
+    ],
+    "exit": 0,
+    "log": "postproc-tta-full.txt"
+  },
+  {
+    "name": "postproc-final-full",
+    "cwd": "/job/repo/04-solution/postproc",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "scripts/s06_final_val.py"
+    ],
+    "exit": 0,
+    "log": "postproc-final-full.txt"
+  },
+  {
+    "name": "validation-inputs",
+    "cwd": "/job/repo/04-solution/reproduce",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "check_inputs.py",
+      "--mode",
+      "val",
+      "--data-dir",
+      "/data",
+      "--report",
+      "/job/full/validation-inputs.json"
+    ],
+    "exit": 0,
+    "log": "validation-inputs.txt"
+  },
+  {
+    "name": "batch-validation",
+    "cwd": "/job/repo/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "-m",
+      "app.batch",
+      "--images-dir",
+      "/data/images",
+      "--query",
+      "/job/repo/04-solution/split/files/val_query.csv",
+      "--gallery",
+      "/job/repo/04-solution/split/files/val_gallery.csv",
+      "--out-dir",
+      "/job/full/val",
+      "--threads",
+      "2"
+    ],
+    "exit": 0,
+    "log": "batch-validation.txt"
+  },
+  {
+    "name": "metrics-validation",
+    "cwd": "/job/repo/04-solution/service",
+    "command": [
+      "/usr/local/bin/python",
+      "-B",
+      "tools/eval_split.py",
+      "/job/full/val/embeddings.npy"
+    ],
+    "exit": 0,
+    "log": "metrics-validation.txt"
+  }
+]

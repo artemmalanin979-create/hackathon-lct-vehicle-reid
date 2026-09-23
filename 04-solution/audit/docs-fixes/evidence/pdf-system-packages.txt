@@ -1,0 +1,24 @@
+Updating and loading repositories:
+Repositories loaded.
+Package "dejavu-sans-fonts-2.37-29.fc44.noarch" is already installed.
+
+Package                 Arch   Version          Repository      Size
+Installing:
+ dejavu-sans-mono-fonts noarch 0:2.37-29.fc44   fedora       1.2 MiB
+ poppler-utils          x86_64 0:26.01.0-3.fc44 fedora     813.6 KiB
+
+Transaction Summary:
+ Installing:         2 packages
+
+Total size of inbound packages is 775 KiB. Need to download 775 KiB.
+After this operation, 2 MiB extra will be used (install 2 MiB, remove 0 B).
+[1/2] poppler-utils-0:26.01.0-3.fc44.x8 100% | 861.2 KiB/s | 305.7 KiB |  00m00s
+[2/2] dejavu-sans-mono-fonts-0:2.37-29. 100% |   1.2 MiB/s | 469.3 KiB |  00m00s
+--------------------------------------------------------------------------------
+[2/2] Total                             100% | 986.0 KiB/s | 775.0 KiB |  00m01s
+Running transaction
+[1/4] Verify package files              100% | 125.0   B/s |   2.0   B |  00m00s
+[2/4] Prepare transaction               100% |   1.0   B/s |   2.0   B |  00m01s
+[3/4] Installing dejavu-sans-mono-fonts 100% |  14.8 MiB/s |   1.2 MiB |  00m00s
+[4/4] Installing poppler-utils-0:26.01. 100% | 579.7 KiB/s | 821.5 KiB |  00m01s
+Complete!

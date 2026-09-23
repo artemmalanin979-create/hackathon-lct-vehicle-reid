@@ -1,0 +1,1 @@
+{"threshold": 0.34921352213815304, "queries_with_candidates": 1107, "queries_refused": 3, "refused_share": 0.0027, "embeddings_shape": [1860, 512]}

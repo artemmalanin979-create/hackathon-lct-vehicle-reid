@@ -1,0 +1,2 @@
+python:3.13-slim        cfd07ed85b05        270MB          130MB
+qdrant/qdrant:v1.15.5   da16f065092a        369MB          181MB

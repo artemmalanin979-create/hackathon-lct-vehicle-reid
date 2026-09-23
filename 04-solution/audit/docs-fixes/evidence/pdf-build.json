@@ -1,0 +1,15 @@
+{
+  "source": "/home/fedora/tmp/job_89/repo/SOLUTION.md",
+  "source_sha256": "dcc7ed8205403b43373f931d4919d93e0491c29090459b46fc135d699996f97c",
+  "output": "/home/fedora/tmp/job_89/repo/06-documentation/SOLUTION.pdf",
+  "bytes": 148797,
+  "pages": 23,
+  "relative_link_annotations": 126,
+  "pdf_sha256": "3bd08e6e0d558cf553e5b397de080d8c572e44616536472d8e01975a8dbd062e",
+  "freshness_verified": true,
+  "versions": {
+    "Markdown": "3.7",
+    "weasyprint": "64.1",
+    "pydyf": "0.11.0"
+  }
+}

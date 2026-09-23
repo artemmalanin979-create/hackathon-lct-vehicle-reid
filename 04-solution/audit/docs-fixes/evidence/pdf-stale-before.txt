@@ -1,0 +1,8 @@
+PDF устарел или не содержит SHA-256 источника. Пересоберите: python3 06-documentation/build_pdf.py (с теми же --source/--output).
+{
+  "ok": false,
+  "source": "/home/artem/projects/hackathon-lct-vehicle-reid/SOLUTION.md",
+  "output": "/home/artem/projects/hackathon-lct-vehicle-reid/06-documentation/SOLUTION.pdf",
+  "source_sha256": "867b133ab750fa9ee1a99a81f0f659803ef7e402039f66a733d220373e1edb5d",
+  "pdf_source_sha256": "947dcea4f0e808a9c05ddd71eeab2ea61a553e992b9b3803496413b2f1e58224"
+}

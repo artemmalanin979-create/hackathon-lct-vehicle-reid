@@ -1,0 +1,1 @@
+{"csv": "/job/checks/fixture/data/test_gallery.csv", "rows": 10, "batch": 16, "threads": 2, "mask_bottom": 0.0, "grayscale": false, "elapsed_s": 1.474, "throughput_obj_per_s": 6.79}

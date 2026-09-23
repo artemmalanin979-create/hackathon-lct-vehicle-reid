@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "mode": "val",
+  "repo": "/job/repo",
+  "data_dir": "/data",
+  "required_files": 1864,
+  "manifest_sha256": "e7fe2f1c5889443f872bb446274a962fcc7dc1bdf5011410ab1285d651cff90e",
+  "missing": [],
+  "mismatched": [],
+  "unreadable": []
+}

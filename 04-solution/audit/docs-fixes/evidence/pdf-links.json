@@ -1,0 +1,1137 @@
+{
+  "annotations": 167,
+  "local": 126,
+  "external": 41,
+  "external_network_checked": false,
+  "broken": [],
+  "links": [
+    {
+      "page": 1,
+      "url": "../04-solution/audit/jury-path-2/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/audit/jury-path-2/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/training/combined",
+      "kind": "local",
+      "target": "04-solution/training/combined",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/training/combined/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/plate-ablation",
+      "kind": "local",
+      "target": "04-solution/plate-ablation",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/core/preprocess.py",
+      "kind": "local",
+      "target": "04-solution/service/app/core/preprocess.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/core/model.py",
+      "kind": "local",
+      "target": "04-solution/service/app/core/model.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/batch.py",
+      "kind": "local",
+      "target": "04-solution/service/app/batch.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/core/rerank.py",
+      "kind": "local",
+      "target": "04-solution/service/app/core/rerank.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/api/main.py",
+      "kind": "local",
+      "target": "04-solution/service/app/api/main.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/api/store.py",
+      "kind": "local",
+      "target": "04-solution/service/app/api/store.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/load_gallery.py",
+      "kind": "local",
+      "target": "04-solution/service/app/load_gallery.py",
+      "ok": true
+    },
+    {
+      "page": 1,
+      "url": "../04-solution/service/app/static/index.html",
+      "kind": "local",
+      "target": "04-solution/service/app/static/index.html",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/eval/reid_metrics.py",
+      "kind": "local",
+      "target": "04-solution/eval/reid_metrics.py",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/eval/scope_metrics.py",
+      "kind": "local",
+      "target": "04-solution/eval/scope_metrics.py",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/training/combined",
+      "kind": "local",
+      "target": "04-solution/training/combined",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/training/combined",
+      "kind": "local",
+      "target": "04-solution/training/combined",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/training/combined/journal.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/journal.md",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/training/combined/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 2,
+      "url": "../04-solution/service/app/core/config.py",
+      "kind": "local",
+      "target": "04-solution/service/app/core/config.py",
+      "ok": true
+    },
+    {
+      "page": 3,
+      "url": "../04-solution/audit/jury-path-2/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/audit/jury-path-2/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 3,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 3,
+      "url": "../04-solution/audit/docs-commands/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/audit/docs-commands/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 3,
+      "url": "https://i.moscow/cabinet/hackaton/lct/contest/4e03d57b5c1d4ef987d8966258c03bd8",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 3,
+      "url": "../04-solution/reproduce/README.md",
+      "kind": "local",
+      "target": "04-solution/reproduce/README.md",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "../04-solution/service/wheels",
+      "kind": "local",
+      "target": "04-solution/service/wheels",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "../04-solution/service/wheels/README.md",
+      "kind": "local",
+      "target": "04-solution/service/wheels/README.md",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "../04-solution/service/Dockerfile",
+      "kind": "local",
+      "target": "04-solution/service/Dockerfile",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "../04-solution/service/offline/README.md",
+      "kind": "local",
+      "target": "04-solution/service/offline/README.md",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "../04-solution/audit/jury-path-2/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/audit/jury-path-2/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "https://docs.docker.com/reference/cli/docker/buildx/build/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 4,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 5,
+      "url": "../04-solution/service/requirements-lock.txt",
+      "kind": "local",
+      "target": "04-solution/service/requirements-lock.txt",
+      "ok": true
+    },
+    {
+      "page": 5,
+      "url": "https://docs.docker.com/reference/cli/docker/compose/up/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 5,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 6,
+      "url": "http://localhost:8000/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 6,
+      "url": "http://localhost:8000/docs",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 6,
+      "url": "http://localhost:8000/openapi.json",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 6,
+      "url": "http://localhost:8000/openapi.json",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 7,
+      "url": "../04-solution/service/offline/README.md",
+      "kind": "local",
+      "target": "04-solution/service/offline/README.md",
+      "ok": true
+    },
+    {
+      "page": 7,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 8,
+      "url": "../00-task/tz.txt",
+      "kind": "local",
+      "target": "00-task/tz.txt",
+      "ok": true
+    },
+    {
+      "page": 8,
+      "url": "../04-solution/baseline/artifacts",
+      "kind": "local",
+      "target": "04-solution/baseline/artifacts",
+      "ok": true
+    },
+    {
+      "page": 8,
+      "url": "../04-solution/service/artifacts-final",
+      "kind": "local",
+      "target": "04-solution/service/artifacts-final",
+      "ok": true
+    },
+    {
+      "page": 8,
+      "url": "../04-solution/service/artifacts-final/manifest.json",
+      "kind": "local",
+      "target": "04-solution/service/artifacts-final/manifest.json",
+      "ok": true
+    },
+    {
+      "page": 8,
+      "url": "../04-solution/split/files",
+      "kind": "local",
+      "target": "04-solution/split/files",
+      "ok": true
+    },
+    {
+      "page": 8,
+      "url": "../04-solution/split/files/manifest.json",
+      "kind": "local",
+      "target": "04-solution/split/files/manifest.json",
+      "ok": true
+    },
+    {
+      "page": 9,
+      "url": "../04-solution/training/combined/s02_metrics.json",
+      "kind": "local",
+      "target": "04-solution/training/combined/s02_metrics.json",
+      "ok": true
+    },
+    {
+      "page": 9,
+      "url": "../04-solution/training/combined/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 9,
+      "url": "../04-solution/training/combined/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/service/calib-d1_j48/headline.json",
+      "kind": "local",
+      "target": "04-solution/service/calib-d1_j48/headline.json",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/service/calib-d1_j48/summary.json",
+      "kind": "local",
+      "target": "04-solution/service/calib-d1_j48/summary.json",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/service/tools/calibrate_threshold.py",
+      "kind": "local",
+      "target": "04-solution/service/tools/calibrate_threshold.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/service/tools/calibrate_threshold.py",
+      "kind": "local",
+      "target": "04-solution/service/tools/calibrate_threshold.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/refusal/scripts/analyze.py",
+      "kind": "local",
+      "target": "04-solution/refusal/scripts/analyze.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/refusal/scripts/analyze.py",
+      "kind": "local",
+      "target": "04-solution/refusal/scripts/analyze.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/refusal/scripts/analyze.py",
+      "kind": "local",
+      "target": "04-solution/refusal/scripts/analyze.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/refusal/scripts/analyze.py",
+      "kind": "local",
+      "target": "04-solution/refusal/scripts/analyze.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/training/ensemble/scripts/s06_refusal.py",
+      "kind": "local",
+      "target": "04-solution/training/ensemble/scripts/s06_refusal.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/training/ensemble/scripts/s06_refusal.py",
+      "kind": "local",
+      "target": "04-solution/training/ensemble/scripts/s06_refusal.py",
+      "ok": true
+    },
+    {
+      "page": 10,
+      "url": "../04-solution/refusal",
+      "kind": "local",
+      "target": "04-solution/refusal",
+      "ok": true
+    },
+    {
+      "page": 11,
+      "url": "../04-solution/refusal/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/refusal/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 11,
+      "url": "../04-solution/reproduce/inputs-manifest.json",
+      "kind": "local",
+      "target": "04-solution/reproduce/inputs-manifest.json",
+      "ok": true
+    },
+    {
+      "page": 11,
+      "url": "../04-solution/split/files/manifest.json",
+      "kind": "local",
+      "target": "04-solution/split/files/manifest.json",
+      "ok": true
+    },
+    {
+      "page": 11,
+      "url": "https://i.moscow/cabinet/hackaton/lct/contest/4e03d57b5c1d4ef987d8966258c03bd8",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 11,
+      "url": "../04-solution/reproduce/README.md",
+      "kind": "local",
+      "target": "04-solution/reproduce/README.md",
+      "ok": true
+    },
+    {
+      "page": 12,
+      "url": "../04-solution/training/combined/s02_metrics.json",
+      "kind": "local",
+      "target": "04-solution/training/combined/s02_metrics.json",
+      "ok": true
+    },
+    {
+      "page": 12,
+      "url": "../04-solution/service/calib-d1_j48",
+      "kind": "local",
+      "target": "04-solution/service/calib-d1_j48",
+      "ok": true
+    },
+    {
+      "page": 12,
+      "url": "../04-solution/service/artifacts-final/manifest.json",
+      "kind": "local",
+      "target": "04-solution/service/artifacts-final/manifest.json",
+      "ok": true
+    },
+    {
+      "page": 12,
+      "url": "../04-solution/service/tools/calibrate_threshold.py",
+      "kind": "local",
+      "target": "04-solution/service/tools/calibrate_threshold.py",
+      "ok": true
+    },
+    {
+      "page": 12,
+      "url": "../04-solution/service/tools/eval_split.py",
+      "kind": "local",
+      "target": "04-solution/service/tools/eval_split.py",
+      "ok": true
+    },
+    {
+      "page": 12,
+      "url": "../04-solution/service/tools/eval_split.py",
+      "kind": "local",
+      "target": "04-solution/service/tools/eval_split.py",
+      "ok": true
+    },
+    {
+      "page": 13,
+      "url": "../04-solution/reproduce/evidence/README.md",
+      "kind": "local",
+      "target": "04-solution/reproduce/evidence/README.md",
+      "ok": true
+    },
+    {
+      "page": 13,
+      "url": "../04-solution/training/combined/s02_metrics.json",
+      "kind": "local",
+      "target": "04-solution/training/combined/s02_metrics.json",
+      "ok": true
+    },
+    {
+      "page": 13,
+      "url": "../04-solution/service/calib-d1_j48",
+      "kind": "local",
+      "target": "04-solution/service/calib-d1_j48",
+      "ok": true
+    },
+    {
+      "page": 13,
+      "url": "../04-solution/postproc/out/grid_tune_base.json",
+      "kind": "local",
+      "target": "04-solution/postproc/out/grid_tune_base.json",
+      "ok": true
+    },
+    {
+      "page": 13,
+      "url": "../04-solution/reproduce/evidence/metric-tests.txt",
+      "kind": "local",
+      "target": "04-solution/reproduce/evidence/metric-tests.txt",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/service/calib-d1_j48/headline.json",
+      "kind": "local",
+      "target": "04-solution/service/calib-d1_j48/headline.json",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/postproc/out/s09_timing.json",
+      "kind": "local",
+      "target": "04-solution/postproc/out/s09_timing.json",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/plate-ablation/out/ablation.json",
+      "kind": "local",
+      "target": "04-solution/plate-ablation/out/ablation.json",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/plate-ablation/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/plate-ablation/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/plate-ablation/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/plate-ablation/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/refusal/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/refusal/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 14,
+      "url": "../04-solution/eda/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/eda/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://storage.openvinotoolkit.org/repositories/open_model_zoo/public/2022.1/vehicle-reid-0001/osnet_ain_x1_0_vehicle_reid.onnx",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/openvinotoolkit/open_model_zoo/blob/2022.1.0/models/public/vehicle-reid-0001/model.yml",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/openvinotoolkit/open_model_zoo/blob/2022.1.0/models/public/vehicle-reid-0001/model.yml",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://raw.githubusercontent.com/sovrasov/deep-person-reid/ea27fd23c962addbd24d8586c5aaf8afe60db0db/LICENSE",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://raw.githubusercontent.com/sovrasov/deep-person-reid/ea27fd23c962addbd24d8586c5aaf8afe60db0db/LICENSE",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/training/combined",
+      "kind": "local",
+      "target": "04-solution/training/combined",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/training/combined",
+      "kind": "local",
+      "target": "04-solution/training/combined",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/training/combined/lw_ens_j48_rho0.5_f64.npz",
+      "kind": "local",
+      "target": "04-solution/training/combined/lw_ens_j48_rho0.5_f64.npz",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/training/combined/lw_ens_j48_rho0.5_f64.npz",
+      "kind": "local",
+      "target": "04-solution/training/combined/lw_ens_j48_rho0.5_f64.npz",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/JDAI-CV/fast-reid/releases/download/v0.1.1/veri_sbs_R50-ibn.pth",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/JDAI-CV/fast-reid/blob/c9bc3ceb2f7a6438b62fb515ea3df6d1e999e95d/MODEL_ZOO.md",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/postproc/scripts/s07_fastreid_extract.py",
+      "kind": "local",
+      "target": "04-solution/postproc/scripts/s07_fastreid_extract.py",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/postproc/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/postproc/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "../04-solution/training/combined/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/sovrasov/deep-person-reid/blob/ea27fd23c962addbd24d8586c5aaf8afe60db0db/README.rst",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/sovrasov/deep-person-reid/blob/ea27fd23c962addbd24d8586c5aaf8afe60db0db/README.rst",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://github.com/sovrasov/deep-person-reid/blob/ea27fd23c962addbd24d8586c5aaf8afe60db0db/README.rst",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://drive.google.com/drive/folders/1C-yTiJrvStMkwgHm9GvqwIG7EKjhSEjl",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://drive.google.com/drive/folders/1C-yTiJrvStMkwgHm9GvqwIG7EKjhSEjl",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://drive.google.com/uc?export=download&id=1z2ODsTcbCJr3e1h9vGmiulpIn2X6kz4J",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 15,
+      "url": "https://drive.google.com/uc?export=download&id=1z2ODsTcbCJr3e1h9vGmiulpIn2X6kz4J",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://huggingface.co/datasets/yl4300/RoundaboutHD",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://researchdata.bath.ac.uk/1574/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://researchdata.bath.ac.uk/1574/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "../02-research/datasets-open/REPORT.md",
+      "kind": "local",
+      "target": "02-research/datasets-open/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://github.com/sekilab/VehicleReIdentificationDataset",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://vehiclereid.github.io/VeRi/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://github.com/PKU-IMRE/VERI-Wild",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/instruction.txt",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://github.com/faezetta/VMMRdb",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://www.dropbox.com/s/uwa7c5uz7cac7cw/VMMRdb.zip?dl=0",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 16,
+      "url": "https://www.dropbox.com/s/uwa7c5uz7cac7cw/VMMRdb.zip?dl=0",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 17,
+      "url": "https://www.image-net.org/download.php",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 17,
+      "url": "../04-solution/training/combined/journal.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/journal.md",
+      "ok": true
+    },
+    {
+      "page": 17,
+      "url": "../02-research/datasets-open/REPORT.md",
+      "kind": "local",
+      "target": "02-research/datasets-open/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 17,
+      "url": "../02-research/datasets-open/REPORT.md",
+      "kind": "local",
+      "target": "02-research/datasets-open/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "../04-solution/eval/sources/manifest.json",
+      "kind": "local",
+      "target": "04-solution/eval/sources/manifest.json",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "../04-solution/eval/sources/manifest.json",
+      "kind": "local",
+      "target": "04-solution/eval/sources/manifest.json",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "https://github.com/zhunzhong07/person-re-ranking/blob/278f2c704e7f033b767f4158dff4febc03a0b78a/python-version/re_ranking_ranklist.py",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "https://github.com/swagger-api/swagger-ui/tree/v5.29.5",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "https://github.com/swagger-api/swagger-ui/blob/v5.29.5/LICENSE",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "https://github.com/qdrant/qdrant/tree/v1.15.5",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "../04-solution/service/requirements.txt",
+      "kind": "local",
+      "target": "04-solution/service/requirements.txt",
+      "ok": true
+    },
+    {
+      "page": 18,
+      "url": "../04-solution/service/requirements-lock.txt",
+      "kind": "local",
+      "target": "04-solution/service/requirements-lock.txt",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "https://pypi.org/project/onnxruntime/1.30.0/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "https://pypi.org/project/numpy/2.5.3/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "https://pypi.org/project/qdrant-client/1.19.0/",
+      "kind": "external",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "../04-solution/training/src/evidence/windows-environment.json",
+      "kind": "local",
+      "target": "04-solution/training/src/evidence/windows-environment.json",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 19,
+      "url": "../04-solution/training/src/evidence/postprocess-environment.json",
+      "kind": "local",
+      "target": "04-solution/training/src/evidence/postprocess-environment.json",
+      "ok": true
+    },
+    {
+      "page": 20,
+      "url": "../04-solution/eval/requirements.txt",
+      "kind": "local",
+      "target": "04-solution/eval/requirements.txt",
+      "ok": true
+    },
+    {
+      "page": 20,
+      "url": "../04-solution/eval/requirements.txt",
+      "kind": "local",
+      "target": "04-solution/eval/requirements.txt",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/scaling/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/scaling/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/scaling/results/ivf_1000000_0.08.json",
+      "kind": "local",
+      "target": "04-solution/scaling/results/ivf_1000000_0.08.json",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/scaling/results/ivf_1000000_0.08.json",
+      "kind": "local",
+      "target": "04-solution/scaling/results/ivf_1000000_0.08.json",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/service/ui-checks/shoot.py",
+      "kind": "local",
+      "target": "04-solution/service/ui-checks/shoot.py",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/training/attempt-2/reid_train.py",
+      "kind": "local",
+      "target": "04-solution/training/attempt-2/reid_train.py",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/training/attempt-2/reid_train.py",
+      "kind": "local",
+      "target": "04-solution/training/attempt-2/reid_train.py",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/training/src/evidence/windows-environment.json",
+      "kind": "local",
+      "target": "04-solution/training/src/evidence/windows-environment.json",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/cloud/tests/ci-extract/smoke.py",
+      "kind": "local",
+      "target": "04-solution/cloud/tests/ci-extract/smoke.py",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/cloud/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/cloud/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/cloud/tests/ci-extract/blender-smoke.py",
+      "kind": "local",
+      "target": "04-solution/cloud/tests/ci-extract/blender-smoke.py",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/training/src/evidence/windows-environment.json",
+      "kind": "local",
+      "target": "04-solution/training/src/evidence/windows-environment.json",
+      "ok": true
+    },
+    {
+      "page": 21,
+      "url": "../04-solution/training/src/evidence/postprocess-environment.json",
+      "kind": "local",
+      "target": "04-solution/training/src/evidence/postprocess-environment.json",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/training/combined/REPORT.md",
+      "kind": "local",
+      "target": "04-solution/training/combined/REPORT.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/plate-ablation",
+      "kind": "local",
+      "target": "04-solution/plate-ablation",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/training/src/README.md",
+      "kind": "local",
+      "target": "04-solution/training/src/README.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/service/offline/README.md",
+      "kind": "local",
+      "target": "04-solution/service/offline/README.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../04-solution/audit/docker-path/README.md",
+      "kind": "local",
+      "target": "04-solution/audit/docker-path/README.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../Readme.md",
+      "kind": "local",
+      "target": "Readme.md",
+      "ok": true
+    },
+    {
+      "page": 22,
+      "url": "../00-task/links-contacts.md#sourcecraft--%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B9-%D1%81%D0%B4%D0%B0%D1%87%D0%B8-%D0%BF%D0%BE%D1%8F%D0%B2%D0%B8%D0%BB%D1%81%D1%8F-1509",
+      "kind": "local",
+      "target": "00-task/links-contacts.md",
+      "ok": true
+    },
+    {
+      "page": 23,
+      "url": "../05-presentation",
+      "kind": "local",
+      "target": "05-presentation",
+      "ok": true
+    },
+    {
+      "page": 23,
+      "url": "SOLUTION.pdf",
+      "kind": "local",
+      "target": "06-documentation/SOLUTION.pdf",
+      "ok": true
+    },
+    {
+      "page": 23,
+      "url": "SOLUTION.pdf",
+      "kind": "local",
+      "target": "06-documentation/SOLUTION.pdf",
+      "ok": true
+    },
+    {
+      "page": 23,
+      "url": "build_pdf.py",
+      "kind": "local",
+      "target": "06-documentation/build_pdf.py",
+      "ok": true
+    }
+  ]
+}

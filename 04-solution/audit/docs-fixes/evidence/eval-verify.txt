@@ -1,0 +1,105 @@
+{
+  "python": "3.13.15",
+  "numpy": "2.5.3",
+  "exhaustive_configurations": 247,
+  "differential_ranking": {
+    "trials": 200,
+    "seed": 61704,
+    "max_absolute_error": {
+      "fastreid_map": 5.551115123125783e-17,
+      "torchreid_map": 5.551115123125783e-17,
+      "fastreid_minp": 2.7755575615628914e-17,
+      "cmc_float32": 2.6490953208835322e-08
+    },
+    "scope": "Python eval_market1501, 96 gallery, unique continuous scores; Cython/MATLAB not executed"
+  },
+  "differential_tied_external": {
+    "trials": 160,
+    "source_calls": 640,
+    "seed": 61705,
+    "max_absolute_metric_error": 1.1102230246251565e-16,
+    "native_vs_stable_mAP_disagreements": 320,
+    "first_tie_policy_difference": {
+      "trial": 0,
+      "source": "fastreid_rank.py",
+      "native_mAP": 0.26054757817148266,
+      "stable_mAP": 0.2623510617300563
+    },
+    "scope": "Actual tied inputs; unmodified upstream vs Fraction in its native order; stable-argsort adapter vs evaluator; 2 measures; keys+junk+camera; CMC ranks 1..7"
+  },
+  "differential_refusal": {
+    "comparisons": 600,
+    "seed": 78401,
+    "max_absolute_error": 2.220446049250313e-16,
+    "scope": "All 3 refusal units x 2 camera masks, discrete tied scores, junk, excluded queries, exact rational PR oracle"
+  },
+  "differential_all_fields": {
+    "trials": 6000,
+    "seed": 20260916,
+    "mismatches": 0,
+    "coverage": {
+      "distance": 3000,
+      "similarity": 3000,
+      "keys_with_filters": 4000,
+      "empty_gallery": 640,
+      "empty_queries": 1158,
+      "exact_threshold": 2874,
+      "near_float32": 1500
+    },
+    "scope": "Every legacy field: protocol/counts/ranking/per_query/refusal/pr_curve"
+  },
+  "differential_new_fields": {
+    "trials": 1800,
+    "seed": 20260917,
+    "mismatches": 0,
+    "scope": "All new metric/count/PR/list fields, all convention branches, exact Fraction oracle"
+  },
+  "random_level": {
+    "seed": 20260915,
+    "queries": 5000,
+    "gallery": 100,
+    "positives_per_query": 4,
+    "acceptance": "absolute difference <= 5 empirical standard errors; mAP < .15",
+    "metrics": {
+      "mAP": {
+        "observed": 0.08126041004579869,
+        "expected": 0.0806048728983236,
+        "standard_error": 0.0009485279430807525,
+        "z": 0.6911100007722983
+      },
+      "Rank-1": {
+        "observed": 0.0408,
+        "expected": 0.04,
+        "standard_error": 0.0027979702871091233,
+        "z": 0.28592154951958626
+      },
+      "Rank-5": {
+        "observed": 0.1838,
+        "expected": 0.18812488444299935,
+        "standard_error": 0.005478094002733118,
+        "z": -0.7894870808791524
+      },
+      "mINP": {
+        "observed": 0.0528925128401258,
+        "expected": 0.052554813990507925,
+        "standard_error": 0.0002698464733214035,
+        "z": 1.2514480751269765
+      }
+    }
+  },
+  "mutations": {
+    "total": 25,
+    "killed": 25,
+    "original_killed": 25,
+    "runtime_errors": 0,
+    "survivors": []
+  },
+  "compatibility_edges": {
+    "reproduced": 4
+  },
+  "cli_and_comparator": {
+    "cli": "passed (default and every nondefault convention switch)",
+    "comparator_checks": 4
+  }
+}
+PASS: 60 tests; 25 / 25 mutants detected

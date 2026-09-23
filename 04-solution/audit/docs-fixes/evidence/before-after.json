@@ -1,0 +1,17 @@
+{
+  "rerank": {
+    "embeddings.npy": "b39f6df4f41b78da4ca1917cb1440b86cc0017e5c132352c9198caf01c76cd7a",
+    "submission.csv": "866081c78f28d83f383edcf6d7638000a937340650abb961138ce2f717d225c5",
+    "candidates.csv": "ce9aaf63d30f21318ed94e8698a519a3c0f65bea5d59f6fa7aeefa4b62b5fecd"
+  },
+  "cosine-flag": {
+    "embeddings.npy": "b39f6df4f41b78da4ca1917cb1440b86cc0017e5c132352c9198caf01c76cd7a",
+    "submission.csv": "43d8c0055dfc5b9218bdaebd59730c403764b9cb384eeb25754f959df6ef101d",
+    "candidates.csv": "0aae11f7e687dc8032c0f98d14e971a73356f1bf77940ebd0b62c6851fd205e8"
+  },
+  "cosine-env": {
+    "embeddings.npy": "b39f6df4f41b78da4ca1917cb1440b86cc0017e5c132352c9198caf01c76cd7a",
+    "submission.csv": "43d8c0055dfc5b9218bdaebd59730c403764b9cb384eeb25754f959df6ef101d",
+    "candidates.csv": "0aae11f7e687dc8032c0f98d14e971a73356f1bf77940ebd0b62c6851fd205e8"
+  }
+}

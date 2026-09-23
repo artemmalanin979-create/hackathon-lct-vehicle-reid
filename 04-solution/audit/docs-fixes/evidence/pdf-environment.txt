@@ -1,0 +1,50 @@
+Collecting Markdown==3.7
+  Downloading Markdown-3.7-py3-none-any.whl.metadata (7.0 kB)
+Collecting WeasyPrint==64.1
+  Downloading weasyprint-64.1-py3-none-any.whl.metadata (3.7 kB)
+Collecting pydyf==0.11.0
+  Downloading pydyf-0.11.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting cffi>=0.6 (from WeasyPrint==64.1)
+  Using cached cffi-2.1.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting tinyhtml5>=2.0.0b1 (from WeasyPrint==64.1)
+  Downloading tinyhtml5-2.1.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting tinycss2>=1.4.0 (from WeasyPrint==64.1)
+  Downloading tinycss2-1.5.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting cssselect2>=0.1 (from WeasyPrint==64.1)
+  Downloading cssselect2-0.10.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting Pyphen>=0.9.1 (from WeasyPrint==64.1)
+  Downloading pyphen-0.18.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting Pillow>=9.1.0 (from WeasyPrint==64.1)
+  Using cached pillow-12.3.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting fonttools>=4.0.0 (from fonttools[woff]>=4.0.0->WeasyPrint==64.1)
+  Downloading fonttools-4.65.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (125 kB)
+Collecting pycparser (from cffi>=0.6->WeasyPrint==64.1)
+  Using cached pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting webencodings (from cssselect2>=0.1->WeasyPrint==64.1)
+  Downloading webencodings-0.6.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting brotli>=1.0.1 (from fonttools[woff]>=4.0.0->WeasyPrint==64.1)
+  Downloading brotli-1.2.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.1 kB)
+Collecting zopfli>=0.1.4 (from fonttools[woff]>=4.0.0->WeasyPrint==64.1)
+  Downloading zopfli-0.4.3-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.5 kB)
+Downloading Markdown-3.7-py3-none-any.whl (106 kB)
+Downloading weasyprint-64.1-py3-none-any.whl (302 kB)
+Downloading pydyf-0.11.0-py3-none-any.whl (8.1 kB)
+Using cached cffi-2.1.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Downloading cssselect2-0.10.1-py3-none-any.whl (15 kB)
+Downloading fonttools-4.65.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 1.1 MB/s  0:00:05
+Downloading brotli-1.2.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 1.1 MB/s  0:00:01
+Using cached pillow-12.3.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+Downloading pyphen-0.18.1-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 1.0 MB/s  0:00:02
+Downloading tinycss2-1.5.1-py3-none-any.whl (28 kB)
+Downloading tinyhtml5-2.1.0-py3-none-any.whl (39 kB)
+Downloading webencodings-0.6.1-py3-none-any.whl (8.7 kB)
+Downloading zopfli-0.4.3-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (829 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 829.4/829.4 kB 1.1 MB/s  0:00:00
+Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+Installing collected packages: brotli, zopfli, webencodings, Pyphen, pydyf, pycparser, Pillow, Markdown, fonttools, tinyhtml5, tinycss2, cffi, cssselect2, WeasyPrint
+
+Successfully installed Markdown-3.7 Pillow-12.3.0 Pyphen-0.18.1 WeasyPrint-64.1 brotli-1.2.0 cffi-2.1.1 cssselect2-0.10.1 fonttools-4.65.0 pycparser-3.0 pydyf-0.11.0 tinycss2-1.5.1 tinyhtml5-2.1.0 webencodings-0.6.1 zopfli-0.4.3
+Could not fetch URL https://pypi.org/simple/pip/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/pip/ (Caused by SSLError(SSLCertVerificationError(1, "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'pypi.org'. (_ssl.c:1081)"))) - skipping

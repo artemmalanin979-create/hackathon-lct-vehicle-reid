@@ -1,0 +1,10 @@
+baseline-eval-full 0
+baseline-submission-full 0
+baseline-order-full 0
+postproc-baseline-full 0
+postproc-tta-full 0
+postproc-final-full 0
+validation-inputs 0
+batch-validation 0
+metrics-validation 0
+PASS: original research outputs unchanged; real validation = 0.7740915539438481 / 0.7307692307692307

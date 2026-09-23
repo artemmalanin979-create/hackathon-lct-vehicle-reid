@@ -1,0 +1,2140 @@
+{
+  "checks": 237,
+  "documents": 15,
+  "errors": [],
+  "claims": [
+    {
+      "file": "SOLUTION.md",
+      "line": 304,
+      "claim": "0.7316093422",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP",
+      "raw": 0.7316093422310448,
+      "expected": "0.7316093422",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 304,
+      "claim": "0.6850961538",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-1",
+      "raw": 0.6850961538461539,
+      "expected": "0.6850961538",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 304,
+      "claim": "0.8822115385",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-5",
+      "raw": 0.8822115384615384,
+      "expected": "0.8822115385",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 304,
+      "claim": "0.6928460434",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mINP",
+      "raw": 0.6928460434032722,
+      "expected": "0.6928460434",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 304,
+      "claim": "0.7242262382",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP@10",
+      "raw": 0.7242262381715506,
+      "expected": "0.7242262382",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 305,
+      "claim": "0.7740915539",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.7740915539",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 305,
+      "claim": "0.7307692308",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.7307692308",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 305,
+      "claim": "0.8810096154",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-5",
+      "raw": 0.8810096153846154,
+      "expected": "0.8810096154",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 305,
+      "claim": "0.7488060310",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mINP",
+      "raw": 0.7488060309838231,
+      "expected": "0.7488060310",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 305,
+      "claim": "0.7684546226",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP@10",
+      "raw": 0.7684546226343101,
+      "expected": "0.7684546226",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 306,
+      "claim": "0.6936584725",
+      "source": "04-solution/training/combined/s02_metrics.json#osnet(repro)/kr/mAP",
+      "raw": 0.6936584724586873,
+      "expected": "0.6936584725",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 306,
+      "claim": "0.6634615385",
+      "source": "04-solution/training/combined/s02_metrics.json#osnet(repro)/kr/Rank-1",
+      "raw": 0.6634615384615384,
+      "expected": "0.6634615385",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 306,
+      "claim": "0.7872596154",
+      "source": "04-solution/training/combined/s02_metrics.json#osnet(repro)/kr/Rank-5",
+      "raw": 0.7872596153846154,
+      "expected": "0.7872596154",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 306,
+      "claim": "0.6608640365",
+      "source": "04-solution/training/combined/s02_metrics.json#osnet(repro)/kr/mINP",
+      "raw": 0.6608640365042834,
+      "expected": "0.6608640365",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 306,
+      "claim": "0.6834008859",
+      "source": "04-solution/training/combined/s02_metrics.json#osnet(repro)/kr/mAP@10",
+      "raw": 0.6834008858618235,
+      "expected": "0.6834008859",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 339,
+      "claim": "0.7684996606",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/f1",
+      "raw": 0.7684996605566871,
+      "expected": "0.7684996606",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 339,
+      "claim": "0.7302158273",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/tnr",
+      "raw": 0.7302158273381295,
+      "expected": "0.7302158273",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 339,
+      "claim": "0.6802884615",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/recall",
+      "raw": 0.6802884615384616,
+      "expected": "0.6802884615",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 339,
+      "claim": "0.9094743821",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/auc_pr",
+      "raw": 0.9094743821256085,
+      "expected": "0.9094743821",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 340,
+      "claim": "0.8090787717",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/f1",
+      "raw": 0.8090787716955942,
+      "expected": "0.8090787717",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 340,
+      "claim": "0.7841726619",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/tnr",
+      "raw": 0.7841726618705036,
+      "expected": "0.7841726619",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 340,
+      "claim": "0.7283653846",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/recall",
+      "raw": 0.7283653846153846,
+      "expected": "0.7283653846",
+      "ok": true
+    },
+    {
+      "file": "SOLUTION.md",
+      "line": 340,
+      "claim": "0.9182837159",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/auc_pr",
+      "raw": 0.9182837158835165,
+      "expected": "0.9182837159",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 28,
+      "claim": "0.774",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.774",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 28,
+      "claim": "0.731",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.731",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 28,
+      "claim": "0.881",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-5",
+      "raw": 0.8810096153846154,
+      "expected": "0.881",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 29,
+      "claim": "0.732",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP",
+      "raw": 0.7316093422310448,
+      "expected": "0.732",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 29,
+      "claim": "0.685",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-1",
+      "raw": 0.6850961538461539,
+      "expected": "0.685",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 29,
+      "claim": "0.882",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-5",
+      "raw": 0.8822115384615384,
+      "expected": "0.882",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 30,
+      "claim": "0.768",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP@10",
+      "raw": 0.7684546226343101,
+      "expected": "0.768",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 46,
+      "claim": "0,812",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/mAP",
+      "raw": 0.8122072020105591,
+      "expected": "0.812",
+      "ok": true
+    },
+    {
+      "file": "04-solution/README.md",
+      "line": 46,
+      "claim": "0,971",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/Rank-1",
+      "raw": 0.9711538461538461,
+      "expected": "0.971",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 19,
+      "claim": "0.657",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/mAP",
+      "raw": 0.6565692724907637,
+      "expected": "0.657",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 19,
+      "claim": "0.631",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/Rank-1",
+      "raw": 0.6310096153846154,
+      "expected": "0.631",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 19,
+      "claim": "0.787",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/Rank-5",
+      "raw": 0.7872596153846154,
+      "expected": "0.787",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 19,
+      "claim": "0.607",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/mINP",
+      "raw": 0.6070423064987811,
+      "expected": "0.607",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 21,
+      "claim": "0.0099",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/mAP",
+      "raw": 0.009922260378380147,
+      "expected": "0.0099",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 21,
+      "claim": "0.0024",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/Rank-1",
+      "raw": 0.002403846153846154,
+      "expected": "0.0024",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 21,
+      "claim": "0.0112",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/Rank-5",
+      "raw": 0.011217948717948718,
+      "expected": "0.0112",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 21,
+      "claim": "0.0071",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/mINP",
+      "raw": 0.007141217503982331,
+      "expected": "0.0071",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 23,
+      "claim": "0.812",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/mAP",
+      "raw": 0.8122072020105591,
+      "expected": "0.812",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 23,
+      "claim": "0.971",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/Rank-1",
+      "raw": 0.9711538461538461,
+      "expected": "0.971",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 23,
+      "claim": "0.988",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/Rank-5",
+      "raw": 0.9879807692307693,
+      "expected": "0.988",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 23,
+      "claim": "0.637",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/mINP",
+      "raw": 0.637196705282104,
+      "expected": "0.637",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 49,
+      "claim": "0.6566",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/mAP",
+      "raw": 0.6565692724907637,
+      "expected": "0.6566",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 49,
+      "claim": "0.6310",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/Rank-1",
+      "raw": 0.6310096153846154,
+      "expected": "0.6310",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 49,
+      "claim": "0.7873",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/Rank-5",
+      "raw": 0.7872596153846154,
+      "expected": "0.7873",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 49,
+      "claim": "0.6070",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/full_gallery/mINP",
+      "raw": 0.6070423064987811,
+      "expected": "0.6070",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 50,
+      "claim": "0.0099",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/mAP",
+      "raw": 0.009922260378380147,
+      "expected": "0.0099",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 50,
+      "claim": "0.0024",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/Rank-1",
+      "raw": 0.002403846153846154,
+      "expected": "0.0024",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 50,
+      "claim": "0.0112",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/Rank-5",
+      "raw": 0.011217948717948718,
+      "expected": "0.0112",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 50,
+      "claim": "0.0071",
+      "source": "04-solution/baseline/out/metrics_summary.json#random_mean/full_gallery/mINP",
+      "raw": 0.007141217503982331,
+      "expected": "0.0071",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 52,
+      "claim": "0.8122",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/mAP",
+      "raw": 0.8122072020105591,
+      "expected": "0.8122",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 52,
+      "claim": "0.9712",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/Rank-1",
+      "raw": 0.9711538461538461,
+      "expected": "0.9712",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 52,
+      "claim": "0.9880",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/Rank-5",
+      "raw": 0.9879807692307693,
+      "expected": "0.9880",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 52,
+      "claim": "0.6372",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_no_camera_excl/full_gallery/mINP",
+      "raw": 0.637196705282104,
+      "expected": "0.6372",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 53,
+      "claim": "0.6612",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_all_same_camera/full_gallery/mAP",
+      "raw": 0.6611837855692393,
+      "expected": "0.6612",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 53,
+      "claim": "0.6346",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_all_same_camera/full_gallery/Rank-1",
+      "raw": 0.6346153846153846,
+      "expected": "0.6346",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 53,
+      "claim": "0.7969",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_all_same_camera/full_gallery/Rank-5",
+      "raw": 0.796875,
+      "expected": "0.7969",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/REPORT.md",
+      "line": 53,
+      "claim": "0.6117",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_all_same_camera/full_gallery/mINP",
+      "raw": 0.6117316908963518,
+      "expected": "0.6117",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 20,
+      "claim": "0.645",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/top_k10/mAP",
+      "raw": 0.6451091746794871,
+      "expected": "0.645",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 20,
+      "claim": "0.631",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/top_k10/Rank-1",
+      "raw": 0.6310096153846154,
+      "expected": "0.631",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 20,
+      "claim": "0.787",
+      "source": "04-solution/baseline/out/metrics_summary.json#base_market/top_k10/Rank-5",
+      "raw": 0.7872596153846154,
+      "expected": "0.787",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 45,
+      "claim": "0,657",
+      "source": "04-solution/postproc/out/final_val.json#base/mAP",
+      "raw": 0.6565692724907637,
+      "expected": "0.657",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 45,
+      "claim": "0,631",
+      "source": "04-solution/postproc/out/final_val.json#base/Rank-1",
+      "raw": 0.6310096153846154,
+      "expected": "0.631",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 46,
+      "claim": "0,667",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/mAP",
+      "raw": 0.666638444987006,
+      "expected": "0.667",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 46,
+      "claim": "0,632",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/Rank-1",
+      "raw": 0.6322115384615384,
+      "expected": "0.632",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 47,
+      "claim": "0,694",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/mAP",
+      "raw": 0.6936584724586873,
+      "expected": "0.694",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 47,
+      "claim": "0,663",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/Rank-1",
+      "raw": 0.6634615384615384,
+      "expected": "0.663",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 49,
+      "claim": "0,704",
+      "source": "04-solution/postproc/out/grid_val_ttacrit.json#points/38/mAP",
+      "raw": 0.7041327391890589,
+      "expected": "0.704",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 49,
+      "claim": "0,681",
+      "source": "04-solution/postproc/out/grid_val_ttacrit.json#points/38/Rank-1",
+      "raw": 0.6814903846153846,
+      "expected": "0.681",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 48,
+      "claim": "0,668",
+      "source": "04-solution/postproc/out/tta_val.json#runs/8/mAP",
+      "raw": 0.6678253594977849,
+      "expected": "0.668",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/review/README.md",
+      "line": 48,
+      "claim": "0,644",
+      "source": "04-solution/postproc/out/tta_val.json#runs/8/Rank-1",
+      "raw": 0.6442307692307693,
+      "expected": "0.644",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 51,
+      "claim": "0,704",
+      "source": "04-solution/postproc/out/grid_val_ttacrit.json#points/38/mAP",
+      "raw": 0.7041327391890589,
+      "expected": "0.704",
+      "ok": true
+    },
+    {
+      "file": "04-solution/baseline/README.md",
+      "line": 51,
+      "claim": "0,681",
+      "source": "04-solution/postproc/out/grid_val_ttacrit.json#points/38/Rank-1",
+      "raw": 0.6814903846153846,
+      "expected": "0.681",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 13,
+      "claim": "0,657",
+      "source": "04-solution/postproc/out/final_val.json#base/mAP",
+      "raw": 0.6565692724907637,
+      "expected": "0.657",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 13,
+      "claim": "0,631",
+      "source": "04-solution/postproc/out/final_val.json#base/Rank-1",
+      "raw": 0.6310096153846154,
+      "expected": "0.631",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 14,
+      "claim": "0,694",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/mAP",
+      "raw": 0.6936584724586873,
+      "expected": "0.694",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 14,
+      "claim": "0,663",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/Rank-1",
+      "raw": 0.6634615384615384,
+      "expected": "0.663",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 15,
+      "claim": "0,667",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/mAP",
+      "raw": 0.666638444987006,
+      "expected": "0.667",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 15,
+      "claim": "0,632",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/Rank-1",
+      "raw": 0.6322115384615384,
+      "expected": "0.632",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 16,
+      "claim": "0,695",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_tuned/mAP",
+      "raw": 0.6952476387991686,
+      "expected": "0.695",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 16,
+      "claim": "0,667",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_tuned/Rank-1",
+      "raw": 0.6670673076923077,
+      "expected": "0.667",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 17,
+      "claim": "0,700",
+      "source": "04-solution/postproc/out/fusion.json#fusion_rerank_val/mAP",
+      "raw": 0.700146218685041,
+      "expected": "0.700",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 17,
+      "claim": "0,681",
+      "source": "04-solution/postproc/out/fusion.json#fusion_rerank_val/Rank-1",
+      "raw": 0.6814903846153846,
+      "expected": "0.681",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 46,
+      "claim": "0,6946",
+      "source": "04-solution/postproc/out/grid_val_base.json#best/mAP",
+      "raw": 0.6945780346553276,
+      "expected": "0.6946",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 47,
+      "claim": "0,6937",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/mAP",
+      "raw": 0.6936584724586873,
+      "expected": "0.6937",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 48,
+      "claim": "0,7068",
+      "source": "04-solution/postproc/out/grid_val_ttacrit.json#best/mAP",
+      "raw": 0.706796481944031,
+      "expected": "0.7068",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/README.md",
+      "line": 49,
+      "claim": "0,6952",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_tuned/mAP",
+      "raw": 0.6952476387991686,
+      "expected": "0.6952",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 57,
+      "claim": "0.6566",
+      "source": "04-solution/postproc/out/final_val.json#base/mAP",
+      "raw": 0.6565692724907637,
+      "expected": "0.6566",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 57,
+      "claim": "0.6310",
+      "source": "04-solution/postproc/out/final_val.json#base/Rank-1",
+      "raw": 0.6310096153846154,
+      "expected": "0.6310",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 57,
+      "claim": "0.6451",
+      "source": "04-solution/postproc/out/final_val.json#base/mAP@10",
+      "raw": 0.6451091746794871,
+      "expected": "0.6451",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 58,
+      "claim": "0.6666",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/mAP",
+      "raw": 0.666638444987006,
+      "expected": "0.6666",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 58,
+      "claim": "0.6322",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/Rank-1",
+      "raw": 0.6322115384615384,
+      "expected": "0.6322",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 58,
+      "claim": "0.6549",
+      "source": "04-solution/postproc/out/final_val.json#rerank_paper/mAP@10",
+      "raw": 0.6548916361416361,
+      "expected": "0.6549",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 59,
+      "claim": "0.6937",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/mAP",
+      "raw": 0.6936584724586873,
+      "expected": "0.6937",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 59,
+      "claim": "0.6635",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/Rank-1",
+      "raw": 0.6634615384615384,
+      "expected": "0.6635",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 59,
+      "claim": "0.6834",
+      "source": "04-solution/postproc/out/final_val.json#rerank_tuned/mAP@10",
+      "raw": 0.6834008858618235,
+      "expected": "0.6834",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 60,
+      "claim": "0.6674",
+      "source": "04-solution/postproc/out/final_val.json#tta2/mAP",
+      "raw": 0.6673874300509741,
+      "expected": "0.6674",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 60,
+      "claim": "0.6406",
+      "source": "04-solution/postproc/out/final_val.json#tta2/Rank-1",
+      "raw": 0.640625,
+      "expected": "0.6406",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 60,
+      "claim": "0.6565",
+      "source": "04-solution/postproc/out/final_val.json#tta2/mAP@10",
+      "raw": 0.6564719662571226,
+      "expected": "0.6565",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 61,
+      "claim": "0.6861",
+      "source": "04-solution/postproc/out/final_val.json#tta2_rerank_tuned/mAP",
+      "raw": 0.6860820379592572,
+      "expected": "0.6861",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 61,
+      "claim": "0.6538",
+      "source": "04-solution/postproc/out/final_val.json#tta2_rerank_tuned/Rank-1",
+      "raw": 0.6538461538461539,
+      "expected": "0.6538",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 61,
+      "claim": "0.6746",
+      "source": "04-solution/postproc/out/final_val.json#tta2_rerank_tuned/mAP@10",
+      "raw": 0.6745607177833741,
+      "expected": "0.6746",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 62,
+      "claim": "0.6657",
+      "source": "04-solution/postproc/out/final_val.json#tta3/mAP",
+      "raw": 0.6657246206625119,
+      "expected": "0.6657",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 62,
+      "claim": "0.6430",
+      "source": "04-solution/postproc/out/final_val.json#tta3/Rank-1",
+      "raw": 0.6430288461538461,
+      "expected": "0.6430",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 62,
+      "claim": "0.6546",
+      "source": "04-solution/postproc/out/final_val.json#tta3/mAP@10",
+      "raw": 0.6546478969525845,
+      "expected": "0.6546",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 63,
+      "claim": "0.6952",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_tuned/mAP",
+      "raw": 0.6952476387991686,
+      "expected": "0.6952",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 63,
+      "claim": "0.6671",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_tuned/Rank-1",
+      "raw": 0.6670673076923077,
+      "expected": "0.6671",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 63,
+      "claim": "0.6841",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_tuned/mAP@10",
+      "raw": 0.6840907753993691,
+      "expected": "0.6841",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 64,
+      "claim": "0.6795",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_paper/mAP",
+      "raw": 0.679482047667065,
+      "expected": "0.6795",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 64,
+      "claim": "0.6418",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_paper/Rank-1",
+      "raw": 0.6418269230769231,
+      "expected": "0.6418",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 64,
+      "claim": "0.6679",
+      "source": "04-solution/postproc/out/final_val.json#tta3_rerank_paper/mAP@10",
+      "raw": 0.6679273742750306,
+      "expected": "0.6679",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 65,
+      "claim": "0.2384",
+      "source": "04-solution/postproc/out/fusion.json#fr_alone_val/mAP",
+      "raw": 0.23841320622088408,
+      "expected": "0.2384",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 65,
+      "claim": "0.2067",
+      "source": "04-solution/postproc/out/fusion.json#fr_alone_val/Rank-1",
+      "raw": 0.20673076923076922,
+      "expected": "0.2067",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 65,
+      "claim": "0.2228",
+      "source": "04-solution/postproc/out/fusion.json#fr_alone_val/mAP@10",
+      "raw": 0.2227818000864876,
+      "expected": "0.2228",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 66,
+      "claim": "0.6640",
+      "source": "04-solution/postproc/out/fusion.json#fusion_val/mAP",
+      "raw": 0.6639601506490769,
+      "expected": "0.6640",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 66,
+      "claim": "0.6418",
+      "source": "04-solution/postproc/out/fusion.json#fusion_val/Rank-1",
+      "raw": 0.6418269230769231,
+      "expected": "0.6418",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 66,
+      "claim": "0.6525",
+      "source": "04-solution/postproc/out/fusion.json#fusion_val/mAP@10",
+      "raw": 0.6525320035866911,
+      "expected": "0.6525",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 67,
+      "claim": "0.7001",
+      "source": "04-solution/postproc/out/fusion.json#fusion_rerank_val/mAP",
+      "raw": 0.700146218685041,
+      "expected": "0.7001",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 67,
+      "claim": "0.6815",
+      "source": "04-solution/postproc/out/fusion.json#fusion_rerank_val/Rank-1",
+      "raw": 0.6814903846153846,
+      "expected": "0.6815",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/REPORT.md",
+      "line": 67,
+      "claim": "0.6888",
+      "source": "04-solution/postproc/out/fusion.json#fusion_rerank_val/mAP@10",
+      "raw": 0.6887760098697598,
+      "expected": "0.6888",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 173,
+      "claim": "0.7316",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP",
+      "raw": 0.7316093422310448,
+      "expected": "0.7316",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 173,
+      "claim": "0.6851",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-1",
+      "raw": 0.6850961538461539,
+      "expected": "0.6851",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 173,
+      "claim": "0.7242",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP@10",
+      "raw": 0.7242262381715506,
+      "expected": "0.7242",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 174,
+      "claim": "0.7741",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.7741",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 174,
+      "claim": "0.7308",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.7308",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 174,
+      "claim": "0.7685",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP@10",
+      "raw": 0.7684546226343101,
+      "expected": "0.7685",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 261,
+      "claim": "0.5282812306342437",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/threshold",
+      "raw": 0.5282812306342437,
+      "expected": "0.5282812306342437",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 261,
+      "claim": "0.809",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/f1",
+      "raw": 0.8090787716955942,
+      "expected": "0.809",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 261,
+      "claim": "0.784",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/tnr",
+      "raw": 0.7841726618705036,
+      "expected": "0.784",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 262,
+      "claim": "0.5141976914190476",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/threshold",
+      "raw": 0.5141976914190476,
+      "expected": "0.5141976914190476",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 262,
+      "claim": "0.768",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/f1",
+      "raw": 0.7684996605566871,
+      "expected": "0.768",
+      "ok": true
+    },
+    {
+      "file": "04-solution/service/README.md",
+      "line": 262,
+      "claim": "0.730",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/tnr",
+      "raw": 0.7302158273381295,
+      "expected": "0.730",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 111,
+      "claim": "0.7316093422310448",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP",
+      "raw": 0.7316093422310448,
+      "expected": "0.7316093422310448",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 111,
+      "claim": "0.6850961538461539",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-1",
+      "raw": 0.6850961538461539,
+      "expected": "0.6850961538461539",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 111,
+      "claim": "0.7684996605566871",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/f1",
+      "raw": 0.7684996605566871,
+      "expected": "0.7684996605566871",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 111,
+      "claim": "0.7302158273381295",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/tnr",
+      "raw": 0.7302158273381295,
+      "expected": "0.7302158273381295",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 112,
+      "claim": "0.7740915539438481",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.7740915539438481",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 112,
+      "claim": "0.7307692307692307",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.7307692307692307",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 112,
+      "claim": "0.8090787716955942",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/f1",
+      "raw": 0.8090787716955942,
+      "expected": "0.8090787716955942",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/README.md",
+      "line": 112,
+      "claim": "0.7841726618705036",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/tnr",
+      "raw": 0.7841726618705036,
+      "expected": "0.7841726618705036",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 9,
+      "claim": "0.7316093422310448",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/mAP",
+      "raw": 0.7316093422310448,
+      "expected": "0.7316093422310448",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 9,
+      "claim": "0.6850961538461539",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/cos/Rank-1",
+      "raw": 0.6850961538461539,
+      "expected": "0.6850961538461539",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 9,
+      "claim": "0.7684996605566871",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/f1",
+      "raw": 0.7684996605566871,
+      "expected": "0.7684996605566871",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 9,
+      "claim": "0.7302158273381295",
+      "source": "04-solution/service/calib-d1_j48/headline.json#cosine_rule_reproduced/tnr",
+      "raw": 0.7302158273381295,
+      "expected": "0.7302158273381295",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 9,
+      "claim": "0.5141977018197194",
+      "source": "04-solution/reproduce/evidence/validation-metrics.json#calibration/threshold",
+      "raw": 0.5141977018197194,
+      "expected": "0.5141977018197194",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 10,
+      "claim": "0.7740915539438481",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.7740915539438481",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 10,
+      "claim": "0.7307692307692307",
+      "source": "04-solution/training/combined/s02_metrics.json#d1_j48/kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.7307692307692307",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 10,
+      "claim": "0.8090787716955942",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/f1",
+      "raw": 0.8090787716955942,
+      "expected": "0.8090787716955942",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 10,
+      "claim": "0.7841726618705036",
+      "source": "04-solution/service/calib-d1_j48/headline.json#rerank_point/tnr",
+      "raw": 0.7841726618705036,
+      "expected": "0.7841726618705036",
+      "ok": true
+    },
+    {
+      "file": "04-solution/reproduce/evidence/README.md",
+      "line": 10,
+      "claim": "0.5282812332956895",
+      "source": "04-solution/reproduce/evidence/validation-metrics.json#rerank_calibration/threshold",
+      "raw": 0.5282812332956895,
+      "expected": "0.5282812332956895",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 11,
+      "claim": "0,6937",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/a/kr/mAP",
+      "raw": 0.6936584724586873,
+      "expected": "0.6937",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 11,
+      "claim": "0,6635",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/a/kr/Rank-1",
+      "raw": 0.6634615384615384,
+      "expected": "0.6635",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 11,
+      "claim": "0,6834",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/a/kr/mAP@10",
+      "raw": 0.6834008858618235,
+      "expected": "0.6834",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 12,
+      "claim": "0,7366",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/b/kr/mAP",
+      "raw": 0.7365685002762792,
+      "expected": "0.7366",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 12,
+      "claim": "0,7007",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/b/kr/Rank-1",
+      "raw": 0.7007211538461539,
+      "expected": "0.7007",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 12,
+      "claim": "0,7283",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/b/kr/mAP@10",
+      "raw": 0.7283317593864468,
+      "expected": "0.7283",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 13,
+      "claim": "0,7310",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/c_w1.0/kr/mAP",
+      "raw": 0.7310190289578179,
+      "expected": "0.7310",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 13,
+      "claim": "0,6863",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/c_w1.0/kr/Rank-1",
+      "raw": 0.6862980769230769,
+      "expected": "0.6863",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 13,
+      "claim": "0,7227",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/c_w1.0/kr/mAP@10",
+      "raw": 0.72270265758547,
+      "expected": "0.7227",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 14,
+      "claim": "0,7621",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d1_w1.0/kr/mAP",
+      "raw": 0.7620600309577549,
+      "expected": "0.7621",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 14,
+      "claim": "0,7175",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d1_w1.0/kr/Rank-1",
+      "raw": 0.7175480769230769,
+      "expected": "0.7175",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 14,
+      "claim": "0,7559",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d1_w1.0/kr/mAP@10",
+      "raw": 0.7558668870192308,
+      "expected": "0.7559",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 15,
+      "claim": "0,7607",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d2_w1.0/kr/mAP",
+      "raw": 0.7606990504433764,
+      "expected": "0.7607",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 15,
+      "claim": "0,7151",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d2_w1.0/kr/Rank-1",
+      "raw": 0.7151442307692307,
+      "expected": "0.7151",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 15,
+      "claim": "0,7535",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d2_w1.0/kr/mAP@10",
+      "raw": 0.7535493933150182,
+      "expected": "0.7535",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 16,
+      "claim": "0,7370",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d3_w1.0/kr/mAP",
+      "raw": 0.7370217084344074,
+      "expected": "0.7370",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 16,
+      "claim": "0,7007",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d3_w1.0/kr/Rank-1",
+      "raw": 0.7007211538461539,
+      "expected": "0.7007",
+      "ok": true
+    },
+    {
+      "file": "04-solution/postproc/whitening/final/README.md",
+      "line": 16,
+      "claim": "0,7288",
+      "source": "04-solution/postproc/whitening/final/s02_configs.json#table/d3_w1.0/kr/mAP@10",
+      "raw": 0.7287629095441596,
+      "expected": "0.7288",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 18,
+      "claim": "0,774092",
+      "source": "04-solution/training/branches3/AB_metrics.json#kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.774092",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 18,
+      "claim": "0,730769",
+      "source": "04-solution/training/branches3/AB_metrics.json#kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.730769",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 18,
+      "claim": "0,748806",
+      "source": "04-solution/training/branches3/AB_metrics.json#kr/mINP",
+      "raw": 0.7488060309838231,
+      "expected": "0.748806",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 18,
+      "claim": "+0,110273",
+      "source": "04-solution/training/branches3/AB_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.11027295350331523,
+      "expected": "0.110273",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 18,
+      "claim": "372,5",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/AB/mean_ms",
+      "raw": 372.4566828622483,
+      "expected": "372.5",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 19,
+      "claim": "0,777874",
+      "source": "04-solution/training/branches3/ABD_metrics.json#kr/mAP",
+      "raw": 0.7778736552900759,
+      "expected": "0.777874",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 19,
+      "claim": "0,739183",
+      "source": "04-solution/training/branches3/ABD_metrics.json#kr/Rank-1",
+      "raw": 0.7391826923076923,
+      "expected": "0.739183",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 19,
+      "claim": "0,752990",
+      "source": "04-solution/training/branches3/ABD_metrics.json#kr/mINP",
+      "raw": 0.75298991331752,
+      "expected": "0.752990",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 19,
+      "claim": "+0,107278",
+      "source": "04-solution/training/branches3/ABD_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.1072783220281851,
+      "expected": "0.107278",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 19,
+      "claim": "662,0",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/ABD/mean_ms",
+      "raw": 661.9528043572791,
+      "expected": "662.0",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 20,
+      "claim": "0,776369",
+      "source": "04-solution/training/branches3/ABCD_metrics.json#kr/mAP",
+      "raw": 0.7763685841920694,
+      "expected": "0.776369",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 20,
+      "claim": "0,735577",
+      "source": "04-solution/training/branches3/ABCD_metrics.json#kr/Rank-1",
+      "raw": 0.7355769230769231,
+      "expected": "0.735577",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 20,
+      "claim": "0,751970",
+      "source": "04-solution/training/branches3/ABCD_metrics.json#kr/mINP",
+      "raw": 0.7519704728064582,
+      "expected": "0.751970",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 20,
+      "claim": "+0,109747",
+      "source": "04-solution/training/branches3/ABCD_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.10974714466971702,
+      "expected": "0.109747",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 20,
+      "claim": "956,9",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/ABCD/mean_ms",
+      "raw": 956.9211402768269,
+      "expected": "956.9",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 21,
+      "claim": "0,774196",
+      "source": "04-solution/training/branches3/ABC_metrics.json#kr/mAP",
+      "raw": 0.7741959552128027,
+      "expected": "0.774196",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 21,
+      "claim": "0,736779",
+      "source": "04-solution/training/branches3/ABC_metrics.json#kr/Rank-1",
+      "raw": 0.7367788461538461,
+      "expected": "0.736779",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 21,
+      "claim": "0,748585",
+      "source": "04-solution/training/branches3/ABC_metrics.json#kr/mINP",
+      "raw": 0.7485852593340152,
+      "expected": "0.748585",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 21,
+      "claim": "+0,109929",
+      "source": "04-solution/training/branches3/ABC_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.10992924462395992,
+      "expected": "0.109929",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 21,
+      "claim": "716,0",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/ABC/mean_ms",
+      "raw": 716.0137024603318,
+      "expected": "716.0",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 22,
+      "claim": "0,771792",
+      "source": "04-solution/training/branches3/ABDE_metrics.json#kr/mAP",
+      "raw": 0.7717917555748228,
+      "expected": "0.771792",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 22,
+      "claim": "0,731971",
+      "source": "04-solution/training/branches3/ABDE_metrics.json#kr/Rank-1",
+      "raw": 0.7319711538461539,
+      "expected": "0.731971",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 22,
+      "claim": "0,745862",
+      "source": "04-solution/training/branches3/ABDE_metrics.json#kr/mINP",
+      "raw": 0.745861607108467,
+      "expected": "0.745862",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 22,
+      "claim": "+0,111343",
+      "source": "04-solution/training/branches3/ABDE_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.1113426027715827,
+      "expected": "0.111343",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 22,
+      "claim": "976,9",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/ABDE/mean_ms",
+      "raw": 976.9203304045368,
+      "expected": "976.9",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 23,
+      "claim": "0,768077",
+      "source": "04-solution/training/branches3/ABE_metrics.json#kr/mAP",
+      "raw": 0.7680772128744071,
+      "expected": "0.768077",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 23,
+      "claim": "0,725962",
+      "source": "04-solution/training/branches3/ABE_metrics.json#kr/Rank-1",
+      "raw": 0.7259615384615384,
+      "expected": "0.725962",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 23,
+      "claim": "0,742451",
+      "source": "04-solution/training/branches3/ABE_metrics.json#kr/mINP",
+      "raw": 0.7424513476532771,
+      "expected": "0.742451",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 23,
+      "claim": "+0,112601",
+      "source": "04-solution/training/branches3/ABE_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.11260076724654589,
+      "expected": "0.112601",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 23,
+      "claim": "731,9",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/ABE/mean_ms",
+      "raw": 731.865873914212,
+      "expected": "731.9",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 24,
+      "claim": "0,767422",
+      "source": "04-solution/training/branches3/ABCE_metrics.json#kr/mAP",
+      "raw": 0.7674224288623684,
+      "expected": "0.767422",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 24,
+      "claim": "0,725962",
+      "source": "04-solution/training/branches3/ABCE_metrics.json#kr/Rank-1",
+      "raw": 0.7259615384615384,
+      "expected": "0.725962",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 24,
+      "claim": "0,741972",
+      "source": "04-solution/training/branches3/ABCE_metrics.json#kr/mINP",
+      "raw": 0.7419719762889877,
+      "expected": "0.741972",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 24,
+      "claim": "+0,113858",
+      "source": "04-solution/training/branches3/ABCE_metrics.json#camera_gap_kr/mAP",
+      "raw": 0.11385753487943795,
+      "expected": "0.113858",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/branches3/README.md",
+      "line": 24,
+      "claim": "1051,0",
+      "source": "04-solution/training/branches3/cpu_batch1_benchmark.json#results/ABCE/mean_ms",
+      "raw": 1051.022534823278,
+      "expected": "1051.0",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 16,
+      "claim": "0,774092",
+      "source": "04-solution/training/input256/eval_all_configs.json#baseline/d1/kr/mAP",
+      "raw": 0.7740915539438481,
+      "expected": "0.774092",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 16,
+      "claim": "0,730769",
+      "source": "04-solution/training/input256/eval_all_configs.json#baseline/d1/kr/Rank-1",
+      "raw": 0.7307692307692307,
+      "expected": "0.730769",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 16,
+      "claim": "+0,110273",
+      "source": "04-solution/training/input256/eval_all_configs.json#baseline/d1/camera_gap_kr/mAP",
+      "raw": 0.11027295350331523,
+      "expected": "0.110273",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 17,
+      "claim": "0,768190",
+      "source": "04-solution/training/input256/eval_all_configs.json#d1_256/kr/mAP",
+      "raw": 0.7681898255591714,
+      "expected": "0.768190",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 17,
+      "claim": "0,725962",
+      "source": "04-solution/training/input256/eval_all_configs.json#d1_256/kr/Rank-1",
+      "raw": 0.7259615384615384,
+      "expected": "0.725962",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 17,
+      "claim": "+0,112683",
+      "source": "04-solution/training/input256/eval_all_configs.json#d1_256/camera_gap_kr/mAP",
+      "raw": 0.11268255622439294,
+      "expected": "0.112683",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 18,
+      "claim": "0,742329",
+      "source": "04-solution/training/input256/eval_all_configs.json#baseline/single/kr/mAP",
+      "raw": 0.7423285567738821,
+      "expected": "0.742329",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 18,
+      "claim": "0,695913",
+      "source": "04-solution/training/input256/eval_all_configs.json#baseline/single/kr/Rank-1",
+      "raw": 0.6959134615384616,
+      "expected": "0.695913",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 18,
+      "claim": "+0,126955",
+      "source": "04-solution/training/input256/eval_all_configs.json#baseline/single/camera_gap_kr/mAP",
+      "raw": 0.12695471161135685,
+      "expected": "0.126955",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 19,
+      "claim": "0,725580",
+      "source": "04-solution/training/input256/eval_all_configs.json#single256/kr/mAP",
+      "raw": 0.7255796094142012,
+      "expected": "0.725580",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 19,
+      "claim": "0,676683",
+      "source": "04-solution/training/input256/eval_all_configs.json#single256/kr/Rank-1",
+      "raw": 0.6766826923076923,
+      "expected": "0.676683",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 19,
+      "claim": "+0,134754",
+      "source": "04-solution/training/input256/eval_all_configs.json#single256/camera_gap_kr/mAP",
+      "raw": 0.13475437079709984,
+      "expected": "0.134754",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 20,
+      "claim": "0,724218",
+      "source": "04-solution/training/input256/eval_all_configs.json#old_single256/kr/mAP",
+      "raw": 0.7242182486874472,
+      "expected": "0.724218",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 20,
+      "claim": "0,679087",
+      "source": "04-solution/training/input256/eval_all_configs.json#old_single256/kr/Rank-1",
+      "raw": 0.6790865384615384,
+      "expected": "0.679087",
+      "ok": true
+    },
+    {
+      "file": "04-solution/training/input256/README.md",
+      "line": 20,
+      "claim": "+0,133624",
+      "source": "04-solution/training/input256/eval_all_configs.json#old_single256/camera_gap_kr/mAP",
+      "raw": 0.13362418325862768,
+      "expected": "0.133624",
+      "ok": true
+    },
+    {
+      "file": "04-solution/plate-ablation/README.md",
+      "line": 66,
+      "claim": "0,6566",
+      "source": "04-solution/plate-ablation/out/ablation.json#metrics/base/mAP",
+      "raw": 0.6565692724907637,
+      "expected": "0.6566",
+      "ok": true
+    },
+    {
+      "file": "04-solution/plate-ablation/README.md",
+      "line": 67,
+      "claim": "0,6513",
+      "source": "04-solution/plate-ablation/out/ablation.json#metrics/plate_ring/mAP",
+      "raw": 0.6513335531829472,
+      "expected": "0.6513",
+      "ok": true
+    },
+    {
+      "file": "04-solution/plate-ablation/README.md",
+      "line": 68,
+      "claim": "0,6480",
+      "source": "04-solution/plate-ablation/out/ablation.json#metrics/shift_ring/mAP",
+      "raw": 0.6480053888900362,
+      "expected": "0.6480",
+      "ok": true
+    },
+    {
+      "file": "04-solution/plate-ablation/README.md",
+      "line": 69,
+      "claim": "0,6505",
+      "source": "04-solution/plate-ablation/out/ablation.json#metrics/mirror_ring/mAP",
+      "raw": 0.6505474937017257,
+      "expected": "0.6505",
+      "ok": true
+    },
+    {
+      "file": "04-solution/plate-ablation/README.md",
+      "line": 70,
+      "claim": "0,6409",
+      "source": "04-solution/plate-ablation/out/ablation.json#metrics/side_ring/mAP",
+      "raw": 0.6408521610922796,
+      "expected": "0.6409",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 59,
+      "claim": "0.0103",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/0/expected/mAP",
+      "raw": 0.010256010994935987,
+      "expected": "0.0103",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 59,
+      "claim": "0.0134",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/0/observed/mAP",
+      "raw": 0.0133747458046183,
+      "expected": "0.0134",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 59,
+      "claim": "0.0096",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/1/observed/mAP",
+      "raw": 0.00962413600444086,
+      "expected": "0.0096",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 59,
+      "claim": "0.0114",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/2/observed/mAP",
+      "raw": 0.011395686147587557,
+      "expected": "0.0114",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 60,
+      "claim": "0.0020",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/0/expected/Rank-1",
+      "raw": 0.001988227893601725,
+      "expected": "0.0020",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 60,
+      "claim": "0.0048",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/0/observed/Rank-1",
+      "raw": 0.004807692307692308,
+      "expected": "0.0048",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 60,
+      "claim": "0.0012",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/1/observed/Rank-1",
+      "raw": 0.001201923076923077,
+      "expected": "0.0012",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 60,
+      "claim": "0.0036",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/2/observed/Rank-1",
+      "raw": 0.003605769230769231,
+      "expected": "0.0036",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 61,
+      "claim": "0.0081",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/0/expected/mINP",
+      "raw": 0.00805025056726357,
+      "expected": "0.0081",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 61,
+      "claim": "0.0113",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/0/observed/mINP",
+      "raw": 0.011300558046558832,
+      "expected": "0.0113",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 61,
+      "claim": "0.0076",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/1/observed/mINP",
+      "raw": 0.007645524399015901,
+      "expected": "0.0076",
+      "ok": true
+    },
+    {
+      "file": "04-solution/split/README.md",
+      "line": 61,
+      "claim": "0.0095",
+      "source": "04-solution/split/out/evalrun/degenerate_results.json#random/2/observed/mINP",
+      "raw": 0.009499136535595483,
+      "expected": "0.0095",
+      "ok": true
+    }
+  ]
+}
