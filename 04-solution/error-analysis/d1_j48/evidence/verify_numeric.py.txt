@@ -1,0 +1,54 @@
+import json,csv,hashlib,collections,sys
+from pathlib import Path
+import numpy as np
+J=Path(__file__).resolve().parent;O=J/'out';R=J/'inputs/repo';sys.path.insert(0,str(R/'04-solution/eval'))
+from reid_metrics import evaluate
+checks={}
+qm=list(csv.DictReader((R/'04-solution/split/files/val_query.csv').open()));gm=list(csv.DictReader((R/'04-solution/split/files/val_gallery.csv').open()));scores=np.load(O/'scores_d1_j48.npz')['scores']
+result=evaluate(scores,query_ids=[x['vehicle_id'] for x in qm],gallery_ids=[x['vehicle_id'] for x in gm],query_cameras=[x['camera_id'] for x in qm],gallery_cameras=[x['camera_id'] for x in gm],known_absent=np.array([x['has_mate']=='0' for x in qm]),threshold=0.5282812306342437,camera_policy='market',refusal_mode='presence',include_rankings=True)
+assert result['ranking_full_gallery']['mAP']==0.7740915539438481
+assert result['ranking_full_gallery']['Rank-1']==0.7307692307692307
+assert result['refusal']['f1']==0.8090787716955942
+assert result['refusal']['tnr']==0.7841726618705036
+checks['saved_matrix_evaluated_by_current_official_evaluator']='exact metrics match'
+final=json.loads((O/'per_query_d1_j48.json').read_text());base=json.loads((O/'per_query_osnet_cosine.json').read_text());kr=json.loads((O/'per_query_osnet_kr.json').read_text())
+for i,(r,s) in enumerate(zip(final,result['per_query'],strict=True)):
+ for key in ['query_index','status','ap','rank1','rank5','num_relevant','positive_ranks','eligible_count','top_gallery_index','top_score','accepted']:assert r[key]==s[key],(i,key)
+ assert r['image_id']==qm[i]['image_id']
+ assert r['ranking_top20']==s['ranking'][:20]
+ positives=[g for g in s['ranking'] if gm[g]['vehicle_id']==qm[i]['vehicle_id']]
+ assert r['positive_gallery_indices']==positives
+ assert r['best_positive_gallery_index']==(positives[0] if positives else None)
+ assert r['best_positive_score']==(float(scores[i,positives[0]]) if positives else None)
+checks['per_query_rows_reconciled']=len(final)
+known=[i for i,r in enumerate(final) if r['status']=='known'];unknown=[i for i,r in enumerate(final) if r['status']=='unknown']
+pools={'errors':[i for i in known if final[i]['rank1']==0], 'fixed':[i for i in known if base[i]['rank1']==0 and final[i]['rank1']==1], 'added':[i for i in known if base[i]['rank1']==1 and final[i]['rank1']==0], 'false_accept':[i for i in unknown if final[i]['accepted']], 'false_reject':[i for i in known if not final[i]['accepted']]}
+frozen=json.loads((O/'sample_frozen.json').read_text());labels=json.loads((O/'manual_labels.json').read_text());sha=hashlib.sha256((O/'sample_frozen.json').read_bytes()).hexdigest()
+assert sha=='36a5f2e0ee86c7a0731134cf490c082729c36edbaf2d0058140e267f090b2ae1'==labels['sample_sha256']
+for g in frozen['groups']:
+ assert pools[g['name']]==g['population'];sample=np.random.Generator(np.random.PCG64(g['seed'])).choice(np.array(g['population']),size=g['sample_n'],replace=False).tolist();assert sample==g['sample'];assigned=[x['query_index'] for x in labels['labels'] if x['group']==g['name']];assert assigned==sample
+checks['sample_population_and_seed_replays']=5;checks['sample_sha256']=sha
+assert len(labels['labels'])==128 and len({r['case'] for r in labels['labels']})==128
+main=[r for r in labels['labels'] if r['group']=='errors'];assert collections.Counter(r['primary'] for r in main)=={'V':23,'T':20,'L':10,'C':5,'D':5,'U':1}
+ms=json.loads((O/'manual_summary.json').read_text())
+for g in frozen['groups']:
+ a=[r for r in labels['labels'] if r['group']==g['name']]
+ for code,stats in ms[g['name']]['causes'].items():assert stats['n']==sum(r['primary']==code for r in a)
+for r in labels['labels']:
+ assert r['primary'] in {'V','T','L','C','D','U','O'} and r['note'] and r['confidence'] in {'low','medium','high'}
+ assert r['image_id']==qm[r['query_index']]['image_id']
+seen={r['query_index'] for r in labels['labels']};assert len(seen)==118;assert len(seen&set(pools['errors']))==81;assert len(seen&set(pools['false_reject']))==71
+checks['manual_labels_complete']=128;checks['unique_reviewed_queries']=118;checks['reviewed_top1_errors']=81
+with (O/'transitions.csv').open() as f:transitions=list(csv.DictReader(f))
+assert len(transitions)==832
+assert collections.Counter(x['transition_vs_osnet'] for x in transitions)=={'both_correct':504,'fixed':104,'added':21,'both_wrong':203}
+assert collections.Counter(x['transition_vs_osnet_kr'] for x in transitions)=={'both_correct':530,'fixed':78,'added':22,'both_wrong':202}
+checks['paired_transition_rows']=832
+head=json.loads((O/'summary.json').read_text())
+for rel,info in head['inputs'].items():
+ p=J/rel;assert hashlib.sha256(p.read_bytes()).hexdigest()==info['sha256']
+checks['numeric_input_and_source_hashes']=len(head['inputs'])
+images=json.loads((O/'image_sources.json').read_text())
+for info in images.values():assert hashlib.sha256(Path(info['path']).read_bytes()).hexdigest()==info['sha256']
+checks['original_image_hashes']=len(images)
+(O/'numeric_verification.json').write_text(json.dumps({'status':'passed','checks':checks},ensure_ascii=False,indent=2)+'\n');print(json.dumps(checks,ensure_ascii=False,indent=2))

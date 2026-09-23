@@ -1,0 +1,71 @@
+import csv, hashlib, json, os, sys, time, platform
+from pathlib import Path
+from datetime import datetime, timezone
+import numpy as np
+J=Path(__file__).resolve().parent; R=J/'inputs/repo'; O=J/'out'; O.mkdir(exist_ok=True)
+sys.path[:0]=[str(R/'04-solution/eval'),str(R/'04-solution/service')]
+from reid_metrics import evaluate, scores_from_embeddings
+from app.core.rerank import rerank_scores
+from app.core import config
+
+def js(path,obj): path.write_text(json.dumps(obj,ensure_ascii=False,indent=2,allow_nan=False)+'\n')
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def meta(n):
+ with (R/f'04-solution/split/files/val_{n}.csv').open() as f:return list(csv.DictReader(f))
+qm,gm=meta('query'),meta('gallery'); qn=len(qm)
+kw=dict(query_ids=[r['vehicle_id'] for r in qm],gallery_ids=[r['vehicle_id'] for r in gm],query_cameras=[r['camera_id'] for r in qm],gallery_cameras=[r['camera_id'] for r in gm],known_absent=np.array([r['has_mate']=='0' for r in qm]),camera_policy='market',refusal_mode='presence',include_rankings=True)
+emb=np.load(J/'inputs/embeddings.npy'); cached=np.load(J/'inputs/rerank_scores.npy')
+assert emb.shape==(len(qm)+len(gm),512)
+start=time.time();rr=rerank_scores(emb[:qn],emb[qn:],6,3,0.3)
+assert np.max(np.abs(rr-cached))<1e-12
+qb=np.load(J/'inputs/val_query.npy');gb=np.load(J/'inputs/val_gallery.npy')
+for name,rows in [('query',qm),('gallery',gm)]:assert (J/f'inputs/val_{name}.ids').read_text().split()==[r['image_id'] for r in rows]
+matrices={'d1_j48':rr,'osnet_cosine':scores_from_embeddings(qb,gb,metric='cosine'),'osnet_kr':rerank_scores(qb,gb,6,3,0.3)}
+thresholds={'d1_j48':config.DEFAULT_THRESHOLD_RERANK,'osnet_cosine':0.5495953464415451,'osnet_kr':0.49937235233589916}
+expected={'d1_j48':(0.7740915539438481,0.7307692307692307),'osnet_cosine':(0.6565692724907637,0.6310096153846154),'osnet_kr':(0.6936584724586873,0.6634615384615384)}
+rows={};summary={}
+for tag,scores in matrices.items():
+ res=evaluate(scores,threshold=thresholds[tag],**kw);full=res['ranking_full_gallery']
+ assert (full['mAP'],full['Rank-1'])==expected[tag],(tag,full)
+ summary[tag]={'ranking':full,'refusal':res['refusal'],'expected_mAP_R1':list(expected[tag]),'exact_match':True}
+ vals=res['per_query']
+ for v in vals:
+  i=v['query_index'];order=v.pop('ranking');v['ranking_top20']=order[:20]
+  pos=[g for g in order if gm[g]['vehicle_id']==qm[i]['vehicle_id']]
+  v['positive_gallery_indices']=pos;v['best_positive_gallery_index']=pos[0] if pos else None
+  v['best_positive_score']=float(scores[i,pos[0]]) if pos else None
+  v['first_positive_rank']=v['positive_ranks'][0] if v['positive_ranks'] else None
+  v['image_id']=qm[i]['image_id'];v['vehicle_id']=qm[i]['vehicle_id'];v['camera_id']=qm[i]['camera_id']
+  v['top_gallery_image_id']=gm[v['top_gallery_index']]['image_id'];v['top_gallery_vehicle_id']=gm[v['top_gallery_index']]['vehicle_id']
+ rows[tag]=vals;js(O/f'per_query_{tag}.json',vals)
+ print(tag,full['mAP'],full['Rank-1'],res['refusal']['f1'],flush=True)
+final=rows['d1_j48'];base=rows['osnet_cosine'];kr=rows['osnet_kr']
+known=[i for i,r in enumerate(final) if r['status']=='known'];unknown=[i for i,r in enumerate(final) if r['status']=='unknown']
+errors=[i for i in known if final[i]['rank1']==0]
+fixed=[i for i in known if base[i]['rank1']==0 and final[i]['rank1']==1]
+added=[i for i in known if base[i]['rank1']==1 and final[i]['rank1']==0]
+fp=[i for i in unknown if final[i]['accepted']];fn=[i for i in known if not final[i]['accepted']]
+sampling=[]
+for name,pool,n,seed in [('errors',errors,64,20260923),('fixed',fixed,16,20260924),('added',added,16,20260925),('false_accept',fp,16,20260926),('false_reject',fn,16,20260927)]:
+ sample=np.random.Generator(np.random.PCG64(seed)).choice(np.array(sorted(pool)),size=min(n,len(pool)),replace=False).tolist()
+ sampling.append(dict(name=name,seed=seed,algorithm='numpy.random.Generator(PCG64(seed)).choice(sorted_pool, size, replace=False)',population=sorted(pool),population_n=len(pool),sample=sample,sample_n=len(sample)))
+freeze=dict(created_utc=datetime.now(timezone.utc).isoformat(),image_viewed=False,selection_uses='numeric evaluator facts only; no image/feature/category filtering',numpy=np.__version__,groups=sampling)
+js(O/'sample_frozen.json',freeze)
+summary['sampling_sha256']=sha(O/'sample_frozen.json')
+summary['rerank_cached_max_abs_diff']=float(np.max(np.abs(rr-cached)))
+summary['execution']={'host':platform.node(),'numpy':np.__version__,'seconds':time.time()-start,'OMP_NUM_THREADS':os.getenv('OMP_NUM_THREADS'),'OPENBLAS_NUM_THREADS':os.getenv('OPENBLAS_NUM_THREADS')}
+summary['counts']={'queries':len(final),'known':len(known),'unknown':len(unknown),'errors':len(errors),'false_accept':len(fp),'false_reject':len(fn)}
+summary['transitions']={}
+for tag in ['osnet_cosine','osnet_kr']:
+ b=rows[tag];summary['transitions'][tag]={name:[i for i in known if bool(b[i]['rank1'])==x and bool(final[i]['rank1'])==y] for name,x,y in [('both_correct',True,True),('fixed',False,True),('added',True,False),('both_wrong',False,False)]}
+summary['refusal_cross']={name:sum(r['status']=='known' and bool(r['accepted'])==acc and bool(r['rank1'])==correct for r in final) for name,acc,correct in [('accept_correct',True,True),('accept_wrong',True,False),('reject_correct',False,True),('reject_wrong',False,False)]}
+summary['depth']={tag:{band:sum(r['status']=='known' and r['first_positive_rank'] is not None and lo<=r['first_positive_rank']<=hi for r in rs) for band,lo,hi in [('2-5',2,5),('6-20',6,20),('>20',21,750)]} for tag,rs in rows.items()}
+summary['inputs']={str(p.relative_to(J)):dict(bytes=p.stat().st_size,sha256=sha(p)) for p in sorted((J/'inputs').rglob('*')) if p.is_file()}
+js(O/'summary.json',summary)
+np.savez_compressed(O/'scores_d1_j48.npz',scores=rr)
+with (O/'all_queries.csv').open('w',newline='') as f:
+ fields=['query_index','image_id','vehicle_id','camera_id','status','accepted','rank1','first_positive_rank','top_gallery_index','top_gallery_image_id','top_gallery_vehicle_id','best_positive_gallery_index','top_score','best_positive_score','osnet_rank1','osnet_first_positive_rank','osnet_top_gallery_index','osnet_kr_rank1','osnet_kr_first_positive_rank']
+ w=csv.DictWriter(f,fields);w.writeheader()
+ for i,r in enumerate(final):
+  d={k:r[k] for k in fields if k in r};d.update(osnet_rank1=base[i]['rank1'],osnet_first_positive_rank=base[i]['first_positive_rank'],osnet_top_gallery_index=base[i]['top_gallery_index'],osnet_kr_rank1=kr[i]['rank1'],osnet_kr_first_positive_rank=kr[i]['first_positive_rank']);w.writerow(d)
+print(json.dumps({'counts':summary['counts'],'transitions':{t:{k:len(v) for k,v in d.items()} for t,d in summary['transitions'].items()},'refusal_cross':summary['refusal_cross'],'sample_sha256':summary['sampling_sha256']},indent=2),flush=True)

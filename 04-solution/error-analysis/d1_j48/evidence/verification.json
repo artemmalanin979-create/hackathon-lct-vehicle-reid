@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "verified_utc": "2026-09-23T12:10:19.462073+00:00",
+  "repository_head": "e80c12bcb0204ffafcc078a12567fc0e25972082",
+  "tracked_diff_empty": true,
+  "staged_diff_empty": true,
+  "untracked_only_requested_directory": true,
+  "numeric": {
+    "saved_matrix_evaluated_by_current_official_evaluator": "exact metrics match",
+    "per_query_rows_reconciled": 1110,
+    "sample_population_and_seed_replays": 5,
+    "sample_sha256": "36a5f2e0ee86c7a0731134cf490c082729c36edbaf2d0058140e267f090b2ae1",
+    "manual_labels_complete": 128,
+    "unique_reviewed_queries": 118,
+    "reviewed_top1_errors": 81,
+    "paired_transition_rows": 832,
+    "numeric_input_and_source_hashes": 23,
+    "original_image_hashes": 303
+  },
+  "artifacts": {
+    "manual_csv_json_rows_equal": 128,
+    "annotated_contact_and_context_sheets": 39,
+    "pitch_pngs": 10,
+    "all_pitch_sizes": [
+      1920,
+      1080
+    ],
+    "pitch_hashes_match_manifest": true,
+    "source_files_equal_actual_repository": 17,
+    "local_markdown_links_checked": 73,
+    "missing_links": []
+  },
+  "limitations": [
+    "Visual labels are Codex judgments, not independent human adjudication.",
+    "Visual review covers 81/224 final ranking errors; the main unbiased cause table uses 64.",
+    "Refusal diagnosis uses 16 random FP and 16 random FN; current threshold is unchanged."
+  ]
+}

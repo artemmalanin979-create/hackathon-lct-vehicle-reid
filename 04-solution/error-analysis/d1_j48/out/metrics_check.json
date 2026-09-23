@@ -1,0 +1,58 @@
+{
+  "d1_j48": {
+    "mAP": 0.7740915539438481,
+    "Rank-1": 0.7307692307692307,
+    "Rank-5": 0.8810096153846154,
+    "valid": 832,
+    "exact_match": true,
+    "refusal": {
+      "threshold": 0.5282812306342437,
+      "tp": 606,
+      "fp": 60,
+      "fn": 226,
+      "tn_unknown": 218,
+      "f1": 0.8090787716955942,
+      "tnr": 0.7841726618705036
+    }
+  },
+  "osnet_cosine": {
+    "mAP": 0.6565692724907637,
+    "Rank-1": 0.6310096153846154,
+    "Rank-5": 0.7872596153846154,
+    "valid": 832,
+    "exact_match": true,
+    "refusal": {
+      "threshold": 0.5495953464415451,
+      "tp": 530,
+      "fp": 84,
+      "fn": 302,
+      "tn_unknown": 194,
+      "f1": 0.7330567081604425,
+      "tnr": 0.697841726618705
+    }
+  },
+  "osnet_kr": {
+    "mAP": 0.6936584724586873,
+    "Rank-1": 0.6634615384615384,
+    "Rank-5": 0.7872596153846154,
+    "valid": 832,
+    "exact_match": true,
+    "refusal": {
+      "threshold": 0.49937235233589916,
+      "tp": 603,
+      "fp": 62,
+      "fn": 229,
+      "tn_unknown": 216,
+      "f1": 0.8056112224448898,
+      "tnr": 0.7769784172661871
+    }
+  },
+  "cached_scores_max_abs_diff": 0.0,
+  "execution": {
+    "host": "sespel-worker.local",
+    "numpy": "2.4.6",
+    "seconds": 11.280120849609375,
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  }
+}

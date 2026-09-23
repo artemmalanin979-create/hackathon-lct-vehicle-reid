@@ -1,0 +1,21 @@
+import json,csv,statistics,collections,hashlib
+from pathlib import Path
+J=Path(__file__).resolve().parent;O=J/'out';R=Path('/home/artem/projects/hackathon-lct-vehicle-reid')
+rows={n:json.loads((O/f'per_query_{n}.json').read_text()) for n in ['d1_j48','osnet_cosine','osnet_kr']};final=rows['d1_j48'];s=json.loads((O/'summary.json').read_text());frozen=json.loads((O/'sample_frozen.json').read_text())
+assert hashlib.sha256((O/'sample_frozen.json').read_bytes()).hexdigest()==s['sampling_sha256']
+old_sample=json.loads((R/'04-solution/error-analysis/out/error_sample.json').read_text())['sample'];old_labels=json.loads((R/'04-solution/error-analysis/out/manual_labels.json').read_text())['labels']
+stats={'old_sample_transitions_by_cause':{},'camera_89_90':{},'error_populations':{},'refusal_error_summary':{}}
+for code in ['V','T','L','C']:
+ ids=[i for case,i in enumerate(old_sample,1) if old_labels[str(case)][0]==code]
+ assert all(rows['osnet_cosine'][i]['rank1']==0 for i in ids)
+ stats['old_sample_transitions_by_cause'][code]={'n':len(ids),'fixed':sum(final[i]['rank1']==1 for i in ids),'remaining':sum(final[i]['rank1']==0 for i in ids),'query_indices':ids}
+for tag,rs in rows.items():
+ x=[r for r in rs if r['status']=='known' and r['camera_id'] in ['89','90']]
+ stats['camera_89_90'][tag]={'n':len(x),'correct':sum(r['rank1']==1 for r in x)}
+ e=[r for r in rs if r['rank1']==0];ranks=[r['first_positive_rank'] for r in e]
+ stats['error_populations'][tag]={'n':len(e),'median_first_positive_rank':statistics.median(ranks),'deep_over20':sum(v>20 for v in ranks)}
+for typ,status,accepted in [('FP','unknown',True),('FN','known',False)]:
+ rs=[r for r in final if r['status']==status and r['accepted']==accepted];scores=[r['top_score'] for r in rs]
+ stats['refusal_error_summary'][typ]={'n':len(rs),'top_score_min':min(scores),'top_score_median':statistics.median(scores),'top_score_max':max(scores),'within_0.05_threshold':sum(abs(x-0.5282812306342437)<=.05 for x in scores),'unique_vehicle_ids':len({r['vehicle_id'] for r in rs})}
+stats['sample_unique_queries']=len({i for g in frozen['groups'] for i in g['sample']})
+(O/'derived_stats.json').write_text(json.dumps(stats,indent=2)+'\n');print(json.dumps(stats,ensure_ascii=False,indent=2))

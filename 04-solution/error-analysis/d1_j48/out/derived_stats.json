@@ -1,0 +1,146 @@
+{
+  "old_sample_transitions_by_cause": {
+    "V": {
+      "n": 30,
+      "fixed": 12,
+      "remaining": 18,
+      "query_indices": [
+        23,
+        191,
+        193,
+        195,
+        213,
+        247,
+        249,
+        252,
+        268,
+        396,
+        398,
+        470,
+        501,
+        545,
+        573,
+        595,
+        617,
+        619,
+        722,
+        736,
+        782,
+        815,
+        824,
+        835,
+        839,
+        840,
+        842,
+        994,
+        1033,
+        1088
+      ]
+    },
+    "T": {
+      "n": 23,
+      "fixed": 7,
+      "remaining": 16,
+      "query_indices": [
+        37,
+        78,
+        154,
+        155,
+        184,
+        202,
+        306,
+        362,
+        372,
+        383,
+        422,
+        514,
+        532,
+        664,
+        681,
+        766,
+        884,
+        932,
+        934,
+        935,
+        947,
+        964,
+        1002
+      ]
+    },
+    "L": {
+      "n": 7,
+      "fixed": 4,
+      "remaining": 3,
+      "query_indices": [
+        6,
+        403,
+        492,
+        529,
+        569,
+        607,
+        955
+      ]
+    },
+    "C": {
+      "n": 4,
+      "fixed": 1,
+      "remaining": 3,
+      "query_indices": [
+        60,
+        387,
+        938,
+        1006
+      ]
+    }
+  },
+  "camera_89_90": {
+    "d1_j48": {
+      "n": 183,
+      "correct": 99
+    },
+    "osnet_cosine": {
+      "n": 183,
+      "correct": 88
+    },
+    "osnet_kr": {
+      "n": 183,
+      "correct": 88
+    }
+  },
+  "error_populations": {
+    "d1_j48": {
+      "n": 224,
+      "median_first_positive_rank": 5.0,
+      "deep_over20": 29
+    },
+    "osnet_cosine": {
+      "n": 307,
+      "median_first_positive_rank": 7,
+      "deep_over20": 89
+    },
+    "osnet_kr": {
+      "n": 280,
+      "median_first_positive_rank": 9.0,
+      "deep_over20": 79
+    }
+  },
+  "refusal_error_summary": {
+    "FP": {
+      "n": 60,
+      "top_score_min": 0.530170164269741,
+      "top_score_median": 0.75345634125932,
+      "top_score_max": 0.8900658085280738,
+      "within_0.05_threshold": 8,
+      "unique_vehicle_ids": 26
+    },
+    "FN": {
+      "n": 226,
+      "top_score_min": 0.11510946449395776,
+      "top_score_median": 0.319339445734915,
+      "top_score_max": 0.5204302001066348,
+      "within_0.05_threshold": 26,
+      "unique_vehicle_ids": 105
+    }
+  },
+  "sample_unique_queries": 118
+}

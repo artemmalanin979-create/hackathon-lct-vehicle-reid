@@ -1,0 +1,46 @@
+import csv,json,hashlib
+from pathlib import Path
+from PIL import Image,ImageDraw,ImageFont,ImageOps
+J=Path(__file__).resolve().parent;O=J/'out';S=J/'sheets';S.mkdir(exist_ok=True)
+IMG=Path('/home/fedora/lct-reid/repo/data/images')
+if not IMG.exists():IMG=Path('/home/fedora/lct-reid/data/images')
+F=next(p for p in [Path('/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf'),Path('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')] if p.exists())
+font=lambda n:ImageFont.truetype(str(F),n)
+qm=list(csv.DictReader((J/'inputs/repo/04-solution/split/files/val_query.csv').open()));gm=list(csv.DictReader((J/'inputs/repo/04-solution/split/files/val_gallery.csv').open()))
+final=json.loads((O/'per_query_d1_j48.json').read_text());base=json.loads((O/'per_query_osnet_cosine.json').read_text());frozen=json.loads((O/'sample_frozen.json').read_text())
+provenance={};manifest=[]
+def crop(r):
+ p=IMG/(r['image_id']+'.jpg')
+ with Image.open(p) as im:
+  im=im.convert('RGB');x,y,w,h=[int(r[k]) for k in ['x','y','w','h']]
+  if r['image_id'] not in provenance:provenance[r['image_id']]={'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'frame_size':list(im.size),'bbox':[x,y,w,h]}
+  return im.crop((x,y,x+w,y+h))
+cw,ch=280,185;pad=12;rh=260;W=4*(cw+pad)+pad;H=4*rh+74
+prefixes={'errors':'E','fixed':'F','added':'A','false_accept':'P','false_reject':'N'}
+for group in frozen['groups']:
+ for offset in range(0,group['sample_n'],4):
+  sheet=Image.new('RGB',(W,H),'white');d=ImageDraw.Draw(sheet)
+  d.text((12,8),f"d1_j48 | {group['name']} | seed {group['seed']} | threshold {0.5282812306342437:.7f}",font=font(18),fill='black')
+  for c,title in enumerate(['Запрос / Query','Верная пара / Best positive','d1_j48: top-1','Исходная OSNet: top-1']):d.text((pad+c*(cw+pad),42),title,font=font(15),fill='black')
+  for row,i in enumerate(group['sample'][offset:offset+4]):
+   r=final[i];b=base[i];case=f"{prefixes[group['name']]}{offset+row+1:02}"
+   y=70+row*rh
+   d.text((12,y),f"{case}  q{i}  rank: {b['first_positive_rank']} -> {r['first_positive_rank']}  accepted={r['accepted']}",font=font(16),fill='black')
+   js=[r['best_positive_gallery_index'],r['top_gallery_index'],b['top_gallery_index']]
+   metas=[qm[i]]+[gm[g] if g is not None else None for g in js]
+   caps=[f"v{qm[i]['vehicle_id']} / cam{qm[i]['camera_id']}",f"rank={r['first_positive_rank']} score={r['best_positive_score']:.4f}" if r['best_positive_score'] is not None else 'Нет пары по разметке',f"score={r['top_score']:.4f}",f"cos={b['top_score']:.4f}"]
+   for c,(m,cap) in enumerate(zip(metas,caps)):
+    x=pad+c*(cw+pad);top=y+26
+    if m:
+     tile=ImageOps.contain(crop(m),(cw,ch),Image.Resampling.LANCZOS)
+     d.rectangle((x,top,x+cw,top+ch),fill=(235,238,242));sheet.paste(tile,(x+(cw-tile.width)//2,top+(ch-tile.height)//2))
+     color=(45,75,120) if c==0 else ((25,120,80) if m['vehicle_id']==qm[i]['vehicle_id'] else (175,45,45))
+     d.rectangle((x,top,x+cw,top+ch),outline=color,width=2)
+     d.text((x,top+ch+4),cap+('' if c==0 else f"  v{m['vehicle_id']}/c{m['camera_id']}"),font=font(13),fill='black')
+     d.text((x,top+ch+22),m['image_id'],font=font(11),fill=(60,65,70))
+    else:d.text((x,top+70),cap,font=font(16),fill=(90,90,90))
+   manifest.append({'case':case,'group':group['name'],'query_index':i,'sheet':f"{group['name']}_{offset//4+1:02}.jpg",'row':row+1})
+  sheet.save(S/f"{group['name']}_{offset//4+1:02}.jpg",quality=94)
+(O/'sheets_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+(O/'image_sources.json').write_text(json.dumps(provenance,ensure_ascii=False,indent=2)+'\n')
+print('sheets',len(list(S.glob('*.jpg'))),'cases',len(manifest),'source_images',len(provenance),'root',IMG,flush=True)

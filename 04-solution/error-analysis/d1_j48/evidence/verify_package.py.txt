@@ -1,0 +1,46 @@
+import csv,hashlib,json,re,subprocess,shutil
+from pathlib import Path
+from datetime import datetime,timezone
+from PIL import Image
+D=Path('/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/error-analysis/d1_j48');R=D.parents[2]
+head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip();assert head.startswith('e80c12b')
+assert subprocess.run(['git','diff','--quiet'],cwd=R).returncode==0
+assert subprocess.run(['git','diff','--cached','--quiet'],cwd=R).returncode==0
+status=subprocess.check_output(['git','status','--porcelain=v1'],cwd=R,text=True).strip();assert status=='?? 04-solution/error-analysis/d1_j48/',status
+numeric=json.loads((D/'evidence/numeric_verification.json').read_text());assert numeric['status']=='passed'
+labels=json.loads((D/'out/manual_labels.json').read_text())['labels'];sm=json.loads((D/'out/sheets_manifest.json').read_text());cases={r['case']:r for r in sm};assert len(cases)==128
+for r in labels:assert r['query_index']==cases[r['case']]['query_index'] and (D/'sheets'/r['sheet']).exists()
+with (D/'out/manual_labels.csv').open() as f:csvlabels=list(csv.DictReader(f))
+assert len(csvlabels)==128
+for a,b in zip(labels,csvlabels,strict=True):assert a['case']==b['case'] and a['primary']==b['primary'] and a['note']==b['note']
+images=list((D/'sheets').rglob('*.jpg'));assert len(images)==39
+for p in images:
+ with Image.open(p) as im:im.verify()
+examples=json.loads((D/'examples/manifest.json').read_text());assert len(examples)==10
+for e in examples:
+ p=D/e['path'];assert hashlib.sha256(p.read_bytes()).hexdigest()==e['sha256']
+ with Image.open(p) as im:assert im.size==(1920,1080);im.verify()
+ assert e['case'] in cases and e['query_index']==cases[e['case']]['query_index']
+# Verify every provenance artifact is still unchanged in the actual repository.
+inputs=json.loads((D/'out/summary.json').read_text())['inputs'];verified_sources=0
+for name,info in inputs.items():
+ if name.startswith('inputs/repo/'):
+  p=R/name.removeprefix('inputs/repo/');assert hashlib.sha256(p.read_bytes()).hexdigest()==info['sha256'];verified_sources+=1
+links=0;missing=[]
+for p in D.rglob('*.md'):
+ for target in re.findall(r'\]\(([^)]+)\)',p.read_text()):
+  target=target.split('#')[0]
+  if not target or '://' in target:continue
+  links+=1
+  if target=='SHA256SUMS':continue
+  if not (p.parent/target).exists():missing.append((str(p.relative_to(D)),target))
+assert not missing,missing
+result={'status':'passed','verified_utc':datetime.now(timezone.utc).isoformat(),'repository_head':head,'tracked_diff_empty':True,'staged_diff_empty':True,'untracked_only_requested_directory':True,'numeric':numeric['checks'],'artifacts':{'manual_csv_json_rows_equal':128,'annotated_contact_and_context_sheets':len(images),'pitch_pngs':len(examples),'all_pitch_sizes':[1920,1080],'pitch_hashes_match_manifest':True,'source_files_equal_actual_repository':verified_sources,'local_markdown_links_checked':links,'missing_links':[]},'limitations':['Visual labels are Codex judgments, not independent human adjudication.','Visual review covers 81/224 final ranking errors; the main unbiased cause table uses 64.','Refusal diagnosis uses 16 random FP and 16 random FN; current threshold is unchanged.']}
+(D/'evidence/verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+shutil.copy2(__file__,D/'evidence/verify_package.py.txt')
+with (D/'journal.md').open('a') as f:f.write(f'''\n## {result['verified_utc']} — итоговая проверка\n\n- Подготовлены REPORT.md, PITCH.md, README.md, 32 листа выборок, 7 листов проверки контекста и 10 PNG 1920×1080 для слайдов. Проверены читаемость основных типов иллюстраций, соответствие case/query и SHA-256 всех PNG.\n- Штатный evaluate повторно проверил сохранённую итоговую матрицу: mAP, Rank-1, F1, TNR совпадают точно. Сверены все 1110 per-query строк, пять seed/популяций, 128 записей разметки, 832 перехода, 23 входных файла и хеши 303 исходных кадров.\n- Дополнительно считан run_info исходного сервисного извлечения: обе модели и whitening совпадают с текущим config по SHA-256. Исторический порог 0,49937 в том run_info явно отделён от применённого здесь 0,5282812306342437; исторические решения отказа не использованы.\n- CSV и JSON разметки совпали по всем 128 наблюдениям. Все локальные ссылки проверены. `git diff` и staged diff пусты; HEAD остался e80c12b, единственный новый каталог — 04-solution/error-analysis/d1_j48/. Коммитов и push не выполнялось.\n- Завершён весь заявленный объём выборочного анализа. Ограничения указаны: 143 остаточные ошибки top-1 не просмотрены; неуверенные визуальные причины оставлены U; второго человеческого разметчика нет.\n''')
+files=sorted(p for p in D.rglob('*') if p.is_file() and p.name!='SHA256SUMS')
+(D/'SHA256SUMS').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.relative_to(D).as_posix()+'\n' for p in files))
+for line in (D/'SHA256SUMS').read_text().splitlines():
+ digest,rel=line.split('  ',1);assert hashlib.sha256((D/rel).read_bytes()).hexdigest()==digest
+print(json.dumps({'status':'passed','artifact_files_with_sha256':len(files),'bytes':sum(p.stat().st_size for p in files),'markdown_links':links,'sheets':len(images),'pitch_pngs':len(examples),'git_status':status},ensure_ascii=False,indent=2))

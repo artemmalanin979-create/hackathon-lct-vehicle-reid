@@ -1,0 +1,40 @@
+{
+  "inputs/embeddings.npy": {
+    "sha256": "7c0e35b4da3092e1fe394f709b502e1dce251b1fdfe7afc5be7409291ee0dad0",
+    "matches_committed_job82_manifest": true
+  },
+  "out/rerank_scores.npy": {
+    "sha256": "3602e1cab4e999317cf8c4afb4c6728d16e540045b010df2705021b31a0c4102",
+    "matches_committed_job82_manifest": true
+  },
+  "04-solution/eval/reid_metrics.py": {
+    "current_sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+    "job82_sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+    "equal": true
+  },
+  "04-solution/eval/scope_metrics.py": {
+    "current_sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+    "job82_sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+    "equal": true
+  },
+  "04-solution/service/app/core/rerank.py": {
+    "current_sha256": "3b1d33338dcbe2a127b889893f7734d415de06ee879de1cf7cf6adf4dc0bd7d7",
+    "job82_sha256": "3b1d33338dcbe2a127b889893f7734d415de06ee879de1cf7cf6adf4dc0bd7d7",
+    "equal": true
+  },
+  "04-solution/service/app/core/config.py": {
+    "current_sha256": "54d85b96bc7c8672a4de282c77a644ad9dd8ac96a1cc0c7dfd7dabd8af71a767",
+    "job82_sha256": "54d85b96bc7c8672a4de282c77a644ad9dd8ac96a1cc0c7dfd7dabd8af71a767",
+    "equal": true
+  },
+  "04-solution/split/files/val_query.csv": {
+    "current_sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+    "job82_sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+    "equal": true
+  },
+  "04-solution/split/files/val_gallery.csv": {
+    "current_sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+    "job82_sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+    "equal": true
+  }
+}

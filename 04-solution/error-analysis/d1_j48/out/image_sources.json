@@ -1,0 +1,4244 @@
+{
+  "af276674a347419e97d484612958e55d": {
+    "path": "/home/fedora/lct-reid/data/images/af276674a347419e97d484612958e55d.jpg",
+    "sha256": "24f0ce332bd6010d88246fced5a8e054371ecfb1a28bbabf32c7194943e31f72",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      503,
+      641,
+      984,
+      439
+    ]
+  },
+  "6628305f060e4397bed3e2bd0be907d5": {
+    "path": "/home/fedora/lct-reid/data/images/6628305f060e4397bed3e2bd0be907d5.jpg",
+    "sha256": "74c89f99ea66d61bef9d238b21f3db109d212199a86c24acae8b856f87b4780f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      307,
+      343,
+      635,
+      528
+    ]
+  },
+  "48c9c0cd16804450b91ee1a6a1c7fa73": {
+    "path": "/home/fedora/lct-reid/data/images/48c9c0cd16804450b91ee1a6a1c7fa73.jpg",
+    "sha256": "16efe15156f36de0dccad018fc8a3da60cddeabd7341cd575005b8ad08a097fc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      973,
+      650,
+      945,
+      430
+    ]
+  },
+  "ea9a3abe17de44e4a08133ebecbf634d": {
+    "path": "/home/fedora/lct-reid/data/images/ea9a3abe17de44e4a08133ebecbf634d.jpg",
+    "sha256": "5efd781bb24665e5d5bee3f5897f7a71980c7f82f142148a52e6634520c3933c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      0,
+      331,
+      444,
+      409
+    ]
+  },
+  "8d7bc91ac9384b8aa9c0b068c03bcfd2": {
+    "path": "/home/fedora/lct-reid/data/images/8d7bc91ac9384b8aa9c0b068c03bcfd2.jpg",
+    "sha256": "b13de88f71b82266850a131d124a3be185c8bc465c66be27e1b7da91c58563c4",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      106,
+      46,
+      584,
+      422
+    ]
+  },
+  "fc8307ace16f4b2caff45c6303a9be6a": {
+    "path": "/home/fedora/lct-reid/data/images/fc8307ace16f4b2caff45c6303a9be6a.jpg",
+    "sha256": "48f7fc7e63b19c5a883d0de0662d1f648a8219a48dc7887434a4521a9c6ac53d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      0,
+      318,
+      424,
+      405
+    ]
+  },
+  "f82f308b9a47413e8347b85b78862bd4": {
+    "path": "/home/fedora/lct-reid/data/images/f82f308b9a47413e8347b85b78862bd4.jpg",
+    "sha256": "ebb1f60e431653575c4cf384e35bc51cb060b90523ba47d40ff4166162eb2333",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      609,
+      272,
+      482,
+      444
+    ]
+  },
+  "aa0ad0bac6ce4df89c748943b957cd16": {
+    "path": "/home/fedora/lct-reid/data/images/aa0ad0bac6ce4df89c748943b957cd16.jpg",
+    "sha256": "33975060b4bda41e65f41d4bd11f8adc1f4a898d6fa2284affe5843d22916128",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      498,
+      205,
+      803,
+      505
+    ]
+  },
+  "b0e0405759af404c872c6e914e03d227": {
+    "path": "/home/fedora/lct-reid/data/images/b0e0405759af404c872c6e914e03d227.jpg",
+    "sha256": "8c6f50ff9a99f969e0883a707559028d958d24d30bab574a1a0f3a3710535237",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      816,
+      369,
+      406,
+      417
+    ]
+  },
+  "e2de7959eafc498db27f522b9cac75ae": {
+    "path": "/home/fedora/lct-reid/data/images/e2de7959eafc498db27f522b9cac75ae.jpg",
+    "sha256": "cdd75cdc735cbc98298631992c68328cf3808feb433885772e409c2818c868c2",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      562,
+      269,
+      494,
+      410
+    ]
+  },
+  "42f86449669d4e0883bfb397fbed8e4c": {
+    "path": "/home/fedora/lct-reid/data/images/42f86449669d4e0883bfb397fbed8e4c.jpg",
+    "sha256": "9627eca445a41a2d6443781b7e65dae0f6ab60facc5a4c039d3225f5f8847b68",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      489,
+      342,
+      514,
+      353
+    ]
+  },
+  "66ae0c26d89d4792b6dac771ff733f1e": {
+    "path": "/home/fedora/lct-reid/data/images/66ae0c26d89d4792b6dac771ff733f1e.jpg",
+    "sha256": "50feab7d85fd997cf2a49ae8b21e4f2b6a815e270c3abe362da6850e87bb8e9d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      718,
+      420,
+      512,
+      567
+    ]
+  },
+  "fc91a3714e4c4b358a33a0a031d1eb41": {
+    "path": "/home/fedora/lct-reid/data/images/fc91a3714e4c4b358a33a0a031d1eb41.jpg",
+    "sha256": "b996cbb88cc736b1563e06aed1295a60f4e90747669f609d4d9942b0c9b2aad5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1066,
+      511,
+      835,
+      437
+    ]
+  },
+  "344070f55ddf4d7dbca57c61119b594d": {
+    "path": "/home/fedora/lct-reid/data/images/344070f55ddf4d7dbca57c61119b594d.jpg",
+    "sha256": "2c0377f69dc0dccf9ab394daf0ab7b6672195505277ddb42245a861231ff485c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      568,
+      270,
+      494,
+      405
+    ]
+  },
+  "4e8a00576c374f28b1a0e193c6fc3131": {
+    "path": "/home/fedora/lct-reid/data/images/4e8a00576c374f28b1a0e193c6fc3131.jpg",
+    "sha256": "e8ef13d511bd9704ef15571503e4fe6c3d9fc5f4a40c87b5b6ec3391c4c3a81a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      707,
+      409,
+      464,
+      482
+    ]
+  },
+  "0c98fb852faa41c0a38c57ab3ffb0146": {
+    "path": "/home/fedora/lct-reid/data/images/0c98fb852faa41c0a38c57ab3ffb0146.jpg",
+    "sha256": "962c2be847857e111c0598b778f037488d6df5c1dd6d74ade7e08a3cd6a0bfbb",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      402,
+      290,
+      935,
+      618
+    ]
+  },
+  "ba16eca1d8904d698b6adf9e5e9fff24": {
+    "path": "/home/fedora/lct-reid/data/images/ba16eca1d8904d698b6adf9e5e9fff24.jpg",
+    "sha256": "f0d4cb64c40c997824e1e6279ac2952f235c1089ebecbcff3be65ed08eb8fa29",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      843,
+      197,
+      796,
+      627
+    ]
+  },
+  "efdb8128e1ec4ed4b35c448438503c44": {
+    "path": "/home/fedora/lct-reid/data/images/efdb8128e1ec4ed4b35c448438503c44.jpg",
+    "sha256": "a13e594a541f559e9ad25155406fbaa10b9f0f0a4dcd5b9cfce1a1c61b491bd3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      641,
+      304,
+      593,
+      524
+    ]
+  },
+  "efb256892bd342bdb8e49c7e47fdddb8": {
+    "path": "/home/fedora/lct-reid/data/images/efb256892bd342bdb8e49c7e47fdddb8.jpg",
+    "sha256": "f1d639564a5f47cecb121c24ad54e5b4c7b9c9415e0d4f22629d96acd4b9a4f6",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1058,
+      191,
+      421,
+      371
+    ]
+  },
+  "734d77c711414df19b27de7a81627789": {
+    "path": "/home/fedora/lct-reid/data/images/734d77c711414df19b27de7a81627789.jpg",
+    "sha256": "43ee23ddf96fa0c0df69d29b3d4430ee77ea6bec41645dbec96d0de01b74fcfc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      301,
+      348,
+      622,
+      501
+    ]
+  },
+  "71bd486c2b45487a95e9c84025c719c0": {
+    "path": "/home/fedora/lct-reid/data/images/71bd486c2b45487a95e9c84025c719c0.jpg",
+    "sha256": "3c201396ce243fb54e14cdf2509d924991a559bc254d1f4ea21634f23fa59ac2",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      843,
+      195,
+      796,
+      630
+    ]
+  },
+  "f7c0682f9afb459ea45fe9dbaee81e41": {
+    "path": "/home/fedora/lct-reid/data/images/f7c0682f9afb459ea45fe9dbaee81e41.jpg",
+    "sha256": "a0aa44bf5552763d3eb41bc62c66361c9d8722f632f4c2b2a202f87b148bfbcc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      244,
+      488,
+      812,
+      396
+    ]
+  },
+  "87f96ebb1d554863b5f634ef6a263a7c": {
+    "path": "/home/fedora/lct-reid/data/images/87f96ebb1d554863b5f634ef6a263a7c.jpg",
+    "sha256": "de3af479a66846de169c3ab2da2bf1c7157e073dae2af07fbef2f2f9b05ebf34",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      828,
+      214,
+      291,
+      272
+    ]
+  },
+  "9a4fe29c386f4204bedafda0f87b510b": {
+    "path": "/home/fedora/lct-reid/data/images/9a4fe29c386f4204bedafda0f87b510b.jpg",
+    "sha256": "bbc05de87fa5328c1ccf31bcb9d69979d643a678f060cc13bd330678fc2c55c9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      192,
+      305,
+      672,
+      394
+    ]
+  },
+  "04ad5a7c44af4c0eb130fba81632a127": {
+    "path": "/home/fedora/lct-reid/data/images/04ad5a7c44af4c0eb130fba81632a127.jpg",
+    "sha256": "60af7159c56770e149a90a9a10927fb74c8bbd29997886337902aeaa333a02af",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      601,
+      339,
+      710,
+      543
+    ]
+  },
+  "37bb96b8584e442b98003fc25c0d7057": {
+    "path": "/home/fedora/lct-reid/data/images/37bb96b8584e442b98003fc25c0d7057.jpg",
+    "sha256": "87893aaba3c5d1e945a03bd09d704693d85863143fe299defce8bc0b96c59d3e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      642,
+      480,
+      634,
+      364
+    ]
+  },
+  "6af31bb65d704ecbab64daced0608403": {
+    "path": "/home/fedora/lct-reid/data/images/6af31bb65d704ecbab64daced0608403.jpg",
+    "sha256": "2bb938d0c2861bdb86fd7d3b5081c406f181c10a54d1b18b9f5184e7dd7206d9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      238,
+      584,
+      938,
+      496
+    ]
+  },
+  "7c644d9e3d4a448d874916a942c4576a": {
+    "path": "/home/fedora/lct-reid/data/images/7c644d9e3d4a448d874916a942c4576a.jpg",
+    "sha256": "8572836c1eaaf74cb66853a0984d06340e2afab0b38870a7e8eb420e35c9df53",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1043,
+      115,
+      790,
+      531
+    ]
+  },
+  "c83fc51ddf5a44a2a371bc715529608a": {
+    "path": "/home/fedora/lct-reid/data/images/c83fc51ddf5a44a2a371bc715529608a.jpg",
+    "sha256": "6c292e3932236873c82d4b4dd7ed4d449e037099050369d51f1786def740fdee",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      636,
+      434,
+      846,
+      474
+    ]
+  },
+  "83316e0c90bf457583e86223365b6bcc": {
+    "path": "/home/fedora/lct-reid/data/images/83316e0c90bf457583e86223365b6bcc.jpg",
+    "sha256": "79eaf0955609df311a5ad4f494ef38c9c71b234d28d3851cb67511cf817ca471",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      776,
+      441,
+      869,
+      639
+    ]
+  },
+  "6f6e1232f93043eaa2e8e03c3aae834e": {
+    "path": "/home/fedora/lct-reid/data/images/6f6e1232f93043eaa2e8e03c3aae834e.jpg",
+    "sha256": "457cf9391dff9d64611eac325279305cd80b7c8d1a0a4486347f0061e1dc5100",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      818,
+      316,
+      958,
+      631
+    ]
+  },
+  "163b2f69d37245eab032365a1594f2e8": {
+    "path": "/home/fedora/lct-reid/data/images/163b2f69d37245eab032365a1594f2e8.jpg",
+    "sha256": "19cab0bad3decda92e58cbbc0fee5e2933c5cb0836c4a294f72c0bf71cb589b9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      927,
+      513,
+      908,
+      488
+    ]
+  },
+  "2084ce9bfdad4559bff1ef64011f8acf": {
+    "path": "/home/fedora/lct-reid/data/images/2084ce9bfdad4559bff1ef64011f8acf.jpg",
+    "sha256": "daaf3de45f57a670e71e86a11bd30756b580418eaf9643fade7f70b4cd610b0b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      0,
+      423,
+      722,
+      470
+    ]
+  },
+  "8193d42b088b42e4a53a972478c6a49f": {
+    "path": "/home/fedora/lct-reid/data/images/8193d42b088b42e4a53a972478c6a49f.jpg",
+    "sha256": "079d4655a0eb3446611a7eaf3e6a6661cf74eed66cf6e93d2a55513e74e96fe5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      169,
+      399,
+      704,
+      463
+    ]
+  },
+  "bfeb206f6bec4b14930cad09bbf2645f": {
+    "path": "/home/fedora/lct-reid/data/images/bfeb206f6bec4b14930cad09bbf2645f.jpg",
+    "sha256": "5fe65486ca7eb8ddbc1251d060dd7cda23c1cb4f6036c14e97005f285d34d0d1",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1096,
+      351,
+      814,
+      570
+    ]
+  },
+  "ac44320dadc1450bae2920c3dd3ca634": {
+    "path": "/home/fedora/lct-reid/data/images/ac44320dadc1450bae2920c3dd3ca634.jpg",
+    "sha256": "8a46c0506f32696365db1c8c994955f7f85ad6cd18da7232587b126d7338681d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1202,
+      543,
+      662,
+      506
+    ]
+  },
+  "6399ebe41f1949ecaea14c03dc0b074d": {
+    "path": "/home/fedora/lct-reid/data/images/6399ebe41f1949ecaea14c03dc0b074d.jpg",
+    "sha256": "b23519378eb186c28760ab7f50bba19733984aa799aeb521c7ec60a63cd283d8",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      770,
+      190,
+      270,
+      257
+    ]
+  },
+  "8cae4e1a9bf54dcfa3c82a8703e32cc7": {
+    "path": "/home/fedora/lct-reid/data/images/8cae4e1a9bf54dcfa3c82a8703e32cc7.jpg",
+    "sha256": "ac74f3d1adc9217e87b384e1d4084d5d8d5186a1164042b5ec4ecce58f40c3d4",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      0,
+      449,
+      660,
+      349
+    ]
+  },
+  "e044a49eb4314025b64816631890eb63": {
+    "path": "/home/fedora/lct-reid/data/images/e044a49eb4314025b64816631890eb63.jpg",
+    "sha256": "16c5a7d8e277de7cc88f23f9b570909c210d5ea4b8b9fb1be312d7a85b583dac",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      522,
+      475,
+      549,
+      480
+    ]
+  },
+  "7006411be2444d4ba109a39cf4e72bca": {
+    "path": "/home/fedora/lct-reid/data/images/7006411be2444d4ba109a39cf4e72bca.jpg",
+    "sha256": "3c051f044f40eb5170398b501778f05ac78572ded3336d2a7ea044b6981ed424",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      543,
+      476,
+      644,
+      430
+    ]
+  },
+  "d3fb5901eae14837ad0677b30da62dec": {
+    "path": "/home/fedora/lct-reid/data/images/d3fb5901eae14837ad0677b30da62dec.jpg",
+    "sha256": "81cb30acb68f09e48c4a333a5ab1ed951f4a432d97670a6fbcf93301fa64eb59",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      725,
+      378,
+      627,
+      448
+    ]
+  },
+  "464e2f7e9e6a402f8a9bb546d67066a4": {
+    "path": "/home/fedora/lct-reid/data/images/464e2f7e9e6a402f8a9bb546d67066a4.jpg",
+    "sha256": "33861ef216e3d0ad8cf174ff2518d634d8ec06e7a7f4c0f7ffab87476e17d151",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1153,
+      500,
+      604,
+      455
+    ]
+  },
+  "2d95eecbc4784affbf277f4fbe0b3cfc": {
+    "path": "/home/fedora/lct-reid/data/images/2d95eecbc4784affbf277f4fbe0b3cfc.jpg",
+    "sha256": "bfddc346d88cab13d999bd1089199a61708d99110a0b33319dc040935c1cd103",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      817,
+      355,
+      637,
+      666
+    ]
+  },
+  "ad64de7148a34e3b8ea46b253ac9d732": {
+    "path": "/home/fedora/lct-reid/data/images/ad64de7148a34e3b8ea46b253ac9d732.jpg",
+    "sha256": "31949cec56e6d05d4bec0ae60248b456f9456fc336137106f4b9e0304b53bc33",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      718,
+      598,
+      1076,
+      482
+    ]
+  },
+  "c6059077958a485b9bfd0d2801321bb3": {
+    "path": "/home/fedora/lct-reid/data/images/c6059077958a485b9bfd0d2801321bb3.jpg",
+    "sha256": "8b8945b14a6e1da840b70dace2e915a7df94a527b4e4c3c5ffb2e731b6e6c846",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      865,
+      291,
+      596,
+      388
+    ]
+  },
+  "8d965941c5ae4a33b1ca86b710f8afb0": {
+    "path": "/home/fedora/lct-reid/data/images/8d965941c5ae4a33b1ca86b710f8afb0.jpg",
+    "sha256": "02d476abf4159d728c5f565302b4d0313e521b3a4faa5a60fd870635431aae90",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      629,
+      144,
+      681,
+      657
+    ]
+  },
+  "7a35af8bb3f5470a9f2608f0d09aa576": {
+    "path": "/home/fedora/lct-reid/data/images/7a35af8bb3f5470a9f2608f0d09aa576.jpg",
+    "sha256": "74ee288d100f7c98c0c7b2e2959033426762d12feddae482245f8fca3dd22765",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      588,
+      137,
+      917,
+      681
+    ]
+  },
+  "07dad1172d7943cb93d0fb9d90264aeb": {
+    "path": "/home/fedora/lct-reid/data/images/07dad1172d7943cb93d0fb9d90264aeb.jpg",
+    "sha256": "10515fcad269b2fdce423e80f1170c6f4749c3f9ba31f9169de78f1310b855e2",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      486,
+      479,
+      636,
+      601
+    ]
+  },
+  "a8a984b4a356492e8a2bccbb992269cd": {
+    "path": "/home/fedora/lct-reid/data/images/a8a984b4a356492e8a2bccbb992269cd.jpg",
+    "sha256": "6b57297aff8da9f56619d41aba66109b2ef1005058d059a374172ef3ff6c9909",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1037,
+      347,
+      809,
+      411
+    ]
+  },
+  "0c75138b5a694f5cb59622605fa52411": {
+    "path": "/home/fedora/lct-reid/data/images/0c75138b5a694f5cb59622605fa52411.jpg",
+    "sha256": "19a00b517ae5ff431e076873beb3dc1e496586883c07fbd325db49d0030b94fc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      438,
+      311,
+      741,
+      643
+    ]
+  },
+  "3b8fc5864110444f82e94f624b583ad2": {
+    "path": "/home/fedora/lct-reid/data/images/3b8fc5864110444f82e94f624b583ad2.jpg",
+    "sha256": "1211c353fb0e5c74f1bdca0137a1c0993cad52c87a3eca2bace38eba4a43e85a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      414,
+      437,
+      494,
+      413
+    ]
+  },
+  "94644eac928a4450b087eb7086d9c416": {
+    "path": "/home/fedora/lct-reid/data/images/94644eac928a4450b087eb7086d9c416.jpg",
+    "sha256": "d982d7804733255a595e009c38c2a03be328f5660e0670fc5cadd92804c4eaa5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      833,
+      491,
+      906,
+      484
+    ]
+  },
+  "0a558663786b4a3a8d313dd283a68d4b": {
+    "path": "/home/fedora/lct-reid/data/images/0a558663786b4a3a8d313dd283a68d4b.jpg",
+    "sha256": "a61e63324d8c1122e3e3a36045ecfd314669a238ea98f11db2f5fee1d10c6d0b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      76,
+      481,
+      718,
+      372
+    ]
+  },
+  "5fa558fc11624ab4a1db5c02136072c2": {
+    "path": "/home/fedora/lct-reid/data/images/5fa558fc11624ab4a1db5c02136072c2.jpg",
+    "sha256": "17521a3e89ccad145db6b145da14525aed0564748ab104dbfd173860d5627882",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      936,
+      132,
+      641,
+      410
+    ]
+  },
+  "fb662c81c45447abb588f12890fc5dfb": {
+    "path": "/home/fedora/lct-reid/data/images/fb662c81c45447abb588f12890fc5dfb.jpg",
+    "sha256": "18b8b8a8d47b42a95dcb07fb3519666986e8570f60c32fbdbe2d7ce0b93c4024",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      253,
+      307,
+      594,
+      381
+    ]
+  },
+  "f5b11cd22b0c4e8bb81d9575da88d667": {
+    "path": "/home/fedora/lct-reid/data/images/f5b11cd22b0c4e8bb81d9575da88d667.jpg",
+    "sha256": "fafddd60663fbcab37893a6e324ab3f7a660a84e49e5e5a82e20a1ff540326b3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      193,
+      403,
+      588,
+      413
+    ]
+  },
+  "6026fec3e118451294fdaefedefe8bf1": {
+    "path": "/home/fedora/lct-reid/data/images/6026fec3e118451294fdaefedefe8bf1.jpg",
+    "sha256": "20055f25e704d505b6123ee644c7bc9fea72d4e793f1d8f43108d1c3af99ca29",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      619,
+      230,
+      487,
+      445
+    ]
+  },
+  "3b4c9a892f6e471e8fff61a2aef8d577": {
+    "path": "/home/fedora/lct-reid/data/images/3b4c9a892f6e471e8fff61a2aef8d577.jpg",
+    "sha256": "d2439669b0e04cc6b4565d6e76c663421c19134bf21c04c482b364a79da36e7a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      570,
+      336,
+      546,
+      411
+    ]
+  },
+  "2866f35cc4ac44cdb4340fbf0333052b": {
+    "path": "/home/fedora/lct-reid/data/images/2866f35cc4ac44cdb4340fbf0333052b.jpg",
+    "sha256": "0b15940c1d75c395d9c93772faab1a85ea52dd537c52e131e1735d0d109140f0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      705,
+      455,
+      565,
+      366
+    ]
+  },
+  "b35cfb8617134a89b2d43a5479f2534c": {
+    "path": "/home/fedora/lct-reid/data/images/b35cfb8617134a89b2d43a5479f2534c.jpg",
+    "sha256": "28cb2ab8036c08438cf467ef50352c5dc4602aed88f1cc5744414cd8a40386d0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      855,
+      340,
+      567,
+      515
+    ]
+  },
+  "5599b0d9dabd4a84ae2c5a9f5fd4caa6": {
+    "path": "/home/fedora/lct-reid/data/images/5599b0d9dabd4a84ae2c5a9f5fd4caa6.jpg",
+    "sha256": "36c4c29620556b6b9628f82b0e53c3c9220a84a7bc8f2262022f87244c7ba5c3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      714,
+      291,
+      848,
+      610
+    ]
+  },
+  "65b7a74b0bce493aa30297ae76d948c9": {
+    "path": "/home/fedora/lct-reid/data/images/65b7a74b0bce493aa30297ae76d948c9.jpg",
+    "sha256": "842e796fee17df185e37c8459e9b77f56b1fe7b6694b27838cce55d2191b324e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      401,
+      478,
+      638,
+      432
+    ]
+  },
+  "228c2a4a2dd046f68b83ea2b2b71b2ae": {
+    "path": "/home/fedora/lct-reid/data/images/228c2a4a2dd046f68b83ea2b2b71b2ae.jpg",
+    "sha256": "813653a3af7dfa4f6c6f564fa6ce92788e4420056a8f1c2e2d0285c0b9078e4f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      499,
+      420,
+      650,
+      453
+    ]
+  },
+  "727147edf265474585a1e92d1fd6166f": {
+    "path": "/home/fedora/lct-reid/data/images/727147edf265474585a1e92d1fd6166f.jpg",
+    "sha256": "ee6642bfabfbaef452d61db333c6375f958c9c40d58326e8513e0046202b7f0c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      617,
+      408,
+      562,
+      536
+    ]
+  },
+  "049f8e385b024bbf8fd904c5f60d4c95": {
+    "path": "/home/fedora/lct-reid/data/images/049f8e385b024bbf8fd904c5f60d4c95.jpg",
+    "sha256": "6e59d16a6a92ce9c3033d97bdccc22ea83e49edfe7ff889fdcfc03abd8dd5673",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      718,
+      418,
+      675,
+      535
+    ]
+  },
+  "5bc1fcdfa432492192e3987a8b323cba": {
+    "path": "/home/fedora/lct-reid/data/images/5bc1fcdfa432492192e3987a8b323cba.jpg",
+    "sha256": "2ad956cfd0aa0b4295808450fdec4244c855168468fc9d2668c122650b9fd202",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      720,
+      421,
+      509,
+      565
+    ]
+  },
+  "deb7570b0f1449b88646d5107477946e": {
+    "path": "/home/fedora/lct-reid/data/images/deb7570b0f1449b88646d5107477946e.jpg",
+    "sha256": "49574baf09e6ad7d759e209c69b3b632f83585d77f20705861e2266920f322bd",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      489,
+      350,
+      515,
+      352
+    ]
+  },
+  "dc436faa52fe43c7be917afba4f83d1c": {
+    "path": "/home/fedora/lct-reid/data/images/dc436faa52fe43c7be917afba4f83d1c.jpg",
+    "sha256": "feb0f5f0d020835be252efbb53560f7f0cb00f2c259dc28d062805cd920a6b17",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      160,
+      487,
+      621,
+      375
+    ]
+  },
+  "d47a3ab303bd446f8044d265fc02c4d9": {
+    "path": "/home/fedora/lct-reid/data/images/d47a3ab303bd446f8044d265fc02c4d9.jpg",
+    "sha256": "987c1f8b2890b1617d51ffee5a1a9840770386e0cc30029c06d908ece6845550",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      952,
+      11,
+      238,
+      199
+    ]
+  },
+  "609d30e3c2d04df397a3f775c649b7a5": {
+    "path": "/home/fedora/lct-reid/data/images/609d30e3c2d04df397a3f775c649b7a5.jpg",
+    "sha256": "bc6d2c00750b3cc0f9fa4ef0ec94ccc87a911877066a8f091d7543a3ad3ebe86",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1196,
+      221,
+      658,
+      421
+    ]
+  },
+  "380827de6d434316957f70d71acdead5": {
+    "path": "/home/fedora/lct-reid/data/images/380827de6d434316957f70d71acdead5.jpg",
+    "sha256": "0f8b2c26403cbc5c755ac622d2df2c4d6811b74645039eea994f945acab32d13",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1199,
+      110,
+      719,
+      478
+    ]
+  },
+  "fbdd01782c254433ac556dac709dbd93": {
+    "path": "/home/fedora/lct-reid/data/images/fbdd01782c254433ac556dac709dbd93.jpg",
+    "sha256": "0f9d1ebdfca8e7bd90b05243c40ee30b47550277b01987017dfdc8e4b582369a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      875,
+      254,
+      448,
+      413
+    ]
+  },
+  "98932b9ad0d84d41a42d17637ff65b26": {
+    "path": "/home/fedora/lct-reid/data/images/98932b9ad0d84d41a42d17637ff65b26.jpg",
+    "sha256": "1051f5ce40adad0681c84793eb62802c4d9f1a9b6bf63b07f11a96e144f82c7d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      82,
+      81,
+      973,
+      497
+    ]
+  },
+  "75761d88031045e3a6ee7772511e5b42": {
+    "path": "/home/fedora/lct-reid/data/images/75761d88031045e3a6ee7772511e5b42.jpg",
+    "sha256": "02c849375df2829def870e412cbcefcc8de3e9b91919af5f0313b4436fc083c6",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      865,
+      440,
+      528,
+      556
+    ]
+  },
+  "947a7b5d8c844bc095329ad835038040": {
+    "path": "/home/fedora/lct-reid/data/images/947a7b5d8c844bc095329ad835038040.jpg",
+    "sha256": "1ebd99134ab066eb76b1e7633eea4a8ddf513c5e7e00417ad95f196b411ca568",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      588,
+      191,
+      1257,
+      745
+    ]
+  },
+  "9562bbdaffa14ee78764f9cf90ada568": {
+    "path": "/home/fedora/lct-reid/data/images/9562bbdaffa14ee78764f9cf90ada568.jpg",
+    "sha256": "f323afaabe638a15dd5168a2a7d7784e58c967ef1c225490837a4d37b5d9e105",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      0,
+      409,
+      703,
+      467
+    ]
+  },
+  "8d27ed6a2d304c3eada9111e8d1acebf": {
+    "path": "/home/fedora/lct-reid/data/images/8d27ed6a2d304c3eada9111e8d1acebf.jpg",
+    "sha256": "3b7e8a99782fb4ddd129511be008184d8d37656a117780a4c93e61a5cf6c3635",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      596,
+      178,
+      920,
+      773
+    ]
+  },
+  "d393f748ba0b4d5cbe194e1edc8e9ef6": {
+    "path": "/home/fedora/lct-reid/data/images/d393f748ba0b4d5cbe194e1edc8e9ef6.jpg",
+    "sha256": "542505a01a1c92753c8c5a500fc2ff95fbe54a5b60ef96fedde9ce4dbb10b89a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      647,
+      267,
+      862,
+      812
+    ]
+  },
+  "c77d866c9c3a4cb89218690c3d400473": {
+    "path": "/home/fedora/lct-reid/data/images/c77d866c9c3a4cb89218690c3d400473.jpg",
+    "sha256": "84f5a2b2839e39a65ef46f96c3419fe374f0ee89ac91a85a78ed851c3f564477",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      967,
+      248,
+      948,
+      608
+    ]
+  },
+  "63b0dcfa5c0c4e3681c4ee2966645107": {
+    "path": "/home/fedora/lct-reid/data/images/63b0dcfa5c0c4e3681c4ee2966645107.jpg",
+    "sha256": "9f2ee8d69456def31b40747fdbe6199816e44aafd39694bafac005cf6228379a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      192,
+      31,
+      784,
+      738
+    ]
+  },
+  "7a878748900047619a8f4a05c2804c6e": {
+    "path": "/home/fedora/lct-reid/data/images/7a878748900047619a8f4a05c2804c6e.jpg",
+    "sha256": "a733e94c90376fed4798ca97ef9343e0bdd348e5b7aa0289ac3debdd7bdf914d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      540,
+      237,
+      1076,
+      690
+    ]
+  },
+  "948e670a173e4428ac2abf92ebed643f": {
+    "path": "/home/fedora/lct-reid/data/images/948e670a173e4428ac2abf92ebed643f.jpg",
+    "sha256": "a0476e454209ef28ca492b58f7f7f96fd36806b958a838896cc124c3176ff639",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      492,
+      0,
+      775,
+      840
+    ]
+  },
+  "4e63e84c4fc147bfb3f69eb510335d53": {
+    "path": "/home/fedora/lct-reid/data/images/4e63e84c4fc147bfb3f69eb510335d53.jpg",
+    "sha256": "b76d4e5b76a01ed77fdae961e10f99b1414ab004024bc68876fcdfaeb235509c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      757,
+      0,
+      750,
+      533
+    ]
+  },
+  "6d7fba0759b84691b3b1540688d77bce": {
+    "path": "/home/fedora/lct-reid/data/images/6d7fba0759b84691b3b1540688d77bce.jpg",
+    "sha256": "06665bc0cf78fdce830e14c043a72073871a83ccb7909f4505480aba6e5734da",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      699,
+      63,
+      966,
+      661
+    ]
+  },
+  "0795bac03a5e411b875dbe405b65ac80": {
+    "path": "/home/fedora/lct-reid/data/images/0795bac03a5e411b875dbe405b65ac80.jpg",
+    "sha256": "cddf29edaa003a7036749c43b972aca8c5b50779add78f793e104b24fc018ab5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      587,
+      1,
+      937,
+      829
+    ]
+  },
+  "773f9cc483964b7bbe7cbb50bacf981d": {
+    "path": "/home/fedora/lct-reid/data/images/773f9cc483964b7bbe7cbb50bacf981d.jpg",
+    "sha256": "4f737ff7c4e40cddf8f508098ac1e9dd454469f9db558d9617b5565efb3d4d25",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      302,
+      230,
+      686,
+      588
+    ]
+  },
+  "fcd5777c5672413fa3ac9173969224f7": {
+    "path": "/home/fedora/lct-reid/data/images/fcd5777c5672413fa3ac9173969224f7.jpg",
+    "sha256": "c3a36b7b3fac56eb31986ed24284ce9f2612981f21cdb6386e446300bb5c76b0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      178,
+      173,
+      981,
+      834
+    ]
+  },
+  "ef856b5706b54af6b38faaea03546f60": {
+    "path": "/home/fedora/lct-reid/data/images/ef856b5706b54af6b38faaea03546f60.jpg",
+    "sha256": "076c6dcb39f2fdcfcc71aa26629b638c7ff15a156cad104424261177e70e1e2d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      780,
+      136,
+      424,
+      373
+    ]
+  },
+  "f0ef7b58347b49099f41dc2bec3cfa2c": {
+    "path": "/home/fedora/lct-reid/data/images/f0ef7b58347b49099f41dc2bec3cfa2c.jpg",
+    "sha256": "90df8bd7c00ed919ade5384b42dc77b90a6484637497e1586afac35235edd440",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      196,
+      158,
+      1126,
+      922
+    ]
+  },
+  "7c49568b885e4f5496912fe608814506": {
+    "path": "/home/fedora/lct-reid/data/images/7c49568b885e4f5496912fe608814506.jpg",
+    "sha256": "11a6c922995b09a83b20f92f00d8ac1e4f46a76ebaec86078548e830a489feb9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      849,
+      338,
+      571,
+      521
+    ]
+  },
+  "140ad0834cda4b40b924b6c7d0d9dfdf": {
+    "path": "/home/fedora/lct-reid/data/images/140ad0834cda4b40b924b6c7d0d9dfdf.jpg",
+    "sha256": "b7814ae9dd213c1cde1d316e752466af0dea48918e20d9e9c8740b40ab15500e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1032,
+      302,
+      613,
+      595
+    ]
+  },
+  "fbaef4353dc44881b42d894235ee09d2": {
+    "path": "/home/fedora/lct-reid/data/images/fbaef4353dc44881b42d894235ee09d2.jpg",
+    "sha256": "13c7813de25b66b17bf6f3bd76eaf2410ecb0a3308308184857fe03e2514c905",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      967,
+      419,
+      951,
+      517
+    ]
+  },
+  "6171986b4aa24f24a83bfc046a952033": {
+    "path": "/home/fedora/lct-reid/data/images/6171986b4aa24f24a83bfc046a952033.jpg",
+    "sha256": "7cea05b82068506092a5723fda93f0320e9984f03e6812c73bdfd3c8d6e7cccd",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1344,
+      350,
+      575,
+      563
+    ]
+  },
+  "a1a5365c33b04b45aaf53d8de2998018": {
+    "path": "/home/fedora/lct-reid/data/images/a1a5365c33b04b45aaf53d8de2998018.jpg",
+    "sha256": "5a6662daceec4b245736cf40c7a251e4da841781149c974a2777a6a79511be74",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1250,
+      290,
+      518,
+      625
+    ]
+  },
+  "022a296e1dc74af9a0c5b43d3e3bc62a": {
+    "path": "/home/fedora/lct-reid/data/images/022a296e1dc74af9a0c5b43d3e3bc62a.jpg",
+    "sha256": "0eb286434d80cbff579611330a7728cbff80eca6af53d9ff5780f1fd54bf32bb",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      308,
+      401,
+      996,
+      622
+    ]
+  },
+  "c6ca53c3d4e34fd2a616c16c1ef1b182": {
+    "path": "/home/fedora/lct-reid/data/images/c6ca53c3d4e34fd2a616c16c1ef1b182.jpg",
+    "sha256": "1b5522bfb315cfee8d39ca7371dd70bdc54af0a197cc48f8a3ea77153dcb359a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      967,
+      252,
+      952,
+      597
+    ]
+  },
+  "8e445d6e4cdc4d3a9d91b3730d100329": {
+    "path": "/home/fedora/lct-reid/data/images/8e445d6e4cdc4d3a9d91b3730d100329.jpg",
+    "sha256": "a05fa04a2bb242d964b9a3f60162b63f6da6c2a4df5fb010d218bbb4830edf1e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      895,
+      364,
+      608,
+      431
+    ]
+  },
+  "3d25faed5e2d4565ad6fd22d7923270d": {
+    "path": "/home/fedora/lct-reid/data/images/3d25faed5e2d4565ad6fd22d7923270d.jpg",
+    "sha256": "f58008a24869eb5da639aa1212c0f382801afd389524fc1bd9fa0dc2397cb470",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      540,
+      292,
+      774,
+      488
+    ]
+  },
+  "a92e33e412e74fbd9f7c9b2eb6ffacc7": {
+    "path": "/home/fedora/lct-reid/data/images/a92e33e412e74fbd9f7c9b2eb6ffacc7.jpg",
+    "sha256": "7f056671ace54f1dcf15bf289497a4ae2fd99b31b43a009c175b5e9c4f83249e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      168,
+      289,
+      588,
+      387
+    ]
+  },
+  "bb711b60f5e64e928bc9c33bd8e010ba": {
+    "path": "/home/fedora/lct-reid/data/images/bb711b60f5e64e928bc9c33bd8e010ba.jpg",
+    "sha256": "0befcc12f563b83bf4df9c330756b5738d7df206c04ccac4200419eff9ad800b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      354,
+      259,
+      857,
+      462
+    ]
+  },
+  "884cc596d18e46da918d04de1c6ed7ce": {
+    "path": "/home/fedora/lct-reid/data/images/884cc596d18e46da918d04de1c6ed7ce.jpg",
+    "sha256": "e8bc34687a4f9c8533630a6962df27f56c8e6fe2ff3a23256627c017bbdc7073",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      364,
+      539,
+      621,
+      409
+    ]
+  },
+  "b0e97900148546bca2dd017234fb588a": {
+    "path": "/home/fedora/lct-reid/data/images/b0e97900148546bca2dd017234fb588a.jpg",
+    "sha256": "311f392024b7546f84ba8aa43339bdfbda11ab81e9a5bbb540d80a83b210006b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      151,
+      54,
+      597,
+      435
+    ]
+  },
+  "2c30f3c3d2ad40978fd57bd7066479aa": {
+    "path": "/home/fedora/lct-reid/data/images/2c30f3c3d2ad40978fd57bd7066479aa.jpg",
+    "sha256": "d4c9fc42fbab6cc074170743eeba5dc24dc4a2b0ed2e88bb390f3bcbc1642d99",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      642,
+      0,
+      619,
+      521
+    ]
+  },
+  "806d5303d73940fab33f1d5440a00d30": {
+    "path": "/home/fedora/lct-reid/data/images/806d5303d73940fab33f1d5440a00d30.jpg",
+    "sha256": "04c6c41296a610e569bcb44c7f4b92e3bd7e3a49fa630e89d44f46e24d09c83b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      729,
+      462,
+      583,
+      503
+    ]
+  },
+  "2e56f47d785b453d8455f64a7ef69b52": {
+    "path": "/home/fedora/lct-reid/data/images/2e56f47d785b453d8455f64a7ef69b52.jpg",
+    "sha256": "0a45d41b75beea5db16b9a40f20b0dadbd9e29ee0a1e4f2a7bc09f6c353dee51",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      485,
+      177,
+      828,
+      752
+    ]
+  },
+  "df2e2af72dbf4354880e2335a95eb669": {
+    "path": "/home/fedora/lct-reid/data/images/df2e2af72dbf4354880e2335a95eb669.jpg",
+    "sha256": "ffa561c04615b74b0d1078452e88e5c685610417c5bf7e01eceaaf1d2c56c14b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      688,
+      334,
+      490,
+      527
+    ]
+  },
+  "4f91f129fcdb4df4a2408bb519847a08": {
+    "path": "/home/fedora/lct-reid/data/images/4f91f129fcdb4df4a2408bb519847a08.jpg",
+    "sha256": "befa6423c9be483a5cf035ca26cb39cf3dfe438d995fdaeb82bf77a1bd2ccf56",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      948,
+      323,
+      552,
+      377
+    ]
+  },
+  "81d524c4219b47889ce40e18ebb8e165": {
+    "path": "/home/fedora/lct-reid/data/images/81d524c4219b47889ce40e18ebb8e165.jpg",
+    "sha256": "8b0fa93a7cea186e9dab3a480287960a32663af142ddcf7c9ee71fec0f0bb41a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      120,
+      387,
+      714,
+      507
+    ]
+  },
+  "6c533ee93f7647db913ad7d68f2aeafa": {
+    "path": "/home/fedora/lct-reid/data/images/6c533ee93f7647db913ad7d68f2aeafa.jpg",
+    "sha256": "e93d71849565753ad04b532972fc3b923d9c040d79ae93dd70d857fafe46faa3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      115,
+      117,
+      782,
+      542
+    ]
+  },
+  "44a644f7f435417b92add3d589c12e6f": {
+    "path": "/home/fedora/lct-reid/data/images/44a644f7f435417b92add3d589c12e6f.jpg",
+    "sha256": "6521d737b5f497c863132591294be06bcd500fa41af754faa6e87f3d58364c45",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      659,
+      296,
+      943,
+      673
+    ]
+  },
+  "c8b264c1ed4c4b66855a88e01e51cfac": {
+    "path": "/home/fedora/lct-reid/data/images/c8b264c1ed4c4b66855a88e01e51cfac.jpg",
+    "sha256": "65aa4c740fd647d9072f1efce3a015884fb3f3df3f06b707d5ab6e281e33c382",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      39,
+      282,
+      513,
+      468
+    ]
+  },
+  "90fc30ada28f414d9f2d823bcb9abd26": {
+    "path": "/home/fedora/lct-reid/data/images/90fc30ada28f414d9f2d823bcb9abd26.jpg",
+    "sha256": "9c12096275589a179be96fe57372b8569e8f5064c9c4cb2acfcd9134dd3f32ae",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      570,
+      296,
+      884,
+      641
+    ]
+  },
+  "f1b508d0e6744af0b996ec9f2c93ec86": {
+    "path": "/home/fedora/lct-reid/data/images/f1b508d0e6744af0b996ec9f2c93ec86.jpg",
+    "sha256": "0435cbba0069d201e758aad36ae5d26d248a58872cbf292b4dc0b73b32d1ba65",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      761,
+      247,
+      728,
+      562
+    ]
+  },
+  "6cf26ffdea184ba486454d78744f5d1f": {
+    "path": "/home/fedora/lct-reid/data/images/6cf26ffdea184ba486454d78744f5d1f.jpg",
+    "sha256": "8b19390ae4fb0db674e88dd413620448f8f37455d32e288ba46e819cb127e4a8",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      765,
+      301,
+      589,
+      601
+    ]
+  },
+  "07f7bb1d34094e53b52d4a736108aecd": {
+    "path": "/home/fedora/lct-reid/data/images/07f7bb1d34094e53b52d4a736108aecd.jpg",
+    "sha256": "ad4e36e1f07ade81b25ad5b2a6f0cb4bde79e6a944a66d0dbe313ee1bfadeb07",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      72,
+      4,
+      826,
+      609
+    ]
+  },
+  "d8fe665d2fbb4eafbab6e196fc1722d8": {
+    "path": "/home/fedora/lct-reid/data/images/d8fe665d2fbb4eafbab6e196fc1722d8.jpg",
+    "sha256": "9df528a68cce88ea06b2d076dedc8e6720b8cb3207ea015a42994d2d26581da4",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      277,
+      157,
+      567,
+      572
+    ]
+  },
+  "12ca3434e7534cb88668b67a3e71eede": {
+    "path": "/home/fedora/lct-reid/data/images/12ca3434e7534cb88668b67a3e71eede.jpg",
+    "sha256": "c17910fda8e81f3ba54f06eb6aacdfdc92d65b2a58b00a63a5ff4bdcf9677b8c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      895,
+      227,
+      854,
+      632
+    ]
+  },
+  "9e904bdf5dae4bfcb9b843506982a3b5": {
+    "path": "/home/fedora/lct-reid/data/images/9e904bdf5dae4bfcb9b843506982a3b5.jpg",
+    "sha256": "74f063dc58d5fa29335a893ed98f61788da37de9554046bb166ef0162d1beeb3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      265,
+      316,
+      947,
+      643
+    ]
+  },
+  "cd6b47b70c3f4aa7835d12101cfec139": {
+    "path": "/home/fedora/lct-reid/data/images/cd6b47b70c3f4aa7835d12101cfec139.jpg",
+    "sha256": "425008d2745ec14e98a1d3e774453fd09becfbf1c8a83885f0619afc225d3412",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      227,
+      154,
+      446,
+      380
+    ]
+  },
+  "ae323732a2ec457d82c66a2be0fd04f4": {
+    "path": "/home/fedora/lct-reid/data/images/ae323732a2ec457d82c66a2be0fd04f4.jpg",
+    "sha256": "57ece4de86347fba4b742f0aff25e23c293ae0ba6ef9086f43141fc2ebe4dc0e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1241,
+      155,
+      678,
+      652
+    ]
+  },
+  "27ff72dc1b4746bfad6c719da1b9716a": {
+    "path": "/home/fedora/lct-reid/data/images/27ff72dc1b4746bfad6c719da1b9716a.jpg",
+    "sha256": "3f0202be14206d8520e13e1d793cfe99755bc6786c5a11e192bed22c37439e2b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1002,
+      434,
+      457,
+      424
+    ]
+  },
+  "cc43ccb573db4a3c86e04c5ecfa0c869": {
+    "path": "/home/fedora/lct-reid/data/images/cc43ccb573db4a3c86e04c5ecfa0c869.jpg",
+    "sha256": "ab8d65f91a1af796a749fa02f84be6bc769e8ad690e8f8ee0e55324effd9f8f0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      737,
+      263,
+      511,
+      404
+    ]
+  },
+  "b883db0a148947fbaddeddcd6134278f": {
+    "path": "/home/fedora/lct-reid/data/images/b883db0a148947fbaddeddcd6134278f.jpg",
+    "sha256": "689a1684f56750ca08fafbc2a47b202fd14ebe2dc737962cfcd09d5c3efca818",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1242,
+      220,
+      677,
+      582
+    ]
+  },
+  "741cef9f2a9b49f686a6581832de15d3": {
+    "path": "/home/fedora/lct-reid/data/images/741cef9f2a9b49f686a6581832de15d3.jpg",
+    "sha256": "bdb2491d7715f2b972dc169d1caccd90066d383ac627ed9ca697e87cfcec124a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      328,
+      573,
+      622,
+      414
+    ]
+  },
+  "a361f4cf65f34d49aaeed4fe1259c6da": {
+    "path": "/home/fedora/lct-reid/data/images/a361f4cf65f34d49aaeed4fe1259c6da.jpg",
+    "sha256": "11086114fd21ba5b45f03dfc1018f8bddb7cb67479024736f469f11018d43770",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      290,
+      322,
+      1050,
+      484
+    ]
+  },
+  "a5de7eaacc6f4268a1b245a047fc5e6e": {
+    "path": "/home/fedora/lct-reid/data/images/a5de7eaacc6f4268a1b245a047fc5e6e.jpg",
+    "sha256": "35b870847ad40028dc187073d00fd7f5d71488c8f2cc03ab902b9e954f64b732",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      552,
+      246,
+      1045,
+      629
+    ]
+  },
+  "2a819a5dd71545a3974a5e6b54cd4238": {
+    "path": "/home/fedora/lct-reid/data/images/2a819a5dd71545a3974a5e6b54cd4238.jpg",
+    "sha256": "8cb462eb2a33df7cce9a8c02726f1f5009a6a7401a205090f6407f0fcdfdba4f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1416,
+      191,
+      417,
+      269
+    ]
+  },
+  "c943b27faeb8430f95a6ed6c71005fbc": {
+    "path": "/home/fedora/lct-reid/data/images/c943b27faeb8430f95a6ed6c71005fbc.jpg",
+    "sha256": "6578e75718dd6303c83ba11b2e1216c57856a785db3928dd792aa139620d1840",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      560,
+      357,
+      796,
+      533
+    ]
+  },
+  "620f0d06a77645a9bd3fa2a702ce8311": {
+    "path": "/home/fedora/lct-reid/data/images/620f0d06a77645a9bd3fa2a702ce8311.jpg",
+    "sha256": "3e615e9333e5c56dc991f1b3ce8c6e40fcce4be4396730234a45ece3ff101bf6",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      783,
+      478,
+      571,
+      433
+    ]
+  },
+  "636eebac1f4f4c0583c396c7ccb67100": {
+    "path": "/home/fedora/lct-reid/data/images/636eebac1f4f4c0583c396c7ccb67100.jpg",
+    "sha256": "79277edc0e6835c7d87bb2c265df32e592f9f18962f9a631e00b578a9e4c9e49",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      637,
+      114,
+      681,
+      645
+    ]
+  },
+  "c2b3d726594b4dab92cb53db70713e9e": {
+    "path": "/home/fedora/lct-reid/data/images/c2b3d726594b4dab92cb53db70713e9e.jpg",
+    "sha256": "d2dd1d1bb87b1a7169b8162a5804ae9b27b1cc378c6e07ff5cadb1b6c797f746",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      177,
+      423,
+      693,
+      383
+    ]
+  },
+  "493e395737d74896b0fb8b71d12cf516": {
+    "path": "/home/fedora/lct-reid/data/images/493e395737d74896b0fb8b71d12cf516.jpg",
+    "sha256": "3bf08939b3d23311b0c01b1d78a72512d5f7076a8e4cdb162d0af667471339f8",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      146,
+      263,
+      669,
+      485
+    ]
+  },
+  "602fc2ae757f49ada2a1f08e5e1ef03d": {
+    "path": "/home/fedora/lct-reid/data/images/602fc2ae757f49ada2a1f08e5e1ef03d.jpg",
+    "sha256": "14e2ed117bca9e7fe61f3e355b5e95130a280944ac50afa481143412c05cbb23",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      961,
+      169,
+      767,
+      646
+    ]
+  },
+  "af439e30cf5a4c90b38d554dbf9be2ad": {
+    "path": "/home/fedora/lct-reid/data/images/af439e30cf5a4c90b38d554dbf9be2ad.jpg",
+    "sha256": "ca282e549da2a8e9de2a0367611ac7c63a9235181604d8145b46428d49799a6e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      778,
+      366,
+      609,
+      353
+    ]
+  },
+  "0294485c05b2461ca7bd2d59ca32f912": {
+    "path": "/home/fedora/lct-reid/data/images/0294485c05b2461ca7bd2d59ca32f912.jpg",
+    "sha256": "32cabc83c8c6f460b203debe84d0ef8376bc5e8d999dd55ab5e9303eb08fda0d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1326,
+      409,
+      500,
+      472
+    ]
+  },
+  "8c7d6bee87fa44259ec8a14454ab1525": {
+    "path": "/home/fedora/lct-reid/data/images/8c7d6bee87fa44259ec8a14454ab1525.jpg",
+    "sha256": "f28ecb1e8ee06f6f6f6362438c9cb147b9f13c11f43d682bad320c881affedd5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      123,
+      378,
+      714,
+      514
+    ]
+  },
+  "5299584cc1c64543b8573bdc062c5062": {
+    "path": "/home/fedora/lct-reid/data/images/5299584cc1c64543b8573bdc062c5062.jpg",
+    "sha256": "e7acc0da95522d5ac67b5f021a8bc065f60c2cde1ce84ee1f237215e9e313101",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      965,
+      286,
+      626,
+      360
+    ]
+  },
+  "c699e17aae0a485aae0fb50c9f1c875c": {
+    "path": "/home/fedora/lct-reid/data/images/c699e17aae0a485aae0fb50c9f1c875c.jpg",
+    "sha256": "5fd4b98dfa2681cde4e3ca085446a11ff0e3b2ab0656cdb985666631c4df28e0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      146,
+      419,
+      899,
+      620
+    ]
+  },
+  "37ec1fa9e640439f9f34cc09fc558c5e": {
+    "path": "/home/fedora/lct-reid/data/images/37ec1fa9e640439f9f34cc09fc558c5e.jpg",
+    "sha256": "ac7d20dff4863feccd22c72bcf8106456f5ce8a3a187710cf50380e6b6392866",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      247,
+      251,
+      696,
+      585
+    ]
+  },
+  "fa0438a2eeb3480dba07cf0cd5583e53": {
+    "path": "/home/fedora/lct-reid/data/images/fa0438a2eeb3480dba07cf0cd5583e53.jpg",
+    "sha256": "c1019961b82a9532b1dd3010f23fd372527dd8a04db46135ada2e3ee71f63aa5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      626,
+      322,
+      991,
+      561
+    ]
+  },
+  "dcdead2c82c9477f918b2cb2283329e2": {
+    "path": "/home/fedora/lct-reid/data/images/dcdead2c82c9477f918b2cb2283329e2.jpg",
+    "sha256": "ff25c961c956d8d2951b44117df0ca317e0c85030a32569b3b704cfe412a64df",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      566,
+      288,
+      551,
+      428
+    ]
+  },
+  "870473858051427e80b7dea17d7afc14": {
+    "path": "/home/fedora/lct-reid/data/images/870473858051427e80b7dea17d7afc14.jpg",
+    "sha256": "4d517db22a9c00b8ac3f734db30efa93f063b26bfcbab0b6543cbf9c3f137711",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      355,
+      256,
+      858,
+      460
+    ]
+  },
+  "41bd4c5368894cd5bc944127e4f44a6c": {
+    "path": "/home/fedora/lct-reid/data/images/41bd4c5368894cd5bc944127e4f44a6c.jpg",
+    "sha256": "6423b1bd3f98dde71c99bee44cadf9747111fc6d4c1b5096d3732d38521b9410",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      70,
+      285,
+      650,
+      383
+    ]
+  },
+  "65a73820e01c45b19683ee76f94216b3": {
+    "path": "/home/fedora/lct-reid/data/images/65a73820e01c45b19683ee76f94216b3.jpg",
+    "sha256": "7e18fba227f73b58e0b857ac6948a27b2a8f1232c50d865256d58bd2e5cfc144",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      632,
+      117,
+      686,
+      644
+    ]
+  },
+  "f273952ff6ab48af86db4c1e3a4efc6a": {
+    "path": "/home/fedora/lct-reid/data/images/f273952ff6ab48af86db4c1e3a4efc6a.jpg",
+    "sha256": "b5a18ebca9c84da6edef857a9927d8b969609c6485f06b153db5ea86867b03ff",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1085,
+      253,
+      728,
+      392
+    ]
+  },
+  "679d0b1d23034073ac51357fed08bcf1": {
+    "path": "/home/fedora/lct-reid/data/images/679d0b1d23034073ac51357fed08bcf1.jpg",
+    "sha256": "8436702043fdfc82c5cc4da31f39bce65aa763d876fa3b0db4cf11fabd263f4d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      548,
+      395,
+      673,
+      591
+    ]
+  },
+  "92521b8d04714bba923d31cc128bfcc5": {
+    "path": "/home/fedora/lct-reid/data/images/92521b8d04714bba923d31cc128bfcc5.jpg",
+    "sha256": "ecfad6bf4a911ed77afffd66b8cb5f12c2e45a8ce74099961626c74cdd69fd28",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      379,
+      454,
+      986,
+      561
+    ]
+  },
+  "6b4cb2406ce74f808723cfff67cb5ff1": {
+    "path": "/home/fedora/lct-reid/data/images/6b4cb2406ce74f808723cfff67cb5ff1.jpg",
+    "sha256": "4db448edd43320ef9414792692e1a57d9ee61601980eaa16566e5f700ada11fd",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      725,
+      326,
+      700,
+      534
+    ]
+  },
+  "24cb4c2da31a4a668ec21b9e9f709bed": {
+    "path": "/home/fedora/lct-reid/data/images/24cb4c2da31a4a668ec21b9e9f709bed.jpg",
+    "sha256": "9aa3aac04fd273524db1576b4207629ed1a3f4dd2993b86ed849c27674723fc8",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1279,
+      410,
+      509,
+      428
+    ]
+  },
+  "1e572dff5c3345abaf289557175be1db": {
+    "path": "/home/fedora/lct-reid/data/images/1e572dff5c3345abaf289557175be1db.jpg",
+    "sha256": "a6e0143ade2e01d379d7eb28b9b0e550210610f2a62e53eacd01983674667556",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      585,
+      73,
+      717,
+      734
+    ]
+  },
+  "9e686720ec78468abdc87b2ac44a96c4": {
+    "path": "/home/fedora/lct-reid/data/images/9e686720ec78468abdc87b2ac44a96c4.jpg",
+    "sha256": "09773d11473fe5fa7985908b45d08285f66e993f0f7f96e5b00935e480455d46",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      433,
+      352,
+      751,
+      670
+    ]
+  },
+  "dbdb963a5ce64412bee3c14cf96d1325": {
+    "path": "/home/fedora/lct-reid/data/images/dbdb963a5ce64412bee3c14cf96d1325.jpg",
+    "sha256": "34ec92cc969d76eb27d9954a17c2c8d23b36b8ec0eda20f0719212cd18704dfb",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      82,
+      241,
+      725,
+      457
+    ]
+  },
+  "a0625750fec5443d8cd254eb731f7900": {
+    "path": "/home/fedora/lct-reid/data/images/a0625750fec5443d8cd254eb731f7900.jpg",
+    "sha256": "205e2bb96b5daa3dfe83e7521aa3b7a226a782a5904182d66dec5de2bee0348a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      667,
+      248,
+      1030,
+      619
+    ]
+  },
+  "204208913838465eba890bca58da0694": {
+    "path": "/home/fedora/lct-reid/data/images/204208913838465eba890bca58da0694.jpg",
+    "sha256": "c4ae3cb2e998b0c796f58e3cc5059bc6b42ec7468a20767f1a9602ab36a1e7e3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      751,
+      2,
+      271,
+      187
+    ]
+  },
+  "8b9018ac65e94751a2542ccbf64446db": {
+    "path": "/home/fedora/lct-reid/data/images/8b9018ac65e94751a2542ccbf64446db.jpg",
+    "sha256": "77c725cd22ee2a8109c353c3d7517539cd008a1b3ee90e12455c30111fb324ce",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      326,
+      575,
+      622,
+      413
+    ]
+  },
+  "a4e955cf180843b98ca0c6271a265cd8": {
+    "path": "/home/fedora/lct-reid/data/images/a4e955cf180843b98ca0c6271a265cd8.jpg",
+    "sha256": "65ab02d77edf0c50c169c2cef57f7447dd1fabf3cac63ec173ac42fe4755b1b0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      311,
+      256,
+      1022,
+      570
+    ]
+  },
+  "1fef43311c004625886df9e78de8c831": {
+    "path": "/home/fedora/lct-reid/data/images/1fef43311c004625886df9e78de8c831.jpg",
+    "sha256": "67687f76e8fca724cb970048188d1176d7857254f2f85c34ea5bd0aa068ed07b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1257,
+      413,
+      615,
+      461
+    ]
+  },
+  "9cc64db8be594052b3c8ab25f58be672": {
+    "path": "/home/fedora/lct-reid/data/images/9cc64db8be594052b3c8ab25f58be672.jpg",
+    "sha256": "e293b571892d53a33e917182045d80b8864c0b12be965021ec0e240cd33caabc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      627,
+      416,
+      597,
+      485
+    ]
+  },
+  "9f47b315fc634a379af34290ceb6e2c2": {
+    "path": "/home/fedora/lct-reid/data/images/9f47b315fc634a379af34290ceb6e2c2.jpg",
+    "sha256": "79d2f80c71c80afe8a1b8fc1d9103b4423493640cc073f49d6c7b74cdeaf88a0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1,
+      447,
+      660,
+      351
+    ]
+  },
+  "5a7d7d08e1ae43b0a122d44092444ced": {
+    "path": "/home/fedora/lct-reid/data/images/5a7d7d08e1ae43b0a122d44092444ced.jpg",
+    "sha256": "16c4283e260258f38386e7623fb1da215fa0319494ff6d69b1cf8579604fe6ed",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      770,
+      191,
+      270,
+      254
+    ]
+  },
+  "464bbc8f264f42a1a236daa942d74afc": {
+    "path": "/home/fedora/lct-reid/data/images/464bbc8f264f42a1a236daa942d74afc.jpg",
+    "sha256": "396da7c46a05a02a0c77ca2ba4e221b37eb211cc96da2550ac6f702884de4082",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      270,
+      536,
+      818,
+      340
+    ]
+  },
+  "f5ab7c6f50054b99a700b79eceb4e1d3": {
+    "path": "/home/fedora/lct-reid/data/images/f5ab7c6f50054b99a700b79eceb4e1d3.jpg",
+    "sha256": "9d6dc54f0d8ace12f9731312777ab430ff4ed7b99569211f03acc98ebb7c9bf4",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      77,
+      481,
+      717,
+      387
+    ]
+  },
+  "9e1fdf64d5064d2a90007975a880ff88": {
+    "path": "/home/fedora/lct-reid/data/images/9e1fdf64d5064d2a90007975a880ff88.jpg",
+    "sha256": "587205d14be49ffdd5f81a9c03c4c498534f13c9ef2fad6a613437c370129625",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1228,
+      421,
+      670,
+      411
+    ]
+  },
+  "5ef9741867d6437bad5d525ba3105e89": {
+    "path": "/home/fedora/lct-reid/data/images/5ef9741867d6437bad5d525ba3105e89.jpg",
+    "sha256": "6c4c3e127efd3da710a940cea4137833ac14a2ccaf06c870a8126d7a7a92fe5c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      411,
+      440,
+      495,
+      410
+    ]
+  },
+  "ba7d79a3d44247a8a12578852bd513dd": {
+    "path": "/home/fedora/lct-reid/data/images/ba7d79a3d44247a8a12578852bd513dd.jpg",
+    "sha256": "ce61b313d36a225f24cfd4e0f1a8a3e2982dd08ca1a9072c177b7685ad80e39f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      580,
+      179,
+      1100,
+      674
+    ]
+  },
+  "4fb2052237834bc39ea210d91130013a": {
+    "path": "/home/fedora/lct-reid/data/images/4fb2052237834bc39ea210d91130013a.jpg",
+    "sha256": "d4928d44f253642b660b1663c758873484d9dcb57a17372dcaa364a7abfd89d3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      798,
+      252,
+      913,
+      463
+    ]
+  },
+  "b20c9f3c1930406a96828958fe9f7d00": {
+    "path": "/home/fedora/lct-reid/data/images/b20c9f3c1930406a96828958fe9f7d00.jpg",
+    "sha256": "16035bca78035f67a1a310c910c64d533c1efd149694081f26ddcf0aa1990dbd",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1135,
+      388,
+      742,
+      434
+    ]
+  },
+  "45d8efb0edca4800806c04764b948f89": {
+    "path": "/home/fedora/lct-reid/data/images/45d8efb0edca4800806c04764b948f89.jpg",
+    "sha256": "cc3aae49a7e0f39a5d6eae0c485ad4195d289e658b53cf4f55cff8526eb43195",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      732,
+      2,
+      291,
+      192
+    ]
+  },
+  "9a508b0e57874dc6957a149912c0d4f4": {
+    "path": "/home/fedora/lct-reid/data/images/9a508b0e57874dc6957a149912c0d4f4.jpg",
+    "sha256": "cd65c52f8f227608404ca99d1c724541b4a9772b7ea179d191f9419c1246e085",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      629,
+      226,
+      497,
+      587
+    ]
+  },
+  "2fb7c413156f4dd78a319beb637428d4": {
+    "path": "/home/fedora/lct-reid/data/images/2fb7c413156f4dd78a319beb637428d4.jpg",
+    "sha256": "8f15c29f0cecdcd81d639a8f4c3acccbeecdf9570c7b282abfe6774f4b1c4831",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      234,
+      285,
+      565,
+      543
+    ]
+  },
+  "311d99a0ea8c44c6a0f7c422008fe2ba": {
+    "path": "/home/fedora/lct-reid/data/images/311d99a0ea8c44c6a0f7c422008fe2ba.jpg",
+    "sha256": "be3b3ca844c27abba3cde6edf8580957edf1db61a52429a80aae150d326f9d97",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      923,
+      634,
+      912,
+      446
+    ]
+  },
+  "91b70948d9f445f38aa47abc95b00d8b": {
+    "path": "/home/fedora/lct-reid/data/images/91b70948d9f445f38aa47abc95b00d8b.jpg",
+    "sha256": "1ab7ce70d273d1f24d101b25cded185f6f7c9bfbc5865470eaea768a2d6f7fb1",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      325,
+      23,
+      386,
+      336
+    ]
+  },
+  "e0609c498b484dbc833676b7a7014d38": {
+    "path": "/home/fedora/lct-reid/data/images/e0609c498b484dbc833676b7a7014d38.jpg",
+    "sha256": "d08a3d712c83dabf8aea945766c7b24caa656c1febad497e2f842261e2e2ede8",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      178,
+      322,
+      568,
+      542
+    ]
+  },
+  "b9b7ba3d25d040169f317da7881efd9a": {
+    "path": "/home/fedora/lct-reid/data/images/b9b7ba3d25d040169f317da7881efd9a.jpg",
+    "sha256": "5d6fa332b79d9cbdf40137b045fa1e728116786fed2018ac870fdd2d51a344bb",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      82,
+      407,
+      648,
+      436
+    ]
+  },
+  "091fc6a09a204f53b3c94dc5d5d8d32d": {
+    "path": "/home/fedora/lct-reid/data/images/091fc6a09a204f53b3c94dc5d5d8d32d.jpg",
+    "sha256": "f774dda4f658b3f9fac53b03722cac910cb6ae5013e9fa5b08e7db57cb24a6ac",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      89,
+      373,
+      927,
+      593
+    ]
+  },
+  "0a75295272004b2c9e0cd0fd2f5dd234": {
+    "path": "/home/fedora/lct-reid/data/images/0a75295272004b2c9e0cd0fd2f5dd234.jpg",
+    "sha256": "87fe84d79150d4353026bab3ed6aa1402eaa3a777aa0b3f424394c9114f5092c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      0,
+      102,
+      447,
+      407
+    ]
+  },
+  "c5c08b94d6cf446281db648048d4ec9b": {
+    "path": "/home/fedora/lct-reid/data/images/c5c08b94d6cf446281db648048d4ec9b.jpg",
+    "sha256": "18d8343e87120a6bd1317cece3a30a8b139d4b25ed8629dd67462901aa85be3b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      726,
+      325,
+      642,
+      533
+    ]
+  },
+  "00efbe470e694d8893138ab861d8c8be": {
+    "path": "/home/fedora/lct-reid/data/images/00efbe470e694d8893138ab861d8c8be.jpg",
+    "sha256": "905128eff994a5dbc0485ad45b5b60679cc89cd2263ae7713193ef28af801346",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      721,
+      422,
+      645,
+      518
+    ]
+  },
+  "bde4256b5a86460ab21a63ff67d7f908": {
+    "path": "/home/fedora/lct-reid/data/images/bde4256b5a86460ab21a63ff67d7f908.jpg",
+    "sha256": "2361c526c86d87d844db7a45173d009aa68c423d4b80a39afcf127344f1ec51f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      255,
+      441,
+      928,
+      529
+    ]
+  },
+  "6a38f391972642bfabd41c2fa039c452": {
+    "path": "/home/fedora/lct-reid/data/images/6a38f391972642bfabd41c2fa039c452.jpg",
+    "sha256": "44517379b838d0fe3bd0fe37e695282044b38d157d6911d554fbcf560e68cb6a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      595,
+      345,
+      719,
+      544
+    ]
+  },
+  "338777ca5ce74150aefb36ca21c49d74": {
+    "path": "/home/fedora/lct-reid/data/images/338777ca5ce74150aefb36ca21c49d74.jpg",
+    "sha256": "5663cbef5f2103d2ed65d969010747d8610f7314ba53b5bb8bb5b3b7751562a8",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      192,
+      305,
+      673,
+      394
+    ]
+  },
+  "41dcda7070d74802988309324e61ad9b": {
+    "path": "/home/fedora/lct-reid/data/images/41dcda7070d74802988309324e61ad9b.jpg",
+    "sha256": "fc76f113b778c94be1d86a57cbae7eaaa647a4f2cfab7b069fe9419541464461",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      860,
+      362,
+      777,
+      355
+    ]
+  },
+  "77eadedac05640c0bc57ef3edf6202e2": {
+    "path": "/home/fedora/lct-reid/data/images/77eadedac05640c0bc57ef3edf6202e2.jpg",
+    "sha256": "06a19c11e54c5df0082621f05353f5802b7da21f585564fd8c5c823309da3962",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      232,
+      264,
+      582,
+      486
+    ]
+  },
+  "f3ae1dd3ae1945269c099a3f3cc043c5": {
+    "path": "/home/fedora/lct-reid/data/images/f3ae1dd3ae1945269c099a3f3cc043c5.jpg",
+    "sha256": "702199647ff225b700e39b228ffcdc9f230f412f1a65293625049c6c80ec3cc5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      715,
+      19,
+      450,
+      432
+    ]
+  },
+  "7dba07eff9e64b4dad8812c29fef620d": {
+    "path": "/home/fedora/lct-reid/data/images/7dba07eff9e64b4dad8812c29fef620d.jpg",
+    "sha256": "dd93fcf6d97fd52ed32ba6b40de70023c1688e5d92ba03dc06726869afc98f12",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      382,
+      390,
+      879,
+      690
+    ]
+  },
+  "0d31b2a497314d4087406f03f49e36c2": {
+    "path": "/home/fedora/lct-reid/data/images/0d31b2a497314d4087406f03f49e36c2.jpg",
+    "sha256": "c2f07e6b405ea0dceb3e663b04678e7d67f5179f4f1834e31e79e1b32a8b0eea",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      442,
+      210,
+      1152,
+      694
+    ]
+  },
+  "dc0670e8a5414e07b79b82b0e0770095": {
+    "path": "/home/fedora/lct-reid/data/images/dc0670e8a5414e07b79b82b0e0770095.jpg",
+    "sha256": "98b1b10d11e2c6c1dccdf26a4290e01cbcf01519f87580dd8591ccb180f4f05d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1289,
+      121,
+      547,
+      678
+    ]
+  },
+  "7c2b6c60fae34604bbfb0509c6fe8f61": {
+    "path": "/home/fedora/lct-reid/data/images/7c2b6c60fae34604bbfb0509c6fe8f61.jpg",
+    "sha256": "109123d8e5fa49411dbe7c461df05e99d5987c655b5d815f350797397145682f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      657,
+      305,
+      942,
+      662
+    ]
+  },
+  "aff10f0dfd414fcdb5b2950719ff7dc7": {
+    "path": "/home/fedora/lct-reid/data/images/aff10f0dfd414fcdb5b2950719ff7dc7.jpg",
+    "sha256": "0a4368f8aae1b2fe9297802a9269528014204a0959f9e26433f869f81b87f281",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1013,
+      155,
+      626,
+      445
+    ]
+  },
+  "8bee6118e6184e6a8adf0d85db0a0d5e": {
+    "path": "/home/fedora/lct-reid/data/images/8bee6118e6184e6a8adf0d85db0a0d5e.jpg",
+    "sha256": "88eb3c5dbbcaeec4cbbcc949e427019dc0b67f5b426b3c281ee65a0f49dc408d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1205,
+      503,
+      548,
+      423
+    ]
+  },
+  "92af1a1a6e7b443698f599ef7bc9e274": {
+    "path": "/home/fedora/lct-reid/data/images/92af1a1a6e7b443698f599ef7bc9e274.jpg",
+    "sha256": "d46a62755a06edb303abe6f255ef65fa40a578f0ffaeeda315667867bc55a2f5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      620,
+      358,
+      927,
+      547
+    ]
+  },
+  "d3ba8f4aeca640b3bbac9b8eedb816fb": {
+    "path": "/home/fedora/lct-reid/data/images/d3ba8f4aeca640b3bbac9b8eedb816fb.jpg",
+    "sha256": "dccf7e7aec5f2cb6225a950a22d8b979fcae92277303448c9eb76774860b4353",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      338,
+      335,
+      814,
+      640
+    ]
+  },
+  "bcfe39b682834182a80f4cd65340d046": {
+    "path": "/home/fedora/lct-reid/data/images/bcfe39b682834182a80f4cd65340d046.jpg",
+    "sha256": "b6be25a43b4552d9d504efa67f76a0c373fb26182de6ce235fe69fd027b49111",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      408,
+      248,
+      1125,
+      626
+    ]
+  },
+  "c22633e21462457894df7073a3224707": {
+    "path": "/home/fedora/lct-reid/data/images/c22633e21462457894df7073a3224707.jpg",
+    "sha256": "dc1239414dee22d19ba7d46d1867b60242014712fc35d9ea6431bbc4660f3490",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      430,
+      3,
+      695,
+      631
+    ]
+  },
+  "a2dca75f78c94ca7bb021d41fa4a82f4": {
+    "path": "/home/fedora/lct-reid/data/images/a2dca75f78c94ca7bb021d41fa4a82f4.jpg",
+    "sha256": "aeaadb8650fa4bc96413843c5f86fca864384d9ff6f3a5810f6b383e22af1018",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      437,
+      228,
+      871,
+      614
+    ]
+  },
+  "2aaf21fca23a4bddb5508c68822ee49e": {
+    "path": "/home/fedora/lct-reid/data/images/2aaf21fca23a4bddb5508c68822ee49e.jpg",
+    "sha256": "509b79d1f31821fb72e7568a517b109e1544aad13a6a2b3f2e7f466c783458b5",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1197,
+      284,
+      626,
+      398
+    ]
+  },
+  "ce2e241768604c66ac96b19050066f9c": {
+    "path": "/home/fedora/lct-reid/data/images/ce2e241768604c66ac96b19050066f9c.jpg",
+    "sha256": "803bdf9c5c0fdd5eb089865cb7a7cf41d901a6c823ddaa3c9baf0c648466b635",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1404,
+      192,
+      491,
+      314
+    ]
+  },
+  "f9c89f43118644f5a548942ad0b871f8": {
+    "path": "/home/fedora/lct-reid/data/images/f9c89f43118644f5a548942ad0b871f8.jpg",
+    "sha256": "738e18376f7ab0e5312652e547bfaca59ff35d2fb952ac742217624fdb7e82ac",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      675,
+      343,
+      650,
+      568
+    ]
+  },
+  "6e8f4eb26c634eefa14cb6999147acc1": {
+    "path": "/home/fedora/lct-reid/data/images/6e8f4eb26c634eefa14cb6999147acc1.jpg",
+    "sha256": "79f507aba1a60092a30e7b98a9adf5bf1f26527fb11c8f149c616125dcce9432",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1191,
+      459,
+      409,
+      336
+    ]
+  },
+  "0f522455996d44e6bec6a4d288db045a": {
+    "path": "/home/fedora/lct-reid/data/images/0f522455996d44e6bec6a4d288db045a.jpg",
+    "sha256": "1d72087d16af91ed8774e38cd30d5f9e5732d4c596b50a3e7541ebf1e19a01af",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      611,
+      340,
+      570,
+      456
+    ]
+  },
+  "810e761dea08460ea8f36f5e0ace094e": {
+    "path": "/home/fedora/lct-reid/data/images/810e761dea08460ea8f36f5e0ace094e.jpg",
+    "sha256": "7df16b6c7b2b255eb4df21d72df9872e7b896e437a83a99024f86b10dcf750cf",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      759,
+      467,
+      418,
+      353
+    ]
+  },
+  "9f70ca8e12cd41fc978cc057cbf2e5ba": {
+    "path": "/home/fedora/lct-reid/data/images/9f70ca8e12cd41fc978cc057cbf2e5ba.jpg",
+    "sha256": "1bad36465b2ec5364d602859b0d9e952b80cdd96d3d6119f46aeab11296600e4",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      484,
+      136,
+      624,
+      548
+    ]
+  },
+  "e695f5882aef4fd5b2f0477b657aa4f1": {
+    "path": "/home/fedora/lct-reid/data/images/e695f5882aef4fd5b2f0477b657aa4f1.jpg",
+    "sha256": "08ecaff88a6ca00d4af9a022c638648f2376aba4c3e5d4c62c2dbc1755445877",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      131,
+      543,
+      520,
+      404
+    ]
+  },
+  "5e553240676d4d238c48ded9ba3ff19c": {
+    "path": "/home/fedora/lct-reid/data/images/5e553240676d4d238c48ded9ba3ff19c.jpg",
+    "sha256": "34d39085881dea09915c56e5c6e27ea39395d30b14043335e03080809279ded9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1241,
+      308,
+      604,
+      494
+    ]
+  },
+  "e827d7e84e9c41048428da63e5285193": {
+    "path": "/home/fedora/lct-reid/data/images/e827d7e84e9c41048428da63e5285193.jpg",
+    "sha256": "ac9f5c43c846ead967dc497095d39eab409d53cab8d2fd299e5a3772f2ca9e67",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      699,
+      730,
+      706,
+      349
+    ]
+  },
+  "791694f7823a4457b40c39ba412c2cb7": {
+    "path": "/home/fedora/lct-reid/data/images/791694f7823a4457b40c39ba412c2cb7.jpg",
+    "sha256": "695831c436b85a1afa8c7d3830dede8c275c3a8943f923da257efaf41dd7aae3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1197,
+      109,
+      721,
+      478
+    ]
+  },
+  "3ded0e77ef694f69a5d6b6df49e052e1": {
+    "path": "/home/fedora/lct-reid/data/images/3ded0e77ef694f69a5d6b6df49e052e1.jpg",
+    "sha256": "712f73405f742a4897bcb3e111dcaf91e787b5888ae5a1c8fcd019f915fd48bd",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      750,
+      381,
+      872,
+      688
+    ]
+  },
+  "633dc85a59ac4797bdc41b35c3835a51": {
+    "path": "/home/fedora/lct-reid/data/images/633dc85a59ac4797bdc41b35c3835a51.jpg",
+    "sha256": "17e89aa8b4aff1787aa5dc393dbc2fd1ead125b1def64e7f055109c414834bb7",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      179,
+      0,
+      995,
+      549
+    ]
+  },
+  "3c3022f7cea84b74ac4e085a37f2b4a3": {
+    "path": "/home/fedora/lct-reid/data/images/3c3022f7cea84b74ac4e085a37f2b4a3.jpg",
+    "sha256": "1ed298425c91a8e515fcdaa47b06cc36065757f4d32d109bf365d3fbf51f3b3a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      496,
+      227,
+      889,
+      651
+    ]
+  },
+  "167852b9df1e407880f518160d329303": {
+    "path": "/home/fedora/lct-reid/data/images/167852b9df1e407880f518160d329303.jpg",
+    "sha256": "674e7e187b5d3ed5cb167d8d540575cfecbd259e7b6086e3262abece5053f223",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      544,
+      447,
+      919,
+      632
+    ]
+  },
+  "25cb9713981146b986002acdc4454fe2": {
+    "path": "/home/fedora/lct-reid/data/images/25cb9713981146b986002acdc4454fe2.jpg",
+    "sha256": "2c8a65643082e40a7bb039cf119c8d4b95b71082579b3ae501a5c541db663b8c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      456,
+      168,
+      717,
+      600
+    ]
+  },
+  "aae1ddec128c4b6bad708752dc04d4d8": {
+    "path": "/home/fedora/lct-reid/data/images/aae1ddec128c4b6bad708752dc04d4d8.jpg",
+    "sha256": "112ebe64326c7d6ab921a3be17a7d346228859d320fc1833041532d94f9aa372",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      646,
+      238,
+      839,
+      662
+    ]
+  },
+  "ea565ecbd8d54cc386c492d8fdeebc96": {
+    "path": "/home/fedora/lct-reid/data/images/ea565ecbd8d54cc386c492d8fdeebc96.jpg",
+    "sha256": "8b86462736dcc9ce6e5b0f0d411f2f1a8fc402a459e262fafea4f7220508c19b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      605,
+      428,
+      677,
+      450
+    ]
+  },
+  "f82cf9e142e743db837bf2df30bc8b8e": {
+    "path": "/home/fedora/lct-reid/data/images/f82cf9e142e743db837bf2df30bc8b8e.jpg",
+    "sha256": "adedacfa18c813e6eeeda3546001adc8120e81cd349a215ec057f634a5beb715",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      770,
+      468,
+      413,
+      353
+    ]
+  },
+  "5706b99226484eb19f5d7272a752ea68": {
+    "path": "/home/fedora/lct-reid/data/images/5706b99226484eb19f5d7272a752ea68.jpg",
+    "sha256": "a951c9b3eb6e364f823389200732005c8eb85c5e965e74eb746ff59c29457f99",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      860,
+      0,
+      434,
+      415
+    ]
+  },
+  "4a359045262a4eccbe6c73e7500551d5": {
+    "path": "/home/fedora/lct-reid/data/images/4a359045262a4eccbe6c73e7500551d5.jpg",
+    "sha256": "ef8f11c7abdc703ff6c56b087abb3ee4fcaa1c4c7b997455337626a920dd3c2b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1323,
+      0,
+      596,
+      378
+    ]
+  },
+  "3ac16774c96f4481bd0bf3e18671084c": {
+    "path": "/home/fedora/lct-reid/data/images/3ac16774c96f4481bd0bf3e18671084c.jpg",
+    "sha256": "cff24cce12ab85af212b0a9c7caa49edb920e39c03533e7ced0dda9f8d379478",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1295,
+      285,
+      475,
+      482
+    ]
+  },
+  "b24b44fd5f12417cb801526b28476b20": {
+    "path": "/home/fedora/lct-reid/data/images/b24b44fd5f12417cb801526b28476b20.jpg",
+    "sha256": "02327de975c49a0de47599b2cc3b2113b5bb0062b67115089ee239f7dd76f486",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1089,
+      277,
+      661,
+      477
+    ]
+  },
+  "430b25adbed843b69f4df8ad42672adc": {
+    "path": "/home/fedora/lct-reid/data/images/430b25adbed843b69f4df8ad42672adc.jpg",
+    "sha256": "be4fba09df744ebb390bde71f99ba7b1abb7ab4a34b7ccb6e134659d53fb4c5d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      626,
+      456,
+      854,
+      477
+    ]
+  },
+  "ebf0e8d60a0449eb8632b468a327f820": {
+    "path": "/home/fedora/lct-reid/data/images/ebf0e8d60a0449eb8632b468a327f820.jpg",
+    "sha256": "41447a8c4899ad0388d27e96e2466a9e4219cd0b6617327601772c81808732c0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      751,
+      339,
+      355,
+      298
+    ]
+  },
+  "c8e943848ff447378bf03f0d1b5b5d39": {
+    "path": "/home/fedora/lct-reid/data/images/c8e943848ff447378bf03f0d1b5b5d39.jpg",
+    "sha256": "5ef2cb0d5862eb98dbffe256c4aed9ef0228256ca973473a3c050b3609e8a350",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      569,
+      335,
+      780,
+      445
+    ]
+  },
+  "0ba4f85325674f4eb99e298ea69bd65f": {
+    "path": "/home/fedora/lct-reid/data/images/0ba4f85325674f4eb99e298ea69bd65f.jpg",
+    "sha256": "878662a5ddca3f10212cc1187c6bb656feba546b956cc0f7e98fde8461c3519c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      753,
+      364,
+      481,
+      371
+    ]
+  },
+  "e9374c630ea24ebeb5c8905b432e7975": {
+    "path": "/home/fedora/lct-reid/data/images/e9374c630ea24ebeb5c8905b432e7975.jpg",
+    "sha256": "59cb5bbea2ddad65f70107c054a9b6cd3982897b24ee702d58a7941f7490bf7b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      208,
+      428,
+      680,
+      386
+    ]
+  },
+  "1854c73b05564496a87055a31bc4639b": {
+    "path": "/home/fedora/lct-reid/data/images/1854c73b05564496a87055a31bc4639b.jpg",
+    "sha256": "e4b5045303a925f085335ff44060a1b232c0a38b64e5f156084513d646952d3d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      72,
+      7,
+      826,
+      606
+    ]
+  },
+  "2b596590501c4765b15dca99e2679f70": {
+    "path": "/home/fedora/lct-reid/data/images/2b596590501c4765b15dca99e2679f70.jpg",
+    "sha256": "9e8d661a88fbb6f780594fa94039a5105aad65cbd39c4633a1da9afb10c2ebce",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      354,
+      350,
+      902,
+      636
+    ]
+  },
+  "e56af06883674546a2a7766e224a30bb": {
+    "path": "/home/fedora/lct-reid/data/images/e56af06883674546a2a7766e224a30bb.jpg",
+    "sha256": "8c7bec4c901a12f481c83b00fe4613c6b44acacd669590538de95d0724b0e8fe",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      457,
+      130,
+      594,
+      501
+    ]
+  },
+  "f6bb35fad0e649b5a735232c74ebd633": {
+    "path": "/home/fedora/lct-reid/data/images/f6bb35fad0e649b5a735232c74ebd633.jpg",
+    "sha256": "cffef6db4f9651a7abc05b1c1f9546809c412713c2d66c3233dd6cf777d59703",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      467,
+      182,
+      625,
+      548
+    ]
+  },
+  "6d1c4e30d9514f65a2d1ebfd789d26d6": {
+    "path": "/home/fedora/lct-reid/data/images/6d1c4e30d9514f65a2d1ebfd789d26d6.jpg",
+    "sha256": "e09d57c1a00427ec0a32ba3c0f4ee54545e4d129ee90e25b53b443d7543db099",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      723,
+      198,
+      607,
+      513
+    ]
+  },
+  "0b7812ac78cd4e66a94468b08fdf9ce2": {
+    "path": "/home/fedora/lct-reid/data/images/0b7812ac78cd4e66a94468b08fdf9ce2.jpg",
+    "sha256": "79ae7d1eab5bf8825580455c86fbab84d38145e32c12f2bf5e82c654c69e7794",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      488,
+      328,
+      940,
+      557
+    ]
+  },
+  "6382e057a726411ea70f2babae7937d3": {
+    "path": "/home/fedora/lct-reid/data/images/6382e057a726411ea70f2babae7937d3.jpg",
+    "sha256": "b477a79e951202f2ea2a4cbe96daa2e7ac574319db11dd871b1ad50ab8ec6c65",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      419,
+      192,
+      700,
+      606
+    ]
+  },
+  "27180b4eb7d94620beb257872bf2c229": {
+    "path": "/home/fedora/lct-reid/data/images/27180b4eb7d94620beb257872bf2c229.jpg",
+    "sha256": "4f06a79b6b43e6dc27e40d8f6906a9cd4590a2dbe721eb59191a116505cfecea",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      58,
+      171,
+      657,
+      472
+    ]
+  },
+  "d286ae15a8a14773b266df803eec4b51": {
+    "path": "/home/fedora/lct-reid/data/images/d286ae15a8a14773b266df803eec4b51.jpg",
+    "sha256": "ef4901eac7fcdcdfc10ca6936ab82947d182e2bed111a831ac4be9ba4b6ca65d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      611,
+      301,
+      739,
+      548
+    ]
+  },
+  "cbe52cc90d8e44eca9e04e482a682654": {
+    "path": "/home/fedora/lct-reid/data/images/cbe52cc90d8e44eca9e04e482a682654.jpg",
+    "sha256": "d0766d4afbd57ad78703bbf9186af25cf82c94556bbaee9092ff95fbb727152c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      399,
+      465,
+      789,
+      388
+    ]
+  },
+  "2ca9fb661bc744ff8b8946af61bd88b8": {
+    "path": "/home/fedora/lct-reid/data/images/2ca9fb661bc744ff8b8946af61bd88b8.jpg",
+    "sha256": "bffa1d15634b57a9502484a0511b1b1954735adfde46ca56073d1df1291bb877",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      717,
+      124,
+      886,
+      812
+    ]
+  },
+  "7d00002d94b4414fa5126c33f697fe65": {
+    "path": "/home/fedora/lct-reid/data/images/7d00002d94b4414fa5126c33f697fe65.jpg",
+    "sha256": "a2af825221c5a03897e5ba389821727b6d1205f89c1908b7dfb2628e7261e567",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      389,
+      563,
+      745,
+      443
+    ]
+  },
+  "108bbb1eab5e4fa685258e037461cc82": {
+    "path": "/home/fedora/lct-reid/data/images/108bbb1eab5e4fa685258e037461cc82.jpg",
+    "sha256": "61415880f8917bce97c9bd549beaaef795c6704fc353a841f75b122089bd855c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      818,
+      118,
+      280,
+      292
+    ]
+  },
+  "d39d1f38b5f740c6802a529814d77923": {
+    "path": "/home/fedora/lct-reid/data/images/d39d1f38b5f740c6802a529814d77923.jpg",
+    "sha256": "d72e63be317575236b44c56f426d7bbff2e1f0f8932d815d225056c4cf665ef2",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1262,
+      527,
+      500,
+      395
+    ]
+  },
+  "1107f5e30e3b479d84d08d6a8a782661": {
+    "path": "/home/fedora/lct-reid/data/images/1107f5e30e3b479d84d08d6a8a782661.jpg",
+    "sha256": "44120d3a1219ccb8f6de205bd7700a39b5bc5589c631e0cfeaf15bc8a6e11ee7",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      798,
+      315,
+      739,
+      448
+    ]
+  },
+  "1554f9d270084cc687210465a6fd5b63": {
+    "path": "/home/fedora/lct-reid/data/images/1554f9d270084cc687210465a6fd5b63.jpg",
+    "sha256": "876755a05e2446a7d629ecf20891995519848a5c7b725da911fc54a78da9c6e3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      334,
+      271,
+      740,
+      808
+    ]
+  },
+  "403d91521eb24c819abe314065539db3": {
+    "path": "/home/fedora/lct-reid/data/images/403d91521eb24c819abe314065539db3.jpg",
+    "sha256": "210183f740117e8495c4844423753061bcc601cc98331bfd9bd7417b4c195424",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      547,
+      316,
+      812,
+      700
+    ]
+  },
+  "a3130474b0794b168d813e7ed3de391b": {
+    "path": "/home/fedora/lct-reid/data/images/a3130474b0794b168d813e7ed3de391b.jpg",
+    "sha256": "eaeabed8f36772b5fe336c0187531f7bca3983d604d0e0bf22cf4403a3bd9938",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      691,
+      4,
+      606,
+      701
+    ]
+  },
+  "7e6033a266ce48ad86c24459ee9f361d": {
+    "path": "/home/fedora/lct-reid/data/images/7e6033a266ce48ad86c24459ee9f361d.jpg",
+    "sha256": "791c6fdb3d6599135d9dda7289e78cdbe97fa2151ee1dbeb92e71477ee8fcd5f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      606,
+      111,
+      1006,
+      815
+    ]
+  },
+  "262f02af267a4127a42fdabbec5e3a3a": {
+    "path": "/home/fedora/lct-reid/data/images/262f02af267a4127a42fdabbec5e3a3a.jpg",
+    "sha256": "2770b81a394cf6b64b17152a2fc6b67467d9998c3518e2df0546c01c597496f7",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      912,
+      199,
+      676,
+      551
+    ]
+  },
+  "a14bcd7605d440ccbb77aab539f434cf": {
+    "path": "/home/fedora/lct-reid/data/images/a14bcd7605d440ccbb77aab539f434cf.jpg",
+    "sha256": "0aa817d77553a256b79212429ef554548d36a0fcbafe4dac16a2c424070331c6",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1276,
+      243,
+      495,
+      528
+    ]
+  },
+  "f4cb610bd9b14e379baf535324917b61": {
+    "path": "/home/fedora/lct-reid/data/images/f4cb610bd9b14e379baf535324917b61.jpg",
+    "sha256": "9ef43b63838aae187a18146fbc8793f0e3d448cc88fadaba2a5ec65f2cb9e34f",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      127,
+      146,
+      649,
+      481
+    ]
+  },
+  "917a5025856a4a69a6eff098c77562d8": {
+    "path": "/home/fedora/lct-reid/data/images/917a5025856a4a69a6eff098c77562d8.jpg",
+    "sha256": "464672e13db7cc056bf2abc3c553970a3df12cb3380b31da39d6b508b4d4ccd9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      675,
+      126,
+      843,
+      610
+    ]
+  },
+  "926252dfb3ad413082c82995a91398dd": {
+    "path": "/home/fedora/lct-reid/data/images/926252dfb3ad413082c82995a91398dd.jpg",
+    "sha256": "9856f135fd4637262b2f25292a628514335876d3f7b43940b7d6eee759a68f84",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      755,
+      323,
+      940,
+      682
+    ]
+  },
+  "5e51414a296c4813911aa9736db8d5cc": {
+    "path": "/home/fedora/lct-reid/data/images/5e51414a296c4813911aa9736db8d5cc.jpg",
+    "sha256": "43a8f9ef8bfaa5ec6884ba8c34224b1e8e22793c090ec60fbafdde6021912c07",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1052,
+      127,
+      579,
+      409
+    ]
+  },
+  "459906b71d834d72b8dfa4ad57640e7b": {
+    "path": "/home/fedora/lct-reid/data/images/459906b71d834d72b8dfa4ad57640e7b.jpg",
+    "sha256": "090c8b4ad716d246e5923be8f8f42d084aa6538512c36a9defccec5664b8a3a7",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      58,
+      167,
+      668,
+      478
+    ]
+  },
+  "b45d5c93b8d2493db04313ae9a3323f4": {
+    "path": "/home/fedora/lct-reid/data/images/b45d5c93b8d2493db04313ae9a3323f4.jpg",
+    "sha256": "53cc1ed656135ae3d82f945aaafcc9e5e856c1ccef7f2ddca816757479f0b5fc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      483,
+      264,
+      612,
+      570
+    ]
+  },
+  "edd3e3ba6041438c90c4957c2ca79a70": {
+    "path": "/home/fedora/lct-reid/data/images/edd3e3ba6041438c90c4957c2ca79a70.jpg",
+    "sha256": "4e4852e06d6f0ccdc4fc768415355d5058050a907238f86f94471219e6fc5435",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      489,
+      323,
+      940,
+      562
+    ]
+  },
+  "506465c733f640bca8d2834acb072f8a": {
+    "path": "/home/fedora/lct-reid/data/images/506465c733f640bca8d2834acb072f8a.jpg",
+    "sha256": "9dc0361b558871dac4e5ae871b835d80b8813b5ae0d8a25582497554477e5890",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      519,
+      560,
+      714,
+      520
+    ]
+  },
+  "9f3054fb9762485eaf1ef8f8f86fafb5": {
+    "path": "/home/fedora/lct-reid/data/images/9f3054fb9762485eaf1ef8f8f86fafb5.jpg",
+    "sha256": "0e496abc95c43abda30e137cacad97e8ab2bad42348705ed305e0c8dce32e7f9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      539,
+      129,
+      794,
+      652
+    ]
+  },
+  "63af7c89d59944d7a40c579d0967df24": {
+    "path": "/home/fedora/lct-reid/data/images/63af7c89d59944d7a40c579d0967df24.jpg",
+    "sha256": "0267ae7c946e1d06c145525a7c0db257104b10e64da46715b7457abad5f1a7a0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      564,
+      427,
+      932,
+      511
+    ]
+  },
+  "f863e3ff648b40a9a93703fdd05f1a12": {
+    "path": "/home/fedora/lct-reid/data/images/f863e3ff648b40a9a93703fdd05f1a12.jpg",
+    "sha256": "67d1dd3b391198eff036682caf066060ad54bd698147923de65294fb5bcabae6",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1208,
+      349,
+      707,
+      401
+    ]
+  },
+  "db0c88244516406ab2d963e8e991b492": {
+    "path": "/home/fedora/lct-reid/data/images/db0c88244516406ab2d963e8e991b492.jpg",
+    "sha256": "b25de466826c25655021b2392e6afc136d3592f4ad4035132cef83fa676cee67",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1129,
+      139,
+      691,
+      602
+    ]
+  },
+  "6f0eb4f4a4d649b98f5e1ec1b5c460b9": {
+    "path": "/home/fedora/lct-reid/data/images/6f0eb4f4a4d649b98f5e1ec1b5c460b9.jpg",
+    "sha256": "695734dd1f112a6d79ecda8538f08b22ff0cf0055ffc1d729a5293ac4949cccc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      233,
+      297,
+      641,
+      408
+    ]
+  },
+  "fb38c12881484675969c9e10868162f9": {
+    "path": "/home/fedora/lct-reid/data/images/fb38c12881484675969c9e10868162f9.jpg",
+    "sha256": "972a523fcf1d5179b94cac055f4da834b14178a3b1e69098c7cc0a0391341bf9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      683,
+      466,
+      581,
+      404
+    ]
+  },
+  "285421040b2e444b96bf990aa4831b12": {
+    "path": "/home/fedora/lct-reid/data/images/285421040b2e444b96bf990aa4831b12.jpg",
+    "sha256": "9da91c32c8145494a0011eb9da01a3002aac12af72b01edc7362b3de2b170a94",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1164,
+      350,
+      722,
+      425
+    ]
+  },
+  "8f03b5b1b69e412ea934d08f34b008a7": {
+    "path": "/home/fedora/lct-reid/data/images/8f03b5b1b69e412ea934d08f34b008a7.jpg",
+    "sha256": "d59971f8199027ff0c5787b3f87023af114b677a3ba633e7e0ecd97cf8899a1d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      331,
+      296,
+      742,
+      530
+    ]
+  },
+  "9d9e7cde7a29431aad5d375cb7a6a88c": {
+    "path": "/home/fedora/lct-reid/data/images/9d9e7cde7a29431aad5d375cb7a6a88c.jpg",
+    "sha256": "41e81ae0aaa80c66dcfeea3032c98c467cd28ef95f53b1c6520d5172a90074e7",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1157,
+      342,
+      627,
+      669
+    ]
+  },
+  "5d4688181d9d46e7893b65b5a26cb99e": {
+    "path": "/home/fedora/lct-reid/data/images/5d4688181d9d46e7893b65b5a26cb99e.jpg",
+    "sha256": "348fdb2d384ee6fb320d1de8507cc363ee90f3c401da8ab2b7195eae32a3178e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      483,
+      272,
+      767,
+      637
+    ]
+  },
+  "24d1624e59654f9cb3c2f52f06cac675": {
+    "path": "/home/fedora/lct-reid/data/images/24d1624e59654f9cb3c2f52f06cac675.jpg",
+    "sha256": "a9e96d63004f66d8f9c09832246baa2a0ed91fbfbe1d685f9c787e9770e731ef",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1,
+      301,
+      664,
+      591
+    ]
+  },
+  "6f46dde27e5447599a07632b34a3be53": {
+    "path": "/home/fedora/lct-reid/data/images/6f46dde27e5447599a07632b34a3be53.jpg",
+    "sha256": "ff5fa9ea292a4b9c946ab545ae3cf5c0169c7f4f2adaf921f85e3e3b81fe41dc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      348,
+      260,
+      1260,
+      676
+    ]
+  },
+  "a318456f5e4840ec984ab7bc341599bb": {
+    "path": "/home/fedora/lct-reid/data/images/a318456f5e4840ec984ab7bc341599bb.jpg",
+    "sha256": "9cd3b6b83f94d4e02ce8745ae6ba40a6178b55f4f4decddb1a39800c8e388958",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      534,
+      304,
+      709,
+      580
+    ]
+  },
+  "6560badc55844e5b83c2e5ba51641195": {
+    "path": "/home/fedora/lct-reid/data/images/6560badc55844e5b83c2e5ba51641195.jpg",
+    "sha256": "83cc0ccd0f38bf98902000165049b59f029628f34688ffdb77fd71f4a4246313",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1170,
+      399,
+      729,
+      446
+    ]
+  },
+  "6cfeffba5a3e482da716d4ecba1f5c56": {
+    "path": "/home/fedora/lct-reid/data/images/6cfeffba5a3e482da716d4ecba1f5c56.jpg",
+    "sha256": "d9acde29441434aafe4feaa402f85b70d52f2198bc806dd43f9bed1d8e654e7e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      647,
+      354,
+      649,
+      548
+    ]
+  },
+  "d5be5c8e097b4a068097954bb7818b5c": {
+    "path": "/home/fedora/lct-reid/data/images/d5be5c8e097b4a068097954bb7818b5c.jpg",
+    "sha256": "17cde5bd2f294d84701e321cc9d9f6a516c3ddfe9d21c95e3610f42403fc1b12",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      483,
+      264,
+      545,
+      516
+    ]
+  },
+  "65b24ba1f81b431ebd2197a398bb7406": {
+    "path": "/home/fedora/lct-reid/data/images/65b24ba1f81b431ebd2197a398bb7406.jpg",
+    "sha256": "12ce73e74febdeaef092694bbece8d5c21504ad49d5c934039ce4d555b4cb562",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      67,
+      394,
+      602,
+      514
+    ]
+  },
+  "2bae42c456274091896d9b9f7b2c52b8": {
+    "path": "/home/fedora/lct-reid/data/images/2bae42c456274091896d9b9f7b2c52b8.jpg",
+    "sha256": "0e63a660457bc52dc4e4a7a8a6daf42012ce8d7269182c77f212237518b7aaa3",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      514,
+      498,
+      822,
+      466
+    ]
+  },
+  "45045370af73405dbeabd5b55f70be65": {
+    "path": "/home/fedora/lct-reid/data/images/45045370af73405dbeabd5b55f70be65.jpg",
+    "sha256": "10a3759ee64eb3704e888a2b9f6b254ef2b31114ee3cdc0ed31da750021aa2f0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      101,
+      284,
+      1243,
+      612
+    ]
+  },
+  "9ec379b4c5b54f059fd125b7aaa0e4c9": {
+    "path": "/home/fedora/lct-reid/data/images/9ec379b4c5b54f059fd125b7aaa0e4c9.jpg",
+    "sha256": "ebc4449eb8d212e1dca02131596536e4a59d973e2ffe271bcaf5290492a25fe1",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      67,
+      394,
+      602,
+      518
+    ]
+  },
+  "5608856c09214d37bc77fe7689c76174": {
+    "path": "/home/fedora/lct-reid/data/images/5608856c09214d37bc77fe7689c76174.jpg",
+    "sha256": "7ad32eb0bd1b50e0d72279189cd86a39396b201a7c0b22337e1ba48cb99b9731",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      518,
+      416,
+      953,
+      503
+    ]
+  },
+  "0e6ce8343aab4415a1fcb4c8f998bf46": {
+    "path": "/home/fedora/lct-reid/data/images/0e6ce8343aab4415a1fcb4c8f998bf46.jpg",
+    "sha256": "783a177741443cd8a41329ee457233fb1248e0fc508eefc4665197550cc95858",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      564,
+      429,
+      932,
+      510
+    ]
+  },
+  "f0d1175094634dc2822623f00321102b": {
+    "path": "/home/fedora/lct-reid/data/images/f0d1175094634dc2822623f00321102b.jpg",
+    "sha256": "3f5c289c4f9e7426335711e79b259e8411de64e273866dce3857765debae8641",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      163,
+      129,
+      699,
+      508
+    ]
+  },
+  "31b56e9352c549bf9956582bd5287f7a": {
+    "path": "/home/fedora/lct-reid/data/images/31b56e9352c549bf9956582bd5287f7a.jpg",
+    "sha256": "158d7d195d5223327faa74c0b610bcd91cbf3080f96d84366dec01e81e23404e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1047,
+      258,
+      513,
+      363
+    ]
+  },
+  "2f5abaf1308b48979828ada071bb3fe9": {
+    "path": "/home/fedora/lct-reid/data/images/2f5abaf1308b48979828ada071bb3fe9.jpg",
+    "sha256": "d0aa420777979a9dcc8975fc0b8b180f82490a5df71c65df4f8d2215017cb1d9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      690,
+      328,
+      664,
+      541
+    ]
+  },
+  "1e2a164e05c64dbb842e1e4b13bd5138": {
+    "path": "/home/fedora/lct-reid/data/images/1e2a164e05c64dbb842e1e4b13bd5138.jpg",
+    "sha256": "2fd4b0757e9676184b0487e9fdc7e6cbc09b9899a0bb759738b874d841b69830",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      765,
+      339,
+      567,
+      528
+    ]
+  },
+  "e7cdd67312474f36bd0c7d31ab3e8a34": {
+    "path": "/home/fedora/lct-reid/data/images/e7cdd67312474f36bd0c7d31ab3e8a34.jpg",
+    "sha256": "d2e3448ecf95f8671ad8c8bf523a3a978155315b4e7d2b93f961995da7ac74ae",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      797,
+      364,
+      898,
+      459
+    ]
+  },
+  "1c68e32722e143dd903c337080c048e0": {
+    "path": "/home/fedora/lct-reid/data/images/1c68e32722e143dd903c337080c048e0.jpg",
+    "sha256": "ccb9ab6cb5364c5454d0685ded11b8a99942792041c71fde5db30b55afa5f9fd",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      77,
+      369,
+      1045,
+      457
+    ]
+  },
+  "be08a332fbb146ecb0ada46d191aa516": {
+    "path": "/home/fedora/lct-reid/data/images/be08a332fbb146ecb0ada46d191aa516.jpg",
+    "sha256": "d02f85b92c32681afd7b0fe87e7b4bd6df69ab3dac15979d04702f61a55fe08a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1032,
+      265,
+      609,
+      343
+    ]
+  },
+  "6732c1735d054905bb2fe07272a7bfa4": {
+    "path": "/home/fedora/lct-reid/data/images/6732c1735d054905bb2fe07272a7bfa4.jpg",
+    "sha256": "f686e058dcd6354bb80f7d199be7ade747a68aebdc695418b4d58125e260f76c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1043,
+      115,
+      792,
+      531
+    ]
+  },
+  "4fbb533c1a264935924afbd1d69a6009": {
+    "path": "/home/fedora/lct-reid/data/images/4fbb533c1a264935924afbd1d69a6009.jpg",
+    "sha256": "921c620ef66f02a7d9c8c0c7a73a7b89fa41db52a0692356292b5d309a68e16d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      571,
+      337,
+      773,
+      444
+    ]
+  },
+  "cd525b5ba18947e8a0f04a2e2fd0d6f0": {
+    "path": "/home/fedora/lct-reid/data/images/cd525b5ba18947e8a0f04a2e2fd0d6f0.jpg",
+    "sha256": "c4e23faadb30cc3cd588ed1de7de46518f5d9dc6d1fa25178939f4982af621fc",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      801,
+      30,
+      315,
+      363
+    ]
+  },
+  "b4fb86bbbe614d9689f91a85c988b126": {
+    "path": "/home/fedora/lct-reid/data/images/b4fb86bbbe614d9689f91a85c988b126.jpg",
+    "sha256": "ea7051fabfd1ba3f47edc1644077ee0c58b6421e84de5bb7aa49f8bd33fb019b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      949,
+      510,
+      759,
+      485
+    ]
+  },
+  "53ba664556c24ad2b8ec64bfe5ded724": {
+    "path": "/home/fedora/lct-reid/data/images/53ba664556c24ad2b8ec64bfe5ded724.jpg",
+    "sha256": "e5c55be8f91c232601d71cdb7de9446804c7aef91b2b296c1728f30ab0b8f516",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      524,
+      350,
+      686,
+      563
+    ]
+  },
+  "d98f4a389a5849c2ba01bd1d2eaab911": {
+    "path": "/home/fedora/lct-reid/data/images/d98f4a389a5849c2ba01bd1d2eaab911.jpg",
+    "sha256": "8504c64d687992014fc488596e98a70a7bf1dadacf364e4e80aea1ae7d9938d0",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      964,
+      271,
+      815,
+      579
+    ]
+  },
+  "94b5527fb7a64204be76b6ca858952f4": {
+    "path": "/home/fedora/lct-reid/data/images/94b5527fb7a64204be76b6ca858952f4.jpg",
+    "sha256": "27208d04455b09c5657672a5b9c2d22d0a7f91b5b9a24fa7bc25293506b39b74",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1240,
+      345,
+      657,
+      439
+    ]
+  },
+  "1ce3def9e49644528964cc67f89b49b3": {
+    "path": "/home/fedora/lct-reid/data/images/1ce3def9e49644528964cc67f89b49b3.jpg",
+    "sha256": "d1110cd7b949d9505cbc3883fcc77a9ffd019f388c9b874f7677e5dbca73a01c",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      208,
+      428,
+      607,
+      373
+    ]
+  },
+  "73c198bf27a145dabfeae8c4183daa5c": {
+    "path": "/home/fedora/lct-reid/data/images/73c198bf27a145dabfeae8c4183daa5c.jpg",
+    "sha256": "11809405ee7d0f93d761d42fb7599f81b7e418db5f8204f8dbd261342ac2d883",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      903,
+      527,
+      537,
+      407
+    ]
+  },
+  "46c988eefbac489a80cbe8975086e6c3": {
+    "path": "/home/fedora/lct-reid/data/images/46c988eefbac489a80cbe8975086e6c3.jpg",
+    "sha256": "330d949ca75c6bb12f9ec1403283b1e25b529b5b2b2e4230cfd4a89db040c59e",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      142,
+      441,
+      629,
+      403
+    ]
+  },
+  "a77365b03da749f8963fb5580a9d422a": {
+    "path": "/home/fedora/lct-reid/data/images/a77365b03da749f8963fb5580a9d422a.jpg",
+    "sha256": "75b92fc0038500280de7e2d3e5e7fc19357599ae5a35e8bd82ac99801fff4bd2",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      626,
+      415,
+      599,
+      496
+    ]
+  },
+  "7233ca0e42c34e6880c4ca5f992795fa": {
+    "path": "/home/fedora/lct-reid/data/images/7233ca0e42c34e6880c4ca5f992795fa.jpg",
+    "sha256": "6c91d9f0b252d9577ef34161c0692018b417f83a80da3403a01303791ffb0a8b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      646,
+      416,
+      665,
+      435
+    ]
+  },
+  "598f359622514e5f8b69f29a05d36737": {
+    "path": "/home/fedora/lct-reid/data/images/598f359622514e5f8b69f29a05d36737.jpg",
+    "sha256": "7d8a1fb82700ab953753f25de2d144c23f5c7c9560befc705299eb5d303bc59b",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      114,
+      398,
+      588,
+      465
+    ]
+  },
+  "b8a30a520bed491bb3147208519ae8f6": {
+    "path": "/home/fedora/lct-reid/data/images/b8a30a520bed491bb3147208519ae8f6.jpg",
+    "sha256": "64ecc9f0de1720f6360b5ac529c67d133d5283ae682ef471ee71840560761040",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      1111,
+      498,
+      648,
+      352
+    ]
+  },
+  "0fea1dd956c943839ddf494ba90a8c6e": {
+    "path": "/home/fedora/lct-reid/data/images/0fea1dd956c943839ddf494ba90a8c6e.jpg",
+    "sha256": "75978ebd947e96d7723d6e34a207fd224b24228a3317d3027911985fc9769b19",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      894,
+      152,
+      478,
+      376
+    ]
+  },
+  "d56d8bb9c98d4edc90d57307e6b7ff81": {
+    "path": "/home/fedora/lct-reid/data/images/d56d8bb9c98d4edc90d57307e6b7ff81.jpg",
+    "sha256": "bc675e6d6daf5f5c942ee8c804ce065d556d9b0ff05809bcdccdcd8e5ccb686d",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      494,
+      406,
+      444,
+      326
+    ]
+  },
+  "427afa8d0c834faa8ecf27510c35b615": {
+    "path": "/home/fedora/lct-reid/data/images/427afa8d0c834faa8ecf27510c35b615.jpg",
+    "sha256": "cb7215dea1d7c913914ba93c482e4d027911268f1e1df6446631f751ad917aaa",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      486,
+      135,
+      620,
+      549
+    ]
+  },
+  "3ea37fc13db242c789df05a28d88ecbd": {
+    "path": "/home/fedora/lct-reid/data/images/3ea37fc13db242c789df05a28d88ecbd.jpg",
+    "sha256": "d77b8004af52802e6dd4963f341286389a6556a18d4d77557c692aafd1dd3511",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      341,
+      588,
+      629,
+      492
+    ]
+  },
+  "ea7227620a6b4dcca9d9e930277a010b": {
+    "path": "/home/fedora/lct-reid/data/images/ea7227620a6b4dcca9d9e930277a010b.jpg",
+    "sha256": "4092ec96ceda510aa45a1bcad9c75fcc827fe1e1b0e4b2ac4deb9efb3e059d4a",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      115,
+      410,
+      570,
+      454
+    ]
+  },
+  "d5351771bb3c45c6b10457c443dd91ef": {
+    "path": "/home/fedora/lct-reid/data/images/d5351771bb3c45c6b10457c443dd91ef.jpg",
+    "sha256": "82ac8f5b2e71d6f1a87ad1e3518fc1da2b00b7893757c4cccde508afe50283a9",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      878,
+      255,
+      491,
+      402
+    ]
+  },
+  "6cc3abec83db4da8ac59d6a285009a2a": {
+    "path": "/home/fedora/lct-reid/data/images/6cc3abec83db4da8ac59d6a285009a2a.jpg",
+    "sha256": "58d89cf1eda26db40f5e9991744986aacb5a4c3d7a9b5768f251d84b81efca49",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      763,
+      254,
+      916,
+      464
+    ]
+  },
+  "bdee1df11fd94d33af98dcad16884410": {
+    "path": "/home/fedora/lct-reid/data/images/bdee1df11fd94d33af98dcad16884410.jpg",
+    "sha256": "83f1f46c8794855fe85179092a55a0fca688d72010c70bda9f1b20f3e70e4831",
+    "frame_size": [
+      1920,
+      1080
+    ],
+    "bbox": [
+      392,
+      221,
+      464,
+      380
+    ]
+  }
+}
