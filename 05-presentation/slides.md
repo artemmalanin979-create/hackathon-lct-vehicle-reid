@@ -65,12 +65,14 @@ README прежней конфигурации `postproc/whitening/final/` ис�
 
 | Артефакт | Что получает жюри | Источник числа |
 |---|---|---|
-| `submission.csv` | Первые 10 кандидатов для каждого запроса, независимо от отказа | `04-solution/service/app/core/submission.py`, `TOP_K_SUBMISSION` |
+| `submission.csv` | Первые 10 кандидатов для каждого запроса при галерее ≥ 10, независимо от отказа | `04-solution/service/app/core/submission.py`, `TOP_K_SUBMISSION` |
 | `embeddings.npy` | Векторы по 512 чисел: запросы, затем галерея, в порядке входных CSV | `04-solution/service/app/core/config.py`, `EMBEDDING_DIM`; `core/submission.py` |
-| `candidates.csv` | Все пары выше порога; нет строк запроса — отказ | `04-solution/service/app/core/submission.py`, `write_candidates` |
+| `candidates.csv` | Все пары с исходным score ≥ порога, без лимита десятью; нет строк запроса — отказ при уникальных query ID и успешном batch | `04-solution/service/app/core/submission.py`, `write_candidates` |
 
 Три сдаваемых файла перечислены в `04-solution/service/app/batch.py`.
 `run_info.json` — дополнительный протокол запуска, не четвёртый сдаваемый файл.
+Границы малого/пустого набора, повторяющихся ID и округления confidence —
+[`SOLUTION.md §5`](../SOLUTION.md#known-behavior-limits).
 
 ### Иллюстрация
 
