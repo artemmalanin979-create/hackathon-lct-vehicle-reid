@@ -59,6 +59,38 @@ class ImageNameTests(unittest.TestCase):
                 csv.write_text(f"image_id,x,y,w,h\n{name},0,0,8,8\n")
                 require_dataset([csv], self.root)
 
+    def test_dotted_id_without_image_extension_resolves_by_appending(self):
+        for name in ("frame.v1", "cam.2026.09.24", "rec.2026-09-24T12.00"):
+            with self.subTest(name=name):
+                Image.new("RGB", (8, 8), (10, 20, 30)).save(self.root / (name + ".jpg"))
+                self.assertEqual(resolve_image_path(self.root, name),
+                                 self.root / (name + ".jpg"))
+                decoded = load_crop(self.root, BBoxRow(name, 0, 0, 8, 8))
+                np.testing.assert_array_equal(decoded[:, 0, 0], [10, 20, 30])
+                csv = self.root / "query.csv"
+                csv.write_text(f"image_id,x,y,w,h\n{name},0,0,8,8\n")
+                require_dataset([csv], self.root)
+
+    def test_dotted_id_resolves_through_symlink(self):
+        Image.new("RGB", (8, 8), (10, 20, 30)).save(self.root / "target.jpg")
+        (self.root / "alias.v2.jpg").symlink_to("target.jpg")
+        self.assertEqual(resolve_image_path(self.root, "alias.v2"),
+                         self.root / "alias.v2.jpg")
+        decoded = load_crop(self.root, BBoxRow("alias.v2", 0, 0, 8, 8))
+        np.testing.assert_array_equal(decoded[:, 0, 0], [10, 20, 30])
+        csv = self.root / "query.csv"
+        csv.write_text("image_id,x,y,w,h\nalias.v2,0,0,8,8\n")
+        require_dataset([csv], self.root)
+
+    def test_dotted_id_keeps_shadow_protection_for_its_full_name(self):
+        # frame.v1 appends extensions, but frame.v1.png stays literal even when
+        # only frame.v1.png.jpg exists.
+        Image.new("RGB", (8, 8)).save(self.root / "frame.v1.png.jpg")
+        with self.assertRaises(FileNotFoundError):
+            resolve_image_path(self.root, "frame.v1.png")
+        self.assertEqual(resolve_image_path(self.root, "frame.v1.png.jpg"),
+                         self.root / "frame.v1.png.jpg")
+
     def test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract(self):
         Image.new("RGB", (8, 8)).save(self.root / "stem.v1.jpg")
         csv = self.root / "query.csv"

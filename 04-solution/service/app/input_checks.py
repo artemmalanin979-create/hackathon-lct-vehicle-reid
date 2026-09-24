@@ -50,12 +50,18 @@ def require_files(paths, *, hint):
         fail_inputs(problems, hint)
 
 
-def image_candidates(images_dir, image_id, suffixes=(".jpg", ".jpeg", ".png", "")):
-    """An explicit filename is literal; extensionless IDs use the caller's order.
+IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png")
 
+
+def image_candidates(images_dir, image_id, suffixes=(".jpg", ".jpeg", ".png", "")):
+    """An explicit image filename is literal; other IDs use the caller's order.
+
+    Only a known image extension (any case) marks the ID as a full filename:
+    `named.png` never resolves to `named.png.jpg`. A dot elsewhere (`frame.v1`,
+    `cam.2026.09.24`) is part of the ID, so the usual extension search applies.
     Callers using only ('.jpg',) retain their JPEG-only research contract.
     """
-    if "" in suffixes and Path(image_id).suffix:
+    if "" in suffixes and Path(image_id).suffix.lower() in IMAGE_SUFFIXES:
         suffixes = ("",)
     return [Path(images_dir) / f"{image_id}{suffix}" for suffix in suffixes]
 
