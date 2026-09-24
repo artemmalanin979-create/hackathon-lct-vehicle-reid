@@ -50,12 +50,22 @@ def require_files(paths, *, hint):
         fail_inputs(problems, hint)
 
 
+def image_candidates(images_dir, image_id, suffixes=(".jpg", ".jpeg", ".png", "")):
+    """An explicit filename is literal; extensionless IDs use the caller's order.
+
+    Callers using only ('.jpg',) retain their JPEG-only research contract.
+    """
+    if "" in suffixes and Path(image_id).suffix:
+        suffixes = ("",)
+    return [Path(images_dir) / f"{image_id}{suffix}" for suffix in suffixes]
+
+
 def require_images(images_dir, image_ids, *, suffixes=(".jpg", ".jpeg", ".png", "")):
     images_dir = Path(images_dir)
     problems = []
     for image_id in dict.fromkeys(image_ids):
         # Match the caller's actual resolver; do not impose snapshot hashes or counts.
-        if not any((images_dir / f"{image_id}{suffix}").is_file() for suffix in suffixes):
+        if not any(path.is_file() for path in image_candidates(images_dir, image_id, suffixes)):
             problems.append(f"Нет изображения: image_id={image_id}, каталог {images_dir}, "
                             f"расширения {suffixes}")
     if problems:

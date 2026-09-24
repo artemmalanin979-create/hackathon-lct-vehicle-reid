@@ -51,11 +51,12 @@ def read_rows(csv_path: Path) -> list[BBoxRow]:
 def resolve_image_path(images_dir: Path, image_id: str) -> Path:
     """Файл кадра по image_id.
 
-    ТЗ допускает JPEG и PNG; выданный набор — .jpg. Перебираем расширения
-    детерминированно, чтобы закрытый тест с .png не уронил прогон.
+    Имя с расширением означает только этот файл, без подстановки. Для ID без
+    расширения сохраняется порядок .jpg, .jpeg, .png, затем точное имя.
     """
-    for suffix in (".jpg", ".jpeg", ".png", ""):
-        p = images_dir / f"{image_id}{suffix}"
+    from ..input_checks import image_candidates
+
+    for p in image_candidates(images_dir, image_id):
         if p.is_file():
             return p
     raise FileNotFoundError(f"нет файла изображения для image_id={image_id} в {images_dir}")
