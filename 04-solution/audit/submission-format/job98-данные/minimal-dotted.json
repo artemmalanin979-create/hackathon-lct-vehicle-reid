@@ -1,0 +1,12 @@
+[
+  {
+    "version": "before",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  {
+    "version": "after",
+    "exit_code": 2,
+    "stderr": "Входы не готовы: 1 проблем.\n  Нет изображения: image_id=frame.v1, каталог /home/artem/tmp/lct-jobs/job_98/fixtures/minimal-dotted, расширения ('.jpg', '.jpeg', '.png', '')\nПоложите CSV и images/ из набора организатора задачи №7 в каталог данных. Набор доступен участнику в личном кабинете, жюри — у организатора. Проверьте пути --query/--gallery/--csv и --images-dir; в Compose — DATA_DIR. Инструкция: 04-solution/reproduce/README.md.\nВычисления не запущены.\n"
+  }
+]
