@@ -67,7 +67,8 @@ def main():
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--batch", type=positive_int, default=8)
     ap.add_argument("--threads", type=nonnegative_int, default=0)
-    ap.add_argument("--limit", type=nonnegative_int, default=0)
+    ap.add_argument("--limit", type=int, default=0,
+                    help="срез rows[:N]; 0 — все строки, отрицательное N убирает хвост")
     ap.add_argument("--timing", type=Path, default=None)
     args = ap.parse_args()
     import numpy as np

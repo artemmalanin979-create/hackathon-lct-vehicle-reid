@@ -101,7 +101,8 @@ def main():
     ap.add_argument("--mask-bottom", type=unit_interval, default=0.0)
     ap.add_argument("--grayscale", action="store_true")
     ap.add_argument("--timing", type=Path, default=None, help="куда писать JSON замера")
-    ap.add_argument("--limit", type=nonnegative_int, default=0, help="обработать только первые N строк")
+    ap.add_argument("--limit", type=int, default=0,
+                    help="срез rows[:N]; 0 — все строки, отрицательное N убирает хвост")
     args = ap.parse_args()
     require_dataset([args.csv], args.images_dir, suffixes=(".jpg",), limit=args.limit)
     require_files([args.model], hint="Укажите --model; веса — service/model/fetch_model.sh.")

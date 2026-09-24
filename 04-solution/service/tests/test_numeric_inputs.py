@@ -99,7 +99,7 @@ class NumericCliTests(unittest.TestCase):
     def test_research_extractors_reject_invalid_numeric_options(self):
         for script in ("04-solution/baseline/scripts/extract_embeddings.py",
                        "04-solution/postproc/scripts/s07_fastreid_extract.py"):
-            options = [("--batch", "0"), ("--batch", "-1"), ("--threads", "-1"), ("--limit", "-1")]
+            options = [("--batch", "0"), ("--batch", "-1"), ("--threads", "-1")]
             if "baseline" in script:
                 options += [("--mask-bottom", v) for v in ("-0.1", "1.1", "nan", "inf", "-inf")]
             for flag, value in options:
