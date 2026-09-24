@@ -21,12 +21,12 @@
     "ap_pr_step": 0.9183724749597769
   },
   "sources": {
-    "/home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/calib-d1_j48/summary.json": "6a8dd83d4e5b03bf1e0fe44ba78fffbe7b4ac3a5da2500db0368c7232a85d3e3"
+    "/home/fedora/tmp/lct-jobs/job_97/runtime/04-solution/service/calib-d1_j48/summary.json": "6a8dd83d4e5b03bf1e0fe44ba78fffbe7b4ac3a5da2500db0368c7232a85d3e3"
   },
   "rendering": "saved measured operating points only, no lines or interpolation",
   "notice": "d1_j48 calibration validation; two models plus whitening; not a holdout result.",
   "outputs": [
-    "/home/artem/projects/hackathon-lct-vehicle-reid/05-presentation/assets/f1_tnr_threshold.svg",
-    "/home/artem/projects/hackathon-lct-vehicle-reid/05-presentation/assets/f1_tnr_threshold.png"
+    "/home/fedora/tmp/lct-jobs/job_97/runtime/05-presentation/assets/f1_tnr_threshold.svg",
+    "/home/fedora/tmp/lct-jobs/job_97/runtime/05-presentation/assets/f1_tnr_threshold.png"
   ]
 }

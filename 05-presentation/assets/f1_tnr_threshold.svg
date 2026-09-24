@@ -6,11 +6,11 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:description>Existing calibration data, no new model run. Sources: /home/artem/projects/hackathon-lct-vehicle-reid/04-solution/service/calib-d1_j48/summary.json</dc:description>
+    <dc:description>Existing calibration data, no new model run. Sources: /home/fedora/tmp/lct-jobs/job_97/runtime/04-solution/service/calib-d1_j48/summary.json</dc:description>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -50,7 +50,7 @@ L 0 3.5
       </g>
      </g>
      <g id="text_1">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="66.096" y="321.594344" transform="rotate(-0 66.096 321.594344)">0</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="66.096" y="324.08" transform="rotate(-0 66.096 324.08)">0</text>
      </g>
     </g>
     <g id="xtick_2">
@@ -60,7 +60,7 @@ L 0 3.5
       </g>
      </g>
      <g id="text_2">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="225.828" y="321.594344" transform="rotate(-0 225.828 321.594344)">0,25</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="225.828" y="324.08" transform="rotate(-0 225.828 324.08)">0,25</text>
      </g>
     </g>
     <g id="xtick_3">
@@ -70,7 +70,7 @@ L 0 3.5
       </g>
      </g>
      <g id="text_3">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="385.56" y="321.594344" transform="rotate(-0 385.56 321.594344)">0,5</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="385.56" y="324.08" transform="rotate(-0 385.56 324.08)">0,5</text>
      </g>
     </g>
     <g id="xtick_4">
@@ -80,7 +80,7 @@ L 0 3.5
       </g>
      </g>
      <g id="text_4">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="545.292" y="321.594344" transform="rotate(-0 545.292 321.594344)">0,75</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="545.292" y="324.08" transform="rotate(-0 545.292 324.08)">0,75</text>
      </g>
     </g>
     <g id="xtick_5">
@@ -90,11 +90,11 @@ L 0 3.5
       </g>
      </g>
      <g id="text_5">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="705.024" y="321.594344" transform="rotate(-0 705.024 321.594344)">1</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="705.024" y="324.08" transform="rotate(-0 705.024 324.08)">1</text>
      </g>
     </g>
     <g id="text_6">
-     <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="385.56" y="336.078719" transform="rotate(-0 385.56 336.078719)">Порог близости s = 1 − d</text>
+     <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="385.56" y="341.489" transform="rotate(-0 385.56 341.489)">Порог близости s = 1 − d</text>
     </g>
    </g>
    <g id="matplotlib.axis_2">
@@ -115,7 +115,7 @@ L -3.5 0
       </g>
      </g>
      <g id="text_7">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="310.513172" transform="rotate(-0 59.096 310.513172)">0</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="311.756" transform="rotate(-0 59.096 311.756)">0</text>
      </g>
     </g>
     <g id="ytick_2">
@@ -130,7 +130,7 @@ L 705.024 252.606757
       </g>
      </g>
      <g id="text_8">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="256.687929" transform="rotate(-0 59.096 256.687929)">0,25</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="257.930757" transform="rotate(-0 59.096 257.930757)">0,25</text>
      </g>
     </g>
     <g id="ytick_3">
@@ -145,7 +145,7 @@ L 705.024 198.781515
       </g>
      </g>
      <g id="text_9">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="202.862686" transform="rotate(-0 59.096 202.862686)">0,5</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="204.105515" transform="rotate(-0 59.096 204.105515)">0,5</text>
      </g>
     </g>
     <g id="ytick_4">
@@ -160,7 +160,7 @@ L 705.024 144.956272
       </g>
      </g>
      <g id="text_10">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="149.037444" transform="rotate(-0 59.096 149.037444)">0,75</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="150.280272" transform="rotate(-0 59.096 150.280272)">0,75</text>
      </g>
     </g>
     <g id="ytick_5">
@@ -175,11 +175,11 @@ L 705.024 91.131029
       </g>
      </g>
      <g id="text_11">
-      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="95.212201" transform="rotate(-0 59.096 95.212201)">1</text>
+      <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: end; fill: #1c1d22" x="59.096" y="96.455029" transform="rotate(-0 59.096 96.455029)">1</text>
      </g>
     </g>
     <g id="text_12">
-     <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="30.641625" y="195.552" transform="rotate(-90 30.641625 195.552)">Значение метрики</text>
+     <text style="font-size: 11px; font-family: 'Montserrat'; text-anchor: middle; fill: #1c1d22" x="30.257656" y="195.552" transform="rotate(-90 30.257656 195.552)">Значение метрики</text>
     </g>
    </g>
    <g id="PathCollection_1">
@@ -257,21 +257,21 @@ L 705.024 306.432
 " style="fill: none; stroke: #8e8993; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
-    <path d="M 386.730943 209.863125
-Q 394.952879 174.703546 403.174815 139.543966
+    <path d="M 387.147645 207.565035
+Q 395.159797 173.553465 403.171948 139.541895
 " style="fill: none; stroke: #1c1d22; stroke-width: 0.9; stroke-linecap: round"/>
    </g>
    <g id="text_13">
     <g id="patch_6">
-     <path d="M 324.20648 241.733906
-L 441.347886 241.733906
-L 441.347886 211.807375
-L 324.20648 211.807375
+     <path d="M 324.20648 244.029641
+L 441.04023 244.029641
+L 441.04023 209.511641
+L 324.20648 209.511641
 z
 " style="fill: #ffffff"/>
     </g>
-    <text style="font-size: 11px; font-family: 'Montserrat'; fill: #1c1d22" transform="translate(328.05648 223.819719)">Порог 0,52828</text>
-    <text style="font-size: 11px; font-family: 'Montserrat'; fill: #1c1d22" transform="translate(328.05648 235.749219)">F1 0,809 · TNR 0,784</text>
+    <text style="font-size: 11px; font-family: 'Montserrat'; fill: #1c1d22" transform="translate(328.05648 224.009641)">Порог 0,52828</text>
+    <text style="font-size: 11px; font-family: 'Montserrat'; fill: #1c1d22" transform="translate(328.05648 237.418641)">F1 0,809 · TNR 0,784</text>
    </g>
    <g id="PathCollection_3">
     <defs>
@@ -297,19 +297,19 @@ z
    <g id="legend_1">
     <g id="PathCollection_4">
      <g>
-      <use xlink:href="#m9731de1822" x="80.096" y="72.779975" style="fill: #520978; stroke: #520978"/>
+      <use xlink:href="#m9731de1822" x="80.096" y="72.2106" style="fill: #520978; stroke: #520978"/>
      </g>
     </g>
     <g id="text_14">
-     <text style="font-size: 10px; font-family: 'Montserrat'; text-anchor: start; fill: #1c1d22" x="98.096" y="75.404975" transform="rotate(-0 98.096 75.404975)">F1</text>
+     <text style="font-size: 10px; font-family: 'Montserrat'; text-anchor: start; fill: #1c1d22" x="98.096" y="74.8356" transform="rotate(-0 98.096 74.8356)">F1</text>
     </g>
     <g id="PathCollection_5">
      <g>
-      <use xlink:href="#m5bbff5916d" x="138.035062" y="72.779975" style="fill: #ff0053; stroke: #ff0053"/>
+      <use xlink:href="#m5bbff5916d" x="138.185062" y="72.2106" style="fill: #ff0053; stroke: #ff0053"/>
      </g>
     </g>
     <g id="text_15">
-     <text style="font-size: 10px; font-family: 'Montserrat'; text-anchor: start; fill: #1c1d22" x="156.035062" y="75.404975" transform="rotate(-0 156.035062 75.404975)">TNR — корректные отказы</text>
+     <text style="font-size: 10px; font-family: 'Montserrat'; text-anchor: start; fill: #1c1d22" x="156.185062" y="74.8356" transform="rotate(-0 156.185062 74.8356)">TNR — корректные отказы</text>
     </g>
    </g>
   </g>
