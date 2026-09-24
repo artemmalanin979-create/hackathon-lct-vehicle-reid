@@ -20,6 +20,7 @@ from pathlib import Path
 
 from .core import config
 from .input_checks import require_dataset, require_files
+from .numeric_inputs import nonnegative_float, positive_int
 
 
 def main() -> None:
@@ -30,8 +31,8 @@ def main() -> None:
                     help="CSV галереи: image_id,x,y,w,h")
     ap.add_argument("--url", default=config.QDRANT_URL, help="адрес Qdrant")
     ap.add_argument("--collection", default=config.QDRANT_COLLECTION)
-    ap.add_argument("--batch", type=int, default=32)
-    ap.add_argument("--wait", type=float, default=120.0,
+    ap.add_argument("--batch", type=positive_int, default=32)
+    ap.add_argument("--wait", type=nonnegative_float, default=120.0,
                     help="сколько секунд ждать готовности Qdrant (0 — не ждать)")
     args = ap.parse_args()
 
@@ -42,6 +43,11 @@ def main() -> None:
     from .api.store import GalleryStore
     from .core.model import Embedder
     from .core.preprocess import read_rows
+    from .core.validation import validate_embeddings
+
+    rows = read_rows(args.gallery)
+    if not rows:
+        raise SystemExit("пустой gallery CSV — прогон не имеет смысла")
 
     # Ждать хранилище ДО извлечения векторов: иначе минута работы модели
     # пропадает из-за ещё не поднявшейся БД.
@@ -54,9 +60,9 @@ def main() -> None:
                              "--url или увеличьте --wait")
         time.sleep(1.0)
 
-    rows = read_rows(args.gallery)
     embedder = Embedder()
     vectors = embedder.embed_rows(args.images_dir, rows, args.batch)
+    validate_embeddings(vectors, rows=len(rows))
 
     store.recreate()
     store.upsert_rows(vectors, rows)

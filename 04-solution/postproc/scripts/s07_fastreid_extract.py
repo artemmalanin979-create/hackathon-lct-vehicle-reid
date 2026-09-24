@@ -18,21 +18,21 @@ import sys
 import time
 from pathlib import Path
 
-import numpy as np
-import torch
-from PIL import Image
-
 JOB = Path(__file__).resolve().parent.parent
 REPO = Path(__file__).resolve().parents[3]  # корень репозитория (путь считается от файла, а не зашит)
-sys.path.insert(0, str(JOB / "fastreid_job/fast-reid"))
-from fastreid.config import get_cfg  # noqa: E402
-from fastreid.modeling.meta_arch import build_model  # noqa: E402
+sys.path.insert(0, str(REPO / "04-solution/service"))
+from app.numeric_inputs import nonnegative_int, positive_int
 
 IMAGES = Path(os.environ.get("REID_DATA_DIR", REPO / "data")) / "images"
 SIZE = 256
 
 
 def build():
+    import torch
+    sys.path.insert(0, str(JOB / "fastreid_job/fast-reid"))
+    from fastreid.config import get_cfg
+    from fastreid.modeling.meta_arch import build_model
+
     cfg = get_cfg()
     cfg.merge_from_file(str(JOB / "fastreid_job/fast-reid/configs/VeRi/sbs_R50-ibn.yml"))
     cfg.MODEL.BACKBONE.PRETRAIN = False
@@ -50,6 +50,9 @@ def build():
 
 
 def load_crop(row):
+    import numpy as np
+    from PIL import Image
+
     with Image.open(IMAGES / f"{row['image_id']}.jpg") as im:
         im = im.convert("RGB")
         crop = im.crop((int(row["x"]), int(row["y"]),
@@ -62,11 +65,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--csv", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--batch", type=int, default=8)
-    ap.add_argument("--threads", type=int, default=0)
-    ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--batch", type=positive_int, default=8)
+    ap.add_argument("--threads", type=nonnegative_int, default=0)
+    ap.add_argument("--limit", type=nonnegative_int, default=0)
     ap.add_argument("--timing", type=Path, default=None)
     args = ap.parse_args()
+    import numpy as np
+    import torch
+    from app.core.validation import validate_embeddings
+
     if args.threads:
         torch.set_num_threads(args.threads)
 
@@ -74,9 +81,11 @@ def main():
         rows = list(csv.DictReader(f))
     if args.limit:
         rows = rows[: args.limit]
+    if not rows:
+        raise SystemExit("пустой CSV — прогон не имеет смысла")
     model = build()
 
-    out = np.empty((len(rows), 2048), dtype=np.float32)
+    out = np.full((len(rows), 2048), np.nan, dtype=np.float32)
     t0 = time.perf_counter()
     with torch.no_grad():
         for start in range(0, len(rows), args.batch):
@@ -92,6 +101,7 @@ def main():
 
     out = out.astype(np.float64)
     out /= np.linalg.norm(out, axis=1, keepdims=True)
+    validate_embeddings(out, rows=len(rows), dimensions=2048)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     np.save(args.out, out.astype(np.float32))
     stats = {"csv": str(args.csv), "rows": len(rows), "batch": args.batch,

@@ -25,6 +25,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from ..numeric_inputs import validate_rerank_params
+
 
 def _k_reciprocal(initial_rank: np.ndarray, i: int, k: int) -> np.ndarray:
     """k-взаимные соседи объекта i: прямые соседи, для которых i — тоже сосед."""
@@ -46,8 +48,7 @@ def rerank_distances(query: np.ndarray, gallery: np.ndarray,
         q = q[None]
     if q.shape[1] != g.shape[1] or q.shape[1] == 0:
         raise ValueError("размерности эмбеддингов не совпадают или нулевые")
-    if k1 < 1 or k2 < 1 or not 0.0 <= lam <= 1.0:
-        raise ValueError("нужны k1 >= 1, k2 >= 1 и 0 <= lambda <= 1")
+    validate_rerank_params(k1, k2, lam)
     query_num = len(q)
 
     feats = np.concatenate([q, g])

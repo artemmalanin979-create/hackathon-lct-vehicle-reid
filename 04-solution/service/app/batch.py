@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import platform
 import sys
 import time
@@ -31,6 +32,7 @@ from pathlib import Path
 
 from .core import config
 from .input_checks import fail_inputs, require_dataset, require_files
+from .numeric_inputs import nonnegative_int, positive_int, validate_rerank_params
 
 
 def main() -> None:
@@ -51,10 +53,20 @@ def main() -> None:
                     help="переранжирование кандидатов (по умолчанию включено)")
     ap.add_argument("--no-rerank", dest="rerank", action="store_false",
                     help="прежнее упорядочивание по косинусу, порог на шкале косинуса")
-    ap.add_argument("--batch", type=int, default=32, help="размер батча инференса")
-    ap.add_argument("--threads", type=int, default=0,
+    ap.add_argument("--batch", type=positive_int, default=32, help="размер батча инференса (> 0)")
+    ap.add_argument("--threads", type=nonnegative_int, default=0,
                     help="intra-op потоки onnxruntime (0 = по умолчанию)")
     args = ap.parse_args()
+    if args.threshold is None:
+        args.threshold = (config.DEFAULT_THRESHOLD_RERANK if args.rerank
+                          else config.DEFAULT_THRESHOLD)
+    if not math.isfinite(args.threshold):
+        ap.error("threshold должен быть конечным числом")
+    if args.rerank:
+        try:
+            validate_rerank_params(config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA)
+        except ValueError as exc:
+            ap.error(str(exc))
     require_dataset([args.query, args.gallery], args.images_dir)
     require_files([config.MODEL_PATH, config.MODEL2_PATH, config.WHITENING_PATH],
                   hint="Восстановите веса из Git; см. service/model/fetch_model.sh.")
@@ -65,10 +77,8 @@ def main() -> None:
     from .core.ranking import cosine_scores, validate_scores
     from .core.rerank import rerank_scores
     from .core.submission import save_embeddings, write_candidates, write_submission
+    from .core.validation import validate_embeddings
 
-    if args.threshold is None:
-        args.threshold = (config.DEFAULT_THRESHOLD_RERANK if args.rerank
-                          else config.DEFAULT_THRESHOLD)
     try:
         validate_scores([], args.threshold)
     except ValueError as exc:
@@ -96,6 +106,10 @@ def main() -> None:
         print(f"Ошибка входного кадра после проверки: {exc}", file=sys.stderr)
         raise SystemExit(2) from None
     t_embed = time.perf_counter() - t0
+
+    # Validate both complete matrices before creating/touching any output file.
+    validate_embeddings(q_emb, rows=len(q_rows), name="query")
+    validate_embeddings(g_emb, rows=len(g_rows), name="gallery")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     # Сначала векторы: они не зависят от способа упорядочивания кандидатов.

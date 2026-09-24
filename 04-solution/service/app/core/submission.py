@@ -12,12 +12,15 @@ from pathlib import Path
 import numpy as np
 
 from .ranking import accepted_candidates, ranked_indices, validate_scores
+from .validation import validate_embeddings
 
 TOP_K_SUBMISSION = 10  # столько кандидатов принимает submission.csv
 
 
 def save_embeddings(path: Path, query: np.ndarray, gallery: np.ndarray) -> np.ndarray:
     """embeddings.npy: сначала все query по порядку файла, затем вся галерея."""
+    validate_embeddings(query, name="query")
+    validate_embeddings(gallery, name="gallery")
     emb = np.concatenate([query, gallery]).astype(np.float32)
     np.save(path, emb)
     return emb

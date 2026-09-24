@@ -13,6 +13,7 @@ y = l2n((x - m) @ P.T) в float32 -> финальная L2-нормировка 
 from __future__ import annotations
 
 import hashlib
+from numbers import Integral
 from pathlib import Path
 
 import numpy as np
@@ -21,6 +22,7 @@ import onnxruntime as ort
 from .config import (EMBEDDING_DIM, MODEL2_PATH, MODEL2_SHA256, MODEL_PATH,
                      MODEL_SHA256, WHITENING_PATH, WHITENING_SHA256)
 from .preprocess import BBoxRow, load_crop
+from .validation import validate_embeddings
 
 
 def model_file_sha256(path: Path = MODEL_PATH) -> str:
@@ -63,6 +65,8 @@ class Embedder:
     def __init__(self, model_path: Path = MODEL_PATH, model2_path: Path = MODEL2_PATH,
                  whitening_path: Path = WHITENING_PATH, threads: int = 0,
                  verify_sha256: bool = True):
+        if isinstance(threads, bool) or not isinstance(threads, Integral) or threads < 0:
+            raise ValueError("threads должен быть целым числом >= 0")
         if verify_sha256:
             # Проверяем ВСЕ три файла: любая подмена/потеря весов или матрицы
             # валит запуск здесь, а не первым запросом.
@@ -104,11 +108,18 @@ class Embedder:
         В памяти живёт один батч кропов и выходная матрица N x 512 — тестовая
         выборка любого разумного размера не приводит к OOM.
         """
-        out = np.empty((len(rows), EMBEDDING_DIM), dtype=np.float32)
+        if (isinstance(batch_size, bool) or not isinstance(batch_size, Integral)
+                or batch_size <= 0):
+            raise ValueError("batch_size должен быть целым числом > 0")
+        # A skipped/unfilled batch must never look like valid model output.
+        out = np.full((len(rows), EMBEDDING_DIM), np.nan, dtype=np.float32)
         for start in range(0, len(rows), batch_size):
             chunk = rows[start : start + batch_size]
             tensors = np.stack([load_crop(images_dir, r) for r in chunk])
-            out[start : start + len(chunk)] = self.embed_tensors(tensors)
+            vectors = self.embed_tensors(tensors)
+            validate_embeddings(vectors, rows=len(chunk))
+            out[start : start + len(chunk)] = vectors
+        validate_embeddings(out, rows=len(rows))
         return out
 
     def embed_one(self, tensor: np.ndarray) -> np.ndarray:

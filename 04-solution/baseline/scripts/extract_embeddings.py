@@ -31,6 +31,8 @@ if __package__:
 else:
     from inputs import require_dataset, require_files
 
+from app.numeric_inputs import nonnegative_int, positive_int, unit_interval
+
 INPUT_SIZE = 208
 
 
@@ -94,25 +96,28 @@ def main():
     ap.add_argument("--out", type=Path, required=True, help="выход .npy float32 N x 512")
     ap.add_argument("--ids-out", type=Path, default=None,
                     help="текстовый файл image_id по строкам выхода (для сверки порядка)")
-    ap.add_argument("--batch", type=int, default=16)
-    ap.add_argument("--threads", type=int, default=0, help="intra-op потоки ORT (0=default)")
-    ap.add_argument("--mask-bottom", type=float, default=0.0)
+    ap.add_argument("--batch", type=positive_int, default=16)
+    ap.add_argument("--threads", type=nonnegative_int, default=0, help="intra-op потоки ORT (0=default)")
+    ap.add_argument("--mask-bottom", type=unit_interval, default=0.0)
     ap.add_argument("--grayscale", action="store_true")
     ap.add_argument("--timing", type=Path, default=None, help="куда писать JSON замера")
-    ap.add_argument("--limit", type=int, default=0, help="обработать только первые N строк")
+    ap.add_argument("--limit", type=nonnegative_int, default=0, help="обработать только первые N строк")
     args = ap.parse_args()
     require_dataset([args.csv], args.images_dir, suffixes=(".jpg",), limit=args.limit)
     require_files([args.model], hint="Укажите --model; веса — service/model/fetch_model.sh.")
 
     import numpy as np
+    from app.core.validation import validate_embeddings
 
     rows = read_rows(args.csv)
     if args.limit:
         rows = rows[: args.limit]
+    if not rows:
+        raise SystemExit("пустой CSV — прогон не имеет смысла")
     session = make_session(args.model, args.threads)
     input_name = session.get_inputs()[0].name
 
-    out = np.empty((len(rows), 512), dtype=np.float32)
+    out = np.full((len(rows), 512), np.nan, dtype=np.float32)
     t_start = time.perf_counter()
     for start in range(0, len(rows), args.batch):
         chunk = rows[start : start + args.batch]
@@ -124,6 +129,7 @@ def main():
     elapsed = time.perf_counter() - t_start
 
     out = l2norm(out.astype(np.float64)).astype(np.float32)
+    validate_embeddings(out, rows=len(rows))
     args.out.parent.mkdir(parents=True, exist_ok=True)
     np.save(args.out, out)
     if args.ids_out:
