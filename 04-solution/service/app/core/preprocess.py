@@ -51,8 +51,9 @@ def read_rows(csv_path: Path) -> list[BBoxRow]:
 def resolve_image_path(images_dir: Path, image_id: str) -> Path:
     """Файл кадра по image_id.
 
-    Имя с расширением означает только этот файл, без подстановки. Для ID без
-    расширения сохраняется порядок .jpg, .jpeg, .png, затем точное имя.
+    Имя с известным расширением изображения означает только этот файл, без
+    подстановки. Прочие ID (включая точки внутри, например frame.v1) ищутся
+    в порядке .jpg, .jpeg, .png, затем точное имя.
     """
     from ..input_checks import image_candidates
 
