@@ -7,6 +7,7 @@ read by this trainer.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import importlib.util
 import json
@@ -47,6 +48,57 @@ def checked_hash(path: str | Path, expected: str) -> str:
 def require_vram_below(peak_bytes: int, limit_gib: float = 3.6) -> None:
     if peak_bytes >= limit_gib * 1024**3:
         raise RuntimeError(f"peak reserved VRAM {peak_bytes} reached {limit_gib} GiB limit")
+
+
+def require_rss_below(peak_bytes: int, limit_mib: int) -> None:
+    if peak_bytes >= int(limit_mib) * 1024**2:
+        raise RuntimeError(f"peak RSS {peak_bytes} reached {limit_mib} MiB limit")
+
+
+def peak_rss_bytes() -> int:
+    """OS peak working set, including native Torch allocations (not tracemalloc)."""
+    if os.name == "nt":
+        class ProcessMemoryCounters(ctypes.Structure):
+            _fields_ = [("cb", ctypes.c_ulong), ("PageFaultCount", ctypes.c_ulong),
+                        ("PeakWorkingSetSize", ctypes.c_size_t),
+                        ("WorkingSetSize", ctypes.c_size_t),
+                        ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                        ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                        ("PagefileUsage", ctypes.c_size_t),
+                        ("PeakPagefileUsage", ctypes.c_size_t)]
+        counters = ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(counters)
+        ok = ctypes.windll.psapi.GetProcessMemoryInfo(
+            ctypes.windll.kernel32.GetCurrentProcess(), ctypes.byref(counters), counters.cb)
+        if not ok:
+            raise OSError("GetProcessMemoryInfo failed")
+        return int(counters.PeakWorkingSetSize)
+    with Path("/proc/self/status").open(encoding="ascii") as stream:
+        for line in stream:
+            if line.startswith("VmHWM:"):
+                return int(line.split()[1]) * 1024
+    raise OSError("/proc/self/status lacks VmHWM")
+
+
+def select_protocol_device(requested: str | None, cuda_available: bool | None = None) -> torch.device:
+    """Never silently switch the hardware fixed before training."""
+    if requested == "cpu":
+        return torch.device("cpu")
+    if requested == "cuda":
+        available = torch.cuda.is_available() if cuda_available is None else cuda_available
+        if not available:
+            raise RuntimeError("protocol requires CUDA, but CUDA is unavailable")
+        return torch.device("cuda")
+    raise ValueError("protocol training.device must be exactly 'cpu' or 'cuda'")
+
+
+def require_protocol_memory(stats: dict, device: torch.device, cfg: dict) -> None:
+    if device.type == "cuda":
+        require_vram_below(stats["peak_vram_bytes"])
+    else:
+        require_rss_below(stats["peak_rss_bytes"], cfg["peak_rss_limit_mib"])
 
 
 def load_evaluator(path: str | Path, expected_sha256: str, scope_sha256: str):
@@ -135,8 +187,9 @@ def train_epoch(model: CrossViewCore, loader: DataLoader, optimizer: torch.optim
         raise ValueError("zero training batches")
     return {key: value / batches for key, value in sums.items()} | {
         "batches": batches, "seconds": time.monotonic() - start,
-        "peak_vram_bytes": torch.cuda.max_memory_reserved(device) if device.type == "cuda" else 0,
-        "peak_tensor_bytes": torch.cuda.max_memory_allocated(device) if device.type == "cuda" else 0,
+        "peak_rss_bytes": peak_rss_bytes(),
+        "peak_vram_bytes": torch.cuda.max_memory_reserved(device) if device.type == "cuda" else None,
+        "peak_tensor_bytes": torch.cuda.max_memory_allocated(device) if device.type == "cuda" else None,
     }
 
 
@@ -205,7 +258,7 @@ def smoke_one_batch(model: CrossViewCore, loader: DataLoader, cfg: dict,
                  for name, parameter in named.items()}
     if not all(gradients.values()):
         raise RuntimeError(f"empty gradient in smoke: {gradients}")
-    require_vram_below(stats["peak_vram_bytes"])
+    require_protocol_memory(stats, device, cfg)
     return {"status": "PASS", "stats": stats, "gradients": gradients,
             "distinct_id_count": int(torch.unique(labels).numel()),
             "cross_camera_anchor_count": cross_camera_anchors,
@@ -278,9 +331,9 @@ def probe_stage2_batch(model: CrossViewCore, loader: DataLoader,
     if device.type == "cuda":
         torch.cuda.synchronize(device)
     elapsed = time.monotonic() - start
-    peak = torch.cuda.max_memory_reserved(device) if device.type == "cuda" else 0
+    peak = torch.cuda.max_memory_reserved(device) if device.type == "cuda" else None
     model.zero_grad(set_to_none=True)
-    return {"seconds": elapsed, "peak_vram_bytes": peak}
+    return {"seconds": elapsed, "peak_vram_bytes": peak, "peak_rss_bytes": peak_rss_bytes()}
 
 
 def projected_runtime(elapsed: float, stage1_epoch_seconds: float,
@@ -334,6 +387,12 @@ def run(args: argparse.Namespace) -> dict:
             not cfg["sampler"].startswith("8 vehicle IDs x 4 frames") or
             cfg["stage1_epochs"] != 2 or cfg["stage2_epochs"] != 12):
         raise ValueError("trainer supports only frozen P8K4 batch32 protocol")
+    device = select_protocol_device(cfg.get("device"))
+    if device.type == "cpu":
+        threads = int(cfg["threads"])
+        if threads < 1 or int(cfg["peak_rss_limit_mib"]) < 1:
+            raise ValueError("CPU threads and peak RSS limit must be positive")
+        torch.set_num_threads(threads)
     hashes = {"protocol": sha256(protocol_path), "evaluator": sha256(args.evaluator),
               "scope_metrics": sha256(Path(args.evaluator).with_name("scope_metrics.py")),
               "core_py": sha256(Path(__file__).with_name("core.py")),
@@ -360,13 +419,10 @@ def run(args: argparse.Namespace) -> dict:
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    if torch.cuda.is_available():
+    if device.type == "cuda":
         torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
-    if not torch.cuda.is_available():
-        raise RuntimeError("full image training requires native Windows CUDA; CPU synthetic smoke is available")
-    device = torch.device("cuda")
     model = CrossViewCore(len(data.label_to_vehicle)).to(device)
     model.load_imagenet(args.imagenet, hashes["imagenet"])
     sampler = CameraAwarePKSampler(data.train_vehicle_ids, data.train_camera_ids,
@@ -404,7 +460,7 @@ def run(args: argparse.Namespace) -> dict:
             record = {"stage": stage, "stage_epoch": local_epoch + 1,
                       "global_epoch": epoch_index + 1, **stats}
             try:
-                require_vram_below(stats["peak_vram_bytes"])
+                require_protocol_memory(stats, device, cfg)
             except RuntimeError as exc:
                 record.update(status="FAIL", reason=str(exc))
                 with (out / "epochs.jsonl").open("a", encoding="utf-8") as stream:
@@ -429,14 +485,17 @@ def run(args: argparse.Namespace) -> dict:
             reasons = []
             if rows[1]["loss"] >= rows[0]["loss"]:
                 reasons.append("stage-1 loss did not decrease")
-            if any(row["peak_vram_bytes"] >= 3.6 * 1024**3 for row in rows[:2]):
-                reasons.append("stage-1 VRAM reached 3.6 GiB")
+            for row in rows[:2]:
+                try:
+                    require_protocol_memory(row, device, cfg)
+                except RuntimeError as exc:
+                    reasons.append(str(exc))
             probe = None
             projected_seconds = None
             if not reasons:
                 probe = probe_stage2_batch(model, loader, device)
                 try:
-                    require_vram_below(probe["peak_vram_bytes"])
+                    require_protocol_memory(probe, device, cfg)
                 except RuntimeError as exc:
                     reasons.append(str(exc))
             if not reasons:
@@ -447,7 +506,7 @@ def run(args: argparse.Namespace) -> dict:
                 if projected_seconds > wall_budget:
                     reasons.append("projected 14-epoch runtime exceeds frozen wall/deadline budget")
             pilot = {"status": "FAIL" if reasons else "PASS", "reasons": reasons,
-                     "stage1": rows[:2], "stage2_probe": probe,
+                     "device": device.type, "stage1": rows[:2], "stage2_probe": probe,
                      "projected_total_seconds": projected_seconds,
                      "wall_budget_seconds": wall_budget,
                      "projection_safety_factor": 1.25}
@@ -486,7 +545,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--synthetic-smoke", action="store_true")
     parser.add_argument("--smoke-only", action="store_true",
-                        help="one real CUDA P8K4 fit batch, new output directory, no epochs")
+                        help="one real protocol-device P8K4 fit batch, new output directory, no epochs")
     parser.add_argument("--protocol", type=Path, default=Path(__file__).with_name("protocol.json"))
     parser.add_argument("--evaluator", type=Path, required=True,
                         help="Archived reid_metrics.py with sibling scope_metrics.py")

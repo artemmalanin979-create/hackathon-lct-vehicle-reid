@@ -19,8 +19,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from core import CrossViewCore  # noqa: E402
 from dataset import CameraAwarePKSampler, load_combined  # noqa: E402
-from train import (cross_camera_batch_hard, make_checkpoint, projected_runtime,
-                   require_vram_below, save_best_checkpoint, set_training_stage, smoke_one_batch,
+from train import (cross_camera_batch_hard, make_checkpoint, peak_rss_bytes, projected_runtime,
+                   require_rss_below, require_vram_below, select_protocol_device,
+                   save_best_checkpoint, set_training_stage, smoke_one_batch,
                    train_epoch)  # noqa: E402
 
 
@@ -152,6 +153,24 @@ class DataBehaviour(unittest.TestCase):
 
 
 class LossBehaviour(unittest.TestCase):
+    def test_device_selection_is_explicit_and_never_falls_back(self):
+        self.assertEqual(select_protocol_device("cpu", cuda_available=True).type, "cpu")
+        self.assertEqual(select_protocol_device("cuda", cuda_available=True).type, "cuda")
+        with self.assertRaisesRegex(RuntimeError, "CUDA"):
+            select_protocol_device("cuda", cuda_available=False)
+        for absent_or_unknown in (None, "auto", "gpu"):
+            with self.subTest(device=absent_or_unknown), self.assertRaisesRegex(ValueError, "device"):
+                select_protocol_device(absent_or_unknown, cuda_available=True)
+
+    def test_cpu_rss_limit_rejects_exact_boundary(self):
+        mib = 1024**2
+        require_rss_below(1536 * mib - 1, limit_mib=1536)
+        with self.assertRaisesRegex(RuntimeError, "RSS"):
+            require_rss_below(1536 * mib, limit_mib=1536)
+
+    def test_native_peak_rss_is_observed(self):
+        self.assertGreater(peak_rss_bytes(), 0)
+
     def test_cross_camera_batch_hard_penalizes_bad_order_and_backpropagates(self):
         z = torch.tensor([[1.0, 0.0], [0.0, 1.0], [0.8, 0.6], [0.8, -0.6]], requires_grad=True)
         ids = torch.tensor([1, 1, 2, 2])
@@ -185,12 +204,14 @@ class LossBehaviour(unittest.TestCase):
         images = torch.randint(0, 256, (32, 3, 64, 64)).float()
         rows = [(images[i], i // 4, i % 2, i) for i in range(32)]
         cfg = {"stage2_backbone_lr": 2e-4, "stage2_head_lr": 5e-4,
-               "weight_decay": 1e-4}
+               "weight_decay": 1e-4, "peak_rss_limit_mib": 4096}
         result = smoke_one_batch(model, DataLoader(rows, batch_size=32), cfg,
                                  torch.device("cpu"), time.monotonic() + 30)
         self.assertEqual(result["status"], "PASS")
         self.assertEqual(result["cross_camera_anchor_count"], 32)
         self.assertTrue(all(result["gradients"].values()))
+        self.assertIsNone(result["stats"]["peak_vram_bytes"])
+        self.assertGreater(result["stats"]["peak_rss_bytes"], 0)
 
     def test_checkpoint_contains_required_source_hashes(self):
         hashes = {key: key * 3 for key in ("protocol", "imagenet", "core_py", "dataset_py", "train_py")}
