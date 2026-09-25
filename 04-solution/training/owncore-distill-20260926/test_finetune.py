@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import copy
 import json
+import random
 from datetime import datetime, timezone
 import sys
 import tempfile
@@ -27,6 +28,8 @@ from finetune import (  # noqa: E402
     load_warm_start,
     make_distilled_checkpoint,
     projected_total_seconds,
+    conservative_warmed_seconds,
+    preserve_training_rng,
     verify_teacher_manifest,
     _check_source_manifest,
     require_time_remaining,
@@ -206,6 +209,27 @@ class LossTests(unittest.TestCase):
 
 
 class TrainingBoundaryTests(unittest.TestCase):
+    def test_pilot_uses_max_warmed_step_not_one_time_cold_step(self):
+        self.assertEqual(conservative_warmed_seconds([0.29, 0.31, 0.28]), 0.31)
+        with self.assertRaises(ValueError):
+            conservative_warmed_seconds([])
+
+    def test_disposable_smoke_cannot_shift_main_training_rng(self):
+        random.seed(301)
+        np.random.seed(301)
+        torch.manual_seed(301)
+        expected = (random.random(), float(np.random.rand()), float(torch.rand(())))
+        random.seed(301)
+        np.random.seed(301)
+        torch.manual_seed(301)
+        with preserve_training_rng():
+            for _ in range(12):
+                random.random()
+                np.random.rand()
+                torch.rand(())
+        actual = (random.random(), float(np.random.rand()), float(torch.rand(())))
+        self.assertEqual(actual, expected)
+
     def test_combined_source_manifest_must_use_same_own_teacher(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "training.json"

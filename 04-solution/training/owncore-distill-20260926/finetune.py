@@ -8,6 +8,7 @@ checkpoint; this trainer has no validation-image or validation-label input.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import gc
 import hashlib
 import json
@@ -220,6 +221,26 @@ def projected_total_seconds(*, elapsed: float, first_epoch_seconds: float,
     return elapsed + remaining_epochs * steps_per_epoch * seconds_per_batch * safety_factor
 
 
+def conservative_warmed_seconds(timings: list[float]) -> float:
+    if not timings or not all(math.isfinite(x) and x > 0 for x in timings):
+        raise ValueError("warmed timing probe must contain positive finite measurements")
+    return max(timings)
+
+
+@contextmanager
+def preserve_training_rng():
+    """Disposable probes must not move any main-run random stream."""
+    python_state = random.getstate()
+    numpy_state = np.random.get_state()
+    torch_state = torch.get_rng_state()
+    try:
+        yield
+    finally:
+        random.setstate(python_state)
+        np.random.set_state(numpy_state)
+        torch.set_rng_state(torch_state)
+
+
 def require_time_remaining(wall_deadline: float, stop_at: datetime, *,
                            now_monotonic: float | None = None,
                            now_utc: datetime | None = None) -> None:
@@ -333,13 +354,15 @@ def _one_step(model: CrossViewCore, batch: tuple, optimizer: torch.optim.Optimiz
 
 
 def smoke_one_real_batch(model: CrossViewCore, loader: DataLoader, cfg: dict,
-                         device: torch.device) -> dict:
+                         device: torch.device, wall_deadline: float,
+                         stop_at: datetime) -> dict:
     """Mutate only a disposable warm-start instance; full run reloads source."""
     model.train()
     set_training_stage(model, 2)
     optimizer = _optimizer(model, cfg, 2)
     batch = None
     for candidate in loader:
+        require_time_remaining(wall_deadline, stop_at)
         if (len(candidate[0]) == 32 and int(torch.unique(candidate[2]).numel()) == 8 and
                 bool((candidate[1] >= 0).any())):
             batch = candidate
@@ -362,9 +385,26 @@ def smoke_one_real_batch(model: CrossViewCore, loader: DataLoader, cfg: dict,
                for key, value in watched.items()}
     if not all(gradients.values()) or not all(updates.values()):
         raise RuntimeError(f"smoke missing gradients/updates: {gradients}, {updates}")
+    # The first full backward/optimizer step includes one-time CPU kernel and
+    # allocator setup. It is evidence for correctness, not a steady epoch rate.
+    # Continue on the *same disposable batch/model*; none of these weights or
+    # RNG draws can enter the actual training run.
+    warmup_seconds, timed_seconds = [], []
+    for repetition in range(5):
+        require_time_remaining(wall_deadline, stop_at)
+        started = time.monotonic()
+        _one_step(model, batch, optimizer, cfg, device)
+        duration = time.monotonic() - started
+        (warmup_seconds if repetition < 2 else timed_seconds).append(duration)
+    require_time_remaining(wall_deadline, stop_at)
+    timing_probe = {"batch_source": "same real P8K4 fit batch on disposable model",
+                    "warmup_seconds": warmup_seconds, "timed_seconds": timed_seconds,
+                    "conservative_stage2_batch_seconds": conservative_warmed_seconds(timed_seconds)}
+    stats["peak_rss_bytes"] = peak_rss_bytes()
     require_rss_below(stats["peak_rss_bytes"], int(cfg["peak_rss_limit_mib"]))
     return {"status": "PASS", "stats": stats, "gradients": gradients,
-            "updates": updates, "batch_rows": [int(x) for x in batch[4]]}
+            "updates": updates, "timing_probe": timing_probe,
+            "batch_rows": [int(x) for x in batch[4]]}
 
 
 def _train_epoch(model: CrossViewCore, loader: DataLoader,
@@ -493,15 +533,18 @@ def run(args: argparse.Namespace) -> dict:
     torch.manual_seed(seed)
     try:
         require_time_remaining(wall_deadline, stop_at)
-        disposable = load_warm_start(args.source_checkpoint,
-                                     args.source_checkpoint_sha256, len(own_fit_ids)).to(device)
-        smoke = smoke_one_real_batch(disposable, loader, cfg, device)
+        with preserve_training_rng():
+            disposable = load_warm_start(args.source_checkpoint,
+                                         args.source_checkpoint_sha256, len(own_fit_ids)).to(device)
+            smoke = smoke_one_real_batch(disposable, loader, cfg, device,
+                                         wall_deadline, stop_at)
+            del disposable
+            gc.collect()
+        smoke["rng_state_restored_for_training"] = True
         smoke.update(protocol_sha256=args.protocol_sha256,
                      source_checkpoint_sha256=args.source_checkpoint_sha256,
                      teacher_targets_sha256=args.teacher_targets_sha256)
         _atomic_json(args.out / "smoke.json", smoke)
-        del disposable
-        gc.collect()
         require_time_remaining(wall_deadline, stop_at)
         if args.smoke_only:
             return smoke
@@ -553,14 +596,15 @@ def run(args: argparse.Namespace) -> dict:
                     projected = projected_total_seconds(
                         elapsed=time.monotonic() - run_start,
                         first_epoch_seconds=stats["seconds"],
-                        stage2_batch_seconds=smoke["stats"]["seconds"],
+                        stage2_batch_seconds=smoke["timing_probe"]["conservative_stage2_batch_seconds"],
                         steps_per_epoch=int(cfg["steps_per_epoch"]),
                         remaining_epochs=remaining)
                     pilot = {"status": "PASS" if projected <= wall_budget else "FAIL",
                              "projected_total_seconds": projected,
                              "wall_budget_seconds": wall_budget,
                              "peak_rss_bytes": stats["peak_rss_bytes"],
-                             "stage2_smoke_batch_seconds": smoke["stats"]["seconds"],
+                             "stage2_cold_smoke_seconds": smoke["stats"]["seconds"],
+                             "stage2_warmed_probe": smoke["timing_probe"],
                              "first_epoch_seconds": stats["seconds"],
                              "remaining_epochs": remaining, "projection_safety_factor": 1.25}
                     _atomic_json(args.out / "pilot.json", pilot)
