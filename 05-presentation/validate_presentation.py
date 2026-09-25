@@ -3,6 +3,7 @@ from io import BytesIO
 from pathlib import Path
 from zipfile import ZipFile
 import hashlib
+import os
 import json
 
 from lxml import etree
@@ -14,8 +15,12 @@ import subprocess
 import tempfile
 
 
-def render_check(preview):
-    """Render the technical copy and confirm no editable text is lost or clipped."""
+def render_check(preview, output_dir=None, sensitive_pages=()):
+    """Render every page and detect missing/clipped editable text.
+
+    Full output stays in ignored checks. Never include participant text in a log.
+    Use a fresh process profile; an open desktop document is never reused.
+    """
     deck = Presentation(preview)
     blocks = []
     for page_number, slide in enumerate(deck.slides, 1):
@@ -29,7 +34,7 @@ def render_check(preview):
                     if text:
                         blocks.append((page_number, text))
     with tempfile.TemporaryDirectory() as tmp:
-        subprocess.run(['libreoffice', '--headless', '-env:UserInstallation=file://' + tmp + '/profile',
+        subprocess.run([os.environ.get('LCT_LIBREOFFICE', '/usr/bin/libreoffice'), '--headless', '-env:UserInstallation=file://' + tmp + '/profile',
                         '--convert-to', 'pdf', '--outdir', tmp, str(preview)],
                        check=True, capture_output=True, timeout=600)
         pdf = Path(tmp) / (preview.stem + '.pdf')
@@ -40,9 +45,10 @@ def render_check(preview):
             pages.pop()  # pdftotext ends the last page with a trailing form feed
         boxes = subprocess.run(['pdftotext', '-bbox', str(pdf), '-'],
                                check=True, capture_output=True, text=True).stdout
-        shutil.copy(pdf, preview.with_suffix('.pdf'))
+        pdf_output = (output_dir or preview.parent) / (preview.stem + '.pdf')
+        shutil.copy(pdf, pdf_output)
     flat_pages = [re.sub(r'\s+', '', page) for page in pages]
-    issues = [dict(kind='text_missing_from_render', page=n, text=b)
+    issues = [dict(kind='text_missing_from_render', page=n, text='[participant field]' if n in sensitive_pages else b)
               for n, b in blocks if n > len(flat_pages) or re.sub(r'\s+', '', b) not in flat_pages[n - 1]]
     # Any rendered word reaching outside the page box would be cut off on screen.
     tree = etree.fromstring(boxes.encode())
@@ -54,11 +60,12 @@ def render_check(preview):
             words += 1
             x0, y0, x1, y1 = (float(w.get(k)) for k in ('xMin', 'yMin', 'xMax', 'yMax'))
             if x0 < -.5 or y0 < -.5 or x1 > pw + .5 or y1 > ph + .5:
-                issues.append(dict(kind='word_outside_page', page=n, text=w.text,
+                issues.append(dict(kind='word_outside_page', page=n, text='[participant field]' if n in sensitive_pages else w.text,
                                    box=[round(v, 1) for v in (x0, y0, x1, y1)]))
     return {'rendered_pages': len(pages), 'text_blocks_checked': len(blocks),
             'rendered_words_checked': words, 'issues': issues,
-            'pdf': str(preview.with_suffix('.pdf'))}
+            'pdf': str(pdf_output),
+            'pdf_sha256': hashlib.sha256(pdf_output.read_bytes()).hexdigest()}
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
@@ -159,6 +166,15 @@ render = render_check(CHECKS / 'content_preview.pptx')
 (CHECKS / 'render_check.json').write_text(json.dumps(render, ensure_ascii=False, indent=2))
 assert render['rendered_pages'] == 11 and not render['issues']
 
+# The full deliverable, not only the technical preview, must be usable as a PDF.
+full_render = render_check(OUTPUT, output_dir=CHECKS, sensitive_pages=(3,))
+(CHECKS / 'full_render_check.json').write_text(json.dumps(full_render, ensure_ascii=False, indent=2))
+assert full_render['rendered_pages'] == len(prs.slides) and not full_render['issues']
+# pdfinfo is an independent page-count check, required in the submission harness.
+info = subprocess.run(['pdfinfo', full_render['pdf']], check=True, capture_output=True, text=True).stdout
+page_match = re.search(r'^Pages:\s+(\d+)\s*$', info, re.M)
+assert page_match and int(page_match.group(1)) == len(prs.slides)
+
 summary = {
     'slide_count': len(prs.slides),
     'text_present_on_each_slide': True,
@@ -179,6 +195,10 @@ summary = {
     'text_layout_estimates_checked': len(fit),
     'text_layout_estimate_failures': 0,
     'rendered_technical_pages': render['rendered_pages'],
+    'rendered_full_pages': full_render['rendered_pages'],
+    'rendered_full_text_blocks_matched': full_render['text_blocks_checked'],
+    'full_pdf_sha256': full_render['pdf_sha256'],
+    'full_pdf_path': full_render['pdf'],
     'rendered_native_text_blocks_matched': render['text_blocks_checked'],
     'bytes': OUTPUT.stat().st_size,
     'sha256': hashlib.sha256(OUTPUT.read_bytes()).hexdigest(),
