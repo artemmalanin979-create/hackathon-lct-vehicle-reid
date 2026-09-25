@@ -135,7 +135,7 @@ def verify_reported_metrics(report: dict, fresh: dict, attempt: str) -> None:
     for variant in ("baseline", *VARIANTS):
         for mode in MODES:
             old, new = reported[variant][mode], fresh[variant][mode]
-            for key in ("mAP", "Rank-1", "Rank-5", "mINP"):
+            for key in ("mAP", "Rank-1", "Rank-5", "mINP", "F1", "TNR", "threshold"):
                 if not math.isclose(float(old[key]), float(new[key]), rel_tol=0, abs_tol=1e-10):
                     raise ValueError(f"{attempt}/{variant}/{mode}: {key} disagrees with fresh vectors")
             if variant == "baseline":

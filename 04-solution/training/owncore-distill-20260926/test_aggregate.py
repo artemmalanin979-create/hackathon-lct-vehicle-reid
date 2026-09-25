@@ -14,10 +14,12 @@ def report(raw_p: list[float], deltas: list[float]) -> dict:
     for variant in ("core", "fusion"):
         for mode in ("cosine", "KR"):
             metrics["baseline"][mode] = {"mAP": EXPECTED_BASELINE[mode],
-                                         "Rank-1": 0.6, "Rank-5": 0.8, "mINP": 0.4}
+                                         "Rank-1": 0.6, "Rank-5": 0.8, "mINP": 0.4,
+                                         "F1": 0.75, "TNR": 0.5, "threshold": 0.4}
             metrics[variant][mode] = {
                 "mAP": EXPECTED_BASELINE[mode] + deltas[index],
                 "Rank-1": 0.6, "Rank-5": 0.8, "mINP": 0.4,
+                "F1": 0.7, "TNR": 0.6, "threshold": 0.3,
                 "paired_vs_baseline": {"delta_mAP": deltas[index],
                                        "ci95": [deltas[index] - 0.02, deltas[index] + 0.02],
                                        "p_two_sided": raw_p[index], "repeats": 4000,
@@ -85,6 +87,16 @@ class AggregateContracts(unittest.TestCase):
         reported["metrics"]["core"]["KR"]["paired_vs_baseline"]["p_two_sided"] = 0.0005
         with self.assertRaisesRegex(ValueError, "fresh bootstrap"):
             verify_reported_metrics(reported, fresh["metrics"], "own")
+
+    def test_refusal_and_threshold_must_match_fresh_vectors(self):
+        fresh = report([0.04, 0.08, 0.2, 0.4], [0.01] * 4)
+        verify_reported_metrics(copy.deepcopy(fresh), fresh["metrics"], "own")
+        for key, false_value in (("F1", 1.0), ("TNR", 1.0), ("threshold", 0.9)):
+            with self.subTest(key=key):
+                reported = copy.deepcopy(fresh)
+                reported["metrics"]["core"]["KR"][key] = false_value
+                with self.assertRaisesRegex(ValueError, key):
+                    verify_reported_metrics(reported, fresh["metrics"], "own")
 
     def test_attempt_roles_are_bound_to_two_frozen_protocol_files(self):
         folder = Path(__file__).resolve().parent
