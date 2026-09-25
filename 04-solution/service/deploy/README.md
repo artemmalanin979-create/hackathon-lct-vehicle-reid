@@ -22,7 +22,7 @@
 
 ## Локальный пакет и репетиция
 
-`deploy/prepare_release.py` собирает **только локально** полный каталог `release/`: проверенные test images/CSV, canonical artifacts, технический PDF без контактов, актуальный `SOLUTION.pdf`, source snapshot, сохранённый Docker-образ и офлайн-образ Qdrant. Требует чистый Git SHA и image label с тем же SHA. `deploy/verify_release.py` сверяет каждый файл с `release.json`; проверка SHA данных дополнительно перед упаковкой. Локальный `compose.yaml`: Qdrant без опубликованного порта, API только `127.0.0.1:18071`, отдельный разовый seed, healthcheck модели и 750 точек. Seed сверяет SHA manifest/CSV/model, размерность, cosine schema, все 750 payload/vector; существующую коллекцию не перезаписывает. Для Fedora SELinux использовать overlay `selinux.yaml`; исходные каталоги не relabel. Существующий основной `docker-compose.yml` и произвольный batch остаются совместимыми.
+`deploy/prepare_release.py` собирает **только локально** полный каталог `release/`: проверенные test images/CSV, canonical artifacts, технический PDF без контактов, актуальный `SOLUTION.pdf`, source snapshot, сохранённый Docker-образ и офлайн-образ Qdrant. До создания каталога он проверяет SHA результатов, входных CSV и трёх моделей, свежесть PDF документации, 11 страниц публичных слайдов и отсутствие в них локальных контактных номеров. Требует чистый Git SHA и image label с тем же SHA. `deploy/verify_release.py` сверяет каждый файл с `release.json` и отклоняет лишние файлы. Локальный `compose.yaml`: Qdrant без опубликованного порта, API только `127.0.0.1:18071`, отдельный разовый seed, healthcheck модели и 750 точек. Seed сверяет SHA manifest/CSV/model, размерность, cosine schema, все 750 payload/vector; существующую коллекцию не перезаписывает. Для Fedora SELinux использовать overlay `selinux.yaml`; исходные каталоги не relabel. Существующий основной `docker-compose.yml` и произвольный batch остаются совместимыми.
 
 Проверено в изолированной локальной Podman-коллекции: новый seed PASS, повторный seed PASS, испорченный вектор отклонён без удаления коллекции, неверные Distance.EUCLID и 256-D отклонены. Главный стенд UI на `127.0.0.1:18070` не затронут. Финальная репетиция **иммутабельного** образа после интеграции UI/deck и PDF ещё должна быть выполнена; эти строки не объявляют её завершённой.
 
@@ -32,10 +32,11 @@
 
 ```bash
 RELEASE_SHA=$(git rev-parse HEAD)
+LCT_DATA_DIR=/home/artem/projects/hackathon-lct-vehicle-reid/data
 podman build --pull=never --network=none --build-arg SOURCE_SHA="$RELEASE_SHA" \
   -t "localhost/lct-release:$RELEASE_SHA" 04-solution/service
 python3 04-solution/service/deploy/prepare_release.py \
-  --data data \
+  --data "$LCT_DATA_DIR" \
   --public-slides 05-presentation/checks/content_preview.pdf \
   --image "localhost/lct-release:$RELEASE_SHA" \
   --out "outputs/continuation-20260925/release-$RELEASE_SHA"

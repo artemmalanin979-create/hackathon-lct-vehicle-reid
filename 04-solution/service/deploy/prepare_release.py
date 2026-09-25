@@ -6,13 +6,58 @@ in org.opencontainers.image.revision. The supplied slides must be the reviewed
 technical PDF without the mandatory contacts page; full deck is delivered aside.
 """
 import argparse
-import hashlib
 import json
+import re
 import shutil
 import subprocess
 from pathlib import Path
 
 from verify_release import digest
+
+
+def preflight(repo: Path, data: Path, public_slides: Path) -> list[dict]:
+    """Reject stale or mismatched inputs before creating a release directory."""
+    subprocess.run(['python3', str(repo / '06-documentation/build_pdf.py'), '--check'],
+                   cwd=repo, check=True, capture_output=True)
+    artifact_dir = repo / '04-solution/service/artifacts-final'
+    manifest = json.loads((artifact_dir / 'manifest.json').read_text())
+    for name, spec in manifest['files'].items():
+        path = artifact_dir / name
+        if not path.is_file() or path.stat().st_size != spec['bytes'] or digest(path) != spec['sha256']:
+            raise SystemExit(f'Canonical artifact mismatch: {name}')
+    for spec in manifest['input_csvs']:
+        path = data / spec['path']
+        if not path.is_file() or path.stat().st_size != spec['bytes'] or digest(path) != spec['sha256']:
+            raise SystemExit(f'Canonical input CSV mismatch: {spec["path"]}')
+    model_dir = repo / '04-solution/service/model'
+    for name, expected in (
+        ('osnet_ain_x1_0_vehicle_reid.onnx', manifest['run_info']['model_sha256']),
+        ('osnet_ain_combined_v1.onnx', manifest['run_info']['model2_sha256']),
+        ('lw_ens_j48_rho0.5.npz', manifest['run_info']['whitening_sha256']),
+    ):
+        path = model_dir / name
+        if not path.is_file() or digest(path) != expected:
+            raise SystemExit(f'Canonical model mismatch: {name}')
+    info = subprocess.check_output(['pdfinfo', str(public_slides)], text=True)
+    pages = re.search(r'^Pages:\s*(\d+)\s*$', info, re.MULTILINE)
+    if pages is None or int(pages.group(1)) != 11:
+        raise SystemExit('Public technical PDF must have exactly 11 pages')
+    private_team = repo / '05-presentation/team-data.md'
+    if not private_team.is_file():
+        raise SystemExit('Local contact source is needed to screen the public PDF')
+    phone_numbers = set(re.findall(r'\+7\d{10}', private_team.read_text()))
+    if not phone_numbers:
+        raise SystemExit('No local contact numbers found for public PDF screening')
+    slide_text = subprocess.check_output(['pdftotext', '-layout', str(public_slides), '-'], text=True)
+    slide_digits = re.sub(r'\D', '', slide_text)
+    if any(re.sub(r'\D', '', number) in slide_digits for number in phone_numbers):
+        raise SystemExit('Public technical PDF contains a private contact number')
+    inputs = json.loads((repo / '04-solution/reproduce/inputs-manifest.json').read_text())
+    for spec in inputs['data']['test']:
+        path = (data / spec['path']).resolve()
+        if not path.is_relative_to(data.resolve()) or not path.is_file() or path.stat().st_size != spec['bytes'] or digest(path) != spec['sha256']:
+            raise SystemExit(f'Input mismatch: {spec["path"]}')
+    return inputs['data']['test']
 
 
 def main():
@@ -34,6 +79,7 @@ def main():
         raise SystemExit('Image revision label must match clean HEAD')
     if not args.public_slides.is_file():
         raise SystemExit('Reviewed technical slides are required')
+    inputs = preflight(repo, args.data, args.public_slides)
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=False)
     (out / 'runtime').mkdir()
@@ -47,11 +93,8 @@ def main():
     shutil.copy2(args.public_slides, materials / 'presentation.pdf')
     for name in ('manifest.json', 'submission.csv', 'candidates.csv', 'embeddings.npy', 'run_info.json'):
         shutil.copy2(service / 'artifacts-final' / name, materials / name)
-    inputs = json.loads((repo / '04-solution/reproduce/inputs-manifest.json').read_text())
-    for spec in inputs['data']['test']:
+    for spec in inputs:
         name = spec['path']; source = (args.data / name).resolve()
-        if not source.is_relative_to(args.data.resolve()) or source.stat().st_size != spec['bytes'] or digest(source) != spec['sha256']:
-            raise SystemExit(f'Input mismatch: {name}; incomplete bundle preserved')
         target = out / 'data' / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)

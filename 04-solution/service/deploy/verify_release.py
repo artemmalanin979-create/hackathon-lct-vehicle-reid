@@ -27,6 +27,10 @@ def main():
             failures.append(name)
         elif path.stat().st_size != spec['bytes'] or digest(path) != spec['sha256']:
             failures.append(name)
+    expected = set(manifest['files']) | {'release.json'}
+    unexpected = sorted(str(path.relative_to(root)) for path in root.rglob('*')
+                        if path.is_file() and str(path.relative_to(root)) not in expected)
+    failures.extend(unexpected)
     print(json.dumps({'status': 'FAIL' if failures else 'PASS', 'source_sha': manifest['source_sha'],
                       'checked': len(manifest['files']), 'failures': failures}, indent=2))
     return bool(failures)
