@@ -55,69 +55,125 @@ const token = (name, fallback) =>
 
 /* ---------- 1. состояние сервиса ---------- */
 
+let bootRevision = 0, bootTimer;
 async function boot() {
+  clearTimeout(bootTimer);
+  const generation = ++bootRevision;
+  $("retry-state").disabled = true;
   const chip = $("state-chip");
   try {
-    const r = await fetch("/api/ui/state");
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    app.info = await r.json();
-  } catch (e) {
-    chip.className = "chip chip-bad";
-    chip.textContent = "сервис не отвечает";
-    banner("Сервис не отвечает", "Страница загрузилась, но метод /api/ui/state "
-      + "недоступен: " + e + ". Проверьте, что контейнер API запущен.");
-    return;
+    const response = await fetch("/api/ui/state");
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const info = await response.json();
+    if (generation !== bootRevision) return;
+    app.info = info;
+  } catch (error) {
+    if (generation !== bootRevision) return;
+    app.ready = false;
+    chip.className = "chip chip-bad"; chip.textContent = "Сервис недоступен";
+    banner("Не удалось связаться с сервисом", "Проверьте соединение и нажмите «Проверить снова». Загруженный кадр останется на странице.");
+    $("retry-state").disabled = false; syncRunButton(); return;
   }
-  const s = app.info;
-  $("foot-service").textContent = "Сервис " + s.service + ", шкала оценки — "
-    + (s.score_scale === "cosine" ? "косинусная близость" : s.score_scale)
-    + ", порог отказа " + fmt6(s.default_threshold);
-  $("foot-model").textContent = s.model;
-  $("thr").placeholder = s.default_threshold.toFixed(6);
-  $("thr-hint").textContent = "Пусто — порог сервиса, " + fmt6(s.default_threshold)
-    + ". Порог обоснован калибровкой, менять его для обычного поиска не нужно.";
-
-  if (!s.storage_reachable) {
-    chip.className = "chip chip-bad";
-    chip.textContent = "хранилище недоступно";
-    banner("Хранилище галереи не отвечает",
-      "Сервис работает, но векторная база (Qdrant) недоступна, поэтому поиск "
-      + "выполнить нельзя. Поднимите её вместе с сервисом:",
-      "podman-compose -f 04-solution/service/docker-compose.yml up -d");
-    return;
+  const info = app.info;
+  $("foot-service").textContent = `Версия ${info.service} · Косинусный поиск · Порог ${fmt6(info.default_threshold)}`;
+  $("foot-model").textContent = info.model.includes("d1_j48") ? "d1_j48 · Две модели + whitening · 512 признаков" : info.model;
+  $("thr").placeholder = info.default_threshold.toFixed(6);
+  $("thr-hint").textContent = `Пусто — калиброванный порог ${fmt6(info.default_threshold)}. Для обычного поиска менять его не нужно.`;
+  $("banner").hidden = true;
+  $("retry-state").disabled = false;
+  app.ready = !!(info.storage_reachable && info.gallery_points);
+  chip.className = "chip " + (app.ready ? "chip-ok" : "chip-bad");
+  chip.textContent = app.ready ? `Галерея · ${info.gallery_points.toLocaleString("ru-RU")}` : "Галерея готовится";
+  if (!info.storage_reachable) {
+    chip.textContent = "Галерея недоступна";
+    banner("Галерея временно недоступна", "Кадр можно подготовить сейчас. Поиск станет доступен после подключения галереи.", "Проверьте контейнер Qdrant и соединение с API.");
+  } else if (!info.gallery_points) {
+    banner("Подготавливаем галерею", "Кадр можно загрузить и выделить объект. Мы автоматически проверим готовность галереи.", "Загрузите галерею по инструкции запуска сервиса.");
+    bootTimer = setTimeout(boot, 4000);
+  } else if (!info.images_available) {
+    banner("Кадры галереи недоступны", "Поиск работает. Пока можно сравнить идентификаторы и оценки; изображения кандидатов временно не отображаются.", "Проверьте монтирование каталога изображений (DATA_DIR).");
   }
-  if (!s.gallery_points) {
-    chip.className = "chip chip-bad";
-    chip.textContent = "галерея не загружена";
-    banner("Галерея не загружена",
-      "Хранилище поднято, но пустое: поиску не с чем сравнивать, API на запрос "
-      + "ответит 409. Загрузка галереи — отдельный воспроизводимый шаг:",
-      "podman-compose -f 04-solution/service/docker-compose.yml run --rm loader");
-    return;
-  }
-  chip.className = "chip chip-ok";
-  chip.textContent = "галерея: " + s.gallery_points.toLocaleString("ru-RU")
-    + " объектов";
-  if (!s.images_available) {
-    banner("Кадры галереи не смонтированы",
-      "Поиск работает, но показать кандидатов картинками нельзя: каталог кадров "
-      + "недоступен сервису. Смонтируйте его в контейнер API (в compose — "
-      + "переменная DATA_DIR); в списке останутся идентификаторы и оценки.");
-  }
-  enableForm();
-}
-
-function banner(head, body, cmd) {
-  $("banner").hidden = false;
-  $("banner-head").textContent = head;
-  $("banner-body").textContent = body;
-  $("banner-cmd").hidden = !cmd;
-  if (cmd) $("banner-cmd").textContent = cmd;
-}
-
-function enableForm() {
-  app.ready = true;
   syncRunButton();
+}
+function banner(head, body, command) {
+  $("banner").hidden = false;
+  $("banner-head").textContent = head; $("banner-body").textContent = body;
+  $("banner-details").hidden = !command;
+  $("banner-cmd").hidden = !command;
+  $("banner-cmd").textContent = command || "";
+}
+$("retry-state").addEventListener("click", boot);
+function scrollToElement(element) {
+  element.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+}
+function localPath(value) { return typeof value === "string" && value.startsWith("/") && !value.startsWith("//") ? value : null; }
+async function loadExamples() {
+  try {
+    const response = await fetch("/api/demo");
+    if (!response.ok) throw new Error();
+    const data = await response.json();
+    app.examples = (data.examples || []).filter(example => localPath(example.image_url));
+    if (!app.examples.length) throw new Error();
+    const first = app.examples[0];
+    $("hero-image").src = first.image_url;
+    $("hero-image").hidden = false; $("hero-empty").hidden = true;
+    $("demo-status").textContent = "Демонстрационный кадр проходит настоящий поиск по галерее.";
+    $("try-demo").disabled = false;
+    for (const example of app.examples) {
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "demo-example";
+      button.textContent = example.label; button.dataset.id = example.id;
+      button.addEventListener("click", () => loadDemo(example));
+      $("demo-examples").append(button);
+    }
+  } catch (error) {
+    $("demo-status").textContent = "Демонстрационные кадры недоступны. Для поиска загрузите свой JPEG или PNG.";
+    $("try-demo").disabled = true;
+  }
+}
+async function loadDemo(example) {
+  invalidateQuery();
+  const generation = ++app.frameRevision;
+  app.loadingFrame = true; syncRunButton();
+  const controller = new AbortController();
+  app.controllers.demo = controller;
+  $("try-demo").disabled = true;
+  $("demo-status").textContent = "Загружаем кадр…";
+  try {
+    const response = await fetch(example.image_url, {signal:controller.signal});
+    if (!response.ok) throw new Error();
+    const blob = await response.blob();
+    if (generation !== app.frameRevision || controller.signal.aborted) return;
+    const filename = (example.image_url.split("/").pop() || example.id).includes(".") ? example.image_url.split("/").pop() : `demo-${example.id}.jpg`;
+    const loaded = await loadFrame(new File([blob], filename, {type:blob.type || "image/jpeg"}), example.bbox);
+    if (!loaded) return;
+    $("hero-image").src = example.image_url;
+    for (const button of $("demo-examples").children) button.classList.toggle("active", button.dataset.id === example.id);
+    $("demo-status").textContent = "Кадр готов. Проверьте рамку и нажмите «Найти кандидатов».";
+  } catch (error) {
+    if (error.name !== "AbortError") $("demo-status").textContent = "Кадр не загрузился. Попробуйте ещё раз или загрузите свой файл.";
+  } finally {
+    if (generation === app.frameRevision) { app.loadingFrame = false; syncRunButton(); }
+    $("try-demo").disabled = !(app.examples && app.examples.length);
+  }
+}
+$("try-demo").addEventListener("click", () => { if (app.examples && app.examples[0]) loadDemo(app.examples[0]); });
+$("upload-start").addEventListener("click", () => $("file").click());
+async function loadMaterials() {
+  try {
+    const response = await fetch("/api/materials");
+    if (!response.ok) throw new Error();
+    const data = await response.json();
+    for (const item of data.items || []) {
+      if (!localPath(item.url)) continue;
+      const link = document.createElement("a"), label = document.createElement("span"), arrow = document.createElement("span");
+      link.href = item.url; label.textContent = item.label; arrow.textContent = "↗"; arrow.setAttribute("aria-hidden", "true");
+      if (item.bytes) { const note = document.createElement("small"); note.textContent = `${(item.bytes / 1024).toLocaleString("ru-RU", {maximumFractionDigits:0})} КБ · сохранённый комплект решения`; label.append(note); }
+      link.append(label, arrow); $("material-links").append(link);
+    }
+    $("materials-status").textContent = "Файлы комплекта — сохранённые артефакты. Они не являются выгрузкой вашего текущего запроса.";
+    if (data.deployment_status && data.deployment_status !== "DEPLOY PENDING") $("deployment-status").textContent = data.deployment_status;
+  } catch (error) { $("materials-status").textContent = "Список файлов комплекта сейчас недоступен. Документация API открывается по ссылкам выше."; }
 }
 
 /* ---------- 2. кадр: выбор, перетаскивание ---------- */
@@ -142,37 +198,57 @@ drop.addEventListener("drop", (e) => {
   if (f) loadFrame(f);
 });
 
-function loadFrame(file) {
-  invalidateQuery();
+function loadFrame(file, initialBox = null) {
+  invalidateQuery(); hideError();
   const generation = ++app.frameRevision;
-  const url = URL.createObjectURL(file);
-  const im = new Image();
-  im.onload = () => {
-    if (generation !== app.frameRevision) { URL.revokeObjectURL(url); return; }
-    app.img = im;
-    app.file = file;
-    app.box = null;
-    $("file-name").textContent = file.name;
-    $("file-size").textContent = im.naturalWidth + "×" + im.naturalHeight;
-    $("drop").hidden = true;
-    $("stage").hidden = false;
-    $("qform").hidden = false;
-    clearResults();
-    layout();
-    syncRunButton();
-  };
-  im.onerror = () => {
-    if (generation !== app.frameRevision) { URL.revokeObjectURL(url); return; }
-    showError("Файл не удалось прочитать как изображение. Нужен JPEG или PNG.");
-    URL.revokeObjectURL(url);
-  };
-  im.src = url;
+  app.loadingFrame = true;
+  app.img = null; app.file = null; app.box = null;
+  $("stage").hidden = true; $("qform").hidden = true; $("drop").hidden = false;
+  $("query-step").textContent = "Выберите изображение";
+  for (const id of ["bx", "by", "bw", "bh"]) $(id).value = "";
+  if (app.objectURL) URL.revokeObjectURL(app.objectURL);
+  app.objectURL = null;
+  syncRunButton();
+  if (!(["image/jpeg", "image/png"].includes(file.type) || (!file.type && /\.(jpe?g|png)$/i.test(file.name)))) {
+    app.loadingFrame = false;
+    showError("Нужен кадр JPEG или PNG. Выберите файл изображения.");
+    scrollToElement($("workspace"));
+    return Promise.resolve(false);
+  }
+  const url = URL.createObjectURL(file), image = new Image();
+  return new Promise(resolve => {
+    image.onload = () => {
+      if (generation !== app.frameRevision) { URL.revokeObjectURL(url); resolve(false); return; }
+      app.loadingFrame = false;
+      app.objectURL = url; app.img = image; app.file = file;
+      app.box = initialBox ? normalizeBox(initialBox) : null;
+      $("file-name").textContent = file.name; $("file-name").title = file.name;
+      $("file-size").textContent = image.naturalWidth + " × " + image.naturalHeight;
+      $("drop").hidden = true; $("stage").hidden = false; $("qform").hidden = false;
+      $("bx").max = image.naturalWidth - 1; $("by").max = image.naturalHeight - 1;
+      $("bw").max = image.naturalWidth; $("bh").max = image.naturalHeight;
+      layout(); pushBox(); scrollToElement($("workspace")); resolve(true);
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      if (generation === app.frameRevision) { app.loadingFrame = false; syncRunButton(); showError("Изображение повреждено или не читается. Выберите другой JPEG или PNG."); scrollToElement($("workspace")); }
+      resolve(false);
+    };
+    image.src = url;
+  });
+}
+function normalizeBox(box) {
+  const width = app.img.naturalWidth, height = app.img.naturalHeight;
+  const x = Math.min(width - 1, Math.max(0, Math.round(Number(box.x) || 0)));
+  const y = Math.min(height - 1, Math.max(0, Math.round(Number(box.y) || 0)));
+  return {x, y, w:Math.min(width - x, Math.max(1, Math.round(Number(box.w) || 1))), h:Math.min(height - y, Math.max(1, Math.round(Number(box.h) || 1)))};
 }
 
 /* ---------- 3. рамка мышью ---------- */
 
 const cv = $("canvas"), ctx = cv.getContext("2d");
-const HANDLE = 9;               // радиус захвата угла/стороны, в пикселях показа
+let handleRadius = 10;
+const HANDLE = 10;               // радиус захвата угла/стороны, в пикселях показа
 let drag = null;
 
 function layout() {
@@ -203,11 +279,11 @@ function draw() {
   ctx.rect(0, 0, w, h);
   ctx.rect(b.x, b.y, b.w, b.h);
   ctx.fill("evenodd");
-  ctx.strokeStyle = "#fcfcfb";
+  ctx.strokeStyle = "#f9fcfd";
   ctx.lineWidth = 2;
   ctx.strokeRect(b.x, b.y, b.w, b.h);
   ctx.fillStyle = "#fcfcfb";
-  for (const [hx, hy] of corners(b)) ctx.fillRect(hx - 3, hy - 3, 6, 6);
+  for (const [hx, hy] of corners(b)) { ctx.fillRect(hx - 4, hy - 4, 8, 8); ctx.strokeStyle = "#17252e"; ctx.lineWidth = 1; ctx.strokeRect(hx - 4, hy - 4, 8, 8); }
   ctx.restore();
 }
 
@@ -221,7 +297,8 @@ const toView = (b) => ({ x: b.x * app.fit, y: b.y * app.fit,
 
 function pos(e) {
   const r = cv.getBoundingClientRect();
-  return { x: (e.clientX - r.left) / app.fit, y: (e.clientY - r.top) / app.fit };
+  return { x: (e.clientX - r.left) * app.img.naturalWidth / r.width,
+           y: (e.clientY - r.top) * app.img.naturalHeight / r.height };
 }
 
 /** Что окажется под курсором: угол/сторона (индекс), тело рамки или пустое место. */
@@ -230,7 +307,7 @@ function hit(p) {
   const b = toView(app.box), v = { x: p.x * app.fit, y: p.y * app.fit };
   const cs = corners(b);
   for (let i = 0; i < cs.length; i++) {
-    if (Math.abs(v.x - cs[i][0]) <= HANDLE && Math.abs(v.y - cs[i][1]) <= HANDLE) {
+    if (Math.abs(v.x - cs[i][0]) <= handleRadius && Math.abs(v.y - cs[i][1]) <= handleRadius) {
       return { kind: "handle", i };
     }
   }
@@ -251,7 +328,8 @@ cv.addEventListener("pointermove", (e) => {
 });
 
 cv.addEventListener("pointerdown", (e) => {
-  if (!app.img) return;
+  if (!app.img || !e.isPrimary || e.button !== 0) return;
+  handleRadius = e.pointerType === "touch" ? 24 : HANDLE;
   cv.setPointerCapture(e.pointerId);
   const p = pos(e), h = hit(p);
   if (h && h.kind === "handle") {
@@ -351,8 +429,9 @@ function pushBox() {
 }
 
 function syncRunButton() {
-  const ok = !app.busy && app.ready && app.img && app.box && app.box.w > 0 && app.box.h > 0;
+  const ok = !app.loadingFrame && !app.busy && app.ready && app.img && app.box && app.box.w > 0 && app.box.h > 0;
   $("run").disabled = !ok;
+  $("query-step").textContent = app.img ? (app.box ? "Объект выделен" : "Выделите автомобиль") : "Выберите изображение";
 }
 
 /* ---------- 4. поиск ---------- */
@@ -365,6 +444,7 @@ function invalidateQuery() {
   for (const controller of Object.values(app.controllers)) controller.abort();
   app.controllers = {};
   app.busy = false;
+  hideError();
   clearResults();
   $("run").textContent = "Найти кандидатов";
 }
@@ -387,7 +467,7 @@ function queryForm(query, threshold) {
   return fd;
 }
 async function runSearch() {
-  if (!app.ready || !app.file || !app.box || app.busy) return;
+  if (!app.ready || !app.file || !app.box || app.busy || app.loadingFrame) return;
   const query = snapshot();
   invalidateQuery();
   const revision = app.revision;
@@ -396,6 +476,8 @@ async function runSearch() {
   app.busy = true;
   $("run").disabled = true;
   $("run").textContent = "Идёт поиск…";
+  $("search-loading").hidden = false; $("placeholder").hidden = true;
+  document.querySelector(".results").setAttribute("aria-busy", "true");
   hideError();
   try {
     const r = await fetch("/api/search", { method: "POST", body: queryForm(query), signal: controller.signal });
@@ -405,11 +487,15 @@ async function runSearch() {
     app.last = Object.freeze({ at: new Date(), snapshot: query, revision,
       query: Object.freeze({file: query.file.name, ...query.box, top_k: query.top_k}), resp: data });
     render();
+    if (innerWidth < 851) scrollToElement(document.querySelector(".results"));
   } catch (e) {
     if (revision === app.revision && e.name !== "AbortError") showError("Не удалось обратиться к сервису. Проверьте соединение и повторите поиск.");
   } finally {
     if (revision === app.revision) {
       app.busy = false;
+      $("search-loading").hidden = true;
+      document.querySelector(".results").setAttribute("aria-busy", "false");
+      if (!app.last) $("placeholder").hidden = false;
       $("run").textContent = "Найти кандидатов";
       syncRunButton();
     }
@@ -437,6 +523,9 @@ const hideError = () => { $("error").hidden = true; $("error").textContent = "";
 function clearResults() {
   app.last = null; app.below = null; app.selected = null;
   $("placeholder").hidden = false;
+  $("search-loading").hidden = true;
+  document.querySelector(".results").setAttribute("aria-busy", "false");
+  $("compare").hidden = true; app.comparison = null;
   $("summary").hidden = true;
   $("cards").hidden = true;
   $("cards").innerHTML = "";
@@ -481,7 +570,7 @@ function render() {
   }
   renderCards(rows, thr);
 
-  const hidden = query.top_k - resp.candidates.length;
+  const hidden = Math.max(0, Math.min(query.top_k, app.info.gallery_points || query.top_k) - resp.candidates.length);
   $("show-below").hidden = !!app.below || hidden <= 0;
   $("show-below").textContent = `Показать ближайшие ниже порога (${hidden})`;
   if (!resp.refusal) {
@@ -503,20 +592,19 @@ const esc = (s) => String(s).replace(/[&<>"]/g,
 function renderRefusal(resp) {
   const best = resp.best_confidence, thr = resp.threshold;
   // Шкала косинуса от 0 до 1: где остановилась лучшая близость и где порог.
-  const pct = (v) => (Math.min(1, Math.max(0, v)) * 100).toFixed(2) + "%";
+  const pct = (v) => ((Math.min(1, Math.max(-1, v)) + 1) * 50).toFixed(2) + "%";
   const sc = $("scale");
   sc.style.setProperty("--best", pct(best === null ? 0 : best));
   sc.style.setProperty("--thr", pct(thr));
-  sc.innerHTML =
-    '<span class="mark best"></span><span class="mark thr"></span>'
-    + '<span class="lab left" style="left:0">0</span>'
-    + `<span class="lab" style="left:${pct(best === null ? 0 : best)}">лучшая ${fmt6(best)}</span>`
-    + `<span class="lab" style="left:${pct(thr)};top:30px">порог ${fmt6(thr)}</span>`
-    + '<span class="lab right" style="left:100%">1</span>';
+  sc.setAttribute("role", "img");
+  sc.setAttribute("aria-label", `Косинусная шкала от минус одного до одного. Лучшая близость ${fmt6(best)}, порог ${fmt6(thr)}.`);
+  sc.innerHTML = '<span class="mark best"></span><span class="mark thr"></span>'
+    + '<span class="lab left" style="left:0">−1</span><span class="lab right" style="left:100%">1</span>'
+    + '<span class="scale-caption"><span class="scale-best">Лучшая близость</span><span class="scale-thr">Порог</span></span>';
   $("refusal-facts").innerHTML =
     dt("Лучшая близость", fmt6(best))
     + dt("Порог отказа", fmt6(thr))
-    + dt("Не хватило", best === null ? "—" : fmtSigned(best - thr))
+    + dt("До порога", best === null ? "—" : fmt6(Math.max(0, thr - best)))
     + dt("Просмотрено", (app.info.gallery_points || 0).toLocaleString("ru-RU")
         + " объектов галереи");
 }
@@ -532,13 +620,13 @@ function renderCards(rows, thr) {
     const li = document.createElement("li");
     li.className = "card" + (c.below ? " below" : "");
     li.dataset.gid = c.gallery_id;
-    const width = (Math.min(1, Math.max(0, c.confidence)) * 100).toFixed(2);
-    const thrPos = (Math.min(1, Math.max(0, thr)) * 100).toFixed(2);
+    const width = ((Math.min(1, Math.max(-1, c.confidence)) + 1) * 50).toFixed(2);
+    const thrPos = ((Math.min(1, Math.max(-1, thr)) + 1) * 50).toFixed(2);
     li.innerHTML = `
       <div class="card-img">
         <span class="rank">${c.rank}</span>
         ${images ? `<img alt="Кандидат ${esc(c.gallery_id)}" loading="lazy"
-             src="/api/gallery/${encodeURIComponent(c.gallery_id)}/crop?size=360">`
+             src="/api/gallery/${encodeURIComponent(c.gallery_id)}/crop?size=560">`
           : '<span class="noimg">кадры галереи не смонтированы</span>'}
       </div>
       <div class="card-body">
@@ -550,8 +638,8 @@ function renderCards(rows, thr) {
         </div>
         <div class="meter"><i style="width:${width}%"></i><u style="left:${thrPos}%"></u></div>
         <div class="card-acts">
-          ${images ? '<button type="button" class="link-btn act-frame">кадр целиком</button>' : ""}
-          ${images ? '<button type="button" class="link-btn act-explain">разбор</button>' : ""}
+          ${images ? '<button type="button" class="link-btn act-compare">Сравнить</button><button type="button" class="link-btn act-frame">Кадр целиком</button>' : ""}
+          ${images ? '<button type="button" class="link-btn act-explain">Разбор</button>' : ""}
         </div>
       </div>`;
     if (images) {
@@ -560,6 +648,7 @@ function renderCards(rows, thr) {
         img.replaceWith(Object.assign(document.createElement("span"),
           { className: "noimg", textContent: "кадр недоступен" }));
       });
+      li.querySelector(".act-compare").addEventListener("click", () => compare(c.gallery_id));
       let frame = false;
       li.querySelector(".act-frame").addEventListener("click", (e) => {
         frame = !frame;
@@ -663,9 +752,9 @@ function buildJSON() {
   if (app.below) {
     const known = new Set(resp.candidates.map((c) => c.gallery_id));
     out.below_threshold = app.below
-      .filter((c) => !known.has(c.gallery_id))
       .map((c, i) => ({ rank: i + 1, gallery_id: c.gallery_id,
-                        confidence: c.confidence, above_threshold: false }));
+                        confidence: c.confidence, above_threshold: false }))
+      .filter((c) => !known.has(c.gallery_id));
   }
   return JSON.stringify(out, null, 2) + "\n";
 }
@@ -693,9 +782,10 @@ async function explain(gid) {
   app.controllers.explain = controller;
   const current = () => app.last === last && app.selected === gid && !controller.signal.aborted;
   const panel = $("explain");
+  $("explain-body").hidden = true;
   panel.hidden = false;
   $("explain-lead").textContent = "Считается разложение…";
-  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  scrollToElement(panel);
   for (const li of $("cards").children) li.classList.toggle("sel", li.dataset.gid === gid);
   app.selected = gid;
 
@@ -722,8 +812,17 @@ async function explain(gid) {
     + "поэтому его оценка может отличаться от числа ниже. Красным — то, что "
     + "поддерживает совпадение, синим — то, что ему мешает.";
 
-  drawTile($("ex-q"), () => drawQueryCrop(last.snapshot), data.query, scale);
-  drawTile($("ex-g"), (c) => loadGalleryCrop(gid, c, current), data.gallery, scale, current);
+  try {
+    await Promise.all([
+      drawTile($("ex-q"), () => drawQueryCrop(last.snapshot), data.query, scale, current),
+      drawTile($("ex-g"), (context) => loadGalleryCrop(gid, context, current), data.gallery, scale, current),
+    ]);
+  } catch (error) {
+    if (current()) $("explain-lead").textContent = "Кадр для разбора не загрузился. Результат поиска сохранён; повторите разбор.";
+    return;
+  }
+  if (!current()) return;
+  $("explain-body").hidden = false;
   drawBar($("ex-bar"), scale);
   $("ex-ticks").innerHTML = `<span>−${scale.toFixed(4)}</span><span>0</span>`
     + `<span>+${scale.toFixed(4)}</span>`;
@@ -760,7 +859,7 @@ function share(g, p) {
 const SIDE = 416;   // размер плитки разбора — ровно тот, в котором
                     // приходит кроп галереи (crop?size=416): без пересчёта
 
-function drawTile(canvas, paint, grid, scale, current = () => true) {
+async function drawTile(canvas, paint, grid, scale, current = () => true) {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = SIDE * dpr;
   canvas.height = SIDE * dpr;
@@ -769,9 +868,8 @@ function drawTile(canvas, paint, grid, scale, current = () => true) {
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
   c.fillStyle = token("--card-2", "#f2f1ec");
   c.fillRect(0, 0, SIDE, SIDE);
-  const after = () => { if (current()) heat(c, grid, scale); };
-  const r = paint(c);
-  if (r && typeof r.then === "function") r.then(after); else after();
+  await paint(c);
+  if (current()) heat(c, grid, scale);
 }
 
 /** Кроп запроса ровно так, как его видит модель: квадрат 208x208 из рамки. */
@@ -783,10 +881,10 @@ function drawQueryCrop(query) {
 }
 
 function loadGalleryCrop(gid, c, current) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const im = new Image();
     im.onload = () => { if (current()) c.drawImage(im, 0, 0, SIDE, SIDE); resolve(); };
-    im.onerror = () => resolve();
+    im.onerror = () => reject(new Error("Кадр галереи недоступен"));
     im.src = `/api/gallery/${encodeURIComponent(gid)}/crop?size=416`;
   });
 }
@@ -831,4 +929,36 @@ function drawBar(canvas, scale) {
   }
 }
 
-boot();
+/* ---------- ordinary pair comparison: uses the immutable search input ---------- */
+function compare(gid) {
+  const last = app.last;
+  if (!last) return;
+  const candidate = [...last.resp.candidates, ...(app.below || [])].find(item => item.gallery_id === gid);
+  if (!candidate) return;
+  app.comparison = {last, gid, candidate, frame:false};
+  $("compare").hidden = false;
+  $("compare-query-name").textContent = last.query.file;
+  $("compare-id").textContent = gid;
+  $("compare-lead").textContent = `Косинусная близость ${fmt6(candidate.confidence)} · ${last.resp.candidates.some(item => item.gallery_id === gid) ? "Прошёл порог" : "Ниже порога — для ручной проверки"}. Оценка не является вероятностью совпадения.`;
+  for (const card of $("cards").children) card.classList.toggle("sel", card.dataset.gid === gid);
+  paintComparison(); scrollToElement($("compare"));
+}
+function paintComparison() {
+  const comparison = app.comparison;
+  if (!comparison || comparison.last !== app.last) return;
+  const query = comparison.last.snapshot, canvas = $("compare-q");
+  const box = comparison.frame ? {x:0,y:0,w:query.image.naturalWidth,h:query.image.naturalHeight} : query.box;
+  const scale = Math.min(1, 1400 / Math.max(box.w, box.h));
+  canvas.width = Math.max(1, Math.round(box.w * scale)); canvas.height = Math.max(1, Math.round(box.h * scale));
+  const context = canvas.getContext("2d");
+  context.drawImage(query.image, box.x, box.y, box.w, box.h, 0, 0, canvas.width, canvas.height);
+  if (comparison.frame) { const b = query.box; context.strokeStyle = "#e34948"; context.lineWidth = Math.max(2,canvas.width/350); context.strokeRect(b.x*scale,b.y*scale,b.w*scale,b.h*scale); }
+  $("compare-g").src = `/api/gallery/${encodeURIComponent(comparison.gid)}/crop?size=1200&view=${comparison.frame ? "frame" : "crop"}`;
+  $("compare-g").alt = `Кандидат ${comparison.gid}${comparison.frame ? ", кадр целиком" : ", выбранный объект"}`;
+  $("compare-view").textContent = comparison.frame ? "Только объекты" : "Кадры целиком";
+}
+$("compare-view").addEventListener("click", () => { if (app.comparison) { app.comparison.frame = !app.comparison.frame; paintComparison(); } });
+$("compare-close").addEventListener("click", () => { $("compare").hidden = true; app.comparison = null; });
+$("compare-explain").addEventListener("click", () => { if (app.comparison) explain(app.comparison.gid); });
+$("hero-image").addEventListener("error", () => { $("hero-image").hidden = true; $("hero-empty").hidden = false; });
+boot(); loadExamples(); loadMaterials();

@@ -1,201 +1,406 @@
 <!doctype html>
-<!-- Тонкий клиент сервиса: кадр + рамка ТС -> кандидаты с оценкой уверенности,
-     честный отказ, выгрузка результата, разбор «на что смотрела модель».
-
-     Ни одного обращения наружу: стили и скрипт лежат рядом, шрифты системные,
-     иконки — инлайновый SVG, значок страницы — data:. Проверяется поиском по
-     исходникам и журналом сети (см. REPORT). -->
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vehicle ReID — поиск транспортного средства по галерее</title>
-<!-- Тема ставится ДО первой отрисовки, иначе при загрузке моргает белым.
-     Блокирующий скрипт на четыре строки: выбор оператора, иначе — системная. -->
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Визуальный поиск автомобилей: выделите объект в кадре, сравните кандидатов и сохраните результат.">
+<title>Vehicle ReID — один автомобиль, разные кадры</title>
 <script>
-  (function () {
-    var t = null;
-    try { t = localStorage.getItem("reid-theme"); } catch (e) {}
-    if (t !== "light" && t !== "dark") {
-      t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark" : "light";
-    }
-    document.documentElement.setAttribute("data-theme", t);
-  })();
+(function(){var t;try{t=localStorage.getItem('reid-theme');}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t;})();
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23f7f7f7'/%3E%3Crect x='2.6' y='2.6' width='10.8' height='10.8' rx='2.2' fill='none' stroke='%231c1c1c' stroke-width='1.2'/%3E%3Crect x='6.4' y='6.4' width='3.2' height='3.2' rx='.8' fill='%231c1c1c'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2317252e' d='M0 0h32v32H0z'/%3E%3Cpath stroke='%239dcddf' stroke-width='2' fill='none' d='M7 13V7h6m6 0h6v6M7 19v6h6m6 0h6v-6'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
-
+<a class="skip-link" href="#workspace">Перейти к поиску</a>
 <header class="top">
-  <div class="top-title">
-    <h1>Поиск транспортного средства по визуальному признаку</h1>
-    <p class="sub">Кадр и рамка ТС — кандидаты из галереи с оценкой уверенности.
-      Номерной знак не используется.</p>
-  </div>
+  <a class="brand" href="#home" aria-label="Vehicle ReID — главная">
+<span class="brand-mark" aria-hidden="true">
+</span>
+<span>Vehicle <b>ReID</b>
+</span>
+</a>
+  <nav class="main-nav" aria-label="Разделы сервиса">
+    <a href="#workspace">Поиск</a>
+<a href="#method">Качество и метод</a>
+<a href="#materials">Материалы</a>
+  </nav>
   <div class="top-side">
-    <div class="top-row">
-      <div id="state-chip" class="chip chip-wait">состояние сервиса…</div>
-      <button type="button" id="theme-btn" class="icon-btn"
-              aria-label="Сменить тему оформления" title="Сменить тему оформления">
-        <svg class="i-moon" width="15" height="15" viewBox="0 0 16 16" fill="none"
-             stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
-             stroke-linejoin="round" aria-hidden="true">
-          <path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8z"/>
-        </svg>
-        <svg class="i-sun" width="15" height="15" viewBox="0 0 16 16" fill="none"
-             stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
-             aria-hidden="true">
-          <circle cx="8" cy="8" r="3"/>
-          <path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3.05 3.05l1.13 1.13M11.82 11.82l1.13 1.13M12.95 3.05l-1.13 1.13M4.18 11.82l-1.13 1.13"/>
-        </svg>
-      </button>
-    </div>
-    <nav class="links">
-      <a href="/docs">Документация API</a>
-      <a href="/openapi.json">OpenAPI</a>
-    </nav>
+<span id="state-chip" class="chip chip-wait" role="status">Проверяем сервис</span>
+    <button type="button" id="theme-btn" class="icon-btn" aria-label="Сменить тему оформления" title="Сменить тему оформления">
+      <svg class="i-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+<path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/>
+</svg>
+      <svg class="i-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+<circle cx="12" cy="12" r="4"/>
+<path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+</svg>
+    </button>
   </div>
 </header>
-
-<!-- Хранилище не поднято или галерея не загружена: внятное состояние вместо
-     пустого экрана и ошибки 409 в консоли. -->
-<div id="banner" class="banner" hidden>
-  <div class="banner-head" id="banner-head"></div>
-  <p class="banner-body" id="banner-body"></p>
-  <pre class="banner-cmd" id="banner-cmd" hidden></pre>
+<main>
+<section class="hero shell" id="home" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow">ЛЦТ 2026 · Фалькон Тех · Команда 33</p>
+    <h1 id="hero-title">Один автомобиль.<br>
+<span>Разные кадры.</span>
+</h1>
+    <p class="hero-lead">Найдите похожий автомобиль в галерее. Выделите его в кадре, сравните детали и сохраните результат проверки.</p>
+    <div class="hero-actions">
+<button id="try-demo" class="primary" type="button" disabled>Попробовать пример <span aria-hidden="true">↗</span>
+</button>
+<button id="upload-start" class="secondary" type="button">Загрузить кадр</button>
 </div>
-
-<main class="grid">
-
-  <section class="panel query" aria-labelledby="h-query">
-    <h2 id="h-query">Запрос</h2>
-
-    <div id="drop" class="drop" tabindex="0" role="button"
-         aria-label="Выбрать кадр или перетащить файл">
-      <svg class="drop-ico" width="26" height="26" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
-           stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="4.5" width="18" height="15" rx="2.5"/>
-        <path d="M3.4 16.2l4.3-4.3 3.8 3.8 2.9-2.9 6.2 6.2"/>
-        <circle cx="8.6" cy="9.1" r="1.2"/>
-      </svg>
-      <p class="drop-main">Перетащите кадр сюда</p>
-      <p class="drop-sub">или нажмите, чтобы выбрать файл — JPEG, PNG</p>
-      <input id="file" type="file" accept="image/jpeg,image/png,image/*" hidden>
-    </div>
-
-    <figure id="stage" class="stage" hidden>
-      <canvas id="canvas" aria-label="Кадр запроса; рамка объекта задаётся мышью"></canvas>
-      <figcaption id="stage-note" class="stage-note">
-        Обведите транспортное средство мышью. Рамку можно двигать и растягивать
-        за углы.
-      </figcaption>
-    </figure>
-
-    <div id="qform" class="qform" hidden>
-      <div class="row row-file">
-        <span class="k">Кадр</span>
-        <span class="v" id="file-name">—</span>
-        <span class="k" id="file-size"></span>
-        <button type="button" class="link-btn" id="change-file">заменить</button>
-      </div>
-
-      <fieldset class="bbox">
-        <legend>Рамка объекта, пиксели кадра</legend>
-        <label>x <input type="number" id="bx" min="0" step="1"></label>
-        <label>y <input type="number" id="by" min="0" step="1"></label>
-        <label>w <input type="number" id="bw" min="1" step="1"></label>
-        <label>h <input type="number" id="bh" min="1" step="1"></label>
-        <div class="bbox-actions">
-          <button type="button" class="link-btn" id="whole-frame">весь кадр</button>
-          <button type="button" class="link-btn" id="clear-box">сбросить</button>
-        </div>
-      </fieldset>
-
-      <fieldset class="params">
-        <legend>Параметры поиска</legend>
-        <label class="p">Кандидатов, top-k
-          <input type="number" id="topk" min="1" max="100" value="10"></label>
-        <label class="p">Порог отказа
-          <input type="number" id="thr" step="0.000001" placeholder="по умолчанию"></label>
-        <p class="hint" id="thr-hint">Пусто — порог сервиса.</p>
-      </fieldset>
-
-      <button type="button" id="run" class="primary" disabled>Найти кандидатов</button>
-      <p id="error" class="error" hidden></p>
-    </div>
-  </section>
-
-  <section class="panel results" aria-labelledby="h-results">
-    <div class="results-head">
-      <h2 id="h-results">Результат</h2>
-      <div class="export" id="export" hidden>
-        <span class="k">Выгрузить</span>
-        <button type="button" class="link-btn" id="exp-csv">CSV</button>
-        <button type="button" class="link-btn" id="exp-json">JSON</button>
-      </div>
-    </div>
-
-    <p id="placeholder" class="placeholder">
-      Результат появится здесь: кандидаты с оценкой уверенности либо
-      обоснованный отказ, если уверенного совпадения в галерее нет.
-    </p>
-
-    <!-- Отказ — не ошибка и не пустота: система проверила и не нашла. -->
-    <div id="refusal" class="refusal" hidden>
-      <h3>Уверенного совпадения нет</h3>
-      <p class="refusal-body">Галерея просмотрена целиком, ни один объект не
-        прошёл порог. Это ответ системы, а не сбой.</p>
-      <div class="scale" id="scale"></div>
-      <dl class="facts" id="refusal-facts"></dl>
-      <button type="button" class="link-btn" id="show-below">
-        Показать ближайшие ниже порога</button>
-      <p class="hint" id="below-note" hidden>Ниже показаны объекты, НЕ прошедшие
-        порог. Совпадением они не являются — это материал для ручной проверки.</p>
-    </div>
-
-    <div id="summary" class="summary" hidden></div>
-    <ol id="cards" class="cards" hidden></ol>
-  </section>
-</main>
-
-<!-- Разбор пары: точное разложение косинуса по областям изображения. -->
-<section id="explain" class="panel explain" hidden aria-labelledby="h-explain">
-  <div class="results-head">
-    <h2 id="h-explain">На что смотрела OSNet-AIN</h2>
-    <button type="button" class="link-btn" id="explain-close">закрыть</button>
+    <p class="hero-note" id="demo-status" role="status">Проверяем демонстрационные кадры…</p>
   </div>
-  <p class="explain-lead" id="explain-lead"></p>
-  <div class="explain-body">
-    <figure class="tile">
-      <canvas id="ex-q"></canvas>
-      <figcaption>Запрос<span class="muted" id="ex-q-note"></span></figcaption>
-    </figure>
-    <figure class="tile">
-      <canvas id="ex-g"></canvas>
-      <figcaption>Кандидат<span class="muted" id="ex-g-note"></span></figcaption>
-    </figure>
-    <div class="explain-side">
-      <canvas id="ex-bar" class="bar" height="16"></canvas>
-      <div class="bar-ticks" id="ex-ticks"></div>
-      <ul class="legend">
-        <li><i class="sw sw-pos"></i>область <b>поддерживает</b> совпадение</li>
-        <li><i class="sw sw-neg"></i>область <b>снижает</b> близость</li>
-      </ul>
-      <dl class="facts" id="ex-facts"></dl>
-      <p class="hint">Разложение точное: сумма вкладов и свободного члена равна
-        косинусу. Невязка — уровень округления float32, она показана выше.</p>
-    </div>
+  <div class="hero-visual">
+    <div class="hero-frame" id="hero-frame">
+<img id="hero-image" alt="Демонстрационный кадр для поиска автомобиля" hidden>
+<div class="frame-empty" id="hero-empty">
+<span class="object-mark" aria-hidden="true">
+</span>
+<p>Поиск начинается<br>с одного кадра</p>
+</div>
+<span class="frame-corner tl" aria-hidden="true">
+</span>
+<span class="frame-corner tr" aria-hidden="true">
+</span>
+<span class="frame-corner bl" aria-hidden="true">
+</span>
+<span class="frame-corner br" aria-hidden="true">
+</span>
+</div>
+    <div class="visual-caption">
+<span>Кадр → объект → сравнение</span>
+<span class="eyebrow">Визуальный поиск</span>
+</div>
+    <div id="demo-examples" class="demo-examples" aria-label="Демонстрационные кадры">
+</div>
   </div>
 </section>
-
-<footer class="foot">
-  <span id="foot-service">—</span>
-  <span id="foot-model" class="muted"></span>
+<section class="workspace shell" id="workspace" aria-labelledby="workspace-title">
+  <div class="section-head">
+<div>
+<p class="eyebrow">Рабочее пространство</p>
+<h2 id="workspace-title">Сопоставьте кадры</h2>
+</div>
+<p class="section-aside">Поиск по внешнему виду<br>
+<span>Оценка близости, не вероятность</span>
+</p>
+</div>
+  <div id="banner" class="banner" hidden role="status">
+<div>
+<h3 id="banner-head">
+</h3>
+<p id="banner-body">
+</p>
+<details id="banner-details" hidden>
+<summary>Для администратора</summary>
+<pre id="banner-cmd" hidden>
+</pre>
+</details>
+</div>
+<button type="button" id="retry-state" class="secondary">Проверить снова</button>
+</div>
+  <div class="grid">
+  <section class="panel query" aria-labelledby="h-query">
+    <div class="panel-heading">
+<h3 id="h-query">Кадр запроса</h3>
+<span class="step-note" id="query-step">Выберите изображение</span>
+</div>
+    <div id="drop" class="drop" tabindex="0" role="button" aria-label="Выбрать кадр или перетащить файл">
+      <span class="upload-mark" aria-hidden="true">
+<svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
+<path d="M7 11V5h6m6 0h6v6M7 21v6h6m6 0h6v-6M16 22V11m-4 4 4-4 4 4"/>
+</svg>
+</span>
+      <p class="drop-main">Добавьте кадр с автомобилем</p>
+<p class="drop-sub">Перетащите файл или нажмите для выбора</p>
+<span class="file-types">JPEG / PNG</span>
+    </div>
+    <input id="file" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" hidden>
+    <figure id="stage" class="stage" hidden>
+<div class="canvas-wrap">
+<canvas id="canvas" aria-label="Кадр запроса. Выделите объект указателем или задайте координаты в полях ниже.">
+</canvas>
+</div>
+<figcaption id="stage-note">Выделите автомобиль. Перемещайте рамку или тяните за её углы и стороны.</figcaption>
+</figure>
+    <div id="qform" class="qform" hidden>
+      <div class="row-file">
+<span id="file-name" title="">
+</span>
+<span id="file-size" class="num">
+</span>
+<button type="button" class="link-btn" id="change-file">Заменить</button>
+</div>
+      <fieldset class="bbox">
+<legend>Точная рамка <span>в пикселях исходного кадра</span>
+</legend>
+<div class="bbox-fields">
+        <label>X<input type="number" inputmode="numeric" id="bx" min="0" step="1" aria-label="Рамка: X">
+</label>
+<label>Y<input type="number" inputmode="numeric" id="by" min="0" step="1" aria-label="Рамка: Y">
+</label>
+<label>Ширина<input type="number" inputmode="numeric" id="bw" min="1" step="1" aria-label="Ширина рамки">
+</label>
+<label>Высота<input type="number" inputmode="numeric" id="bh" min="1" step="1" aria-label="Высота рамки">
+</label>
+      </div>
+<div class="bbox-actions">
+<button type="button" class="link-btn" id="whole-frame">Весь кадр</button>
+<button type="button" class="link-btn" id="clear-box">Сбросить рамку</button>
+</div>
+</fieldset>
+      <details class="advanced" id="advanced">
+<summary>Настройки поиска</summary>
+<fieldset class="params">
+<legend class="sr-only">Параметры поиска</legend>
+<label>Кандидатов, top-k<input type="number" id="topk" min="1" max="100" value="10">
+</label>
+<label>Порог отказа<input type="number" id="thr" step="any" placeholder="по умолчанию">
+</label>
+<p class="hint" id="thr-hint">Пусто — калиброванный порог сервиса.</p>
+</fieldset>
+</details>
+      <button type="button" id="run" class="primary" disabled>Найти кандидатов <span aria-hidden="true">→</span>
+</button>
+    </div>
+    <p id="error" class="error" hidden role="alert">
+</p>
+  </section>
+  <section class="panel results" aria-labelledby="h-results" aria-busy="false">
+    <div class="panel-heading results-head">
+<h3 id="h-results">Результат поиска</h3>
+<div class="export" id="export" hidden>
+<button type="button" class="link-btn" id="exp-csv" aria-label="Выгрузить результат в CSV">CSV ↓</button>
+<button type="button" class="link-btn" id="exp-json" aria-label="Выгрузить результат в JSON">JSON ↓</button>
+</div>
+</div>
+    <div id="placeholder" class="placeholder">
+<span class="pair-outline" aria-hidden="true">
+</span>
+<h4 id="placeholder-title">Выберите автомобиль для поиска</h4>
+<p id="placeholder-copy">Загрузите кадр и выделите объект. Здесь появятся кандидаты для сравнения или ответ об отсутствии совпадений выше порога.</p>
+</div>
+    <div id="search-loading" class="loading" hidden role="status">
+<span class="loading-line" aria-hidden="true">
+</span>
+<h4>Сравниваем с галереей</h4>
+<p>Результат появится, как только поиск завершится.</p>
+</div>
+    <div id="refusal" class="refusal" hidden>
+<p class="eyebrow">Поиск выполнен</p>
+<h4>Совпадений выше порога нет</h4>
+<p>Ни один объект галереи не прошёл выбранный порог. Ближайшие кадры можно открыть отдельно для ручной проверки.</p>
+<div class="scale" id="scale">
+</div>
+<dl class="facts" id="refusal-facts">
+</dl>
+<button type="button" class="secondary" id="show-below">Показать ближайшие ниже порога</button>
+</div>
+    <div id="summary" class="summary" hidden aria-live="polite">
+</div>
+<p class="below-note" id="below-note" hidden>Эти объекты не прошли порог. Они показаны для ручной проверки и не считаются принятыми совпадениями.</p>
+<ol id="cards" class="cards" hidden>
+</ol>
+  </section>
+  </div>
+  <section id="compare" class="compare" hidden aria-labelledby="h-compare">
+<div class="panel-heading">
+<div>
+<p class="eyebrow">Проверка деталей</p>
+<h3 id="h-compare">Сравнение пары</h3>
+</div>
+<button id="compare-close" type="button" class="link-btn">Закрыть сравнение</button>
+</div>
+<p class="compare-lead" id="compare-lead">
+</p>
+<div class="compare-pair">
+<figure>
+<div class="pair-image">
+<canvas id="compare-q">
+</canvas>
+</div>
+<figcaption>
+<b>Запрос</b>
+<span id="compare-query-name">
+</span>
+</figcaption>
+</figure>
+<figure>
+<div class="pair-image">
+<img id="compare-g" alt="Выбранный кандидат">
+</div>
+<figcaption>
+<b>Кандидат</b>
+<span id="compare-id">
+</span>
+</figcaption>
+</figure>
+</div>
+<div class="compare-actions">
+<button id="compare-view" class="secondary" type="button">Кадры целиком</button>
+<button id="compare-explain" class="secondary" type="button">Показать вклад областей</button>
+<span>Сравните силуэт, светотехнику и видимые детали.</span>
+</div>
+</section>
+  <section id="explain" class="explain" hidden aria-labelledby="h-explain">
+<div class="panel-heading">
+<div>
+<p class="eyebrow">Дополнительный разбор</p>
+<h3 id="h-explain">Вклад областей · первая OSNet</h3>
+</div>
+<button type="button" class="link-btn" id="explain-close">Закрыть разбор</button>
+</div>
+<p class="explain-lead" id="explain-lead" role="status">
+</p>
+<div class="explain-body" id="explain-body">
+<figure class="tile">
+<canvas id="ex-q">
+</canvas>
+<figcaption>Запрос<span id="ex-q-note">
+</span>
+</figcaption>
+</figure>
+<figure class="tile">
+<canvas id="ex-g">
+</canvas>
+<figcaption>Кандидат<span id="ex-g-note">
+</span>
+</figcaption>
+</figure>
+<div class="explain-side">
+<canvas id="ex-bar" class="bar" height="16">
+</canvas>
+<div class="bar-ticks" id="ex-ticks">
+</div>
+<ul class="legend">
+<li>
+<i class="sw sw-pos">
+</i>Поддерживает сходство</li>
+<li>
+<i class="sw sw-neg">
+</i>Снижает сходство</li>
+</ul>
+<dl class="facts" id="ex-facts">
+</dl>
+<p class="hint">Сумма вкладов и свободного члена равна косинусу первой OSNet. Это не оценка всего ансамбля поиска.</p>
+</div>
+</div>
+</section>
+</section>
+<section class="method shell" id="method" aria-labelledby="method-title">
+<div class="section-head">
+<div>
+<p class="eyebrow">Качество и метод</p>
+<h2 id="method-title">Что стоит за результатом</h2>
+</div>
+<p class="section-aside">Одинаковый признак.<br>
+<span>Два режима поиска.</span>
+</p>
+</div>
+  <div class="method-grid">
+<article class="method-intro">
+<h3>Сравниваем внешний вид</h3>
+<p>Из выбранной рамки две модели OSNet-AIN извлекают признаки. Вторая модель дообучена нами. Нормировка, объединение и whitening дают вектор из 512 чисел.</p>
+<div class="pipeline" aria-label="Конвейер обработки">
+<span>Кадр + рамка</span>
+<span>Две модели</span>
+<span>512 признаков</span>
+<span>Поиск в галерее</span>
+</div>
+<p class="hint">OCR и чтение номера в pipeline не входят. Это не доказывает полной независимости от изображения номерной пластины.</p>
+</article>
+  <div class="metric-table">
+<table>
+<caption>Локальная валидация d1_j48</caption>
+<thead>
+<tr>
+<th scope="col">Режим</th>
+<th scope="col">mAP</th>
+<th scope="col">Rank-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Этот сервис <span>Косинусный поиск</span>
+</th>
+<td>0,7316</td>
+<td>0,6851</td>
+</tr>
+<tr>
+<th scope="row">Пакетный режим <span>k-reciprocal</span>
+</th>
+<td>0,7741</td>
+<td>0,7308</td>
+</tr>
+</tbody>
+</table>
+<p class="hint">1 110 запросов × 750 объектов галереи; 832 запроса с допустимой парой. Совпадения одной камеры исключены. Full-ranking mAP не является долей правильных ответов на любых данных.</p>
+</div>
+</div>
+  <div class="method-details">
+<details>
+<summary>Как понимать близость и отказ</summary>
+<p>Близость — косинусная оценка от −1 до 1, а не вероятность того, что это тот же автомобиль. API принимает кандидата, если исходная оценка не ниже порога; отображаемое число округлено. Поэтому оценка у границы может выглядеть чуть ниже полного порога.</p>
+<p>Порог выбран на использованном validation-сплите. Для новой галереи, камер и условий качество отказа требует отдельной проверки. Ближайшие объекты ниже порога — материал для ручного сравнения.</p>
+</details>
+<details>
+<summary>Почему режимы дают разные числа</summary>
+<p>Интерактивный сервис сравнивает один запрос с галереей по косинусу. Пакетный k-reciprocal учитывает окрестности сразу всех запросов и галереи; его результат зависит от состава batch. Метрики и порог пакетного режима нельзя приписывать этому экрану.</p>
+</details>
+<details>
+<summary>Что показывает разбор областей</summary>
+<p>Красные области поддерживают сходство пары, синие — снижают его. Разложение относится к первой OSNet-AIN. Поиск использует две модели и whitening, поэтому число в разборе может отличаться от оценки кандидата. Карта помогает исследованию; она не подтверждает личность автомобиля.</p>
+</details>
+<details>
+<summary>Границы и сложные случаи</summary>
+<p>Сильная смена ракурса, похожие автомобили и освещение могут привести к ошибкам. В галерее может не быть нужного объекта. Демонстрационные кадры показывают выполнение API; закрытый test организатора не имеет доступных нам меток, поэтому его выдача не служит подтверждением качества.</p>
+</details>
+</div>
+</section>
+<section class="materials shell" id="materials" aria-labelledby="materials-title">
+<div class="section-head">
+<div>
+<p class="eyebrow">Материалы решения</p>
+<h2 id="materials-title">От поиска — к проверке</h2>
+</div>
+<p class="section-aside" id="deployment-status">Локальная подготовка<br>
+<span>DEPLOY PENDING</span>
+</p>
+</div>
+<p class="materials-intro">Инструкция, метод и воспроизводимый комплект. Выгрузка вашего текущего поиска доступна над результатами.</p>
+<div class="material-links" id="material-links">
+<a href="/docs">
+<span>Документация API</span>
+<span aria-hidden="true">↗</span>
+</a>
+<a href="/openapi.json">
+<span>Спецификация OpenAPI</span>
+<span aria-hidden="true">↗</span>
+</a>
+</div>
+<p class="hint" id="materials-status">
+</p>
+</section>
+</main>
+<footer class="foot shell">
+<a class="brand" href="#home">
+<span class="brand-mark" aria-hidden="true">
+</span>
+<span>Vehicle <b>ReID</b>
+</span>
+</a>
+<div>
+<span id="foot-service">Проверяем версию сервиса</span>
+<span id="foot-model">
+</span>
+</div>
+<span>ЛЦТ 2026 · Команда 33</span>
 </footer>
-
-<script src="/static/app.js"></script>
+<script src="/static/app.js">
+</script>
 </body>
 </html>
