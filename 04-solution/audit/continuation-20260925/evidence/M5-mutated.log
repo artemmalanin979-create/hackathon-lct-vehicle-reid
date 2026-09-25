@@ -1,0 +1,45 @@
+test_corrupt_explicit_file_does_not_fall_back_to_valid_shadow (test_image_names.ImageNameTests.test_corrupt_explicit_file_does_not_fall_back_to_valid_shadow) ... ok
+test_dotted_id_keeps_shadow_protection_for_its_full_name (test_image_names.ImageNameTests.test_dotted_id_keeps_shadow_protection_for_its_full_name) ... ok
+test_dotted_id_resolves_through_symlink (test_image_names.ImageNameTests.test_dotted_id_resolves_through_symlink) ... ok
+test_dotted_id_without_image_extension_resolves_by_appending (test_image_names.ImageNameTests.test_dotted_id_without_image_extension_resolves_by_appending) ... ok
+test_explicit_filename_is_not_replaced_by_appended_extension (test_image_names.ImageNameTests.test_explicit_filename_is_not_replaced_by_appended_extension) ... ok
+test_extensionless_ids_keep_existing_priority_and_fallbacks (test_image_names.ImageNameTests.test_extensionless_ids_keep_existing_priority_and_fallbacks) ... ok
+test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract) ... Входы не готовы: 1 проблем.
+  Нет изображения: image_id=car.png, каталог /tmp/tmp5hdu4_ac, расширения ('.jpg',)
+Положите CSV и images/ из набора организатора задачи №7 в каталог данных. Набор доступен участнику в личном кабинете, жюри — у организатора. Проверьте пути --query/--gallery/--csv и --images-dir; в Compose — DATA_DIR. Инструкция: 04-solution/reproduce/README.md.
+Вычисления не запущены.
+
+  test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract) (image_id='car.png') ... ERROR
+test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg) ... FAIL
+test_missing_explicit_filename_never_falls_back_to_shadow_file (test_image_names.ImageNameTests.test_missing_explicit_filename_never_falls_back_to_shadow_file) ... ok
+
+======================================================================
+ERROR: test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract) (image_id='car.png')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/case/04-solution/service/tests/test_image_names.py", line 102, in test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract
+    require_dataset([csv], self.root, suffixes=(".jpg",))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/case/04-solution/service/app/input_checks.py", line 98, in require_dataset
+    require_images(images_dir, image_ids, suffixes=suffixes)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/case/04-solution/service/app/input_checks.py", line 78, in require_images
+    fail_inputs(problems, DATA_HINT)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/case/04-solution/service/app/input_checks.py", line 25, in fail_inputs
+    raise SystemExit(2)
+SystemExit: 2
+
+======================================================================
+FAIL: test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/case/04-solution/service/tests/test_image_names.py", line 109, in test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg
+    with contextlib.redirect_stderr(stderr), self.assertRaises(SystemExit) as exc:
+                                             ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: SystemExit not raised
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.680s
+
+FAILED (failures=1, errors=1)

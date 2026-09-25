@@ -92,10 +92,26 @@ class ImageNameTests(unittest.TestCase):
                          self.root / "frame.v1.png.jpg")
 
     def test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract(self):
-        Image.new("RGB", (8, 8)).save(self.root / "stem.v1.jpg")
+        # A research caller explicitly appends .jpg even when an ID happens
+        # to end in .png. Removing the empty-suffix guard breaks this case.
+        for name in ("stem.v1", "car.png"):
+            with self.subTest(image_id=name):
+                Image.new("RGB", (8, 8)).save(self.root / (name + ".jpg"))
+                csv = self.root / "query.csv"
+                csv.write_text(f"image_id,x,y,w,h\n{name},0,0,8,8\n")
+                require_dataset([csv], self.root, suffixes=(".jpg",))
+
+    def test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg(self):
+        Image.new("RGB", (8, 8)).save(self.root / "car.png")
         csv = self.root / "query.csv"
-        csv.write_text("image_id,x,y,w,h\nstem.v1,0,0,8,8\n")
-        require_dataset([csv], self.root, suffixes=(".jpg",))
+        csv.write_text("image_id,x,y,w,h\ncar.png,0,0,8,8\n")
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr), self.assertRaises(SystemExit) as exc:
+            require_dataset([csv], self.root, suffixes=(".jpg",))
+        self.assertEqual(exc.exception.code, 2)
+        self.assertIn("car.png", stderr.getvalue())
+        # The same real file is valid under the service's literal-name contract.
+        require_dataset([csv], self.root)
 
 
 if __name__ == "__main__":

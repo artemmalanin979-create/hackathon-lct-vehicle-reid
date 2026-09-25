@@ -1,0 +1,45 @@
+test_stream_preflight_does_not_consume_or_open_csv (test_cli_inputs.CliInputTests.test_stream_preflight_does_not_consume_or_open_csv) ... 
+  test_stream_preflight_does_not_consume_or_open_csv (test_cli_inputs.CliInputTests.test_stream_preflight_does_not_consume_or_open_csv) (kind='pipe') ... FAIL
+  test_stream_preflight_does_not_consume_or_open_csv (test_cli_inputs.CliInputTests.test_stream_preflight_does_not_consume_or_open_csv) (kind='fifo') ... ERROR
+
+======================================================================
+ERROR: test_stream_preflight_does_not_consume_or_open_csv (test_cli_inputs.CliInputTests.test_stream_preflight_does_not_consume_or_open_csv) (kind='fifo')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/case/04-solution/reproduce/test_cli_inputs.py", line 97, in test_stream_preflight_does_not_consume_or_open_csv
+    p = subprocess.run([sys.executable, "-B", "-S", "-c", code,
+                        str(self.root), kind],
+                       cwd=REPO / "04-solution/service", timeout=10,
+                       capture_output=True, text=True)
+  File "/usr/local/lib/python3.13/subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/subprocess.py", line 1222, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/subprocess.py", line 2155, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/subprocess.py", line 1269, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/usr/local/bin/python', '-B', '-S', '-c', '\nimport os, sys, threading\nfrom pathlib import Path\nfrom app.input_checks import require_dataset\nroot, kind = Path(sys.argv[1]), sys.argv[2]\npayload = "image_id,x,y,w,h\\npresent,0,0,1,1\\n"\nif kind == "pipe":\n    read_fd, write_fd = os.pipe()\n    os.write(write_fd, payload.encode())\n    os.close(write_fd)\n    path = Path(f"/dev/fd/{read_fd}")\nelse:\n    path = root / "input.fifo"\n    os.mkfifo(path)\n    # Preflight must even work before the writer exists.\n    require_dataset([path], root)\n    def write():\n        path.write_text(payload)\n    threading.Thread(target=write, daemon=True).start()\nrequire_dataset([path], root)\nassert path.read_text() == payload\nprint("stream preserved")\n', '/tmp/tmplov8_88_', 'fifo']' timed out after 10 seconds
+
+======================================================================
+FAIL: test_stream_preflight_does_not_consume_or_open_csv (test_cli_inputs.CliInputTests.test_stream_preflight_does_not_consume_or_open_csv) (kind='pipe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/case/04-solution/reproduce/test_cli_inputs.py", line 101, in test_stream_preflight_does_not_consume_or_open_csv
+    self.assertEqual(p.returncode, 0, p.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : Входы не готовы: 1 проблем.
+  Нет изображения: image_id=present, каталог /tmp/tmplov8_88_, расширения ('.jpg', '.jpeg', '.png', '')
+Положите CSV и images/ из набора организатора задачи №7 в каталог данных. Набор доступен участнику в личном кабинете, жюри — у организатора. Проверьте пути --query/--gallery/--csv и --images-dir; в Compose — DATA_DIR. Инструкция: 04-solution/reproduce/README.md.
+Вычисления не запущены.
+
+
+----------------------------------------------------------------------
+Ran 1 test in 10.346s
+
+FAILED (failures=1, errors=1)

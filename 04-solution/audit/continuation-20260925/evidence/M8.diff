@@ -1,0 +1,11 @@
+--- 04-solution/service/app/input_checks.py
++++ 04-solution/service/app/input_checks.py
+@@ -85,8 +85,6 @@
+     for path in csv_paths:
+         # A pipe/FIFO cannot be replayed. Leave it intact for the actual loader;
+         # early image diagnostics are deliberately limited to regular CSV files.
+-        if not Path(path).is_file():
+-            continue
+         try:
+             with Path(path).open(newline="") as stream:
+                 rows = list(csv.DictReader(stream))

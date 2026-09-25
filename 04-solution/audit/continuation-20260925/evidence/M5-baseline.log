@@ -1,0 +1,14 @@
+test_corrupt_explicit_file_does_not_fall_back_to_valid_shadow (test_image_names.ImageNameTests.test_corrupt_explicit_file_does_not_fall_back_to_valid_shadow) ... ok
+test_dotted_id_keeps_shadow_protection_for_its_full_name (test_image_names.ImageNameTests.test_dotted_id_keeps_shadow_protection_for_its_full_name) ... ok
+test_dotted_id_resolves_through_symlink (test_image_names.ImageNameTests.test_dotted_id_resolves_through_symlink) ... ok
+test_dotted_id_without_image_extension_resolves_by_appending (test_image_names.ImageNameTests.test_dotted_id_without_image_extension_resolves_by_appending) ... ok
+test_explicit_filename_is_not_replaced_by_appended_extension (test_image_names.ImageNameTests.test_explicit_filename_is_not_replaced_by_appended_extension) ... ok
+test_extensionless_ids_keep_existing_priority_and_fallbacks (test_image_names.ImageNameTests.test_extensionless_ids_keep_existing_priority_and_fallbacks) ... ok
+test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_keeps_its_explicit_suffix_contract) ... ok
+test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg (test_image_names.ImageNameTests.test_jpeg_only_research_preflight_rejects_a_literal_png_without_jpeg) ... ok
+test_missing_explicit_filename_never_falls_back_to_shadow_file (test_image_names.ImageNameTests.test_missing_explicit_filename_never_falls_back_to_shadow_file) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.166s
+
+OK

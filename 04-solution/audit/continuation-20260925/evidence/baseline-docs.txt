@@ -1,0 +1,10 @@
+test_changed_source_is_rejected_without_rewriting_pdf (test_build_pdf.PdfFreshnessTests.test_changed_source_is_rejected_without_rewriting_pdf) ... ok
+test_missing_and_invalid_pdf_are_diagnostic (test_build_pdf.PdfFreshnessTests.test_missing_and_invalid_pdf_are_diagnostic) ... ok
+test_shipped_pdf_is_current (test_build_pdf.PdfFreshnessTests.test_shipped_pdf_is_current) ... ok
+test_f1_reports_numeric_profile_order_and_changed_decisions (test_known_boundaries.BoundaryDocumentationTests.test_f1_reports_numeric_profile_order_and_changed_decisions) ... ok
+test_f7_count_has_explicit_zero_threshold_and_gallery_size (test_known_boundaries.BoundaryDocumentationTests.test_f7_count_has_explicit_zero_threshold_and_gallery_size) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.166s
+
+OK

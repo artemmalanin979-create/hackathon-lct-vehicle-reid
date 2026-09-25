@@ -1,0 +1,6 @@
+test_stream_preflight_does_not_consume_or_open_csv (test_cli_inputs.CliInputTests.test_stream_preflight_does_not_consume_or_open_csv) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.640s
+
+OK

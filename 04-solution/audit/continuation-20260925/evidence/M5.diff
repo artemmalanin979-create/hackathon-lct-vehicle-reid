@@ -1,0 +1,11 @@
+--- 04-solution/service/app/input_checks.py
++++ 04-solution/service/app/input_checks.py
+@@ -61,7 +61,7 @@
+     `cam.2026.09.24`) is part of the ID, so the usual extension search applies.
+     Callers using only ('.jpg',) retain their JPEG-only research contract.
+     """
+-    if "" in suffixes and Path(image_id).suffix.lower() in IMAGE_SUFFIXES:
++    if Path(image_id).suffix.lower() in IMAGE_SUFFIXES:
+         suffixes = ("",)
+     return [Path(images_dir) / f"{image_id}{suffix}" for suffix in suffixes]
+ 
