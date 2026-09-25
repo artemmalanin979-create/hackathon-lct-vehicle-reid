@@ -28,6 +28,35 @@
 
 После разрешённой аренды: на VPS установить Docker/Compose и reverse proxy, передать `release/` по разрешённому каналу, `docker load -i runtime/service.tar`, импортировать Qdrant archive, `docker compose --env-file release.env -f compose.yaml up -d`; проверить `seed` exit0, API health, `/api/version` хеши, демо-поиск/отказ, выгрузки, PDF, отсутствие внешних запросов из UI и доступ из другой сети. Публичный DNS/TLS настраивать только с подтверждённым доменом, Qdrant оставлять без внешнего порта. `DEPLOYMENT_STATUS` менять на deployed после внешней проверки, не заранее.
 
+Точная локальная сборка после интеграции и commit (из корня репозитория; `<каталог>` в этой строке — пояснение, не shell-токен):
+
+```bash
+RELEASE_SHA=$(git rev-parse HEAD)
+podman build --pull=never --network=none --build-arg SOURCE_SHA="$RELEASE_SHA" \
+  -t "localhost/lct-release:$RELEASE_SHA" 04-solution/service
+python3 04-solution/service/deploy/prepare_release.py \
+  --data data \
+  --public-slides 05-presentation/checks/content_preview.pdf \
+  --image "localhost/lct-release:$RELEASE_SHA" \
+  --out "outputs/continuation-20260925/release-$RELEASE_SHA"
+python3 04-solution/service/deploy/verify_release.py \
+  "outputs/continuation-20260925/release-$RELEASE_SHA"
+```
+
+На **уже разрешённом** VPS, после передачи проверенного каталога и установки Docker/Compose:
+
+```bash
+cd /путь/к/release-<SHA>
+docker load -i runtime/service.tar
+docker load -i runtime/qdrant-v1.15.5.tar.gz
+docker compose --env-file release.env -f compose.yaml -p lct-release up -d
+docker compose --env-file release.env -f compose.yaml -p lct-release ps
+curl --fail http://127.0.0.1:18071/api/health
+curl --fail http://127.0.0.1:18071/api/version
+```
+
+`/путь/к/release-<SHA>` означает реальный каталог перенесённого bundle. Перед публичным открытием proxy должен направлять на этот loopback-порт, а его DNS-имя/TLS и вся UI-цепочка проверяться с внешней сети. Если предыдущий релиз ещё работает, выбрать новому другой `API_PORT` в копии `release.env` и отдельное имя Compose-проекта; переключить только proxy после проверки новой версии. `DEPLOYMENT_STATUS` в публичных материалах остаётся PENDING до фактической внешней проверки, затем задаётся в env и API контейнер пересоздаётся.
+
 Rollback: сохранить предыдущий каталог релиза, image tag, volume и manifest. При дефекте вернуть proxy на прежний localhost endpoint/старый контейнер; новую коллекцию не перезаписывать. Если установлен только один релиз, резерв — canonical `artifacts-final` и штатный офлайн Compose, испытанный до изменений. Удаление VPS/volume и остановку публичного доступа делать только по отдельному решению владельца.
 
 ## Оставшиеся решения владельца
