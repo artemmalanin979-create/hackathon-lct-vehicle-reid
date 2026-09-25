@@ -1,0 +1,1 @@
+PASS: baseline 2/2 → nonempty JS diff → stale export FAIL → source hash unchanged → baseline 2/2

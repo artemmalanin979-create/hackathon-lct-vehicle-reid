@@ -1,0 +1,18 @@
+PASS layout-390-light
+PASS layout-390-dark
+PASS layout-768-light
+PASS layout-768-dark
+PASS layout-1440-light
+PASS layout-1440-dark
+PASS bbox-mouse-numeric-zoom
+PASS bbox-touch
+PASS loading-refusal-and-export
+PASS invalid-file-and-search-error
+PASS explain-error-preserves-search
+PASS empty-gallery-recovers
+PASS explain-waits-for-gallery-pixels
+PASS below-json-ranks-match-screen
+PASS demo-load-disables-search
+PASS long-cyrillic-filename-export
+PASS missing-demo-keyboard-theme
+{"passed":17,"failed":0,"external":0}
