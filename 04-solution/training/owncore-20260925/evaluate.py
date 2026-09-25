@@ -39,6 +39,14 @@ def require_sha256(path: Path, expected: str) -> str:
     return actual
 
 
+def require_evaluator_files(repo: Path, evaluation_protocol: dict) -> None:
+    """The evaluator imports scope_metrics.py; freeze both before importing it."""
+    require_sha256(repo / "04-solution/eval/reid_metrics.py",
+                   evaluation_protocol["evaluator_sha256"])
+    require_sha256(repo / "04-solution/eval/scope_metrics.py",
+                   evaluation_protocol["evaluator_scope_dependency_sha256"])
+
+
 def read_dev_thresholds(path: Path, expected_sha256: str) -> dict:
     """Accept only immutable dev selection; never derive refusal on val labels."""
     require_sha256(path, expected_sha256)
@@ -155,8 +163,8 @@ def _read_csv(path: Path) -> list[dict]:
 def validate_frozen_inputs(repo: Path, data_dir: Path, protocol: dict) -> dict:
     """Check CSV, every val JPG and implementation before any model inference."""
     ev, dat = protocol["evaluation"], protocol["data"]
+    require_evaluator_files(repo, ev)
     for key, relative in (
-        ("evaluator_sha256", "04-solution/eval/reid_metrics.py"),
         ("reranker_sha256", "04-solution/service/app/core/rerank.py"),
         ("preprocess_sha256", "04-solution/service/app/core/preprocess.py"),
         ("baseline_model_a_sha256", "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx"),

@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 from evaluate import (DEFAULT_REPO, HERE, _evaluation_modules, _validate_embeddings,
-                      evaluate_matrix, fuse_embeddings, require_sha256,
+                      evaluate_matrix, fuse_embeddings, require_evaluator_files, require_sha256,
                       score_matrix)
 
 
@@ -73,8 +73,8 @@ def select_on_dev(repo: Path, protocol_path: Path, protocol_sha256: str,
     require_sha256(raw_crops, protocol["data"]["train_crops_sha256"])
     require_sha256(model, model_sha256)
     ev = protocol["evaluation"]
+    require_evaluator_files(repo, ev)
     for key, relative in (
-        ("evaluator_sha256", "04-solution/eval/reid_metrics.py"),
         ("reranker_sha256", "04-solution/service/app/core/rerank.py"),
         ("preprocess_sha256", "04-solution/service/app/core/preprocess.py"),
         ("baseline_model_a_sha256", "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx"),

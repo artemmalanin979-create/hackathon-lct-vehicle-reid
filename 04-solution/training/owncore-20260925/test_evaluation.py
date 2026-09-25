@@ -31,6 +31,21 @@ class EvaluationContracts(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "SHA-256"):
                 own_eval.require_sha256(path, "0" * 64)
 
+    def test_evaluator_sibling_scope_dependency_hash_is_required(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            source = repo / "04-solution/eval"
+            source.mkdir(parents=True)
+            (source / "reid_metrics.py").write_bytes(b"main evaluator")
+            sibling = source / "scope_metrics.py"
+            sibling.write_bytes(b"ranking scopes")
+            frozen = {"evaluator_sha256": hashlib.sha256(b"main evaluator").hexdigest(),
+                      "evaluator_scope_dependency_sha256": hashlib.sha256(b"ranking scopes").hexdigest()}
+            own_eval.require_evaluator_files(repo, frozen)
+            sibling.write_bytes(b"silent scope mutation")
+            with self.assertRaisesRegex(ValueError, "SHA-256"):
+                own_eval.require_evaluator_files(repo, frozen)
+
     def test_only_hash_checked_dev_thresholds_are_used(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "selection.json"
