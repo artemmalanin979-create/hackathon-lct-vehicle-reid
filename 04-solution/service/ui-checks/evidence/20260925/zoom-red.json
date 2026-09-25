@@ -1,0 +1,18 @@
+{
+  "started": "2026-09-25T17:18:20.539Z",
+  "cases": [
+    {
+      "name": "bbox-mouse-numeric-zoom",
+      "status": "FAIL",
+      "error": "bbox X respects the rendered scale at 200%"
+    }
+  ],
+  "screens": [
+    "200percent-query.png"
+  ],
+  "external": [],
+  "errors": [],
+  "finished": "2026-09-25T17:18:25.823Z",
+  "passed": 0,
+  "failed": 1
+}

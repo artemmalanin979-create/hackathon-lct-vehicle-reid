@@ -1,0 +1,11 @@
+--- /home/artem/projects/lct-ui-20260925/04-solution/service/app/static/app.js	2026-09-25 20:26:53.508829412 +0300
++++ /home/artem/tmp/lct-ui-20260925/accepted-mutation/copy-d4HXig/app.js	2026-09-25 20:29:02.486900340 +0300
+@@ -482,7 +482,7 @@
+   try {
+     const r = await fetch("/api/search", { method: "POST", body: queryForm(query), signal: controller.signal });
+     const data = await r.json();
+-    if (revision !== app.revision || controller.signal.aborted) return;
++    // MUTATION: accept an obsolete parsed response.
+     if (!r.ok) { showError(apiError(r.status, data)); return; }
+     app.last = Object.freeze({ at: new Date(), snapshot: query, revision,
+       query: Object.freeze({file: query.file.name, ...query.box, top_k: query.top_k}), resp: data });

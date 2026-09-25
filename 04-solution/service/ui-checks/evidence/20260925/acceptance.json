@@ -1,0 +1,160 @@
+{
+  "started": "2026-09-25T17:27:55.108Z",
+  "cases": [
+    {
+      "name": "layout-390-light",
+      "status": "PASS"
+    },
+    {
+      "name": "layout-390-dark",
+      "status": "PASS"
+    },
+    {
+      "name": "layout-768-light",
+      "status": "PASS"
+    },
+    {
+      "name": "layout-768-dark",
+      "status": "PASS"
+    },
+    {
+      "name": "layout-1440-light",
+      "status": "PASS"
+    },
+    {
+      "name": "layout-1440-dark",
+      "status": "PASS"
+    },
+    {
+      "name": "bbox-mouse-numeric-zoom",
+      "status": "PASS"
+    },
+    {
+      "name": "bbox-touch",
+      "status": "PASS"
+    },
+    {
+      "name": "loading-refusal-and-export",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid-file-and-search-error",
+      "status": "PASS"
+    },
+    {
+      "name": "explain-error-preserves-search",
+      "status": "PASS"
+    },
+    {
+      "name": "empty-gallery-recovers",
+      "status": "PASS"
+    },
+    {
+      "name": "explain-waits-for-gallery-pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "below-json-ranks-match-screen",
+      "status": "PASS"
+    },
+    {
+      "name": "demo-load-disables-search",
+      "status": "PASS"
+    },
+    {
+      "name": "long-cyrillic-filename-export",
+      "status": "PASS"
+    },
+    {
+      "name": "missing-demo-keyboard-theme",
+      "status": "PASS"
+    }
+  ],
+  "screens": [
+    "390-light-query.png",
+    "390-light-search.png",
+    "390-light-compare.png",
+    "390-light-explain.png",
+    "390-light-loading.png",
+    "390-light-refusal.png",
+    "390-light-error.png",
+    "390-dark-query.png",
+    "390-dark-search.png",
+    "390-dark-compare.png",
+    "390-dark-explain.png",
+    "390-dark-loading.png",
+    "390-dark-refusal.png",
+    "390-dark-error.png",
+    "768-light-query.png",
+    "768-light-search.png",
+    "768-light-compare.png",
+    "768-light-explain.png",
+    "768-light-loading.png",
+    "768-light-refusal.png",
+    "768-light-error.png",
+    "768-dark-query.png",
+    "768-dark-search.png",
+    "768-dark-compare.png",
+    "768-dark-explain.png",
+    "768-dark-loading.png",
+    "768-dark-refusal.png",
+    "768-dark-error.png",
+    "1440-light-query.png",
+    "1440-light-search.png",
+    "1440-light-compare.png",
+    "1440-light-explain.png",
+    "1440-light-loading.png",
+    "1440-light-refusal.png",
+    "1440-light-error.png",
+    "1440-dark-query.png",
+    "1440-dark-search.png",
+    "1440-dark-compare.png",
+    "1440-dark-explain.png",
+    "1440-dark-loading.png",
+    "1440-dark-refusal.png",
+    "1440-dark-error.png",
+    "200percent-query.png",
+    "200percent-result.png",
+    "390-touch-bbox.png",
+    "loading.png",
+    "refusal.png",
+    "below-threshold.png",
+    "invalid-file.png",
+    "network-error.png",
+    "explain-error.png",
+    "gallery-preparing.png",
+    "390-long-filename.png",
+    "no-demo-keyboard.png"
+  ],
+  "external": [],
+  "errors": [],
+  "evidence": {
+    "head": "7229f12eb667f5737f227f02460ca851cbd1cc30",
+    "branch": "ui/20260925",
+    "source_sha256": {
+      "index.html": "5bf3301eef9678e26e84a6e4741b64b6eee2743860dcac6a41171d4fffe29d77",
+      "app.css": "790a82dfe769e791e2d9c6f0d26477950314e621f10a1d2ed76de8da7299cae7",
+      "app.js": "98d403ccfc909e03bafa7ee347d299dccbaba443bcd314fd1b9ab83a2a8bfbd3"
+    },
+    "input_sha256": {
+      "test_query.csv": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c",
+      "test_gallery.csv": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496",
+      "images/a4f2a13bd2b54360a921c8ef7366e535.jpg": "5ff38c1593f271fe448f8e2872acd51e7e83a09034d60dc84319bbd8cdafbd35"
+    },
+    "node": "v20.20.2",
+    "playwright": "1.63.0",
+    "command": [
+      "/home/artem/.local/node-v20.20.2-linux-x64/bin/node",
+      "/home/artem/projects/lct-ui-20260925/04-solution/service/ui-checks/acceptance.cjs",
+      "http://127.0.0.1:18070",
+      "/home/artem/projects/hackathon-lct-vehicle-reid/data",
+      "/home/artem/tmp/lct-ui-20260925/accepted-matrix"
+    ],
+    "filter": null,
+    "source_override": null,
+    "browser": "153.0.8010.52"
+  },
+  "finished": "2026-09-25T17:30:23.318Z",
+  "passed": 17,
+  "failed": 0
+}

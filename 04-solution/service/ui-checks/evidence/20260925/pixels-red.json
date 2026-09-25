@@ -1,0 +1,16 @@
+{
+  "started": "2026-09-25T17:26:27.430Z",
+  "cases": [
+    {
+      "name": "explain-waits-for-gallery-pixels",
+      "status": "FAIL",
+      "error": "explanation must not claim completion before candidate pixels load\n+ actual - expected\n\n+ 'Модель объясненияOSNet-AIN · OMZКосинус OSNet-AIN0.992384Сетка признаков13 × 1310 % ячеек дают42 % вклада запросаНевязка разложения2.38e-8Время расчёта1202 мс'\n- ''"
+    }
+  ],
+  "screens": [],
+  "external": [],
+  "errors": [],
+  "finished": "2026-09-25T17:26:33.068Z",
+  "passed": 0,
+  "failed": 1
+}

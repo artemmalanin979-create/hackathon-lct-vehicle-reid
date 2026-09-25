@@ -1,0 +1,19 @@
+{
+  "source": "/home/artem/projects/lct-ui-20260925/04-solution/service/app/static/app.js",
+  "source_sha256": "98d403ccfc909e03bafa7ee347d299dccbaba443bcd314fd1b9ab83a2a8bfbd3",
+  "mutant_sha256": "117eadd54f71ab37e8ed753278fb474bb7c047278a38b53b256fd1562352b7c1",
+  "baseline": {
+    "exit": 0,
+    "passed": 2
+  },
+  "negative": {
+    "exit": 1,
+    "passed": 1,
+    "failed": 1
+  },
+  "restored": {
+    "exit": 0,
+    "passed": 2
+  },
+  "status": "KILLED: semantic stale export assertion"
+}

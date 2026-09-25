@@ -1,0 +1,121 @@
+{
+  "base": "http://127.0.0.1:18070",
+  "started": "2026-09-25T16:57:38.535Z",
+  "cases": [
+    {
+      "name": "positive-search-export",
+      "status": "PASS"
+    },
+    {
+      "name": "bbox-invalidates-export",
+      "status": "FAIL",
+      "error": "changed query must not retain/export the previous response"
+    },
+    {
+      "name": "late-search-after-bbox",
+      "status": "FAIL",
+      "error": "changed query must not retain/export the previous response"
+    },
+    {
+      "name": "late-search-after-file",
+      "status": "FAIL",
+      "error": "changed query must not retain/export the previous response"
+    },
+    {
+      "name": "network-error-removes-prior-export",
+      "status": "FAIL",
+      "error": "changed query must not retain/export the previous response"
+    },
+    {
+      "name": "late-below-after-bbox",
+      "status": "FAIL",
+      "error": "changed query must not retain/export the previous response"
+    },
+    {
+      "name": "late-explain-after-file",
+      "status": "FAIL",
+      "error": "no uncaught browser error\n\n1 !== 0\n"
+    }
+  ],
+  "requests": [
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/f0848805-4d27-440f-93a2-ff26bf563e3d",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/9e38dd37-e1a3-40d2-bae3-b0263e3a3c4d",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/4c76f3ba-512d-43f5-a55d-ec530097a50f",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/6f275498-8ad3-4f49-adbd-1ac76ca62cb0",
+    "http://127.0.0.1:18070/api/search",
+    "blob:http://127.0.0.1:18070/b79512f1-6f30-43bc-ad2b-754105255e4b",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/b637c74d-873d-48ed-8563-28cf1bebe239",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/a6cd950e-f1e1-4868-90ac-d164ab4c168d",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/d0e41bf891254ba0872f1641139f84f6/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/aa082284f9894b5aa210c179d59999b1/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/051d304b7139431fb3bff19b4e75aff7/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/2ece45504eff42469c104dc2a2d03caf/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/7584980704ae4617bb27ca162cc9c5db/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/34b736136487439389c10cc6bd4e9f4e/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/5fc200cab89346658c9c91cce27e85fe/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/be8953cc364d46cebbcc2c2da2c348ab/crop?size=360",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "blob:http://127.0.0.1:18070/2bf8b5dc-14ac-456f-b1b5-63564216e379",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=360",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=360",
+    "http://127.0.0.1:18070/api/explain",
+    "blob:http://127.0.0.1:18070/04cadc2d-797e-44f7-a759-c74a9649dc28"
+  ],
+  "browserErrors": [
+    {
+      "test": "late-explain-after-file",
+      "error": "Cannot read properties of null (reading 'x')"
+    }
+  ],
+  "finished": "2026-09-25T16:58:08.506Z",
+  "passed": 1,
+  "failed": 6,
+  "externalRequests": []
+}

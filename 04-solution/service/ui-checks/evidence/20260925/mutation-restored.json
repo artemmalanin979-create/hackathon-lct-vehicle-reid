@@ -1,0 +1,71 @@
+{
+  "base": "http://127.0.0.1:18070",
+  "started": "2026-09-25T17:29:12.603Z",
+  "cases": [
+    {
+      "name": "positive-search-export",
+      "status": "PASS"
+    },
+    {
+      "name": "late-search-after-bbox",
+      "status": "PASS"
+    }
+  ],
+  "requests": [
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/static/fonts/AdwaitaSans-Regular.ttf",
+    "http://127.0.0.1:18070/static/fonts/Montserrat-SemiBold.otf",
+    "http://127.0.0.1:18070/api/ui/state",
+    "http://127.0.0.1:18070/api/demo",
+    "http://127.0.0.1:18070/api/materials",
+    "http://127.0.0.1:18070/api/demo/street/image",
+    "blob:http://127.0.0.1:18070/38b5e70e-a841-47ba-a45f-8200962bf70b",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=560",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=560",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/static/fonts/AdwaitaSans-Regular.ttf",
+    "http://127.0.0.1:18070/static/fonts/Montserrat-SemiBold.otf",
+    "http://127.0.0.1:18070/api/ui/state",
+    "http://127.0.0.1:18070/api/demo",
+    "http://127.0.0.1:18070/api/materials",
+    "http://127.0.0.1:18070/api/demo/street/image",
+    "blob:http://127.0.0.1:18070/4918b68e-3078-4d30-8350-469298347364",
+    "http://127.0.0.1:18070/api/search"
+  ],
+  "browserErrors": [],
+  "evidence": {
+    "head": "7229f12eb667f5737f227f02460ca851cbd1cc30",
+    "branch": "ui/20260925",
+    "source_sha256": {
+      "index.html": "5bf3301eef9678e26e84a6e4741b64b6eee2743860dcac6a41171d4fffe29d77",
+      "app.css": "790a82dfe769e791e2d9c6f0d26477950314e621f10a1d2ed76de8da7299cae7",
+      "app.js": "98d403ccfc909e03bafa7ee347d299dccbaba443bcd314fd1b9ab83a2a8bfbd3"
+    },
+    "input_sha256": {
+      "test_query.csv": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c",
+      "test_gallery.csv": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496",
+      "images/a4f2a13bd2b54360a921c8ef7366e535.jpg": "5ff38c1593f271fe448f8e2872acd51e7e83a09034d60dc84319bbd8cdafbd35"
+    },
+    "node": "v20.20.2",
+    "playwright": "1.63.0",
+    "command": [
+      "/home/artem/.local/node-v20.20.2-linux-x64/bin/node",
+      "/home/artem/projects/lct-ui-20260925/04-solution/service/ui-checks/behavior.cjs",
+      "http://127.0.0.1:18070",
+      "/home/artem/projects/hackathon-lct-vehicle-reid/data",
+      "/home/artem/tmp/lct-ui-20260925/accepted-mutation/restored"
+    ],
+    "filter": "positive-search-export|late-search-after-bbox",
+    "source_override": null,
+    "browser": "153.0.8010.52"
+  },
+  "finished": "2026-09-25T17:29:23.150Z",
+  "passed": 2,
+  "failed": 0,
+  "externalRequests": []
+}

@@ -1,0 +1,43 @@
+{
+  "base": "http://127.0.0.1:18070",
+  "started": "2026-09-25T17:15:41.210Z",
+  "cases": [
+    {
+      "name": "positive-search-export",
+      "status": "PASS"
+    },
+    {
+      "name": "late-search-after-bbox",
+      "status": "PASS"
+    }
+  ],
+  "requests": [
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/static/fonts/AdwaitaSans-Regular.ttf",
+    "http://127.0.0.1:18070/static/fonts/Montserrat-SemiBold.otf",
+    "http://127.0.0.1:18070/api/ui/state",
+    "http://127.0.0.1:18070/api/demo",
+    "http://127.0.0.1:18070/api/materials",
+    "http://127.0.0.1:18070/api/demo/street/image",
+    "http://127.0.0.1:18070/api/search",
+    "http://127.0.0.1:18070/api/gallery/db620271348d404a9a0b978d96c63f29/crop?size=560",
+    "http://127.0.0.1:18070/api/gallery/6f8d80f8673144dfa7a4e09190442ab3/crop?size=560",
+    "http://127.0.0.1:18070/",
+    "http://127.0.0.1:18070/static/app.css",
+    "http://127.0.0.1:18070/static/app.js",
+    "http://127.0.0.1:18070/api/ui/state",
+    "http://127.0.0.1:18070/api/demo",
+    "http://127.0.0.1:18070/api/materials",
+    "http://127.0.0.1:18070/static/fonts/AdwaitaSans-Regular.ttf",
+    "http://127.0.0.1:18070/static/fonts/Montserrat-SemiBold.otf",
+    "http://127.0.0.1:18070/api/demo/street/image",
+    "http://127.0.0.1:18070/api/search"
+  ],
+  "browserErrors": [],
+  "finished": "2026-09-25T17:15:47.356Z",
+  "passed": 2,
+  "failed": 0,
+  "externalRequests": []
+}

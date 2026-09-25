@@ -1,0 +1,16 @@
+{
+  "started": "2026-09-25T17:24:42.632Z",
+  "cases": [
+    {
+      "name": "below-json-ranks-match-screen",
+      "status": "FAIL",
+      "error": "JSON ranks correspond to the displayed full top-k ranks\n+ actual - expected\n\n  [\n    {\n      gallery_id: 'd0e41bf891254ba0872f1641139f84f6',\n+     rank: 1\n-     rank: 3\n    },\n    {\n      gallery_id: 'aa082284f9894b5aa210c179d59999b1',\n+     rank: 2\n-     rank: 4\n    },\n    {\n      gallery_id: '051d304b7139431fb3bff19b4e75aff7',\n+     rank: 3\n-     rank: 5\n    },\n    {\n      gallery_id: '2ece45504eff42469c104dc2a2d03caf',\n+     rank: 4\n-     rank: 6\n    },\n    {\n      gallery_id: '7584980704ae4617bb27ca162cc9c5db',\n+     rank: 5\n-     rank: 7\n    },\n    {\n      gallery_id: '34b736136487439389c10cc6bd4e9f4e',\n+     rank: 6\n-     rank: 8\n    },\n    {\n      gallery_id: '5fc200cab89346658c9c91cce27e85fe',\n+     rank: 7\n-     rank: 9\n    },\n    {\n      gallery_id: 'be8953cc364d46cebbcc2c2da2c348ab',\n+     rank: 8\n-     rank: 10\n    }\n  ]"
+    }
+  ],
+  "screens": [],
+  "external": [],
+  "errors": [],
+  "finished": "2026-09-25T17:24:51.815Z",
+  "passed": 0,
+  "failed": 1
+}

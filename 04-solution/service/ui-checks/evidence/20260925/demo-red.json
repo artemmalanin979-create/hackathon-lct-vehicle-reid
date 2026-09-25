@@ -1,0 +1,16 @@
+{
+  "started": "2026-09-25T17:17:41.345Z",
+  "cases": [
+    {
+      "name": "demo-load-disables-search",
+      "status": "FAIL",
+      "error": "search stays disabled while a new example is loading"
+    }
+  ],
+  "screens": [],
+  "external": [],
+  "errors": [],
+  "finished": "2026-09-25T17:17:44.985Z",
+  "passed": 0,
+  "failed": 1
+}

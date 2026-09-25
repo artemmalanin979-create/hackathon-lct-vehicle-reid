@@ -1,0 +1,412 @@
+[
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/1440-dark-explain.png",
+    "bytes": 581293,
+    "sha256": "062a3d5e7312c60d2e303e6facb9413116b6bfc8a7f73430661c13c78abecc1b"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/1440-dark-search.png",
+    "bytes": 266816,
+    "sha256": "94a968be8d70cdda69cb4587f741445a48ba51644b8073bfbb362a684618d971"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/1440-dark-start.png",
+    "bytes": 40759,
+    "sha256": "352480ba88cc1ec98ab27fa4efec3d7c5070a5d47ca33ebd78b7d632de5a5bff"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/1440-light-explain.png",
+    "bytes": 588581,
+    "sha256": "9ec8b45e478a23def082f2559f8fc3aac20ae92bfef1b8f9cb439925c5ba0e94"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/1440-light-search.png",
+    "bytes": 271156,
+    "sha256": "a8bdc93c772610522e062172a27922eae8cb2cc6583d66e220e0699ab4d0df7a"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/1440-light-start.png",
+    "bytes": 43272,
+    "sha256": "f8505a0cbea3252d6557538bd3dd7e817cb733befcd510dc01d2c0ccfe871183"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/390-dark-explain.png",
+    "bytes": 485139,
+    "sha256": "8110991e76edd240e87731e98af1952c7404936f5bc01c24da90b267b4f8d518"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/390-dark-search.png",
+    "bytes": 279652,
+    "sha256": "0967e3776fb3403f5a98ee131ade80d995ea33b486fdccaaff315a5d78d30bfc"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/390-dark-start.png",
+    "bytes": 34283,
+    "sha256": "4af7966115aaf8a4bfaa08b5636edec7a815bb53235a6ced95c73d30bbc19128"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/390-light-explain.png",
+    "bytes": 492484,
+    "sha256": "bdd53d1e79ca9df75a51059113ee4b077b4f82097054b77d4f9c5e9b9129f423"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/390-light-search.png",
+    "bytes": 284147,
+    "sha256": "29ab88a327906868a5495e1292bd5b4c5511e33f5d32ef48bc3a1ecd8c6ccc24"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/390-light-start.png",
+    "bytes": 36509,
+    "sha256": "d9c81ed2ca61aad098085d83e0b6608d18d8a85b137f651643585688e7fba2db"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/768-dark-explain.png",
+    "bytes": 611616,
+    "sha256": "d746ca5c09df9c4d01a19c75a8b4dd580c025f1d6cbfcfd654c8eb37a8ad85b8"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/768-dark-search.png",
+    "bytes": 454831,
+    "sha256": "9eb02e538a188166db8cb3bda0c375f28ecd68e05d1fe85f0ffb3167eb317c1d"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/768-dark-start.png",
+    "bytes": 38888,
+    "sha256": "de48f919005efed64ffa20baec4c3a2f9621a3c2cd870e09e0901453d66782bc"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/768-light-explain.png",
+    "bytes": 620464,
+    "sha256": "bcf3ba191a2a0d6ac1867af4720203c30cf70570e459482ab7cd0453fa5ada46"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/768-light-search.png",
+    "bytes": 460710,
+    "sha256": "79b89cc11303cbd47b7e03a8d6cfb44df6190bf3419556bc6e92b2478009249f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/before-screens/768-light-start.png",
+    "bytes": 41570,
+    "sha256": "b7e7224925feba1ebc270d08d38c5d9a6c3a62fe5dc5ceb210ed17a60ae3b14f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-compare.png",
+    "bytes": 1800237,
+    "sha256": "af9cdfe0990795bc0393ad1e84e19fe19c54c74c6e1bc97e69ac3b92723bdc4e"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-error.png",
+    "bytes": 1019171,
+    "sha256": "077c93a82106523e2632e7ecb1fa81dca0bda089d52a3c2f1b58dbf29e090646"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-explain.png",
+    "bytes": 2436970,
+    "sha256": "49a623bbbef1535120c6bbfad135c192b28e08aab0240d5baf65b8ea933d5cd7"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-loading.png",
+    "bytes": 1005464,
+    "sha256": "33046096c6583c103c698d77308cb051f52a3676037205f723b3962211f0e5ee"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-query.png",
+    "bytes": 863823,
+    "sha256": "fba862f6439d7fd97c8a76924d7f16e5f5417a99eec175adf00ef8767f0ee3bb"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-refusal.png",
+    "bytes": 1038481,
+    "sha256": "93e0d8c727a27bf1389acfab5449246c738c579dd3ee070f3b71a171be4a8bbc"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-dark-search.png",
+    "bytes": 1103057,
+    "sha256": "dafc8422c4b089316c01b074d38f66ea6129dfcdca89ce57d948495fcd35b2c1"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-compare.png",
+    "bytes": 1796439,
+    "sha256": "0e247e2cb941ca3335cde4516c40a94c96316ec0cde6d0b89c425071e612090e"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-error.png",
+    "bytes": 1016409,
+    "sha256": "b693cb799d336d8195c0230741aace57a1792401098429cba56fa95a1e48e160"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-explain.png",
+    "bytes": 2433007,
+    "sha256": "7cc365d2afd56f4d4d943981258565a7093d754b9689a4caf11e3af2b316f7e0"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-loading.png",
+    "bytes": 1003086,
+    "sha256": "f7950a14518116e2a81778a36b28b2e7f011bcf70290eafaac4e079b7ada65ac"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-query.png",
+    "bytes": 861037,
+    "sha256": "879ccec0f627c8a69a03c6526f3f53034ff502f3efc7d1025f8d672c20247d5f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-refusal.png",
+    "bytes": 1035390,
+    "sha256": "9fd618a5122e5c932cdb46dbd9c061ae106b0da32215569d3238870cac8e5e40"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/1440-light-search.png",
+    "bytes": 1099045,
+    "sha256": "49a18ac0c05d95fd1c09e8f7775086057e583b31d4a90df97538e7f532596b4c"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/200percent-query.png",
+    "bytes": 900605,
+    "sha256": "9723ae0dfe18ed6bd96f1614884a3f76373cfc25a82947aab1d67b582df0ee05"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/200percent-result.png",
+    "bytes": 949301,
+    "sha256": "d3a474f4affed65486e04d36ba850237ee0bad57a9954ee7a75ea4a479ace66c"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-compare.png",
+    "bytes": 738299,
+    "sha256": "24fa3ae33b8928e47235eb5a4b4793806bae51d059b01c46c153c6fb1f74d6c4"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-error.png",
+    "bytes": 460016,
+    "sha256": "acc672f19f87e3c78fdcb43365feeaf4db1c19a0a41700645c708556c12783a8"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-explain.png",
+    "bytes": 877625,
+    "sha256": "c7be25cec05e961b0c9885a852336db6fd2a11c4a5900866b9dffaf08c2b96ff"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-loading.png",
+    "bytes": 450684,
+    "sha256": "9ae8e0c07f043f5da9a09dde502ed85b1d26804e144f09137ac23f3b0812990f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-query.png",
+    "bytes": 401159,
+    "sha256": "75d51fbb5a323400ea396f459abcdcf168a0e325c839b396fa19b4c5baa86790"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-refusal.png",
+    "bytes": 475113,
+    "sha256": "32850779b0e6a31a279e3ac78742b6b9acef3571c7d0d6a8380e68b5f756fe4b"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-dark-search.png",
+    "bytes": 482183,
+    "sha256": "ffe5071904ecc12ce35d86b55e2ec54177c6f98cc05a6daefd2a286894eaf5a8"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-compare.png",
+    "bytes": 735772,
+    "sha256": "7bf7e5fa004ae6825dbefe8aaeb734ba171fcd9aa30ebaf142c89be5cc9f7c14"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-error.png",
+    "bytes": 457343,
+    "sha256": "f0e91324767d88465149c20e9590efb1e43de4e2ab417f14062ba4a6019afb18"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-explain.png",
+    "bytes": 875399,
+    "sha256": "fd26c4c9736afa139503e90659fc43a4362d2eca5cb5c528702b1a659d372b89"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-loading.png",
+    "bytes": 448274,
+    "sha256": "10a94cdb9988a5b28a13f5b68793895d6dfcb01037179c84561bb515d3abd907"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-query.png",
+    "bytes": 399650,
+    "sha256": "4a770dd9758e8d6d776f3bb7402a2d27f2f1e9525489b3aeab487080684ac87f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-refusal.png",
+    "bytes": 472691,
+    "sha256": "5ad6df9b8b50d7d3e304d2a13a981610c391e3c09ee88aa45b1656bd0309cd06"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-light-search.png",
+    "bytes": 480343,
+    "sha256": "d94abe744f011b859d9bbc74f9cc0d81290330a4489e3568c66f8789590a5dce"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-long-filename.png",
+    "bytes": 429464,
+    "sha256": "f2a1b9982409a65eeceb2284e5ae11c15c85cddd9dd1c1bc351f179d54732f8c"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/390-touch-bbox.png",
+    "bytes": 400085,
+    "sha256": "3b58e177f15a4c7e58bc90cab408fb2c7ee837a3dd017aafdbbaf5d6fe6eca3f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-compare.png",
+    "bytes": 1107171,
+    "sha256": "09a4dc2b169f37e34aa50ffb0ef71fb709a689ade8b4ca2a3cfbe79ea05bda91"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-error.png",
+    "bytes": 858112,
+    "sha256": "5e8033c86273d65b2610946e84353d1f957cd984d87f1612be8123314b5cff6b"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-explain.png",
+    "bytes": 1503189,
+    "sha256": "f70ed3b8183f5ef2030259d9172ca573b4d6534c4948abe7356046ffd3462df7"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-loading.png",
+    "bytes": 846826,
+    "sha256": "d4d424874d84c04f0f8c8e2375dbecf26d68045dc3c70c1f6c3f026a422d66af"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-query.png",
+    "bytes": 743096,
+    "sha256": "a1223ff61415a481a0366c3daaefc84effe47565b401050df5da30743d07d0db"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-refusal.png",
+    "bytes": 877515,
+    "sha256": "cffe528d7ceeb9d2c57b035305015371c866ef995efe5c8e8c9d87ab93de42ee"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-dark-search.png",
+    "bytes": 859477,
+    "sha256": "12aa2b0831e3498f7bdfb5adbb3e32dc7341c9bb209bc547ce20c536cc6a7aaa"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-compare.png",
+    "bytes": 1104172,
+    "sha256": "36084dbb55fa0abd86df6ffdddcf4525bc28deb1ad4e32188e0d4a384bc700a8"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-error.png",
+    "bytes": 855091,
+    "sha256": "0f7f5da184fa80c529a76d5b6b72ffade7c2fe5435bda83a94d51d0c3a65946f"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-explain.png",
+    "bytes": 1501270,
+    "sha256": "0868d3e9dddbde746d1f54ad4d80dae69f9e80f2cb764f391ec8ce9c255e8c76"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-loading.png",
+    "bytes": 843988,
+    "sha256": "8cef385e523b3def0c896768ab59dad8331765d65a291d4b2707e38130c7bace"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-query.png",
+    "bytes": 740982,
+    "sha256": "8369005939609316dc5eb0535c9eab8fc249339cb5effa959d0d31b70bb782bc"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-refusal.png",
+    "bytes": 874646,
+    "sha256": "52aaa15dbd0d3b60cdd036dae4c696488daf02fe00cfa907ae0a32789838f422"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/768-light-search.png",
+    "bytes": 857181,
+    "sha256": "46d2636c3a7c3dd3eaf55c39063960953f0df1c062c93b811b4910610ac05bf9"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/below-threshold.png",
+    "bytes": 2139941,
+    "sha256": "7dcb7c27984672acbccf16d6aef28e8a93e59ceef9e5e8f3ef1aa22393e53fc6"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/explain-error.png",
+    "bytes": 1117158,
+    "sha256": "b5e4e3a8432cb54a147321df49f1c6f9ac302909e2d4a89c2497046f78f50038"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/gallery-preparing.png",
+    "bytes": 606176,
+    "sha256": "11d76bb5950a4e8a6fb40ff4a0b77fe20fdc71dc3b57852941b4e7487956c4a9"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/invalid-file.png",
+    "bytes": 598025,
+    "sha256": "1eafeb71656b6b59b1184ee90e018f77e05a116fb8f7dcd98dd4ea89a696583a"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/loading.png",
+    "bytes": 862922,
+    "sha256": "b2d183b1a2fde71e0fee5be0f75cd0237271c17cebee3fa0421f162388f50803"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/network-error.png",
+    "bytes": 866214,
+    "sha256": "07b6a21f1e00ad8741a414d50c254d2ccdaf1dc544e7fe5b58085369127437e8"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/no-demo-keyboard.png",
+    "bytes": 274198,
+    "sha256": "84423b0c96de1e40e1daee468b6636889b298d20d829119a4232dc5efd473717"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/accepted-matrix/refusal.png",
+    "bytes": 894568,
+    "sha256": "5f2adfa38594efb3b3aa969150ecbb1adc45a390aaa8a9d75a2c18c00a8a1003"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-dark-comparison.png",
+    "bytes": 711433,
+    "sha256": "969410ae9dfea2019b59d6ee0c5b15419510791527a0a7c3eb477f6fd2af39bf"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-dark-cover.png",
+    "bytes": 401811,
+    "sha256": "21ef51f9472124771c3e5f10716313da58c30eee0214292dac2ddbe22cf76b5b"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-dark-explanation.png",
+    "bytes": 711484,
+    "sha256": "f71dcd791f48a9e2f623fcaedcf73bddd1ad11c1476e713b85c25e1c3d479107"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-dark-refusal.png",
+    "bytes": 403302,
+    "sha256": "663f2a80c5f4e48a757ceab18b07fc03350ecb7fc194a041d914b81771497558"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-dark-search.png",
+    "bytes": 557656,
+    "sha256": "d88a2cba659ce3ecd563acc154700102c8d3548821fa7ca7613e5dafc839f1c7"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-light-comparison.png",
+    "bytes": 710777,
+    "sha256": "0d557af6fe3f62fb51995e2fa9b078287990bc3e29074c393ccbc041da9ec233"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-light-cover.png",
+    "bytes": 400091,
+    "sha256": "2718e38e91c48e87fadc594aa5b52d94ed7171dbd70e9540fdff7f459ae18200"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-light-explanation.png",
+    "bytes": 710682,
+    "sha256": "e20d2f76337c0bf64d171e10bda9c306fc48159a51fe1e3cf43530ee18a27c4d"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-light-refusal.png",
+    "bytes": 402238,
+    "sha256": "b696067c2a2b5ed22637c012fbdeb9789e031ab8511f33360a1db161b2023d31"
+  },
+  {
+    "path": "/home/artem/tmp/lct-ui-20260925/deck-shots-v2/1440-light-search.png",
+    "bytes": 556577,
+    "sha256": "d76dd88ea0d653a560dbf5a76e13d27dc8def3a501e68b548096f913f520ec04"
+  }
+]

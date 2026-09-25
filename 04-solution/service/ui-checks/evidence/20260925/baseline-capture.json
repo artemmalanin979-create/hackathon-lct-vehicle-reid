@@ -1,0 +1,38 @@
+[
+  {
+    "width": 390,
+    "theme": "light",
+    "overflow": true,
+    "cards": 2
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "overflow": true,
+    "cards": 2
+  },
+  {
+    "width": 768,
+    "theme": "light",
+    "overflow": true,
+    "cards": 2
+  },
+  {
+    "width": 768,
+    "theme": "dark",
+    "overflow": true,
+    "cards": 2
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "overflow": false,
+    "cards": 2
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "overflow": false,
+    "cards": 2
+  }
+]

@@ -16,6 +16,7 @@ const qid='a4f2a13bd2b54360a921c8ef7366e535';
 const frame=path.join(DATA,'images',qid+'.jpg');
 const other=path.join(DATA,'images','5cfbbd42352245fb9ab4e93f0e17452a.jpg');
 const result={base:BASE,started:new Date().toISOString(),cases:[],requests:[],browserErrors:[]};
+result.evidence=require("./evidence.cjs")(DATA);
 let browser;
 async function fillBox(page, x=849) {
   // Exact input through the same number-field event an operator uses.
@@ -37,7 +38,9 @@ async function search(page) {
   assert(await page.locator('#cards .card').count()>0,'positive real API search has candidates');
 }
 async function hold(page, endpoint) {
-  // Delay delivery AFTER the actual browser fetch: replaying Chromium multipart
+  // Delay delivery of ALREADY PARSED real JSON; AbortController cannot undo it.
+  // This observes the revision guard independently of transport cancellation.
+  // Replaying Chromium multipart
   // uploads through route.fetch loses their file part in this Playwright version.
   await page.evaluate(endpoint => {
     const original=window.fetch;
@@ -46,9 +49,14 @@ async function hold(page, endpoint) {
       if(String(args[0])!==endpoint) return original(...args);
       window.fetch=original;
       const response=await original(...args);
-      window.__held.data={status:response.status,body:await response.clone().json()};
-      window.__held.ready=true;
-      await new Promise(resolve=>{window.__held.release=resolve;});
+      const parse=response.json.bind(response);
+      response.json=async()=>{
+        const data=await parse();
+        window.__held.data={status:response.status,body:data};
+        window.__held.ready=true;
+        await new Promise(resolve=>{window.__held.release=resolve;});
+        return data;
+      };
       return response;
     };
   }, endpoint);
@@ -63,8 +71,10 @@ async function noExport(page) {
   assert(await page.locator('#export').isHidden(),'changed query must not retain/export the previous response');
 }
 async function test(name, fn) {
+  if (process.env.TEST_FILTER && !new RegExp(process.env.TEST_FILTER).test(name)) return;
   const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
   const page=await context.newPage();
+  if (process.env.UI_JS_OVERRIDE) await page.route('**/static/app.js',route=>route.fulfill({contentType:'application/javascript',body:fs.readFileSync(process.env.UI_JS_OVERRIDE,'utf8')}));
   page.on('request',r=>result.requests.push(r.url()));
   page.on('pageerror',e=>result.browserErrors.push({test:name,error:e.message}));
   try {await ready(page);await fn(page);assert.equal(result.browserErrors.filter(e=>e.test===name).length,0,'no uncaught browser error');result.cases.push({name,status:'PASS'});console.log('PASS',name);}
@@ -73,6 +83,7 @@ async function test(name, fn) {
 }
 (async()=>{
  browser=await chromium.launch({executablePath:process.env.CHROME || '/usr/bin/google-chrome',headless:true,args:['--disable-gpu']});
+ result.evidence.browser=browser.version();
  try {
   await test('positive-search-export',async page=>{
     await search(page);
@@ -98,11 +109,19 @@ async function test(name, fn) {
     await page.locator('#run').click();await page.waitForTimeout(300);await noExport(page);
   });
   await test('late-below-after-bbox',async page=>{
+    if(await page.locator('#advanced').count()) await page.locator('#advanced > summary').click();
     await page.locator('#thr').fill('1.1');await page.locator('#thr').blur();
     await page.locator('#run').click();await page.waitForFunction(()=>!document.querySelector('#refusal').hidden);
     const gate=await hold(page,'/api/search');await page.locator('#show-below').click();assert(!(await gate.arrived).transportError,'delayed real API must succeed');
     await page.locator('#bx').fill('850');await page.locator('#bx').blur();await gate.release();
     await page.waitForTimeout(300);await noExport(page);assert.equal(await page.locator('#cards .card').count(),0);
+  });
+  await test('explain-out-of-order',async page=>{
+    await search(page);assert(await page.locator('#cards .act-explain').count()>1,'two real candidates available');
+    const gate=await hold(page,'/api/explain');await page.locator('#cards .act-explain').nth(0).click();assert(!(await gate.arrived).transportError);
+    await page.locator('#cards .act-explain').nth(1).click();await page.waitForFunction(()=>document.querySelector('#ex-facts').children.length>0);
+    const latest=await page.locator('#ex-facts').textContent();await gate.release();await page.waitForTimeout(300);
+    assert.equal(await page.locator('#ex-facts').textContent(),latest,'older explanation must not replace selected candidate');
   });
   await test('late-explain-after-file',async page=>{
     await search(page);const gate=await hold(page,'/api/explain');await page.locator('#cards .act-explain').first().click();assert(!(await gate.arrived).transportError,'delayed real API must succeed');
