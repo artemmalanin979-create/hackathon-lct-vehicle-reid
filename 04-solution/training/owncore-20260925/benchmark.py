@@ -34,14 +34,17 @@ def paired_order(sample_index: int) -> tuple[str, str, str]:
 def _runner(repo: Path, model: Path, core_weight: float,
             needed_modes: tuple[str, ...] = MODES):
     _evaluation_modules(repo)
-    from app.core.model import Embedder
     import onnxruntime as ort
     options = ort.SessionOptions()
     options.intra_op_num_threads = 2
     options.inter_op_num_threads = 1
     needs_baseline = any(mode in ("baseline", "fusion") for mode in needed_modes)
     needs_core = any(mode in ("core", "fusion") for mode in needed_modes)
-    baseline = Embedder(threads=2) if needs_baseline else None
+    if needs_baseline:
+        from app.core.model import Embedder
+        baseline = Embedder(threads=2)
+    else:
+        baseline = None
     core = (ort.InferenceSession(str(model), sess_options=options,
                                  providers=["CPUExecutionProvider"])
             if needs_core else None)
@@ -66,10 +69,14 @@ def _runner(repo: Path, model: Path, core_weight: float,
 
 def _cold(repo: Path, model: Path, model_sha256: str, sample: Path,
           mode: str, weight: float) -> dict:
+    import onnxruntime  # noqa: F401 -- exclude library import from cold timer
     require_sha256(model, model_sha256)
     tensor = np.load(sample, allow_pickle=False)
     if tensor.shape != (1, 3, 208, 208) or tensor.dtype != np.float32:
         raise ValueError("cold sample must be one RGB float32 NCHW crop")
+    _evaluation_modules(repo)
+    if mode in ("baseline", "fusion"):
+        from app.core.model import Embedder  # noqa: F401 -- exclude module import
     start = time.perf_counter()
     run = _runner(repo, model, weight, (mode,))
     output = run(mode, tensor)
