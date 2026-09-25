@@ -1,0 +1,37 @@
+{
+  "baseline_before_exit": 0,
+  "baseline_after_exit": 0,
+  "tests_per_baseline": 5,
+  "baseline_sha256": "14ed128f4d7ccb197761d4a32f5d8460485ea95966847317e850510397b6635f",
+  "original_hash_unchanged": true,
+  "mutations": [
+    {
+      "mutation": "row_order",
+      "status": "KILLED",
+      "diff": "--- baseline\n+++ row_order\n@@ -16,7 +16,7 @@\n def checked_features(x, actual_ids, expected_ids):\n     x = np.asarray(x)\n     if list(actual_ids) != list(expected_ids):\n-        raise ValueError(\"feature row order differs from metadata\")\n+        pass  # isolated semantic guard-removal mutation\n     if x.ndim != 2 or len(x) != len(expected_ids) or not x.shape[1]:\n         raise ValueError(\"feature dimensions differ from metadata\")\n     if not np.isfinite(x).all() or np.any(np.linalg.norm(x, axis=1) == 0):\n",
+      "exit_code": 1,
+      "output": "test_finite_and_nonzero_vectors (test_contracts.InputContracts.test_finite_and_nonzero_vectors) ... ok\ntest_hash_corruption (test_contracts.InputContracts.test_hash_corruption) ... ok\ntest_identity_leakage_and_positive_control (test_contracts.InputContracts.test_identity_leakage_and_positive_control) ... ok\ntest_row_order_positive_and_permuted (test_contracts.InputContracts.test_row_order_positive_and_permuted) ... FAIL\ntest_whole_identity_split_and_reproducibility (test_contracts.InputContracts.test_whole_identity_split_and_reproducibility) ... ok\n\n======================================================================\nFAIL: test_row_order_positive_and_permuted (test_contracts.InputContracts.test_row_order_positive_and_permuted)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lct-distill-mutation-4zc2u8c3/test_contracts.py\", line 16, in test_row_order_positive_and_permuted\n    with self.assertRaisesRegex(ValueError, \"order\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 5 tests in 0.061s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "mutation": "finite_nonzero",
+      "status": "KILLED",
+      "diff": "--- baseline\n+++ finite_nonzero\n@@ -20,7 +20,7 @@\n     if x.ndim != 2 or len(x) != len(expected_ids) or not x.shape[1]:\n         raise ValueError(\"feature dimensions differ from metadata\")\n     if not np.isfinite(x).all() or np.any(np.linalg.norm(x, axis=1) == 0):\n-        raise ValueError(\"nonfinite or zero feature\")\n+        pass  # isolated semantic guard-removal mutation\n     return x\n \n \n",
+      "exit_code": 1,
+      "output": "test_finite_and_nonzero_vectors (test_contracts.InputContracts.test_finite_and_nonzero_vectors) ... FAIL\ntest_hash_corruption (test_contracts.InputContracts.test_hash_corruption) ... ok\ntest_identity_leakage_and_positive_control (test_contracts.InputContracts.test_identity_leakage_and_positive_control) ... ok\ntest_row_order_positive_and_permuted (test_contracts.InputContracts.test_row_order_positive_and_permuted) ... ok\ntest_whole_identity_split_and_reproducibility (test_contracts.InputContracts.test_whole_identity_split_and_reproducibility) ... ok\n\n======================================================================\nFAIL: test_finite_and_nonzero_vectors (test_contracts.InputContracts.test_finite_and_nonzero_vectors)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lct-distill-mutation-4n7xj7uw/test_contracts.py\", line 23, in test_finite_and_nonzero_vectors\n    with self.assertRaises(ValueError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 5 tests in 0.069s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "mutation": "identity_leakage",
+      "status": "KILLED",
+      "diff": "--- baseline\n+++ identity_leakage\n@@ -29,7 +29,7 @@\n     for i, a in enumerate(sets):\n         for b in sets[i + 1:]:\n             if a & b:\n-                raise ValueError(f\"identity overlap: {sorted(a & b)[:10]}\")\n+                pass  # isolated semantic guard-removal mutation\n \n \n def grouped_split(vids, n_dev=100, seed=20260916):\n",
+      "exit_code": 1,
+      "output": "test_finite_and_nonzero_vectors (test_contracts.InputContracts.test_finite_and_nonzero_vectors) ... ok\ntest_hash_corruption (test_contracts.InputContracts.test_hash_corruption) ... ok\ntest_identity_leakage_and_positive_control (test_contracts.InputContracts.test_identity_leakage_and_positive_control) ... FAIL\ntest_row_order_positive_and_permuted (test_contracts.InputContracts.test_row_order_positive_and_permuted) ... ok\ntest_whole_identity_split_and_reproducibility (test_contracts.InputContracts.test_whole_identity_split_and_reproducibility) ... ok\n\n======================================================================\nFAIL: test_identity_leakage_and_positive_control (test_contracts.InputContracts.test_identity_leakage_and_positive_control)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lct-distill-mutation-x9xtzp56/test_contracts.py\", line 28, in test_identity_leakage_and_positive_control\n    with self.assertRaisesRegex(ValueError, \"overlap\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 5 tests in 0.062s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "mutation": "file_hash",
+      "status": "KILLED",
+      "diff": "--- baseline\n+++ file_hash\n@@ -9,7 +9,7 @@\n     with Path(path).open(\"rb\") as stream:\n         actual = hashlib.file_digest(stream, \"sha256\").hexdigest()\n     if actual != expected:\n-        raise ValueError(f\"hash mismatch: {path}: {actual} != {expected}\")\n+        pass  # isolated semantic guard-removal mutation\n     return actual\n \n \n",
+      "exit_code": 1,
+      "output": "test_finite_and_nonzero_vectors (test_contracts.InputContracts.test_finite_and_nonzero_vectors) ... ok\ntest_hash_corruption (test_contracts.InputContracts.test_hash_corruption) ... FAIL\ntest_identity_leakage_and_positive_control (test_contracts.InputContracts.test_identity_leakage_and_positive_control) ... ok\ntest_row_order_positive_and_permuted (test_contracts.InputContracts.test_row_order_positive_and_permuted) ... ok\ntest_whole_identity_split_and_reproducibility (test_contracts.InputContracts.test_whole_identity_split_and_reproducibility) ... ok\n\n======================================================================\nFAIL: test_hash_corruption (test_contracts.InputContracts.test_hash_corruption)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lct-distill-mutation-jdhu11h7/test_contracts.py\", line 38, in test_hash_corruption\n    with self.assertRaisesRegex(ValueError, \"hash\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 5 tests in 0.065s\n\nFAILED (failures=1)\n"
+    }
+  ]
+}

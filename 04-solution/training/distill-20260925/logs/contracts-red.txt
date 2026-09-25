@@ -1,0 +1,21 @@
+test_contracts (unittest.loader._FailedTest.test_contracts) ... ERROR
+
+======================================================================
+ERROR: test_contracts (unittest.loader._FailedTest.test_contracts)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_contracts
+Traceback (most recent call last):
+  File "/usr/lib64/python3.13/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/usr/lib64/python3.13/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/home/artem/projects/lct-ml-20260925/04-solution/training/distill-20260925/test_contracts.py", line 9, in <module>
+    from contracts import checked_features, check_disjoint, checked_hash, grouped_split
+ModuleNotFoundError: No module named 'contracts'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

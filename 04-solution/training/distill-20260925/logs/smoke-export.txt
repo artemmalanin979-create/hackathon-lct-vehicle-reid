@@ -1,0 +1,1 @@
+{"status": "PASS", "rows": 128, "max_abs": 5.960464477539063e-08, "onnx": "1.22.0", "onnxruntime": "1.30.0", "artifacts": {"head.onnx": {"sha256": "e1678699ee7d25e214d10ad566b2ace543ab8f272146205e674b8f8575dd988e", "bytes": 1052412}}}

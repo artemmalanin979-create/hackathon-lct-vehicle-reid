@@ -1,0 +1,10 @@
+test_finite_and_nonzero_vectors (test_contracts.InputContracts.test_finite_and_nonzero_vectors) ... ok
+test_hash_corruption (test_contracts.InputContracts.test_hash_corruption) ... ok
+test_identity_leakage_and_positive_control (test_contracts.InputContracts.test_identity_leakage_and_positive_control) ... ok
+test_row_order_positive_and_permuted (test_contracts.InputContracts.test_row_order_positive_and_permuted) ... ok
+test_whole_identity_split_and_reproducibility (test_contracts.InputContracts.test_whole_identity_split_and_reproducibility) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.161s
+
+OK

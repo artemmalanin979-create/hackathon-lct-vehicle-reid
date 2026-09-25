@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "batches": 2,
+  "losses": [
+    {
+      "embedding_loss": 0.19830837845802307,
+      "relational_loss": 0.01404651440680027
+    },
+    {
+      "embedding_loss": 0.18869522213935852,
+      "relational_loss": 0.01338069885969162
+    }
+  ],
+  "numpy_max_abs": 2.9802322387695312e-08
+}
