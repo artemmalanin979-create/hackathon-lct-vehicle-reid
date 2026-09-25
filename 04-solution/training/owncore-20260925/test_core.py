@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
+import subprocess
 import sys
 import tempfile
 import time
@@ -18,10 +20,39 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from core import CrossViewCore  # noqa: E402
 from dataset import CameraAwarePKSampler, load_combined  # noqa: E402
 from train import (cross_camera_batch_hard, make_checkpoint, projected_runtime,
-                   set_training_stage, smoke_one_batch, train_epoch)  # noqa: E402
+                   require_vram_below, save_best_checkpoint, set_training_stage, smoke_one_batch,
+                   train_epoch)  # noqa: E402
 
 
 class CoreBehaviour(unittest.TestCase):
+    def test_trainer_imports_own_core_in_isolated_python(self):
+        script = Path(__file__).with_name("train.py")
+        result = subprocess.run([sys.executable, "-I", str(script), "--help"],
+                                capture_output=True, text=True, timeout=30, check=False)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("--synthetic-smoke", result.stdout)
+
+    def test_onnx_opset17_runs_dynamic_batch_with_torch_parity(self):
+        import onnx
+        import onnxruntime as ort
+
+        model = CrossViewCore(num_ids=8).eval()
+        images = torch.rand(2, 3, 208, 208, dtype=torch.float32).mul(255)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "core.onnx"
+            torch.onnx.export(model, images[:1], path, opset_version=17,
+                              input_names=["images"], output_names=["descriptor"],
+                              dynamic_axes={"images": {0: "batch"}, "descriptor": {0: "batch"}},
+                              dynamo=False)
+            onnx.checker.check_model(onnx.load(path))
+            session = ort.InferenceSession(str(path), providers=["CPUExecutionProvider"])
+            actual = session.run(None, {"images": images.numpy()})[0]
+            with torch.inference_mode():
+                expected = model(images).numpy()
+        self.assertEqual(actual.shape, (2, 512))
+        self.assertLess(float(np.max(np.abs(actual - expected))), 1e-5)
+        self.assertTrue(np.allclose(np.linalg.norm(actual, axis=1), 1, atol=1e-5))
+
     def test_image_to_normalized_512_and_gradients_reach_three_heads(self):
         torch.manual_seed(1)
         model = CrossViewCore(num_ids=8).train()
@@ -171,9 +202,31 @@ class LossBehaviour(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "train_py"):
             make_checkpoint({}, 8, {k: v for k, v in hashes.items() if k != "train_py"}, 3, 0.4)
 
+    def test_best_checkpoint_is_recoverable_and_explicitly_partial(self):
+        hashes = {key: "a" * 64 for key in ("protocol", "imagenet", "core_py", "dataset_py", "train_py")}
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            first = make_checkpoint({"weight": torch.tensor([1.0])}, 8, hashes, 3, 0.4)
+            status1 = save_best_checkpoint(out, first)
+            self.assertEqual(status1["status"], "PARTIAL")
+            self.assertEqual(status1["best_epoch"], 3)
+            self.assertEqual(torch.load(out / "checkpoint.pt", weights_only=True)["best_epoch"], 3)
+            second = make_checkpoint({"weight": torch.tensor([2.0])}, 8, hashes, 5, 0.5)
+            status2 = save_best_checkpoint(out, second)
+            self.assertNotEqual(status1["checkpoint_sha256"], status2["checkpoint_sha256"])
+            self.assertEqual(torch.load(out / "checkpoint.pt", weights_only=True)["best_epoch"], 5)
+            self.assertEqual(json.loads((out / "checkpoint-status.json").read_text())["status"], "PARTIAL")
+            self.assertEqual(list(out.glob(".*.tmp")), [])
+
     def test_pilot_projection_accounts_for_slower_unfrozen_backward(self):
         # 2 remaining epochs x 10 steps x 20 s/step x 1.25 + 200 s elapsed.
         self.assertEqual(projected_runtime(200, 100, 20, 10, 2), 700)
+
+    def test_vram_guard_rejects_limit_including_exact_boundary(self):
+        limit = math.ceil(3.6 * 1024**3)
+        require_vram_below(limit - 1)
+        with self.assertRaisesRegex(RuntimeError, "VRAM"):
+            require_vram_below(limit)
 
 
 if __name__ == "__main__":

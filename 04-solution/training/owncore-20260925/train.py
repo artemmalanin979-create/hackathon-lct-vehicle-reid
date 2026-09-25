@@ -11,8 +11,10 @@ import hashlib
 import importlib.util
 import json
 import math
+import os
 import random
 import sys
+import tempfile
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -22,6 +24,8 @@ import torch
 from torch.nn import functional as F
 from torch.utils.data import DataLoader
 
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))  # Windows python312._pth omits the script directory.
 from core import CrossViewCore
 from dataset import CameraAwarePKSampler, CropDataset, load_combined
 
@@ -38,6 +42,11 @@ def checked_hash(path: str | Path, expected: str) -> str:
     if actual != expected:
         raise ValueError(f"hash mismatch for {path}: {actual} != {expected}")
     return actual
+
+
+def require_vram_below(peak_bytes: int, limit_gib: float = 3.6) -> None:
+    if peak_bytes >= limit_gib * 1024**3:
+        raise RuntimeError(f"peak reserved VRAM {peak_bytes} reached {limit_gib} GiB limit")
 
 
 def load_evaluator(path: str | Path, expected_sha256: str, scope_sha256: str):
@@ -196,8 +205,7 @@ def smoke_one_batch(model: CrossViewCore, loader: DataLoader, cfg: dict,
                  for name, parameter in named.items()}
     if not all(gradients.values()):
         raise RuntimeError(f"empty gradient in smoke: {gradients}")
-    if stats["peak_vram_bytes"] >= 3.6 * 1024**3:
-        raise RuntimeError("smoke VRAM exceeds frozen 3.6 GiB limit")
+    require_vram_below(stats["peak_vram_bytes"])
     return {"status": "PASS", "stats": stats, "gradients": gradients,
             "distinct_id_count": int(torch.unique(labels).numel()),
             "cross_camera_anchor_count": cross_camera_anchors,
@@ -219,14 +227,46 @@ def make_checkpoint(model_state: dict, num_ids: int, hashes: dict,
             "source_sha256": {key: hashes[key] for key in ("core_py", "dataset_py", "train_py")}}
 
 
+def _atomic_json(path: Path, value: dict) -> None:
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                     prefix=f".{path.name}.", suffix=".tmp",
+                                     delete=False) as stream:
+        temporary = Path(stream.name)
+        json.dump(value, stream, indent=2, allow_nan=False)
+        stream.write("\n")
+    try:
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def save_best_checkpoint(out: Path, payload: dict) -> dict:
+    """Persist a recoverable best while the run remains explicitly PARTIAL."""
+    with tempfile.NamedTemporaryFile(mode="wb", dir=out, prefix=".checkpoint.",
+                                     suffix=".tmp", delete=False) as stream:
+        temporary = Path(stream.name)
+    try:
+        torch.save(payload, temporary)
+        os.replace(temporary, out / "checkpoint.pt")
+    finally:
+        temporary.unlink(missing_ok=True)
+    status = {"status": "PARTIAL", "best_epoch": payload["best_epoch"],
+              "dev_cosine_mAP": payload["dev_cosine_mAP"],
+              "protocol_sha256": payload["protocol_sha256"],
+              "checkpoint_sha256": sha256(out / "checkpoint.pt")}
+    _atomic_json(out / "checkpoint-status.json", status)
+    return status
+
+
 def probe_stage2_batch(model: CrossViewCore, loader: DataLoader,
-                       device: torch.device) -> float:
+                       device: torch.device) -> dict:
     """Time an unfrozen backward pass without changing weights or BN statistics."""
     images, labels, cameras, _ = next(iter(loader))
     images, labels, cameras = images.to(device), labels.to(device), cameras.to(device)
     model.eval()
     set_training_stage(model, 2)
     if device.type == "cuda":
+        torch.cuda.reset_peak_memory_stats(device)
         torch.cuda.synchronize(device)
     start = time.monotonic()
     descriptor = model(images)
@@ -238,8 +278,9 @@ def probe_stage2_batch(model: CrossViewCore, loader: DataLoader,
     if device.type == "cuda":
         torch.cuda.synchronize(device)
     elapsed = time.monotonic() - start
+    peak = torch.cuda.max_memory_reserved(device) if device.type == "cuda" else 0
     model.zero_grad(set_to_none=True)
-    return elapsed
+    return {"seconds": elapsed, "peak_vram_bytes": peak}
 
 
 def projected_runtime(elapsed: float, stage1_epoch_seconds: float,
@@ -362,6 +403,13 @@ def run(args: argparse.Namespace) -> dict:
                                 metric_weight=0.5, smoothing=0.1, wall_deadline=wall_deadline)
             record = {"stage": stage, "stage_epoch": local_epoch + 1,
                       "global_epoch": epoch_index + 1, **stats}
+            try:
+                require_vram_below(stats["peak_vram_bytes"])
+            except RuntimeError as exc:
+                record.update(status="FAIL", reason=str(exc))
+                with (out / "epochs.jsonl").open("a", encoding="utf-8") as stream:
+                    stream.write(json.dumps(record, sort_keys=True) + "\n")
+                raise
             if stage == 2:
                 dev_map, query, gallery = dev_cosine_map(model, data, evaluator, batch=32, device=device)
                 record["dev_cosine_mAP"] = dev_map
@@ -369,6 +417,8 @@ def run(args: argparse.Namespace) -> dict:
                     best_map, best_epoch = dev_map, epoch_index + 1
                     best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
                     best_q, best_g = query, gallery
+                    save_best_checkpoint(out, make_checkpoint(
+                        best_state, len(data.label_to_vehicle), hashes, best_epoch, best_map))
             rows.append(record)
             with (out / "epochs.jsonl").open("a", encoding="utf-8") as stream:
                 stream.write(json.dumps(record, sort_keys=True) + "\n")
@@ -381,18 +431,23 @@ def run(args: argparse.Namespace) -> dict:
                 reasons.append("stage-1 loss did not decrease")
             if any(row["peak_vram_bytes"] >= 3.6 * 1024**3 for row in rows[:2]):
                 reasons.append("stage-1 VRAM reached 3.6 GiB")
-            probe_seconds = None
+            probe = None
             projected_seconds = None
             if not reasons:
-                probe_seconds = probe_stage2_batch(model, loader, device)
+                probe = probe_stage2_batch(model, loader, device)
+                try:
+                    require_vram_below(probe["peak_vram_bytes"])
+                except RuntimeError as exc:
+                    reasons.append(str(exc))
+            if not reasons:
                 projected_seconds = projected_runtime(
                     time.monotonic() - run_start,
                     sum(row["seconds"] for row in rows[:2]) / 2.0,
-                    probe_seconds, int(cfg["steps_per_epoch"]), int(cfg["stage2_epochs"]))
+                    probe["seconds"], int(cfg["steps_per_epoch"]), int(cfg["stage2_epochs"]))
                 if projected_seconds > wall_budget:
                     reasons.append("projected 14-epoch runtime exceeds frozen wall/deadline budget")
             pilot = {"status": "FAIL" if reasons else "PASS", "reasons": reasons,
-                     "stage1": rows[:2], "stage2_probe_seconds_per_batch": probe_seconds,
+                     "stage1": rows[:2], "stage2_probe": probe,
                      "projected_total_seconds": projected_seconds,
                      "wall_budget_seconds": wall_budget,
                      "projection_safety_factor": 1.25}
@@ -401,9 +456,9 @@ def run(args: argparse.Namespace) -> dict:
                 raise RuntimeError(f"frozen pilot gate failed: {reasons}")
     if best_state is None:
         raise RuntimeError("no stage-2 checkpoint selected")
-    checkpoint = make_checkpoint(best_state, len(data.label_to_vehicle), hashes,
-                                 best_epoch, best_map)
-    torch.save(checkpoint, out / "checkpoint.pt")
+    checkpoint_path = out / "checkpoint.pt"
+    if not checkpoint_path.is_file():
+        raise RuntimeError("selected best checkpoint was not persisted")
     q, g = data.dev_query_indices, data.dev_gallery_indices
     np.savez(out / "dev_embeddings.npz", query_embeddings=best_q, gallery_embeddings=best_g,
              query_indices=q, gallery_indices=g,
@@ -412,13 +467,18 @@ def run(args: argparse.Namespace) -> dict:
              known_absent=~np.isin(data.vehicle_ids[q], data.vehicle_ids[g]),
              protocol_sha256=np.array(hashes["protocol"]))
     summary = {"status": "PASS", "protocol_sha256": hashes["protocol"],
-               "checkpoint_sha256": sha256(out / "checkpoint.pt"),
+               "checkpoint_sha256": sha256(checkpoint_path),
                "dev_embeddings_sha256": sha256(out / "dev_embeddings.npz"),
                "best_epoch": best_epoch, "dev_cosine_mAP": best_map,
                "num_ids": len(data.label_to_vehicle), "device": str(device),
                "torch": torch.__version__, "numpy": np.__version__,
                "input_sha256": hashes, "epochs": rows}
     (out / "training.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    _atomic_json(out / "checkpoint-status.json",
+                 {"status": "COMPLETE", "best_epoch": best_epoch,
+                  "dev_cosine_mAP": best_map, "protocol_sha256": hashes["protocol"],
+                  "checkpoint_sha256": summary["checkpoint_sha256"],
+                  "training_sha256": sha256(out / "training.json")})
     return summary
 
 
