@@ -1,0 +1,27 @@
+{
+  "font": "Montserrat",
+  "canvas_inches": [
+    13.3333333333,
+    7.5
+  ],
+  "colors": {
+    "ink": "1C1D22",
+    "paper": "FFFFFF",
+    "pink": "FF0053",
+    "violet": "520977",
+    "muted_chart": "8A83D1"
+  },
+  "title_pt": 31,
+  "body_pt_range": [
+    16,
+    22
+  ],
+  "photo_policy": "Exact picture rectangles from verified d1_j48 sheets; no retouch",
+  "mandatory_template_pages": [
+    7,
+    8,
+    9,
+    10,
+    11
+  ]
+}

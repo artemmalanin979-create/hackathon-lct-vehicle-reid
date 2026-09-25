@@ -1,0 +1,14 @@
+digraph pipeline {
+ graph [rankdir=LR,bgcolor="white",pad="0.3",nodesep="0.4",ranksep="0.5",fontname="Montserrat"];
+ node [shape=box,fontname="Montserrat",fontsize=14,color="#E5E7E9",fontcolor="#1C1D22",margin="0.18,0.12"];
+ edge [color="#520977",arrowsize=0.6];
+ input [label="Кроп автомобиля\nRGB 208 × 208"];
+ a [label="OSNet-AIN\nOMZ 2022.1"];
+ b [label="combined_v1\nНаше LP-FT",style=filled,fillcolor="#2D1451",fontcolor="white"];
+ fusion [label="L2 каждой ветви\nСреднее → L2"];
+ whitening [label="Whitening (train_fit)\nrho=0,5 → L2"];
+ output [label="512 чисел float32",style=filled,fillcolor="#2D1451",fontcolor="white"];
+ api [label="API: exact cosine\nt_cos=0,5141976914"];
+ batch [label="Batch: KR(6,3,0,3)\nt_rr=0,5282812306"];
+ input -> {a,b}; {a,b} -> fusion -> whitening -> output; output -> {api,batch};
+}
