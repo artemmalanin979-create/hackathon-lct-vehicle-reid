@@ -27,7 +27,15 @@ python3 05-presentation/build_presentation.py
 python3 05-presentation/validate_presentation.py
 python3 05-presentation/test_submission_contract.py
 python3 05-presentation/render_review.py
+python3 05-presentation/check_ui_provenance.py
 ```
+
+Последняя команда сравнивает зафиксированный браузерный снимок и его исходники с
+текущими файлами сервиса. На базе `818456a` она сообщает `STALE`: после capture
+изменился `app.js` (стабилизация рамки при pointer-событиях), остальные входы
+совпадают. После окончательной UI-правки снимок нужно получить повторно через
+настоящий API и обновить provenance по новому capture, прежде чем считать
+презентацию и сервис одной финальной версией.
 
 Зависимости: python-pptx, Pillow, lxml, Montserrat, LibreOffice headless, pdftotext,
 pdfinfo. Сборщик использует существующий стек проекта, без сети. Validator запускает
