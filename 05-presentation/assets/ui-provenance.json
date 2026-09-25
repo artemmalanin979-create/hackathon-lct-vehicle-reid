@@ -1,20 +1,20 @@
 {
-  "captured_utc": "2026-09-25T17:27:00Z",
-  "capture_time_precision": "minute from saved file timestamp",
+  "captured_utc": "2026-09-25T22:21:16Z",
+  "capture_time_precision": "filesystem mtime to 1 second",
   "source_filename": "1440-light-search.png",
-  "source_sha256": "d76dd88ea0d653a560dbf5a76e13d27dc8def3a501e68b548096f913f520ec04",
+  "source_sha256": "12e4a0eb0b7b6886dce014977716d777e48431beb2c344c606b1d34d687affea",
   "source_size_px": [
     1440,
     1000
   ],
-  "source_git_sha": "c79668ac1ab834accf3016275bc2c39a8171261a",
+  "source_git_sha": "d94d3fdc33c720796574000accf2c1ce75132280",
   "source_files_sha256": {
-    "04-solution/service/app/static/index.html": "5bf3301eef9678e26e84a6e4741b64b6eee2743860dcac6a41171d4fffe29d77",
-    "04-solution/service/app/static/app.css": "790a82dfe769e791e2d9c6f0d26477950314e621f10a1d2ed76de8da7299cae7",
-    "04-solution/service/app/static/app.js": "98d403ccfc909e03bafa7ee347d299dccbaba443bcd314fd1b9ab83a2a8bfbd3"
+    "04-solution/service/app/static/index.html": "61d94c2969322b256f093fb9c098ce47a56ccc06050c55769cbe3a1bbe3cb79a",
+    "04-solution/service/app/static/app.css": "0f4ae007d1fe1828f4b1abecb4c7e487f6d6f155abeed40f6edf265f6bd84adb",
+    "04-solution/service/app/static/app.js": "010434b731cc669d1d201d4e45eee84ccdae4ebc70cbc99e86a973d8168f5c9c"
   },
-  "api_origin": "local rehearsal (origin omitted)",
-  "api_version_source": "local verification snapshot outputs/continuation-20260925/http-benchmark.json, field version",
+  "api_origin": "local immutable release through a loopback-only capture gateway (origin omitted)",
+  "api_version_source": "real GET /api/version during capture; local evidence checks/capture/api-version.json",
   "api_version": {
     "service": "0.2.0",
     "model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
@@ -51,5 +51,9 @@
   "image_is_full_viewport": true,
   "result_mocked": false,
   "retouched": false,
-  "personal_contacts_present": false
+  "personal_contacts_present": false,
+  "capture_proxy": "05-presentation/capture_proxy.py",
+  "capture_proxy_sha256": "2a2e3a97c0051a2536228fa12f40de254f73a90433c4242926e4efbe9f1574e7",
+  "capture_method": "integrated UI static served read-only; /api requests forwarded to the immutable d1_j48 API",
+  "gallery_points_at_capture": 750
 }
