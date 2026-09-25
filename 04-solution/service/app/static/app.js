@@ -55,33 +55,45 @@ const token = (name, fallback) =>
 
 /* ---------- 1. состояние сервиса ---------- */
 
-let bootRevision = 0, bootTimer;
+let bootRevision = 0, bootTimer, resultHealthTimer;
+const STATE_KEYS = ["service", "model", "score_scale", "default_threshold",
+  "gallery_points", "storage_reachable"];
+function scheduleResultHealth() {
+  clearTimeout(resultHealthTimer);
+  // Check only while a visible tab displays a result. Every export also checks
+  // synchronously against the current API state before it creates a file.
+  if (app.last && !document.hidden) resultHealthTimer = setTimeout(boot, 12000);
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) clearTimeout(resultHealthTimer);
+  else if (app.last) void boot();
+});
 async function boot() {
   clearTimeout(bootTimer);
   const generation = ++bootRevision;
   $("retry-state").disabled = true;
-  const chip = $("state-chip");
   try {
     const response = await fetch("/api/ui/state");
     if (!response.ok) throw new Error("HTTP " + response.status);
     const info = await response.json();
     if (generation !== bootRevision) return;
-    const previous = app.info;
-    const configurationChanged = previous && ["service", "model", "score_scale",
-      "default_threshold", "gallery_points", "storage_reachable"].some(key => previous[key] !== info[key]);
-    const hadResult = !!app.last;
-    if (configurationChanged && (hadResult || app.busy)) invalidateQuery();
-    app.info = info;
-    app.configurationChanged = configurationChanged && hadResult;
+    applyState(info);
   } catch (error) {
     if (generation !== bootRevision) return;
     if (app.last || app.busy) invalidateQuery();
     app.ready = false;
+    const chip = $("state-chip");
     chip.className = "chip chip-bad"; chip.textContent = "Сервис недоступен";
     banner("Не удалось связаться с сервисом", "Проверьте соединение и нажмите «Проверить снова». Загруженный кадр останется на странице.");
     $("retry-state").disabled = false; syncRunButton(); return;
   }
-  const info = app.info;
+}
+function applyState(info) {
+  const previous = app.info;
+  const configurationChanged = previous && STATE_KEYS.some(key => previous[key] !== info[key]);
+  const hadResult = !!app.last;
+  if (configurationChanged && (hadResult || app.busy)) invalidateQuery();
+  app.info = info;
   $("foot-service").textContent = `Версия ${info.service} · Косинусный поиск · Порог ${fmt6(info.default_threshold)}`;
   $("foot-model").textContent = info.model.includes("d1_j48") ? "d1_j48 · Две модели + whitening · 512 признаков" : info.model;
   $("thr").placeholder = info.default_threshold.toFixed(6);
@@ -89,6 +101,7 @@ async function boot() {
   $("banner").hidden = true;
   $("retry-state").disabled = false;
   app.ready = !!(info.storage_reachable && info.gallery_points);
+  const chip = $("state-chip");
   chip.className = "chip " + (app.ready ? "chip-ok" : "chip-bad");
   chip.textContent = app.ready ? `Галерея · ${info.gallery_points.toLocaleString("ru-RU")}` : "Галерея готовится";
   if (!info.storage_reachable) {
@@ -97,12 +110,13 @@ async function boot() {
   } else if (!info.gallery_points) {
     banner("Подготавливаем галерею", "Кадр можно загрузить и выделить объект. Мы автоматически проверим готовность галереи.", "Загрузите галерею по инструкции запуска сервиса.");
     bootTimer = setTimeout(boot, 4000);
-  } else if (app.configurationChanged) {
+  } else if (configurationChanged && hadResult) {
     banner("Условия поиска изменились", "Модель, галерея или порог обновились. Повторите поиск по выбранному кадру, чтобы получить актуальный результат.");
   } else if (!info.images_available) {
     banner("Кадры галереи недоступны", "Поиск работает. Пока можно сравнить идентификаторы и оценки; изображения кандидатов временно не отображаются.", "Проверьте монтирование каталога изображений (DATA_DIR).");
   }
   syncRunButton();
+  scheduleResultHealth();
 }
 function banner(head, body, command) {
   $("banner").hidden = false;
@@ -496,19 +510,25 @@ async function runSearch() {
   let refreshState = false;
   try {
     const r = await fetch("/api/search", { method: "POST", body: queryForm(query), signal: controller.signal });
-    const data = await r.json();
+    // Reverse proxies may return an HTML error body; status is still meaningful.
+    let data = null;
+    try { data = await r.json(); } catch (error) { /* non-JSON response */ }
     if (revision !== app.revision || controller.signal.aborted) return;
     if (!r.ok) {
       showError(apiError(r.status, data));
       refreshState = r.status === 409 || r.status === 503;
       return;
     }
+    if (!data) throw new Error("invalid search response");
     app.last = Object.freeze({ at: new Date(), snapshot: query, revision,
       query: Object.freeze({file: query.file.name, ...query.box, top_k: query.top_k}), resp: data });
     render();
     if (innerWidth < 851) scrollToElement(document.querySelector(".results"));
   } catch (e) {
-    if (revision === app.revision && e.name !== "AbortError") showError("Не удалось обратиться к сервису. Проверьте соединение и повторите поиск.");
+    if (revision === app.revision && e.name !== "AbortError") {
+      showError("Не удалось обратиться к сервису. Проверьте соединение и повторите поиск.");
+      refreshState = true;
+    }
   } finally {
     if (revision === app.revision) {
       app.busy = false;
@@ -542,6 +562,7 @@ const hideError = () => { $("error").hidden = true; $("error").textContent = "";
 
 function clearResults() {
   app.last = null; app.below = null; app.selected = null;
+  clearTimeout(resultHealthTimer);
   $("placeholder").hidden = false;
   $("search-loading").hidden = true;
   document.querySelector(".results").setAttribute("aria-busy", "false");
@@ -603,6 +624,7 @@ function render() {
       $("show-below-2").addEventListener("click", loadBelow);
     }
   }
+  scheduleResultHealth();
 }
 
 const field = (k, v) => `<span><span class="k">${k}</span> ${v}</span>`;
@@ -715,9 +737,36 @@ async function loadBelow() {
 
 /* ---------- 6. выгрузка ---------- */
 
-$("exp-csv").addEventListener("click", () => download(buildCSV(), "csv", "text/csv"));
-$("exp-json").addEventListener("click",
-  () => download(buildJSON(), "json", "application/json"));
+$("exp-csv").addEventListener("click", () => exportCurrent("csv"));
+$("exp-json").addEventListener("click", () => exportCurrent("json"));
+
+async function exportCurrent(format) {
+  const last = app.last;
+  if (!last || app.exportBusy) return;
+  app.exportBusy = true;
+  $("exp-csv").disabled = $("exp-json").disabled = true;
+  try {
+    const response = await fetch("/api/ui/state", {cache:"no-store"});
+    if (!response.ok) throw new Error("state unavailable");
+    const info = await response.json();
+    if (app.last !== last) return;
+    // Supersede any older in-flight health response before applying this one.
+    ++bootRevision;
+    clearTimeout(bootTimer);
+    applyState(info);
+    if (app.last !== last) return;
+    if (format === "csv") download(buildCSV(), "csv", "text/csv");
+    else download(buildJSON(), "json", "application/json");
+  } catch (error) {
+    if (app.last === last) {
+      showError("Не удалось проверить состояние сервиса. Повторите выгрузку после восстановления связи.");
+      void boot();
+    }
+  } finally {
+    app.exportBusy = false;
+    $("exp-csv").disabled = $("exp-json").disabled = false;
+  }
+}
 
 const csvCell = (v) => {
   const s = v === null || v === undefined ? "" : String(v);
