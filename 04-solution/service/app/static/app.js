@@ -14,6 +14,7 @@ const NEG = [0x2a, 0x78, 0xd6];   // мешает / ниже порога
 const A_MAX = 0.76;               // верхняя прозрачность плеча — как в render.py
 
 const app = {
+  revision: 0, busy: false, controllers: {}, frameRevision: 0,
   info: null,        // ответ /api/ui/state
   img: null,         // HTMLImageElement текущего кадра
   file: null,        // File — уходит в API как есть
@@ -142,9 +143,12 @@ drop.addEventListener("drop", (e) => {
 });
 
 function loadFrame(file) {
+  invalidateQuery();
+  const generation = ++app.frameRevision;
   const url = URL.createObjectURL(file);
   const im = new Image();
   im.onload = () => {
+    if (generation !== app.frameRevision) { URL.revokeObjectURL(url); return; }
     app.img = im;
     app.file = file;
     app.box = null;
@@ -158,6 +162,7 @@ function loadFrame(file) {
     syncRunButton();
   };
   im.onerror = () => {
+    if (generation !== app.frameRevision) { URL.revokeObjectURL(url); return; }
     showError("Файл не удалось прочитать как изображение. Нужен JPEG или PNG.");
     URL.revokeObjectURL(url);
   };
@@ -303,6 +308,7 @@ function onDrag(e) {
 /* поля x/y/w/h — второй, точный способ задать ту же рамку */
 
 for (const id of ["bx", "by", "bw", "bh"]) {
+  $(id).addEventListener("change", () => pushBox());
   $(id).addEventListener("input", () => {
     if (!app.img) return;
     const v = (k) => parseInt($(k).value, 10);
@@ -313,6 +319,7 @@ for (const id of ["bx", "by", "bw", "bh"]) {
     b.y = Math.min(Math.max(0, b.y), H - 1);
     b.w = Math.min(b.w, W - b.x);
     b.h = Math.min(b.h, H - b.y);
+    invalidateQuery();
     app.box = b;
     draw();
     syncRunButton();
@@ -325,6 +332,7 @@ $("whole-frame").addEventListener("click", () => {
   pushBox();
 });
 $("clear-box").addEventListener("click", () => {
+  invalidateQuery();
   app.box = null;
   for (const id of ["bx", "by", "bw", "bh"]) $(id).value = "";
   draw();
@@ -332,6 +340,7 @@ $("clear-box").addEventListener("click", () => {
 });
 
 function pushBox() {
+  invalidateQuery();
   const b = app.box;
   if (b) {
     $("bx").value = b.x; $("by").value = b.y;
@@ -342,7 +351,7 @@ function pushBox() {
 }
 
 function syncRunButton() {
-  const ok = app.ready && app.img && app.box && app.box.w > 0 && app.box.h > 0;
+  const ok = !app.busy && app.ready && app.img && app.box && app.box.w > 0 && app.box.h > 0;
   $("run").disabled = !ok;
 }
 
@@ -350,39 +359,60 @@ function syncRunButton() {
 
 $("run").addEventListener("click", () => runSearch());
 
-function queryForm(threshold) {
+/** Results belong to a frozen query, never to mutable input controls. */
+function invalidateQuery() {
+  app.revision += 1;
+  for (const controller of Object.values(app.controllers)) controller.abort();
+  app.controllers = {};
+  app.busy = false;
+  clearResults();
+  $("run").textContent = "Найти кандидатов";
+}
+for (const id of ["topk", "thr"]) $(id).addEventListener("input", () => {
+  invalidateQuery(); syncRunButton();
+});
+function snapshot() {
+  return Object.freeze({ file: app.file, image: app.img,
+    box: Object.freeze({ ...app.box }),
+    top_k: Math.max(1, Math.min(100, parseInt($("topk").value, 10) || 10)),
+    threshold: $("thr").value });
+}
+function queryForm(query, threshold) {
   const fd = new FormData();
-  fd.append("file", app.file);
-  fd.append("x", app.box.x); fd.append("y", app.box.y);
-  fd.append("w", app.box.w); fd.append("h", app.box.h);
-  fd.append("top_k", Math.max(1, Math.min(100, parseInt($("topk").value, 10) || 10)));
+  fd.append("file", query.file);
+  for (const key of ["x", "y", "w", "h"]) fd.append(key, query.box[key]);
+  fd.append("top_k", query.top_k);
   if (threshold !== undefined) fd.append("threshold", threshold);
-  else if ($("thr").value !== "") fd.append("threshold", $("thr").value);
+  else if (query.threshold !== "") fd.append("threshold", query.threshold);
   return fd;
 }
-
 async function runSearch() {
-  const btn = $("run");
-  btn.disabled = true;
-  btn.textContent = "Идёт поиск…";
+  if (!app.ready || !app.file || !app.box || app.busy) return;
+  const query = snapshot();
+  invalidateQuery();
+  const revision = app.revision;
+  const controller = new AbortController();
+  app.controllers.search = controller;
+  app.busy = true;
+  $("run").disabled = true;
+  $("run").textContent = "Идёт поиск…";
   hideError();
   try {
-    const r = await fetch("/api/search", { method: "POST", body: queryForm() });
+    const r = await fetch("/api/search", { method: "POST", body: queryForm(query), signal: controller.signal });
     const data = await r.json();
-    if (!r.ok) { showError(apiError(r.status, data)); clearResults(); return; }
-    app.below = null;
-    app.last = {
-      at: new Date(),
-      query: { file: app.file.name, ...app.box,
-               top_k: parseInt($("topk").value, 10) || 10 },
-      resp: data,
-    };
+    if (revision !== app.revision || controller.signal.aborted) return;
+    if (!r.ok) { showError(apiError(r.status, data)); return; }
+    app.last = Object.freeze({ at: new Date(), snapshot: query, revision,
+      query: Object.freeze({file: query.file.name, ...query.box, top_k: query.top_k}), resp: data });
     render();
   } catch (e) {
-    showError("Не удалось обратиться к сервису: " + e);
+    if (revision === app.revision && e.name !== "AbortError") showError("Не удалось обратиться к сервису. Проверьте соединение и повторите поиск.");
   } finally {
-    btn.textContent = "Найти кандидатов";
-    syncRunButton();
+    if (revision === app.revision) {
+      app.busy = false;
+      $("run").textContent = "Найти кандидатов";
+      syncRunButton();
+    }
   }
 }
 
@@ -413,6 +443,8 @@ function clearResults() {
   $("refusal").hidden = true;
   $("export").hidden = true;
   $("explain").hidden = true;
+  $("ex-facts").replaceChildren();
+  $("show-below").disabled = false;
   $("below-note").hidden = true;
 }
 
@@ -552,16 +584,23 @@ $("show-below").addEventListener("click", loadBelow);
     Отказ при этом не «отменяется» — он показан выше, а эти строки помечены
     как не прошедшие порог. */
 async function loadBelow() {
-  const btn = $("show-below");
-  btn.disabled = true;
+  const last = app.last;
+  if (!last || app.controllers.below) return;
+  const controller = new AbortController();
+  app.controllers.below = controller;
+  $("show-below").disabled = true;
   try {
-    const r = await fetch("/api/search", { method: "POST", body: queryForm(-1) });
+    const r = await fetch("/api/search", {method:"POST", body:queryForm(last.snapshot, -1), signal:controller.signal});
     const data = await r.json();
+    if (app.last !== last || controller.signal.aborted) return;
     if (!r.ok) { showError(apiError(r.status, data)); return; }
     app.below = data.candidates;
     render();
   } catch (e) {
-    showError("Не удалось обратиться к сервису: " + e);
+    if (app.last === last && e.name !== "AbortError") showError("Ближайшие объекты не загрузились. Повторите действие.");
+  } finally {
+    if (app.controllers.below === controller) delete app.controllers.below;
+    if (app.last === last) $("show-below").disabled = false;
   }
 }
 
@@ -647,6 +686,12 @@ function download(text, ext, mime) {
 /* ---------- 7. разбор пары: на что смотрела модель ---------- */
 
 async function explain(gid) {
+  const last = app.last;
+  if (!last) return;
+  if (app.controllers.explain) app.controllers.explain.abort();
+  const controller = new AbortController();
+  app.controllers.explain = controller;
+  const current = () => app.last === last && app.selected === gid && !controller.signal.aborted;
   const panel = $("explain");
   panel.hidden = false;
   $("explain-lead").textContent = "Считается разложение…";
@@ -654,18 +699,18 @@ async function explain(gid) {
   for (const li of $("cards").children) li.classList.toggle("sel", li.dataset.gid === gid);
   app.selected = gid;
 
-  const fd = new FormData();
-  fd.append("file", app.file);
-  fd.append("x", app.box.x); fd.append("y", app.box.y);
-  fd.append("w", app.box.w); fd.append("h", app.box.h);
+  $("ex-facts").replaceChildren();
+  const fd = queryForm(last.snapshot);
   fd.append("gallery_id", gid);
   let data;
   try {
-    const r = await fetch("/api/explain", { method: "POST", body: fd });
+    const r = await fetch("/api/explain", { method: "POST", body: fd, signal: controller.signal });
     data = await r.json();
+    if (!current()) return;
     if (!r.ok) { $("explain-lead").textContent = apiError(r.status, data); return; }
   } catch (e) {
-    $("explain-lead").textContent = "Не удалось обратиться к сервису: " + e;
+    if (!current() || e.name === "AbortError") return;
+    $("explain-lead").textContent = "Разбор недоступен. Результат поиска сохранён; повторите разбор.";
     return;
   }
 
@@ -677,8 +722,8 @@ async function explain(gid) {
     + "поэтому его оценка может отличаться от числа ниже. Красным — то, что "
     + "поддерживает совпадение, синим — то, что ему мешает.";
 
-  drawTile($("ex-q"), () => drawQueryCrop(), data.query, scale);
-  drawTile($("ex-g"), (c) => loadGalleryCrop(gid, c), data.gallery, scale);
+  drawTile($("ex-q"), () => drawQueryCrop(last.snapshot), data.query, scale);
+  drawTile($("ex-g"), (c) => loadGalleryCrop(gid, c, current), data.gallery, scale, current);
   drawBar($("ex-bar"), scale);
   $("ex-ticks").innerHTML = `<span>−${scale.toFixed(4)}</span><span>0</span>`
     + `<span>+${scale.toFixed(4)}</span>`;
@@ -694,6 +739,8 @@ async function explain(gid) {
 }
 
 $("explain-close").addEventListener("click", () => {
+  if (app.controllers.explain) app.controllers.explain.abort();
+  app.selected = null;
   $("explain").hidden = true;
   for (const li of $("cards").children) li.classList.remove("sel");
 });
@@ -713,7 +760,7 @@ function share(g, p) {
 const SIDE = 416;   // размер плитки разбора — ровно тот, в котором
                     // приходит кроп галереи (crop?size=416): без пересчёта
 
-function drawTile(canvas, paint, grid, scale) {
+function drawTile(canvas, paint, grid, scale, current = () => true) {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = SIDE * dpr;
   canvas.height = SIDE * dpr;
@@ -722,23 +769,23 @@ function drawTile(canvas, paint, grid, scale) {
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
   c.fillStyle = token("--card-2", "#f2f1ec");
   c.fillRect(0, 0, SIDE, SIDE);
-  const after = () => heat(c, grid, scale);
+  const after = () => { if (current()) heat(c, grid, scale); };
   const r = paint(c);
   if (r && typeof r.then === "function") r.then(after); else after();
 }
 
 /** Кроп запроса ровно так, как его видит модель: квадрат 208x208 из рамки. */
-function drawQueryCrop() {
-  const b = app.box;
+function drawQueryCrop(query) {
+  const b = query.box;
   const c = $("ex-q").getContext("2d");
   c.imageSmoothingQuality = "high";
-  c.drawImage(app.img, b.x, b.y, b.w, b.h, 0, 0, SIDE, SIDE);
+  c.drawImage(query.image, b.x, b.y, b.w, b.h, 0, 0, SIDE, SIDE);
 }
 
-function loadGalleryCrop(gid, c) {
+function loadGalleryCrop(gid, c, current) {
   return new Promise((resolve) => {
     const im = new Image();
-    im.onload = () => { c.drawImage(im, 0, 0, SIDE, SIDE); resolve(); };
+    im.onload = () => { if (current()) c.drawImage(im, 0, 0, SIDE, SIDE); resolve(); };
     im.onerror = () => resolve();
     im.src = `/api/gallery/${encodeURIComponent(gid)}/crop?size=416`;
   });
