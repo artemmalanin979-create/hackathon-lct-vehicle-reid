@@ -79,6 +79,7 @@
     "baseline_model_b_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
     "baseline_whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
     "evaluator_sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+    "evaluator_scope_dependency_sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
     "reranker_sha256": "ac946451b2e2ae901e4597667b4b5bfe9a77d85d94caf2e369636cee876feb76",
     "preprocess_sha256": "4a6a203feb059d1626ab3a683dc505956e36c3280d746a96a0abd593238af686",
     "baseline_expected_cosine_mAP": 0.7316093422310448,
