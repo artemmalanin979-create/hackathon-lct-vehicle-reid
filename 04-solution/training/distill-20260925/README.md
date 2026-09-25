@@ -73,7 +73,7 @@ Head ONNX на1860 признаках: maxabs 1.64e-07. Полный image→stu
 | `artifacts/run/export/head.onnx` | `b547c8bfb79a0df84f8623fd45d736b4a80386f573c6b59b646f6faf70ef4dca` |
 | `artifacts/run/export/student_combined_v1.onnx` | `188284ff7a56ff915ea6143cca62dca0a381e3ca7fc784b996b876b641ad3d06` |
 
-Артефакты не входят в Git; сохранены локально в этом worktree и на `worker-vm:~/lct-reid/jobs/distill_20260925/results/`. Перед удалением worktree скопировать **весь** `artifacts/run/` в каталог принятого handoff и проверить [local_artifact_manifest.json](results/local_artifact_manifest.json). Исходники/config/метрики/логи входят в Git. Никаких новых внешних весов или датасетов не скачивалось; исходный provenance/licensing OSNet и combined_v1 остаётся прежним.
+Артефакты не входят в Git; сохранены локально в delivery worktree и на `worker-vm:~/lct-reid/jobs/distill_20260925/results/`. Все 24 файла `artifacts/run/` в delivery сверены с [local_artifact_manifest.json](results/local_artifact_manifest.json). Перед удалением worktree перенести **весь** каталог вместе с manifest, не один ONNX. Исходники/config/метрики/логи входят в Git. Никаких новых внешних весов или датасетов не скачивалось; исходный provenance/licensing OSNet и combined_v1 остаётся прежним.
 
 ## Запуск готового ядра
 
@@ -110,7 +110,7 @@ Worker clock отстаёт от workstation примерно на2.6ч. Свя�
 
 Вывод ограничен данным рецептом и бюджетом: он не доказывает невозможности дистилляции вообще. Дополнительных обучений после отрицательной оценки не запускалось.
 
-Независимая приёмка: **PENDING**. Следующее действие — критик проверяет diff, входы, канонический baseline и отрицательный вывод; после приёмки интегрируются исходники и отчёт, default d1_j48 остаётся.
+Независимая приёмка: **PASS** на ML SHA `c8b1fdc` (интеграция delivery `edd9a72`). Критик проверил split/protocol, replay исправления dev whitening, смысловую мутацию, 24/24 артефакта и отрицательное решение. Отчёт: `outputs/independent-ml-review-20260925/REPORT.md` в ML worktree. Открытых блокирующих замечаний нет; default d1_j48 остаётся.
 
 ## Исправление независимого замечания P2: dev whitening
 
