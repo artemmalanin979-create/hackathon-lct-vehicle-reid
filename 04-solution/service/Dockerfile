@@ -40,6 +40,9 @@ RUN if [ "$PIP_SOURCE" = "offline" ]; then \
 # ── Стадия 2: сдаваемый образ ───────────────────────────────────────────────
 FROM python:3.13-slim
 
+ARG SOURCE_SHA=unspecified
+LABEL org.opencontainers.image.revision="${SOURCE_SHA}"
+
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1

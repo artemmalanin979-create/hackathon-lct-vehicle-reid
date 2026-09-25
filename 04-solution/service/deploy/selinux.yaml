@@ -1,0 +1,9 @@
+# Optional for a local Fedora rehearsal. Avoid relabelling the organizer dataset.
+# Main compose is suitable for a host without enforcing SELinux, e.g. Ubuntu.
+services:
+  seed:
+    security_opt:
+      - label=disable
+  api:
+    security_opt:
+      - label=disable

@@ -1,0 +1,9 @@
+# After the owner approves deployment and supplies the public DNS name.
+# Replace demo.example.org; keep the backend bound to localhost.
+demo.example.org {
+    encode zstd gzip
+    request_body {
+        max_size 20MB
+    }
+    reverse_proxy 127.0.0.1:18071
+}
