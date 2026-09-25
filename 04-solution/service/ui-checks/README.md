@@ -1,8 +1,9 @@
 # Проверка пользовательского пути
 
 Клиент остаётся vanilla HTML/CSS/JS. Инструменты ниже не входят в runtime
-образа и не требуют сети: нужен установленный Playwright и Chrome, а также
-локальная репетиция настоящего API с заполненной галереей d1_j48.
+образа и не требуют внешней сети. Нужны Playwright и Chrome; кроме
+`resilience.cjs`, нужна локальная репетиция настоящего API с заполненной
+галереей d1_j48.
 
 Рабочая проверочная среда: Node 20.20.2, Playwright 1.63.0, Chrome
 153.0.8010.52. Скрипты создают только собственные browser contexts и файлы в
@@ -19,6 +20,8 @@ node 04-solution/service/ui-checks/mutation.cjs \
   http://127.0.0.1:18070 /путь/к/data /путь/к/logs/mutation
 node 04-solution/service/ui-checks/presentation-shots.cjs \
   http://127.0.0.1:18070 /путь/к/logs/deck-shots
+node 04-solution/service/ui-checks/resilience.cjs \
+  /путь/к/logs/resilience
 ```
 
 - `behavior.cjs`: 8 проверок причинности запросов, ошибок, выгрузки и
@@ -42,6 +45,13 @@ node 04-solution/service/ui-checks/presentation-shots.cjs \
 - `presentation-shots.cjs`: 10 реальных viewport-снимков 1440 px: обложка,
   поиск, сравнение, объяснение, отказ в двух темах.
 - `capture.cjs`: исходная матрица экранов, поддерживающая baseline-интерфейс.
+- `resilience.cjs`: лёгкая изолированная браузерная проверка отказов клиента.
+  Ответы `/api/ui/state`, `/api/search` и изображения подменены внутри одного
+  browser context: 409 обновляет готовность галереи и сохраняет возможность
+  повтора, смена модели снимает старый экспорт, недоступный кадр пары получает
+  понятное состояние и восстанавливается при выборе другого кандидата. Скрипт
+  не запускает API и не измеряет качество модели; реальный путь проверяют
+  `behavior.cjs` и `acceptance.cjs`.
 
 `TEST_FILTER` ограничивает сценарии регулярным выражением. JSON результатов
 содержит command, HEAD, branch, source/input SHA-256, toolchain, counts и

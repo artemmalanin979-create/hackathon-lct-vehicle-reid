@@ -66,9 +66,16 @@ async function boot() {
     if (!response.ok) throw new Error("HTTP " + response.status);
     const info = await response.json();
     if (generation !== bootRevision) return;
+    const previous = app.info;
+    const configurationChanged = previous && ["service", "model", "score_scale",
+      "default_threshold", "gallery_points", "storage_reachable"].some(key => previous[key] !== info[key]);
+    const hadResult = !!app.last;
+    if (configurationChanged && (hadResult || app.busy)) invalidateQuery();
     app.info = info;
+    app.configurationChanged = configurationChanged && hadResult;
   } catch (error) {
     if (generation !== bootRevision) return;
+    if (app.last || app.busy) invalidateQuery();
     app.ready = false;
     chip.className = "chip chip-bad"; chip.textContent = "Сервис недоступен";
     banner("Не удалось связаться с сервисом", "Проверьте соединение и нажмите «Проверить снова». Загруженный кадр останется на странице.");
@@ -90,6 +97,8 @@ async function boot() {
   } else if (!info.gallery_points) {
     banner("Подготавливаем галерею", "Кадр можно загрузить и выделить объект. Мы автоматически проверим готовность галереи.", "Загрузите галерею по инструкции запуска сервиса.");
     bootTimer = setTimeout(boot, 4000);
+  } else if (app.configurationChanged) {
+    banner("Условия поиска изменились", "Модель, галерея или порог обновились. Повторите поиск по выбранному кадру, чтобы получить актуальный результат.");
   } else if (!info.images_available) {
     banner("Кадры галереи недоступны", "Поиск работает. Пока можно сравнить идентификаторы и оценки; изображения кандидатов временно не отображаются.", "Проверьте монтирование каталога изображений (DATA_DIR).");
   }
@@ -484,11 +493,16 @@ async function runSearch() {
   $("search-loading").hidden = false; $("placeholder").hidden = true;
   document.querySelector(".results").setAttribute("aria-busy", "true");
   hideError();
+  let refreshState = false;
   try {
     const r = await fetch("/api/search", { method: "POST", body: queryForm(query), signal: controller.signal });
     const data = await r.json();
     if (revision !== app.revision || controller.signal.aborted) return;
-    if (!r.ok) { showError(apiError(r.status, data)); return; }
+    if (!r.ok) {
+      showError(apiError(r.status, data));
+      refreshState = r.status === 409 || r.status === 503;
+      return;
+    }
     app.last = Object.freeze({ at: new Date(), snapshot: query, revision,
       query: Object.freeze({file: query.file.name, ...query.box, top_k: query.top_k}), resp: data });
     render();
@@ -503,6 +517,7 @@ async function runSearch() {
       if (!app.last) $("placeholder").hidden = false;
       $("run").textContent = "Найти кандидатов";
       syncRunButton();
+      if (refreshState) void boot();
     }
   }
 }
@@ -958,8 +973,23 @@ function paintComparison() {
   const context = canvas.getContext("2d");
   context.drawImage(query.image, box.x, box.y, box.w, box.h, 0, 0, canvas.width, canvas.height);
   if (comparison.frame) { const b = query.box; context.strokeStyle = "#e34948"; context.lineWidth = Math.max(2,canvas.width/350); context.strokeRect(b.x*scale,b.y*scale,b.w*scale,b.h*scale); }
-  $("compare-g").src = `/api/gallery/${encodeURIComponent(comparison.gid)}/crop?size=1200&view=${comparison.frame ? "frame" : "crop"}`;
-  $("compare-g").alt = `Кандидат ${comparison.gid}${comparison.frame ? ", кадр целиком" : ", выбранный объект"}`;
+  const image = $("compare-g"), status = $("compare-image-status");
+  const src = `/api/gallery/${encodeURIComponent(comparison.gid)}/crop?size=1200&view=${comparison.frame ? "frame" : "crop"}`;
+  image.hidden = true;
+  status.hidden = false;
+  status.textContent = "Загружаем кадр кандидата…";
+  image.onload = () => {
+    if (app.comparison !== comparison || image.getAttribute("src") !== src) return;
+    image.hidden = false;
+    status.hidden = true;
+  };
+  image.onerror = () => {
+    if (app.comparison !== comparison || image.getAttribute("src") !== src) return;
+    image.hidden = true;
+    status.textContent = "Кадр кандидата недоступен. Выберите другой объект для сравнения.";
+  };
+  image.src = src;
+  image.alt = `Кандидат ${comparison.gid}${comparison.frame ? ", кадр целиком" : ", выбранный объект"}`;
   $("compare-view").textContent = comparison.frame ? "Только объекты" : "Кадры целиком";
 }
 $("compare-view").addEventListener("click", () => { if (app.comparison) { app.comparison.frame = !app.comparison.frame; paintComparison(); } });

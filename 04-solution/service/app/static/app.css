@@ -1065,6 +1065,19 @@ summary::-webkit-details-marker {
   object-fit:contain;
   min-height:0
 }
+.pair-image-status {
+  position:absolute;
+  inset:20px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5
+}
+.pair-image-status[hidden] {
+  display:none
+}
 .compare-pair figcaption {
   display:flex;
   justify-content:space-between;
