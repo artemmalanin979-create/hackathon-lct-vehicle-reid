@@ -1,0 +1,185 @@
+{
+  "version": 2,
+  "status": "frozen_before_training",
+  "purpose": "Predeclared attempt 2: continue the distilled standalone image encoder on permitted own+CARLA/Roundabout fit data with the same own-fit-only teacher coordinate system.",
+  "base_source_sha": "28407ce0baf1405539ed60e577494a90e1fbca87",
+  "hypothesis": "Adding verified cross-view foreign fit data to the teacher-distilled core improves generalization over own-only distillation without requiring a second network at inference.",
+  "architecture": {
+    "backbone": "torchvision MobileNetV3-Small features, ImageNet-1K V1 initialization, all feature layers trainable in stage 2",
+    "own_mechanism": "one 256-dimensional global branch and two independently projected 128-dimensional horizontal stripe branches, concatenated and L2-normalized",
+    "input": "float32 RGB NCHW 0..255, 208x208 bbox crop; 1/255 and ImageNet mean/std applied inside the graph",
+    "output_dimensions": 512,
+    "inference_dependency": "same one CrossViewCore ONNX; teacher, OSNet and whitening are training-only",
+    "weights_source": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+    "weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+    "weights_bytes": 10306551,
+    "weights_provenance": "TorchVision MobileNet_V3_Small_Weights.IMAGENET1K_V1; external initialization disclosed, not claimed as our architecture or training data",
+    "license_review": "TorchVision code is BSD-3-Clause; TorchVision states pretrained weights can inherit dataset terms. Raw external weights stay local pending final redistribution review."
+  },
+  "data": {
+    "train_source": "verified combined_train.npz and aligned combined_crops_208.npy: 7248 own +13328 CARLA/Roundabout rows, own dev100 excluded from 19967 fit rows",
+    "train_source_sha256": "c1ee49dee0873a5748e7b799613fd1e14b4d3689bcd93b3cf51d24d08c42652c",
+    "train_crops_sha256": "babd228fbe649999a09e9b2d83f3701de9c1b17424a72e23331940dcca3521cc",
+    "fit_dev_rule": "exclude all 100 previously selected own dev vehicle IDs from training; all remaining own train IDs form fit",
+    "split_file": "04-solution/training/distill-20260925/results/split.json",
+    "split_sha256": "0f35d494bde29b0bac95094862cdd67cfc8b06cd7715c0affae0ac1a669ec620",
+    "fit_rows_expected": 19967,
+    "dev_rows_expected": 609,
+    "dev_ids_expected": 100,
+    "dev_preprocess": "Use the same fixed own crops_208.npy rows for both baseline and new core on dev. The baseline consumes these as float32 RGB 0..255 NCHW through its release preprocessing and release whitening; do not refit whitening on dev.",
+    "dev_baseline_limitation": "The teacher combined_v1 and warm-start checkpoint had historical dev100 model-selection exposure; fit-only whitening excludes direct dev labels from new gradients but dev is not an untouched holdout.",
+    "evaluation": "existing reused val, never used for checkpoint, fusion or threshold selection",
+    "val_query_csv_sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+    "val_gallery_csv_sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+    "val_images_manifest_local": "outputs/owncore-20260925/input/val_images_manifest.json",
+    "val_images_manifest_sha256": "ee57a58e12bc8d25679fda55cf047194986446faddfa6c278411728a79b20fd5",
+    "val_images_count": 1860,
+    "val_rows_expected": [
+      1110,
+      750
+    ],
+    "known_queries_expected": 832,
+    "limitation": "The 1110x750 val has been reused in prior experiments. This is a paired comparison on a known split, not an untouched holdout."
+  },
+  "training": {
+    "seed": 20260926,
+    "attempts": 2,
+    "this_attempt": 2,
+    "source_checkpoint_sha256": "from attempt_1 training.json selected checkpoint; verify recorded SHA and strict load before any gradient",
+    "warm_start": "strict model_state_dict reload; reset AdamW optimizer because original checkpoint has no optimizer state",
+    "stage1_epochs": 0,
+    "stage2_epochs": 8,
+    "stage1_trainable": "not applicable; all layers trainable from first batch",
+    "stage2_trainable": "all MobileNetV3-Small backbone, heads and 1071-ID classifier",
+    "batch_size": 32,
+    "sampler": "8 vehicle IDs x 4 frames, cross-camera positives required",
+    "steps_per_epoch": 600,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "head_classifier_lr": 0.0002,
+    "backbone_lr": 5e-05,
+    "scheduler": "cosine anneal within each stage to eta_min=0.000001",
+    "classification_loss": {
+      "type": "CE",
+      "label_smoothing": 0.1,
+      "weight": 1.0,
+      "policy": "all own fit rows; foreign rows excluded in attempt 2"
+    },
+    "metric_loss": {
+      "type": "cross_camera_batch_hard_triplet",
+      "margin": 0.3,
+      "weight": 0.5
+    },
+    "embedding_kd": {
+      "type": "1 - dot(L2 student,L2 teacher)",
+      "weight": 2.0
+    },
+    "relation_kd": {
+      "type": "0.5*(mean_squared_cross_camera_positive + mean_squared_different_ID_negative) of batch Gram similarities",
+      "weight": 0.5
+    },
+    "augmentation": "fit-only horizontal flip p=0.5 and brightness/contrast 0.9..1.1, same as prior run",
+    "checkpoint_selection": "highest dev cosine full-gallery mAP with market same-camera exclusion after each epoch; ties earlier epoch; val never selects",
+    "pilot": "one real P8K4 batch checks finite losses/gradients/parameter update and nonempty cross-camera pairs; after first epoch RSS<4096MiB and projected total runtime<7200s or STOP with partial evidence",
+    "wall_limit_seconds": 7200,
+    "stop_no_later_than_moscow": "2026-09-27 00:00:00",
+    "device": "cpu",
+    "threads": 4,
+    "peak_rss_limit_mib": 4096
+  },
+  "selection": {
+    "fusion": "For weight w in [0.25,0.5,0.75], L2-normalize each 512D branch and concatenate [sqrt(1-w)*release_baseline, sqrt(w)*new_core] into a 1024D research descriptor. Its pairwise cosine is (1-w)*baseline cosine + w*core cosine for Q-Q/Q-G/G-G. Run KR once on these fused descriptors, never average two separately reranked score matrices. Select one w by dev cosine mAP, ties smaller w; reuse w for KR.",
+    "baseline_dev": "Use the same two release ONNX files, release normalization and lw_ens_j48_rho0.5.npz on dev and val; no fit-only or dev-refit whitening.",
+    "threshold": "maximize presence F1 on dev precision-recall curve, tie higher threshold; separate for each model and cosine/KR",
+    "no_val_tuning": true
+  },
+  "evaluation": {
+    "camera_policy": "market",
+    "refusal_mode": "presence",
+    "ap_method": "step",
+    "ranking": [
+      "cosine",
+      "KR k1=6 k2=3 lambda=0.3"
+    ],
+    "metrics": [
+      "mAP",
+      "Rank-1",
+      "Rank-5",
+      "mINP",
+      "F1",
+      "TNR",
+      "camera gap"
+    ],
+    "baseline_fresh_extract": true,
+    "baseline_model_a_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "baseline_model_b_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "baseline_whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+    "evaluator_sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+    "evaluator_scope_dependency_sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+    "reranker_sha256": "ac946451b2e2ae901e4597667b4b5bfe9a77d85d94caf2e369636cee876feb76",
+    "preprocess_sha256": "4a6a203feb059d1626ab3a683dc505956e36c3280d746a96a0abd593238af686",
+    "baseline_expected_cosine_mAP": 0.7316093422310448,
+    "baseline_expected_KR_mAP": 0.7740915539438481,
+    "bootstrap": {
+      "cluster": "vehicle_id",
+      "paired": true,
+      "replicates": 4000,
+      "seed": 20260925
+    },
+    "multiplicity": "Holm across core/fusion × cosine/KR × 2 predeclared attempts (8 deltas) if both attempts reach validation; missing comparisons marked NOT RUN, never removed after seeing values",
+    "candidate_acceptance": "Release changes only if KR mAP delta >= +0.005 and paired CI95 lower >0, cosine delta >=0, refusal F1 no worse than -0.02 in both modes, and all performance limits pass; otherwise retain d1_j48.",
+    "export_tolerance": "Torch vs ONNX max absolute descriptor difference <=1e-5 on real crops; same top-1 and refusal decisions on all validation rows at dev-frozen thresholds",
+    "research_target": "standalone KR mAP >= 0.7740915539438481 on the reused val is the user goal, not a guaranteed outcome or the separate release gate"
+  },
+  "benchmark": {
+    "device": "same workstation CPU for release and new ONNX",
+    "threads": 2,
+    "batch": 1,
+    "warmup": 5,
+    "samples": 40,
+    "order": "paired interleaved baseline/core/fusion with model order reversed every sample",
+    "boundary": "same preprocessed 208x208 float32 tensor to final L2 descriptor; no JPEG decode, API, Qdrant or KR",
+    "report": [
+      "p50",
+      "p95",
+      "FPS",
+      "cold_start",
+      "peak_RSS",
+      "weight_bytes",
+      "descriptor_size",
+      "raw_gallery_750_bytes"
+    ],
+    "release_performance_limits": {
+      "batch1_p95_max_ratio_to_same_run_baseline": 1.1,
+      "batch1_FPS_min_ratio_to_same_run_baseline": 0.9,
+      "cold_start_max_ratio_to_same_run_baseline": 2.0,
+      "peak_RSS_max_ratio_to_same_run_baseline": 2.0,
+      "standalone_weight_bytes_max": 50000000,
+      "fusion_weight_bytes_max": 100000000,
+      "task_weight_bytes_max": 2000000000,
+      "inference_VRAM": "NOT APPLICABLE: this fallback training and production paired benchmark are CPU-only; process training RSS must remain below 4096 MiB as specified in pilot",
+      "gallery_index": "512D standalone raw 750-row float32 index <=1536000 bytes; 1024D research fusion <=3072000 bytes before Qdrant overhead"
+    },
+    "no_artificial_delay": true
+  },
+  "release": "d1_j48 stays untouched and shippable until explicit candidate acceptance; do not alter canonical reproduce metric bounds",
+  "teacher": {
+    "source": "fresh ONNX Runtime extraction of both release ONNX on the same hash-checked RGB uint8 208x208 raw crops, NCHW float32 0..255; no network download",
+    "model_a_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model_b_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "geometry": "L2 each raw branch -> L2(A+B) -> discriminative whitening rho=0.5 fitted only on own fit6639 vehicle/camera labels -> L2 512D target",
+    "whitening_source": "learn_lw from 04-solution/training/src/postprocess/lib45.py, SHA256 8a03c39489e463529ea5814753b6be435989fe14ea972d2848851bad09fb6983",
+    "target_rows": "own fit6639 plus permitted foreign 13328 in ascending original row order; exclude own dev609; apply exactly the attempt_1 own-fit-only P,m to all rows; no new whitening fit",
+    "row_order": "compare own NPZ image_id/vehicle_id/camera_id to hash-checked train_fit.csv row by row; compare first 7248 combined metadata/raw rows before attempt 2",
+    "train_fit_csv_sha256": "4eae49f6e50795445ef9281181571565298cc69828ba3d54b345386acb8441b8",
+    "no_dev_gradient": true,
+    "release_whitening_for_teacher": false,
+    "historical_exposure": "teacher combined_v1 and source checkpoint were previously selected using dev100; fit-only target generation prevents new direct dev leakage, not historical independence"
+  },
+  "attempt_plan": {
+    "attempt_1": "own-only fit6639 distill warm-start of checkpoint 22fc2fdd; select on dev, freeze ONNX/selection before validation",
+    "attempt_2": "combined fit19967 continuation of attempt_1 selected checkpoint for eight full epochs, same fit-only own whitening teacher geometry, own CE only, other losses all fit rows; select on same dev",
+    "attempt_2_resource_gate": "start only if combined NPZ/raw match frozen SHA, teacher target generation and one-batch smoke fit RSS<4096MiB and projected runtime before 27.09 00:00 MSK; decide before opening attempt_1 val; no trigger based on val result",
+    "validation": "run shared reused val once for each fully selected candidate after both attempts are frozen or attempt_2 resource-blocked; no adaptive retraining after val"
+  }
+}
