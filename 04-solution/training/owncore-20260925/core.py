@@ -36,11 +36,16 @@ class CrossViewCore(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         feature_map = self.backbone((x / 255.0 - self.rgb_mean) / self.rgb_std)
         global_feature = F.adaptive_avg_pool2d(feature_map, (1, 1)).flatten(1)
-        stripes = F.adaptive_avg_pool2d(feature_map, (2, 1))
+        # Fixed 208x208 inference gives a 7-row feature map. Adaptive 7->2
+        # pooling is unsupported by the legacy opset-17 exporter; explicit
+        # horizontal regions preserve the global/local design and export cleanly.
+        midpoint = feature_map.shape[2] // 2
+        top = feature_map[:, :, :midpoint, :].mean(dim=(2, 3))
+        bottom = feature_map[:, :, midpoint:, :].mean(dim=(2, 3))
         descriptor = torch.cat((
             self.global_head(global_feature),
-            self.top_head(stripes[:, :, 0, 0]),
-            self.bottom_head(stripes[:, :, 1, 0]),
+            self.top_head(top),
+            self.bottom_head(bottom),
         ), dim=1)
         return F.normalize(descriptor, p=2, dim=1, eps=1e-12)
 
