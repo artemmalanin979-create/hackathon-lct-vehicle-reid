@@ -1,0 +1,377 @@
+{
+  "status": "PASS",
+  "scope": "reused val1110x750; not an untouched holdout",
+  "metrics": {
+    "baseline": {
+      "cosine": {
+        "mAP": 0.7316093422310448,
+        "Rank-1": 0.6850961538461539,
+        "Rank-5": 0.8822115384615384,
+        "mINP": 0.6928460434032722,
+        "F1": 0.8613291470434328,
+        "TNR": 0.07913669064748201,
+        "threshold": 0.3079062860777646,
+        "counts": {
+          "queries": 1110,
+          "gallery": 750,
+          "known_queries": 832,
+          "unknown_queries": 278,
+          "filtered_queries": 0,
+          "refusal_queries": 1110,
+          "relevant_pairs": 1239
+        },
+        "same_camera_gap_mAP": 0.1307524529041899
+      },
+      "KR": {
+        "mAP": 0.7740915539438481,
+        "Rank-1": 0.7307692307692307,
+        "Rank-5": 0.8810096153846154,
+        "mINP": 0.7488060309838231,
+        "F1": 0.8420382165605096,
+        "TNR": 0.7230215827338129,
+        "threshold": 0.410404583517058,
+        "counts": {
+          "queries": 1110,
+          "gallery": 750,
+          "known_queries": 832,
+          "unknown_queries": 278,
+          "filtered_queries": 0,
+          "refusal_queries": 1110,
+          "relevant_pairs": 1239
+        },
+        "same_camera_gap_mAP": 0.11027295350331523
+      }
+    },
+    "core": {
+      "cosine": {
+        "mAP": 0.27674931781841666,
+        "Rank-1": 0.21995192307692307,
+        "Rank-5": 0.4338942307692308,
+        "mINP": 0.23337608390759834,
+        "F1": 0.8568486096807415,
+        "TNR": 0.0,
+        "threshold": 0.33602163788320494,
+        "counts": {
+          "queries": 1110,
+          "gallery": 750,
+          "known_queries": 832,
+          "unknown_queries": 278,
+          "filtered_queries": 0,
+          "refusal_queries": 1110,
+          "relevant_pairs": 1239
+        },
+        "same_camera_gap_mAP": 0.29690275972034647,
+        "paired_vs_baseline": {
+          "delta_mAP": -0.45486002441262813,
+          "ci95": [
+            -0.49894891356738186,
+            -0.4106553956499757
+          ],
+          "p_two_sided": 0.0004998750312421895,
+          "queries": 832,
+          "vehicle_ids": 284,
+          "repeats": 4000,
+          "seed": 20260925,
+          "p_Holm_four_tests": 0.001999500124968758
+        }
+      },
+      "KR": {
+        "mAP": 0.31151814074822953,
+        "Rank-1": 0.26802884615384615,
+        "Rank-5": 0.4387019230769231,
+        "mINP": 0.26655152736773313,
+        "F1": 0.8568486096807415,
+        "TNR": 0.0,
+        "threshold": 0.16580532352447674,
+        "counts": {
+          "queries": 1110,
+          "gallery": 750,
+          "known_queries": 832,
+          "unknown_queries": 278,
+          "filtered_queries": 0,
+          "refusal_queries": 1110,
+          "relevant_pairs": 1239
+        },
+        "same_camera_gap_mAP": 0.27954135063534674,
+        "paired_vs_baseline": {
+          "delta_mAP": -0.4625734131956186,
+          "ci95": [
+            -0.5093225638524642,
+            -0.41557014796415104
+          ],
+          "p_two_sided": 0.0004998750312421895,
+          "queries": 832,
+          "vehicle_ids": 284,
+          "repeats": 4000,
+          "seed": 20260925,
+          "p_Holm_four_tests": 0.001999500124968758
+        }
+      }
+    },
+    "fusion": {
+      "cosine": {
+        "mAP": 0.7251414170188863,
+        "Rank-1": 0.6694711538461539,
+        "Rank-5": 0.8774038461538461,
+        "mINP": 0.686454512462787,
+        "F1": 0.8583554376657825,
+        "TNR": 0.1223021582733813,
+        "threshold": 0.3183396012878831,
+        "counts": {
+          "queries": 1110,
+          "gallery": 750,
+          "known_queries": 832,
+          "unknown_queries": 278,
+          "filtered_queries": 0,
+          "refusal_queries": 1110,
+          "relevant_pairs": 1239
+        },
+        "same_camera_gap_mAP": 0.133878661778296,
+        "paired_vs_baseline": {
+          "delta_mAP": -0.006467925212158459,
+          "ci95": [
+            -0.021247529079472232,
+            0.00772458923622091
+          ],
+          "p_two_sided": 0.35291177205698576,
+          "queries": 832,
+          "vehicle_ids": 284,
+          "repeats": 4000,
+          "seed": 20260925,
+          "p_Holm_four_tests": 0.35291177205698576
+        }
+      },
+      "KR": {
+        "mAP": 0.7550093168711395,
+        "Rank-1": 0.7007211538461539,
+        "Rank-5": 0.875,
+        "mINP": 0.7320802502764562,
+        "F1": 0.8681114551083592,
+        "TNR": 0.7050359712230215,
+        "threshold": 0.36435476498384334,
+        "counts": {
+          "queries": 1110,
+          "gallery": 750,
+          "known_queries": 832,
+          "unknown_queries": 278,
+          "filtered_queries": 0,
+          "refusal_queries": 1110,
+          "relevant_pairs": 1239
+        },
+        "same_camera_gap_mAP": 0.11999856138572595,
+        "paired_vs_baseline": {
+          "delta_mAP": -0.019082237072708695,
+          "ci95": [
+            -0.03549929207176834,
+            -0.0032458588655607926
+          ],
+          "p_two_sided": 0.020994751312171957,
+          "queries": 832,
+          "vehicle_ids": 284,
+          "repeats": 4000,
+          "seed": 20260925,
+          "p_Holm_four_tests": 0.041989502624343915
+        }
+      }
+    }
+  },
+  "export_parity": {
+    "status": "PASS",
+    "descriptor_max_abs": 8.363276720046997e-07,
+    "descriptor_tolerance": 1e-05,
+    "queries": 1110,
+    "modes": {
+      "core": {
+        "cosine": {
+          "queries": 1110,
+          "top1_mismatches": 0,
+          "refusal_mismatches": 0,
+          "max_ranking_metric_delta": 6.733349461329752e-09,
+          "torch_metrics": {
+            "mAP": 0.2767493144517419,
+            "Rank-1": 0.21995192307692307,
+            "Rank-5": 0.4338942307692308,
+            "mINP": 0.23337607717424888,
+            "F1": 0.8568486096807415,
+            "TNR": 0.0,
+            "threshold": 0.33602163788320494,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          },
+          "onnx_metrics": {
+            "mAP": 0.27674931781841666,
+            "Rank-1": 0.21995192307692307,
+            "Rank-5": 0.4338942307692308,
+            "mINP": 0.23337608390759834,
+            "F1": 0.8568486096807415,
+            "TNR": 0.0,
+            "threshold": 0.33602163788320494,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          }
+        },
+        "KR": {
+          "queries": 1110,
+          "top1_mismatches": 0,
+          "refusal_mismatches": 0,
+          "max_ranking_metric_delta": 6.733349489085327e-09,
+          "torch_metrics": {
+            "mAP": 0.3115181373815548,
+            "Rank-1": 0.26802884615384615,
+            "Rank-5": 0.4387019230769231,
+            "mINP": 0.26655152063438364,
+            "F1": 0.8568486096807415,
+            "TNR": 0.0,
+            "threshold": 0.16580532352447674,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          },
+          "onnx_metrics": {
+            "mAP": 0.31151814074822953,
+            "Rank-1": 0.26802884615384615,
+            "Rank-5": 0.4387019230769231,
+            "mINP": 0.26655152736773313,
+            "F1": 0.8568486096807415,
+            "TNR": 0.0,
+            "threshold": 0.16580532352447674,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          }
+        }
+      },
+      "fusion": {
+        "cosine": {
+          "queries": 1110,
+          "top1_mismatches": 0,
+          "refusal_mismatches": 0,
+          "max_ranking_metric_delta": 0.0,
+          "torch_metrics": {
+            "mAP": 0.7251414170188863,
+            "Rank-1": 0.6694711538461539,
+            "Rank-5": 0.8774038461538461,
+            "mINP": 0.686454512462787,
+            "F1": 0.8583554376657825,
+            "TNR": 0.1223021582733813,
+            "threshold": 0.3183396012878831,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          },
+          "onnx_metrics": {
+            "mAP": 0.7251414170188863,
+            "Rank-1": 0.6694711538461539,
+            "Rank-5": 0.8774038461538461,
+            "mINP": 0.686454512462787,
+            "F1": 0.8583554376657825,
+            "TNR": 0.1223021582733813,
+            "threshold": 0.3183396012878831,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          }
+        },
+        "KR": {
+          "queries": 1110,
+          "top1_mismatches": 0,
+          "refusal_mismatches": 0,
+          "max_ranking_metric_delta": 0.0,
+          "torch_metrics": {
+            "mAP": 0.7550093168711395,
+            "Rank-1": 0.7007211538461539,
+            "Rank-5": 0.875,
+            "mINP": 0.7320802502764562,
+            "F1": 0.8681114551083592,
+            "TNR": 0.7050359712230215,
+            "threshold": 0.36435476498384334,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          },
+          "onnx_metrics": {
+            "mAP": 0.7550093168711395,
+            "Rank-1": 0.7007211538461539,
+            "Rank-5": 0.875,
+            "mINP": 0.7320802502764562,
+            "F1": 0.8681114551083592,
+            "TNR": 0.7050359712230215,
+            "threshold": 0.36435476498384334,
+            "counts": {
+              "queries": 1110,
+              "gallery": 750,
+              "known_queries": 832,
+              "unknown_queries": 278,
+              "filtered_queries": 0,
+              "refusal_queries": 1110,
+              "relevant_pairs": 1239
+            }
+          }
+        }
+      }
+    }
+  },
+  "inputs": {
+    "protocol_sha256": "fea8a176d0caa32e01179bc674364b28f66f34121a43038be0b4318b50be3f27",
+    "model_sha256": "15162a9b3b7bd97a851a7e2cc588a00e69001e5bae522fa02e33026d7dd35909",
+    "checkpoint_sha256": "22fc2fdd92519ae21f08eb6feef3812dc92bb5dd0191b2f6c7f1bbdc6a966e1a",
+    "dev_selection_sha256": "ca74676b74288024766852b74ddc9772418e1b8191ebe867c82cb545bca2bf13",
+    "val_manifest_sha256": "ee57a58e12bc8d25679fda55cf047194986446faddfa6c278411728a79b20fd5",
+    "verified_files": 1864
+  },
+  "runtime": {
+    "python": "3.13.13 (main, Apr  8 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]",
+    "numpy": "2.5.3",
+    "onnxruntime": "1.30.0",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41"
+  },
+  "baseline_fresh_sha256": "8eeeb2f4854a2c3db2dcbbaa6cadc4ad5772fae36d23929b550916e2d7d7caaf",
+  "core_fresh_sha256": "7ab9f01a6ca0bd9edc81b4e3b7ff8205e61c2d9846e125d1ff3ba1252550a967",
+  "core_torch_fresh_sha256": "c1acadb5d92f8b4a889f59170df4eb0752066eff58dfc65988246d0d98106b37",
+  "fusion": "research-only 1024-d concatenation; cosine is weighted pairwise score, KR runs once on all concatenated vectors",
+  "refusal": "dev-frozen thresholds only; no dev selection means NOT MEASURED"
+}

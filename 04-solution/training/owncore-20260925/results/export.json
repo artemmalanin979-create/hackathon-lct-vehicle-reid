@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "checkpoint_sha256": "22fc2fdd92519ae21f08eb6feef3812dc92bb5dd0191b2f6c7f1bbdc6a966e1a",
+  "protocol_sha256": "fea8a176d0caa32e01179bc674364b28f66f34121a43038be0b4318b50be3f27",
+  "onnx_sha256": "15162a9b3b7bd97a851a7e2cc588a00e69001e5bae522fa02e33026d7dd35909",
+  "onnx_bytes": 4902116,
+  "checkpoint_num_ids": 1071,
+  "input": "8 frozen real dev crops; RGB float32 NCHW 0..255, 208x208",
+  "train_crops_sha256": "ea77290d1ad1ae6c245bc33e2ba19bc7c676a8185eda69f9028fe4d1b9e05057",
+  "split_sha256": "0f35d494bde29b0bac95094862cdd67cfc8b06cd7715c0affae0ac1a669ec620",
+  "torch_onnx_max_abs": 4.842877388000488e-07,
+  "onnx_unit_norm_max_error": 2.384185791015625e-07,
+  "opset": 17,
+  "torch": "2.14.0+cu130",
+  "onnx": "1.22.0",
+  "onnxruntime": "1.30.0",
+  "numpy": "2.5.3",
+  "python": "3.13.13 (main, Apr  8 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]",
+  "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+  "scope": "real dev crop embedding parity; validation ranking/refusal parity is a separate evaluation check"
+}

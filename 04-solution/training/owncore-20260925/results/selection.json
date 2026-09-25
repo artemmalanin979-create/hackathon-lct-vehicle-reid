@@ -1,0 +1,67 @@
+{
+  "selection_split": "dev",
+  "status": "PASS",
+  "protocol_sha256": "fea8a176d0caa32e01179bc674364b28f66f34121a43038be0b4318b50be3f27",
+  "model_sha256": "15162a9b3b7bd97a851a7e2cc588a00e69001e5bae522fa02e33026d7dd35909",
+  "fusion_core_weight": 0.25,
+  "fusion_dev_cosine_grid": [
+    {
+      "core_weight": 0.25,
+      "mAP": 0.8694383447052486
+    },
+    {
+      "core_weight": 0.5,
+      "mAP": 0.8216693378368294
+    },
+    {
+      "core_weight": 0.75,
+      "mAP": 0.6599381523869681
+    }
+  ],
+  "thresholds": {
+    "baseline": {
+      "cosine": 0.3079062860777646,
+      "KR": 0.410404583517058
+    },
+    "core": {
+      "cosine": 0.33602163788320494,
+      "KR": 0.16580532352447674
+    },
+    "fusion": {
+      "cosine": 0.3183396012878831,
+      "KR": 0.36435476498384334
+    }
+  },
+  "dev_mAP": {
+    "baseline": {
+      "cosine": 0.859114276377931,
+      "KR": 0.8900974234381139
+    },
+    "core": {
+      "cosine": 0.4439932439263956,
+      "KR": 0.5116681105889229
+    },
+    "fusion": {
+      "cosine": 0.8694383447052486,
+      "KR": 0.89852098606547
+    }
+  },
+  "dev_query": 427,
+  "dev_gallery": 182,
+  "metadata_sha256": "a910e8a3a10986845fb83f3a3fcd401bfc8213ac697d50864e36b8c84fefff9d",
+  "raw_crops_sha256": "ea77290d1ad1ae6c245bc33e2ba19bc7c676a8185eda69f9028fe4d1b9e05057",
+  "split_sha256": "0f35d494bde29b0bac95094862cdd67cfc8b06cd7715c0affae0ac1a669ec620",
+  "release_whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+  "release_thresholds_separate_from_dev": {
+    "cosine": 0.5141976914190476,
+    "KR": 0.5282812306342437
+  },
+  "fusion": "L2 per branch, sqrt-weight concatenation, one KR on all 1024-d vectors",
+  "limitation": "release whitening historically saw dev100; dev is not an untouched baseline holdout",
+  "runtime": {
+    "python": "3.13.13 (main, Apr  8 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]",
+    "numpy": "2.5.3",
+    "onnxruntime": "1.30.0",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41"
+  }
+}

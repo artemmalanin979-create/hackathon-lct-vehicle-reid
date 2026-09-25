@@ -1,0 +1,8 @@
+{
+  "status": "COMPLETE",
+  "best_epoch": 14,
+  "dev_cosine_mAP": 0.4439932439263956,
+  "protocol_sha256": "fea8a176d0caa32e01179bc674364b28f66f34121a43038be0b4318b50be3f27",
+  "checkpoint_sha256": "22fc2fdd92519ae21f08eb6feef3812dc92bb5dd0191b2f6c7f1bbdc6a966e1a",
+  "training_sha256": "a70930835bad2e6afa0fd4194ff2aa24cc6bad4e5d8bbfdd698b22bf86a06695"
+}
