@@ -119,6 +119,27 @@ class EvaluationContracts(unittest.TestCase):
         self.assertEqual(own_eval.holm_adjusted([.01, .02, .3, .4]),
                          [.04, .06, .6, .6])
 
+    def test_full_score_parity_accepts_equal_outputs(self):
+        qm = [{"vehicle_id": "1", "camera_id": "a", "has_mate": "1"},
+              {"vehicle_id": "9", "camera_id": "a", "has_mate": "0"}]
+        gm = [{"vehicle_id": "1", "camera_id": "b"},
+              {"vehicle_id": "2", "camera_id": "b"}]
+        scores = np.array([[.8, .2], [.3, .1]], dtype=np.float64)
+        result = own_eval.require_score_parity(REPO, scores, scores.copy(), qm, gm, .5)
+        self.assertEqual(result["top1_mismatches"], 0)
+        self.assertEqual(result["refusal_mismatches"], 0)
+
+    def test_score_perturbation_in_copy_kills_parity(self):
+        qm = [{"vehicle_id": "1", "camera_id": "a", "has_mate": "1"},
+              {"vehicle_id": "9", "camera_id": "a", "has_mate": "0"}]
+        gm = [{"vehicle_id": "1", "camera_id": "b"},
+              {"vehicle_id": "2", "camera_id": "b"}]
+        truth = np.array([[.8, .2], [.3, .1]], dtype=np.float64)
+        changed = truth.copy()
+        changed[0, 1] = .9  # one score, wrong ID becomes top-1
+        with self.assertRaisesRegex(AssertionError, "top1"):
+            own_eval.require_score_parity(REPO, truth, changed, qm, gm, .5)
+
 
 if __name__ == "__main__":
     unittest.main()

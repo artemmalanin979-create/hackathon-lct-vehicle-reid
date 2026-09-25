@@ -143,6 +143,26 @@ def score_and_summarize(repo: Path, query: np.ndarray, gallery: np.ndarray,
     return summary
 
 
+def require_score_parity(repo: Path, torch_scores: np.ndarray, onnx_scores: np.ndarray,
+                         query_meta: list[dict], gallery_meta: list[dict],
+                         threshold: float, tolerance: float = 1e-6) -> dict:
+    """Compare actual market-filtered top-1 and refusal for every query row."""
+    left, left_raw = evaluate_matrix(repo, torch_scores, query_meta, gallery_meta, threshold)
+    right, right_raw = evaluate_matrix(repo, onnx_scores, query_meta, gallery_meta, threshold)
+    top1_mismatches = [i for i, (a, b) in enumerate(zip(left_raw["per_query"], right_raw["per_query"]))
+                       if a["top_gallery_index"] != b["top_gallery_index"]]
+    refusal_mismatches = [i for i, (a, b) in enumerate(zip(left_raw["per_query"], right_raw["per_query"]))
+                          if a["accepted"] != b["accepted"]]
+    metric_deltas = {key: abs(left[key] - right[key]) for key in ("mAP", "Rank-1", "Rank-5", "mINP")}
+    if top1_mismatches or refusal_mismatches or any(delta > tolerance for delta in metric_deltas.values()):
+        raise AssertionError(f"Torch/ONNX top1 mismatches={top1_mismatches[:12]}, "
+                             f"refusal mismatches={refusal_mismatches[:12]}, "
+                             f"metric deltas={metric_deltas}")
+    return {"queries": len(query_meta), "top1_mismatches": 0, "refusal_mismatches": 0,
+            "max_ranking_metric_delta": max(metric_deltas.values()),
+            "torch_metrics": left, "onnx_metrics": right}
+
+
 def require_reproduced_baseline(observed: dict, expected: dict | None = None,
                                 tolerance: float = 1e-6) -> None:
     frozen = EXPECTED_BASELINE if expected is None else expected
@@ -222,6 +242,64 @@ def extract_images(repo: Path, images_dir: Path, rows: list, baseline=None,
             vectors = candidate.run(None, {candidate.get_inputs()[0].name: crops})[0]
         output[begin:begin + len(crops)] = _validate_embeddings(vectors, len(crops))
     return output
+
+
+def extract_torch_onnx_pair(repo: Path, images_dir: Path, rows: list,
+                            torch_model, onnx_session, batch_size: int = 16
+                            ) -> tuple[np.ndarray, np.ndarray, float]:
+    """Feed identical freshly decoded crop tensors to both runtimes, row by row."""
+    import torch
+    _evaluation_modules(repo)
+    from app.core.preprocess import load_crop
+    if batch_size < 1:
+        raise ValueError("batch_size must be positive")
+    torch_output = np.empty((len(rows), 512), dtype=np.float32)
+    onnx_output = np.empty_like(torch_output)
+    max_abs = 0.
+    input_name = onnx_session.get_inputs()[0].name
+    for begin in range(0, len(rows), batch_size):
+        crops = np.stack([load_crop(images_dir, row) for row in rows[begin:begin + batch_size]])
+        with torch.inference_mode():
+            from_torch = torch_model(torch.from_numpy(crops)).cpu().numpy()
+        from_onnx = onnx_session.run(None, {input_name: crops})[0]
+        from_torch = _validate_embeddings(from_torch, len(crops))
+        from_onnx = _validate_embeddings(from_onnx, len(crops))
+        max_abs = max(max_abs, float(np.max(np.abs(from_torch - from_onnx))))
+        torch_output[begin:begin + len(crops)] = from_torch
+        onnx_output[begin:begin + len(crops)] = from_onnx
+    return torch_output, onnx_output, max_abs
+
+
+def require_export_parity(repo: Path, baseline: np.ndarray, torch_core: np.ndarray,
+                          onnx_core: np.ndarray, query_meta: list[dict],
+                          gallery_meta: list[dict], selection: dict,
+                          max_abs_tolerance: float = 1e-5) -> dict:
+    """Gate descriptors, market-filtered top-1 and dev-threshold refusals on all val."""
+    if baseline.shape != torch_core.shape or torch_core.shape != onnx_core.shape:
+        raise ValueError("Torch/ONNX/baseline descriptor rows are not aligned")
+    max_abs = float(np.max(np.abs(torch_core - onnx_core)))
+    if max_abs > max_abs_tolerance:
+        raise AssertionError(f"Torch/ONNX real val descriptor max_abs={max_abs} > {max_abs_tolerance}")
+    nquery = len(query_meta)
+    if len(torch_core) != nquery + len(gallery_meta):
+        raise ValueError("Torch/ONNX rows do not match val CSV")
+    variants = {
+        "core": (torch_core, onnx_core),
+        "fusion": (fuse_embeddings(baseline, torch_core, selection["fusion_core_weight"]),
+                   fuse_embeddings(baseline, onnx_core, selection["fusion_core_weight"])),
+    }
+    parity = {}
+    for name, (from_torch, from_onnx) in variants.items():
+        parity[name] = {}
+        for mode in ("cosine", "KR"):
+            threshold = selection["thresholds"][name][mode]
+            parity[name][mode] = require_score_parity(
+                repo, score_matrix(repo, from_torch[:nquery], from_torch[nquery:], mode),
+                score_matrix(repo, from_onnx[:nquery], from_onnx[nquery:], mode),
+                query_meta, gallery_meta, threshold)
+    return {"status": "PASS", "descriptor_max_abs": max_abs,
+            "descriptor_tolerance": max_abs_tolerance, "queries": nquery,
+            "modes": parity}
 
 
 def paired_bootstrap(candidate: dict, baseline: dict, query_meta: list[dict], *,
@@ -341,6 +419,8 @@ def main() -> int:
     parser.add_argument("--protocol-sha256", required=True)
     parser.add_argument("--model", type=Path, help="Standalone ONNX core")
     parser.add_argument("--model-sha256")
+    parser.add_argument("--checkpoint", type=Path, help="Training-runtime checkpoint")
+    parser.add_argument("--checkpoint-sha256")
     parser.add_argument("--baseline-only", action="store_true")
     parser.add_argument("--baseline-dir", type=Path,
                         help="Reuse this run's hash-checked fresh baseline vectors")
@@ -352,10 +432,12 @@ def main() -> int:
     if args.dev_selection is None and args.dev_selection_sha256 is not None or (
         args.dev_selection is not None and args.dev_selection_sha256 is None):
         parser.error("dev selection path and SHA-256 must be supplied together")
-    if args.baseline_only and (args.model or args.baseline_dir or args.dev_selection):
+    if args.baseline_only and (args.model or args.checkpoint or args.baseline_dir or args.dev_selection):
         parser.error("baseline-only takes no candidate or previous baseline")
-    if not args.baseline_only and (not args.model or not args.model_sha256):
-        parser.error("comparison needs standalone ONNX model and SHA-256")
+    if not args.baseline_only and not all((args.model, args.model_sha256, args.checkpoint,
+                                           args.checkpoint_sha256, args.dev_selection,
+                                           args.dev_selection_sha256)):
+        parser.error("comparison needs ONNX/checkpoint/dev selection and their SHA-256 values")
     repo, data_dir = args.repo.resolve(), args.data_dir.resolve()
     require_sha256(args.protocol, args.protocol_sha256)
     protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
@@ -363,6 +445,7 @@ def main() -> int:
         raise ValueError("protocol was not frozen before training")
     if args.model:
         require_sha256(args.model, args.model_sha256)
+        require_sha256(args.checkpoint, args.checkpoint_sha256)
     selection = read_dev_selection(args.dev_selection, args.dev_selection_sha256) if args.dev_selection else None
     if selection is not None and (selection.get("model_sha256") != args.model_sha256 or
                                   selection.get("protocol_sha256") != args.protocol_sha256):
@@ -419,13 +502,30 @@ def main() -> int:
     options.inter_op_num_threads = 1
     candidate = ort.InferenceSession(str(args.model), sess_options=options,
                                      providers=["CPUExecutionProvider"])
-    core = extract_images(repo, data_dir / "images", qrows + grows,
-                          candidate=candidate, batch_size=args.batch_size)
+    import torch
+    from core import CrossViewCore
+    from export import checkpoint_contract
+    checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=True)
+    num_ids, state = checkpoint_contract(checkpoint, args.protocol_sha256)
+    torch.set_num_threads(2)
+    torch_model = CrossViewCore(num_ids)
+    torch_model.load_state_dict(state, strict=True)
+    torch_model.eval()
+    from_torch, core, tensor_max_abs = extract_torch_onnx_pair(
+        repo, data_dir / "images", qrows + grows, torch_model, candidate,
+        batch_size=args.batch_size)
+    np.save(args.out / "core-torch-fresh.npy", from_torch, allow_pickle=False)
     np.save(args.out / "core-fresh.npy", core, allow_pickle=False)
+    parity = require_export_parity(repo, baseline, from_torch, core, qmeta, gmeta,
+                                   selection)
+    if tensor_max_abs != parity["descriptor_max_abs"]:
+        raise AssertionError("Torch/ONNX per-batch and aggregate embedding deltas differ")
     report = {
         "status": "PASS", "scope": "reused val1110x750; not an untouched holdout",
         "metrics": compare_arrays(repo, baseline, core, qmeta, gmeta, selection=selection),
+        "export_parity": parity,
         "inputs": {"protocol_sha256": args.protocol_sha256, "model_sha256": args.model_sha256,
+                   "checkpoint_sha256": args.checkpoint_sha256,
                    "dev_selection_sha256": args.dev_selection_sha256 or "NOT MEASURED",
                    "val_manifest_sha256": protocol["data"]["val_images_manifest_sha256"],
                    "verified_files": input_report["required_files"]},
@@ -433,6 +533,7 @@ def main() -> int:
                     "onnxruntime": ort.__version__, "platform": platform.platform()},
         "baseline_fresh_sha256": sha256(args.out / "baseline-fresh.npy"),
         "core_fresh_sha256": sha256(args.out / "core-fresh.npy"),
+        "core_torch_fresh_sha256": sha256(args.out / "core-torch-fresh.npy"),
         "fusion": "research-only 1024-d concatenation; cosine is weighted pairwise score, KR runs once on all concatenated vectors",
         "refusal": "dev-frozen thresholds only; no dev selection means NOT MEASURED",
     }
