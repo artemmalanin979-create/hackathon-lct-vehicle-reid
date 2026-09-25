@@ -17,16 +17,16 @@
     "license_review": "TorchVision code is BSD-3-Clause; TorchVision states pretrained weights can inherit dataset terms. Raw external weights stay local pending final redistribution review."
   },
   "data": {
-    "train_source": "D:/lct-reid/data/combined_train.npz with aligned combined_crops_208.npy; 7248 own and 13328 previously permitted CARLA/Roundabout crops",
-    "train_source_sha256": "c1ee49dee0873a5748e7b799613fd1e14b4d3689bcd93b3cf51d24d08c42652c",
-    "train_crops_sha256": "babd228fbe649999a09e9b2d83f3701de9c1b17424a72e23331940dcca3521cc",
-    "fit_dev_rule": "exclude all 100 previously selected own dev vehicle IDs from training; external IDs all remain fit; fixed dev query/gallery rows from split.json",
+    "train_source": "Locally reproduced organizer own train_crops.npz and aligned crops_208.npy; 7248 own rows only, no external data",
+    "train_source_sha256": "a910e8a3a10986845fb83f3a3fcd401bfc8213ac697d50864e36b8c84fefff9d",
+    "train_crops_sha256": "ea77290d1ad1ae6c245bc33e2ba19bc7c676a8185eda69f9028fe4d1b9e05057",
+    "fit_dev_rule": "exclude all 100 previously selected own dev vehicle IDs from training; all remaining own train IDs form fit",
     "split_file": "04-solution/training/distill-20260925/results/split.json",
     "split_sha256": "0f35d494bde29b0bac95094862cdd67cfc8b06cd7715c0affae0ac1a669ec620",
-    "fit_rows_expected": 19967,
+    "fit_rows_expected": 6639,
     "dev_rows_expected": 609,
     "dev_ids_expected": 100,
-    "dev_preprocess": "Use the same fixed combined_crops_208.npy rows for both baseline and new core on dev. The baseline consumes these as float32 RGB 0..255 NCHW through its release preprocessing and release whitening; do not refit whitening on dev.",
+    "dev_preprocess": "Use the same fixed own crops_208.npy rows for both baseline and new core on dev. The baseline consumes these as float32 RGB 0..255 NCHW through its release preprocessing and release whitening; do not refit whitening on dev.",
     "dev_baseline_limitation": "The existing release whitening historically saw dev100. Dev selection is therefore not independent of the baseline pipeline; report this explicitly and never call dev or reused val untouched.",
     "evaluation": "existing reused val, never used for checkpoint, fusion or threshold selection",
     "val_query_csv_sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
@@ -34,7 +34,10 @@
     "val_images_manifest_local": "outputs/owncore-20260925/input/val_images_manifest.json",
     "val_images_manifest_sha256": "ee57a58e12bc8d25679fda55cf047194986446faddfa6c278411728a79b20fd5",
     "val_images_count": 1860,
-    "val_rows_expected": [1110, 750],
+    "val_rows_expected": [
+      1110,
+      750
+    ],
     "known_queries_expected": 832,
     "limitation": "The 1110x750 val has been reused in prior experiments. This is a paired comparison on a known split, not an untouched holdout."
   },
@@ -57,11 +60,13 @@
     "metric_loss": "batch-hard margin triplet on L2 descriptors, cross-camera positives only, margin=0.3, weight=0.5",
     "augmentation": "horizontal flip p=0.5 and light color jitter on fit only; no label-dependent view annotations",
     "checkpoint_selection": "highest dev cosine mAP with market same-camera exclusion after each stage2 epoch; ties earlier epoch",
-    "pilot": "first 2 stage1 epochs: finite loss/gradients, loss decreases, measured epoch time, peak VRAM below 3.6 GiB; stop if any fails",
+    "pilot": "first 2 stage1 epochs: finite loss/gradients, loss decreases, measured epoch time, peak process RSS below 4096 MiB; stop if any fails",
     "wall_limit_seconds": 21600,
     "stop_no_later_than_moscow": "2026-09-27 00:00:00",
     "checkpoint_contract": "torch.save dict with model_state_dict, num_ids, protocol_sha256, model_config; strict reload in export",
-    "device": "cuda"
+    "device": "cpu",
+    "threads": 4,
+    "peak_rss_limit_mib": 4096
   },
   "selection": {
     "fusion": "For weight w in [0.25,0.5,0.75], L2-normalize each 512D branch and concatenate [sqrt(1-w)*release_baseline, sqrt(w)*new_core] into a 1024D research descriptor. Its pairwise cosine is (1-w)*baseline cosine + w*core cosine for Q-Q/Q-G/G-G. Run KR once on these fused descriptors, never average two separately reranked score matrices. Select one w by dev cosine mAP, ties smaller w; reuse w for KR.",
@@ -73,8 +78,19 @@
     "camera_policy": "market",
     "refusal_mode": "presence",
     "ap_method": "step",
-    "ranking": ["cosine", "KR k1=6 k2=3 lambda=0.3"],
-    "metrics": ["mAP", "Rank-1", "Rank-5", "mINP", "F1", "TNR", "camera gap"],
+    "ranking": [
+      "cosine",
+      "KR k1=6 k2=3 lambda=0.3"
+    ],
+    "metrics": [
+      "mAP",
+      "Rank-1",
+      "Rank-5",
+      "mINP",
+      "F1",
+      "TNR",
+      "camera gap"
+    ],
     "baseline_fresh_extract": true,
     "baseline_model_a_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
     "baseline_model_b_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
@@ -85,7 +101,12 @@
     "preprocess_sha256": "4a6a203feb059d1626ab3a683dc505956e36c3280d746a96a0abd593238af686",
     "baseline_expected_cosine_mAP": 0.7316093422310448,
     "baseline_expected_KR_mAP": 0.7740915539438481,
-    "bootstrap": {"cluster": "vehicle_id", "paired": true, "replicates": 4000, "seed": 20260925},
+    "bootstrap": {
+      "cluster": "vehicle_id",
+      "paired": true,
+      "replicates": 4000,
+      "seed": 20260925
+    },
     "multiplicity": "Holm across new-core cosine/KR and fusion cosine/KR mAP deltas",
     "candidate_acceptance": "Adopt the standalone core or fused variant only if its KR mAP delta >= +0.005 with paired CI95 lower > 0, cosine mAP delta >= 0, refusal F1 no worse than -0.02 in both modes, and every performance limit below passes. Otherwise keep d1_j48. A 1024D fused candidate additionally requires an explicit versioned index/API migration before release.",
     "export_tolerance": "Torch vs ONNX max absolute descriptor difference <=1e-5 on real crops; same top-1 and refusal decisions on all validation rows at dev-frozen thresholds"
@@ -98,7 +119,16 @@
     "samples": 40,
     "order": "paired interleaved baseline/core/fusion with model order reversed every sample",
     "boundary": "same preprocessed 208x208 float32 tensor to final L2 descriptor; no JPEG decode, API, Qdrant or KR",
-    "report": ["p50", "p95", "FPS", "cold_start", "peak_RSS", "weight_bytes", "descriptor_size", "raw_gallery_750_bytes"],
+    "report": [
+      "p50",
+      "p95",
+      "FPS",
+      "cold_start",
+      "peak_RSS",
+      "weight_bytes",
+      "descriptor_size",
+      "raw_gallery_750_bytes"
+    ],
     "release_performance_limits": {
       "batch1_p95_max_ratio_to_same_run_baseline": 1.1,
       "batch1_FPS_min_ratio_to_same_run_baseline": 0.9,
@@ -107,10 +137,15 @@
       "standalone_weight_bytes_max": 50000000,
       "fusion_weight_bytes_max": 100000000,
       "task_weight_bytes_max": 2000000000,
-      "inference_VRAM": "NOT APPLICABLE: production inference and paired benchmark are CPU-only; training GPU peak must remain below 3.6 GiB as specified in pilot",
+      "inference_VRAM": "NOT APPLICABLE: this fallback training and production paired benchmark are CPU-only; process training RSS must remain below 4096 MiB as specified in pilot",
       "gallery_index": "512D standalone raw 750-row float32 index <=1536000 bytes; 1024D research fusion <=3072000 bytes before Qdrant overhead"
     },
     "no_artificial_delay": true
   },
-  "release": "d1_j48 remains untouched until the candidate passes all frozen acceptance conditions"
+  "release": "d1_j48 remains untouched until the candidate passes all frozen acceptance conditions",
+  "amendment": {
+    "replaces_protocol_sha256_for_cpu_fallback": "0cdee6ec07e733612e98c5b2b58b7e21b66f1bad44f7904a152f267ac542c00b",
+    "reason": "Windows worker host CUDA failed before the first training batch because available host commit was exhausted; CPU fallback uses the same model and hyperparameters on the organizer own training set whose deterministic prepared crops match historical hashes. No validation outcome was inspected for this amendment.",
+    "one_main_run_only": true
+  }
 }
