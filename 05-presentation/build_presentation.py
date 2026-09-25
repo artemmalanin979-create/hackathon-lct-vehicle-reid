@@ -344,7 +344,7 @@ set_text(by_id(s, 8), 'Для d1_j48 проверены 6 контрастов �
 for ident in (6, 15, 4):
     sh = by_id(s, ident)
     set_text(sh, sh.text, 16, bold=True, after=0)
-notes(s, 'Использован готовый короткий вариант истории команды. Формулировка о зоне номера соответствует ограниченному выводу в slides.md, раздел 6; утверждение о доказанной полной независимости не используется. Фотография команды не предоставлена, необязательный фотоплейсхолдер удалён.')
+notes(s, 'История команды — локальный team-data.md. Проверка зоны номера: 04-solution/plate-ablation/d1_j48/plate_ablation_d1_j48.json, 3 маски × 2 режима, интервалы включают ноль; полной независимости это не доказывает. OCR отсутствует в сервисном пути: 04-solution/service/app/core/model.py. Фотография команды не предоставлена, необязательный фотоплейсхолдер удалён.')
 
 # 3: mandatory participant matrix in the five original cards, original slide 9.
 CURRENT = 3
@@ -398,7 +398,7 @@ set_text(by_id(s, 7), [
     {'text': 'Перенести измеренный ANN-поиск на d1_j48 и перекалибровать отказ.'},
 ], 15.8, min_size=15, after=8, margin=.05)
 foot(s, 'd1_j48; наша валидация, market / presence')
-notes(s, 'Источник: slides.md, дополнение об обязательном слайде 11. В исходном шаблоне две белые панели; третье смысловое поле «Идеи по дальнейшему развитию» расположено внутри правой панели с отдельным заголовком, без изменения фона, панелей и двухколоночной структуры.')
+notes(s, 'Источники чисел: 04-solution/training/combined/s02_metrics.json → d1_j48.kr; 04-solution/service/calib-d1_j48/summary.json → rerank_market_presence.selected.robust_balanced (tp=606, fp=60, fn=226, tn_unknown=218). В исходном шаблоне две белые панели; третье смысловое поле «Идеи по дальнейшему развитию» расположено внутри правой панели с отдельным заголовком, без изменения фона, панелей и двухколоночной структуры.')
 
 # Technical content is authored as a separate visual story. Mandatory slides above
 # retain the exact organizer fields, theme, geometry and participants contract.
@@ -530,14 +530,14 @@ diagram_node(s, .65, 2.18, 1.75, 1.38, 'Кроп', 'RGB\n208 × 208')
 diagram_node(s, 2.90, 1.96, 2.2, .78, 'OSNet-AIN')
 diagram_node(s, 2.90, 3.04, 2.2, 1.20, 'combined_v1', 'Наше LP-FT\nдообучение', emphasis=True)
 diagram_node(s, 5.62, 2.18, 2.13, 1.38, 'Объединение', 'L2 ветвей\nСреднее → L2')
-diagram_node(s, 8.26, 2.18, 2.18, 1.38, 'Whitening', 'Межкамерные\nразности → L2')
+diagram_node(s, 8.26, 2.18, 2.18, 1.38, 'Whitening', 'Матрица P\n→ L2')
 diagram_node(s, 10.95, 2.18, 1.75, 1.38, '512', 'float32', emphasis=True)
 for args in [(2.42,2.72,2.83,2.36),(2.42,3.10,2.83,3.43),(5.13,2.36,5.55,2.72),(5.13,3.43,5.55,3.10),(7.80,2.87,8.18,2.87),(10.50,2.87,10.88,2.87)]:
     arrow(s,*args)
 rule(s,.65,4.63,12.70)
 for x,w,heading,body in [
     (.65,3.74,'Почему OSNet','Перенос на наши данные:\nmAP 0,657 против 0,238\nу R50-IBN, cosine.'),
-    (4.95,3.4,'Ракурс и освещение','Межкамерный MCNL,\nбаланс камер, MixStyle\nи аугментации при обучении.'),
+    (4.95,3.4,'Смена ракурса','Межкамерный MCNL,\nбаланс камер, MixStyle\nи аугментации при обучении.'),
     (9.0,3.7,'Два режима поиска','API: точный cosine.\nBatch: KR(6, 3, 0,3),\nзависит от состава batch.'),
 ]:
     txt(s,x,4.96,w,.45,heading,19,bold=True)
@@ -667,7 +667,7 @@ table(s,.65,1.99,[3.12,8.91],[.54,.91,1.04,1.20],[
     ['embeddings.npy','По 512 чисел: сначала запросы, затем галерея, в порядке входных CSV'],
     ['candidates.csv','Все пары с исходным score ≥ порога, без лимита 10. Нет строк — отказ при успешном batch и уникальных query ID'],
 ],size=16.0,header=14.5)
-txt(s,.65,6.05,5.73,.62,'run_info.json связывает входы,\nмодели и параметры одного запуска.',16.0,bold=True)
+txt(s,.65,6.05,5.73,.62,'manifest.json: SHA входов и выходов.\nrun_info.json: режим и параметры.',16.0,bold=True)
 txt(s,7.17,6.05,5.49,.62,'Обе ONNX, whitening, wheels\nи базовые офлайн-образы в комплекте.',16.0)
 
 # 16. The readiness claim remains bounded to the verified local candidate.
