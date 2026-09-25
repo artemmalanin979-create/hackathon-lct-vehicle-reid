@@ -1,0 +1,70 @@
+{
+  "product_commit": "e0408319e9d29ddf52d1411384f2fd8df7941e90",
+  "app_js_sha256": "7e8cd4f183fd8f1abd1a539079fe1e75e7f162adfa364bb0c1adc117c5ec633e",
+  "passed": {
+    "bbox_geometry": 8,
+    "targeted_acceptance": 2,
+    "causal_behavior": 8
+  },
+  "failed": 0,
+  "skipped": 0,
+  "independent_retest": "PENDING",
+  "screens": [
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-red/dark-200-mouse-failure.png",
+      "sha256": "ad25d53ed1c4925b5b4be91d5ab1a7750fb1727a47b7e6bba5c4c01378cbe75c"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-red/light-200-mouse-failure.png",
+      "sha256": "ad4555b54be7b7a84ff7b6e58042daeaf897700f3ddd3c0ac7faa39e138b82f8"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-control-v2/light-100-mouse-failure.png",
+      "sha256": "c693e312c32ebd6ea46e6a14891b0d307670d84bd0235671cc8e9af828a762a0"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/dark-100-mouse.png",
+      "sha256": "2cbd6bf1cc489087e8360ad4fa49b948cb795750816c15a3776d8aed05198dd1"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/dark-100-touch.png",
+      "sha256": "2cbd6bf1cc489087e8360ad4fa49b948cb795750816c15a3776d8aed05198dd1"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/dark-200-mouse.png",
+      "sha256": "0b8119a59077cedd83a9ee6587669f71a96e29c8f482dee5c6b9ea408275984f"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/dark-200-touch.png",
+      "sha256": "0b8119a59077cedd83a9ee6587669f71a96e29c8f482dee5c6b9ea408275984f"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/light-100-mouse.png",
+      "sha256": "150d7bd768f7f21ac15c75431c13aa3485e044ff50ddf70a63cde3b6dd4e2e3e"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/light-100-touch.png",
+      "sha256": "150d7bd768f7f21ac15c75431c13aa3485e044ff50ddf70a63cde3b6dd4e2e3e"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/light-200-mouse.png",
+      "sha256": "fa15f73bc96c09f2016dc7780454ecbbd68f90f03920fe74cb747ddd71ba0f64"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-green/light-200-touch.png",
+      "sha256": "fa15f73bc96c09f2016dc7780454ecbbd68f90f03920fe74cb747ddd71ba0f64"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-acceptance/200percent-query.png",
+      "sha256": "9723ae0dfe18ed6bd96f1614884a3f76373cfc25a82947aab1d67b582df0ee05"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-acceptance/200percent-result.png",
+      "sha256": "6ee098fc866220ddaaef981a68cd6167e9cf6796ef3ffa54376923cdcb0b2f34"
+    },
+    {
+      "path": "/home/artem/tmp/lct-ui-20260925/bbox-p2-acceptance/390-touch-bbox.png",
+      "sha256": "3b58e177f15a4c7e58bc90cab408fb2c7ee837a3dd017aafdbbaf5d6fe6eca3f"
+    }
+  ]
+}

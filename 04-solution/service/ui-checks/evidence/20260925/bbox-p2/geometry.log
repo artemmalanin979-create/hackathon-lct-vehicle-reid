@@ -1,0 +1,9 @@
+PASS light-100-mouse
+PASS light-100-touch
+PASS light-200-mouse
+PASS light-200-touch
+PASS dark-100-mouse
+PASS dark-100-touch
+PASS dark-200-mouse
+PASS dark-200-touch
+{"passed":8,"failed":0,"errors":0,"external":0}

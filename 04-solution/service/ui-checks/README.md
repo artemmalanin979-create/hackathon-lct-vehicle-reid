@@ -32,6 +32,9 @@ node 04-solution/service/ui-checks/presentation-shots.cjs \
   недоступное объяснение явно подменяются в browser context: производственные
   контейнеры ради них не ломаются. Снимки до завершения загрузки изображений
   не делаются.
+- `bbox-geometry.cjs`: отдельный regression P2: обе темы × 100/200% ×
+  mouse/touch; все x/y/w/h, неподвижность canvas во время drag, перенос, resize,
+  пустой клик, настоящие POST-поля и JSON-экспорт. Аргументы BASE DATA OUT те же.
 - `mutation.cjs`: loopback-only. Штатный GREEN → одна копия JS с удалённым
   guard → именно FAIL stale export → неизменность SHA исходника → GREEN.
   Подмена JS существует только внутри одноразового browser context;

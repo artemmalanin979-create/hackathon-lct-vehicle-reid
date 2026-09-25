@@ -1,0 +1,3 @@
+PASS bbox-mouse-numeric-zoom
+PASS bbox-touch
+{"passed":2,"failed":0,"external":0}

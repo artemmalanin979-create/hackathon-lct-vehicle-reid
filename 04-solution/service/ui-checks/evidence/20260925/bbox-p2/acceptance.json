@@ -1,0 +1,49 @@
+{
+  "started": "2026-09-25T17:51:55.201Z",
+  "cases": [
+    {
+      "name": "bbox-mouse-numeric-zoom",
+      "status": "PASS"
+    },
+    {
+      "name": "bbox-touch",
+      "status": "PASS"
+    }
+  ],
+  "screens": [
+    "200percent-query.png",
+    "200percent-result.png",
+    "390-touch-bbox.png"
+  ],
+  "external": [],
+  "errors": [],
+  "evidence": {
+    "head": "22c0ac5435be1da49a7593b5bd9b45b91901c715",
+    "branch": "ui/20260925",
+    "source_sha256": {
+      "index.html": "5bf3301eef9678e26e84a6e4741b64b6eee2743860dcac6a41171d4fffe29d77",
+      "app.css": "790a82dfe769e791e2d9c6f0d26477950314e621f10a1d2ed76de8da7299cae7",
+      "app.js": "7e8cd4f183fd8f1abd1a539079fe1e75e7f162adfa364bb0c1adc117c5ec633e"
+    },
+    "input_sha256": {
+      "test_query.csv": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c",
+      "test_gallery.csv": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496",
+      "images/a4f2a13bd2b54360a921c8ef7366e535.jpg": "5ff38c1593f271fe448f8e2872acd51e7e83a09034d60dc84319bbd8cdafbd35"
+    },
+    "node": "v20.20.2",
+    "playwright": "1.63.0",
+    "command": [
+      "/home/artem/.local/node-v20.20.2-linux-x64/bin/node",
+      "/home/artem/projects/lct-ui-20260925/04-solution/service/ui-checks/acceptance.cjs",
+      "http://127.0.0.1:18070",
+      "/home/artem/projects/hackathon-lct-vehicle-reid/data",
+      "/home/artem/tmp/lct-ui-20260925/bbox-p2-acceptance"
+    ],
+    "filter": "bbox-",
+    "source_override": null,
+    "browser": "153.0.8010.52"
+  },
+  "finished": "2026-09-25T17:52:02.465Z",
+  "passed": 2,
+  "failed": 0
+}
