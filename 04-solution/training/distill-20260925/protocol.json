@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "frozen_before_training": true,
+  "baseline_sha": "8e7a20580613f5a784c6ee47270a209cf1923e0e",
+  "hypothesis": "Distil cross-camera geometry of two-network ensemble into frozen combined_v1 plus residual MLP; reduce CPU cost without accepted quality loss.",
+  "architecture": {
+    "input": "l2 combined_v1@208 embedding",
+    "hidden": 256,
+    "output": 512,
+    "residual": true,
+    "activation": "relu",
+    "last_layer_initialization": "zeros",
+    "output_normalization": "L2"
+  },
+  "data": {
+    "fit": "1071 own vehicle IDs excluding historic dev100",
+    "dev": "historic 100 IDs from seed20260916, 609 images; previously used for backbone monitoring, NOT untouched",
+    "historical_dev_ids_sha256": "b0f7a7791939256bd794a5c086d89d7c752d2e7949d564161611ad5b69e0a11e",
+    "eval": "existing reused validation1110x750,832 known; never tune on these labels",
+    "refusal_dev": "sorted dev IDs at positions0,4,8,... have no gallery; for others first image per camera to gallery and remaining to query; if no query and>=2 cameras move final gallery image to query",
+    "teacher_whitening": "rho0.5 learned on fit6639 only using existing learn_lw; release teacher remains separate comparison",
+    "preprocessing_limitation": "historical fit cached crops bbox→256 JPEG→208; validation bbox→208 directly"
+  },
+  "training": {
+    "seed": 20260925,
+    "epochs": 30,
+    "pilot_epochs": 3,
+    "batch_size": 128,
+    "optimizer": "AdamW",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "embedding_loss": "mean(1-dot(normalized_student,normalized_teacher))",
+    "relational_loss": "MSE of pair cosine similarities for different-camera pairs; positives and negatives equally averaged when present",
+    "relational_weight": 0.5,
+    "sampling": "32 vehicle IDs x4 frames, alternate cameras when available; epoch ceil(fit_rows/128) batches",
+    "checkpoint_selection": "lowest mean dev embedding distillation loss; ties earliest epoch",
+    "pilot_continue": "finite nonzero gradients, fit embedding loss decreases from epoch0; epoch3 dev loss below epoch0; projected30epochs <=3600seconds; RSS<=2048MiB",
+    "wall_limit_seconds": 3600,
+    "threads": 2,
+    "rss_limit_mib": 2048,
+    "ablation": "one repeat same seed,epochs and sampling with relational_weight0; no further runs"
+  },
+  "fusion": {
+    "mode": "sqrt-weight concatenation of normalized baseline and student; equivalent weighted cosine scores; 1024d research-only",
+    "student_weights": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "selection": "max dev cosine mAP, tie smaller student weight; one weight shared cosine/KR"
+  },
+  "threshold": {
+    "selection": "max presence F1 on dev PR curve; ties higher threshold",
+    "separate": [
+      "cosine",
+      "KR"
+    ],
+    "release_baseline": "report official thresholds plus independently dev-calibrated baseline; never recalibrate baseline on evaluation"
+  },
+  "evaluation": {
+    "camera_policy": "market",
+    "refusal_mode": "presence",
+    "ap_method": "step",
+    "ranks": [
+      1,
+      5
+    ],
+    "kr": [
+      6,
+      3,
+      0.3
+    ],
+    "bootstrap": {
+      "replicates": 4000,
+      "seed": 20260925,
+      "cluster": "vehicle_id",
+      "paired": true
+    },
+    "confirmatory_family": [
+      "student cosine",
+      "student KR",
+      "fusion cosine",
+      "fusion KR"
+    ],
+    "multiplicity": "Holm across4 mAP hypotheses; ablation descriptive",
+    "baseline_expected": {
+      "cosine_mAP": 0.7316093422310448,
+      "KR_mAP": 0.7740915539438481,
+      "KR_Rank1": 0.7307692307692307
+    },
+    "export": {
+      "embedding_max_abs_tolerance": 1e-05,
+      "ranking": "same top1 on all evaluation queries, full metrics delta <=1e-6",
+      "refusal": "identical decisions at frozen dev thresholds"
+    }
+  },
+  "acceptance": {
+    "student": {
+      "p95_speedup_min": 0.25,
+      "mAP_point_delta_min": 0,
+      "mAP_paired_ci95_lower_min": 0,
+      "modes": [
+        "cosine",
+        "KR"
+      ]
+    },
+    "fusion": {
+      "mAP_delta_min": 0.005,
+      "mAP_paired_ci95_lower_strictly_positive": true,
+      "latency_increase_max": 0.1,
+      "weights_bytes_max": 2000000000,
+      "modes": [
+        "cosine",
+        "KR"
+      ]
+    },
+    "otherwise": "keep d1_j48; no release modification in experiment"
+  },
+  "benchmark": {
+    "device": "worker-vm CPU",
+    "threads": 2,
+    "batch": 1,
+    "warmup": 5,
+    "samples": 40,
+    "order": "paired alternating baseline/student/fusion order reversed every sample",
+    "boundary": "preprocessed input tensor→final normalized embedding; image decode not included",
+    "cold_start": "session creation plus first inference in fresh process",
+    "no_artificial_delay": true
+  },
+  "inputs": [
+    {
+      "name": "A_val_query",
+      "path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query_osnet.npy",
+      "sha256": "4bf81dce5f9608340dc419f78944b5b426daf37f134830189940cc59e6ac005d",
+      "ids_path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_query.ids",
+      "ids_sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf",
+      "shape": [
+        1110,
+        512
+      ]
+    },
+    {
+      "name": "A_val_gallery",
+      "path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery_osnet.npy",
+      "sha256": "c342bfd967ea827bdb1609142396f91509260dd969eb20b85972fcc802dc79ed",
+      "ids_path": "/home/fedora/lct-reid/repo/04-solution/training/attempt-2/out/val_gallery.ids",
+      "ids_sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c",
+      "shape": [
+        750,
+        512
+      ]
+    },
+    {
+      "name": "A_train_fit",
+      "path": "/home/fedora/lct-reid/jobs/job_42/out/train_fit_osnet.npy",
+      "sha256": "439fc98433416ec5ddf04716daddc47f093dd48ec86c19646e29728523638f8d",
+      "ids_path": "/home/fedora/lct-reid/jobs/job_42/out/train_fit_osnet.ids",
+      "ids_sha256": "4c17a2909ee3e4dd268408e92e0fd5726eb253ceed112d6e1aabc2f5e19dc19f",
+      "shape": [
+        7248,
+        512
+      ]
+    },
+    {
+      "name": "B_val_query",
+      "path": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.npy",
+      "sha256": "d36d5599db25789cafb42d4b2d4937eb9b7da1e0f7921ef82017433ababa7dc2",
+      "ids_path": "/home/fedora/lct-reid/jobs/job_48/out/val_query_j48.ids",
+      "ids_sha256": "a9145a6137ca067800c1445933c9e05a442b273caf9a148d7f7babbf347131cf",
+      "shape": [
+        1110,
+        512
+      ]
+    },
+    {
+      "name": "B_val_gallery",
+      "path": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.npy",
+      "sha256": "9cf6b810151761f60994d3b7364b07c51faaa7775d073b8507607281efc98cea",
+      "ids_path": "/home/fedora/lct-reid/jobs/job_48/out/val_gallery_j48.ids",
+      "ids_sha256": "103513f1167426848c955f3c181147936d521b1488fc49ebc4948068a54e608c",
+      "shape": [
+        750,
+        512
+      ]
+    },
+    {
+      "name": "B_train_fit",
+      "path": "/home/fedora/lct-reid/jobs/job_48/out/train_fit_j48.npy",
+      "sha256": "172ea47e65bae357904c0293f928367412768f5e071cfe47de5cb1e01b675cd8",
+      "ids_path": "/home/fedora/lct-reid/jobs/job_48/out/train_fit_j48.ids",
+      "ids_sha256": "4c17a2909ee3e4dd268408e92e0fd5726eb253ceed112d6e1aabc2f5e19dc19f",
+      "shape": [
+        7248,
+        512
+      ]
+    },
+    {
+      "name": "train_csv",
+      "repo_path": "04-solution/split/files/train_fit.csv",
+      "sha256": "4eae49f6e50795445ef9281181571565298cc69828ba3d54b345386acb8441b8"
+    },
+    {
+      "name": "query_csv",
+      "repo_path": "04-solution/split/files/val_query.csv",
+      "sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6"
+    },
+    {
+      "name": "gallery_csv",
+      "repo_path": "04-solution/split/files/val_gallery.csv",
+      "sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d"
+    },
+    {
+      "name": "model_a",
+      "repo_path": "04-solution/service/model/osnet_ain_x1_0_vehicle_reid.onnx",
+      "sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f"
+    },
+    {
+      "name": "model_b",
+      "repo_path": "04-solution/service/model/osnet_ain_combined_v1.onnx",
+      "sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2"
+    },
+    {
+      "name": "whitening_release",
+      "repo_path": "04-solution/service/model/lw_ens_j48_rho0.5.npz",
+      "sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+    },
+    {
+      "name": "eval",
+      "repo_path": "04-solution/eval/reid_metrics.py",
+      "sha256": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec"
+    },
+    {
+      "name": "scope",
+      "repo_path": "04-solution/eval/scope_metrics.py",
+      "sha256": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df"
+    },
+    {
+      "name": "rerank",
+      "repo_path": "04-solution/service/app/core/rerank.py",
+      "sha256": "ac946451b2e2ae901e4597667b4b5bfe9a77d85d94caf2e369636cee876feb76"
+    },
+    {
+      "name": "numeric_inputs",
+      "repo_path": "04-solution/service/app/numeric_inputs.py",
+      "sha256": "409b27eb4ed75c2cc25ca95ec612234f0364a38162988669fc6bfa1df92b2ad0"
+    },
+    {
+      "name": "learn_lw",
+      "repo_path": "04-solution/training/src/postprocess/lib45.py",
+      "sha256": "8a03c39489e463529ea5814753b6be435989fe14ea972d2848851bad09fb6983"
+    },
+    {
+      "name": "canonical_embeddings",
+      "path": "/home/fedora/lct-reid/jobs/job_55/out/val_batch/embeddings.npy",
+      "sha256": "7c0e35b4da3092e1fe394f709b502e1dce251b1fdfe7afc5be7409291ee0dad0",
+      "shape": [
+        1860,
+        512
+      ]
+    }
+  ]
+}
