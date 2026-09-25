@@ -356,8 +356,9 @@ cv.addEventListener("pointerup", () => {
     pushBox();
   }
   drag = null;
+  syncRunButton();
 });
-cv.addEventListener("pointercancel", () => { drag = null; });
+cv.addEventListener("pointercancel", () => { drag = null; syncRunButton(); });
 
 function onDrag(e) {
   if (!drag) return;
@@ -423,6 +424,8 @@ function pushBox() {
   if (b) {
     $("bx").value = b.x; $("by").value = b.y;
     $("bw").value = b.w; $("bh").value = b.h;
+  } else {
+    for (const id of ["bx", "by", "bw", "bh"]) $(id).value = "";
   }
   draw();
   syncRunButton();
@@ -431,7 +434,9 @@ function pushBox() {
 function syncRunButton() {
   const ok = !app.loadingFrame && !app.busy && app.ready && app.img && app.box && app.box.w > 0 && app.box.h > 0;
   $("run").disabled = !ok;
-  $("query-step").textContent = app.img ? (app.box ? "Объект выделен" : "Выделите автомобиль") : "Выберите изображение";
+  // Keep the canvas origin stable throughout a pointer gesture: this label can
+  // wrap differently at narrow widths or 200% zoom and change the header height.
+  if (!drag) $("query-step").textContent = app.img ? (app.box ? "Объект выделен" : "Выделите автомобиль") : "Выберите изображение";
 }
 
 /* ---------- 4. поиск ---------- */
