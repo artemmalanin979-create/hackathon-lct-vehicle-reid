@@ -507,12 +507,11 @@ CURRENT = 7
 s = technical('Поиск начинается с кадра и рамки',
               'HTTP API: точный cosine. Score — близость, не вероятность. Ошибка API отдельно от отказа модели.')
 UI = ROOT / 'assets/ui-search.png'
-if UI.exists():
-    picture(s, UI, None, .65, 1.97, 8.05, 4.55, 'Работающий сервис: актуальный поиск')
-else:
-    txt(s, .65, 2.12, 7.8, .5, 'Рабочий интерфейс', 25, bold=True)
-    txt(s, .65, 2.9, 7.5, 2.3, 'Кадр и bbox\nПоиск через настоящий API\nСравнение найденных кандидатов\nРазбор и выгрузка CSV / JSON', 22, line=1.6)
-    txt(s, .65, 6.0, 7.7, .5, 'Снимок новой версии войдёт после её приёмки.', 14, color=MUTED)
+# A missing real screenshot is a build error, never a presentational placeholder.
+ui_provenance = json.loads((ROOT / 'assets/ui-provenance.json').read_text())
+import hashlib
+assert hashlib.sha256(UI.read_bytes()).hexdigest() == ui_provenance['source_sha256']
+picture(s, UI, None, .65, 1.92, 8.05, 4.85, 'Работающий сервис: актуальный поиск')
 for n, y, heading, body in [
     ('01', 2.0, 'Выделить автомобиль', 'Демокадр или JPEG/PNG.\nРамка мышью, касанием\nили точными числами.'),
     ('02', 3.55, 'Сравнить кандидатов', 'Крупная пара кадров.\nЯвный порог и оценки\nниже него.'),
@@ -641,7 +640,7 @@ rule(s,.65,5.14,12.7)
 for x,n,heading in [(.65,'1','d1_j48 на реальных данных'),(4.92,'2','ANN top-K + локальный KR'),(9.18,'3','Новая калибровка отказа')]:
     txt(s,x,5.49,.36,.44,n,20,bold=True,color=PINK)
     txt(s,x+.53,5.49,3.05,.94,heading,16.5,bold=True)
-txt(s,.65,6.56,11.9,.3,'Миллион — шумовые копии 750 векторов. Сквозной d1_j48 на миллионе и HTTP p95 не измерены.',11.2,color=MUTED)
+txt(s,.65,6.56,11.9,.3,'Миллион — синтетический индекс. Сквозной путь не измерен. Локальный API: p95 1,81 с, 20 запросов.',11.2,color=MUTED)
 
 # 14. The trained prototype is judged against the predeclared no-loss gate.
 CURRENT = 14

@@ -1,0 +1,55 @@
+{
+  "captured_utc": "2026-09-25T17:27:00Z",
+  "capture_time_precision": "minute from saved file timestamp",
+  "source_filename": "1440-light-search.png",
+  "source_sha256": "d76dd88ea0d653a560dbf5a76e13d27dc8def3a501e68b548096f913f520ec04",
+  "source_size_px": [
+    1440,
+    1000
+  ],
+  "source_git_sha": "c79668ac1ab834accf3016275bc2c39a8171261a",
+  "source_files_sha256": {
+    "04-solution/service/app/static/index.html": "5bf3301eef9678e26e84a6e4741b64b6eee2743860dcac6a41171d4fffe29d77",
+    "04-solution/service/app/static/app.css": "790a82dfe769e791e2d9c6f0d26477950314e621f10a1d2ed76de8da7299cae7",
+    "04-solution/service/app/static/app.js": "98d403ccfc909e03bafa7ee347d299dccbaba443bcd314fd1b9ab83a2a8bfbd3"
+  },
+  "api_origin": "local rehearsal (origin omitted)",
+  "api_version_source": "local verification snapshot outputs/continuation-20260925/http-benchmark.json, field version",
+  "api_version": {
+    "service": "0.2.0",
+    "model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model2": "osnet_ain_combined_v1 (fine-tuned OSNet-AIN: RoundaboutHD MIT + CARLA Apache-2.0 + train organizer)",
+    "model2_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+    "embedding_dim": 512,
+    "input_size": 208,
+    "score_scale": "cosine",
+    "default_threshold": 0.5141976914190476,
+    "batch_rerank": {
+      "enabled_by_default": true,
+      "params": [
+        6,
+        3,
+        0.3
+      ],
+      "score_scale": "rerank_confidence_1_minus_distance",
+      "default_threshold": 0.5282812306342437
+    },
+    "onnxruntime": "1.30.0",
+    "numpy": "2.5.3"
+  },
+  "capture_script": "04-solution/service/ui-checks/presentation-shots.cjs",
+  "capture_script_sha256": "9f88942b0046b04f9960135fb8730976e822b2e36d3b73a49293187e38aeab19",
+  "scenario": "light theme; demo-street.jpg; bbox [849,300,736,471]; real POST /api/search; unmodified response rendered by application",
+  "bbox": [
+    849,
+    300,
+    736,
+    471
+  ],
+  "image_is_full_viewport": true,
+  "result_mocked": false,
+  "retouched": false,
+  "personal_contacts_present": false
+}
