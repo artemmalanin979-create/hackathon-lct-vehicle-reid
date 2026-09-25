@@ -31,6 +31,7 @@ MATERIALS = {
     "solution": ("Документация решения", "solution.pdf", "application/pdf"),
     "presentation": ("Технические слайды", "presentation.pdf", "application/pdf"),
     "manifest": ("Состав и хеши сдаваемого прогона", "manifest.json", "application/json"),
+    "run_info": ("Параметры сдаваемого прогона", "run_info.json", "application/json"),
     "submission": ("Пакетное ранжирование", "submission.csv", "text/csv"),
     "candidates": ("Пакетные кандидаты и отказ", "candidates.csv", "text/csv"),
     "embeddings": ("Признаки тестовой выборки", "embeddings.npy", "application/octet-stream"),

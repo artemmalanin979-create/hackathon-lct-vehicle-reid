@@ -61,8 +61,8 @@ async def lifespan(_: FastAPI):
 app = FastAPI(
     title="Vehicle ReID service",
     version=config.SERVICE_VERSION,
-    description="Формирование цифрового признака ТС и поиск по галерее "
-                "(без использования государственного номера).",
+    description="Формирование цифрового признака ТС и поиск по галерее. "
+                "OCR и ввод номера не применяются; область пластины остаётся частью кадра.",
     lifespan=lifespan,
     docs_url=None,  # /docs собирается вручную из локальных файлов Swagger UI
     redoc_url=None,
