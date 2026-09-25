@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import gc
+import hashlib
 import json
 import math
 import random
@@ -121,6 +122,14 @@ def verify_teacher_manifest(path: Path, target_sha: str, protocol_sha: str,
     for key, expected in expected_inputs.items():
         if observed_inputs.get(key) != expected:
             raise ValueError(f"teacher manifest {key} differs from frozen input")
+    array_hashes = manifest.get("array_sha256")
+    if not isinstance(array_hashes, dict):
+        raise ValueError("teacher manifest array_sha256 missing")
+    with np.load(path, allow_pickle=False) as archive:
+        for key in ("target", "P", "m"):
+            digest = hashlib.sha256(np.ascontiguousarray(archive[key]).tobytes()).hexdigest()
+            if array_hashes.get(key) != digest:
+                raise ValueError(f"teacher manifest {key} array SHA-256 mismatch")
     return sha256(manifest_path)
 
 
@@ -209,6 +218,15 @@ def projected_total_seconds(*, elapsed: float, first_epoch_seconds: float,
         raise ValueError("pilot times and counts must be nonnegative")
     seconds_per_batch = max(first_epoch_seconds / steps_per_epoch, stage2_batch_seconds)
     return elapsed + remaining_epochs * steps_per_epoch * seconds_per_batch * safety_factor
+
+
+def require_time_remaining(wall_deadline: float, stop_at: datetime, *,
+                           now_monotonic: float | None = None,
+                           now_utc: datetime | None = None) -> None:
+    monotonic = time.monotonic() if now_monotonic is None else now_monotonic
+    utc = datetime.now(timezone.utc) if now_utc is None else now_utc
+    if monotonic >= wall_deadline or utc >= stop_at:
+        raise TimeoutError("frozen training wall/Moscow deadline exceeded")
 
 
 def make_distilled_checkpoint(model: CrossViewCore, *, protocol_sha: str,
@@ -351,7 +369,7 @@ def smoke_one_real_batch(model: CrossViewCore, loader: DataLoader, cfg: dict,
 
 def _train_epoch(model: CrossViewCore, loader: DataLoader,
                  optimizer: torch.optim.Optimizer, scheduler, cfg: dict,
-                 device: torch.device, wall_deadline: float) -> dict:
+                 device: torch.device, wall_deadline: float, stop_at: datetime) -> dict:
     model.train()
     if not any(p.requires_grad for p in model.backbone.parameters()):
         model.backbone.eval()
@@ -360,8 +378,7 @@ def _train_epoch(model: CrossViewCore, loader: DataLoader,
                                 "embedding_kd", "relation_kd")}
     own_rows = positive_pairs = negative_pairs = count = 0
     for batch in loader:
-        if time.monotonic() >= wall_deadline:
-            raise TimeoutError("frozen training wall/Moscow deadline exceeded")
+        require_time_remaining(wall_deadline, stop_at)
         record = _one_step(model, batch, optimizer, cfg, device)
         scheduler.step()
         for key in sums:
@@ -372,6 +389,7 @@ def _train_epoch(model: CrossViewCore, loader: DataLoader,
         count += 1
     if count != int(cfg["steps_per_epoch"]):
         raise ValueError(f"epoch executed {count} rather than frozen {cfg['steps_per_epoch']} batches")
+    require_time_remaining(wall_deadline, stop_at)
     return {key: value / count for key, value in sums.items()} | {
         "batches": count, "own_ce_rows": own_rows,
         "cross_camera_positive_pairs": positive_pairs,
@@ -396,6 +414,8 @@ def _check_source_manifest(attempt: int, cfg: dict, args: argparse.Namespace,
             manifest.get("checkpoint_sha256") != args.source_checkpoint_sha256 or
             manifest.get("protocol_sha256") != sha256(HERE / "protocol-own.json")):
         raise ValueError("combined warm start differs from completed attempt-1 manifest")
+    if manifest.get("input_sha256", {}).get("teacher_targets") != hashes.get("own_teacher_targets"):
+        raise ValueError("combined source manifest teacher target differs from own teacher artifact")
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -457,6 +477,7 @@ def run(args: argparse.Namespace) -> dict:
     loader = DataLoader(dataset, batch_sampler=sampler, num_workers=0)
     moscow = timezone(timedelta(hours=3))
     stop_at = datetime.fromisoformat(cfg["stop_no_later_than_moscow"]).replace(tzinfo=moscow)
+    run_start = time.monotonic()
     wall_budget = min(float(cfg["wall_limit_seconds"]),
                       (stop_at - datetime.now(timezone.utc)).total_seconds())
     if wall_budget <= 0:
@@ -465,13 +486,13 @@ def run(args: argparse.Namespace) -> dict:
         raise FileExistsError("refusing to overwrite training output directory")
     args.out.mkdir(parents=True)
     _atomic_json(args.out / "inputs.json", hashes)
-    run_start = time.monotonic()
     wall_deadline = run_start + wall_budget
     seed = int(cfg["seed"])
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     try:
+        require_time_remaining(wall_deadline, stop_at)
         disposable = load_warm_start(args.source_checkpoint,
                                      args.source_checkpoint_sha256, len(own_fit_ids)).to(device)
         smoke = smoke_one_real_batch(disposable, loader, cfg, device)
@@ -481,6 +502,7 @@ def run(args: argparse.Namespace) -> dict:
         _atomic_json(args.out / "smoke.json", smoke)
         del disposable
         gc.collect()
+        require_time_remaining(wall_deadline, stop_at)
         if args.smoke_only:
             return smoke
         model = load_warm_start(args.source_checkpoint,
@@ -498,13 +520,16 @@ def run(args: argparse.Namespace) -> dict:
             scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
                 optimizer, T_max=n_epochs * int(cfg["steps_per_epoch"]), eta_min=1e-6)
             for local_epoch in range(n_epochs):
+                require_time_remaining(wall_deadline, stop_at)
                 sampler.set_epoch(global_epoch)
                 stats = _train_epoch(model, loader, optimizer, scheduler, cfg,
-                                     device, wall_deadline)
+                                     device, wall_deadline, stop_at)
                 require_rss_below(stats["peak_rss_bytes"], int(cfg["peak_rss_limit_mib"]))
                 global_epoch += 1
+                require_time_remaining(wall_deadline, stop_at)
                 dev_map, query, gallery = dev_cosine_map(model, data, evaluator,
                                                           batch=32, device=device)
+                require_time_remaining(wall_deadline, stop_at)
                 row = {"global_epoch": global_epoch, "stage": stage,
                        "stage_epoch": local_epoch + 1, "dev_cosine_mAP": dev_map, **stats}
                 if dev_map > best_map:
@@ -515,6 +540,7 @@ def run(args: argparse.Namespace) -> dict:
                         teacher_sha=args.teacher_targets_sha256,
                         code_sha=hashes["finetune_py"], best_epoch=best_epoch, best_map=best_map)
                     save_best_checkpoint(args.out, payload)
+                    require_time_remaining(wall_deadline, stop_at)
                     row["selected_best"] = True
                 else:
                     row["selected_best"] = False
@@ -542,6 +568,7 @@ def run(args: argparse.Namespace) -> dict:
                         raise RuntimeError("frozen first-epoch runtime pilot exceeded wall budget")
         if best_epoch < 1 or best_q is None or best_g is None:
             raise RuntimeError("no dev-selected checkpoint after complete training")
+        require_time_remaining(wall_deadline, stop_at)
         q, g = data.dev_query_indices, data.dev_gallery_indices
         np.savez(args.out / "dev_embeddings.npz",
                  query_embeddings=best_q, gallery_embeddings=best_g,
@@ -550,6 +577,7 @@ def run(args: argparse.Namespace) -> dict:
                  query_camera_ids=data.camera_ids[q], gallery_camera_ids=data.camera_ids[g],
                  known_absent=~np.isin(data.vehicle_ids[q], data.vehicle_ids[g]),
                  protocol_sha256=np.array(args.protocol_sha256))
+        require_time_remaining(wall_deadline, stop_at)
         checkpoint_path = args.out / "checkpoint.pt"
         summary = {"status": "PASS", "protocol_sha256": args.protocol_sha256,
                    "checkpoint_sha256": sha256(checkpoint_path),

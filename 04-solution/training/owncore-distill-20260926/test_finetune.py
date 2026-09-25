@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import copy
 import json
+from datetime import datetime, timezone
 import sys
 import tempfile
 import unittest
@@ -27,6 +28,8 @@ from finetune import (  # noqa: E402
     make_distilled_checkpoint,
     projected_total_seconds,
     verify_teacher_manifest,
+    _check_source_manifest,
+    require_time_remaining,
     _validate_protocol,
 )
 from core import CrossViewCore  # noqa: E402
@@ -96,7 +99,8 @@ class TeacherContractTests(unittest.TestCase):
         digest = self.write()
         protocol_path = HERE / "protocol-own.json"
         protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
-        manifest = self.valid_manifest(protocol, _sha256(protocol_path), digest, "own")
+        manifest = self.valid_manifest(protocol, _sha256(protocol_path), digest, "own",
+                                       target_path=self.path)
         manifest_path = Path(str(self.path) + ".manifest.json")
         manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
         verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3)
@@ -112,6 +116,11 @@ class TeacherContractTests(unittest.TestCase):
         manifest_path.write_text(json.dumps(corrupted), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "protocol_sha256"):
             verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3)
+        corrupted = copy.deepcopy(manifest)
+        corrupted["array_sha256"]["target"] = "0" * 64
+        manifest_path.write_text(json.dumps(corrupted), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "target"):
+            verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3)
 
     def test_combined_manifest_requires_own_target_and_own_protocol_hashes(self):
         digest = self.write()
@@ -119,7 +128,8 @@ class TeacherContractTests(unittest.TestCase):
         protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
         own_sha = "b" * 64
         manifest = self.valid_manifest(protocol, _sha256(protocol_path), digest,
-                                       "combined", own_sha=own_sha)
+                                       "combined", own_sha=own_sha,
+                                       target_path=self.path)
         path = Path(str(self.path) + ".manifest.json")
         path.write_text(json.dumps(manifest), encoding="utf-8")
         verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3,
@@ -131,7 +141,8 @@ class TeacherContractTests(unittest.TestCase):
                                     own_target_sha=own_sha)
 
     @staticmethod
-    def valid_manifest(protocol, protocol_sha, digest, mode, own_sha=None):
+    def valid_manifest(protocol, protocol_sha, digest, mode, own_sha=None,
+                       target_path=None):
         teacher, data = protocol["teacher"], protocol["data"]
         lib_hash = teacher["whitening_source"].split("SHA256 ")[1]
         inputs = {"metadata": data["train_source_sha256"],
@@ -148,9 +159,12 @@ class TeacherContractTests(unittest.TestCase):
                           own_raw=own["data"]["train_crops_sha256"],
                           own_targets=own_sha,
                           own_protocol=_sha256(HERE / "protocol-own.json"))
+        with np.load(target_path, allow_pickle=False) as archive:
+            array_hashes = {key: hashlib.sha256(np.ascontiguousarray(archive[key]).tobytes()).hexdigest()
+                            for key in ("target", "P", "m")}
         return {"status": "PASS", "mode": mode, "npz_sha256": digest,
                 "protocol_sha256": protocol_sha, "row_count": 3,
-                "input_sha256": inputs}
+                "input_sha256": inputs, "array_sha256": array_hashes}
 
 
 class LossTests(unittest.TestCase):
@@ -192,6 +206,32 @@ class LossTests(unittest.TestCase):
 
 
 class TrainingBoundaryTests(unittest.TestCase):
+    def test_combined_source_manifest_must_use_same_own_teacher(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "training.json"
+            args = SimpleNamespace(source_training_json=path,
+                                   source_checkpoint_sha256="a" * 64)
+            manifest = {"status": "PASS", "checkpoint_sha256": "a" * 64,
+                        "protocol_sha256": _sha256(HERE / "protocol-own.json"),
+                        "input_sha256": {"teacher_targets": "b" * 64}}
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            hashes = {"own_teacher_targets": "b" * 64}
+            _check_source_manifest(2, {}, args, hashes)
+            manifest["input_sha256"]["teacher_targets"] = "c" * 64
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "teacher"):
+                _check_source_manifest(2, {}, args, hashes)
+
+    def test_deadline_recheck_catches_smoke_crossing_moscow_cutoff(self):
+        cutoff = datetime(2026, 9, 26, 21, 0, tzinfo=timezone.utc)
+        before = datetime(2026, 9, 26, 20, 59, 59, tzinfo=timezone.utc)
+        after = datetime(2026, 9, 26, 21, 0, 1, tzinfo=timezone.utc)
+        require_time_remaining(101.0, cutoff, now_monotonic=100.0, now_utc=before)
+        with self.assertRaises(TimeoutError):
+            require_time_remaining(101.0, cutoff, now_monotonic=100.5, now_utc=after)
+        with self.assertRaises(TimeoutError):
+            require_time_remaining(101.0, cutoff, now_monotonic=101.0, now_utc=before)
+
     def test_protocol_mutation_of_optimizer_or_loss_is_rejected(self):
         frozen = json.loads((HERE / "protocol-own.json").read_text(encoding="utf-8"))
         self.assertEqual(_validate_protocol(frozen)["this_attempt"], 1)
