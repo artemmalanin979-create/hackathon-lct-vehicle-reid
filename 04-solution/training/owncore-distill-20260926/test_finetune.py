@@ -26,6 +26,7 @@ from finetune import (  # noqa: E402
     load_warm_start,
     make_distilled_checkpoint,
     projected_total_seconds,
+    verify_teacher_manifest,
     _validate_protocol,
 )
 from core import CrossViewCore  # noqa: E402
@@ -90,6 +91,66 @@ class TeacherContractTests(unittest.TestCase):
         self.write()
         with self.assertRaisesRegex(ValueError, "hash"):
             load_teacher_targets(self.path, "0" * 64, self.indices, self.meta)
+
+    def test_teacher_manifest_binds_artifact_and_release_model_hashes(self):
+        digest = self.write()
+        protocol_path = HERE / "protocol-own.json"
+        protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+        manifest = self.valid_manifest(protocol, _sha256(protocol_path), digest, "own")
+        manifest_path = Path(str(self.path) + ".manifest.json")
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3)
+        for key, value in (("model_b", "0" * 64), ("raw_crops", "1" * 64),
+                           ("train_fit_csv", "2" * 64)):
+            corrupted = copy.deepcopy(manifest)
+            corrupted["input_sha256"][key] = value
+            manifest_path.write_text(json.dumps(corrupted), encoding="utf-8")
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, key):
+                verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3)
+        corrupted = copy.deepcopy(manifest)
+        corrupted["protocol_sha256"] = "0" * 64
+        manifest_path.write_text(json.dumps(corrupted), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "protocol_sha256"):
+            verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3)
+
+    def test_combined_manifest_requires_own_target_and_own_protocol_hashes(self):
+        digest = self.write()
+        protocol_path = HERE / "protocol-combined.json"
+        protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+        own_sha = "b" * 64
+        manifest = self.valid_manifest(protocol, _sha256(protocol_path), digest,
+                                       "combined", own_sha=own_sha)
+        path = Path(str(self.path) + ".manifest.json")
+        path.write_text(json.dumps(manifest), encoding="utf-8")
+        verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3,
+                                own_target_sha=own_sha)
+        manifest["input_sha256"]["own_targets"] = "a" * 64
+        path.write_text(json.dumps(manifest), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "own_targets"):
+            verify_teacher_manifest(self.path, digest, _sha256(protocol_path), protocol, 3,
+                                    own_target_sha=own_sha)
+
+    @staticmethod
+    def valid_manifest(protocol, protocol_sha, digest, mode, own_sha=None):
+        teacher, data = protocol["teacher"], protocol["data"]
+        lib_hash = teacher["whitening_source"].split("SHA256 ")[1]
+        inputs = {"metadata": data["train_source_sha256"],
+                  "raw_crops": data["train_crops_sha256"],
+                  "split": data["split_sha256"],
+                  "train_fit_csv": teacher["train_fit_csv_sha256"],
+                  "model_a": teacher["model_a_sha256"],
+                  "model_b": teacher["model_b_sha256"],
+                  "lib45": lib_hash,
+                  "teacher_targets_py": _sha256(HERE / "teacher_targets.py")}
+        if mode == "combined":
+            own = json.loads((HERE / "protocol-own.json").read_text(encoding="utf-8"))
+            inputs.update(own_metadata=own["data"]["train_source_sha256"],
+                          own_raw=own["data"]["train_crops_sha256"],
+                          own_targets=own_sha,
+                          own_protocol=_sha256(HERE / "protocol-own.json"))
+        return {"status": "PASS", "mode": mode, "npz_sha256": digest,
+                "protocol_sha256": protocol_sha, "row_count": 3,
+                "input_sha256": inputs}
 
 
 class LossTests(unittest.TestCase):

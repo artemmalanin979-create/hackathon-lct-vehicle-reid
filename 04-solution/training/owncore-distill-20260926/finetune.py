@@ -73,6 +73,57 @@ def load_teacher_targets(path: Path, expected_sha256: str,
         return np.array(target, copy=True)
 
 
+def verify_teacher_manifest(path: Path, target_sha: str, protocol_sha: str,
+                            protocol: dict, fit_rows: int,
+                            own_target_sha: str | None = None) -> str:
+    """Bind the exact NPZ to the frozen teacher inputs before any gradient."""
+    checked_hash(path, target_sha)
+    manifest_path = Path(str(path) + ".manifest.json")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    mode = "own" if protocol["training"]["this_attempt"] == 1 else "combined"
+    for key, expected in (("status", "PASS"), ("mode", mode),
+                          ("npz_sha256", target_sha),
+                          ("protocol_sha256", protocol_sha),
+                          ("row_count", fit_rows)):
+        if manifest.get(key) != expected:
+            raise ValueError(f"teacher manifest {key} differs from frozen run")
+    whitening = protocol["teacher"]["whitening_source"]
+    lib_hash = whitening.rsplit("SHA256 ", 1)[-1]
+    if len(lib_hash) != 64 or any(char not in "0123456789abcdef" for char in lib_hash):
+        raise ValueError("frozen teacher lib45 SHA-256 is invalid")
+    checked_hash(BASE.parent / "src/postprocess/lib45.py", lib_hash)
+    source = protocol["data"]
+    teacher = protocol["teacher"]
+    expected_inputs = {
+        "metadata": source["train_source_sha256"],
+        "raw_crops": source["train_crops_sha256"],
+        "split": source["split_sha256"],
+        "train_fit_csv": teacher["train_fit_csv_sha256"],
+        "model_a": teacher["model_a_sha256"],
+        "model_b": teacher["model_b_sha256"],
+        "lib45": lib_hash,
+        "teacher_targets_py": sha256(HERE / "teacher_targets.py"),
+    }
+    if mode == "combined":
+        if own_target_sha is None:
+            raise ValueError("combined teacher manifest requires own_targets SHA-256")
+        own_protocol_path = HERE / "protocol-own.json"
+        own = json.loads(own_protocol_path.read_text(encoding="utf-8"))
+        expected_inputs.update({
+            "own_metadata": own["data"]["train_source_sha256"],
+            "own_raw": own["data"]["train_crops_sha256"],
+            "own_targets": own_target_sha,
+            "own_protocol": sha256(own_protocol_path),
+        })
+    observed_inputs = manifest.get("input_sha256")
+    if not isinstance(observed_inputs, dict):
+        raise ValueError("teacher manifest input_sha256 missing")
+    for key, expected in expected_inputs.items():
+        if observed_inputs.get(key) != expected:
+            raise ValueError(f"teacher manifest {key} differs from frozen input")
+    return sha256(manifest_path)
+
+
 def load_warm_start(path: Path, expected_sha256: str, expected_num_ids: int) -> CrossViewCore:
     """Hash and strictly reload a compatible checkpoint before any optimizer exists."""
     checked_hash(path, expected_sha256)
@@ -364,6 +415,21 @@ def run(args: argparse.Namespace) -> dict:
               "data_raw": checked_hash(args.data_raw, protocol["data"]["train_crops_sha256"]),
               "split": checked_hash(args.split, protocol["data"]["split_sha256"]),
               "teacher_targets": checked_hash(args.teacher_targets, args.teacher_targets_sha256)}
+    own_target_sha = None
+    if attempt == 2:
+        if args.own_teacher_targets is None or args.own_teacher_targets_sha256 is None:
+            raise ValueError("combined attempt requires own teacher target file and SHA-256")
+        own_target_sha = checked_hash(args.own_teacher_targets,
+                                      args.own_teacher_targets_sha256)
+        hashes["own_teacher_targets"] = own_target_sha
+        own_protocol_path = HERE / "protocol-own.json"
+        own_protocol = json.loads(own_protocol_path.read_text(encoding="utf-8"))
+        hashes["own_teacher_manifest"] = verify_teacher_manifest(
+            args.own_teacher_targets, own_target_sha, sha256(own_protocol_path),
+            own_protocol, own_protocol["data"]["fit_rows_expected"])
+    hashes["teacher_manifest"] = verify_teacher_manifest(
+        args.teacher_targets, args.teacher_targets_sha256, args.protocol_sha256,
+        protocol, protocol["data"]["fit_rows_expected"], own_target_sha)
     _check_source_manifest(attempt, cfg, args, hashes)
     evaluator = load_evaluator(args.evaluator,
                                protocol["evaluation"]["evaluator_sha256"],
@@ -521,6 +587,10 @@ def main() -> None:
     parser.add_argument("--split", type=Path, required=True)
     parser.add_argument("--teacher-targets", type=Path, required=True)
     parser.add_argument("--teacher-targets-sha256", required=True)
+    parser.add_argument("--own-teacher-targets", type=Path,
+                        help="required for combined: completed own teacher NPZ")
+    parser.add_argument("--own-teacher-targets-sha256",
+                        help="required for combined: SHA-256 of own teacher NPZ")
     parser.add_argument("--evaluator", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--smoke-only", action="store_true")
