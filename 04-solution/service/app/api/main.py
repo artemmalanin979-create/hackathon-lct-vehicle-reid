@@ -37,6 +37,7 @@ from ..core.model import Embedder, model_file_sha256
 from ..core.preprocess import crop_to_input, resolve_image_path
 from ..core.ranking import validate_scores
 from .store import GalleryStore
+from .demo_materials import router as demo_materials_router
 
 STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
 
@@ -81,6 +82,7 @@ class _Static(StaticFiles):
 
 
 app.mount("/static", _Static(directory=STATIC_DIR), name="static")
+app.include_router(demo_materials_router)
 
 
 # ---------- схемы ответов (видны в OpenAPI) ----------
