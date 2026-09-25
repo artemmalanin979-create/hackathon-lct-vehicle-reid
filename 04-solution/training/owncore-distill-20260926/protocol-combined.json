@@ -127,9 +127,10 @@
       "seed": 20260925
     },
     "multiplicity": "Holm across core/fusion × cosine/KR × 2 predeclared attempts (8 deltas) if both attempts reach validation; missing comparisons marked NOT RUN, never removed after seeing values",
-    "candidate_acceptance": "Release changes only if KR mAP delta >= +0.005 and paired CI95 lower >0, cosine delta >=0, refusal F1 no worse than -0.02 in both modes, and all performance limits pass; otherwise retain d1_j48.",
+    "candidate_acceptance": "Release changes only if KR mAP delta >= +0.005 and paired CI95 lower >0, cosine delta >=0, refusal F1 no worse than -0.02 in both modes, and all performance limits pass. If a 1024D fusion is chosen, require explicit versioned API/gallery/index migration plus fresh compatibility acceptance before release. Otherwise retain d1_j48.",
     "export_tolerance": "Torch vs ONNX max absolute descriptor difference <=1e-5 on real crops; same top-1 and refusal decisions on all validation rows at dev-frozen thresholds",
-    "research_target": "standalone KR mAP >= 0.7740915539438481 on the reused val is the user goal, not a guaranteed outcome or the separate release gate"
+    "research_target": "standalone KR mAP >= 0.7740915539438481 on the reused val is the user goal, not a guaranteed outcome or the separate release gate",
+    "multiplicity_implementation": "Existing owncore evaluate.py reports a local four-test p_Holm_four_tests per attempt; if both attempts reach val, an independent aggregate report must recompute raw paired-bootstrap p values and Holm over all eight predeclared deltas before any release claim. Never present local four-test adjusted p as family-wide."
   },
   "benchmark": {
     "device": "same workstation CPU for release and new ONNX",
@@ -162,7 +163,7 @@
     },
     "no_artificial_delay": true
   },
-  "release": "d1_j48 stays untouched and shippable until explicit candidate acceptance; do not alter canonical reproduce metric bounds",
+  "release": "d1_j48 stays untouched and shippable until explicit candidate acceptance; do not alter canonical reproduce metric bounds; no 1024D fusion can replace 512D release without a separately verified versioned API/index migration.",
   "teacher": {
     "source": "fresh ONNX Runtime extraction of both release ONNX on the same hash-checked RGB uint8 208x208 raw crops, NCHW float32 0..255; no network download",
     "model_a_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
