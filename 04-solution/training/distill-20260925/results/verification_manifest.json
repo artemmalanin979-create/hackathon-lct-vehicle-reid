@@ -1,0 +1,99 @@
+{
+  "code_commit": "53f7261",
+  "training_source_sha256": "3aceba697d40c72a759a3e964143f785dad49bebbec895930cce371dcccde3fe",
+  "protocol_sha256": "1f79153545a415d90f599b0c513e4f17602e497ef07ce76a571eccd662f12b4a",
+  "baseline_sha": "8e7a20580613f5a784c6ee47270a209cf1923e0e",
+  "records": [
+    {
+      "check": "contracts",
+      "exit_code": 0,
+      "cases": 5,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/contracts-green.txt"
+    },
+    {
+      "check": "guard mutations",
+      "exit_code": 0,
+      "cases": 4,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/mutations.json"
+    },
+    {
+      "check": "canonical evaluator tests",
+      "exit_code": 0,
+      "cases": 60,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/evaluator-tests.txt"
+    },
+    {
+      "check": "smoke training+export",
+      "exit_code": 0,
+      "cases": 2,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/smoke-export.json"
+    },
+    {
+      "check": "main+ablation training",
+      "exit_code": 0,
+      "cases": 60,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/train.txt"
+    },
+    {
+      "check": "quality evaluation",
+      "exit_code": 0,
+      "cases": 8,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/evaluate.txt"
+    },
+    {
+      "check": "ONNX export",
+      "exit_code": 0,
+      "cases": 1860,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/export.txt"
+    },
+    {
+      "check": "ONNX ranking/refusal",
+      "exit_code": 0,
+      "cases": 2220,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/export_ranking_check.json"
+    },
+    {
+      "check": "CPU benchmark",
+      "exit_code": 0,
+      "cases": 120,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/benchmark.json"
+    },
+    {
+      "check": "real image+bbox inference CLI",
+      "exit_code": 0,
+      "cases": 1,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/infer_smoke.json"
+    }
+  ],
+  "counts_note": "cases refer to tests, epochs, vectors, query-mode pairs, or measured descriptor calls as named; not one summed test count",
+  "clock_note": "worker wall clock lags workstation by about2.6h; protocol/code hashes and sequential orchestration/monotonic durations establish provenance, not mtimes",
+  "not_run": [
+    "release integration",
+    "public deployment",
+    "full CNN retraining",
+    "fresh untouched holdout evaluation",
+    "end-to-end API latency",
+    "independent visual view annotation"
+  ],
+  "initial_red": "missing contracts module import, NOT a killed mutation; separate four semantic mutations establish guard sensitivity"
+}

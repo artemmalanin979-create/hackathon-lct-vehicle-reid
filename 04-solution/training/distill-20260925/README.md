@@ -1,17 +1,111 @@
-# ML-эксперимент: дистилляция d1_j48, 25.09.2026
+# Дистилляция d1_j48: прототип обучен, в релиз не принят
 
-Статус: протокол заморожен до обучения; результат пока NOT RUN. База 8e7a205.
+Student и fusion не прошли заранее объявленный критерий качества. Сдаваемой остаётся **d1_j48**; release-код, модели, пороги и gallery не менялись.
 
-Одна гипотеза: замороженная combined_v1 + residual MLP 512→256→512 с переносом нормированных признаков и межкамерных отношений teacher. Это специализированное обучаемое ядро; CNN не переобучается. Цель — ускорение без разрешённой потери качества.
+## Что реально выполнено
 
-Fit: 6639 кадров/1071 ID. Исторический dev100:609 кадров; backbone не учился на этих ID, но уже использовал их для мониторинга. Релизный whitening учился на всех7248; поэтому экспериментальный teacher whitening учится заново только на fit. Старый validation многократно использован и не является новым holdout. Его метки не входят в выбор эпохи, fusion и порога.
+Замороженная combined_v1 + residual MLP512→256→512; один seed20260925, main30 эпох и одна ablation30 без relational-loss. Обучение заняло 278.8с, peakRSS 639.4MiB. Main выбран на эпохе29 по dev embedding loss, ablation на эпохе30. Внешний validation не участвовал в выборе.
 
-До просмотра результата фиксируются один seed20260925, pilot3→main30epochs и одна ablation без relational loss. Head: residual MLP512→256→512, ReLU; AdamW lr0.001 wd0.0001, batch128, cross-camera sampler32ID×4. Loss:1−cos(student,teacher)+0.5×relational MSE. Checkpoint по минимальному dev embedding loss. Fusion веса0.25/0.5/0.75 выбираются только на dev; sqrt-конкатенация1024d — исследовательский формат, не смена релизного интерфейса512d.
+Fit6639 кадров/1071ID; исторический dev100 —609 кадров. Refusal dev: 427 query ×182 gallery,25 ID без gallery-пары. Teacher whitening обучен только на fit. Fusion: вес student0.25, выбран на dev; размерность1024 — исключительно исследовательский формат.
 
-Критерий student: p95 быстрее≥25%, ΔmAP≥0 и нижняя95% paired CI≥0 в cosine и KR. Fusion: ΔmAP≥0.005, нижняяCI>0, latency≤+10%, веса<2GB. Четыре сравнения с Holm; bootstrap4000 поvehicle_id. Иначе остаётся d1_j48.
+## Качество на многократно использованном validation
 
-Узел: worker-vm, nice10,2threads, собственный каталог jobs/distill_20260925, peakRSS≤2GiB, обучение≤60мин. Данные уже на узле. Windows GPU свободен, но RAM почти исчерпана; не используется.
+1110query×750gallery,832 query с межкамерной парой. Market/presence, full-gallery AP, KR(6,3,0.3). F1/TNR ниже используют отдельные **dev-пороги**, в том числе для baseline; официальные релизные пороги показаны отдельно.
 
-Критичный вход: job68 — признаки256, здесь НЕ используется. Правильные job42/A и job48/B сверяются по SHA и полному порядку image_id. Известен domain shift исторического train-кропа через JPEG256 против прямого bbox208 на validation.
+| Модель | Режим | mAP | Rank-1 | Rank-5 | mINP | F1 dev-порог | TNR dev-порог | Camera gap mAP |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| baseline | cosine | 0.731609 | 0.685096 | 0.882212 | 0.692846 | 0.861780 | 0.082734 | 0.130752 |
+| baseline | KR | 0.774092 | 0.730769 | 0.881010 | 0.748806 | 0.866343 | 0.636691 | 0.110273 |
+| student | cosine | 0.707940 | 0.652644 | 0.856971 | 0.667816 | 0.860441 | 0.086331 | 0.143439 |
+| student | KR | 0.745935 | 0.700721 | 0.858173 | 0.716658 | 0.871581 | 0.579137 | 0.124902 |
+| fusion | cosine | 0.731071 | 0.680288 | 0.882212 | 0.693580 | 0.860417 | 0.057554 | 0.130331 |
+| fusion | KR | 0.766010 | 0.727163 | 0.873798 | 0.737446 | 0.881119 | 0.539568 | 0.113562 |
+| ablation | cosine | 0.710866 | 0.652644 | 0.862981 | 0.672673 | 0.859658 | 0.032374 | 0.141802 |
+| ablation | KR | 0.743569 | 0.695913 | 0.861779 | 0.715112 | 0.879300 | 0.535971 | 0.125693 |
 
-Полный машинный контракт и SHA входов: `04-solution/training/distill-20260925/protocol.json`. Код/release не меняются; кандидат и резерв d1_j48 разделены. Результаты, ограничения и точные команды будут добавлены после выполнения.
+Официальный baseline при сохранённых релизных порогах:
+
+| Режим | Порог | F1 | TNR |
+|---|---:|---:|---:|
+| cosine | 0.5141976914190476 | 0.768500 | 0.730216 |
+| KR | 0.5282812306342437 | 0.809079 | 0.784173 |
+
+Максимизация F1 на маленьком dev дала слабый перенос отказа на cosine: TNR низкий. Эти экспериментальные пороги не пригодны для переноса в сервис. После просмотра validation пороги не менялись.
+
+## Неопределённость и ошибки
+
+Парный bootstrap4000 по vehicle_id, seed20260925; обычные CI95 и Holm по четырём сравнениям student/fusion×cosine/KR. Абляция описательная; выигрышный seed не выбирался.
+
+| Сравнение с d1 | Режим | ΔmAP | CI95 | p Holm | Исправлено / испорчено top-1 |
+|---|---|---:|---|---:|---:|
+| student | cosine | -0.023670 | [-0.036547;-0.010885] | 0.003999 | 14 / 41 |
+| student | KR | -0.028156 | [-0.043966;-0.013094] | 0.003999 | 17 / 42 |
+| fusion | cosine | -0.000538 | [-0.004947;+0.004028] | 0.772807 | 4 / 8 |
+| fusion | KR | -0.008082 | [-0.015103;-0.002237] | 0.010997 | 4 / 7 |
+| ablation | cosine | -0.020744 | [-0.033260;-0.008296] | описательно | 13 / 40 |
+| ablation | KR | -0.030523 | [-0.045532;-0.016877] | описательно | 8 / 37 |
+
+Перечни исправленных/испорченных query, корреляции ошибок и разбиение по камерам: [evaluation.json](results/evaluation.json). Независимой view-разметки нет: view-strata **NOT MEASURED**. Нельзя приписывать падение исключительно MLP или relational-loss: teacher whitening fit-only отличается от релизного, а отдельная абляция этого фактора не предусматривалась.
+
+## Измеренная стоимость
+
+worker-vm CPU, ORT1.30.0,2threads,batch1,warmup5,40кадров; порядок трёх моделей чередуется. Измеряется готовый тензор→нормированный признак; decode/API/Qdrant/KR сюда не входят. Узел общий, фоновая нагрузка не устранялась.
+
+| Модель | p50 мс | p95 мс | FPS batch1 | Cold start с | PeakRSS cold MiB | Веса МБ | Размерность / raw gallery750 |
+|---|---:|---:|---:|---:|---:|---:|---|
+| baseline | 504.36 | 619.39 | 1.94 | 1.079 | 149.3 | 18.631 | 512 / 1536000Б |
+| student | 286.33 | 452.38 | 3.34 | 0.517 | 129.6 | 9.795 | 512 / 1536000Б |
+| fusion | 514.52 | 791.37 | 1.87 | 1.237 | 150.3 | 19.683 | 1024 / 3072000Б |
+
+Ускорение student по p95:27.0%; overhead fusion:+27.8%. Даже выигрыш скорости не разрешает потерю качества: критерий student — lowerCI≥0 и pointΔ≥0 в обеих метриках. Он не выполнен. Fusion также не достигΔmAP≥0.005/lowerCI>0. VRAM — неприменимо(CPU); размер индекса — только raw векторы, без накладных расходов Qdrant. PeakRSS по модели измерен в отдельном холодном процессе, не является отдельным продолжительным нагрузочным тестом.
+
+## Экспорт, проверки и артефакты
+
+Head ONNX на1860 признаках: maxabs 1.64e-07. Полный image→student ONNX на40 реальных cached-crop входах: maxabs 8.94e-08. Cosine/KR:0 изменений top-1 и0 изменений отказа на1110query каждого режима; mAP совпал. [Проверка](results/export_ranking_check.json).
+
+5 новых behavioral tests PASS;4/4 содержательных guard-removal mutations убиты в одноразовых копиях; исходный hash неизменён;60 штатных тестов evaluator PASS. Первоначальный RED был отсутствующим модулем, он **не считается** убитой мутацией. [Полный manifest](results/verification_manifest.json).
+
+| Артефакт | SHA-256 |
+|---|---|
+| `artifacts/run/main.npz` | `8e80d2ad34b75d4cd98fee17d6e091f3ce3b7a5ada7b81b2d46ee746f6b3213f` |
+| `artifacts/run/export/head.onnx` | `b547c8bfb79a0df84f8623fd45d736b4a80386f573c6b59b646f6faf70ef4dca` |
+| `artifacts/run/export/student_combined_v1.onnx` | `188284ff7a56ff915ea6143cca62dca0a381e3ca7fc784b996b876b641ad3d06` |
+
+Артефакты не входят в Git; сохранены локально в этом worktree и на `worker-vm:~/lct-reid/jobs/distill_20260925/results/`. Перед удалением worktree скопировать **весь** `artifacts/run/` в каталог принятого handoff и проверить [local_artifact_manifest.json](results/local_artifact_manifest.json). Исходники/config/метрики/логи входят в Git. Никаких новых внешних весов или датасетов не скачивалось; исходный provenance/licensing OSNet и combined_v1 остаётся прежним.
+
+## Запуск готового ядра
+
+`infer.py` принимает настоящий JPEG/PNG и bbox, проверяет SHA полного ONNX и выдаёт нормированный float32-вектор512. Проверен реальным validation JPEG и исходным bbox: результат совпал с независимым training-runtime в пределах1e-5. Точная выполненная команда и погрешность — [infer_smoke.json](results/infer_smoke.json). Имена модели и результата явно экспериментальные; endpoint релизного сервиса не подменяется.
+
+```bash
+/home/artem/projects/hackathon-lct-vehicle-reid/.venv/bin/python \
+  04-solution/training/distill-20260925/infer.py \
+  --image /path/to/frame.jpg --bbox 10 20 200 100 \
+  --out ./student-vector.npy
+```
+
+Путь/рамка в этом примере заменяются своими. Модель по умолчанию берётся из `artifacts/run/export/student_combined_v1.onnx`; после интеграции копируется весь `artifacts/run/`. Повторную запись существующего результата CLI отклоняет. Для собственного окружения нужны NumPy, Pillow и ONNX Runtime; версии проверенного окружения сохранены в export/benchmark manifests.
+
+## Воспроизведение обучения
+
+Команды на разрешённом worker-vm; `--repo` должен указывать на checkout/snapshot с SHA из protocol.json. Входные кэши уже находятся по проверяемым абсолютным путям manifest. Для другой машины сначала подготовить те же входы и явный новый path mapping; скрытого download нет. Новый запуск — только в **новый** OUT, существующие main.npz/training.json защищены от перезаписи.
+
+```bash
+cd ~/lct-reid/jobs/distill_20260925
+export OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2
+systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 python3 code/experiment.py train --repo repo --out fresh-run --smoke-only
+# Export/check smoke locally with export_head.py before the training continuation.
+systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 python3 code/experiment.py train --repo repo --out fresh-run
+systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 python3 code/experiment.py evaluate --repo repo --out fresh-run
+# Export main.npz + export_validation.npz using export_head.py --backbone ... --out fresh-run/export.
+systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 python3 code/verify_export.py --repo repo --out fresh-run
+systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 ../job_45/venv/bin/python code/benchmark.py --repo repo --out fresh-run
+```
+
+Окружение обучения: Python3.14.3/torch2.9.1/NumPy2.4.6. Export: ONNX1.22.0/ORT1.30.0 в существующей локальной venv. Benchmark: существующая job45 venv, ORT1.30.0. Архивная learn_lw вызывается из её точного AST без запуска жёстко заданных исторических entry point. Нынешний service KR скопирован в изолированный snapshot, старый worker repo не изменён.
+
+Worker clock отстаёт от workstation примерно на2.6ч. Связь результатов подтверждается protocol/source SHA и monotonic durations; mtime не используется как доказательство порядка. Код обучения: `53f7261`, baseline:`8e7a205`, frozen protocol:`e1557af`.
+
+Вывод ограничен данным рецептом и бюджетом: он не доказывает невозможности дистилляции вообще. Дополнительных обучений после отрицательной оценки не запускалось.
+
+Независимая приёмка: **PENDING**. Следующее действие — критик проверяет diff, входы, канонический baseline и отрицательный вывод; после приёмки интегрируются исходники и отчёт, default d1_j48 остаётся.

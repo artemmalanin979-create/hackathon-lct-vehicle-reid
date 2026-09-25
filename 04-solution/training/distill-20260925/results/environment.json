@@ -1,0 +1,11 @@
+{
+  "python": "3.14.3 (main, Mar 26 2026, 00:00:00) [GCC 16.0.1 20260321 (Red Hat 16.0.1-0)]",
+  "torch": "2.9.1",
+  "numpy": "2.4.6",
+  "platform": "Linux-6.19.10-300.fc44.x86_64-x86_64-with-glibc2.43",
+  "threads": 2,
+  "protocol_sha256": "1f79153545a415d90f599b0c513e4f17602e497ef07ce76a571eccd662f12b4a",
+  "experiment_sha256": "3aceba697d40c72a759a3e964143f785dad49bebbec895930cce371dcccde3fe",
+  "total_seconds": 278.80736120801885,
+  "peak_rss_mib": 639.37109375
+}

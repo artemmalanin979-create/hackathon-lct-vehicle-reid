@@ -1,0 +1,1 @@
+{"status": "PASS", "shape": [1, 512], "model_sha256": "188284ff7a56ff915ea6143cca62dca0a381e3ca7fc784b996b876b641ad3d06", "output": "04-solution/training/distill-20260925/artifacts/run/infer-smoke.npy", "model_version": "experimental-distill-20260925-not-release"}

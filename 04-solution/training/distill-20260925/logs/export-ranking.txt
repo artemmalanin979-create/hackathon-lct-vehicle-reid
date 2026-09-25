@@ -1,0 +1,2 @@
+Running as unit: lct-distill-export-check-20260925.scope; invocation ID: 82e305bb4e974199997207fb96e2133f
+{"max_abs": 1.6391277313232422e-07, "rows": 1860, "modes": {"cosine": {"top1_mismatches": 0, "refusal_mismatches": 0, "mAP_abs_delta": 0.0, "queries": 1110}, "KR": {"top1_mismatches": 0, "refusal_mismatches": 0, "mAP_abs_delta": 0.0, "queries": 1110}}, "status": "PASS"}

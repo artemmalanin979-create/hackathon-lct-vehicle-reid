@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "initial_dev": 0.2080257087945938,
+  "initial_fit": 0.20045170187950134,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_embedding": 0.14851933989960414,
+      "train_relation": 0.011923507339535998,
+      "dev_embedding": 0.1274426430463791,
+      "seconds": 4.594819916062988,
+      "max_rss_mib": 637.74609375
+    },
+    {
+      "epoch": 2,
+      "train_embedding": 0.1067166907282976,
+      "train_relation": 0.008374322393837456,
+      "dev_embedding": 0.11036545783281326,
+      "seconds": 4.096457413048483,
+      "max_rss_mib": 637.74609375
+    },
+    {
+      "epoch": 3,
+      "train_embedding": 0.09311989651849636,
+      "train_relation": 0.0061731255756547814,
+      "dev_embedding": 0.10300739109516144,
+      "seconds": 3.7120183299994096,
+      "max_rss_mib": 637.74609375
+    }
+  ]
+}

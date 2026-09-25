@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "command": [
+    "/home/artem/projects/hackathon-lct-vehicle-reid/.venv/bin/python",
+    "04-solution/training/distill-20260925/infer.py",
+    "--image",
+    "/home/artem/projects/hackathon-lct-vehicle-reid/data/images/64a7b342e5654ac38e16ab1cc2d58037.jpg",
+    "--bbox",
+    "630",
+    "454",
+    "550",
+    "474",
+    "--out",
+    "04-solution/training/distill-20260925/artifacts/run/infer-smoke.npy"
+  ],
+  "exit_code": 0,
+  "max_abs": 2.086162567138672e-07,
+  "rows": 1,
+  "source": "validation query first row, real JPEG+original bbox, no labels used by inference"
+}

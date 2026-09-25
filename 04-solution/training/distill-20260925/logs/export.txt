@@ -1,0 +1,1 @@
+{"status": "PASS", "rows": 1860, "max_abs": 1.6391277313232422e-07, "onnx": "1.22.0", "onnxruntime": "1.30.0", "artifacts": {"head.onnx": {"sha256": "b547c8bfb79a0df84f8623fd45d736b4a80386f573c6b59b646f6faf70ef4dca", "bytes": 1052412}, "student_combined_v1.onnx": {"sha256": "188284ff7a56ff915ea6143cca62dca0a381e3ca7fc784b996b876b641ad3d06", "bytes": 9795108}}}

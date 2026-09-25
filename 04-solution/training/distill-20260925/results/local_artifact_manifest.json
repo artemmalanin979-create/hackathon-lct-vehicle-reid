@@ -1,0 +1,98 @@
+{
+  "artifacts/run/teacher_fit_only.npz": {
+    "sha256": "43a9eea77c9eed5e5d2ba678dd0ba31abdbfab39e66d865f9c2a2c9fcae90364",
+    "bytes": 2101738
+  },
+  "artifacts/run/split.json": {
+    "sha256": "0f35d494bde29b0bac95094862cdd67cfc8b06cd7715c0affae0ac1a669ec620",
+    "bytes": 88349
+  },
+  "artifacts/run/smoke.npz": {
+    "sha256": "e00da92cd5dd846dde16f9cf8d9b3c5edf15f59c049b627c05306bfa98467f56",
+    "bytes": 1052670
+  },
+  "artifacts/run/smoke_vectors.npz": {
+    "sha256": "ff26140dd9f5bd4bb003181fa373fd47a1f26bf05dcfd350131064959761011e",
+    "bytes": 524800
+  },
+  "artifacts/run/smoke.json": {
+    "sha256": "c4d410e33e08381264f5e2de5288fee3b4c44099968a705baf8065c890e7f52a",
+    "bytes": 306
+  },
+  "artifacts/run/main.npz": {
+    "sha256": "8e80d2ad34b75d4cd98fee17d6e091f3ce3b7a5ada7b81b2d46ee746f6b3213f",
+    "bytes": 1052670
+  },
+  "artifacts/run/main_pilot.json": {
+    "sha256": "907fc86892b9bb962eec76ae38f4174a454bc183a61a7ee50be09ccea355b9b3",
+    "bytes": 827
+  },
+  "artifacts/run/training.json": {
+    "sha256": "96524e69de52e6cf1c06e3aab70b28dcdc16bf7755e44d68c08d368ad64fcec9",
+    "bytes": 15842
+  },
+  "artifacts/run/ablation.npz": {
+    "sha256": "5b94d6eb8614e3c7c9be379aec22dd9704fa2ba68bccad793cc8a6f444f59f95",
+    "bytes": 1052670
+  },
+  "artifacts/run/ablation_pilot.json": {
+    "sha256": "d6d47d224ee8da37c559be087939e07c52a895200bd8fff396bac4946b0992d5",
+    "bytes": 827
+  },
+  "artifacts/run/environment.json": {
+    "sha256": "55b9f0b685f9eca52f34689a2ba3606a3dbc09cd7438661ead30669f8887ed39",
+    "bytes": 472
+  },
+  "artifacts/run/selection.json": {
+    "sha256": "cff2ebd3e608e96e58465697d6c96d8237001246a26255357203e7b2127b5ee4",
+    "bytes": 737
+  },
+  "artifacts/run/evaluation.json": {
+    "sha256": "42fafa83376fc10319e23cb0fe040d8faee772fd1886dafd93f024d9cf79ac3c",
+    "bytes": 105594
+  },
+  "artifacts/run/export_validation.npz": {
+    "sha256": "c764c2123f8c9c9ce688c875bee5f3b5ba0fc71f406881fc2ec1c847d3b9fddf",
+    "bytes": 7619068
+  },
+  "artifacts/run/artifact_hashes.json": {
+    "sha256": "a36681aab9617d35bdb54074a23d8cf0cbac72226f205246edbf6c534faa412e",
+    "bytes": 785
+  },
+  "artifacts/run/benchmark.json": {
+    "sha256": "75ce94076e86aea020cf5e29750d462b7195c1616c159b6c49c49b3e244be251",
+    "bytes": 5638
+  },
+  "artifacts/run/export_ranking_check.json": {
+    "sha256": "7b84805c9237c371634ad47d1e69a2b55287bb625d1775ea9ce154eb2ce4d0d2",
+    "bytes": 353
+  },
+  "artifacts/run/benchmark_inputs.json": {
+    "sha256": "d15397176d834f6682cbdad53036f9c39291e79f2c1c2841570dc20e91018be9",
+    "bytes": 978
+  },
+  "artifacts/run/infer-smoke.npy": {
+    "sha256": "dcd461467eb75cc3e2ba615cd7a1324faf3510f44d4ad845fe93561cbad820f5",
+    "bytes": 2176
+  },
+  "artifacts/run/infer_smoke.json": {
+    "sha256": "32513667708eec362a9c1e7a4cabee32d945d5710b213870ca401c20015fedc7",
+    "bytes": 596
+  },
+  "artifacts/run/export/head.onnx": {
+    "sha256": "b547c8bfb79a0df84f8623fd45d736b4a80386f573c6b59b646f6faf70ef4dca",
+    "bytes": 1052412
+  },
+  "artifacts/run/export/onnx_validation.npy": {
+    "sha256": "c1e64a6183a0e35289cdc3750f57dcc9e84343f7093fead3164026cc39ef98e5",
+    "bytes": 3809408
+  },
+  "artifacts/run/export/student_combined_v1.onnx": {
+    "sha256": "188284ff7a56ff915ea6143cca62dca0a381e3ca7fc784b996b876b641ad3d06",
+    "bytes": 9795108
+  },
+  "artifacts/run/export/export.json": {
+    "sha256": "dbe8c55a14d22e355bf9f4b8e8947089dda4bc4c6085416788ab77a29bcc4414",
+    "bytes": 425
+  }
+}

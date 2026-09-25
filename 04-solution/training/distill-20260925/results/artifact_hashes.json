@@ -1,0 +1,26 @@
+{
+  "teacher_fit_only.npz": {
+    "sha256": "43a9eea77c9eed5e5d2ba678dd0ba31abdbfab39e66d865f9c2a2c9fcae90364",
+    "bytes": 2101738
+  },
+  "smoke.npz": {
+    "sha256": "e00da92cd5dd846dde16f9cf8d9b3c5edf15f59c049b627c05306bfa98467f56",
+    "bytes": 1052670
+  },
+  "smoke_vectors.npz": {
+    "sha256": "ff26140dd9f5bd4bb003181fa373fd47a1f26bf05dcfd350131064959761011e",
+    "bytes": 524800
+  },
+  "main.npz": {
+    "sha256": "8e80d2ad34b75d4cd98fee17d6e091f3ce3b7a5ada7b81b2d46ee746f6b3213f",
+    "bytes": 1052670
+  },
+  "ablation.npz": {
+    "sha256": "5b94d6eb8614e3c7c9be379aec22dd9704fa2ba68bccad793cc8a6f444f59f95",
+    "bytes": 1052670
+  },
+  "export_validation.npz": {
+    "sha256": "c764c2123f8c9c9ce688c875bee5f3b5ba0fc71f406881fc2ec1c847d3b9fddf",
+    "bytes": 7619068
+  }
+}
