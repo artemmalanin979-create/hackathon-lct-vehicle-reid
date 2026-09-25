@@ -167,6 +167,17 @@ async function check(name,browser,fn) {
       await page.locator('#export').waitFor({state:'hidden',timeout:22000});
       assert.match(await page.locator('#banner-body').textContent(),/повторите поиск/i);
     });
+    await check('export-blocked-when-state-unavailable',browser,async (page,env)=>{
+      await search(page);
+      let downloads=0;
+      page.on('download',()=>downloads++);
+      env.stateFailure=true;
+      await page.locator('#exp-json').click();
+      await page.waitForFunction(()=>document.querySelector('#state-chip').textContent.includes('Сервис недоступен'));
+      assert.equal(downloads,0,'export must not use an unverified old result');
+      assert(await page.locator('#export').isHidden());
+      assert.match(await page.locator('#banner-body').textContent(),/Проверьте соединение/);
+    });
   } finally {await browser.close();}
   results.passed=results.cases.filter(x=>x.status==='PASS').length;
   results.failed=results.cases.length-results.passed;
