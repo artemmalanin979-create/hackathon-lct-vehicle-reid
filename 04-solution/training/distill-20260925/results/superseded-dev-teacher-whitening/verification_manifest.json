@@ -45,12 +45,28 @@
       "log": "logs/train.txt"
     },
     {
+      "check": "quality evaluation",
+      "exit_code": 0,
+      "cases": 8,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/evaluate.txt"
+    },
+    {
       "check": "ONNX export",
       "exit_code": 0,
       "cases": 1860,
       "failed": 0,
       "skipped": 0,
       "log": "logs/export.txt"
+    },
+    {
+      "check": "ONNX ranking/refusal",
+      "exit_code": 0,
+      "cases": 2220,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/export_ranking_check.json"
     },
     {
       "check": "CPU benchmark",
@@ -67,38 +83,6 @@
       "failed": 0,
       "skipped": 0,
       "log": "results/infer_smoke.json"
-    },
-    {
-      "check": "contracts including dev release geometry",
-      "exit_code": 0,
-      "cases": 6,
-      "failed": 0,
-      "skipped": 0,
-      "log": "logs/selection-green.txt"
-    },
-    {
-      "check": "dev teacher whitening mutation",
-      "exit_code": 0,
-      "cases": 1,
-      "failed": 0,
-      "skipped": 0,
-      "log": "results/selection-mutation.json"
-    },
-    {
-      "check": "quality evaluation replay",
-      "exit_code": 0,
-      "cases": 8,
-      "failed": 0,
-      "skipped": 0,
-      "log": "logs/evaluate-replay-p2.txt"
-    },
-    {
-      "check": "ONNX ranking/refusal replay",
-      "exit_code": 0,
-      "cases": 2220,
-      "failed": 0,
-      "skipped": 0,
-      "log": "results/export_ranking_check.json"
     }
   ],
   "counts_note": "cases refer to tests, epochs, vectors, query-mode pairs, or measured descriptor calls as named; not one summed test count",
@@ -111,7 +95,5 @@
     "end-to-end API latency",
     "independent visual view annotation"
   ],
-  "initial_red": "missing contracts module import, NOT a killed mutation; separate four semantic mutations establish guard sensitivity",
-  "evaluation_source_sha256": "bfd82360d0b635bbf7f5da3ae529849e2f1347d9db426e1dba8ae151e19e4f34",
-  "replay": "results/replay-p2.json"
+  "initial_red": "missing contracts module import, NOT a killed mutation; separate four semantic mutations establish guard sensitivity"
 }

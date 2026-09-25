@@ -1,0 +1,178 @@
+{
+  "status": "PASS",
+  "base_commit": "853070587194e252ff1a8d23bfb1c817ece402fe",
+  "scope": "P2 dev geometry correction only; no training and no acceptance/protocol change",
+  "evaluation_source_sha256": "bfd82360d0b635bbf7f5da3ae529849e2f1347d9db426e1dba8ae151e19e4f34",
+  "protocol_sha256": "1f79153545a415d90f599b0c513e4f17602e497ef07ce76a571eccd662f12b4a",
+  "inherited_exposure": "release whitening was fit on all train_fit including historical dev100; dev is not untouched",
+  "frozen_training_artifacts": {
+    "artifacts/run/main.npz": {
+      "sha256": "8e80d2ad34b75d4cd98fee17d6e091f3ce3b7a5ada7b81b2d46ee746f6b3213f",
+      "unchanged": true
+    },
+    "artifacts/run/ablation.npz": {
+      "sha256": "5b94d6eb8614e3c7c9be379aec22dd9704fa2ba68bccad793cc8a6f444f59f95",
+      "unchanged": true
+    },
+    "artifacts/run/teacher_fit_only.npz": {
+      "sha256": "43a9eea77c9eed5e5d2ba678dd0ba31abdbfab39e66d865f9c2a2c9fcae90364",
+      "unchanged": true
+    },
+    "artifacts/run/training.json": {
+      "sha256": "96524e69de52e6cf1c06e3aab70b28dcdc16bf7755e44d68c08d368ad64fcec9",
+      "unchanged": true
+    },
+    "artifacts/run/export/head.onnx": {
+      "sha256": "b547c8bfb79a0df84f8623fd45d736b4a80386f573c6b59b646f6faf70ef4dca",
+      "unchanged": true
+    },
+    "artifacts/run/export/student_combined_v1.onnx": {
+      "sha256": "188284ff7a56ff915ea6143cca62dca0a381e3ca7fc784b996b876b641ad3d06",
+      "unchanged": true
+    },
+    "artifacts/run/benchmark.json": {
+      "sha256": "75ce94076e86aea020cf5e29750d462b7195c1616c159b6c49c49b3e244be251",
+      "unchanged": true
+    }
+  },
+  "ranking_and_bootstrap_unchanged": true,
+  "fusion_weight_before": 0.25,
+  "fusion_weight_after": 0.25,
+  "changed_metrics": {
+    "baseline cosine": {
+      "F1": {
+        "before": 0.8617801047120419,
+        "after": 0.8613291470434328
+      },
+      "TNR": {
+        "before": 0.08273381294964029,
+        "after": 0.07913669064748201
+      },
+      "threshold": {
+        "before": 0.30911772166031704,
+        "after": 0.3079063575102238
+      }
+    },
+    "baseline KR": {
+      "F1": {
+        "before": 0.8663426488456865,
+        "after": 0.8420382165605096
+      },
+      "TNR": {
+        "before": 0.6366906474820144,
+        "after": 0.7230215827338129
+      },
+      "threshold": {
+        "before": 0.32501522059804344,
+        "after": 0.4104045645873857
+      }
+    },
+    "fusion cosine": {
+      "F1": {
+        "before": 0.8604166666666667,
+        "after": 0.8607329842931937
+      },
+      "TNR": {
+        "before": 0.05755395683453238,
+        "after": 0.07913669064748201
+      },
+      "threshold": {
+        "before": 0.30021617414774765,
+        "after": 0.3126843407695431
+      }
+    },
+    "fusion KR": {
+      "F1": {
+        "before": 0.8811188811188811,
+        "after": 0.8671076368009621
+      },
+      "TNR": {
+        "before": 0.539568345323741,
+        "after": 0.60431654676259
+      },
+      "threshold": {
+        "before": 0.280807328020658,
+        "after": 0.32242858171568356
+      }
+    }
+  },
+  "remote_original": "worker-vm:~/lct-reid/jobs/distill_20260925/results/",
+  "remote_replay": "worker-vm:~/lct-reid/jobs/distill_20260925/results-replay-p2/",
+  "commands": [
+    {
+      "host": "local",
+      "command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python3 -m unittest test_contracts test_selection -v",
+      "exit_code": 0,
+      "log": "logs/selection-green.txt"
+    },
+    {
+      "host": "local",
+      "command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python3 verify_selection_mutation.py",
+      "exit_code": 0,
+      "log": "logs/selection-mutation.txt"
+    },
+    {
+      "host": "worker-vm",
+      "cwd": "~/lct-reid/jobs/distill_20260925",
+      "command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 python3 code-replay-p2/experiment.py evaluate --repo repo --out results-replay-p2",
+      "exit_code": 0,
+      "log": "logs/evaluate-replay-p2.txt"
+    },
+    {
+      "host": "worker-vm",
+      "cwd": "~/lct-reid/jobs/distill_20260925",
+      "command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 systemd-run --user --scope -p MemoryMax=2G -p CPUQuota=200% nice -n 10 python3 code-replay-p2/verify_export.py --repo repo --out results-replay-p2",
+      "exit_code": 0,
+      "log": "logs/export-ranking-replay-p2.txt"
+    }
+  ],
+  "checks": [
+    {
+      "check": "contracts including dev release geometry",
+      "exit_code": 0,
+      "cases": 6,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/selection-green.txt"
+    },
+    {
+      "check": "dev teacher whitening mutation",
+      "exit_code": 0,
+      "cases": 1,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/selection-mutation.json"
+    },
+    {
+      "check": "quality evaluation replay",
+      "exit_code": 0,
+      "cases": 8,
+      "failed": 0,
+      "skipped": 0,
+      "log": "logs/evaluate-replay-p2.txt"
+    },
+    {
+      "check": "ONNX ranking/refusal replay",
+      "exit_code": 0,
+      "cases": 2220,
+      "failed": 0,
+      "skipped": 0,
+      "log": "results/export_ranking_check.json"
+    }
+  ],
+  "not_run": [
+    "training: unchanged checkpoint",
+    "benchmark: unchanged weight0.25 and descriptor graph",
+    "canonical evaluator suite: unchanged evaluator, previous60 PASS"
+  ],
+  "elapsed_seconds": "NOT MEASURED for replay; timing results in benchmark.json remain unchanged",
+  "toolchain": {
+    "local_python": "3.13.13",
+    "worker_python": "3.14.3",
+    "worker_numpy": "2.4.6",
+    "runtime": "same existing interpreter as original evaluation; environment.json",
+    "local_numpy": "2.2.6",
+    "version_command": "python3 -c \"import sys,numpy; print(sys.version); print(numpy.__version__)\" (local and worker-vm, both exit0)"
+  },
+  "independent_review": "PENDING"
+}

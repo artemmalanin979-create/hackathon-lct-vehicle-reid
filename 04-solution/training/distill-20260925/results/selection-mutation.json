@@ -1,0 +1,13 @@
+{
+  "baseline_before_exit": 0,
+  "baseline_after_exit": 0,
+  "tests_per_baseline": 1,
+  "baseline_sha256": "bfd82360d0b635bbf7f5da3ae529849e2f1347d9db426e1dba8ae151e19e4f34",
+  "original_hash_unchanged": true,
+  "mutation": {
+    "status": "KILLED",
+    "diff": "--- release-geometry\n+++ wrong-teacher-geometry\n@@ -315,7 +315,7 @@\n     # evaluation. Fit-only whitening belongs to student training, not baseline.\n     # Release whitening historically saw dev100; this is inherited exposure,\n     # disclosed in selection.json, and does not make dev an untouched holdout.\n-    release_lw = dict(np.load(files[\"whitening_release\"], allow_pickle=False))\n+    release_lw = dict(np.load(out / \"teacher_fit_only.npz\", allow_pickle=False))\n     dev_base = apply_whitening(l2(v[\"A_train_fit\"] + v[\"B_train_fit\"]), release_lw)\n     main = dict(np.load(out / \"main.npz\", allow_pickle=False))\n     ablation = dict(np.load(out / \"ablation.npz\", allow_pickle=False))\n",
+    "exit_code": 1,
+    "output": "test_dev_baseline_scores_use_release_whitening (test_selection.SelectionGeometry.test_dev_baseline_scores_use_release_whitening) ... FAIL\n\n======================================================================\nFAIL: test_dev_baseline_scores_use_release_whitening (test_selection.SelectionGeometry.test_dev_baseline_scores_use_release_whitening)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/lct-selection-mutation-1gez2b56/test_selection.py\", line 45, in test_dev_baseline_scores_use_release_whitening\n    self.assertAlmostEqual(float(captured[0][0, 0]), 2 / np.sqrt(5), places=6)\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0.7071067690849304 != np.float64(0.8944271909999159) within 6 places (np.float64(0.18732042191498544) difference)\n\n----------------------------------------------------------------------\nRan 1 test in 0.011s\n\nFAILED (failures=1)\n"
+  }
+}

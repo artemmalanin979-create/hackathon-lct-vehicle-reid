@@ -3,29 +3,29 @@
   "dev_grid": [
     {
       "weight": 0.25,
-      "mAP": 0.8138680770808479
+      "mAP": 0.846321790267754
     },
     {
       "weight": 0.5,
-      "mAP": 0.8127772232549961
+      "mAP": 0.8328059057445347
     },
     {
       "weight": 0.75,
-      "mAP": 0.8078374369793638
+      "mAP": 0.8193260367110669
     }
   ],
   "thresholds": {
     "baseline": {
-      "cosine": 0.30911772166031704,
-      "KR": 0.32501522059804344
+      "cosine": 0.3079063575102238,
+      "KR": 0.4104045645873857
     },
     "student": {
       "cosine": 0.3375437389386462,
       "KR": 0.30894765047628814
     },
     "fusion": {
-      "cosine": 0.30021617414774765,
-      "KR": 0.280807328020658
+      "cosine": 0.3126843407695431,
+      "KR": 0.32242858171568356
     },
     "ablation": {
       "cosine": 0.31430358621876314,
@@ -34,5 +34,13 @@
   },
   "dev_query": 427,
   "dev_gallery": 182,
-  "selected_before_external_evaluation": true
+  "selected_before_external_evaluation": true,
+  "baseline_whitening": {
+    "role": "canonical release baseline for both dev and evaluation",
+    "sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+    "historical_dev_exposure": "release whitening was learned on all train_fit, including dev100; dev is not untouched"
+  },
+  "selection_labels": "historical dev only; no external evaluation labels",
+  "protocol_sha256": "1f79153545a415d90f599b0c513e4f17602e497ef07ce76a571eccd662f12b4a",
+  "evaluation_source_sha256": "bfd82360d0b635bbf7f5da3ae529849e2f1347d9db426e1dba8ae151e19e4f34"
 }

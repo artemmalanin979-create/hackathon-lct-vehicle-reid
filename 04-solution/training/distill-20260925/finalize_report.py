@@ -43,12 +43,20 @@ def main():
               "clock_note":"worker wall clock lags workstation by about2.6h; protocol/code hashes and sequential orchestration/monotonic durations establish provenance, not mtimes",
               "not_run":["release integration","public deployment","full CNN retraining","fresh untouched holdout evaluation","end-to-end API latency","independent visual view annotation"],
               "initial_red":"missing contracts module import, NOT a killed mutation; separate four semantic mutations establish guard sensitivity"}
+    replay_path = evidence / "replay-p2.json"
+    replay = json.loads(replay_path.read_text()) if replay_path.exists() else None
+    if replay:
+        manifest["evaluation_source_sha256"] = sel["evaluation_source_sha256"]
+        manifest["replay"] = "results/replay-p2.json"
+        manifest["records"] = [r for r in manifest["records"] if r["check"] not in ["quality evaluation", "ONNX ranking/refusal"]]
+        manifest["records"].extend(replay["checks"])
     (evidence/"verification_manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
     lines=["# Дистилляция d1_j48: прототип обучен, в релиз не принят", "",
            "Student и fusion не прошли заранее объявленный критерий качества. Сдаваемой остаётся **d1_j48**; release-код, модели, пороги и gallery не менялись.","",
            "## Что реально выполнено", "",
            f"Замороженная combined_v1 + residual MLP512→256→512; один seed20260925, main30 эпох и одна ablation30 без relational-loss. Обучение заняло {env['total_seconds']:.1f}с, peakRSS {env['peak_rss_mib']:.1f}MiB. Main выбран на эпохе{training['main']['best_epoch']} по dev embedding loss, ablation на эпохе{training['ablation']['best_epoch']}. Внешний validation не участвовал в выборе.","",
            f"Fit6639 кадров/1071ID; исторический dev100 —609 кадров. Refusal dev: {sel['dev_query']} query ×{sel['dev_gallery']} gallery,25 ID без gallery-пары. Teacher whitening обучен только на fit. Fusion: вес student{sel['fusion_student_weight']}, выбран на dev; размерность1024 — исключительно исследовательский формат.","",
+           "Dev baseline/fusion используют тот же канонический release whitening, что и итоговая оценка. Он исторически обучен на всех train_fit, включая dev100: унаследованная экспозиция раскрыта, dev **не untouched**. Fit-only teacher применяется только для обучения student; его checkpoint не менялся.", "",
            "## Качество на многократно использованном validation", "",
            "1110query×750gallery,832 query с межкамерной парой. Market/presence, full-gallery AP, KR(6,3,0.3). F1/TNR ниже используют отдельные **dev-пороги**, в том числе для baseline; официальные релизные пороги показаны отдельно.","",
            "| Модель | Режим | mAP | Rank-1 | Rank-5 | mINP | F1 dev-порог | TNR dev-порог | Camera gap mAP |", "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
@@ -65,7 +73,7 @@ def main():
     for mode in ["cosine","KR"]:
         z=ev["metrics"]["baseline"][mode]["official_threshold_result"]
         lines.append(f"| {mode} | {z['threshold']:.16f} | {z['F1']:.6f} | {z['TNR']:.6f} |")
-    lines.extend(["", "Максимизация F1 на маленьком dev дала слабый перенос отказа на cosine: TNR низкий. Эти экспериментальные пороги не пригодны для переноса в сервис. После просмотра validation пороги не менялись.","",
+    lines.extend(["", "Максимизация F1 на маленьком dev дала слабый перенос отказа на cosine: TNR низкий. Эти экспериментальные пороги не пригодны для переноса в сервис. Пороги вычислены только по историческому dev. Replay после независимой критики исправляет геометрию baseline, не подбирает пороги по внешнему validation; внешние метки не используются в selection.","",
                   "## Неопределённость и ошибки","","Парный bootstrap4000 по vehicle_id, seed20260925; обычные CI95 и Holm по четырём сравнениям student/fusion×cosine/KR. Абляция описательная; выигрышный seed не выбирался.","",
                   "| Сравнение с d1 | Режим | ΔmAP | CI95 | p Holm | Исправлено / испорчено top-1 |","|---|---|---:|---|---:|---:|"])
     for name in ["student","fusion","ablation"]:
@@ -81,7 +89,7 @@ def main():
     lines.extend(["", f"Ускорение student по p95:{speed:.1%}; overhead fusion:{overhead:+.1%}. Даже выигрыш скорости не разрешает потерю качества: критерий student — lowerCI≥0 и pointΔ≥0 в обеих метриках. Он не выполнен. Fusion также не достигΔmAP≥0.005/lowerCI>0. VRAM — неприменимо(CPU); размер индекса — только raw векторы, без накладных расходов Qdrant. PeakRSS по модели измерен в отдельном холодном процессе, не является отдельным продолжительным нагрузочным тестом.","",
                   "## Экспорт, проверки и артефакты", "",
                   f"Head ONNX на1860 признаках: maxabs {ex['max_abs']:.3g}. Полный image→student ONNX на40 реальных cached-crop входах: maxabs {bench['image_export_max_abs_vs_cached_torch_head']:.3g}. Cosine/KR:0 изменений top-1 и0 изменений отказа на1110query каждого режима; mAP совпал. [Проверка](results/export_ranking_check.json).",
-                  "", "5 новых behavioral tests PASS;4/4 содержательных guard-removal mutations убиты в одноразовых копиях; исходный hash неизменён;60 штатных тестов evaluator PASS. Первоначальный RED был отсутствующим модулем, он **не считается** убитой мутацией. [Полный manifest](results/verification_manifest.json).", "",
+                  "", "Исходные5 behavioral tests и новый тест dev/release-геометрии PASS (6/6); исходные4 guard-removal mutations и воспроизведение P2 в одноразовой копии убиты (5/5); исходные hashes неизменны. 60 штатных тестов evaluator PASS на исходном запуске; evaluator не менялся. Первоначальный RED был отсутствующим модулем, он **не считается** убитой мутацией. [Полный manifest](results/verification_manifest.json).", "",
                   "| Артефакт | SHA-256 |", "|---|---|"])
     for relative in ["artifacts/run/main.npz","artifacts/run/export/head.onnx","artifacts/run/export/student_combined_v1.onnx"]:
         lines.append(f"| `{relative}` | `{artifacts[relative]['sha256']}` |")
@@ -105,6 +113,12 @@ def main():
                   "Worker clock отстаёт от workstation примерно на2.6ч. Связь результатов подтверждается protocol/source SHA и monotonic durations; mtime не используется как доказательство порядка. Код обучения: `53f7261`, baseline:`8e7a205`, frozen protocol:`e1557af`.","",
                   "Вывод ограничен данным рецептом и бюджетом: он не доказывает невозможности дистилляции вообще. Дополнительных обучений после отрицательной оценки не запускалось.","",
                   "Независимая приёмка: **PENDING**. Следующее действие — критик проверяет diff, входы, канонический baseline и отрицательный вывод; после приёмки интегрируются исходники и отчёт, default d1_j48 остаётся."])
+    if replay:
+        lines.extend(["", "## Исправление независимого замечания P2: dev whitening", "",
+            "Прежние selection/evaluation, таблица и отчёт сохранены как **SUPERSEDED** в `results/superseded-dev-teacher-whitening/`. В них dev baseline ошибочно использовал fit-only teacher whitening, тогда как evaluation использовал release whitening.", "",
+            "Исправление применяет release whitening и к dev baseline/fusion. Перевыбраны вес fusion и отдельные cosine/KR-пороги только на dev. Вес остался0.25, поэтому ranking, mAP, доверительные интервалы и отрицательное решение не изменились. Изменились dev-пороги и их внешние F1/TNR для baseline/fusion. Teacher, оба checkpoint, ONNX и frozen protocol/acceptance проверены по исходным хешам и неизменны. Нового обучения не было.", "",
+            "Release whitening ранее видел dev100 — это ограничивает независимость dev-результата и явно сохранено в selection metadata. Повторная оценка не становится новой untouched-проверкой. Команды, hashes, exit codes и проверки replay: [replay-p2.json](results/replay-p2.json). Benchmark не повторён: вес fusion и вычисления остались прежними.", "",
+            "Удалённый первоначальный запуск сохранён в `worker-vm:~/lct-reid/jobs/distill_20260925/results/`; исправленная оценка — в `results-replay-p2/`, её код — в `code-replay-p2/`. Локальный `artifacts/run/` содержит актуальную исправленную selection/evaluation."])
     text="\n".join(lines)+"\n"
     # This exact note is assigned to this task; source is edited first.
     a.note.write_text(text)

@@ -1,0 +1,16 @@
+{
+  "status": "SUPERSEDED",
+  "source_commit": "853070587194e252ff1a8d23bfb1c817ece402fe",
+  "reason": "dev baseline/fusion used fit-only teacher whitening, while evaluated baseline/fusion used release whitening; replay corrects selection and calibration only",
+  "sha256": {
+    "selection.json": "cff2ebd3e608e96e58465697d6c96d8237001246a26255357203e7b2127b5ee4",
+    "evaluation.json": "42fafa83376fc10319e23cb0fe040d8faee772fd1886dafd93f024d9cf79ac3c",
+    "decision.json": "fe00a026a7851e61b0549a6cea408913a0787ec1169433918dcf2f344355a573",
+    "metrics.csv": "d0c39863662ab2c08c70c57c6b26db4c2c27f31e6ab1dfd53bcc01e3ce730392",
+    "verification_manifest.json": "bd315a1e2dc2f773e0c3c22a2def6726d5d0c0be4feec9a99c323916f5b1652c",
+    "local_artifact_manifest.json": "4ad956f6130030a0b5e2a1419b2f5345bae49d5d6402cf00bcff08401df3943d",
+    "README.md": "5d195bbd803d56f8b286cbebbff5357ffd86261237a450c6437808f23835d899",
+    "evaluate.txt": "7c844c7c0076ddc98aaa9fa85c0ba1cb806227c7da25eca2282318f1d85d0e00",
+    "experiment.py.txt": "3aceba697d40c72a759a3e964143f785dad49bebbec895930cce371dcccde3fe"
+  }
+}

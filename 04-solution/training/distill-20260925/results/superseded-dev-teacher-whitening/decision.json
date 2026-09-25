@@ -1,0 +1,13 @@
+{
+  "student_quality_pass": false,
+  "student_p95_speedup": 0.2696485993448402,
+  "student_speed_pass": true,
+  "fusion_quality_pass": false,
+  "fusion_p95_overhead": 0.2776538199804932,
+  "fusion_speed_pass": false,
+  "student_promoted": false,
+  "fusion_promoted": false,
+  "release": "d1_j48 unchanged",
+  "reason": "both trained student and fusion fail frozen quality gates",
+  "independent_review": "PENDING"
+}

@@ -1,0 +1,2 @@
+Running as unit: run-p708592-i708593.scope; invocation ID: 4e919493073348e58620e0eafaa37057
+{"max_abs": 1.6391277313232422e-07, "rows": 1860, "modes": {"cosine": {"top1_mismatches": 0, "refusal_mismatches": 0, "mAP_abs_delta": 0.0, "queries": 1110}, "KR": {"top1_mismatches": 0, "refusal_mismatches": 0, "mAP_abs_delta": 0.0, "queries": 1110}}, "status": "PASS"}

@@ -1,0 +1,38 @@
+{
+  "fusion_student_weight": 0.25,
+  "dev_grid": [
+    {
+      "weight": 0.25,
+      "mAP": 0.8138680770808479
+    },
+    {
+      "weight": 0.5,
+      "mAP": 0.8127772232549961
+    },
+    {
+      "weight": 0.75,
+      "mAP": 0.8078374369793638
+    }
+  ],
+  "thresholds": {
+    "baseline": {
+      "cosine": 0.30911772166031704,
+      "KR": 0.32501522059804344
+    },
+    "student": {
+      "cosine": 0.3375437389386462,
+      "KR": 0.30894765047628814
+    },
+    "fusion": {
+      "cosine": 0.30021617414774765,
+      "KR": 0.280807328020658
+    },
+    "ablation": {
+      "cosine": 0.31430358621876314,
+      "KR": 0.29395605445014517
+    }
+  },
+  "dev_query": 427,
+  "dev_gallery": 182,
+  "selected_before_external_evaluation": true
+}

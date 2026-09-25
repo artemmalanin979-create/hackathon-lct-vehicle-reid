@@ -1,0 +1,15 @@
+test_dev_baseline_scores_use_release_whitening (test_selection.SelectionGeometry.test_dev_baseline_scores_use_release_whitening) ... FAIL
+
+======================================================================
+FAIL: test_dev_baseline_scores_use_release_whitening (test_selection.SelectionGeometry.test_dev_baseline_scores_use_release_whitening)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/artem/projects/lct-ml-20260925/04-solution/training/distill-20260925/test_selection.py", line 45, in test_dev_baseline_scores_use_release_whitening
+    self.assertAlmostEqual(float(captured[0][0, 0]), 2 / np.sqrt(5), places=6)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.7071067690849304 != np.float64(0.8944271909999159) within 6 places (np.float64(0.18732042191498544) difference)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.012s
+
+FAILED (failures=1)

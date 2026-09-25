@@ -44,12 +44,12 @@
     "bytes": 472
   },
   "artifacts/run/selection.json": {
-    "sha256": "da8e3c12668ccbf0f1487e0030a73c898528f1e5b2e16e664021b76355f13fcb",
-    "bytes": 1301
+    "sha256": "cff2ebd3e608e96e58465697d6c96d8237001246a26255357203e7b2127b5ee4",
+    "bytes": 737
   },
   "artifacts/run/evaluation.json": {
-    "sha256": "f73802ba1736c21c2861efb91d9c71eb5096a96d5403e4c2d0a90f8f02fda91a",
-    "bytes": 105592
+    "sha256": "42fafa83376fc10319e23cb0fe040d8faee772fd1886dafd93f024d9cf79ac3c",
+    "bytes": 105594
   },
   "artifacts/run/export_validation.npz": {
     "sha256": "c764c2123f8c9c9ce688c875bee5f3b5ba0fc71f406881fc2ec1c847d3b9fddf",

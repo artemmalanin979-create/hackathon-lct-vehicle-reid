@@ -311,12 +311,8 @@ def paired_bootstrap(a, b, ids):
 def evaluate_run(args, protocol, files, data):
     v, meta, vids, cams, fit, dev, dq, dg, dqm, dgm = data
     out = args.out
-    # Calibrate the actual released baseline geometry used below for external
-    # evaluation. Fit-only whitening belongs to student training, not baseline.
-    # Release whitening historically saw dev100; this is inherited exposure,
-    # disclosed in selection.json, and does not make dev an untouched holdout.
-    release_lw = dict(np.load(files["whitening_release"], allow_pickle=False))
-    dev_base = apply_whitening(l2(v["A_train_fit"] + v["B_train_fit"]), release_lw)
+    lw = dict(np.load(out / "teacher_fit_only.npz", allow_pickle=False))
+    dev_base = apply_whitening(l2(v["A_train_fit"] + v["B_train_fit"]), lw)
     main = dict(np.load(out / "main.npz", allow_pickle=False))
     ablation = dict(np.load(out / "ablation.npz", allow_pickle=False))
     ds = head_numpy(v["B_train_fit"], main)
@@ -328,18 +324,14 @@ def evaluate_run(args, protocol, files, data):
     devs = {"baseline": dev_base, "student": ds, "fusion": fuse(dev_base, ds, weight), "ablation": head_numpy(v["B_train_fit"], ablation)}
     thresholds = {name: {mode: calibrate(scores(x[dq], x[dg], mode), dqm, dgm) for mode in ["cosine", "KR"]} for name, x in devs.items()}
     dump(out / "selection.json", {"fusion_student_weight": weight, "dev_grid": [{"weight": -w, "mAP": m} for m,w in weights],
-                                  "thresholds": thresholds, "dev_query": len(dq), "dev_gallery": len(dg), "selected_before_external_evaluation": True,
-                                  "baseline_whitening": {"role": "canonical release baseline for both dev and evaluation",
-                                      "sha256": sha(files["whitening_release"]),
-                                      "historical_dev_exposure": "release whitening was learned on all train_fit, including dev100; dev is not untouched"},
-                                  "selection_labels": "historical dev only; no external evaluation labels",
-                                  "protocol_sha256": sha(HERE / "protocol.json"), "evaluation_source_sha256": sha(__file__)})
+                                  "thresholds": thresholds, "dev_query": len(dq), "dev_gallery": len(dg), "selected_before_external_evaluation": True})
     # Canonical release vectors and row count are frozen independently; compare
     # reconstruction too, so shuffled source rows cannot hide behind dimensions.
     canonical = np.load(files["canonical_embeddings"], allow_pickle=False)
     qn = len(meta["val_query"])
     if canonical.shape != (qn+len(meta["val_gallery"]), 512):
         raise ValueError("canonical shape")
+    release_lw = dict(np.load(files["whitening_release"], allow_pickle=False))
     raw_ens = l2(np.concatenate([v["A_val_query"]+v["B_val_query"], v["A_val_gallery"]+v["B_val_gallery"]]))
     reconstruction = l2((raw_ens - release_lw["m"]) @ release_lw["P"].T)
     max_delta = float(np.max(np.abs(canonical-reconstruction)))
