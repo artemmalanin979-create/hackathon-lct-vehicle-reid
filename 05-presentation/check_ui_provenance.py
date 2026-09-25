@@ -34,6 +34,15 @@ def check(repo: Path, provenance: Path) -> dict:
             "capture_source_git_sha": recorded["source_git_sha"], "items": items}
 
 
+def require_current_capture(repo: Path, provenance: Path) -> None:
+    """Stop ordinary deck build/validation before an old UI can be delivered."""
+    report = check(repo, provenance)
+    if report["status"] != "PASS":
+        changed = ", ".join(item["path"] for item in report["items"] if not item["match"])
+        raise RuntimeError(f"Presentation UI screenshot is STALE: {changed}. "
+                           "Capture the current service through the real API and update provenance.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     root = Path(__file__).resolve().parent

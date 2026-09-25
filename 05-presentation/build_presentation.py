@@ -20,6 +20,8 @@ from pptx.oxml.xmlchemy import OxmlElement
 from pptx.opc.packuri import PackURI
 from pptx.util import Inches, Pt
 
+from check_ui_provenance import require_current_capture
+
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
@@ -30,6 +32,7 @@ SLIDES = ROOT / 'slides.md'
 OUTPUT = ROOT / 'ЛЦТ2026-задача7-ПРОСВЕТ.pptx'
 FONTDIR = Path('/usr/share/fonts/julietaula-montserrat-fonts')
 CHECKS = ROOT / 'checks'
+require_current_capture(REPO, ROOT / 'assets/ui-provenance.json')
 CHECKS.mkdir(exist_ok=True)
 FIT = []
 MEDIA = []

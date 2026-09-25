@@ -8,7 +8,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from check_ui_provenance import check
+from check_ui_provenance import check, require_current_capture
 
 
 class UiProvenanceTest(unittest.TestCase):
@@ -38,6 +38,7 @@ class UiProvenanceTest(unittest.TestCase):
                 "source_git_sha": "capture-commit",
             }), encoding="utf-8")
             self.assertEqual(check(repo, provenance)["status"], "PASS")
+            require_current_capture(repo, provenance)
 
             script = repo / "04-solution/service/app/static/app.js"
             script.write_bytes(b"performSearchWithChangedState()")
@@ -45,6 +46,8 @@ class UiProvenanceTest(unittest.TestCase):
             self.assertEqual(report["status"], "STALE")
             changed = [item["path"] for item in report["items"] if not item["match"]]
             self.assertEqual(changed, ["04-solution/service/app/static/app.js"])
+            with self.assertRaisesRegex(RuntimeError, "app.js"):
+                require_current_capture(repo, provenance)
 
 
 if __name__ == "__main__":

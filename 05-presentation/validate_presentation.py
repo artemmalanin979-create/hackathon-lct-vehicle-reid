@@ -14,6 +14,8 @@ import shutil
 import subprocess
 import tempfile
 
+from check_ui_provenance import require_current_capture
+
 
 def render_check(preview, output_dir=None, sensitive_pages=()):
     """Render every page and detect missing/clipped editable text.
@@ -73,6 +75,7 @@ SOURCE = REPO / '00-task/assets/ЛЦТ2026 Шаблон презентации.p
 OUTPUT = ROOT / 'ЛЦТ2026-задача7-ПРОСВЕТ.pptx'
 TEAM = ROOT / 'team-data.md'
 CHECKS = ROOT / 'checks'
+require_current_capture(REPO, ROOT / 'assets/ui-provenance.json')
 prs = Presentation(OUTPUT)
 template = Presentation(SOURCE)
 assert len(prs.slides) == 16
