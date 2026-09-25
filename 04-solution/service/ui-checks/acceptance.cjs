@@ -56,6 +56,8 @@ try{
   await page.mouse.move(box.x+box.width*.2,box.y+box.height*.2);await page.mouse.down();await page.mouse.move(box.x+box.width*.6,box.y+box.height*.6,{steps:8});await page.mouse.up();
   assert(Math.abs(Number(await page.locator('#bx').inputValue())-384)<=2,'bbox X respects the rendered scale at 200%');
   assert(Math.abs(Number(await page.locator('#bw').inputValue())-768)<=2,'bbox width respects the rendered scale at 200%');
+  assert(Math.abs(Number(await page.locator('#by').inputValue())-216)<=2,'bbox Y respects the rendered scale at 200%');
+  assert(Math.abs(Number(await page.locator('#bh').inputValue())-432)<=2,'bbox height respects the rendered scale at 200%');
 
   await page.locator('#run').click();await page.waitForFunction(()=>!document.querySelector('#export').hidden);await noOverflow(page);await shot(page,'200percent-result');
  });
