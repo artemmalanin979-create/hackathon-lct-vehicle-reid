@@ -83,12 +83,20 @@ def aggregate(own: dict, combined: dict) -> dict:
             "warning": "Local p_Holm_four_tests inside each evaluation.json is not family-wide."}
 
 
+def require_protocol(report: dict, expected_sha256: str, attempt: str) -> None:
+    actual = report.get("inputs", {}).get("protocol_sha256")
+    if actual != expected_sha256:
+        raise ValueError(f"{attempt} evaluation protocol SHA-256 mismatch")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--own-evaluation", type=Path, required=True)
     parser.add_argument("--own-sha256", required=True)
     parser.add_argument("--combined-evaluation", type=Path, required=True)
     parser.add_argument("--combined-sha256", required=True)
+    parser.add_argument("--own-protocol-sha256", required=True)
+    parser.add_argument("--combined-protocol-sha256", required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     if args.out.exists():
@@ -99,9 +107,13 @@ def main() -> None:
             raise ValueError(f"{name} evaluation SHA-256 mismatch")
     own = json.loads(args.own_evaluation.read_text(encoding="utf-8"))
     combined = json.loads(args.combined_evaluation.read_text(encoding="utf-8"))
+    require_protocol(own, args.own_protocol_sha256, "own")
+    require_protocol(combined, args.combined_protocol_sha256, "combined")
     result = aggregate(own, combined)
     result["inputs"] = {"own_evaluation_sha256": args.own_sha256,
-                        "combined_evaluation_sha256": args.combined_sha256}
+                        "combined_evaluation_sha256": args.combined_sha256,
+                        "own_protocol_sha256": args.own_protocol_sha256,
+                        "combined_protocol_sha256": args.combined_protocol_sha256}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
                         encoding="utf-8")

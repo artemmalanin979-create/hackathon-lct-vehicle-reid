@@ -2,7 +2,7 @@
 import copy
 import unittest
 
-from aggregate import aggregate, holm
+from aggregate import aggregate, holm, require_protocol
 
 
 def report(raw_p: list[float], deltas: list[float]) -> dict:
@@ -53,6 +53,13 @@ class AggregateContracts(unittest.TestCase):
         changed["metrics"]["core"]["KR"]["paired_vs_baseline"]["queries"] = 831
         with self.assertRaisesRegex(ValueError, "population changed"):
             aggregate(own, changed)
+
+    def test_rejects_stale_protocol_before_aggregation(self):
+        candidate = report([0.1] * 4, [0.1] * 4)
+        candidate["inputs"] = {"protocol_sha256": "correct"}
+        require_protocol(candidate, "correct", "own")
+        with self.assertRaisesRegex(ValueError, "protocol SHA-256 mismatch"):
+            require_protocol(candidate, "stale", "own")
 
 
 if __name__ == "__main__":
