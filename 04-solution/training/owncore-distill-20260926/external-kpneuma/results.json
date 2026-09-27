@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "preflight": {
+    "status": "PASS",
+    "source_sha": "ed028e82702ee7d80904b5a49cd5cc5c23b5505c",
+    "checkpoint_sha256": "30d98c3f4b8c4a99421dc4feb4f835f8e467b00f306bbe78ba3ab5b8cfd51467",
+    "onnx_sha256": "4cb47b31cf2abf3eabb9fdf30f8de5bc4f06cfe2306670a01fe1bc9e95961df6",
+    "archive_sha256": "c55c90b1b2e87e86991d47e18a52ce39b7839f2a17a8142be90320a4b9821332",
+    "reference_results_sha256": "6ed7bb8d8f87daab1f9e08697fcefa8d8ec8ca3dcab22559ff5f2a59b4e2f0ab",
+    "query_count": 318,
+    "gallery_count": 318,
+    "unique_query_ids": 318,
+    "unique_gallery_ids": 318,
+    "valid_cross_vld": 318,
+    "same_vld_mates": 0,
+    "ordered_labels_sha256": "ea3a9489fb813ae57005604c2725d5279bfc0a8e42956265c45e4ee9eac12cde",
+    "code_sha256": {
+      "04-solution/service/app/core/preprocess.py": "4a6a203feb059d1626ab3a683dc505956e36c3280d746a96a0abd593238af686",
+      "04-solution/service/app/core/ranking.py": "92aebe6c65dd54b9375abbb56c26cafd4e6344c8ef5c27a638dde4d10c19c6b9",
+      "04-solution/service/app/core/rerank.py": "ac946451b2e2ae901e4597667b4b5bfe9a77d85d94caf2e369636cee876feb76",
+      "04-solution/eval/reid_metrics.py": "79fba7051bc1fd6e856230f6a256334196c7ae7f14767ad85175aaeabe37ffec",
+      "04-solution/eval/scope_metrics.py": "6dd489984a531ad2d07b58b1e963d61f015e5d4ee780187de90b424b71e463df",
+      "04-solution/eval/external-kpneuma-20260928/run.py": "138558c7c4bb711ead6ddad7b74bfa4f0dcfed40ab033181ec71592a7365490a"
+    },
+    "preprocess": "PIL RGB, full PNG bbox, bilinear 208x208, float32 NCHW 0..255"
+  },
+  "preflight_sha256": "b2302b8a23e7518f4f72f4361234bf9a58e7cd5f5c8e63d36c19a9c58ccc1359",
+  "protocol_sha256": "8b2e4edeb4dbf569d99ee21e8ae916584727c9a2e4bce2442678313f4fe6bbae",
+  "model": "combined CrossViewCore, one image encoder, no teacher at inference",
+  "ranking": {
+    "cosine": {
+      "mAP": 0.4449083315694242,
+      "Rank-1": 0.31446540880503143,
+      "Rank-5": 0.60062893081761,
+      "mINP": 0.4449083315694242,
+      "valid_queries": 318,
+      "mAP_bootstrap_95": [
+        0.400000667708449,
+        0.48708983241706044
+      ]
+    },
+    "rerank": {
+      "mAP": 0.40896960616144995,
+      "Rank-1": 0.2861635220125786,
+      "Rank-5": 0.5345911949685535,
+      "mINP": 0.40896960616144995,
+      "valid_queries": 318,
+      "mAP_bootstrap_95": [
+        0.3646783938883929,
+        0.4546006949318853
+      ]
+    }
+  },
+  "controls": {
+    "perfect_labels": {
+      "mAP": 1.0,
+      "Rank-1": 1.0,
+      "Rank-5": 1.0,
+      "mINP": 1.0,
+      "valid_queries": 318
+    },
+    "random_vectors": {
+      "mAP": 0.02580154388672231,
+      "Rank-1": 0.006289308176100629,
+      "Rank-5": 0.02830188679245283,
+      "mINP": 0.02580154388672231,
+      "valid_queries": 318
+    }
+  },
+  "rerank_minus_cosine": {
+    "mAP": -0.03593872540797434,
+    "mAP_bootstrap_95": [
+      -0.058270318213326816,
+      -0.01216384241884924
+    ]
+  },
+  "release_reference": {
+    "cosine_mAP": 0.49025602209387037,
+    "rerank_mAP": 0.4069622532115476,
+    "own_minus_release_cosine_mAP": -0.04534769052444615,
+    "own_minus_release_rerank_mAP": 0.0020073529499023413
+  },
+  "timing_seconds": {
+    "decode_resize_embed": 2.775165554998239,
+    "ranking_and_metrics": 0.2834679470033734
+  },
+  "runtime": {
+    "python": "3.13.13",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "onnxruntime": "1.30.0",
+    "cpu_count": 12,
+    "onnx_threads": 1,
+    "batch_size": 16
+  },
+  "limitations": "KPNEUMA virtual detectors from aerial video; not LCT closed test. No absent-identity cases; refusal F1/TNR not measured."
+}
