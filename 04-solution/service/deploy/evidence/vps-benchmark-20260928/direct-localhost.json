@@ -1,0 +1,187 @@
+{
+  "status": "PASS",
+  "timestamp_utc": "2026-09-27T22:31:59.954470+00:00",
+  "base": "http://127.0.0.1:18071",
+  "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "health": {
+    "http_status": 200,
+    "seconds": 0.03277352599980077,
+    "gallery_points": 750
+  },
+  "demo_http_status": 200,
+  "version_http_status": 200,
+  "version_model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
+  "version_sha256": {
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model2_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+  },
+  "inputs": [
+    {
+      "id": "street",
+      "sha256": "d721a626545ba5ca289afe8d7ef7feea9e410fb46ef312b90c4aec7acac09fda",
+      "size_bytes": 623890
+    },
+    {
+      "id": "edge",
+      "sha256": "5f2b719c33e96721c1ac79675911755c82291f01648a6f8cbfbd737abd9b15ef",
+      "size_bytes": 738936
+    }
+  ],
+  "warmup": 2,
+  "phases": {
+    "1": {
+      "concurrency": 1,
+      "count": 10,
+      "elapsed_s": 1.4192276289995789,
+      "throughput_rps": 7.046086051079103,
+      "p50_s": 0.14097905950075074,
+      "p95_nearest_rank_s": 0.14929490699978487,
+      "http_codes": {
+        "200": 10
+      },
+      "samples": [
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.13988538900048297,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.14929490699978487,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.14097273700099322,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.14174267099951976,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.14104345699888654,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.13972730099885666,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.14098538200050825,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.14180218599904038,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.1408257910006796,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.13990247900073882,
+          "refusal": true,
+          "candidates": 0
+        }
+      ]
+    },
+    "2": {
+      "concurrency": 2,
+      "count": 8,
+      "elapsed_s": 1.124001706000854,
+      "throughput_rps": 7.117426919629534,
+      "p50_s": 0.2809156230005101,
+      "p95_nearest_rank_s": 0.28236051900057646,
+      "http_codes": {
+        "200": 8
+      },
+      "samples": [
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.142850111998996,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.28236051900057646,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.28064909800013993,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.28166159600004903,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.28118214800088026,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.279729492000115,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.28119591099857644,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.2788482149990159,
+          "refusal": true,
+          "candidates": 0
+        }
+      ]
+    }
+  }
+}

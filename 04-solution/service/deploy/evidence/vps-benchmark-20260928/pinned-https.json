@@ -1,0 +1,188 @@
+{
+  "status": "PASS",
+  "timestamp_utc": "2026-09-27T22:35:13.713039+00:00",
+  "base": "https://iamcp.ru",
+  "pinned_ipv4": "84.201.146.191",
+  "host": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+  "python": "3.13.13",
+  "health": {
+    "http_status": 200,
+    "seconds": 0.23348041999997804,
+    "gallery_points": 750
+  },
+  "demo_http_status": 200,
+  "version_http_status": 200,
+  "version_model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
+  "version_sha256": {
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model2_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+  },
+  "inputs": [
+    {
+      "id": "street",
+      "sha256": "d721a626545ba5ca289afe8d7ef7feea9e410fb46ef312b90c4aec7acac09fda",
+      "size_bytes": 623890
+    },
+    {
+      "id": "edge",
+      "sha256": "5f2b719c33e96721c1ac79675911755c82291f01648a6f8cbfbd737abd9b15ef",
+      "size_bytes": 738936
+    }
+  ],
+  "warmup": 2,
+  "phases": {
+    "1": {
+      "concurrency": 1,
+      "count": 10,
+      "elapsed_s": 9.078763081000943,
+      "throughput_rps": 1.1014716333909982,
+      "p50_s": 0.833052943000439,
+      "p95_nearest_rank_s": 1.4223680190007144,
+      "http_codes": {
+        "200": 10
+      },
+      "samples": [
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.6718912400010595,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.8088850410003943,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 1.2380683840001439,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 1.2168653230000928,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.6731106249990262,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.5572686490013439,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.9429776909983048,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 1.4223680190007144,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.6853688549999788,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.8572208450004837,
+          "refusal": true,
+          "candidates": 0
+        }
+      ]
+    },
+    "2": {
+      "concurrency": 2,
+      "count": 8,
+      "elapsed_s": 3.3010452750004333,
+      "throughput_rps": 2.423474788602816,
+      "p50_s": 0.6960733989999426,
+      "p95_nearest_rank_s": 1.3618585100011842,
+      "http_codes": {
+        "200": 8
+      },
+      "samples": [
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 1.3618585100011842,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 1.2289818930003094,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.7298744399995485,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 1.1203818729991326,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.6622723580003367,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.3597046960003354,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "http_status": 200,
+          "seconds": 0.4294757509996998,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "http_status": 200,
+          "seconds": 0.4581003849998524,
+          "refusal": true,
+          "candidates": 0
+        }
+      ]
+    }
+  }
+}
