@@ -10,3 +10,8 @@ License: AdwaitaSans-LICENSE.md.
 
 No remote font requests are made by the application. Numbers use tabular
 figures; monospaced system fallbacks are only used for technical coordinates.
+
+NotoSerif-Italic.woff2: subset of Fedora google-noto-serif-vf font,
+generated only for the visible italic strings on this landing page.
+Original Noto Serif is licensed under Apache 2.0; see NotoSerif-LICENSE.txt.
+The subset remains local and does not request a remote font.

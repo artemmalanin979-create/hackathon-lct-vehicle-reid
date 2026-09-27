@@ -3,114 +3,131 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f6f7">
-  <meta name="description" content="Vehicle ReID — рабочий сервис, документация и презентация решения команды ПРОСВЕТ для ЛЦТ 2026, задача № 7.">
-  <title>Vehicle ReID · ЛЦТ 2026 · ПРОСВЕТ</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2317252e' d='M0 0h32v32H0z'/%3E%3Cpath stroke='%239dcddf' stroke-width='2' fill='none' d='M7 13V7h6m6 0h6v6M7 19v6h6m6 0h6v-6'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0b0e0d">
+  <meta name="description" content="ПРОСВЕТ: поиск автомобиля по визуальному признаку на снимках из разных локаций. Рабочий сервис и материалы решения ЛЦТ 2026, задача № 7.">
+  <title>ПРОСВЕТ · Поиск автомобиля по кадру · ЛЦТ 2026</title>
+  <link rel="icon" href="/assets/logo-prosvet.png" type="image/png">
+  <link rel="preload" href="/fonts/Montserrat-SemiBold.otf" as="font" type="font/otf" crossorigin>
   <link rel="stylesheet" href="/landing.css">
   <script src="/landing.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
+
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="brand" href="#top" aria-label="Vehicle ReID — наверх">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Vehicle <strong>ReID</strong></span>
+      <a class="brand" href="#top" aria-label="ПРОСВЕТ, на главную">
+        <span class="brand-mark"><img src="/assets/logo-prosvet.png" alt="" width="44" height="44"></span>
+        <span class="brand-name">ПРОСВЕТ<small>ЛЦТ 2026 / Задача 7</small></span>
       </a>
-      <nav class="site-nav" aria-label="Навигация">
-        <a href="#how">Как работает</a>
+      <nav class="site-nav" aria-label="Разделы страницы">
+        <a href="#story">Сценарий</a>
         <a href="#quality">Качество</a>
         <a href="#materials">Материалы</a>
       </nav>
-      <a class="header-action" href="https://demo.lct.iamcp.ru/">Открыть сервис <span aria-hidden="true">↗</span></a>
+      <a class="header-action" href="/workspace/">Открыть сервис <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero shell" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">ЛЦТ 2026 <span class="eyebrow-rule" aria-hidden="true"></span> Задача № 7 · Фалькон Тех</p>
-        <h1 id="hero-title">Один автомобиль.<br><span>Разные кадры.</span></h1>
-        <p class="hero-lead">Сервис сопоставляет машину по внешнему виду между снимками из разных локаций. Покажите кадр, выделите объект и проверьте найденные совпадения.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="https://demo.lct.iamcp.ru/">Попробовать на демо-кадре <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href="#how">Как это работает <span aria-hidden="true">↓</span></a>
-        </div>
-        <p class="hero-footnote">Команда «ПРОСВЕТ» · работающий прототип решения</p>
-      </div>
-
-      <figure class="hero-figure" aria-labelledby="frame-caption">
-        <div class="image-stage" id="image-stage">
-          <img id="demo-frame" src="https://demo.lct.iamcp.ru/api/demo/street/image" alt="Демонстрационный кадр: автомобиль на стоянке, вид сзади сбоку" width="1920" height="1080" fetchpriority="high">
-          <div class="object-box" aria-hidden="true"><span class="box-label">Объект запроса</span></div>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <figure class="hero-visual" aria-labelledby="hero-photo-caption">
+        <div class="hero-image" id="image-stage">
+          <img id="demo-frame" src="/api/demo/street/image" alt="Разрешённый демонстрационный кадр с автомобилем на стоянке" width="1920" height="1080" fetchpriority="high">
+          <span class="image-shade" aria-hidden="true"></span>
+          <span class="object-box" aria-hidden="true"><span class="box-label">Объект запроса</span></span>
           <div class="frame-fallback" id="frame-fallback" hidden>
-            <span class="fallback-mark" aria-hidden="true"></span>
-            <p>Демо-кадр временно недоступен.<br>Откройте сервис и загрузите свой снимок.</p>
+            <p>Демо-кадр сейчас недоступен. В сервисе можно загрузить свой снимок.</p>
           </div>
-          <span class="corner corner-tl" aria-hidden="true"></span>
-          <span class="corner corner-tr" aria-hidden="true"></span>
-          <span class="corner corner-bl" aria-hidden="true"></span>
-          <span class="corner corner-br" aria-hidden="true"></span>
         </div>
-        <figcaption id="frame-caption"><span>01 / Кадр запроса</span><span>Разрешённый пример · настоящий API</span></figcaption>
+        <figcaption id="hero-photo-caption"><span>Исходный кадр</span><span>Разрешённый пример · 1920 × 1080</span></figcaption>
       </figure>
-    </section>
-
-    <section class="intro-rule shell" aria-label="О решении">
-      <p>От кадра до сравнения — в одном рабочем пространстве.</p>
-      <span>Vehicle Re-identification / 2026</span>
-    </section>
-
-    <section class="how shell" id="how" aria-labelledby="how-title">
-      <div class="section-heading">
-        <p class="eyebrow">Рабочий сценарий</p>
-        <h2 id="how-title">Проверка без лишних шагов</h2>
-        <p>Демонстрационный кадр проходит тот же поиск, что и загруженное изображение.</p>
+      <div class="shell hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow">Команда ПРОСВЕТ <span aria-hidden="true">/</span> Vehicle Re-ID</p>
+          <h1 id="hero-title">Найти <em>ту же</em><br>машину.</h1>
+          <p class="hero-lead">Сопоставляем автомобиль по внешнему виду на снимках из разных локаций.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/workspace/">Начать поиск <span aria-hidden="true">↗</span></a>
+            <a class="subtle-link" href="#story">Как это работает</a>
+          </div>
+        </div>
+        <p class="hero-aside">Кадр <span aria-hidden="true">→</span> рамка <span aria-hidden="true">→</span> кандидаты</p>
       </div>
-      <ol class="steps">
-        <li><span class="step-number">01</span><h3>Выберите кадр</h3><p>Возьмите разрешённый пример в сервисе или загрузите свой JPEG/PNG.</p></li>
-        <li><span class="step-number">02</span><h3>Уточните автомобиль</h3><p>Выделите объект рамкой. Её можно поправить мышью, касанием или точными координатами.</p></li>
-        <li><span class="step-number">03</span><h3>Сравните выдачу</h3><p>Посмотрите кандидатов, оценку близости и пару кадров. При слабом совпадении сервис покажет отказ.</p></li>
-      </ol>
-      <a class="section-action" href="https://demo.lct.iamcp.ru/">Перейти к поиску <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <div class="section-rule shell" aria-hidden="true"><span>Визуальный поиск транспортных средств</span><span>01 / Рабочий сценарий</span></div>
+
+    <section class="story shell" id="story" aria-labelledby="story-title">
+      <div class="section-intro">
+        <p class="eyebrow">От запроса к результату</p>
+        <h2 id="story-title">Кадр становится<br><em>понятным ответом.</em></h2>
+        <p>Попробуйте готовый пример или загрузите свой кадр. Оба проходят один и тот же поиск.</p>
+      </div>
+      <div class="story-grid">
+        <ol class="story-steps">
+          <li><span class="step-index">01</span><div><h3>Выберите кадр</h3><p>Откройте разрешённый пример или загрузите JPEG/PNG.</p></div></li>
+          <li><span class="step-index">02</span><div><h3>Уточните автомобиль</h3><p>Обведите объект рамкой. Координаты можно задать точно.</p></div></li>
+          <li><span class="step-index">03</span><div><h3>Сравните кандидатов</h3><p>Откройте пару кадров и разбор. Слабое совпадение сервис отклонит.</p></div></li>
+        </ol>
+        <figure class="service-figure">
+          <a href="/workspace/" aria-label="Открыть работающий сервис поиска автомобилей">
+            <img src="/assets/service-search.png" alt="Реальный экран сервиса: слева запрос с рамкой, справа ранжированные кандидаты" width="1440" height="1000" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Реальный поиск в сервисе <span>Снимок проверенной сборки · без подставленной выдачи</span></figcaption>
+        </figure>
+      </div>
+      <a class="section-action" href="/workspace/">Перейти к поиску <span aria-hidden="true">↗</span></a>
     </section>
 
     <section class="quality" id="quality" aria-labelledby="quality-title">
-      <div class="shell quality-grid">
-        <div class="quality-copy">
-          <p class="eyebrow eyebrow-light">Качество и границы</p>
-          <h2 id="quality-title">Цифры с указанным режимом поиска.</h2>
-          <p>В пакетной проверке используется переранжирование кандидатов. Интерактивный HTTP-сервис ищет по косинусному сходству — это другой режим; оценка близости не является вероятностью совпадения.</p>
-          <a href="/submission/documentation.pdf" class="light-link">Методика и воспроизведение <span aria-hidden="true">↗</span></a>
+      <div class="shell quality-inner">
+        <div class="quality-heading">
+          <p class="eyebrow">Проверка решения</p>
+          <h2 id="quality-title">Два режима.<br>Разные цифры.</h2>
+          <p>Пакетная сдача использует k-reciprocal re-ranking. Живой сервис выполняет косинусный поиск. Оценка близости не является вероятностью совпадения.</p>
         </div>
-        <dl class="quality-facts">
-          <div><dt>Пакетная проверка с KR</dt><dd><strong>0,774</strong><span>mAP на локальной валидации</span></dd></div>
-          <div><dt>Состав проверки</dt><dd><strong>1 110 <em>×</em> 750</strong><span>запросов × объектов галереи</span></dd></div>
-          <div><dt>Интерактивное демо</dt><dd><strong>750</strong><span>объектов в галерее · косинусный поиск</span></dd></div>
-        </dl>
+        <div class="metric-comparison" role="group" aria-label="Качество на локальной валидации">
+          <div class="metric">
+            <span class="metric-mode">Пакетный режим · KR</span>
+            <strong>0,774</strong>
+            <span class="metric-unit">mAP на локальной валидации</span>
+            <span class="metric-rank">Rank-1 <b>0,731</b></span>
+          </div>
+          <div class="metric">
+            <span class="metric-mode">Режим HTTP · cosine</span>
+            <strong>0,732</strong>
+            <span class="metric-unit">mAP на той же выборке</span>
+            <span class="metric-rank">Rank-1 <b>0,685</b></span>
+          </div>
+        </div>
+        <p class="quality-note">1110 запросов × 750 объектов галереи; 832 запроса с допустимой парой. Совпадения одной камеры исключены. Это измерения заданного локального протокола, а не оценка на произвольных данных.</p>
+        <a class="section-action" href="/submission/documentation.pdf">Методика и ограничения <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="shell quality-note">mAP посчитан по 832 запросам с допустимой парой; совпадения одной камеры исключены. Результат относится к указанной выборке и протоколу.</div>
     </section>
 
     <section class="materials shell" id="materials" aria-labelledby="materials-title">
-      <div class="section-heading materials-heading">
-        <p class="eyebrow">Материалы решения</p>
-        <h2 id="materials-title">Всё для проверки</h2>
-        <p>Сервис, методика и выступление доступны из одной точки.</p>
+      <div class="section-intro materials-intro">
+        <p class="eyebrow">Комплект сдачи</p>
+        <h2 id="materials-title">Проверить всё<br><em>самостоятельно.</em></h2>
+        <p>Рабочий сервис, инструкция и слайды собраны здесь. Исходный код доступен в репозитории команды.</p>
       </div>
       <div class="material-list">
-        <a class="material" href="https://demo.lct.iamcp.ru/"><span class="material-index">01</span><span class="material-body"><strong>Рабочий сервис</strong><small>Демо-кадр, свой снимок, сравнение и выгрузка результата</small></span><span class="material-arrow" aria-hidden="true">↗</span></a>
-        <a class="material" href="/submission/documentation.pdf"><span class="material-index">02</span><span class="material-body"><strong>Документация</strong><small>Устройство решения, запуск, метрики и ограничения · PDF</small></span><span class="material-arrow" aria-hidden="true">↗</span></a>
-        <a class="material" href="/submission/presentation.pdf"><span class="material-index">03</span><span class="material-body"><strong>Презентация</strong><small>Полная версия для просмотра · PDF</small></span><span class="material-arrow" aria-hidden="true">↗</span></a>
-        <a class="material" href="/submission/presentation.pptx"><span class="material-index">04</span><span class="material-body"><strong>Редактируемая презентация</strong><small>Слайды для защиты · PPTX</small></span><span class="material-arrow" aria-hidden="true">↓</span></a>
-        <a class="material" href="https://sourcecraft.dev/lct-hackaton-2026/case-17-vehicle-digital-signature-team-33"><span class="material-index">05</span><span class="material-body"><strong>Исходный код</strong><small>Репозиторий команды в SourceCraft · доступ проверяющих</small></span><span class="material-arrow" aria-hidden="true">↗</span></a>
+        <a class="material" href="/workspace/"><span class="material-index">01</span><span class="material-title">Рабочий сервис</span><span class="material-desc">Свой кадр, демо-пример, сравнение и выгрузка</span><span class="material-arrow" aria-hidden="true">↗</span></a>
+        <a class="material" href="/submission/documentation.pdf"><span class="material-index">02</span><span class="material-title">Документация</span><span class="material-desc">Сборка, метрики, ограничения · PDF</span><span class="material-arrow" aria-hidden="true">↗</span></a>
+        <a class="material" href="/submission/presentation.pdf"><span class="material-index">03</span><span class="material-title">Презентация</span><span class="material-desc">Полная версия для просмотра · PDF</span><span class="material-arrow" aria-hidden="true">↗</span></a>
+        <a class="material" href="/submission/presentation.pptx"><span class="material-index">04</span><span class="material-title">Слайды для защиты</span><span class="material-desc">Редактируемая версия · PPTX</span><span class="material-arrow" aria-hidden="true">↓</span></a>
+        <a class="material" href="https://sourcecraft.dev/lct-hackaton-2026/case-17-vehicle-digital-signature-team-33"><span class="material-index">05</span><span class="material-title">Исходный код</span><span class="material-desc">Репозиторий команды · SourceCraft</span><span class="material-arrow" aria-hidden="true">↗</span></a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="shell footer-inner"><span>Vehicle <strong>ReID</strong> · ПРОСВЕТ</span><span>ЛЦТ 2026 · Задача № 7</span><a href="#top">Наверх ↑</a></div>
+    <div class="shell footer-inner">
+      <img src="/assets/logo-prosvet.png" alt="Логотип команды ПРОСВЕТ" width="98" height="98" loading="lazy" decoding="async">
+      <div><strong>ПРОСВЕТ</strong><span>ЛЦТ 2026 · Задача № 7 «Фалькон Тех»</span></div>
+      <a href="#top">Наверх <span aria-hidden="true">↑</span></a>
+    </div>
   </footer>
 </body>
 </html>
