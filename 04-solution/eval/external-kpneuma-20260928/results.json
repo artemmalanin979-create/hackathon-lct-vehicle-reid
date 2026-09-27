@@ -1,0 +1,88 @@
+{
+  "source_sha": "ed028e82702ee7d80904b5a49cd5cc5c23b5505c",
+  "dataset": "KPNEUMA test query/gallery, virtual loop detectors",
+  "dataset_archive_sha256": "c55c90b1b2e87e86991d47e18a52ce39b7839f2a17a8142be90320a4b9821332",
+  "counts": {
+    "query": 318,
+    "gallery": 318,
+    "valid_cross_vld": 318
+  },
+  "protocol": {
+    "camera_policy": "market",
+    "query_average": "valid_queries",
+    "ranking_scope": "full_gallery",
+    "one_positive_per_query": true,
+    "bbox": "whole pre-cropped PNG",
+    "input_size": 208,
+    "batch_size": 16,
+    "onnx_threads": 1,
+    "rerank": [
+      6,
+      3,
+      0.3
+    ],
+    "bootstrap_repeats": 2000,
+    "seed": 20260928
+  },
+  "models": {
+    "osnet_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "combined_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+  },
+  "controls": {
+    "perfect_labels": {
+      "mAP": 1.0,
+      "Rank-1": 1.0,
+      "Rank-5": 1.0,
+      "mINP": 1.0,
+      "valid_queries": 318
+    },
+    "random_vectors": {
+      "mAP": 0.02580154388672231,
+      "Rank-1": 0.006289308176100629,
+      "Rank-5": 0.02830188679245283,
+      "mINP": 0.02580154388672231,
+      "valid_queries": 318
+    }
+  },
+  "cosine": {
+    "mAP": 0.49025602209387037,
+    "Rank-1": 0.3836477987421384,
+    "Rank-5": 0.6037735849056604,
+    "mINP": 0.49025602209387037,
+    "valid_queries": 318,
+    "mAP_bootstrap_95": [
+      0.4427094080349402,
+      0.5366010516196907
+    ]
+  },
+  "rerank": {
+    "mAP": 0.4069622532115476,
+    "Rank-1": 0.2861635220125786,
+    "Rank-5": 0.5251572327044025,
+    "mINP": 0.4069622532115476,
+    "valid_queries": 318,
+    "mAP_bootstrap_95": [
+      0.3615342002494815,
+      0.45082884281303154
+    ]
+  },
+  "delta_rerank_minus_cosine": {
+    "mAP": -0.0832937688823227,
+    "mAP_bootstrap_95": [
+      -0.11522527334324002,
+      -0.0529405447524662
+    ]
+  },
+  "timing_seconds": {
+    "embed": 91.93888036700082,
+    "ranking_and_metrics": 0.29711615899941535
+  },
+  "runtime": {
+    "python": "3.13.13",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "onnxruntime": "1.30.0",
+    "cpu_count": 12
+  }
+}
