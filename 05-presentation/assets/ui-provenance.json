@@ -1,20 +1,21 @@
 {
-  "captured_utc": "2026-09-25T22:21:16Z",
+  "captured_utc": "2026-09-27T21:14:29Z",
   "capture_time_precision": "filesystem mtime to 1 second",
   "source_filename": "1440-light-search.png",
-  "source_sha256": "12e4a0eb0b7b6886dce014977716d777e48431beb2c344c606b1d34d687affea",
+  "source_sha256": "c737fd4bb7d924f9da0be07e7e584af03f9798ee3e6c464411cef0ed7c99beba",
   "source_size_px": [
     1440,
     1000
   ],
-  "source_git_sha": "d94d3fdc33c720796574000accf2c1ce75132280",
+  "source_git_sha": "6e8c1c9d7be015073252f1d30da181737894067c",
   "source_files_sha256": {
     "04-solution/service/app/static/index.html": "61d94c2969322b256f093fb9c098ce47a56ccc06050c55769cbe3a1bbe3cb79a",
     "04-solution/service/app/static/app.css": "0f4ae007d1fe1828f4b1abecb4c7e487f6d6f155abeed40f6edf265f6bd84adb",
-    "04-solution/service/app/static/app.js": "010434b731cc669d1d201d4e45eee84ccdae4ebc70cbc99e86a973d8168f5c9c"
+    "04-solution/service/app/static/app.js": "010434b731cc669d1d201d4e45eee84ccdae4ebc70cbc99e86a973d8168f5c9c",
+    "04-solution/service/app/api/demo_materials.py": "fb6173203e301895c717df65151da043224777d5efbb50bc8baa9c83139dae61"
   },
-  "api_origin": "local immutable release through a loopback-only capture gateway (origin omitted)",
-  "api_version_source": "real GET /api/version during capture; local evidence checks/capture/api-version.json",
+  "api_origin": "deployed d1_j48 API reached through SSH loopback forward and loopback-only capture gateway (public hostname omitted)",
+  "api_version_source": "real GET /api/version during capture; response SHA-256 dd65dffd2d73146c25ce8aa9c5c2c7b3250d72e0a1154da35ac15b3e2d0aaf13",
   "api_version": {
     "service": "0.2.0",
     "model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
@@ -41,12 +42,12 @@
   },
   "capture_script": "04-solution/service/ui-checks/presentation-shots.cjs",
   "capture_script_sha256": "9f88942b0046b04f9960135fb8730976e822b2e36d3b73a49293187e38aeab19",
-  "scenario": "light theme; demo-street.jpg; bbox [849,300,736,471]; real POST /api/search; unmodified response rendered by application",
+  "scenario": "light theme; first live GET /api/demo entry, query e03daa7cd69147cf9ffcfe59b6f1ff74; bbox [734,341,608,551]; real POST /api/search; unmodified response rendered by application",
   "bbox": [
-    849,
-    300,
-    736,
-    471
+    734,
+    341,
+    608,
+    551
   ],
   "image_is_full_viewport": true,
   "result_mocked": false,
@@ -54,6 +55,21 @@
   "personal_contacts_present": false,
   "capture_proxy": "05-presentation/capture_proxy.py",
   "capture_proxy_sha256": "2a2e3a97c0051a2536228fa12f40de254f73a90433c4242926e4efbe9f1574e7",
-  "capture_method": "integrated UI static served read-only; /api requests forwarded to the immutable d1_j48 API",
-  "gallery_points_at_capture": 750
+  "capture_method": "integrated UI static served read-only; /api requests forwarded to deployed d1_j48 API through SSH loopback",
+  "gallery_points_at_capture": 750,
+  "demo_catalog_sha256": "82ae218dda894ef597da98640596aa5a481106b393feccfe5a8dfad79410d1ef",
+  "query_jpeg_sha256": "d721a626545ba5ca289afe8d7ef7feea9e410fb46ef312b90c4aec7acac09fda",
+  "search_response_sha256": "8e11119b0aa9d43831c250297e9e695a82f47862d0b310ef11fcf05b31e69eb5",
+  "first_two_candidates_observed": [
+    {
+      "gallery_id": "e429a2e164a24919a12edcc8d4ea8f09",
+      "confidence": 0.678976
+    },
+    {
+      "gallery_id": "c4b9d7a8d5d342459d2282589b3af293",
+      "confidence": 0.67862
+    }
+  ],
+  "accepted_candidates_at_capture": 4,
+  "ground_truth_identity_verified": false
 }
