@@ -23,8 +23,8 @@ router = APIRouter()
 # The released test query CSV contains these anonymous frames. Labels describe
 # the frame, not a known identity or a ground-truth match in the unlabelled test.
 EXAMPLES = (
-    ("street", "Автомобиль на дороге", "a4f2a13bd2b54360a921c8ef7366e535"),
-    ("second-view", "Другой кадр", "5cfbbd42352245fb9ab4e93f0e17452a"),
+    ("street", "Автомобиль с частичным перекрытием", "285ed58a8d154d748bba60ef4ef0123d"),
+    ("second-view", "Автомобиль с другого ракурса", "e03daa7cd69147cf9ffcfe59b6f1ff74"),
     ("edge", "Автомобиль у края кадра", "c15e316f43844831a8809cd85924e3b1"),
 )
 MATERIALS = {
