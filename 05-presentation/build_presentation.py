@@ -617,7 +617,7 @@ txt(s,.65,6.28,11.9,.5,'Похожий ракурс чужой машины ок
 # 12. Two further mechanisms, each with the complete query / wrong / positive triplet.
 CURRENT = 12
 s = technical('Свет и перекрытие остаются трудными',
-              'E08 и E44: d1_j48 + KR, валидация. Визуальные причины — гипотезы одного наблюдателя, не доказанная причинность.')
+              'E08/E44, d1_j48 + KR, val. Причины по одному наблюдателю — гипотезы.')
 for case,y,heading,detail in [
     ('E08',2.05,'Свет фар','Верная пара: ранг 7'),
     ('E44',4.48,'Перекрытие кузова','Верная пара ниже top-1'),
@@ -647,19 +647,32 @@ txt(s,.65,6.56,11.9,.3,'Миллион — синтетический индек
 
 # 14. The trained prototype is judged against the predeclared no-loss gate.
 CURRENT = 14
-s = technical('Student быстрее, но проигрывает в поиске',
-              'Та же многократно использованная валидация: 1110 × 750, 832 запроса с парой. KR full-ranking mAP; парный bootstrap по vehicle_id.')
+core = json.loads((ROOT / 'assets/owncore-distill-summary.json').read_text())
+assert core['status'] == 'research_only; release d1_j48'
+assert (core['query_count'], core['gallery_count'], core['known_queries']) == (1110, 750, 832)
+def metric(value, digits):
+    return f'{value:.{digits}f}'.replace('-', '−').replace('.', ',')
+
+s = technical('Собственное ядро быстрее, но ищет хуже',
+              'Повторно использованная val: 1110 × 750, 832 запроса с парой; это не новый holdout. KR full-ranking mAP; парный bootstrap по vehicle_id.')
 txt(s,.65,2.08,5.45,.36,'КАЧЕСТВО · KR / BATCH',12,bold=True,color=MUTED)
-txt(s,.65,2.62,5.55,.60,'0,7741 → 0,7459',30,bold=True)
-txt(s,.65,3.46,5.57,.76,'d1_j48 → student\nΔmAP −0,0282',18.2)
-txt(s,.65,4.51,5.62,.75,'95 % ДИ [−0,0440; −0,0131]\np_Holm = 0,004',17.3,color=MUTED)
+txt(s,.65,2.62,5.55,.60,f"{metric(core['baseline_kr_map'], 4)} → {metric(core['core_kr_map'], 4)}",30,bold=True)
+txt(s,.65,3.46,5.57,.76,f"d1_j48 → CrossViewCore\nΔmAP {metric(core['core_kr_delta'], 4)}",18.2)
+txt(s,.65,4.51,5.62,.75,
+    f"95 % ДИ [{metric(core['core_kr_delta_ci95'][0], 4)}; {metric(core['core_kr_delta_ci95'][1], 4)}]"
+    f"\np_Holm(8) = {metric(core['core_kr_p_holm8'], 3)}",17.3,color=MUTED)
 txt(s,7.13,2.08,5.5,.36,'СКОРОСТЬ · CPU, BATCH-1',12,bold=True,color=MUTED)
-txt(s,7.13,2.62,5.6,.60,'619 → 452 мс',30,bold=True)
-txt(s,7.13,3.46,5.57,.76,'p95, один и тот же CPU\nЗадержка меньше на 27 %',18.2)
-txt(s,7.13,4.51,5.6,.75,'Веса 18,63 → 9,80 МБ\n40 попарных кадров, 2 потока',17.3,color=MUTED)
+txt(s,7.13,2.62,5.6,.60,
+    f"{metric(core['baseline_cpu_p95_ms'], 2)} → {metric(core['core_cpu_p95_ms'], 2)} мс",30,bold=True)
+txt(s,7.13,3.46,5.57,.76,'p95, готовый тензор → признак\nОдин CPU, 2 потока',18.2)
+txt(s,7.13,4.51,5.6,.75,
+    f"Веса {metric(core['baseline_weights_bytes']/1e6, 2)} → {metric(core['core_weights_bytes']/1e6, 2)} МБ"
+    f"\n{core['benchmark_samples']} парных кадров, {core['benchmark_warmup']} прогревов",17.3,color=MUTED)
 rule(s,.65,5.50,12.7)
-txt(s,.65,5.82,7.2,.78,'Критерий без потери качества не выполнен.\nВ релизе остаётся d1_j48.',19.5,bold=True)
-txt(s,8.08,5.82,4.55,.78,'Fusion: KR 0,7660; p95 791 мс.\nТоже не принят.',15.5)
+txt(s,.65,5.82,7.2,.78,'Критерий качества и отказа не выполнен.\nВ релизе остаётся d1_j48.',19.5,bold=True)
+txt(s,8.08,5.82,4.55,.78,
+    f"Fusion: KR {metric(core['fusion_kr_map'], 4)}; ДИ Δ включает 0."
+    f"\nTNR ядра = {metric(core['core_kr_tnr'], 1)}.",15.5)
 
 # 15. Table wording is an acceptance contract, retained literally and still editable.
 CURRENT = 15
@@ -679,7 +692,7 @@ CURRENT = 16
 s = technical('Демонстрация готовится к внешнему доступу',
               'Локальная сборка не означает публикацию. Финальные ссылки проверяются из внешней сети после развёртывания.')
 txt(s,.65,2.07,6.7,1.62,'Кадр\nРамка\nСравнение',34,bold=True,line=1.14)
-txt(s,.65,4.6,5.9,1.21,'Student обучен и проверен.\nПо критерию качества в релизе\nостаётся d1_j48.',18)
+txt(s,.65,4.6,5.9,1.21,'CrossViewCore обучен и проверен.\nПо критерию качества в релизе\nостаётся d1_j48.',18)
 txt(s,8.03,2.10,4.63,.42,'27–28 СЕНТЯБРЯ',13,bold=True,color=C.ACCENT_2)
 txt(s,8.03,2.78,4.63,1.18,'Развёртывание VPS\nи проверка доступа жюри',24,bold=True)
 txt(s,8.03,4.40,4.63,.91,'Сейчас\nDEPLOY PENDING',21,color=C.ACCENT_2,bold=True)

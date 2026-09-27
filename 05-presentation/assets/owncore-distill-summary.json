@@ -1,0 +1,37 @@
+{
+  "source_git_sha": "d94d3fdc33c720796574000accf2c1ce75132280",
+  "status": "research_only; release d1_j48",
+  "source_sha256": {
+    "holm8-d94d3fd.json": "37f797d3c428f3c0bb34a3048f72810ebf658483a24c6430425a7798901be280",
+    "assessment-combined-d94d3fd/evaluation/evaluation.json": "b4f29deedcc3bcf01a93c9449f2ba1f34b4ccb60163594b0060d1f8d6ad8319f",
+    "assessment-combined-d94d3fd/benchmark/benchmark.json": "9e545c42596b330c1f99ee0b08e4e9c113ef5b047dc6af8380d6f1cd1f89b3b0"
+  },
+  "scope": "reused val1110x750; not an untouched holdout",
+  "query_count": 1110,
+  "gallery_count": 750,
+  "known_queries": 832,
+  "baseline_kr_map": 0.7740915539438481,
+  "core_kr_map": 0.32745016194451204,
+  "core_kr_delta": -0.44664139199933606,
+  "core_kr_delta_ci95": [
+    -0.4924052867403261,
+    -0.40064079846459044
+  ],
+  "core_kr_p_holm8": 0.003999000249937516,
+  "fusion_kr_map": 0.7626041995806793,
+  "fusion_kr_delta": -0.011487354363168834,
+  "fusion_kr_delta_ci95": [
+    -0.026954222058426704,
+    0.0031977253260624364
+  ],
+  "fusion_kr_p_holm8": 0.340414896275931,
+  "core_kr_tnr": 0.0,
+  "baseline_cpu_p95_ms": 43.86065904873248,
+  "core_cpu_p95_ms": 1.7274484482186379,
+  "baseline_weights_bytes": 18630636,
+  "core_weights_bytes": 4902116,
+  "benchmark_threads": 2,
+  "benchmark_warmup": 5,
+  "benchmark_samples": 40,
+  "benchmark_boundary": "preprocessed tensor to normalized descriptor; no JPEG decode/API/Qdrant/KR"
+}
