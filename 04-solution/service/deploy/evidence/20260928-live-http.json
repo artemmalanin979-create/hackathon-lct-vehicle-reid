@@ -1,0 +1,247 @@
+{
+  "url": "https://iamcp.ru",
+  "python": "3.13.13",
+  "host": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+  "warmup": 3,
+  "version": {
+    "service": "0.2.0",
+    "model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model2": "osnet_ain_combined_v1 (fine-tuned OSNet-AIN: RoundaboutHD MIT + CARLA Apache-2.0 + train organizer)",
+    "model2_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5",
+    "embedding_dim": 512,
+    "input_size": 208,
+    "score_scale": "cosine",
+    "default_threshold": 0.5141976914190476,
+    "batch_rerank": {
+      "enabled_by_default": true,
+      "params": [
+        6,
+        3,
+        0.3
+      ],
+      "score_scale": "rerank_confidence_1_minus_distance",
+      "default_threshold": 0.5282812306342437
+    },
+    "onnxruntime": "1.30.0",
+    "numpy": "2.5.3"
+  },
+  "inputs": [
+    {
+      "example": {
+        "id": "street",
+        "label": "Автомобиль с другого ракурса",
+        "bbox": {
+          "x": 734,
+          "y": 341,
+          "w": 608,
+          "h": 551
+        },
+        "image_url": "/api/demo/street/image"
+      },
+      "sha256": "d721a626545ba5ca289afe8d7ef7feea9e410fb46ef312b90c4aec7acac09fda"
+    },
+    {
+      "example": {
+        "id": "edge",
+        "label": "Автомобиль у края кадра",
+        "bbox": {
+          "x": 0,
+          "y": 677,
+          "w": 332,
+          "h": 402
+        },
+        "image_url": "/api/demo/edge/image"
+      },
+      "sha256": "5f2b719c33e96721c1ac79675911755c82291f01648a6f8cbfbd737abd9b15ef"
+    }
+  ],
+  "cold_start": "NOT MEASURED",
+  "phases": {
+    "1": {
+      "concurrency": 1,
+      "count": 15,
+      "elapsed_s": 20.958514551999542,
+      "fps": 0.7156995770279401,
+      "p50_s": 1.3896725529994,
+      "p95_s": 1.462108439000076,
+      "samples": [
+        {
+          "example": "street",
+          "seconds": 1.3548363119989517,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.4381122260001575,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.4089676580006198,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.3821612380015722,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.3535961070010671,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.3725537809987145,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.3914490789993579,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.3896725529994,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.369468742999743,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.462108439000076,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.345554417999665,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.4472205609999946,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.3737995270003012,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.4239987340006337,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.4248573160002707,
+          "refusal": false,
+          "candidates": 4
+        }
+      ]
+    },
+    "2": {
+      "concurrency": 2,
+      "count": 10,
+      "elapsed_s": 7.496589770000355,
+      "fps": 1.333939872236003,
+      "p50_s": 1.4129848624997976,
+      "p95_s": 1.7087560839991056,
+      "samples": [
+        {
+          "example": "street",
+          "seconds": 1.4195266669994453,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.5511865059997945,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.3952089920003345,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.4406490860001213,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.3901080310006364,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.40644305800015,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.3753224640004191,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.7087560839991056,
+          "refusal": true,
+          "candidates": 0
+        },
+        {
+          "example": "street",
+          "seconds": 1.420333699999901,
+          "refusal": false,
+          "candidates": 4
+        },
+        {
+          "example": "edge",
+          "seconds": 1.38836536800045,
+          "refusal": true,
+          "candidates": 0
+        }
+      ]
+    }
+  },
+  "explain": {
+    "elapsed_s": 1.3174943539997912,
+    "response_keys": [
+      "bias",
+      "cos",
+      "gallery",
+      "gallery_id",
+      "grid",
+      "ms",
+      "query",
+      "residual"
+    ]
+  },
+  "status": "PASS"
+}
