@@ -612,7 +612,7 @@ for col,x,heading,caption in [
     sh=case_picture(s,'E17',col,x,2.76,3.45,2.70,heading)
     if col==1:frame(s,sh,PINK)
     txt(s,x,5.65,3.45,.38,caption,13.7,color=MUTED)
-txt(s,.65,6.28,11.9,.5,'Похожий ракурс чужой машины оказался сильнее различий конкретного автомобиля.',17)
+txt(s,.65,6.28,11.9,.5,'Чужая машина с похожим ракурсом получила score выше верной пары.',17)
 
 # 12. Two further mechanisms, each with the complete query / wrong / positive triplet.
 CURRENT = 12
@@ -664,10 +664,10 @@ txt(s,.65,4.51,5.62,.75,
 txt(s,7.13,2.08,5.5,.36,'СКОРОСТЬ · CPU, BATCH-1',12,bold=True,color=MUTED)
 txt(s,7.13,2.62,5.6,.60,
     f"{metric(core['baseline_cpu_p95_ms'], 2)} → {metric(core['core_cpu_p95_ms'], 2)} мс",30,bold=True)
-txt(s,7.13,3.46,5.57,.76,'p95, готовый тензор → признак\nОдин CPU, 2 потока',18.2)
+txt(s,7.13,3.46,5.57,.76,'p95, RGB208 тензор → признак\nНе сопоставлять с 13: другой CPU/граница',16.5)
 txt(s,7.13,4.51,5.6,.75,
     f"Веса {metric(core['baseline_weights_bytes']/1e6, 2)} → {metric(core['core_weights_bytes']/1e6, 2)} МБ"
-    f"\n{core['benchmark_samples']} парных кадров, {core['benchmark_warmup']} прогревов",17.3,color=MUTED)
+    f"\n{core['benchmark_samples']} кадров, {core['benchmark_warmup']} прогревов, {core['benchmark_threads']} потока",17.3,color=MUTED)
 rule(s,.65,5.50,12.7)
 txt(s,.65,5.82,7.2,.78,'Критерий качества и отказа не выполнен.\nВ релизе остаётся d1_j48.',19.5,bold=True)
 txt(s,8.08,5.82,4.55,.78,
