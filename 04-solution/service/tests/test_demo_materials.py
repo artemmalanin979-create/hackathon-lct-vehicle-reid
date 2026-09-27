@@ -23,7 +23,7 @@ class DemoMaterialsTests(unittest.TestCase):
         self.materials = self.root / "materials"
         self.materials.mkdir()
         self.csv = self.root / "query.csv"
-        self.image_id = "285ed58a8d154d748bba60ef4ef0123d"
+        self.image_id = "e03daa7cd69147cf9ffcfe59b6f1ff74"
         self.csv.write_text(f"image_id,x,y,w,h\n{self.image_id},1,2,6,5\n")
         self.frame = self.images / (self.image_id + ".jpg")
         Image.new("RGB", (12, 10), (42, 100, 150)).save(self.frame)

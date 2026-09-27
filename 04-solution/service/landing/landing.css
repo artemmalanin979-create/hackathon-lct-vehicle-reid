@@ -235,10 +235,10 @@ a:focus-visible { outline: 3px solid var(--signal); outline-offset: 5px; }
 }
 .object-box {
   position: absolute;
-  left: 44.21875%;
-  top: 27.7778%;
-  width: 38.3333%;
-  height: 43.6111%;
+  left: 38.2292%;
+  top: 31.5741%;
+  width: 31.6667%;
+  height: 51.0185%;
   border: 1.5px solid var(--signal);
   box-shadow: 0 0 0 1px rgb(11 14 13 / .25);
   pointer-events: none;
