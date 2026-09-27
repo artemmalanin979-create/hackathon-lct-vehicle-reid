@@ -40,11 +40,17 @@
 [исследования](02-research/), [план](03-plan/),
 [код решения](04-solution/), [презентация](05-presentation/README.md).
 
-Для локальной репетиции VPS-кандидата и расчёта окна 27–28.09 см.
-[план развёртывания](04-solution/service/deploy/README.md). Исходники
-проверенного релизного кандидата опубликованы в `main` GitHub и SourceCraft;
-код отдельного отрицательного опыта с собственным ядром опубликован в GitHub.
-Внешний адрес для жюри и загрузка полной презентации пока **DEPLOY PENDING**.
+Публичный вход: [iamcp.ru](https://iamcp.ru/); [рабочий сервис](https://demo.lct.iamcp.ru/)
+и запасной путь [на том же домене](https://iamcp.ru/workspace/).
+[Документация](https://iamcp.ru/submission/documentation.pdf),
+[полная презентация PDF](https://iamcp.ru/submission/presentation.pdf) и
+[PPTX](https://iamcp.ru/submission/presentation.pptx) доступны для просмотра.
+Проверенный bundle данных/моделей `fcb038a` и текущий образ сервиса с
+исправленным демо `6e8c1c9` описаны в
+[развёртывании](04-solution/service/deploy/README.md). Исходники публикуются
+в `main` GitHub и SourceCraft,
+код отдельного опыта с собственным ядром — в GitHub. Доступ жюри к приватному
+SourceCraft и отправка ссылок через форму организатора проверяются отдельно.
 
 ---
 
