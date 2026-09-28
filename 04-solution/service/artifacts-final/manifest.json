@@ -1,29 +1,26 @@
 {
-  "release_date": "2026-09-21",
-  "recorded_on": "2026-09-21",
-  "note": "Retrospective manifest of the existing release; files were not regenerated or replaced by job_73.",
-  "date_evidence": [
-    "README.md",
-    "../README.md",
-    "../../audit/jury-path-2/REPORT.md"
-  ],
-  "configuration": "d1_j48; KR(6,3,0.3); threshold=0.5282812306342437",
+  "release_date": "2026-09-29",
+  "configuration": "d1_j48; independent per-query KR(6,3,0.3) within cosine top-50 for submission; cosine candidates threshold 0.5141976914190476",
+  "batch_source_sha": "640ced67efbd9f23527d5f955c59b2258f97d8fa",
+  "container_image_id": "150a6853fa262b20891e1dbe5184a3d8812e970eac72bf414496736f1405b8bb",
+  "command": "python -B -m app.batch --images-dir /data/images --query /data/test_query.csv --gallery /data/test_gallery.csv --out-dir /out --threads 2 --batch 32",
+  "network": "none",
   "files": {
     "submission.csv": {
-      "bytes": 404181,
-      "sha256": "9f08068971d10efe815f6c5817d3f2adce59d343b1a3feb130aac1d22407bca8"
+      "bytes": 404040,
+      "sha256": "d9683e018b80fe30ab6c7363d635127291890b2f6ac62feb223a0f8b4a4bef57"
     },
     "embeddings.npy": {
       "bytes": 3809408,
-      "sha256": "a64fecfe3d2c21d2e27142260bb12749987f6f4d663ab81c8192a0be3575cc57"
+      "sha256": "365395f713b146e4ae437ad7b3f4ec0b51e8d3f82a1b8a5b32eb840f26afbe0a"
     },
     "candidates.csv": {
-      "bytes": 155680,
-      "sha256": "204559a5c9b50a6130801c2141ec2d5a305bbcf0ae1b28c84d20c1bf98aaf0b1"
+      "bytes": 202496,
+      "sha256": "fd11c66ad40ee32a5ddc8b283909259180cf242fc2b451e435f30e789fd8dbc0"
     },
     "run_info.json": {
-      "bytes": 977,
-      "sha256": "16391afcdf853790dc9ba0e043f457c84d3565c8a92e7546c7ec5e05cb3a33c3"
+      "bytes": 1050,
+      "sha256": "07e8297c27add0f5210e3545c13313ec680eef5c537fcfeabc35e72b6c106474"
     }
   },
   "input_csvs": [
@@ -38,28 +35,37 @@
       "sha256": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496"
     }
   ],
-  "image_manifest": "../../reproduce/inputs-manifest.json",
+  "image_manifest": {
+    "path": "../../reproduce/inputs-manifest.json",
+    "bytes": 708396,
+    "sha256": "e7fe2f1c5889443f872bb446274a962fcc7dc1bdf5011410ab1285d651cff90e"
+  },
+  "official_evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "example_submission_sha256": "cccda5bf0c801be8fd5748646dac345f180f6d11988ecbf4ec17ac9c311e4f46",
+  "test_ground_truth": "not supplied; no test mAP/F1 claimed",
   "run_info": {
-    "threshold": 0.5282812306342437,
-    "queries_with_candidates": 1076,
-    "queries_refused": 34,
-    "refused_share": 0.0306,
+    "threshold": 0.5141976914190476,
+    "queries_with_candidates": 1062,
+    "queries_refused": 48,
+    "refused_share": 0.0432,
     "rerank": true,
-    "score_scale": "rerank_confidence_1_minus_distance",
+    "score_scale": "cosine",
+    "ranking_score_scale": "streaming_top50_rerank_confidence_1_minus_distance",
     "rerank_params": [
       6,
       3,
       0.3
     ],
+    "rerank_top_k": 50,
     "queries": 1110,
     "gallery": 750,
     "embeddings_shape": [
       1860,
       512
     ],
-    "embed_elapsed_s": 765.252,
-    "rank_elapsed_s": 2.785,
-    "total_elapsed_s": 769.082,
+    "embed_elapsed_s": 263.424,
+    "rank_elapsed_s": 9.384,
+    "total_elapsed_s": 273.259,
     "model": "d1_j48: mean(l2n(OSNet-AIN OMZ), l2n(combined_v1)) -> whitening rho=0.5",
     "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
     "model2": "osnet_ain_combined_v1 (fine-tuned OSNet-AIN: RoundaboutHD MIT + CARLA Apache-2.0 + train organizer)",

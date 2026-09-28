@@ -1,0 +1,50 @@
+{
+  "date": "2026-09-29",
+  "scope": "reused validation, not hidden test or untouched holdout",
+  "protocol": "official evaluate.py; independent per-query KR inside cosine top-50 for submission; cosine threshold 0.5141976914190476 for candidates",
+  "batch_source_sha": "640ced67efbd9f23527d5f955c59b2258f97d8fa",
+  "official_evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "query_csv_sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+  "gallery_csv_sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+  "files": {
+    "embeddings.npy": {
+      "bytes": 3809408,
+      "sha256": "7007ef51db06aa968f3b227227afd33fe3d70c512773a328cf6772f1f6a7c7af"
+    },
+    "submission.csv": {
+      "bytes": 404040,
+      "sha256": "c09296da4711ccb2517aad6d6c662d0403a1aeabdc3c7a5e0bbe8c4d04e75f03"
+    },
+    "candidates.csv": {
+      "bytes": 155832,
+      "sha256": "652e52112589c4c9034602a138bd10c750873675560befac8765879f3a4f4f76"
+    }
+  },
+  "results": {
+    "ranking": {
+      "n_scored": 832,
+      "n_openset_excluded": 278,
+      "mAP@10": 0.7411030505952382,
+      "Rank-1": 0.7079326923076923,
+      "Rank-5": 0.8605769230769231
+    },
+    "full_ranking": {
+      "mAP_full": 0.7316093422310447,
+      "mINP": 0.6928460434032723,
+      "n_scored": 832
+    },
+    "candidates": {
+      "TP": 803,
+      "FP": 84,
+      "FN": 20,
+      "TN": 203,
+      "n_openset_queries": 278,
+      "Precision": 0.9052987598647125,
+      "Recall": 0.9756986634264885,
+      "F1": 0.9391812865497076,
+      "TNR": 0.7302158273381295,
+      "PR-AUC": 0.9926129189439657
+    }
+  },
+  "test_ground_truth": "not supplied; no test mAP/F1 claimed"
+}
