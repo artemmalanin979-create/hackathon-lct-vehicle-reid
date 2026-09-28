@@ -35,6 +35,28 @@ class IndependentRerankTests(unittest.TestCase):
         result = scorer(np.empty((0, 2)), np.eye(2), 3, 2, .3)
         self.assertEqual(result.shape, (0, 2))
 
+    def test_gallery_outside_cosine_top50_cannot_change_reranked_top10(self):
+        rng = np.random.default_rng(5)
+        query = rng.normal(size=(1, 8))
+        query /= np.linalg.norm(query, axis=1, keepdims=True)
+        gallery = rng.normal(size=(60, 8))
+        gallery /= np.linalg.norm(gallery, axis=1, keepdims=True)
+        distant = -query
+        cosine = (np.vstack([gallery, distant]) @ query[0])
+        selected = np.argsort(-cosine, kind="stable")[:50]
+        self.assertNotIn(60, selected)
+
+        baseline = rerank.rerank_scores_independent(query, gallery, 6, 3, .3)[0]
+        augmented = rerank.rerank_scores_independent(
+            query, np.vstack([gallery, distant]), 6, 3, .3)[0]
+
+        np.testing.assert_array_equal(
+            np.argsort(-baseline, kind="stable")[:10],
+            np.argsort(-augmented, kind="stable")[:10])
+        np.testing.assert_allclose(baseline[selected], augmented[selected], rtol=0, atol=1e-12)
+        self.assertGreater(np.min(baseline[selected]),
+                           np.max(baseline[np.setdiff1d(np.arange(60), selected)]))
+
 
 if __name__ == "__main__":
     unittest.main()

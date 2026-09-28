@@ -27,6 +27,8 @@ import numpy as np
 
 from ..numeric_inputs import validate_rerank_params
 
+STREAM_RERANK_TOP_K = 50
+
 
 def _k_reciprocal(initial_rank: np.ndarray, i: int, k: int) -> np.ndarray:
     """k-взаимные соседи объекта i: прямые соседи, для которых i — тоже сосед."""
@@ -117,24 +119,43 @@ def rerank_scores(query: np.ndarray, gallery: np.ndarray,
 
 def rerank_distances_independent(query: np.ndarray, gallery: np.ndarray,
                                  k1: int, k2: int, lam: float) -> np.ndarray:
-    """KR для потока: каждый query видит только себя и неизменную gallery.
+    """KR внутри cosine top-50 одного query; остальные объекты ниже top-50.
 
-    В отличие от ``rerank_distances``, соседства других запросов не участвуют
-    ни в нормировке расстояний, ни в k-reciprocal expansion / query expansion.
-    Возвращает полное ранжирование gallery в исходном порядке её строк.
-    Цена полного варианта — повторное построение матриц gallery для каждого
-    запроса; время и порог отказа требуется измерить отдельно до релиза.
+    Используется только текущий query и выбранные из статичной gallery
+    кандидаты. Внешние кандидаты сохраняют cosine-порядок; их дистанция больше
+    дистанции любого выбранного кандидата. Их шкала — техническое дополнение
+    для полного CSV, а не калиброванная уверенность совпадения. Порог отказа
+    для этого режима требуется выбрать отдельно до релиза.
     """
-    q = np.asarray(query)
+    q = np.asarray(query, dtype=np.float64)
+    g = np.asarray(gallery, dtype=np.float64)
     if q.ndim == 1:
         q = q[None]
-    if q.ndim != 2:
-        raise ValueError("query должен быть матрицей эмбеддингов")
-    if len(q) == 0:
-        return rerank_distances(q, gallery, k1, k2, lam)
-    return np.concatenate(
-        [rerank_distances(q[i:i + 1], gallery, k1, k2, lam)
-         for i in range(len(q))], axis=0)
+    if q.ndim != 2 or g.ndim != 2 or q.shape[1] != g.shape[1] or q.shape[1] == 0:
+        raise ValueError("размерности эмбеддингов не совпадают или нулевые")
+    validate_rerank_params(k1, k2, lam)
+    if not np.isfinite(q).all() or not np.isfinite(g).all():
+        raise ValueError("эмбеддинги содержат NaN или бесконечность")
+    q_norms = np.linalg.norm(q, axis=1)
+    g_norms = np.linalg.norm(g, axis=1)
+    if np.any(q_norms == 0) or np.any(g_norms == 0):
+        raise ValueError("переранжирование не определено для нулевого вектора")
+    distances = np.empty((len(q), len(g)), dtype=np.float64)
+    if len(q) == 0 or len(g) == 0:
+        return distances
+
+    g_unit = g / g_norms[:, None]
+    for i, row in enumerate(q):
+        cosine = np.clip(g_unit @ (row / q_norms[i]), -1.0, 1.0)
+        selected = np.argsort(-cosine, kind="stable")[:min(STREAM_RERANK_TOP_K, len(g))]
+        selected_dist = rerank_distances(row[None], g[selected], k1, k2, lam)[0]
+        distances[i, selected] = selected_dist
+        if len(selected) < len(g):
+            outside = np.ones(len(g), dtype=bool)
+            outside[selected] = False
+            distances[i, outside] = (np.max(selected_dist) + 1.0
+                                     + (1.0 - cosine[outside]))
+    return distances
 
 
 def rerank_scores_independent(query: np.ndarray, gallery: np.ndarray,
