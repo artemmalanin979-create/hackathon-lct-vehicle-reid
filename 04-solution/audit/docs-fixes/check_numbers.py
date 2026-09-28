@@ -151,12 +151,14 @@ def check_additional_claims():
           ref('training/attempt-2/out/boot_ainv2.json', 'ainv2rr_minus_osnetrr', 'delta'))
     combined = 'training/combined/s02_metrics.json'
     prose('SOLUTION.md',
-          [r'Прирост mAP от переранжирования у d1_j48 — \*\*' + number,
-           r'из §6 и прирост\s+' + number],
+          [r'Исторические full-query KR mAP/Rank и прирост\s+' + number],
           difference(ref(combined, 'd1_j48', 'kr', 'mAP'),
                      ref(combined, 'd1_j48', 'cos', 'mAP')))
-    prose('SOLUTION.md', [r'278/1110 ≈\s*' + number],
-          (Decimal(278) / Decimal(1110), '278 / 1110'))
+    official = 'reproduce/evidence/official-validation-20260929.json'
+    comparison = 'training/owncore-distill-20260926/official-evaluation-20260929.json'
+    prose('SOLUTION.md', [r'с cosine равна\s+' + number],
+          difference(ref(official, 'results', 'ranking', 'mAP@10'),
+                     ref(comparison, 'results', 'baseline', 'cosine', 'ranking', 'mAP@10')))
 
 
 def main():
@@ -170,15 +172,76 @@ def main():
     baseline = "baseline/out/metrics_summary.json"
     final = "postproc/out/final_val.json"
     headline = "service/calib-d1_j48/headline.json"
-    for marker, key in (("d1_j48, косинус", "cos"), ("d1_j48, переранжирование", "kr")):
-        table("SOLUTION.md", marker, scores(combined, ["d1_j48", key], rank + ["mAP@10"]))
-    table("SOLUTION.md", "Прежняя сдаваемая конфигурация", scores(combined, ["osnet(repro)", "kr"], rank + ["mAP@10"]))
-    for marker, key in (("Косинус d1_j48", "cosine_rule_reproduced"), ("Переранжирование d1_j48", "rerank_point")):
-        table("SOLUTION.md", marker, scores(headline, [key], ["f1", "tnr", "recall", "auc_pr"]))
-    for marker, key in (("Полная галерея", "kr"), ("Косинус (HTTP", "cos")):
-        table("04-solution/README.md", marker, scores(combined, ["d1_j48", key], rank[:3]))
-    table("04-solution/README.md", "Усечение до 10", [ref(combined, "d1_j48", "kr", "mAP@10")])
-    table("04-solution/README.md", "Без исключения", scores(baseline, ["base_no_camera_excl", "full_gallery"], rank[:2]))
+    official = "reproduce/evidence/official-validation-20260929.json"
+    comparison = "training/owncore-distill-20260926/official-evaluation-20260929.json"
+    manifest = "service/artifacts-final/manifest.json"
+    number = '(?P<claim>' + NUMBER + ')'
+    release_ranking = scores(official, ["results", "ranking"], ["mAP@10", "Rank-1", "Rank-5"])
+    cosine_ranking = scores(comparison, ["results", "baseline", "cosine", "ranking"],
+                            ["mAP@10", "Rank-1", "Rank-5"])
+    table("SOLUTION.md", "d1_j48, независимый top-50 KR (сдаваемый)", release_ranking)
+    table("SOLUTION.md", "d1_j48, cosine (`--no-rerank`)", cosine_ranking)
+    table("Readme.md", "Сдаваемое ранжирование: независимый top-50 k-reciprocal",
+          release_ranking[:2])
+    table("Readme.md", "Та же модель, только cosine", cosine_ranking[:2])
+    table("04-solution/README.md", "Независимый top-50 KR, сдаваемый", release_ranking)
+    table("04-solution/README.md", "Только cosine", cosine_ranking)
+    table("04-solution/service/README.md", "Независимый top-50 KR, сдаваемый", release_ranking)
+    table("04-solution/service/README.md", "Cosine (`--no-rerank`)", cosine_ranking)
+    prose("SOLUTION.md", [r'full-ranking mAP \*\*' + number],
+          ref(official, "results", "full_ranking", "mAP_full"))
+    prose("SOLUTION.md", [r'mINP \*\*' + number],
+          ref(official, "results", "full_ranking", "mINP"))
+    prose("SOLUTION.md", [r'Он дал full-ranking mAP\s+' + number],
+          ref(combined, "d1_j48", "kr", "mAP"))
+    prose("04-solution/service/README.md", [r'^' + number + r'\. \*\*Сдаваемый порядок'],
+          ref(combined, "d1_j48", "kr", "mAP"))
+    prose("SOLUTION.md", [r'локальное mAP@10\s+' + number],
+          ref(combined, "d1_j48", "kr", "mAP@10"))
+    prose("SOLUTION.md", [r'Rank-1\s+' + number + r'\s+и прежнее'],
+          ref(combined, "d1_j48", "kr", "Rank-1"))
+    prose("SOLUTION.md", [r'^\*\*' + number + r'\*\*, TNR'],
+          ref(official, "results", "candidates", "F1"))
+    prose("Readme.md", [r'F1\s+\*\*' + number], ref(official, "results", "candidates", "F1"))
+    prose("Readme.md", [r'TNR\s+\*\*' + number], ref(official, "results", "candidates", "TNR"))
+    prose("04-solution/README.md", [r'^\*\*' + number + r'\*\*, TNR'],
+          ref(official, "results", "candidates", "F1"))
+    prose("04-solution/README.md", [r'TNR — \*\*' + number],
+          ref(official, "results", "candidates", "TNR"))
+    prose("04-solution/service/README.md", [r'F1 \*\*' + number],
+          ref(official, "results", "candidates", "F1"))
+    prose("04-solution/service/README.md", [r'^\*\*' + number + r'\*\*\. При оценке'],
+          ref(official, "results", "candidates", "TNR"))
+    prose("SOLUTION.md", [r'PR-AUC\s+\*\*' + number],
+          ref(official, "results", "candidates", "PR-AUC"))
+    prose("SOLUTION.md", [r'TNR \*\*' + number + r'\*\*, PR-AUC'],
+          ref(official, "results", "candidates", "TNR"))
+    prose("Readme.md", [r'mAP@10 \*\*' + number + r'\*\* против'],
+          ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
+    prose("Readme.md", [r'против \*\*' + number + r'\*\* у релиза'],
+          ref(official, "results", "ranking", "mAP@10"))
+    prose("04-solution/README.md", [r'^\*\*' + number + r'\*\* против'],
+          ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
+    prose("04-solution/training/owncore-distill-20260926/README.md",
+          [r'запросам\]\([^)]*\):\s*' + number],
+          ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
+    prose("04-solution/training/owncore-distill-20260926/README.md",
+          [r'CrossViewCore против\s*' + number],
+          ref(official, "results", "ranking", "mAP@10"))
+    prose("SOLUTION.md", [r'd1_j48 mAP@10\s+' + number],
+          ref(official, "results", "ranking", "mAP@10"))
+    prose("SOLUTION.md", [r'CrossViewCore после combined-продолжения\s+' + number],
+          ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
+    prose("SOLUTION.md", [r'CrossViewCore после combined-продолжения.*? /\s*' + number],
+          ref(comparison, "results", "core", "top50", "ranking", "Rank-1"))
+    prose("04-solution/service/artifacts-final/README.md",
+          [r'`' + number + r'`, сравнение до округления'],
+          ref(manifest, "run_info", "threshold"))
+    for before, after, field in ((r'извлечение векторов заняло \*\*', '', 'embed_elapsed_s'),
+                                 (r'^\*\*', r' с\*\*, весь batch', 'rank_elapsed_s'),
+                                 (r'весь batch \*\*', '', 'total_elapsed_s')):
+        prose("04-solution/service/artifacts-final/README.md", [before + number + after],
+              ref(manifest, "run_info", field))
     for doc in ("04-solution/baseline/README.md", "04-solution/baseline/REPORT.md"):
         if doc.endswith("README.md"):
             markers = [("OSNet-AIN, честный", "base_market"), ("Случайные векторы", "random_mean"),
@@ -219,12 +282,17 @@ def main():
         table("04-solution/postproc/REPORT.md", marker, scores(final, [key], ["mAP", "Rank-1", "mAP@10"]), offset=1)
     for marker, key in (("fast-reid R50", "fr_alone_val"), ("слияние TTA3", "fusion_val"), ("слияние + rerank", "fusion_rerank_val")):
         table("04-solution/postproc/REPORT.md", marker, scores("postproc/out/fusion.json", [key], ["mAP", "Rank-1", "mAP@10"]), offset=1)
-    for marker, key in (("d1_j48, `--no-rerank`", "cos"), ("d1_j48, по умолчанию", "kr")):
-        table("04-solution/service/README.md", marker, scores(combined, ["d1_j48", key], ["mAP", "Rank-1", "mAP@10"]))
-    for marker, key in (("=по умолчанию (переранжирование)", "rerank_point"), ("`--no-rerank`", "cosine_rule_reproduced")):
-        # The second marker must select the refusal row, not the earlier d1_j48 table.
-        if key == "cosine_rule_reproduced": marker = "=`--no-rerank`"
-        table("04-solution/service/README.md", marker, scores(headline, [key], ["threshold", "f1", "tnr"]))
+    service_doc = "04-solution/service/README.md"
+    prose(service_doc, [r'контуром тот же порог давал F1\s+' + number],
+          ref(headline, "cosine_rule_reproduced", "f1"))
+    prose(service_doc, [r'/ TNR\s+' + number + r': смысл'],
+          ref(headline, "cosine_rule_reproduced", "tnr"))
+    prose(service_doc, [r'^' + number + r' и F1'],
+          ref(headline, "rerank_point", "threshold"))
+    prose(service_doc, [r'и F1\s+' + number + r' / TNR'],
+          ref(headline, "rerank_point", "f1"))
+    prose(service_doc, [r'/ TNR\s+' + number + r' —'],
+          ref(headline, "rerank_point", "tnr"))
     for doc in ("04-solution/reproduce/README.md", "04-solution/reproduce/evidence/README.md"):
         for marker, mode, refusal in (("cosine", "cos", "cosine_rule_reproduced"), ("rerank", "kr", "rerank_point")):
             values = scores(combined, ["d1_j48", mode], rank[:2]) + scores(headline, [refusal], ["f1", "tnr"])
@@ -256,7 +324,7 @@ def main():
     check_additional_claims()
     tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=REPO).decode().split('\0')
     files = [f for f in tracked if f.endswith('.md') and
-             (Path(f).name.startswith('README') or f in
+             (Path(f).name.startswith('README') or f == 'Readme.md' or f in
               ('SOLUTION.md', '04-solution/baseline/REPORT.md', '04-solution/postproc/REPORT.md'))]
     inventory = numeric_inventory(files, CHECKS)
     unbound = sum(c['status'] == 'unbound' for c in inventory)
