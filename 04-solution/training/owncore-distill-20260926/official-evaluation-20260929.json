@@ -1,0 +1,86 @@
+{
+  "date": "2026-09-29",
+  "scope": "Reused LCT validation; not hidden test or untouched holdout",
+  "official_evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "reference_example_sha256": "cccda5bf0c801be8fd5748646dac345f180f6d11988ecbf4ec17ac9c311e4f46",
+  "source_assessment": "outputs/owncore-distill-20260926/assessment-combined-d94d3fd/evaluation",
+  "source_evaluation_json_sha256": "b4f29deedcc3bcf01a93c9449f2ba1f34b4ccb60163594b0060d1f8d6ad8319f",
+  "query_csv_sha256": "0988668d730e2599f487e25dac8913d718e3b5405442a73ca61123cc8b1a50f6",
+  "gallery_csv_sha256": "6c1a8d65e89dc5e898d12c90f02c6db6d53b031817a6acaf648bcacc1b532a9d",
+  "row_order": "all 1110 query rows then all 750 gallery rows, as checked by the original ONNX assessment",
+  "vector_sha256": {
+    "baseline": "1ee05675fe584134fc4b7a84932f843d8b056e3928b2d8ca6c36c5509f0891da",
+    "core": "a1864786284ec6c88897d471188f0a7c2a2bfd16c56810d4a0d0f9adba24b13a"
+  },
+  "ranking_modes": {
+    "cosine": "cosine for each independent query",
+    "top50": "k-reciprocal (6,3,0.3) on current query + its cosine top-50 gallery only"
+  },
+  "results": {
+    "baseline": {
+      "cosine": {
+        "ranking": {
+          "n_scored": 832,
+          "n_openset_excluded": 278,
+          "mAP@10": 0.7242262381715506,
+          "Rank-1": 0.6850961538461539,
+          "Rank-5": 0.8822115384615384
+        },
+        "full_ranking": {
+          "mAP_full": 0.7316093422310447,
+          "mINP": 0.6928460434032723,
+          "n_scored": 832
+        },
+        "submission_sha256": "da6d2bc64b474f68df07fc6b2873698ff80dac6eff663060b095e8f1936db30c"
+      },
+      "top50": {
+        "ranking": {
+          "n_scored": 832,
+          "n_openset_excluded": 278,
+          "mAP@10": 0.7411030505952382,
+          "Rank-1": 0.7079326923076923,
+          "Rank-5": 0.8605769230769231
+        },
+        "full_ranking": {
+          "mAP_full": 0.7316093422310447,
+          "mINP": 0.6928460434032723,
+          "n_scored": 832
+        },
+        "submission_sha256": "c09296da4711ccb2517aad6d6c662d0403a1aeabdc3c7a5e0bbe8c4d04e75f03"
+      }
+    },
+    "core": {
+      "cosine": {
+        "ranking": {
+          "n_scored": 832,
+          "n_openset_excluded": 278,
+          "mAP@10": 0.27366572229853475,
+          "Rank-1": 0.23197115384615385,
+          "Rank-5": 0.47596153846153844
+        },
+        "full_ranking": {
+          "mAP_full": 0.2935344325150326,
+          "mINP": 0.24780236109785425,
+          "n_scored": 832
+        },
+        "submission_sha256": "4c82eda0cd30b7de9db8ac3c1859ead8a29af345d0c572798ea31d5402118b6f"
+      },
+      "top50": {
+        "ranking": {
+          "n_scored": 832,
+          "n_openset_excluded": 278,
+          "mAP@10": 0.2979721522690273,
+          "Rank-1": 0.25600961538461536,
+          "Rank-5": 0.4699519230769231
+        },
+        "full_ranking": {
+          "mAP_full": 0.2935344325150326,
+          "mINP": 0.24780236109785425,
+          "n_scored": 832
+        },
+        "submission_sha256": "22911efe872c5234ecd65bcf3b60ab379f55d8a7d818b818962cf1b0c85dac3e"
+      }
+    }
+  },
+  "note": "The historical all-query KR results in REPORT.md are a different research protocol and cannot be used for official test submission."
+}
