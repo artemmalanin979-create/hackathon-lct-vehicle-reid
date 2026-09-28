@@ -271,6 +271,11 @@ def main():
     prose("04-solution/service/artifacts-final/README.md",
           [r'`' + number + r'`, сравнение до округления'],
           ref(manifest, "run_info", "threshold"))
+    prose("04-solution/service/README.md",
+          [r'^\*\*' + number + r'\*\*\. В `candidates.csv`'],
+          ref(manifest, "run_info", "threshold"))
+    prose("Readme.md", [r'с порогом\s+' + number + r' дали'],
+          ref(manifest, "run_info", "threshold"))
     prose("04-solution/README.md", [r'^' + number + r' mAP и'],
           ref(baseline, "base_no_camera_excl", "full_gallery", "mAP"))
     prose("04-solution/README.md", [r'mAP и\s+' + number + r' Rank-1'],
