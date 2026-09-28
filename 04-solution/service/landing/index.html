@@ -85,23 +85,23 @@
         <div class="quality-heading">
           <p class="eyebrow">Проверка решения</p>
           <h2 id="quality-title">Два режима.<br>Разные цифры.</h2>
-          <p>Пакетная сдача использует k-reciprocal re-ranking. Живой сервис выполняет косинусный поиск. Оценка близости не является вероятностью совпадения.</p>
+          <p>Для сдачи каждый запрос отдельно переранжируется в своём cosine top-50. Живой сервис использует косинусный поиск. Оценка близости не является вероятностью совпадения.</p>
         </div>
         <div class="metric-comparison" role="group" aria-label="Качество на локальной валидации">
           <div class="metric">
-            <span class="metric-mode">Пакетный режим · KR</span>
-            <strong>0,774</strong>
-            <span class="metric-unit">mAP на локальной валидации</span>
-            <span class="metric-rank">Rank-1 <b>0,731</b></span>
+            <span class="metric-mode">Пакетная сдача · top-50 KR</span>
+            <strong>0,741</strong>
+            <span class="metric-unit">mAP@10 на локальной валидации</span>
+            <span class="metric-rank">Rank-1 <b>0,708</b></span>
           </div>
           <div class="metric">
             <span class="metric-mode">Режим HTTP · cosine</span>
-            <strong>0,732</strong>
-            <span class="metric-unit">mAP на той же выборке</span>
+            <strong>0,724</strong>
+            <span class="metric-unit">mAP@10 на той же выборке</span>
             <span class="metric-rank">Rank-1 <b>0,685</b></span>
           </div>
         </div>
-        <p class="quality-note">1110 запросов × 750 объектов галереи; 832 запроса с допустимой парой. Совпадения одной камеры исключены. Это измерения заданного локального протокола, а не оценка на произвольных данных.</p>
+        <p class="quality-note">Официальный evaluate.py: 1110 запросов × 750 объектов галереи; 832 запроса с допустимой парой участвуют в mAP@10. Валидация уже использовалась при разработке; закрытый тест не размечен.</p>
         <a class="section-action" href="/submission/documentation.pdf">Методика и ограничения <span aria-hidden="true">↗</span></a>
       </div>
     </section>
