@@ -37,7 +37,7 @@ identities did participate in model/whitening fitting, a limitation. The val
 has been examined repeatedly in this project and is only an exploratory
 confirmation, not an independent external generalization estimate.
 
-| Input | CSV SHA-256 | Aggregate image SHA-256 (sorted CSV row order; `name + NUL + raw-file SHA-256 bytes` per image) |
+| Input | CSV SHA-256 | Aggregate image SHA-256 (CSV row order; `name + NUL + raw-file SHA-256 bytes` per image) |
 |---|---|---|
 | tune query | `17b03ff171a82a42fb3733b293cd8c1be7f111076613d2c0c8041564b201dce6` | `798f4af4728073d6dc4937c8552b770602b7f6347ad7159b90c18ed16a3beea8` |
 | tune gallery | `224fe2e21ddcc991b8a88a2a2e95d36d9ea3ac0e8e58439d9da2fe5175bcd518` | `9554594bc6a39f742653e604025e8fcd05d03a72990b12612d1d59bb3de89358` |
