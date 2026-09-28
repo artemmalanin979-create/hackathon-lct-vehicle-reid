@@ -9,26 +9,27 @@
 
 Обязательные страницы 7–11 шаблона остаются итоговыми 1–5; слайд 3 содержит
 контакты только в локальном полном PPTX/PDF. Файлы с контактами, локальный
-`team-data.md`, проверки и рендеры исключены из Git. `render_review.py` удалил
+`team-data.md`, проверки и рендеры исключены из Git. `render_review.py` скрыл
 ровно 10 contact fields из отдельной копии для просмотра, исходный PPTX не менял.
 В Git входят только код сборки, notes, источники схем, screenshot разрешённого
 демокадра и машиночитаемое резюме ML без персональных данных.
 
 | Локальный артефакт | SHA-256 |
 |---|---|
-| `ЛЦТ2026-задача7-ПРОСВЕТ.pptx` | `1ef32e53d1b24f663fcd9444ba1902bf30323253f02a644c6a43a1a25fd097f3` |
-| `checks/ЛЦТ2026-задача7-ПРОСВЕТ.pdf`, 16 страниц | `46ced0396e4ead71f0ce496ac55a2e31935b4b66997f9bf2d35a7bb18188a2b4` |
-| `checks/content_preview.pdf`, 11 технических страниц, без контактов | `544aa32fe556025a8166031d54e35d69b42884333bfd279512d50b6681047afe` |
+| `ЛЦТ2026-задача7-ПРОСВЕТ.pptx` | `7d3f735c24a7fb2f7d56800d754049781c369ddb152ad3b197fd4f8191add0fa` |
+| `checks/ЛЦТ2026-задача7-ПРОСВЕТ.pdf`, 16 страниц | `57f52518c310026a2f7d7481639d1a2b6827eb67e0ee7fff1308cec5eef220da` |
+| `checks/content_preview.pdf`, 11 технических страниц, без контактов | `036a2824a6334f6b3e4927dd9543d2ed289472a44b3644d2cc397f736ca6b03d` |
 | `assets/ui-search.png` | `c737fd4bb7d924f9da0be07e7e584af03f9798ee3e6c464411cef0ed7c99beba` |
 | `assets/owncore-distill-summary.json` | `a53d4d923ac1db215d6e85594fd60eacb15bdc62c949d398db1d3103c1744bfa` |
-| `slides.md`, побайтное зеркало Obsidian | `2fac5b19c3fc3f9a7304abdcd45a48d118d920aa3b97a2af8ff00ef53b292d32` |
+| `slides.md`, побайтное зеркало Obsidian | `14d7bd8cdd7117199bacc7694152a31e6fea93174da2a3aa72b5801d031c6d9f` |
+| `build_presentation.py` | `789d4bb2cbc3faa42e0bbcdfcaf86e1f389ca8d610c58299e9ee79fbe2822f7e` |
 
 UI source: интегрированный checkout `6e8c1c9d7be015073252f1d30da181737894067c`;
 развёрнутый API d1_j48 с 750 объектами. Демонстрационный кадр прошёл настоящий
 API без готовой выдачи. `assets/ui-provenance.json` закрепляет хеши static,
 каталога demo, сценария захвата, proxy и PNG. Новый кадр `e03daa7c…` имеет полный
 bbox и отличающиеся первые кандидаты; у закрытого test нет identity/camera labels.
-Gate свежести выполнен штатными build/validate в интегрированном checkout.
+Свежесть исходников подтверждена штатными build/validate в интегрированном checkout.
 
 ML source: `d94d3fd`; хеши первичных локальных Holm8, evaluation и benchmark
 зафиксированы в `assets/owncore-distill-summary.json` и notes слайда 14.
@@ -48,29 +49,29 @@ CI95 [−0,492405; −0,400641], p_Holm(8)=0,003999. Для fusion CI95 дель
 
 | Команда | Проверенное свойство | Лог |
 |---|---|---|
-| `python3 05-presentation/check_ui_provenance.py` | PNG и 7 исходников совпали с SHA | `checks/deck-live-provenance.json` |
-| `python3 05-presentation/build_presentation.py` | 16 slides, 18 illustrations, 184 text checks, 0 fit warnings | `checks/deck-live-build.log` |
-| `OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python3 05-presentation/validate_presentation.py` | 57 template geometries, 18 pixel comparisons, 16 full / 11 preview PDF pages, 258/181 text blocks, 0 layout failures | `checks/deck-live-validate.log`, `checks/validation.json` |
-| `python3 05-presentation/test_submission_contract.py` | 3 passed, 0 failed, 0 skipped | `checks/deck-live-contract.log` |
-| Office XML/package validator с `--original` на фактический шаблон | 0 issues | `checks/deck-live-office-schema.log` |
-| `python3 05-presentation/render_review.py` | 10 contact fields удалены только из review-копии | `checks/deck-live-redact.log` |
-| LibreOffice → PDF, затем 1600×900 JPG | 16 обезличенных страниц просмотрены автором, включая 7/10/16 в масштабе 1:1 | `checks/deck-live-redacted-render.log`, `/home/artem/tmp/lct-deck-live-final-all/` |
+| `python3 05-presentation/check_ui_provenance.py` | PNG и 7 исходников совпали с SHA | `checks/deck-final-provenance.log` |
+| `python3 05-presentation/build_presentation.py` | 16 слайдов, 18 иллюстраций, 184 проверки текста, 0 предупреждений о вместимости | `checks/deck-final-build.log` |
+| `OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 python3 05-presentation/validate_presentation.py` | 57 геометрий шаблона, 18 сравнений пикселей, 16 страниц полного PDF и 11 preview; 258/181 текстовых блоков, 0 ошибок размещения | `checks/deck-final-validate.log`, `checks/validation.json` |
+| `python3 05-presentation/test_submission_contract.py` | 3 passed, 0 failed, 0 skipped | `checks/deck-final-contract.log` |
+| Проверка структуры пакета PPTX с `--fail-on-findings` | 0 замечаний | `checks/deck-final-package.log` |
+| `python3 05-presentation/render_review.py` | 10 контактных полей скрыты только в копии для просмотра | `checks/deck-final-redact.log` |
+| LibreOffice → PDF, затем 1600×900 JPG | Все 16 обезличенных страниц просмотрены, включая 16-й с обновлённым статусом; после правки notes повторный рендер совпал пиксель в пиксель на 16/16 страницах | `checks/deck-final-review/{slide-01..16}.jpg`, `checks/deck-final-review-v2/{slide-01..16}.jpg` |
 
-Ранние исправления слайдов 11–14 сохранены. В этой сборке обновлены реальный
-скриншот слайда 7 и статус HTTPS слайда 16; обязательные страницы 1–5 остались
-по шаблону. Автор просмотрел все 16 обезличенных страниц, без наложений и
-обрезки. Числа и границы измерений остаются в заметках. Итоговые хеши относятся
-к опубликованной версии PPTX/PDF, а не к прежнему предварительному deck.
+Ранние исправления слайдов 11–14 и реальный скриншот слайда 7 сохранены.
+На слайде 16 указана отправка решения 28.09.2026; обязательные страницы 1–5
+остались по шаблону. Все 16 обезличенных страниц просмотрены без видимых
+наложений и обрезки. Числа и границы измерений остаются в заметках. Хеши выше
+относятся к этой пересборке, а не к прежнему файлу.
 
 Toolchain: Python 3.13.13, python-pptx 1.0.2, Pillow 12.3.0,
 lxml 5.3.2, LibreOffice 25.2.7.2, Poppler 25.02.0, локальный Montserrat.
 
-Независимая визуальная приёмка текущей пересборки — **PASS**: критик осмотрел
-все 16 обезличенных страниц, отдельно 7/10/16, не нашёл видимых дефектов,
-сверил 11 страниц technical preview с полным PDF по тексту. Контакты страницы 3
-он видел только замаскированными; полный вариант проверяет validator.
+Предыдущая полная версия прошла независимый визуальный просмотр 16 страниц.
+В текущей пересборке изменён видимый текст только на слайде 16; он и остальные
+15 страниц повторно просмотрены в обезличенном рендере. Содержимое полного
+PPTX/PDF с контактами проверяет validator, контакты не выводились в журналы.
 Регламент выступления в минутах не подтверждён;
 репетиционный сценарий около шести минут. Отключённый от сети резервный прогон
-**PENDING**. PPTX/PDF опубликованы с HTTPS, их SHA-256 сверены с локальными и
-серверными файлами; сохранение ссылки в форме организатора этим отчётом не
-подтверждается.
+пока не подтверждён отдельным журналом. Обновлённые PPTX/PDF опубликованы
+по HTTPS; SHA-256 публичных файлов совпали с локальными и файлами на VPS.
+Решение отправлено через платформу 28.09.2026.

@@ -687,16 +687,16 @@ table(s,.65,1.99,[3.12,8.91],[.54,.91,1.04,1.20],[
 txt(s,.65,6.05,5.73,.62,'manifest.json: SHA входов и выходов.\nrun_info.json: режим и параметры.',16.0,bold=True)
 txt(s,7.17,6.05,5.49,.62,'Обе ONNX, whitening, wheels\nи базовые офлайн-образы в комплекте.',16.0)
 
-# 16. Published HTTPS endpoints are distinct from submission on the organizer platform.
+# 16. Published endpoints and the repository submitted to the organizer platform.
 CURRENT = 16
 s = technical('Демонстрация открыта по HTTPS',
-              'Сайт, сервис и материалы опубликованы. Ссылки и обязательные поля на платформе организатора заполняются отдельно.')
+              'Сайт, сервис и материалы опубликованы. Решение отправлено через платформу организатора 28.09.2026.')
 txt(s,.65,2.07,6.7,1.62,'Кадр\nРамка\nСравнение',34,bold=True,line=1.14)
 txt(s,.65,4.6,5.9,1.21,'CrossViewCore обучен и проверен.\nПо критерию качества в релизе\nостаётся d1_j48.',18)
 txt(s,8.03,2.10,4.63,.42,'ОНЛАЙН · 28 СЕНТЯБРЯ',13,bold=True,color=C.ACCENT_2)
 txt(s,8.03,2.78,4.63,1.18,'iamcp.ru\nСайт и материалы решения',23,bold=True)
 txt(s,8.03,4.40,4.63,.91,'demo.lct.iamcp.ru\nСервис · галерея 750',18.5,color=C.ACCENT_2,bold=True)
-txt(s,8.03,5.70,4.63,.98,'До 29.09, 23:59 МСК\nЗаполнить поля платформы',17.5)
+txt(s,8.03,5.70,4.63,.98,'Репозиторий SourceCraft\nКоманда 33 · ПРОСВЕТ',17.5)
 
 # Normalize visible page numbers, keeping each original number field's position.
 for n, s in enumerate(prs.slides, 1):
