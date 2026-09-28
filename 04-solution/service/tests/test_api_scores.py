@@ -6,6 +6,7 @@ import numpy as np
 from fastapi import HTTPException
 
 from app.api import main
+from app.core import config
 
 
 class ApiScoreTests(unittest.TestCase):
@@ -43,6 +44,17 @@ class ApiScoreTests(unittest.TestCase):
         self.assertTrue(main._search_by_vector(np.ones(512), 10, .9).refusal)
         self.store.search.return_value = []
         self.assertTrue(main._search_by_vector(np.ones(512), 10, .5).refusal)
+
+    def test_version_describes_independent_batch_and_cosine_refusal(self):
+        with patch.dict(main.state, {"model_sha256": config.MODEL_SHA256,
+                                     "model2_sha256": config.MODEL2_SHA256,
+                                     "whitening_sha256": config.WHITENING_SHA256}):
+            batch = main.version()["batch_rerank"]
+        self.assertEqual(batch["scope"], "current_query_cosine_top_k")
+        self.assertEqual(batch["top_k"], 50)
+        self.assertEqual(batch["candidates_score_scale"], "cosine")
+        self.assertEqual(batch["default_threshold"], config.DEFAULT_THRESHOLD)
+        self.assertEqual(batch["candidate_threshold"], config.DEFAULT_THRESHOLD)
 
 
 if __name__ == "__main__":

@@ -36,6 +36,7 @@ from ..core import explain as explain_mod
 from ..core.model import Embedder, model_file_sha256
 from ..core.preprocess import crop_to_input, resolve_image_path
 from ..core.ranking import validate_scores
+from ..core.rerank import STREAM_RERANK_TOP_K
 from .store import GalleryStore
 from .demo_materials import router as demo_materials_router
 
@@ -226,9 +227,13 @@ def version() -> dict:
         "default_threshold": config.DEFAULT_THRESHOLD,
         "batch_rerank": {
             "enabled_by_default": config.RERANK_DEFAULT,
+            "scope": "current_query_cosine_top_k",
+            "top_k": STREAM_RERANK_TOP_K,
             "params": [config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA],
-            "score_scale": "rerank_confidence_1_minus_distance",
-            "default_threshold": config.DEFAULT_THRESHOLD_RERANK,
+            "score_scale": "streaming_top50_rerank_confidence_1_minus_distance",
+            "candidates_score_scale": "cosine",
+            "default_threshold": config.DEFAULT_THRESHOLD,
+            "candidate_threshold": config.DEFAULT_THRESHOLD,
         },
         "onnxruntime": __import__("onnxruntime").__version__,
         "numpy": np.__version__,
