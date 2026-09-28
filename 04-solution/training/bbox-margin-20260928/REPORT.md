@@ -1,10 +1,10 @@
 # ±3% bbox margin: negative tune pilot
 
-2026-09-28. Experimental branch `ml/bbox-margin-20260928`, based on release
-source `a0404df`. The [protocol](PROTOCOL.md) was committed as `acfa30c`
-before inference; execution code and a wording correction were committed as
-`ab35262` before inference. No release file, evaluator, weight, gallery or
-threshold was changed. The later release `main` may have moved independently.
+2026-09-28. The isolated pilot started from release source `a0404df`.
+The [protocol](PROTOCOL.md) was committed before inference (`acfa30c` in the
+pilot branch, `a2df3fe` after integration into `main`); execution code and a
+wording correction followed before inference (`ab35262`, then `cc26700` in
+`main`). No release file, evaluator, weight, gallery or threshold was changed.
 
 **Decision: stop at tune.** Neither fixed variant reached the predeclared
 +0.015 KR-mAP tune gate, so there was **no val inference, no threshold fit,
