@@ -1,0 +1,45 @@
+iamcp.ru, www.iamcp.ru, lct.iamcp.ru {
+    encode gzip
+    header X-Content-Type-Options "nosniff"
+    @landing_font path /fonts/*.otf
+    header @landing_font Content-Type "font/otf"
+    @service_font path /static/fonts/*.otf
+    handle @service_font {
+        reverse_proxy 127.0.0.1:18071 {
+            header_down Content-Type "font/otf"
+        }
+    }
+    @portal_files path /submission/presentation.pdf /submission/presentation.pptx /submission/documentation.pdf
+    handle @portal_files {
+        root * /srv/lct/portal-assets
+        file_server
+    }
+    handle /workspace {
+        redir /workspace/ 308
+    }
+    handle_path /workspace/* {
+        reverse_proxy 127.0.0.1:18071
+    }
+    @service path /api/* /static/* /docs* /openapi.json /materials/*
+    handle @service {
+        reverse_proxy 127.0.0.1:18071
+    }
+    handle {
+        root * /srv/lct/landing
+        file_server
+    }
+}
+
+demo.lct.iamcp.ru {
+    encode gzip
+    header X-Content-Type-Options "nosniff"
+    @service_font path /static/fonts/*.otf
+    handle @service_font {
+        reverse_proxy 127.0.0.1:18071 {
+            header_down Content-Type "font/otf"
+        }
+    }
+    handle {
+        reverse_proxy 127.0.0.1:18071
+    }
+}
