@@ -113,3 +113,32 @@ def rerank_scores(query: np.ndarray, gallery: np.ndarray,
                   k1: int, k2: int, lam: float) -> np.ndarray:
     """Матрица уверенностей len(query) x len(gallery) на шкале переранжирования."""
     return distances_to_scores(rerank_distances(query, gallery, k1, k2, lam))
+
+
+def rerank_distances_independent(query: np.ndarray, gallery: np.ndarray,
+                                 k1: int, k2: int, lam: float) -> np.ndarray:
+    """KR для потока: каждый query видит только себя и неизменную gallery.
+
+    В отличие от ``rerank_distances``, соседства других запросов не участвуют
+    ни в нормировке расстояний, ни в k-reciprocal expansion / query expansion.
+    Возвращает полное ранжирование gallery в исходном порядке её строк.
+    Цена полного варианта — повторное построение матриц gallery для каждого
+    запроса; время и порог отказа требуется измерить отдельно до релиза.
+    """
+    q = np.asarray(query)
+    if q.ndim == 1:
+        q = q[None]
+    if q.ndim != 2:
+        raise ValueError("query должен быть матрицей эмбеддингов")
+    if len(q) == 0:
+        return rerank_distances(q, gallery, k1, k2, lam)
+    return np.concatenate(
+        [rerank_distances(q[i:i + 1], gallery, k1, k2, lam)
+         for i in range(len(q))], axis=0)
+
+
+def rerank_scores_independent(query: np.ndarray, gallery: np.ndarray,
+                              k1: int, k2: int, lam: float) -> np.ndarray:
+    """Уверенности потокового KR: ни один query не влияет на другие query."""
+    return distances_to_scores(
+        rerank_distances_independent(query, gallery, k1, k2, lam))
