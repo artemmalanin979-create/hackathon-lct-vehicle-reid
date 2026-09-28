@@ -194,11 +194,25 @@ def main():
           ref(official, "results", "full_ranking", "mINP"))
     prose("SOLUTION.md", [r'Он дал full-ranking mAP\s+' + number],
           ref(combined, "d1_j48", "kr", "mAP"))
+    prose("04-solution/README.md", [r'^' + number + r' и локальное mAP@10'],
+          ref(combined, "d1_j48", "kr", "mAP"))
+    prose("04-solution/README.md", [r'локальное mAP@10\s+' + number],
+          ref(combined, "d1_j48", "kr", "mAP@10"))
     prose("04-solution/service/README.md", [r'^' + number + r'\. \*\*Сдаваемый порядок'],
           ref(combined, "d1_j48", "kr", "mAP"))
+    prose("04-solution/service/README.md", [r'cosine full-ranking mAP\s+' + number],
+          ref(official, "results", "full_ranking", "mAP_full"))
     prose("SOLUTION.md", [r'локальное mAP@10\s+' + number],
           ref(combined, "d1_j48", "kr", "mAP@10"))
     prose("SOLUTION.md", [r'Rank-1\s+' + number + r'\s+и прежнее'],
+          ref(combined, "d1_j48", "kr", "Rank-1"))
+    prose("SOLUTION.md", [r'mAP / Rank-1 выросли с\s+' + number],
+          ref(combined, "osnet(repro)", "kr", "mAP"))
+    prose("SOLUTION.md", [r'выросли с\s+' + NUMBER + r' /\s+' + number],
+          ref(combined, "osnet(repro)", "kr", "Rank-1"))
+    prose("SOLUTION.md", [r'у OSNet\+KR до\s+' + number],
+          ref(combined, "d1_j48", "kr", "mAP"))
+    prose("SOLUTION.md", [r'до\s+' + NUMBER + r' /\s+' + number + r' у d1_j48'],
           ref(combined, "d1_j48", "kr", "Rank-1"))
     prose("SOLUTION.md", [r'^\*\*' + number + r'\*\*, TNR'],
           ref(official, "results", "candidates", "F1"))
@@ -216,12 +230,26 @@ def main():
           ref(official, "results", "candidates", "PR-AUC"))
     prose("SOLUTION.md", [r'TNR \*\*' + number + r'\*\*, PR-AUC'],
           ref(official, "results", "candidates", "TNR"))
+    prose("SOLUTION.md", [r'оценщик дал при том же косинусном пороге F1 \*\*' + number],
+          ref(headline, "cosine_rule_reproduced", "f1"))
+    prose("SOLUTION.md", [r'^\*\*' + number + r'\*\*\. Исторический общий KR'],
+          ref(headline, "cosine_rule_reproduced", "tnr"))
+    prose("SOLUTION.md", [r'^`' + number + r'` дал F1'],
+          ref(headline, "rerank_point", "threshold"))
+    prose("SOLUTION.md", [r'` дал F1 \*\*' + number],
+          ref(headline, "rerank_point", "f1"))
+    prose("SOLUTION.md", [r'и TNR \*\*' + number + r'\*\*;'],
+          ref(headline, "rerank_point", "tnr"))
     prose("Readme.md", [r'mAP@10 \*\*' + number + r'\*\* против'],
           ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
     prose("Readme.md", [r'против \*\*' + number + r'\*\* у релиза'],
           ref(official, "results", "ranking", "mAP@10"))
     prose("04-solution/README.md", [r'^\*\*' + number + r'\*\* против'],
           ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
+    prose("04-solution/README.md", [r'против \*\*' + number + r'\*\* у d1_j48'],
+          ref(official, "results", "ranking", "mAP@10"))
+    prose("04-solution/service/README.md", [r'top-50 KR mAP@10\s+' + number],
+          ref(official, "results", "ranking", "mAP@10"))
     prose("04-solution/training/owncore-distill-20260926/README.md",
           [r'запросам\]\([^)]*\):\s*' + number],
           ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
@@ -230,13 +258,25 @@ def main():
           ref(official, "results", "ranking", "mAP@10"))
     prose("SOLUTION.md", [r'd1_j48 mAP@10\s+' + number],
           ref(official, "results", "ranking", "mAP@10"))
+    prose("SOLUTION.md", [r'd1_j48 mAP@10\s+' + NUMBER + r' / Rank-1\s+' + number],
+          ref(official, "results", "ranking", "Rank-1"))
     prose("SOLUTION.md", [r'CrossViewCore после combined-продолжения\s+' + number],
           ref(comparison, "results", "core", "top50", "ranking", "mAP@10"))
     prose("SOLUTION.md", [r'CrossViewCore после combined-продолжения.*? /\s*' + number],
           ref(comparison, "results", "core", "top50", "ranking", "Rank-1"))
+    prose("SOLUTION.md", [r'В cosine без KR соответствующие mAP@10 —\s+' + number],
+          ref(comparison, "results", "baseline", "cosine", "ranking", "mAP@10"))
+    prose("SOLUTION.md", [r'В cosine без KR соответствующие mAP@10 —\s+' + NUMBER + r' и\s+' + number],
+          ref(comparison, "results", "core", "cosine", "ranking", "mAP@10"))
     prose("04-solution/service/artifacts-final/README.md",
           [r'`' + number + r'`, сравнение до округления'],
           ref(manifest, "run_info", "threshold"))
+    prose("04-solution/README.md", [r'^' + number + r' mAP и'],
+          ref(baseline, "base_no_camera_excl", "full_gallery", "mAP"))
+    prose("04-solution/README.md", [r'mAP и\s+' + number + r' Rank-1'],
+          ref(baseline, "base_no_camera_excl", "full_gallery", "Rank-1"))
+    prose("04-solution/README.md", [r'Rank-1 был\s+' + number],
+          ref(baseline, "base_market", "full_gallery", "Rank-1"))
     for before, after, field in ((r'извлечение векторов заняло \*\*', '', 'embed_elapsed_s'),
                                  (r'^\*\*', r' с\*\*, весь batch', 'rank_elapsed_s'),
                                  (r'весь batch \*\*', '', 'total_elapsed_s')):
