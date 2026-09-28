@@ -81,12 +81,12 @@ class NumericCliTests(unittest.TestCase):
             with self.subTest(value=value):
                 self.invalid_cli("app.load_gallery", [f"--wait={value}"], "--wait")
 
-    def test_threshold_overrides_are_checked_in_both_modes(self):
-        for mode, variable in (("--rerank", "REID_THRESHOLD_RERANK"),
-                               ("--no-rerank", "REID_THRESHOLD")):
+    def test_candidate_threshold_override_is_checked_in_both_ranking_modes(self):
+        for mode in ("--rerank", "--no-rerank"):
             for value in ("nan", "inf", "-inf"):
                 with self.subTest(mode=mode, value=value):
-                    self.invalid_cli("app.batch", [mode], "threshold", {variable: value})
+                    self.invalid_cli("app.batch", [mode], "threshold",
+                                     {"REID_THRESHOLD": value})
 
     def test_rerank_parameters_are_checked_before_inference(self):
         for variable, values in (("REID_RERANK_K1", ("0", "-1")),

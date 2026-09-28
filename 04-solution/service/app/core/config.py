@@ -15,9 +15,11 @@ SERVICE_ROOT = Path(__file__).resolve().parents[2]
 # Сдаваемая конфигурация d1_j48 (переключение 20.09.2026 по решению Артёма):
 # две модели с общим препроцессингом -> L2-нормировка каждого вектора -> среднее
 # -> whitening (P, m; rho=0.5, обучена на train_fit) -> L2-нормировка.
-# Метрики контура (04-solution/eval, market+presence, валидация): KR mAP 0.7741,
-# Rank-1 0.7308; косинус mAP 0.7316, Rank-1 0.6851. Источник чисел и обучения
-# whitening — 04-solution/training/combined/ (s02_metrics.json).
+# На повторно используемой валидации официальный evaluate.py даёт mAP@10
+# 0.7411 для независимого top-50 KR и 0.7242 для cosine. Исторический
+# общий для всех query KR давал full-ranking mAP 0.7741, но не соответствует
+# правилу независимой обработки запросов. Источник обучения whitening —
+# 04-solution/training/combined/ (s02_metrics.json).
 #
 # Модель 1: OSNet-AIN x1.0 (vehicle-reid-0001, Open Model Zoo 2022.1, лицензия MIT).
 # Это же «первая модель» объяснимости (app/core/explain.py): разложение по картам
@@ -46,22 +48,20 @@ WHITENING_SHA256 = "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3
 INPUT_SIZE = 208
 EMBEDDING_DIM = 512
 
-# Переранжирование (k-reciprocal, Zhong et al. 2017) — упорядочивание кандидатов
-# после извлечения векторов. На замеряемое организатором время «изображение ->
-# вектор» не влияет: работает на готовых векторах (см. 04-solution/postproc/).
-#
-# Параметры подобраны на ОТДЕЛЬНОМ протоколе из train_fit (другие идентичности),
-# и только потом один раз проверены на валидации: mAP 0.657 -> 0.694,
-# Rank-1 0.631 -> 0.664. Параметры из статьи (20, 6, 0.3) дают заметно меньше
-# (mAP 0.667) — на этих данных широкое плато вокруг (6, 3, 0.3).
+# Streaming k-reciprocal only reranks the current query against its cosine
+# top-50 gallery candidates. It does not affect measured feature extraction.
+# The k1/k2/lambda values originated in a different, historical all-query
+# experiment; top-50 was measured separately and is not the 0.7741 result.
+# The published batch entry point reranks each query within its own cosine top-50.
+# The historical all-query KR remains available only to offline research code.
 RERANK_DEFAULT = os.environ.get("REID_RERANK", "1") not in {"0", "false", "no"}
 RERANK_K1 = int(os.environ.get("REID_RERANK_K1", "6"))
 RERANK_K2 = int(os.environ.get("REID_RERANK_K2", "3"))
 RERANK_LAMBDA = float(os.environ.get("REID_RERANK_LAMBDA", "0.3"))
 
-# Порог режима отказа. Значения полные, округлять нельзя — иначе candidates.csv
-# разойдётся с проверенным прогоном. Порогов два, потому что шкалы разные, и
-# порог с одной шкалы на другой бессмысленен.
+# Порог режима отказа. candidates.csv в обоих режимах batch использует косинус,
+# поэтому его рабочий порог — DEFAULT_THRESHOLD. DEFAULT_THRESHOLD_RERANK ниже
+# оставлен лишь для воспроизведения исторического all-query исследования.
 #
 # Оба выбраны одним правилом, зафиксированным до просмотра результатов: максимум
 # от min(TNR, F1 при долях отказных 0.10/0.25/0.40), при равенстве — больший F1,
@@ -78,12 +78,13 @@ RERANK_LAMBDA = float(os.environ.get("REID_RERANK_LAMBDA", "0.3"))
 # объектов галереи, протокол market + presence. Отдельного holdout под калибровку
 # нет — F1/TNR ниже заявлены на том же срезе, на котором выбран порог (оговорено
 # в SOLUTION.md, разд. 6). Правило выбора прежнее, применено к новой шкале:
-# DEFAULT_THRESHOLD — косинус, режим --no-rerank: t = 0.5141976914190476,
-# F1 0.7685, TNR 0.7302 (AUC-PR 0.9095).
-# DEFAULT_THRESHOLD_RERANK — уверенность переранжирования (1 - дистанция),
-# режим по умолчанию: t = 0.5282812306342437, F1 0.8091, TNR 0.7842
-# (AUC-PR 0.9183). Как и раньше, шкала переранжирования сильнее косинуса.
-# Порог со шкалы на шкалу не переносится.
+# DEFAULT_THRESHOLD — косинус в HTTP API и candidates.csv обоих пакетных
+# режимов: t = 0.5141976914190476. По официальному query-level оценщику
+# на той же валидации F1 0.9392, TNR 0.7302. Ранее посчитанные F1 0.7685
+# и AUC-PR 0.9095 относятся к иному, gallery-level протоколу.
+# DEFAULT_THRESHOLD_RERANK = 0.5282812306342437 относится только к
+# историческому общему для всех query KR (F1 0.8091, TNR 0.7842 по старому
+# протоколу); пакетная сдача его не использует.
 #
 # Прежние значения (сдаваемая ранее конфигурация OSNet+KR, калибровка
 # 04-solution/refusal/): t_cos 0.5495953464415451 (F1 0.733, TNR 0.698),

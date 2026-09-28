@@ -13,10 +13,11 @@
 Выход: submission.csv, embeddings.npy, candidates.csv (схемы — README датасета)
 и run_info.json со счётчиками и версиями (для протокола, к сдаче не требуется).
 
-По умолчанию кандидаты упорядочиваются переранжированием (k-reciprocal); флаг
---no-rerank возвращает прежнее упорядочивание по косинусу. `embeddings.npy` в
-обоих режимах один и тот же: переранжирование работает после извлечения векторов
-и на них не влияет.
+Для submission каждый запрос независимо переранжирует свой cosine top-50
+относительно статичной gallery. Для candidates решение о совпадении и его
+confidence остаются на отдельно калиброванной шкале cosine. Оба результата
+получены из одних и тех же эмбеддингов одного прогона. Флаг --no-rerank
+отключает только переранжирование submission.
 
 Зависимости — только numpy/pillow/onnxruntime; FastAPI и Qdrant не импортируются.
 """
@@ -47,19 +48,17 @@ def main() -> None:
     ap.add_argument("--out-dir", type=Path, required=True,
                     help="каталог для сдаваемых файлов (создаётся)")
     ap.add_argument("--threshold", type=float, default=None,
-                    help="порог режима отказа (по умолчанию — обоснованный в README, "
-                         "свой для каждой шкалы)")
+                    help="косинусный порог candidates.csv (по умолчанию — из README)")
     ap.add_argument("--rerank", dest="rerank", action="store_true", default=config.RERANK_DEFAULT,
-                    help="переранжирование кандидатов (по умолчанию включено)")
+                    help="потоковый KR внутри cosine top-50 каждого query (по умолчанию)")
     ap.add_argument("--no-rerank", dest="rerank", action="store_false",
-                    help="прежнее упорядочивание по косинусу, порог на шкале косинуса")
+                    help="косинусное ранжирование submission.csv")
     ap.add_argument("--batch", type=positive_int, default=32, help="размер батча инференса (> 0)")
     ap.add_argument("--threads", type=nonnegative_int, default=0,
                     help="intra-op потоки onnxruntime (0 = по умолчанию)")
     args = ap.parse_args()
     if args.threshold is None:
-        args.threshold = (config.DEFAULT_THRESHOLD_RERANK if args.rerank
-                          else config.DEFAULT_THRESHOLD)
+        args.threshold = config.DEFAULT_THRESHOLD
     if not math.isfinite(args.threshold):
         ap.error("threshold должен быть конечным числом")
     if args.rerank:
@@ -75,7 +74,7 @@ def main() -> None:
     from .core.model import Embedder
     from .core.preprocess import CropInputError, crop_problems, read_rows
     from .core.ranking import cosine_scores, validate_scores
-    from .core.rerank import rerank_scores
+    from .core.rerank import STREAM_RERANK_TOP_K, rerank_scores_independent
     from .core.submission import save_embeddings, write_candidates, write_submission
     from .core.validation import validate_embeddings
 
@@ -116,24 +115,28 @@ def main() -> None:
     emb = save_embeddings(args.out_dir / "embeddings.npy", q_emb, g_emb)
 
     t_rank = time.perf_counter()
+    candidate_scores = cosine_scores(q_emb, g_emb)
     if args.rerank:
-        scores = rerank_scores(q_emb, g_emb, config.RERANK_K1, config.RERANK_K2,
-                               config.RERANK_LAMBDA)
+        rank_scores = rerank_scores_independent(q_emb, g_emb, config.RERANK_K1,
+                                                 config.RERANK_K2, config.RERANK_LAMBDA)
     else:
-        scores = cosine_scores(q_emb, g_emb)
+        rank_scores = candidate_scores
     t_rank = time.perf_counter() - t_rank
     q_ids = [r.image_id for r in q_rows]
     g_ids = [r.image_id for r in g_rows]
-    write_submission(args.out_dir / "submission.csv", q_ids, g_ids, scores)
+    write_submission(args.out_dir / "submission.csv", q_ids, g_ids, rank_scores)
     counts = write_candidates(args.out_dir / "candidates.csv", q_ids, g_ids,
-                              scores, args.threshold)
+                              candidate_scores, args.threshold)
 
     info = {
         **counts,
         "rerank": bool(args.rerank),
-        "score_scale": "rerank_confidence_1_minus_distance" if args.rerank else "cosine",
+        "score_scale": "cosine",
+        "ranking_score_scale": ("streaming_top50_rerank_confidence_1_minus_distance"
+                                if args.rerank else "cosine"),
         "rerank_params": ([config.RERANK_K1, config.RERANK_K2, config.RERANK_LAMBDA]
                           if args.rerank else None),
+        "rerank_top_k": STREAM_RERANK_TOP_K if args.rerank else None,
         "queries": len(q_rows),
         "gallery": len(g_rows),
         "embeddings_shape": [int(x) for x in emb.shape],

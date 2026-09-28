@@ -1,8 +1,8 @@
 """Запись сдаваемых файлов: submission.csv, candidates.csv, embeddings.npy.
 
-Форматы — по README датасета («Как сдавать решение»); побайтово совпадают с
-файлами, которые собирал проверенный бейзлайн (тот же csv.writer, те же
-заголовки, confidence с шестью знаками).
+Формат сверяется с example_submission.zip и evaluate.py организаторов:
+submission.csv без заголовка, candidates.csv с заголовком и confidence
+с шестью знаками после запятой.
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def write_submission(path: Path, q_ids: list[str], g_ids: list[str], scores: np.
     validate_scores(scores)
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["query_id"] + [f"gallery_id_{k}" for k in range(1, TOP_K_SUBMISSION + 1)])
+        # Organizer evaluate.py and example_submission.zip require no header here.
         for i, qid in enumerate(q_ids):
             top = ranked_indices(scores[i])[:TOP_K_SUBMISSION]
             w.writerow([qid] + [g_ids[j] for j in top])
@@ -45,8 +45,8 @@ def write_candidates(path: Path, q_ids: list[str], g_ids: list[str],
                      scores: np.ndarray, threshold: float) -> dict:
     """candidates.csv: все кандидаты со скором >= порога; запрос без строк = отказ.
 
-    Порог обязан быть на той же шкале, что и скоры (см. config.DEFAULT_THRESHOLD
-    для косинуса и config.DEFAULT_THRESHOLD_RERANK для переранжирования).
+    Порог обязан быть на той же шкале, что и скоры. Пакетная сдача передаёт
+    косинусные оценки и config.DEFAULT_THRESHOLD независимо от ранжирования.
     """
     validate_scores(scores, threshold)
     n_accepted = n_refused = 0
