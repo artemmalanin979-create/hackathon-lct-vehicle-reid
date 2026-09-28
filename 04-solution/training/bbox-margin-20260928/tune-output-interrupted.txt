@@ -1,0 +1,2 @@
+original: cosine=0.788945 KR=0.810447 embed=157.85s
+inward_3pct: cosine=0.766372 KR=0.793618 embed=159.86s

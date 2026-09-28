@@ -1,0 +1,103 @@
+{
+  "source_sha": "a0404df",
+  "protocol_sha256": "971a68b7e24e3056d090e7c8f4d61623eb30f462e44ecf5467f7d0385eb1bc6f",
+  "script_sha256": "bb8f2c58bf2c1269a927cb5af37d4a85c5df8f9f6de98f6fca049e79bfe36f5e",
+  "stage": "tune",
+  "selected_for_val": null,
+  "counts": {
+    "query": 1110,
+    "gallery": 732,
+    "known": 832,
+    "absent": 278
+  },
+  "controls": {
+    "perfect_labels": {
+      "mAP": 1.0,
+      "Rank-1": 1.0,
+      "Rank-5": 1.0,
+      "mINP": 1.0,
+      "valid_queries": 832
+    },
+    "random_vectors": {
+      "mAP": 0.00925549207977345,
+      "Rank-1": 0.0,
+      "Rank-5": 0.007211538461538462,
+      "mINP": 0.008204395738982182,
+      "valid_queries": 832
+    }
+  },
+  "variants": {
+    "original": {
+      "cosine": {
+        "mAP": 0.7889451222918141,
+        "Rank-1": 0.7307692307692307,
+        "Rank-5": 0.9110576923076923,
+        "mINP": 0.764743985731882,
+        "valid_queries": 832
+      },
+      "KR": {
+        "mAP": 0.8104466614617514,
+        "Rank-1": 0.7487980769230769,
+        "Rank-5": 0.9086538461538461,
+        "mINP": 0.8010872392895101,
+        "valid_queries": 832
+      },
+      "embed_seconds": 155.19230850000167
+    },
+    "inward_3pct": {
+      "cosine": {
+        "mAP": 0.76637156171006,
+        "Rank-1": 0.6959134615384616,
+        "Rank-5": 0.9014423076923077,
+        "mINP": 0.7424391106587144,
+        "valid_queries": 832
+      },
+      "KR": {
+        "mAP": 0.793618273037018,
+        "Rank-1": 0.7295673076923077,
+        "Rank-5": 0.8954326923076923,
+        "mINP": 0.7835585500410928,
+        "valid_queries": 832
+      },
+      "embed_seconds": 150.30653726500532,
+      "delta_KR_mAP": -0.016828388424733363,
+      "delta_KR_mAP_cluster_bootstrap_95": [
+        -0.029289753303740913,
+        -0.00544668491654314
+      ],
+      "tune_gate": false
+    },
+    "outward_3pct": {
+      "cosine": {
+        "mAP": 0.7810677529917147,
+        "Rank-1": 0.7247596153846154,
+        "Rank-5": 0.9038461538461539,
+        "mINP": 0.755067800335836,
+        "valid_queries": 832
+      },
+      "KR": {
+        "mAP": 0.8102164229580324,
+        "Rank-1": 0.7596153846153846,
+        "Rank-5": 0.9098557692307693,
+        "mINP": 0.7975275900258161,
+        "valid_queries": 832
+      },
+      "embed_seconds": 157.07283814200127,
+      "delta_KR_mAP": -0.00023023850371897263,
+      "delta_KR_mAP_cluster_bootstrap_95": [
+        -0.012327178624617794,
+        0.012305974261222657
+      ],
+      "tune_gate": false
+    }
+  },
+  "runtime_seconds": 465.5556309909989,
+  "runtime": {
+    "python": "3.13.13",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "onnxruntime": "1.30.0",
+    "openblas_threads": "1",
+    "omp_threads": "1"
+  }
+}

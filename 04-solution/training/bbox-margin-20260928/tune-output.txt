@@ -1,0 +1,4 @@
+original: cosine=0.788945 KR=0.810447 embed=155.19s
+inward_3pct: cosine=0.766372 KR=0.793618 embed=150.31s
+outward_3pct: cosine=0.781068 KR=0.810216 embed=157.07s
+{"selected_for_val": null, "deltas": {"inward_3pct": -0.016828388424733363, "outward_3pct": -0.00023023850371897263}}
