@@ -6,6 +6,7 @@ The validation copy contains only the eleven technical slides.
 from copy import deepcopy
 from io import BytesIO
 from pathlib import Path
+import csv
 import json
 import math
 import re
@@ -391,17 +392,17 @@ for ident in (15, 17):
     set_text(sh, sh.text.strip(), 20, bold=True, min_size=18.5, after=0)
 set_text(by_id(s, 3), [
     'Две модели + whitening → вектор из 512 чисел → кандидаты или отказ.',
-    'd1_j48: mAP 0,7741, Rank-1 0,7308 с переранжированием; 832 запроса с парой.',
+    'Официальный mAP@10 0,7411, Rank-1 0,7079; 832 запроса с парой на валидации.',
 ], 18, min_size=17, after=15, margin=.055)
 set_text(by_id(s, 7), [
     {'text': 'Помогает оператору сопоставить автомобиль между камерами по внешности.', 'after': 10},
-    {'text': 'Порог делает цену отказа явной: принимаем 606 из 832 запросов с парой и 60 из 278 без пары.', 'after': 18},
+    {'text': 'Порог отказа: 803 верных ответа, 20 отказов при наличии пары; 203 из 278 без пары отклонены.', 'after': 18},
     {'text': 'Идеи по дальнейшему развитию', 'bold': True, 'size': 18, 'after': 10},
     {'text': 'Проверить локальные приметы двойников и расширение данных заказчика.', 'after': 10},
-    {'text': 'Перенести измеренный ANN-поиск на d1_j48 и перекалибровать отказ.'},
+    {'text': 'Измерить новый режим на закрытом тесте и перекалибровать отказ на новых данных.'},
 ], 15.8, min_size=15, after=8, margin=.05)
-foot(s, 'd1_j48; наша валидация, market / presence')
-notes(s, 'Источники чисел: 04-solution/training/combined/s02_metrics.json → d1_j48.kr; 04-solution/service/calib-d1_j48/summary.json → rerank_market_presence.selected.robust_balanced (tp=606, fp=60, fn=226, tn_unknown=218). В исходном шаблоне две белые панели; третье смысловое поле «Идеи по дальнейшему развитию» расположено внутри правой панели с отдельным заголовком, без изменения фона, панелей и двухколоночной структуры.')
+foot(s, 'd1_j48; повторно использованная validation, evaluate.py организаторов')
+notes(s, 'Источник чисел: 05-presentation/assets/official-evaluation-20260929.json, пересчёт evaluate.py организаторов (SHA-256 указан в JSON). submission.csv: независимый top-50 rerank каждого query, mAP@10 0,741103 и Rank-1 0,707933 на 832 допустимых query из 1110. candidates.csv: cosine, порог 0,5141976914; TP=803, FP=84, FN=20, TN=203. FP включает 75 запросов без пары и 9 запросов с парой, где первый ответ чужой; TNR=203/278. Эта validation многократно использовалась, скрытый test не размечен. В исходном шаблоне две белые панели; третье смысловое поле «Идеи по дальнейшему развитию» расположено внутри правой панели без изменения геометрии.')
 
 # Technical content is authored as a separate visual story. Mandatory slides above
 # retain the exact organizer fields, theme, geometry and participants contract.
@@ -415,6 +416,9 @@ CASE_ROOT = REPO / '04-solution/error-analysis/d1_j48'
 CASES = {r['case']: r for r in json.loads((CASE_ROOT / 'examples/manifest.json').read_text())}
 IMAGE_SOURCES = json.loads((CASE_ROOT / 'out/image_sources.json').read_text())
 FINAL_QUERIES = json.loads((CASE_ROOT / 'out/per_query_d1_j48.json').read_text())
+OFFICIAL = json.loads((ROOT / 'assets/official-evaluation-20260929.json').read_text())
+assert (OFFICIAL['query_count'], OFFICIAL['gallery_count'], OFFICIAL['valid_query_count']) == (1110, 750, 832)
+assert OFFICIAL['official_evaluate_sha256'] == '655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3'
 
 
 def txt(s, x, y, w, h, text, size=18, **kwargs):
@@ -479,6 +483,17 @@ def case_picture(s, case, column, x, y, w, h, label):
                    x, y, w, h, f'{case}: {label}')
 
 
+def split_crop(slide, csv_path, image_id, x, y, w, h, label):
+    """Show an unchanged organizer photograph cropped to its supplied bbox."""
+    with csv_path.open(newline='') as stream:
+        rows = [row for row in csv.DictReader(stream) if row['image_id'] == image_id]
+    assert len(rows) == 1
+    row = rows[0]
+    left, top, width, height = (int(row[key]) for key in ('x', 'y', 'w', 'h'))
+    return picture(slide, REPO / 'data/images' / f'{image_id}.jpg',
+                   (left, top, left + width, top + height), x, y, w, h, label)
+
+
 def diagram_node(s, x, y, w, h, heading, sub='', emphasis=False):
     sh = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
     sh.fill.solid()
@@ -496,14 +511,14 @@ def diagram_node(s, x, y, w, h, heading, sub='', emphasis=False):
 # 6. An actual successful pair of the submitted model sets the visual premise.
 CURRENT = 6
 s = technical('Один автомобиль. Две камеры',
-              'Валидация, случай F03. d1_j48 + KR, полный сплит 1110 × 750. Кадры и bbox без ретуши.')
+              'Валидация, случай F03. d1_j48 + независимый top-50 rerank; кадры и bbox без ретуши.')
 txt(s, .65, 1.81, 11.8, .64, 'Ракурс меняется. Задача остаётся: найти ту же машину по внешности.', 20)
 txt(s, .65, 2.65, 5.8, .37, 'ЗАПРОС   /   КАМЕРА 39', 12, bold=True, color=C.ACCENT_2)
 txt(s, 6.97, 2.65, 5.7, .37, 'ВЕРНАЯ ПАРА   /   КАМЕРА 33', 12, bold=True, color=C.ACCENT_2)
 for col, x in [(0, .65), (2, 6.97)]:
     sh = case_picture(s, 'F03', col, x, 3.08, 5.71, 2.96, 'запрос' if col == 0 else 'верный top-1')
     frame(s, sh, C.ACCENT_2)
-txt(s, .65, 6.32, 11.6, .44, 'Исходная OSNet: верная пара на 2-м месте. d1_j48: на 1-м.', 19, bold=True)
+txt(s, .65, 6.32, 11.6, .44, 'После исключения одной камеры: верная пара на 1-м месте.', 19, bold=True)
 
 # 7. The actual UI screenshot is supplied after the independent UI workstream.
 CURRENT = 7
@@ -540,7 +555,7 @@ rule(s,.65,4.63,12.70)
 for x,w,heading,body in [
     (.65,3.74,'Почему OSNet','Перенос на наши данные:\nmAP 0,657 против 0,238\nу R50-IBN, cosine.'),
     (4.95,3.4,'Смена ракурса','Межкамерный MCNL,\nбаланс камер, MixStyle\nи аугментации при обучении.'),
-    (9.0,3.7,'Два режима поиска','API: точный cosine.\nBatch: KR(6, 3, 0,3),\nзависит от состава batch.'),
+    (9.0,3.7,'Два режима поиска','API: точный cosine.\nBatch: top-50 KR только\nс текущим запросом.'),
 ]:
     txt(s,x,4.96,w,.45,heading,19,bold=True)
     txt(s,x,5.58,w,1.13,body,15.7)
@@ -548,15 +563,13 @@ for x,w,heading,body in [
 # 9. Native PowerPoint chart with a common zero baseline and exact values in notes.
 CURRENT = 9
 s = technical('Качество поиска зависит от режима',
-              'Валидация: 1110 query × 750 gallery; 832 query с парой. market, same-camera исключены. Full-ranking mAP.')
+              'Официальный evaluate.py: mAP@10 и Rank-1, 832 допустимых query из 1110, gallery 750. Validation использовалась многократно.')
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION, XL_LABEL_POSITION, XL_TICK_MARK
-metric_data = json.loads((REPO / '04-solution/training/combined/s02_metrics.json').read_text())
-release = metric_data['d1_j48']
 cd = CategoryChartData()
-cd.categories = ['mAP', 'Rank-1']
-cd.add_series('Cosine / API', (release['cos']['mAP'], release['cos']['Rank-1']))
-cd.add_series('KR / batch', (release['kr']['mAP'], release['kr']['Rank-1']))
+cd.categories = ['mAP@10', 'Rank-1']
+cd.add_series('Cosine', (OFFICIAL['cosine_ranking']['mAP@10'], OFFICIAL['cosine_ranking']['Rank-1']))
+cd.add_series('Top-50 KR / query', (OFFICIAL['ranking']['mAP@10'], OFFICIAL['ranking']['Rank-1']))
 chart = s.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(.52), Inches(2.00), Inches(8.07), Inches(3.37), cd).chart
 chart.has_legend=True
 chart.legend.position=XL_LEGEND_POSITION.BOTTOM
@@ -577,36 +590,40 @@ for series,color in zip(chart.series,[C.ACCENT_4,PINK]):
     series.format.line.fill.background()
 chart.plots[0].gap_width=65
 chart.plots[0].overlap=-15
-txt(s,9.12,2.06,3.5,.95,'608 / 832',36,bold=True,color=MUTED)
-txt(s,9.12,3.06,3.5,.81,'верных первых ответов\nу d1_j48 + KR',17)
-txt(s,9.12,4.21,3.5,1.18,'78 ошибок исправлены,\n22 добавлены\nпротив OSNet + KR.',17)
+txt(s,9.12,2.06,3.5,.95,'589 / 832',36,bold=True,color=MUTED)
+txt(s,9.12,3.06,3.5,.81,'верных первых ответов\nу top-50 KR',17)
+txt(s,9.12,4.21,3.5,1.18,'+0,0169 mAP@10\nпротив cosine на\nтех же признаках.',17)
 rule(s,.65,5.76,12.7)
 txt(s,.65,6.02,11.9,.72,'Одна многократно использованная валидация. Закрытый test без меток.\nЭти числа не обещают такое же качество на новых камерах.',16.5)
 
 # 10. Real errors on both sides of the operating threshold, not a fabricated demo.
 CURRENT = 10
 s = technical('Порог имеет цену в обе стороны',
-              'd1_j48 + KR, t=0,5282812306342437. В API другой порог: 0,5141976914190476. Оценки не вероятности.')
-for x,case,heading,sub in [
-    (.65,'P07','Чужая машина проходит порог','Пары нет по разметке. Score 0,839679.'),
-    (6.95,'N01','Верная машина получает отказ','Правильный top-1. Score 0,520430.'),
-]:
-    txt(s,x,1.96,5.72,.65,heading,20,bold=True)
-    for col,dx in [(0,0),(1,2.96)]:
-        case_picture(s,case,col,x+dx,2.82,2.72,1.87,'запрос' if col==0 else 'top-1')
-        txt(s,x+dx,4.81,2.72,.3,'Запрос' if col==0 else 'Первый кандидат',12,color=MUTED)
-    txt(s,x,5.32,5.7,.72,sub,17)
-txt(s,.65,6.25,5.7,.48,'60 из 278 без пары приняты',20,bold=True,color=MUTED)
-txt(s,6.95,6.25,5.7,.48,'226 из 832 с парой отклонены',20,bold=True,color=MUTED)
+              'candidates.csv: cosine, порог 0,5141976914; случаи P07/N02 на val. Оценки — близость, не вероятность.')
+txt(s,.65,1.96,5.72,.65,'Чужая машина проходит порог',20,bold=True)
+for col,dx in [(0,0),(1,2.96)]:
+    case_picture(s,'P07',col,.65+dx,2.82,2.72,1.87,'запрос' if col==0 else 'top-1')
+    txt(s,.65+dx,4.81,2.72,.3,'Запрос' if col==0 else 'Первый кандидат',12,color=MUTED)
+txt(s,.65,5.32,5.7,.72,'Пары нет по разметке. Cosine 0,626608.',17)
+txt(s,6.95,1.96,5.72,.65,'Верная машина получает отказ',20,bold=True)
+split_crop(s, REPO / '04-solution/split/files/val_query.csv',
+           'd33614c8e25b475880fb28c58d752100', 6.95, 2.82, 2.72, 1.87, 'N02: запрос')
+split_crop(s, REPO / '04-solution/split/files/val_gallery.csv',
+           '6f46dde27e5447599a07632b34a3be53', 9.91, 2.82, 2.72, 1.87, 'N02: верная пара')
+txt(s,6.95,4.81,2.72,.3,'Запрос',12,color=MUTED)
+txt(s,9.91,4.81,2.72,.3,'Верная пара · другая камера',12,color=MUTED)
+txt(s,6.95,5.32,5.7,.72,'Верный top-1, но cosine 0,502348.',17)
+txt(s,.65,6.25,5.7,.48,'75 из 278 без пары приняты',20,bold=True,color=MUTED)
+txt(s,6.95,6.25,5.7,.48,'20 из 832 с парой отклонены',20,bold=True,color=MUTED)
 
 # 11. A residual failure of the released model at a readable image size.
 CURRENT = 11
 s = technical('Одинаковая ливрея скрывает различия',
-              'E17, query 516. d1_j48 + KR на валидации. Верная пара осталась третьей; это ошибка финальной сборки.')
+              'E17, query 516. Независимый top-50 KR на val. Верная пара осталась третьей.')
 for col,x,heading,caption in [
     (0,.65,'Запрос','v451 · камера 19'),
-    (1,4.94,'Ошибочный top-1','v1158 · score 0,929677'),
-    (2,9.23,'Верная пара','v451 · score 0,278172'),
+    (1,4.94,'Ошибочный top-1','v1158 · score 0,894970'),
+    (2,9.23,'Верная пара','v451 · score 0,731592'),
 ]:
     txt(s,x,2.08,3.45,.42,heading,18.5,bold=True)
     sh=case_picture(s,'E17',col,x,2.76,3.45,2.70,heading)
@@ -617,10 +634,10 @@ txt(s,.65,6.28,11.9,.5,'Чужая машина с похожим ракурсо
 # 12. Two further mechanisms, each with the complete query / wrong / positive triplet.
 CURRENT = 12
 s = technical('Свет и перекрытие остаются трудными',
-              'E08/E44, d1_j48 + KR, val. Причины по одному наблюдателю — гипотезы.')
+              'E08/E44, d1_j48 + независимый top-50 KR, val. Причины по одному наблюдателю — гипотезы.')
 for case,y,heading,detail in [
-    ('E08',2.05,'Свет фар','Верная пара: ранг 7'),
-    ('E44',4.48,'Перекрытие кузова','Верная пара ниже top-1'),
+    ('E08',2.05,'Свет фар','Верная пара: ранг 8'),
+    ('E44',4.48,'Перекрытие кузова','Верная пара: ранг 3'),
 ]:
     txt(s,.65,y,2.15,.64,heading,19,bold=True)
     txt(s,.65,y+.73,2.1,.95,detail,14.4,color=MUTED)
@@ -653,14 +670,13 @@ assert (core['query_count'], core['gallery_count'], core['known_queries']) == (1
 def metric(value, digits):
     return f'{value:.{digits}f}'.replace('-', '−').replace('.', ',')
 
-s = technical('Собственное ядро быстрее, но ищет хуже',
-              'Повторно использованная val: 1110 × 750, 832 запроса с парой; это не новый holdout. KR full-ranking mAP; парный bootstrap по vehicle_id.')
-txt(s,.65,2.08,5.45,.36,'КАЧЕСТВО · KR / BATCH',12,bold=True,color=MUTED)
-txt(s,.65,2.62,5.55,.60,f"{metric(core['baseline_kr_map'], 4)} → {metric(core['core_kr_map'], 4)}",30,bold=True)
-txt(s,.65,3.46,5.57,.76,f"d1_j48 → CrossViewCore\nΔmAP {metric(core['core_kr_delta'], 4)}",18.2)
+s = technical('Собственное ядро быстрее, но не заменяет релиз',
+              'Val 1110 × 750 (832 с парой), официальный mAP@10; отдельно CPU batch1 без JPEG.')
+txt(s,.65,2.08,5.45,.36,'КАЧЕСТВО · ОФИЦИАЛЬНЫЙ mAP@10',11.5,bold=True,color=MUTED)
+txt(s,.65,2.62,5.55,.60,f"{metric(OFFICIAL['ranking']['mAP@10'], 4)} → {metric(OFFICIAL['owncore_combined']['top50_ranking']['mAP@10'], 4)}",30,bold=True)
+txt(s,.65,3.46,5.57,.76,'d1_j48 → CrossViewCore\nодин и тот же val-сплит',18.2)
 txt(s,.65,4.51,5.62,.75,
-    f"95 % ДИ [{metric(core['core_kr_delta_ci95'][0], 4)}; {metric(core['core_kr_delta_ci95'][1], 4)}]"
-    f"\np_Holm(8) = {metric(core['core_kr_p_holm8'], 3)}",17.3,color=MUTED)
+    'Независимый top-50 KR/query.\nVal не новый holdout.',17.3,color=MUTED)
 txt(s,7.13,2.08,5.5,.36,'СКОРОСТЬ · CPU, BATCH-1',12,bold=True,color=MUTED)
 txt(s,7.13,2.62,5.6,.60,
     f"{metric(core['baseline_cpu_p95_ms'], 2)} → {metric(core['core_cpu_p95_ms'], 2)} мс",30,bold=True)
@@ -671,8 +687,7 @@ txt(s,7.13,4.51,5.6,.75,
 rule(s,.65,5.50,12.7)
 txt(s,.65,5.82,7.2,.78,'Критерий качества и отказа не выполнен.\nВ релизе остаётся d1_j48.',19.5,bold=True)
 txt(s,8.08,5.82,4.55,.78,
-    f"Fusion: KR {metric(core['fusion_kr_map'], 4)}; ДИ Δ включает 0."
-    f"\nTNR ядра = {metric(core['core_kr_tnr'], 1)}.",15.5)
+    'Отказ ядра на val не прошёл\nпредзаданный release gate.',15.5)
 
 # 15. Table wording is an acceptance contract, retained literally and still editable.
 CURRENT = 15
@@ -680,9 +695,9 @@ s = technical('Один проверяемый комплект сдачи',
               'Readme.md и SOLUTION.md описывают фактическую сборку. Изображения организатора передаются отдельно от Git.')
 table(s,.65,1.99,[3.12,8.91],[.54,.91,1.04,1.20],[
     ['Артефакт','Контракт результата одного прогона'],
-    ['submission.csv','Первые 10 кандидатов при галерее ≥ 10, независимо от отказа'],
+    ['submission.csv','Без заголовка: top-10 при галерее ≥ 10, top-50 KR для каждого запроса, независимо от отказа'],
     ['embeddings.npy','По 512 чисел: сначала запросы, затем галерея, в порядке входных CSV'],
-    ['candidates.csv','Все пары с исходным score ≥ порога, без лимита 10. Нет строк — отказ при успешном batch и уникальных query ID'],
+    ['candidates.csv','Все пары с исходным score ≥ порога (cosine 0,51419769), без лимита 10. Нет строк — отказ при успешном batch и уникальных query ID'],
 ],size=16.0,header=14.5)
 txt(s,.65,6.05,5.73,.62,'manifest.json: SHA входов и выходов.\nrun_info.json: режим и параметры.',16.0,bold=True)
 txt(s,7.17,6.05,5.49,.62,'Обе ONNX, whitening, wheels\nи базовые офлайн-образы в комплекте.',16.0)

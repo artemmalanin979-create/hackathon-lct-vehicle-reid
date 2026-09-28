@@ -9,6 +9,6 @@ digraph pipeline {
  whitening [label="Whitening (train_fit)\nrho=0,5 → L2"];
  output [label="512 чисел float32",style=filled,fillcolor="#2D1451",fontcolor="white"];
  api [label="API: exact cosine\nt_cos=0,5141976914"];
- batch [label="Batch: KR(6,3,0,3)\nt_rr=0,5282812306"];
+ batch [label="Batch submission: top-50 KR/query\nCandidates: cosine t=0,5141976914"];
  input -> {a,b}; {a,b} -> fusion -> whitening -> output; output -> {api,batch};
 }

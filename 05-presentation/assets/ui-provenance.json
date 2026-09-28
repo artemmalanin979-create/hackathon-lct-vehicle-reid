@@ -7,9 +7,9 @@
     1440,
     1000
   ],
-  "source_git_sha": "6e8c1c9d7be015073252f1d30da181737894067c",
+  "source_git_sha": "71ee4e41a5fbe677cda881239d847666820d45e0",
   "source_files_sha256": {
-    "04-solution/service/app/static/index.html": "61d94c2969322b256f093fb9c098ce47a56ccc06050c55769cbe3a1bbe3cb79a",
+    "04-solution/service/app/static/index.html": "539a09940b1b282f4c6e9b33b4e452f289476ad12ec1d8bcfc17e312ae844597",
     "04-solution/service/app/static/app.css": "0f4ae007d1fe1828f4b1abecb4c7e487f6d6f155abeed40f6edf265f6bd84adb",
     "04-solution/service/app/static/app.js": "010434b731cc669d1d201d4e45eee84ccdae4ebc70cbc99e86a973d8168f5c9c",
     "04-solution/service/app/api/demo_materials.py": "fb6173203e301895c717df65151da043224777d5efbb50bc8baa9c83139dae61"
@@ -71,5 +71,16 @@
     }
   ],
   "accepted_candidates_at_capture": 4,
-  "ground_truth_identity_verified": false
+  "ground_truth_identity_verified": false,
+  "source_revalidation": {
+    "utc": "2026-09-28T23:16:37Z",
+    "reason": "index.html method text changed below the captured workspace viewport; recaptured current static against the unchanged deployed d1_j48 API through SSH loopback",
+    "recapture_filename": "1440-light-search.png",
+    "recapture_sha256": "5da147898ca1740a539ccf7baf280b89426aecf3bc5ab371495289fa9edd418a",
+    "pixel_differences": 44,
+    "total_pixels": 1440000,
+    "canonical_png_retained": true,
+    "api_version_response_sha256": "dd65dffd2d73146c25ce8aa9c5c2c7b3250d72e0a1154da35ac15b3e2d0aaf13",
+    "gallery_points": 750
+  }
 }

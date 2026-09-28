@@ -1,0 +1,62 @@
+{
+  "protocol": "Organizer evaluate.py, independent top-50 rerank per query for submission.csv; cosine candidates.csv at threshold 0.5141976914190476",
+  "scope": "Reused local validation, 1110 query x 750 gallery, 832 valid cross-camera queries; not a hidden-test estimate",
+  "official_evaluate_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "embeddings_sha256": "7007ef51db06aa968f3b227227afd33fe3d70c512773a328cf6772f1f6a7c7af",
+  "ground_truth_sha256": "92e55f1546508f4346b9f0bcfaca00d356d28ad2bf9aa2902d22ede9a17f8647",
+  "submission_sha256": "c09296da4711ccb2517aad6d6c662d0403a1aeabdc3c7a5e0bbe8c4d04e75f03",
+  "candidates_sha256": "652e52112589c4c9034602a138bd10c750873675560befac8765879f3a4f4f76",
+  "query_count": 1110,
+  "gallery_count": 750,
+  "valid_query_count": 832,
+  "ranking": {
+    "mAP@10": 0.7411030505952382,
+    "Rank-1": 0.7079326923076923,
+    "Rank-5": 0.8605769230769231
+  },
+  "cosine_ranking": {
+    "mAP@10": 0.7242262381715506,
+    "Rank-1": 0.6850961538461539,
+    "Rank-5": 0.8822115384615384
+  },
+  "owncore_combined": {
+    "source": "assessment-combined-d94d3fd/evaluation/core-fresh.npy; same query/gallery order and organizer evaluate.py",
+    "embeddings_sha256": "a1864786284ec6c88897d471188f0a7c2a2bfd16c56810d4a0d0f9adba24b13a",
+    "baseline_embeddings_sha256": "1ee05675fe584134fc4b7a84932f843d8b056e3928b2d8ca6c36c5509f0891da",
+    "top50_submission_sha256": "22911efe872c5234ecd65bcf3b60ab379f55d8a7d818b818962cf1b0c85dac3e",
+    "top50_report_sha256": "4833c3ac95c1d2f3dc9571540db16b978d9935213f5fa83d14f51cde1c0448cb",
+    "top50_ranking": {
+      "mAP@10": 0.2979721522690273,
+      "Rank-1": 0.25600961538461536,
+      "Rank-5": 0.4699519230769231
+    },
+    "cosine_ranking": {
+      "mAP@10": 0.27366572229853475,
+      "Rank-1": 0.23197115384615385,
+      "Rank-5": 0.47596153846153844
+    }
+  },
+  "candidates": {
+    "TP": 803,
+    "FP": 84,
+    "FN": 20,
+    "TN": 203,
+    "open_set_false_positives": 75,
+    "F1": 0.9391812865497076,
+    "TNR": 0.7302158273381295
+  },
+  "case_scores": {
+    "F03_top50_positive": 0.816926,
+    "P07_cosine_wrong_top1": 0.626608,
+    "N02_query_index": 1078,
+    "N02_cosine_true_top1": 0.502348,
+    "E17_top50_wrong_top1": 0.894970,
+    "E17_top50_true_rank3": 0.731592,
+    "E08_top50_true_rank": 8,
+    "E44_top50_true_rank": 3
+  },
+  "historical_full_batch": {
+    "mAP_full": 0.7740915539438481,
+    "status": "Research-only result: mixed all query embeddings and violates independent-query evaluation rule"
+  }
+}
