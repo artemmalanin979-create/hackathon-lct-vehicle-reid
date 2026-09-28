@@ -2,8 +2,8 @@
 """Reproduce d1_j48 from organizer images and retain historical research anchors.
 
 The old all-query KR numbers below are historical, not the current independent-query
-submission metric. Pass --official-evaluator to additionally check the current batch
-output with the organizer's evaluate.py.
+submission metric. Run the organizer's evaluate.py separately as documented in
+SOLUTION.md; it needs pandas, which is intentionally absent from the service image.
 """
 from __future__ import annotations
 
@@ -29,8 +29,6 @@ def main():
     parser.add_argument("--data-dir", type=Path, required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--check-only", action="store_true")
-    parser.add_argument("--official-evaluator", type=Path,
-                        help="путь к полученному от организатора evaluate.py")
     args = parser.parse_args()
     repo, data, out = args.repo_dir.resolve(), args.data_dir.resolve(), args.out_dir.resolve()
     # This check runs before numpy, ONNX Runtime or any model is imported.
@@ -66,10 +64,10 @@ def main():
         (out / "test-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
         print("TEST REPRODUCED", json.dumps(report["files"]))
         return 0
-    return validation(repo, data, out, modes, inputs, args.official_evaluator)
+    return validation(repo, data, out, modes, inputs)
 
 
-def validation(repo, data, out, modes, inputs, official_evaluator=None):
+def validation(repo, data, out, modes, inputs):
     import csv
     import hashlib
     import json
@@ -183,40 +181,6 @@ def validation(repo, data, out, modes, inputs, official_evaluator=None):
     report["rerank_refusal"] = assess(1-distance, rr_best["threshold"])["refusal"]
     report["rerank_at_service_threshold"] = assess(
         1-distance, getattr(config, "DEFAULT_THRESHOLD_RERANK", rr_best["threshold"]))["refusal"]
-    if official_evaluator is not None:
-        evaluator = official_evaluator.resolve()
-        expected_evaluator_sha = "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3"
-        if not evaluator.is_file() or hashlib.sha256(evaluator.read_bytes()).hexdigest() != expected_evaluator_sha:
-            raise ValueError("официальный evaluate.py отсутствует или не совпал SHA-256")
-        gt = out / "val_ground_truth.csv"
-        with gt.open("w", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow(("image_id", "vehicle_id", "camera_id", "split"))
-            for split_name, entries in (("query", qm), ("gallery", gm)):
-                writer.writerows((r["image_id"], r["vehicle_id"], r["camera_id"], split_name)
-                                 for r in entries)
-        official_path = out / "official_metrics.json"
-        subprocess.run([sys.executable, str(evaluator), "--gt", str(gt),
-                        "--submission", str(out / "val/submission.csv"),
-                        "--candidates", str(out / "val/candidates.csv"),
-                        "--embeddings", str(out / "val/embeddings.npy"),
-                        "--query", str(split / "val_query.csv"),
-                        "--gallery", str(split / "val_gallery.csv"),
-                        "--json", str(official_path)], check=True)
-        official = json.loads(official_path.read_text())
-        expected = {"mAP@10": 0.7411030505952382, "Rank-1": 0.7079326923076923,
-                    "Rank-5": 0.8605769230769231}
-        for metric, want in expected.items():
-            got = official["ranking"][metric]
-            assert abs(got - want) < 1e-6, (metric, got, want)
-        report["official_independent_query"] = {
-            "evaluator_sha256": expected_evaluator_sha,
-            "report": str(official_path),
-            "ranking": official["ranking"],
-            "candidates": official["candidates"],
-        }
-    else:
-        report["official_independent_query"] = "NOT RUN (--official-evaluator required)"
     # Check model-to-row order by independently inferring boundary rows at batch 1.
     model = Embedder(threads=2)
     meta_rows = read_rows(split / "val_query.csv") + read_rows(split / "val_gallery.csv")
