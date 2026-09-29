@@ -117,8 +117,10 @@ CPU-резерв проверен на Podman и Docker Engine 29.7.2 / Compose 
 [Развёртывание и откат](04-solution/service/deploy/README.md) ·
 [Полная презентация PPTX](https://iamcp.ru/submission/presentation.pptx)
 
-Сдаваемый код и артефакты размещены в
-[репозитории команды в SourceCraft](https://sourcecraft.dev/lct-hackaton-2026/case-17-vehicle-digital-signature-team-33).
+Сдаваемый код и артефакты размещены в открытом
+[репозитории команды на GitHub](https://github.com/artemmalanin979-create/hackathon-lct-vehicle-reid);
+зеркало для организаторов — в закрытом
+[SourceCraft](https://sourcecraft.dev/lct-hackaton-2026/case-17-vehicle-digital-signature-team-33).
 [Инструкция по развёртыванию и откату](04-solution/service/deploy/README.md)
 описывает работающий образ и проверенный комплект данных. Исходники отдельного
 ML-эксперимента также включены; его checkpoint и обучающие данные не входят в

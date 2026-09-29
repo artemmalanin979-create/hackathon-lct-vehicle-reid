@@ -1003,7 +1003,7 @@ Python runtime, а для всего жизненного цикла решен�
 
 | Материал | Где посмотреть |
 |---|---|
-| Исходный код | [Репозиторий команды в SourceCraft](https://sourcecraft.dev/lct-hackaton-2026/case-17-vehicle-digital-signature-team-33): `Readme.md`, `SOLUTION.md`, обучение и инференс, Dockerfile, Compose, зависимости, обе ONNX-модели и whitening |
+| Исходный код | Открытый [репозиторий команды на GitHub](https://github.com/artemmalanin979-create/hackathon-lct-vehicle-reid): `Readme.md`, `SOLUTION.md`, обучение и инференс, Dockerfile, Compose, зависимости, обе ONNX-модели и whitening; зеркало для организаторов — закрытый SourceCraft |
 | Результаты на выданном тесте | [submission.csv](04-solution/service/artifacts-final/submission.csv), [embeddings.npy](04-solution/service/artifacts-final/embeddings.npy), [candidates.csv](04-solution/service/artifacts-final/candidates.csv) и [manifest прогона](04-solution/service/artifacts-final/manifest.json) |
 | Презентация | [PDF на 16 слайдов](https://iamcp.ru/submission/presentation.pdf) и [редактируемый PPTX](https://iamcp.ru/submission/presentation.pptx); обязательные страницы шаблона сохранены |
 | Работающий прототип | [Сайт проекта](https://iamcp.ru/) и [сервис поиска](https://demo.lct.iamcp.ru/); резервный вход — [через сайт](https://iamcp.ru/workspace/) |
