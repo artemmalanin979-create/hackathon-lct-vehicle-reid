@@ -1,14 +1,16 @@
 # Колёса зависимостей
 
 30 файлов, 59 146 237 байт: зависимости из `requirements.txt` и
-`requirements-lock.txt`. Они входят в Git; установка пакетов по умолчанию не
-обращается к PyPI. Для офлайн-сборки нужен правильный локальный Python base.
+`requirements-lock.txt`. Они входят в Git; `Dockerfile.cpu` устанавливает их
+без обращения к PyPI. Основной GPU-образ собирается из отдельного
+`requirements-gpu-lock.txt` с доступом к PyPI. Для офлайн-сборки CPU нужен
+правильный локальный Python base.
 Базовые образы лежат в [offline/](../offline/README.md) — по отдельному архиву на образ,
 с отпечатками в `SHA256SUMS`.
 
 ## Что проверено
 
-[Аудит 21.09](../../audit/jury-path-2/REPORT.md) собрал неизменённый Dockerfile
+[Аудит 21.09](../../audit/jury-path-2/REPORT.md) собрал прежний CPU Dockerfile
 на Podman 5.8.1 с заранее имевшимся `python:3.13-slim`: без кэша, без pull,
 с сетью `RUN` в режиме `none`, а сам процесс сборки — в отдельном network
 namespace через `unshare --net`. Установка из `/wheels` и `pip check` прошли;
@@ -18,7 +20,8 @@ namespace через `unshare --net`. Установка из `/wheels` и `pip 
 
 ```bash
 podman image exists docker.io/library/python:3.13-slim
-podman build --no-cache --pull=never --network none -t vehicle-reid-offline .
+podman build --no-cache --pull=never --network none -f Dockerfile.cpu \
+  -t vehicle-reid-service-cpu .
 ```
 
 Эта команда запрещает pull в Podman и сеть у `RUN`. Проверку полной изоляции
@@ -53,10 +56,11 @@ podman run --rm -v "$PWD:/src:z" -w /src python:3.13-slim \
 
 ```bash
 mkdir -p wheels
-docker build --build-arg PIP_SOURCE=network -t vehicle-reid-service .
+docker build -f Dockerfile.cpu --build-arg PIP_SOURCE=network \
+  -t vehicle-reid-service-cpu .
 ```
 
-Каталог `wheels/` обязателен в обеих ветвях: Dockerfile безусловно выполняет
+Каталог `wheels/` обязателен в обеих ветвях CPU-сборки: `Dockerfile.cpu` безусловно выполняет
 `COPY wheels/ /wheels/`. В сетевой ветви он может быть пустым; отсутствие каталога
 не исправляется выбором `PIP_SOURCE=network`. Сетевой путь не является
 офлайн-сборкой. Колёса не входят в финальный слой runtime: копируются только

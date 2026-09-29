@@ -1,6 +1,6 @@
 # ЛЦТ №7 — развёрнутый сервис и воспроизведение релиза
 
-Срез 29.09.2026. Публичный прототип **DEPLOYED** на выделенной Yandex Cloud VM `84.201.146.191` (Ubuntu 24.04, 2 vCPU, 4 GiB RAM, SSD 50 GiB). Проверенный неизменный bundle данных и моделей построен из `fcb038af681405b07219542833ce3b80395055b0`; текущий API запущен из отдельно загруженного образа с revision `e3cd2b0d0a538fa2e383ba43acb763e903a63aef`. Галерея, веса и порог HTTP-поиска не менялись. Лендинг и публичные документы размещаются отдельно. Решение отправлено через платформу организатора 28.09.2026; изменения в репозитории допускаются до **29.09.2026, 23:59 МСК**. Перед обновлением сервиса сверяйте фактический контейнер, `/api/version`, ссылки и SHA.
+Срез 29.09.2026. Публичный прототип **DEPLOYED** на выделенной Yandex Cloud VM `84.201.146.191` (Ubuntu 24.04, 2 vCPU, 4 GiB RAM, SSD 50 GiB). Проверенный неизменный bundle данных и моделей построен из `fcb038af681405b07219542833ce3b80395055b0`; текущий API запущен из отдельно загруженного CPU-образа с revision `e3cd2b0d0a538fa2e383ba43acb763e903a63aef`. Новый основной GPU-образ предназначен для стенда организаторов, не для этой VM без NVIDIA. Галерея, веса и порог HTTP-поиска не менялись. Лендинг и публичные документы размещаются отдельно. Решение отправлено через платформу организатора 28.09.2026; изменения в репозитории допускаются до **29.09.2026, 23:59 МСК**. Перед обновлением сервиса сверяйте фактический контейнер, `/api/version`, ссылки и SHA.
 
 ## Адреса и состав
 
@@ -26,13 +26,14 @@
 
 ## Воспроизводимая локальная сборка
 
-Команды выполняются из чистого checkout **после логического commit**. Нужны разрешённые данные организатора в локальном `data/`, Podman 5.8.2 или совместимый Docker, два базовых образа из `04-solution/service/offline/`, `pdfinfo`/`pdftotext` и уже проверенный технический PDF `05-presentation/checks/content_preview.pdf` (11 страниц). Этот PDF генерируется штатным `build_presentation.py`/`validate_presentation.py`; для их запуска нужен локальный игнорируемый Git `05-presentation/team-data.md` из разрешённого источника. Скрипт релиза проверяет, что контактные номера из этого файла отсутствуют в техническом PDF. Не добавлять `team-data.md`, полный deck или данные организатора в Git.
+Команды выполняются из чистого checkout **после логического commit**. Это сборка CPU-образа для текущего VPS без NVIDIA; основной GPU-образ для стенда организаторов описан в [инструкции сервиса](../README.md). Нужны разрешённые данные организатора в локальном `data/`, Podman 5.8.2 или совместимый Docker, два базовых образа из `04-solution/service/offline/`, `pdfinfo`/`pdftotext` и уже проверенный технический PDF `05-presentation/checks/content_preview.pdf` (11 страниц). Этот PDF генерируется штатным `build_presentation.py`/`validate_presentation.py`; для их запуска нужен локальный игнорируемый Git `05-presentation/team-data.md` из разрешённого источника. Скрипт релиза проверяет, что контактные номера из этого файла отсутствуют в техническом PDF. Не добавлять `team-data.md`, полный deck или данные организатора в Git.
 
 ```bash
 python3 06-documentation/build_pdf.py --check
 RELEASE_SHA=$(git rev-parse HEAD)
 LCT_DATA_DIR=/home/artem/projects/hackathon-lct-vehicle-reid/data
-podman build --pull=never --network=none --build-arg SOURCE_SHA="$RELEASE_SHA" \
+podman build --pull=never --network=none -f 04-solution/service/Dockerfile.cpu \
+  --build-arg SOURCE_SHA="$RELEASE_SHA" \
   -t "localhost/lct-release:$RELEASE_SHA" 04-solution/service
 python3 04-solution/service/deploy/prepare_release.py \
   --data "$LCT_DATA_DIR" \

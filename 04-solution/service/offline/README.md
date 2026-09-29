@@ -2,8 +2,9 @@
 
 ТЗ п. 8 требует, чтобы инференс работал без доступа в сеть, а всё необходимое
 поставлялось в составе решения. Колёса Python лежат в `../wheels/`, веса — в `../model/`.
-Здесь — два базовых образа, которые иначе пришлось бы тянуть из реестра: на них ссылаются
-`Dockerfile` и `docker-compose.yml`.
+Здесь — два базовых образа для резервной CPU-сборки (`Dockerfile.cpu` и
+`docker-compose.cpu.yml`). Основной `Dockerfile` также использует Python base,
+но устанавливает GPU-зависимости из PyPI при сборке.
 
 | Файл | Образ | Размер | Digest образа |
 |---|---|---:|---|
@@ -43,7 +44,8 @@ Docker 29.7.2 с containerd image store для этих же архивов по
 ## Сборка без обращения к реестру
 
 ```bash
-podman build --pull=never --network none -t vehicle-reid-service ..
+podman build --pull=never --network none -f ../Dockerfile.cpu \
+  -t vehicle-reid-service-cpu ..
 ```
 
 `--network none` изолирует только шаги `RUN`: базовый образ тянется **до** них, поэтому

@@ -82,7 +82,8 @@ python3 04-solution/reproduce/check_inputs.py --mode val --data-dir "$DATA_DIR" 
 
 ## Запуск
 
-Соберите или импортируйте `vehicle-reid-service` по [SOLUTION.md §3–4](../../SOLUTION.md).
+Для точного повтора опубликованных CPU-чисел соберите или импортируйте
+`vehicle-reid-service-cpu` по [SOLUTION.md §3–4](../../SOLUTION.md).
 Для офлайн-сборки нужен локальный Python base, для этих batch-команд Qdrant не нужен.
 Базовые образы лежат в [offline/](../service/offline/README.md) отдельными архивами и
 проверены загрузкой в отдельное хранилище.
@@ -91,7 +92,7 @@ python3 04-solution/reproduce/check_inputs.py --mode val --data-dir "$DATA_DIR" 
 docker run --rm --network none --cpus 2 --memory 4g \
   -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 -e PYTHONDONTWRITEBYTECODE=1 \
   -v "$REPO:/repo:ro" -v "$DATA_DIR:/data:ro" -v "$OUT_DIR:/out" \
-  vehicle-reid-service python -B /repo/04-solution/reproduce/run.py \
+  vehicle-reid-service-cpu python -B /repo/04-solution/reproduce/run.py \
   --mode val --data-dir /data --out-dir /out
 ```
 

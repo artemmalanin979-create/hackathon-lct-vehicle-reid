@@ -7,7 +7,7 @@
 
 | Компонент | Технология | Роль |
 |---|---|---|
-| `api` | Python, FastAPI, onnxruntime (CPU) | инференс модели, HTTP-API (OpenAPI), тонкий клиент |
+| `api` | Python, FastAPI, ONNX Runtime GPU; CPU-образ отдельно | инференс модели, HTTP-API (OpenAPI), тонкий клиент |
 | `qdrant` | Qdrant (свободная векторная СУБД) | хранение векторов и метаданных галереи |
 | `app.batch` | тот же образ, без API и СУБД | пакетный прогон тестового набора → сдаваемые файлы |
 
@@ -27,6 +27,13 @@ CARLA Apache-2.0 + train организатора; журнал — `../training
 
 ## Запуск одной командой
 
+Основной образ предназначен для NVIDIA GPU. Он включает ONNX Runtime GPU,
+CUDA 12.2 и cuDNN 9; контейнеру нужен NVIDIA Container Toolkit. При сборке
+нужна сеть для установки закреплённых версий пакетов, при работе инференса —
+нет. `LCT_DEVICE=cuda` задан в образе: если CUDA не запустилась, API и batch
+завершаются ошибкой, а не измеряются на CPU. Фактические провайдеры обеих
+сетей видны в `/api/version` и `run_info.json`.
+
 Файл `docker-compose.yml` лежит **в этом каталоге** (`04-solution/service/`), в
 корне репозитория его нет. Поэтому либо перейдите сюда:
 
@@ -35,8 +42,8 @@ cd 04-solution/service
 docker compose up --build -d
 ```
 
-либо укажите файл явно — тогда команда работает из любого каталога (пути внутри
-файла считаются от него самого):
+либо выполните из корня репозитория с явным путём к файлу (пути внутри
+Compose считаются от расположения файла):
 
 ```bash
 docker compose -f 04-solution/service/docker-compose.yml up --build -d
@@ -45,8 +52,8 @@ docker compose -f 04-solution/service/docker-compose.yml up --build -d
 `up` поднимает хранилище, API **и загружает галерею**: сервис `loader` стартует
 после healthcheck Qdrant, отрабатывает и выходит. Каталог данных задаётся
 переменной `DATA_DIR` (по умолчанию `data/` в корне репозитория; должен
-содержать `images/` и `test_gallery.csv`). Загрузка 750 объектов занимает около
-минуты — до её конца поиск честно отвечает 409 «галерея не загружена».
+содержать `images/` и `test_gallery.csv`). Загрузка 750 объектов требует времени;
+до её конца поиск честно отвечает 409 «галерея не загружена».
 Готовность видна по health:
 
 ```bash
@@ -56,6 +63,24 @@ curl --fail http://localhost:8000/api/health   # storage.gallery_points > 0
 - тонкий клиент: <http://localhost:8000/> — см. раздел ниже;
 - документация API (Swagger UI, работает офлайн): <http://localhost:8000/docs>;
 - спецификация OpenAPI: <http://localhost:8000/openapi.json>.
+
+<a id="cpu-run"></a>
+
+### CPU без NVIDIA
+
+Для локальной репетиции и текущего VPS сохранён отдельный CPU-образ. Его
+зависимости и базовые образы входят в комплект, сборка может идти офлайн.
+Из корня репозитория:
+
+```bash
+docker compose -f 04-solution/service/docker-compose.cpu.yml up --build -d --pull never
+```
+
+Если вы уже в `04-solution/service/`, используйте
+`docker compose -f docker-compose.cpu.yml up --build -d --pull never`.
+
+Пакетный запуск CPU-образа использует тот же `app.batch` и задаёт
+`LCT_DEVICE=cpu`; этот режим не является замером скорости на GPU организаторов.
 
 ## Тонкий клиент
 
@@ -139,6 +164,10 @@ combined_v1 + whitening**. Поэтому косинус объяснения н
 DATA_DIR=/абсолютный/путь/к/data docker compose run --rm loader
 ```
 
+Это команда для основного GPU Compose после `cd 04-solution/service`.
+Для CPU-резерва используйте `DATA_DIR=/абсолютный/путь/к/data docker compose
+-f docker-compose.cpu.yml run --rm loader` из того же каталога.
+
 Шаг идемпотентен: коллекция пересоздаётся, повторный запуск даёт то же
 состояние. Загрузчик сам ждёт готовности хранилища (`--wait`, по умолчанию
 120 с), поэтому его можно запускать сразу после `up`.
@@ -151,12 +180,15 @@ DATA_DIR=/абсолютный/путь/к/data docker compose run --rm loader
 
 ## Пакетный прогон (закрытый тест организатора)
 
-Одна команда; все пути — аргументы, в коде ничего не зашито. Хранилище **не
-требуется**, сеть **не требуется** (проверено с `--network none`):
+Из каталога `04-solution/service/` сначала соберите образ с доступом к PyPI,
+затем запустите batch одной командой.
+Все пути — аргументы, хранилище не требуется. Инференс не обращается к сети;
+запуск с `--network none` проверен на CPU-резерве. GPU-запуск на стенде
+организаторов ещё требует аппаратной проверки:
 
 ```bash
 docker build -t vehicle-reid-service .
-docker run --rm --network none \
+docker run --rm --gpus all --network none \
   -v /путь/к/тестовому/набору:/data:ro \
   -v /путь/к/выводу:/out \
   vehicle-reid-service \
@@ -164,6 +196,33 @@ docker run --rm --network none \
       --query /data/test_query.csv --gallery /data/test_gallery.csv \
       --out-dir /out
 ```
+
+Сеть разрешена только при `docker build`; `docker run` выполняется с
+`--network none`. На CPU-машине используйте `docker build -f Dockerfile.cpu
+-t vehicle-reid-service-cpu .` и ту же batch-команду без `--gpus all`, с
+образом `vehicle-reid-service-cpu`. В `run_info.json` указан фактический
+ONNX-провайдер обеих моделей.
+
+На доступном NVIDIA GPU полный путь «JPEG → bbox → признак» можно измерить
+в том же образе по опубликованным организаторами границам. Возьмите CSV не
+менее чем с 32 разными кадрами и новый путь для JSON-отчёта:
+
+```bash
+DATA_DIR=/абсолютный/путь/к/data
+OUT_DIR=/абсолютный/путь/к/новому/каталогу-результатов
+SOURCE_SHA="$(git rev-parse HEAD)"
+mkdir -p "$OUT_DIR"
+docker build --build-arg SOURCE_SHA="$SOURCE_SHA" -t vehicle-reid-service .
+docker run --rm --gpus all --network none \
+  -v "$DATA_DIR:/data:ro" -v "$OUT_DIR:/out" \
+  vehicle-reid-service python tools/benchmark_gpu.py \
+  --images-dir /data/images --csv /data/test_query.csv \
+  --out /out/gpu-benchmark.json --source-sha "$SOURCE_SHA"
+```
+
+Измеритель делает 50 прогревов и 300 замеров batch-1 с CUDA-синхронизацией,
+затем не менее 10 секунд на каждом batch 1/8/16/32. Он исключает поиск и
+переранжирование. Без RTX A5000 эти числа нельзя называть баллами стенда жюри.
 
 После успешного batch в `/out` находятся три сдаваемых файла. Полная схема
 submission требует минимум десяти объектов галереи; для однозначного
@@ -302,7 +361,7 @@ validation по правилу максимизации `min(TNR, F1_0.10, F1_0.
 ## Воспроизводимость и численная эквивалентность
 
 Конвейер сервиса численно повторяет измерительный контур: кроп по bbox → RGB →
-resize 208×208 (PIL bilinear) → float32 0..255 → NCHW → **две ONNX-модели** (CPU) →
+resize 208×208 (PIL bilinear) → float32 0..255 → NCHW → **две ONNX-модели** →
 L2 каждого вектора → среднее → L2 среднего → whitening (float32) → L2-нормировка с накоплением в
 float64; косинусы считаются в float64 по формуле измерительного контура.
 Векторы d1_j48 воспроизводят исторические метрики `tools/eval_split.py`:
@@ -375,11 +434,14 @@ KR и не является текущей сдачей.
 
 **Сборка и запуск — разные вещи, и требования к сети у них разные.**
 
-- **Пакеты на сборке из сети не тянутся:** зависимости лежат колёсами в
-  [`wheels/`](wheels/) (30 файлов, 57 МБ), `Dockerfile` по умолчанию собирается с
-  `ARG PIP_SOURCE=offline` → `pip install --no-index --find-links=/wheels`. Запасной
-  путь — `--build-arg PIP_SOURCE=network`. Как пересобрать каталог колёс — в
-  [`wheels/README.md`](wheels/README.md).
+- **Основной GPU-образ:** `Dockerfile` устанавливает во время сборки
+  закреплённые в `requirements-gpu.txt` и `requirements-gpu-lock.txt`
+  ONNX Runtime GPU и CUDA/cuDNN-библиотеки. Организаторы разрешили сеть на
+  этапе `docker build`; после сборки образ работает без неё.
+- **Резервный CPU-образ:** `Dockerfile.cpu` устанавливает зависимости из
+  [`wheels/`](wheels/) (30 файлов, 57 МБ) без PyPI. Для несовместимой
+  платформы есть явный `--build-arg PIP_SOURCE=network`; порядок пересборки
+  колёс — в [`wheels/README.md`](wheels/README.md).
 - **Базовые образы нужно получить заранее:** `python:3.13-slim` для сборки и
   `qdrant/qdrant:v1.15.5` для хранилища. Из сети — через `docker pull`; офлайн — из
   [offline/](offline/README.md), где каждый образ лежит своим архивом
@@ -387,6 +449,6 @@ KR и не является текущей сдачей.
   После загрузки сверяют идентификаторы и размеры: `51cce855bb6e` / 130 МБ и
   `0ad2e23181e5` / 181 МБ.
 
-Колёса в сдаваемый образ не попадают: зависимости ставятся в отдельной стадии сборки,
-наружу уходит только каталог установленных пакетов. Для сдачи это означает: образ можно
-собрать и на машине без выхода в интернет, если базовый образ уже есть локально.
+Колёса не попадают в итоговый слой ни одного образа: зависимости ставятся в
+отдельной стадии. CPU-образ можно собрать без сети, если базовый образ уже
+есть локально; для GPU-образа при сборке нужны PyPI-пакеты CUDA/cuDNN.

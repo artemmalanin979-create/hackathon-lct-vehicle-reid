@@ -11,6 +11,15 @@ Docker Engine / Compose и её условия приведены в
 [отчёте](04-solution/audit/docker-path/README.md). Исторические исследования
 и ограничения их повторения собраны в разделах 8–11.
 
+Основной контейнер для стенда организаторов использует GPU NVIDIA через
+ONNX Runtime; заявленный стенд — RTX A5000 с CUDA 12.2 и доступом в Docker
+через `--gpus all` ([ответы организаторов, вопрос 30](https://docs.google.com/spreadsheets/d/1M_GsQjK4geMsNr8YsLnMWhfRbKWo86v-/edit?gid=987591864#gid=987591864)).
+Отдельный CPU-образ сохраняет офлайн-воспроизведение опубликованных
+артефактов и работу прототипа на VPS без GPU. При запуске основного образа
+CUDA обязательна; фактические провайдеры обеих моделей записываются в
+`run_info.json` и `/api/version`. Числа качества ниже получены на CPU-релизе;
+реальный замер GPU на RTX A5000 и численная сверка его выдачи ещё не выполнены.
+
 <a id="architecture"></a>
 
 ## 1. Назначение и архитектура
@@ -20,7 +29,7 @@ Docker Engine / Compose и её условия приведены в
 | Компонент | Код | Ответственность |
 |---|---|---|
 | Подготовка изображения | [preprocess.py](04-solution/service/app/core/preprocess.py) | Чтение JPEG/PNG, bbox, RGB, изменение размера |
-| Модель | [model.py](04-solution/service/app/core/model.py) | Проверка SHA-256 трёх файлов весов (две ONNX-модели + матрица whitening), ONNX Runtime CPU, двумодельный признак со whitening |
+| Модель | [model.py](04-solution/service/app/core/model.py) | Проверка SHA-256 трёх файлов весов (две ONNX-модели + матрица whitening), выбор CUDA/CPU-провайдера ONNX Runtime, двумодельный признак со whitening |
 | Пакетная обработка | [batch.py](04-solution/service/app/batch.py) | Последовательное чтение CSV, извлечение векторов, ранжирование, три сдаваемых файла |
 | Переранжирование | [rerank.py](04-solution/service/app/core/rerank.py) | Для каждого запроса отдельно: k-взаимные соседи среди его cosine top-50 и статичной галереи; старый общий алгоритм оставлен для исследований |
 | HTTP API | [main.py](04-solution/service/app/api/main.py) | Получение файла/bbox или вектора, валидация, поиск, OpenAPI |
@@ -37,7 +46,7 @@ API и Qdrant запускаются отдельными контейнерам
 
 ### Признак
 
-Путь обработки: bbox в пикселях исходного кадра → RGB → PIL bilinear, `208×208` → `float32`, диапазон `0…255`, NCHW → **две модели на одном препроцессированном батче**: OSNet-AIN (OMZ 2022.1) и combined_v1 (наш дообученный OSNet-AIN) → L2-нормировка каждого сырого вектора `512` → покомпонентное среднее → L2-нормировка среднего → whitening `y = (x − m) @ P.T` в `float32` (матрица `P` и вектор `m` обучены на `train_fit` по дельтам ансамбля, ρ=0,5; обучение и проверка — [training/combined/](04-solution/training/combined/)) → L2-нормировка с накоплением в `float64`, сохранение в `float32`. Порядок важен: среднее нормируется до whitening, потому что `m` обучена на нормированных входах. Внешняя ImageNet-нормировка не применяется: обе модели уже содержат нормировку входа. Инференс выполняется через `CPUExecutionProvider`.
+Путь обработки: bbox в пикселях исходного кадра → RGB → PIL bilinear, `208×208` → `float32`, диапазон `0…255`, NCHW → **две модели на одном препроцессированном батче**: OSNet-AIN (OMZ 2022.1) и combined_v1 (наш дообученный OSNet-AIN) → L2-нормировка каждого сырого вектора `512` → покомпонентное среднее → L2-нормировка среднего → whitening `y = (x − m) @ P.T` в `float32` (матрица `P` и вектор `m` обучены на `train_fit` по дельтам ансамбля, ρ=0,5; обучение и проверка — [training/combined/](04-solution/training/combined/)) → L2-нормировка с накоплением в `float64`, сохранение в `float32`. Порядок важен: среднее нормируется до whitening, потому что `m` обучена на нормированных входах. Внешняя ImageNet-нормировка не применяется: обе модели уже содержат нормировку входа. Основной образ требует `CUDAExecutionProvider` для обеих моделей; резервный образ явно выбирает `CPUExecutionProvider`. Формула признака и файлы весов одинаковы.
 
 Происхождение **combined_v1**: LP-FT дообучение OSNet-AIN (обучение только классификатора при замороженном backbone → частичная разморозка; полная разморозка предусмотрена воротами, но в этом прогоне пропущена) на объединённом наборе RoundaboutHD (лицензия MIT) + CARLA (лицензия Apache-2.0) + train организатора. Полный журнал: [training/combined/journal.md](04-solution/training/combined/journal.md), отчёт с метриками и бутстрэпом — [training/combined/REPORT.md](04-solution/training/combined/REPORT.md). Веса `model/osnet_ain_combined_v1.onnx` входят в Git вместе с исходной OSNet и whitening (SHA-256 — §9). Фактический trainer, оркестратор, конфиги, export и whitening перенесены с узлов в [training/src/](04-solution/training/src/README.md); там даны команды и границы подтверждённого происхождения.
 
@@ -79,7 +88,7 @@ shell хоста, не передаётся контейнеру автомат�
 
 ## 3. Подготовка к сборке и установке
 
-Нужны Linux x86_64, Docker Engine с Compose V2, shell, Python 3.10+ для проверки входов и `curl`. GPU не требуется. Для validation достаточно её изображений; для test/галереи сервиса нужны соответствующие test-CSV и изображения. CSV из Git недостаточно. Указанные команды запускаются из корня полученного репозитория.
+Нужны Linux x86_64, Docker Engine с Compose V2, shell, Python 3.10+ для проверки входов и `curl`. Для основного образа нужны NVIDIA GPU, драйвер и NVIDIA Container Toolkit; CPU-вариант работает без них. Для validation достаточно её изображений; для test/галереи сервиса нужны соответствующие test-CSV и изображения. CSV из Git недостаточно. Указанные команды запускаются из корня полученного репозитория.
 
 Отдельной компиляции Python-кода и сборки frontend нет: браузер получает
 готовые HTML/CSS/JS, а Dockerfile устанавливает готовые Python wheels,
@@ -113,10 +122,18 @@ python3 04-solution/reproduce/check_inputs.py --mode val --data-dir "$DATA_DIR" 
 
 Скрипт проверяет по полному SHA-256 все три сдаваемых файла весов и скачивает по прямой ссылке OMZ только то, чего нет рядом (OSNet). После него файлы находятся в `04-solution/service/model/`. При несовпадении любого хеша сборку не продолжать. Оба ONNX и whitening отслеживаются Git. Исключение `!04-solution/service/model/*.onnx` в `.gitignore` включает эти ONNX вопреки общему `*.onnx`. В полном клоне скачивание не требуется.
 
-### Шаг 3. Образы
+### Шаг 3. Образы и зависимости
 
-Для воспроизведения закреплённой среды используйте архивы из Git.
-Из корня репозитория:
+Основной [`Dockerfile`](04-solution/service/Dockerfile) собирает GPU-образ
+на базе `python:3.13-slim`. Сборка скачивает из PyPI закреплённые версии
+ONNX Runtime GPU 1.20.2, CUDA 12.2 и cuDNN 9; при запуске они уже находятся
+внутри образа. [Ответ организаторов, вопрос 39](https://docs.google.com/spreadsheets/d/1M_GsQjK4geMsNr8YsLnMWhfRbKWo86v-/edit?gid=987591864#gid=987591864)
+разрешает доступ к сети во время `docker build` и запрещает его во время
+инференса. CUDA-библиотеки не входят в Git; все три файла весов входят.
+
+Для воспроизведения опубликованного CPU-прогона и сборки резервного
+[`Dockerfile.cpu`](04-solution/service/Dockerfile.cpu) используйте архивы
+из Git. Из корня репозитория:
 
 ```bash
 (cd 04-solution/service/offline && sha256sum -c SHA256SUMS)
@@ -124,14 +141,13 @@ docker load -i 04-solution/service/offline/python-3.13-slim.tar.gz
 docker load -i 04-solution/service/offline/qdrant-v1.15.5.tar.gz
 ```
 
-После импорта переходите к [§4](#one-command): отдельный `docker build`
-для короткого пути не нужен. Сетевой `docker pull python:3.13-slim` может
+После импорта CPU-образ собирают командой ниже. Сетевой `docker pull python:3.13-slim` может
 получить другую ревизию плавающего тега и потому не заменяет импорт
 проверенного архива при воспроизведении опубликованных версий.
 
-**Пакеты из PyPI на этом шаге не скачиваются: сборка идёт офлайн, из репозитория.** В решении лежит каталог [wheels/](04-solution/service/wheels/) — 30 файлов `.whl`, 59 146 237 байт: ровно те пакеты, что перечислены в разделе 10 (семь прямых зависимостей и их транзитивные). Колёс 30, а строк в разделе 10 — 31: `pip` приходит из базового образа и отдельным колесом не везётся. Колёса получены `pip download -r requirements.txt -c requirements-lock.txt` **в том же базовом образе** `python:3.13-slim`, поэтому платформа и версия Python у них те же, что у сборки; команда пересборки каталога — в [wheels/README.md](04-solution/service/wheels/README.md). [Dockerfile](04-solution/service/Dockerfile) по умолчанию собирается с `ARG PIP_SOURCE=offline`, то есть `pip install --no-index --find-links=/wheels -r requirements.txt -c requirements-lock.txt`. Это наш ответ на разд. 9 ТЗ: образ собирается в изолированной среде, без выхода наружу.
+**CPU-образ собирается офлайн, из репозитория.** Каталог [wheels/](04-solution/service/wheels/) содержит 30 файлов `.whl`, 59 146 237 байт: семь прямых зависимостей и их транзитивные версии. Колёс 30, а строк в разделе 10 — 31: `pip` приходит из базового образа. Колёса получены `pip download -r requirements.txt -c requirements-lock.txt` в том же `python:3.13-slim`; пересборка описана в [wheels/README.md](04-solution/service/wheels/README.md). `Dockerfile.cpu` по умолчанию устанавливает их через `--no-index --find-links=/wheels`. Исторические проверки офлайн-сборки ниже относятся именно к CPU-образу.
 
-**Для этого шага нужны два базовых образа:** `python:3.13-slim` для сборки и `qdrant/qdrant:v1.15.5` для хранилища. Оба поставляются в [offline/](04-solution/service/offline/README.md) — отдельным архивом каждый, 45,6 и 65,4 МБ, загрузка командой `docker load -i`. Архив, положенный 21.09 одним файлом, содержал только Python с двумя тегами (`podman save` без `--multi-image-archive` молча теряет второй образ); 22.09 образы разложены по отдельным архивам и проверены загрузкой в отдельное хранилище — встают оба, с правильными идентификаторами и размерами.
+**Для CPU-варианта нужны два базовых образа:** `python:3.13-slim` для сборки и `qdrant/qdrant:v1.15.5` для хранилища. Оба поставляются в [offline/](04-solution/service/offline/README.md) — отдельным архивом каждый, 45,6 и 65,4 МБ, загрузка командой `docker load -i`. Архив, положенный 21.09 одним файлом, содержал только Python с двумя тегами (`podman save` без `--multi-image-archive` молча теряет второй образ); 22.09 образы разложены по отдельным архивам и проверены загрузкой в отдельное хранилище — встают оба, с правильными идентификаторами и размерами.
 
 **`--network none` изолирует только шаги `RUN`.** Внешний процесс сборки
 может обращаться к реестру. В [аудите 21.09](04-solution/audit/jury-path-2/REPORT.md)
@@ -141,7 +157,8 @@ docker load -i 04-solution/service/offline/qdrant-v1.15.5.tar.gz
 ```bash
 podman image exists docker.io/library/python:3.13-slim
 podman build --no-cache --pull=never --network none \
-  -t vehicle-reid-service "$REPO/04-solution/service"
+  -f "$REPO/04-solution/service/Dockerfile.cpu" \
+  -t vehicle-reid-service-cpu "$REPO/04-solution/service"
 ```
 
 Без base Podman останавливается на `image not known`; с ним офлайн-сборка
@@ -153,7 +170,8 @@ podman build --no-cache --pull=never --network none \
 ```bash
 docker image inspect python:3.13-slim >/dev/null
 docker build --no-cache --pull=false --network none \
-  -t vehicle-reid-service "$REPO/04-solution/service"
+  -f "$REPO/04-solution/service/Dockerfile.cpu" \
+  -t vehicle-reid-service-cpu "$REPO/04-solution/service"
 ```
 
 `--pull=false` сам по себе не запрещает получение отсутствующего base.
@@ -161,15 +179,15 @@ docker build --no-cache --pull=false --network none \
 Docker-вариант и Compose V2 проверены отдельным прогоном на Engine 29.7.2 /
 Compose 2.40.3 ([отчёт](04-solution/audit/docker-path/README.md)).
 
-**Запасной путь — ставить из сети:** при отсутствии каталога сначала `mkdir -p "$REPO/04-solution/service/wheels"`, затем `docker build --build-arg PIP_SOURCE=network -t vehicle-reid-service "$REPO/04-solution/service"`. Он нужен, если колёса разошлись с `requirements.txt` или требуется другая платформа. Сам каталог `wheels/` нужен в любом случае: `COPY wheels/` в Dockerfile общий для обеих ветвей, без каталога сборка не начнётся.
+**Запасной путь для CPU-образа — ставить из сети:** при отсутствии каталога сначала `mkdir -p "$REPO/04-solution/service/wheels"`, затем `docker build -f "$REPO/04-solution/service/Dockerfile.cpu" --build-arg PIP_SOURCE=network -t vehicle-reid-service-cpu "$REPO/04-solution/service"`. Он нужен, если колёса разошлись с `requirements.txt` или требуется другая платформа. Сам каталог `wheels/` нужен в любом случае: `COPY wheels/` в `Dockerfile.cpu` общий для обеих ветвей.
 
-В сдаваемый образ колёса **не попадают**: зависимости ставятся в отдельной стадии сборки, наружу уходит только каталог установленных пакетов. Веса копируются внутрь образа и проверяются при сборке, затем повторно при загрузке модели. Транзитивные зависимости закреплены: `pip install` идёт с constraints-файлом [requirements-lock.txt](04-solution/service/requirements-lock.txt) — полным `pip freeze --all` проверенной сборки (раздел 10). Не закреплены хеши wheel и тег базового образа `python:3.13-slim` (digest проверенной среды указан в разделе 10).
+В итоговые образы колёса **не попадают**: зависимости ставятся в отдельной стадии сборки. Веса копируются внутрь обоих образов и проверяются при сборке, затем при загрузке модели. CPU-зависимости закреплены в [requirements-lock.txt](04-solution/service/requirements-lock.txt), GPU-зависимости — в [requirements-gpu-lock.txt](04-solution/service/requirements-gpu-lock.txt). Хеши Python wheel в этих constraints-файлах не закреплены; хеши трёх файлов весов проверяются. Тег базового образа `python:3.13-slim` плавающий (digest проверенной CPU-среды указан в разделе 10).
 
 ### Замечание для хостов с SELinux (Fedora, RHEL, CentOS Stream и подобные)
 
 Это касается **четырёх** команд ниже — всех, которые монтируют каталоги хоста: пакетный прогон (раздел 4), команды **T** и **R** (раздел 7), калибровка порога (раздел 8). Docker на таком хосте обычно расставляет метки сам; Podman — нет, и контейнер получает отказ в доступе к смонтированным каталогам. Проверенное решение — добавить в каждую такую команду `--security-opt label=disable`; альтернатива — суффикс `:z`/`:Z` у каждого `-v`.
 
-**Добавьте флаг до первого запуска, а не после отказа.** `app.batch` пишет все три файла **в самом конце**, поэтому `PermissionError: [Errno 13] Permission denied: '/out/embeddings.npy'` приходит через 5,5 минут уже выполненного инференса — весь расчёт придётся повторить. Команда **T** падает быстро, но с сообщением не по делу: `ModuleNotFoundError: No module named 'test_protocols'` — файл на месте, просто каталог `/repo` не читается.
+**Добавьте флаг до первого запуска, а не после отказа.** `app.batch` пишет все три файла **в самом конце**, поэтому `PermissionError: [Errno 13] Permission denied: '/out/embeddings.npy'` приходит после выполненного инференса — весь расчёт придётся повторить. В прежнем CPU-прогоне это заняло 5,5 минуты; время GPU-прогона не измерено. Команда **T** падает быстро, но с сообщением не по делу: `ModuleNotFoundError: No module named 'test_protocols'` — файл на месте, просто каталог `/repo` не читается.
 
 ## 4. Запуск и офлайн-поставка
 
@@ -177,38 +195,57 @@ Compose 2.40.3 ([отчёт](04-solution/audit/docker-path/README.md)).
 
 ### Сборка, установка зависимостей и запуск — одна команда
 
-После подготовки данных и импорта двух базовых образов из §3, **из корня
-репозитория**, без предварительно собранного `vehicle-reid-service`:
+После подготовки данных, **из корня репозитория** на хосте с NVIDIA GPU и
+NVIDIA Container Toolkit:
 
 ```bash
-docker compose -f 04-solution/service/docker-compose.yml up --build -d --pull never
+docker compose -f 04-solution/service/docker-compose.yml up --build -d
 ```
 
-`--build` собирает образ по Dockerfile и устанавливает зависимости из
-локальных wheels; Compose запускает Qdrant, API и одноразовый `loader`.
+`--build` собирает основной GPU-образ по `Dockerfile` и устанавливает
+закреплённые зависимости из PyPI; Compose предоставляет GPU контейнерам
+`api` и `loader`, запускает Qdrant и однократную загрузку галереи.
 Данные по умолчанию берутся из `data/` в корне. Для другого расположения
 перед командой задайте `DATA_DIR=/абсолютный/путь/к/data`.
 Назначение флагов сверено с [Docker Compose reference](https://docs.docker.com/reference/cli/docker/compose/up/).
 
-Это полная команда сборки и старта приложения при подготовленных входах;
-полный прогон на Docker Engine 29.7.2 / Compose V2 2.40.3 **выполнен 22.09** ([отчёт](04-solution/audit/docker-path/README.md)): пустое хранилище, импорт обоих архивов, сборка без кэша, запуск через Compose, отрицательный контроль сети демона.
-`--pull never` относится к образам запуска и не изолирует сеть BuildKit;
-условия офлайн-сборки описаны в §3. На SELinux требуется доступ контейнеров
-к bind-mount данных; текущий Compose не задаёт `:z`/`:Z`, и универсальный
-запуск без дополнительной настройки на таком хосте не доказан.
+Это полная команда сборки и старта приложения при подготовленных входах.
+Сеть во время сборки разрешена ответом организаторов, но контейнеру она не
+нужна для формирования признака. Фактический провайдер проверяйте по
+`GET /api/version`: обе сессии должны показывать `CUDAExecutionProvider`
+первым. Реальное время на RTX A5000 здесь не заявляется без замера на стенде.
+На SELinux требуется доступ контейнеров к bind-mount данных; текущий Compose
+не задаёт `:z`/`:Z`, поэтому добавьте метки или настройте тома (§3).
 `-d` возвращает управление до окончания загрузки галереи: готовность
 проверяют по выходу `loader` с кодом 0 и строке с числом загруженных объектов,
 как описано ниже. `localhost:8000` после запуска — локальный адрес,
 а не опубликованная ссылка для жюри.
 
+Без NVIDIA используйте резервный CPU-образ:
+
+```bash
+docker compose -f 04-solution/service/docker-compose.cpu.yml up --build -d --pull never
+```
+
+CPU-вариант собирается из `Dockerfile.cpu` и локальных wheels. Полный прогон
+именно этого пути на Docker Engine 29.7.2 / Compose V2 2.40.3 выполнен
+22.09 ([отчёт](04-solution/audit/docker-path/README.md)); он не является
+измерением на стенде организаторов.
+
 ### Сервис с загруженной галереей — одна команда
 
-Если образ `vehicle-reid-service` уже собран предыдущей командой либо
+Если GPU-образ `vehicle-reid-service` уже собран предыдущей командой либо
 импортирован из runtime-архива, повторный запуск без сборки (переменная
 `COMPOSE_FILE` задана в шаге 1 раздела 3):
 
 ```bash
 docker compose up -d --no-build --pull never
+```
+
+Для CPU-образа явно укажите его Compose-файл:
+
+```bash
+docker compose -f 04-solution/service/docker-compose.cpu.yml up -d --no-build --pull never
 ```
 
 Интерфейс: <http://localhost:8000/>. Swagger: <http://localhost:8000/docs>. OpenAPI: <http://localhost:8000/openapi.json>. Статические файлы Swagger поставляются локально. Загрузчик читает `$DATA_DIR/test_gallery.csv` и **пересоздаёт** коллекцию; повторный запуск заменяет её прежнее содержимое. Дождитесь завершения loader и проверьте:
@@ -242,19 +279,21 @@ docker compose up -d --no-build --pull never
 
 Загрузка галереи входит в `up`: `loader` — обычный разовый сервис Compose (профиля `tools` больше нет), он стартует после healthcheck Qdrant, отрабатывает и выходит. Готовность Qdrant проверяется healthcheck-запросом `/readyz` (в образе нет curl, поэтому проверка идёт через `/dev/tcp` bash), а `api` и `loader` объявлены зависимыми с `condition: service_healthy`. Дополнительно сам загрузчик ждёт доступности хранилища до извлечения векторов (`--wait`, по умолчанию 120 с) — это нужно для сред, где ожидание healthcheck не выполняется (поведение зависит от версии и стенда; podman-compose 1.6.0 в отдельном storage аудита ожидал healthcheck, но его systemd unit не видел это storage). Повторная загрузка на другом каталоге данных: `DATA_DIR=/путь/к/data docker compose run --rm loader` — эта форма блокирует терминал до конца загрузки и печатает ту же итоговую строку, то есть тоже годится как признак готовности.
 
-`docker compose up -d` возвращает управление, пока загрузчик ещё работает. Замер 64,5 с выше относится к исторической проверке; для текущего ансамбля d1_j48 время зависит от лимита CPU и состояния машины. До конца загрузки поиск отвечает 409 — это ожидаемо, а не отказ сервиса.
+`docker compose up -d` возвращает управление, пока загрузчик ещё работает. Замер 64,5 с выше относится к исторической CPU-проверке; для текущего ансамбля d1_j48 время зависит от устройства и нагрузки, GPU-вариант не измерен. До конца загрузки поиск отвечает 409 — это ожидаемо, а не отказ сервиса.
 
 ### Пакетный инференс — одна команда, сеть отключена
 
 ```bash
-docker run --rm --network none \
+docker run --rm --gpus all --network none \
   -v "$DATA_DIR:/data:ro" -v "$OUT_DIR:/out" \
   vehicle-reid-service python -m app.batch \
   --images-dir /data/images --query /data/test_query.csv \
   --gallery /data/test_gallery.csv --out-dir /out --threads 2
 ```
 
-Для закрытого теста заменяются только входной каталог и CSV. Метки `vehicle_id` и `camera_id` инференсу не нужны. Выходной каталог должен быть доступен на запись. **На хосте с SELinux добавьте `--security-opt label=disable`** — см. замечание в конце раздела 3; там же сказано, почему отказ приходит только через 5,5 минут.
+Для закрытого теста заменяются только входной каталог и CSV. Метки `vehicle_id` и `camera_id` инференсу не нужны. Выходной каталог должен быть доступен на запись. `--gpus all` предоставляет контейнеру NVIDIA-устройство; основной образ требует активного CUDA-провайдера. Для CPU-варианта уберите этот флаг, используйте `vehicle-reid-service-cpu`. **На хосте с SELinux добавьте `--security-opt label=disable`** — см. замечание в конце раздела 3.
+
+Отдельный [измеритель полного извлечения](04-solution/service/README.md#пакетный-прогон-закрытый-тест-организатора) выполняет 50 прогревов, 300 замеров batch-1 с CUDA-синхронизацией и не менее 10 секунд для каждого batch 1/8/16/32. Он включает чтение JPEG, bbox, препроцессинг и обе ONNX-модели, но исключает поиск; результаты на GPU организаторов пока не получены.
 
 ### Передача на машину без интернета
 
@@ -265,7 +304,7 @@ docker save -o "$OUT_DIR/runtime-images.tar" vehicle-reid-service docker.io/qdra
 sha256sum "$OUT_DIR/runtime-images.tar" > "$OUT_DIR/runtime-images.tar.sha256"
 ```
 
-**Podman вместо Docker:** `podman save -o файл образ1 образ2` молча кладёт в архив только один образ (оба тега при этом навешиваются на него) — нужен `podman save --multi-image-archive -o ...`; проверено на podman 5.8.2 для `vehicle-reid-service` + `qdrant/qdrant:v1.15.5`: с флагом в архиве два образа и **529 025 536** байт, без флага — один образ и **347 906 048**. Побайтово эти размеры не воспроизводимы и сверять их не нужно: слои образа содержат отметки времени файлов, поэтому две независимые сборки одного и того же Dockerfile дают чуть разные архивы. Контрольный повтор на другой сборке из чистого клона: **528 972 288** и **347 852 800** — те же величины с точностью 53 248 байт (0,01 %). Проверяемое утверждение здесь другое и оно выполняется точно: **без флага в архиве один образ с двумя тегами, с флагом — два образа**. Передайте архив образов, код вместе с тремя файлами `model/` и разрешённый комплект данных организатора. На целевой машине выполните `docker load -i /путь/к/runtime-images.tar`, задайте пути из шага 1, затем используйте команду запуска выше без `--build`. Для пакетного режима достаточно образа сервиса и тестовых данных. **Данные организатора передаются отдельно от Git.** Для пересборки без сети в текущем комплекте есть два исправленных архива `offline/python-3.13-slim.tar.gz` и `offline/qdrant-v1.15.5.tar.gz` ([инструкция](04-solution/service/offline/README.md)); старого `base-images.tar.gz` больше нет. Оба ONNX, whitening и wheels входят в Git; работающий образ сервиса содержит веса. Отдельная приёмка на Docker Engine 29.7.2 / Compose V2 2.40.3 выполнена; [условия и результаты](04-solution/audit/docker-path/README.md).
+**Podman вместо Docker:** для нескольких образов используйте `podman save --multi-image-archive`. Без этого флага Podman 5.8.2 в [проверке CPU-комплекта](04-solution/audit/docker-path/README.md) сохранил только один образ; размеры того архива не относятся к новому GPU-образу. Передайте архив образов и разрешённый комплект данных организатора отдельно от Git. На целевой машине выполните `docker load -i /путь/к/runtime-images.tar`; для batch достаточно образа сервиса и данных, без Qdrant. Если GPU-образ уже собран и перенесён, инференс выполняется с `--gpus all --network none`. Офлайн-архивы базовых образов и Python wheels в репозитории предназначены для CPU-резерва; CUDA-библиотеки уже находятся в собранном GPU-образе.
 
 <a id="submission-format"></a>
 
@@ -534,13 +573,13 @@ python3 04-solution/reproduce/check_inputs.py --mode val --data-dir "$DATA_DIR" 
 
 ### R-val: исторический контур валидации и калибровки
 
-После сборки/импорта образа из §3–4, из корня репозитория:
+После сборки CPU-образа `vehicle-reid-service-cpu` из §3–4, из корня репозитория:
 
 ```bash
 docker run --rm --network none --cpus 2 --memory 4g \
   -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 -e PYTHONDONTWRITEBYTECODE=1 \
   -v "$REPO:/repo:ro" -v "$DATA_DIR:/data:ro" -v "$OUT_DIR:/out" \
-  vehicle-reid-service python -B /repo/04-solution/reproduce/run.py \
+  vehicle-reid-service-cpu python -B /repo/04-solution/reproduce/run.py \
   --mode val --data-dir /data --out-dir /out
 ```
 
@@ -628,7 +667,7 @@ Rank-5 0.8605769231, F1 0.9391812865, TNR 0.7302158273. Без файла
 docker run --rm --network none --cpus 2 --memory 4g \
   -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 -e PYTHONDONTWRITEBYTECODE=1 \
   -v "$REPO:/repo:ro" -v "$DATA_DIR:/data:ro" -v "$OUT_DIR:/out" \
-  vehicle-reid-service python -B /repo/04-solution/reproduce/run.py \
+  vehicle-reid-service-cpu python -B /repo/04-solution/reproduce/run.py \
   --mode test --data-dir /data --out-dir /out
 ```
 
@@ -647,8 +686,8 @@ docker run --rm --network none --cpus 2 --memory 4g \
 ```bash
 docker run --rm --network none -e PYTHONDONTWRITEBYTECODE=1 \
   -v "$REPO:/repo:ro" -w /repo/04-solution/eval \
-  vehicle-reid-service python -B -m unittest -q test_metrics test_protocols
-docker run --rm --network none vehicle-reid-service python -m pip freeze --all
+  vehicle-reid-service-cpu python -B -m unittest -q test_metrics test_protocols
+docker run --rm --network none vehicle-reid-service-cpu python -m pip freeze --all
 ```
 
 Дополнительно [tools/calibrate_threshold.py](04-solution/service/tools/calibrate_threshold.py)
@@ -684,7 +723,7 @@ Docker/Compose-стенда. Ниже исторические проверки 
 | Дельта метрик от f32-хранения whitening | скрипт прогона job_55 (сравнение A f64 / B f32-хранение / C f32-сервис на одних векторах валидации) | `d_kr_mAP = 0.0`, `d_cos_mAP = 0.0` (все 16 печатных цифр совпали); max |Δэмбеддинг| = 1.4282077284710759e-08 |
 | Порядок `(query; gallery)` в `embeddings.npy` | R → `row_order`, независимый batch=1 на границах | Проверено переизвлечением, а не чтением отчёта |
 | 60 тестов метрик | T | Пройдены (15–16.09), повторены 20.09 и 21.09; [новый лог](04-solution/reproduce/evidence/metric-tests.txt) |
-| 187 прямых сверок новой калибровки (20.09) | `docker run --rm --network none -v "$REPO:/repo:ro" -v "$OUT_DIR:/out" vehicle-reid-service python -B /repo/04-solution/service/tools/calibrate_threshold.py /out/val/embeddings.npy /out/calibration` | Пройдены на независимо извлечённых векторах конфигурации d1_j48; результат — [headline.json](04-solution/service/calib-d1_j48/headline.json) и `verification.json` |
+| 187 прямых сверок новой калибровки (20.09) | `docker run --rm --network none -v "$REPO:/repo:ro" -v "$OUT_DIR:/out" vehicle-reid-service-cpu python -B /repo/04-solution/service/tools/calibrate_threshold.py /out/val/embeddings.npy /out/calibration` | Пройдены на независимо извлечённых векторах конфигурации d1_j48; результат — [headline.json](04-solution/service/calib-d1_j48/headline.json) и `verification.json` |
 | Точные версии всех пакетов образа | V | Полный freeze проверенной сборки — §10 |
 | Исторические 43.8 мс/объект и 0.55 с на rerank | **Не команда, а историческая справка.** Замер делал `s09_timing.py`. Ему нужны исследовательское окружение (раздел 10), каталог изображений (`REID_DATA_DIR`) и промежуточные векторы `04-solution/postproc/out/*.npy` из шага `s03_extract.py`; `.npy` в git не входят. Из чистого клона скрипт падает трейсбеком `FileNotFoundError` на первом же недостающем входе — запускать его не нужно. Сохранён результат: [s09_timing.json](04-solution/postproc/out/s09_timing.json) | Точные исторические тайминги не воспроизведены. R выполняет новый ограниченный замер, с другим объёмом выборки и лимитом CPU |
 | Эффект зоны пластины около −0.003 mAP, 95% CI [−0.011; +0.004]; расширенная маска: верхняя граница +0.016 | **Не команда, а историческая справка.** Считал `eval_variants.py` по векторам 13 вариантов из `plate-ablation/work/emb/`; их в git нет. Запущенный в исследовательском окружении (раздел 10), скрипт это и сообщает — понятным сообщением, а не трейсбеком: `нет векторов вариантов в …/work/emb (13 из 13, например base)` | **Не воспроизведено из git:** нет `work/emb`, детекций и исходной ручной разметки. Числа только из [ablation.json](04-solution/plate-ablation/out/ablation.json) и [отчёта](04-solution/plate-ablation/REPORT.md) |
@@ -828,7 +867,7 @@ urllib3==2.7.0
 uvicorn==0.53.0
 ```
 
-Этот список фиксирует фактическую проверенную сборку и подключён к Dockerfile как constraints — в обеих ветвях: офлайн `pip install --no-cache-dir --no-index --find-links=/wheels -r requirements.txt -c requirements-lock.txt` и сетевой `pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt`. Проверено пересборкой (офлайн, `--no-cache --pull=never --network none`) — `pip freeze --all` нового образа совпал с файлом построчно, `pip check` без замечаний. Полным lock-файлом с хешами wheel он при этом не является. Все имена пакетов соответствуют их публикациям на PyPI, например [onnxruntime 1.30.0](https://pypi.org/project/onnxruntime/1.30.0/), [NumPy 2.5.3](https://pypi.org/project/numpy/2.5.3/), [qdrant-client 1.19.0](https://pypi.org/project/qdrant-client/1.19.0/). Хеши wheel-файлов в текущем файле зависимостей отсутствуют. Системные библиотеки фиксируются сохранением образа; отдельный список Debian-пакетов можно получить `docker run --rm --network none vehicle-reid-service dpkg-query -W`.
+Этот список фиксирует фактическую проверенную **CPU-сборку** и подключён к `Dockerfile.cpu` как constraints — в офлайн- и сетевой ветвях. Проверено пересборкой (офлайн, `--no-cache --pull=never --network none`): `pip freeze --all` совпал с файлом построчно, `pip check` без замечаний. Полным lock-файлом с хешами wheel он не является. GPU-образ имеет отдельный [requirements-gpu-lock.txt](04-solution/service/requirements-gpu-lock.txt): ONNX Runtime GPU 1.20.2 и закреплённые CUDA 12.2/cuDNN 9 библиотеки. Версии Python-пакетов не означают подтверждённого исполнения CUDA на RTX A5000; это проверяется запуском обеих моделей и замером на самом GPU. Список системных библиотек CPU-образа можно получить `docker run --rm --network none vehicle-reid-service-cpu dpkg-query -W`.
 
 ### Фактическое обучение combined_v1
 
@@ -947,7 +986,7 @@ Python runtime, а для всего жизненного цикла решен�
 - **Полная исследовательская воспроизводимость пока не достигнута.** Часть скриптов содержит `/home/artem/projects/...` и ссылки на временные `work/`, `metadata/`, `evaluator_snapshot/`, `.ids`, `.npy`, которых нет в git. Команда R обходит эти зависимости для основных метрик, но не восстанавливает все старые эксперименты.
 - **Абляция пластины — не доказательство полного отсутствия использования ГРЗ, но проверена для обеих сдаваемых моделей.** Для combined_v1 маскирование зоны номера статистически неотличимо от контрольной зоны той же площади (все контрасты накрывают 0, [training/combined/REPORT.md §5](04-solution/training/combined/REPORT.md)); для исходного OSNet — [plate-ablation/](04-solution/plate-ablation/). Исходной ручной разметки/детекций/эмбеддингов вариантов в git нет — числа берутся из сохранённых json. Верхнюю границу `+0.016 mAP` нельзя называть «меньше процента метрики».
 - **Не полностью известны версии внешних обучающих архивов и часть условий их распространения.** RoundaboutHD и CARLA-ReID теперь идентифицированы хешами полных локальных архивов и точным отбором в [training/src/](04-solution/training/src/README.md); исторический журнал содержал только хеши производных combined-файлов. Ревизия HuggingFace/неизменяемый удалённый URL не были записаны; скачанный ныне архив надо сверять с опубликованным SHA-256; цепочка происхождения предобучения OSNet (VeRi, VERI-Wild, CompCars, VMMRdb) остаётся документированным пробелом. Все обнаруженные источники раскрыты в §9; отсутствующие сведения названы отсутствующими.
-- **Веса, Python wheels и базовые образы для офлайн-сборки поставлены.** Данные организатора предоставляются отдельно; Docker-путь проверен на Engine 29.7.2 / Compose 2.40.3. Пакеты ставятся из `wheels/`, PyPI на сборке не нужен, базовые образы лежат в [offline/](04-solution/service/offline/README.md) отдельными архивами: `python-3.13-slim.tar.gz` 45,6 МБ и `qdrant-v1.15.5.tar.gz` 65,4 МБ. Оба проверены манифестом и загрузкой в отдельное хранилище. Единый архив от 21.09 содержал только Python с двумя тегами и заменён 22.09; раздельные архивы исключают саму ошибку и укладываются в лимит GitHub в 100 МБ на файл. Docker и Podman проверены независимо ([отчёт Docker](04-solution/audit/docker-path/README.md)); наличие исходных данных остаётся условием инференса.
+- **Веса и CPU-резерв поставлены.** Оба ONNX и whitening входят в Git; Python wheels и базовые образы для офлайн-сборки `Dockerfile.cpu` лежат в [wheels/](04-solution/service/wheels/) и [offline/](04-solution/service/offline/README.md). Этот CPU-путь проверен на Docker Engine 29.7.2 / Compose 2.40.3 ([отчёт](04-solution/audit/docker-path/README.md)). Основной GPU-образ скачивает CUDA/cuDNN-пакеты при сборке; в Git они не входят. Данные организатора предоставляются отдельно. Реальный GPU-инференс и его скорость на стенде жюри остаются непроверенными до доступа к нему.
 
 <a id="delivery"></a>
 
