@@ -1,6 +1,7 @@
 """The speed probe must time decoded frames and never label a CPU run as GPU."""
 
 import json
+from hashlib import sha256
 import os
 from pathlib import Path
 import subprocess
@@ -22,8 +23,10 @@ class GpuBenchmarkTests(unittest.TestCase):
             images = root / "images"
             images.mkdir()
             Image.new("RGB", (32, 32), (70, 100, 140)).save(images / "frame.jpg")
+            Image.new("RGB", (32, 32), (40, 120, 160)).save(images / "frame2.jpg")
             csv_path = root / "query.csv"
-            csv_path.write_text("image_id,x,y,w,h\nframe,0,0,32,32\n")
+            csv_path.write_text("image_id,x,y,w,h\nframe,0,0,32,32\n"
+                                "frame2,0,0,32,32\n")
             output = root / "benchmark.json"
             command = [sys.executable, str(BENCHMARK),
                        "--images-dir", str(images), "--csv", str(csv_path),
@@ -43,11 +46,23 @@ class GpuBenchmarkTests(unittest.TestCase):
             result = json.loads(output.read_text())
             self.assertEqual(result["inference_backend"]["active_device"], "cpu")
             self.assertFalse(result["official_counts_and_gpu"])
+            self.assertFalse(result["protocol_ready"])
+            self.assertEqual(result["peak_vram_mib"], "NOT MEASURED")
             self.assertEqual(result["scope"], "disk_jpeg_bbox_preprocess_two_onnx_whitening_l2")
             self.assertEqual(len(result["latency_b1"]["samples_ms"]), 3)
             self.assertGreater(result["latency_b1"]["median_ms"], 0)
             self.assertEqual(set(result["throughput_fps_by_batch"]), {"1", "8", "16", "32"})
             self.assertTrue(all(value > 0 for value in result["throughput_fps_by_batch"].values()))
+            from app.core import config
+            paths = (config.MODEL_PATH, config.MODEL2_PATH, config.WHITENING_PATH)
+            self.assertEqual(result["weights"]["total_bytes"],
+                             sum(path.stat().st_size for path in paths))
+            image_hashes = {item["path"]: item["sha256"]
+                            for item in result["inputs"]["timed_images"]}
+            self.assertEqual(image_hashes, {
+                str(path): sha256(path.read_bytes()).hexdigest()
+                for path in (images / "frame.jpg", images / "frame2.jpg")})
+            self.assertEqual(result["inputs"]["distinct_timed_images"], 2)
 
 
 if __name__ == "__main__":
