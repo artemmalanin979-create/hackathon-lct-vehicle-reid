@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-29",
+  "scope": "compatibility control of the shipped GPU image (ONNX Runtime GPU 1.20.2) run with forced CPU provider; reused validation, not hidden test",
+  "image": "localhost/lct-gpu built from tree tagged ff979b7c0ab02ca82c6059e9b43eebf47e494d5e (docs-only delta vs cached layers from 774ea506687df153dd18a92b1195f781cc78fc2e)",
+  "command": "podman run --rm --network none --cpus 2 --memory 4g -e LCT_DEVICE=cpu ... python -B /repo/04-solution/reproduce/run.py --mode val --data-dir /data --out-dir /out; затем официальный evaluate.py по SOLUTION.md §7",
+  "official_evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "input_check": "1864 файла val, размеры и SHA-256 совпали (run.py check_inputs, OK)",
+  "providers": {
+    "osnet": [
+      "CPUExecutionProvider"
+    ],
+    "combined_v1": [
+      "CPUExecutionProvider"
+    ]
+  },
+  "versions": {
+    "python": "3.13.15",
+    "numpy": "2.5.3",
+    "onnxruntime": "1.20.2"
+  },
+  "run_info": {
+    "threshold": 0.5141976914190476,
+    "queries": 1110,
+    "gallery": 750,
+    "embeddings_shape": [
+      1860,
+      512
+    ],
+    "model_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "model2_sha256": "b1ba5021275b34079a1653608bdfd215fc9404306dc909852e4cdfa03402efb2",
+    "whitening_sha256": "eb4433ffd5e38d3751d5cb04e234090060a83be6d1720b47bcf2fa1274b3c5b5"
+  },
+  "result": "all published reference numbers reproduced exactly, including historical cosine/rerank metrics with 1e-6 tolerance and the official evaluator values below",
+  "official": {
+    "ranking": {
+      "n_scored": 832,
+      "n_openset_excluded": 278,
+      "mAP@10": 0.7411030505952382,
+      "Rank-1": 0.7079326923076923,
+      "Rank-5": 0.8605769230769231
+    },
+    "full_ranking": {
+      "mAP_full": 0.7316093422310447,
+      "mINP": 0.6928460434032723,
+      "n_scored": 832
+    },
+    "candidates": {
+      "TP": 803,
+      "FP": 84,
+      "FN": 20,
+      "TN": 203,
+      "n_openset_queries": 278,
+      "Precision": 0.9052987598647125,
+      "Recall": 0.9756986634264885,
+      "F1": 0.9391812865497076,
+      "TNR": 0.7302158273381295,
+      "PR-AUC": 0.9926129189439657
+    }
+  },
+  "cuda_execution": "NOT MEASURED: провайдер CUDA на RTX A5000 не запускался, скорость GPU не измерена"
+}
