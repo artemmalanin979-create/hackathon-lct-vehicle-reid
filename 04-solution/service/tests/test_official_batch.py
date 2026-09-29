@@ -35,6 +35,10 @@ class OfficialBatchContractTests(unittest.TestCase):
                 vectors[name] = vector
 
             class FakeEmbedder:
+                inference_backend = {"requested_device": "cpu", "active_device": "cpu",
+                                     "providers": {"osnet": ["CPUExecutionProvider"],
+                                                   "combined_v1": ["CPUExecutionProvider"]}}
+
                 def __init__(self, threads):
                     pass
 
@@ -67,6 +71,7 @@ class OfficialBatchContractTests(unittest.TestCase):
             info = json.loads((out / "run_info.json").read_text())
             self.assertEqual(info["score_scale"], "cosine")
             self.assertEqual(info["rerank_top_k"], 50)
+            self.assertEqual(info["inference_backend"], FakeEmbedder.inference_backend)
 
 
 if __name__ == "__main__":

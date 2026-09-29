@@ -221,6 +221,7 @@ def version() -> dict:
         "model2": config.MODEL2_NAME,
         "model2_sha256": state["model2_sha256"],
         "whitening_sha256": state["whitening_sha256"],
+        "inference_backend": getattr(state.get("embedder"), "inference_backend", None),
         "embedding_dim": config.EMBEDDING_DIM,
         "input_size": config.INPUT_SIZE,
         "score_scale": "cosine",

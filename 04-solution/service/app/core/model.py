@@ -13,6 +13,8 @@ y = l2n((x - m) @ P.T) в float32 -> финальная L2-нормировка 
 from __future__ import annotations
 
 import hashlib
+import os
+import sys
 from numbers import Integral
 from pathlib import Path
 
@@ -39,14 +41,26 @@ def l2norm(m: np.ndarray) -> np.ndarray:
     return (m / np.linalg.norm(m, axis=1, keepdims=True)).astype(np.float32)
 
 
-def _open_session(model_path: Path, threads: int) -> ort.InferenceSession:
+CPU_PROVIDER = "CPUExecutionProvider"
+CUDA_PROVIDER = "CUDAExecutionProvider"
+
+
+def _open_session(model_path: Path, threads: int,
+                  providers: list[str]) -> ort.InferenceSession:
     opts = ort.SessionOptions()
     opts.log_severity_level = 3  # молчать про неиспользуемые инициализаторы
     if threads:
         opts.intra_op_num_threads = threads
-    return ort.InferenceSession(
-        str(model_path), sess_options=opts, providers=["CPUExecutionProvider"]
-    )
+    session = ort.InferenceSession(str(model_path), sess_options=opts,
+                                   providers=providers)
+    # ORT otherwise retries a failed CUDA run on CPU without telling the caller.
+    session.disable_fallback()
+    return session
+
+
+def _cuda_active(session: ort.InferenceSession) -> bool:
+    providers = session.get_providers()
+    return bool(providers) and providers[0] == CUDA_PROVIDER
 
 
 def _load_whitening(path: Path) -> tuple[np.ndarray, np.ndarray]:
@@ -81,8 +95,45 @@ class Embedder:
                         f"sha256 {kind} не совпал: {digest} != {expected} ({path}); "
                         "файл повреждён или подменён"
                     )
-        self.session = _open_session(model_path, threads)       # первая модель (OSNet)
-        self.session2 = _open_session(model2_path, threads)     # вторая модель (combined_v1)
+        requested_device = os.environ.get("LCT_DEVICE", "auto").strip().lower()
+        if requested_device not in {"auto", "cuda", "cpu"}:
+            raise ValueError("LCT_DEVICE должен быть auto, cuda или cpu")
+        available = set(ort.get_available_providers())
+        if requested_device == "cuda" and CUDA_PROVIDER not in available:
+            raise RuntimeError("CUDAExecutionProvider недоступен: проверьте GPU-образ, "
+                               "NVIDIA Container Toolkit и драйвер; для CPU задайте LCT_DEVICE=cpu")
+
+        use_cuda = requested_device != "cpu" and CUDA_PROVIDER in available
+        if use_cuda:
+            try:
+                session = _open_session(model_path, threads, [CUDA_PROVIDER, CPU_PROVIDER])
+                session2 = _open_session(model2_path, threads, [CUDA_PROVIDER, CPU_PROVIDER])
+                if not (_cuda_active(session) and _cuda_active(session2)):
+                    raise RuntimeError("CUDAExecutionProvider не стал первым активным провайдером")
+            except Exception as exc:
+                if requested_device == "cuda":
+                    raise RuntimeError("CUDA-инференс не запустился для обеих моделей; "
+                                       "проверьте CUDA/cuDNN и доступ контейнера к GPU") from exc
+                print(f"LCT_DEVICE=auto: CUDA недоступна при запуске ONNX; "
+                      f"обе модели переключены на CPU ({exc})", file=sys.stderr)
+                use_cuda = False
+        if not use_cuda:
+            session = _open_session(model_path, threads, [CPU_PROVIDER])
+            session2 = _open_session(model2_path, threads, [CPU_PROVIDER])
+            if (CPU_PROVIDER not in session.get_providers()
+                    or CPU_PROVIDER not in session2.get_providers()):
+                raise RuntimeError("CPUExecutionProvider не стал активным для обеих моделей")
+
+        self.session = session       # первая модель (OSNet)
+        self.session2 = session2     # вторая модель (combined_v1)
+        self.inference_backend = {
+            "requested_device": requested_device,
+            "active_device": "cuda" if use_cuda else "cpu",
+            "providers": {
+                "osnet": list(session.get_providers()),
+                "combined_v1": list(session2.get_providers()),
+            },
+        }
         self.input_name = self.session.get_inputs()[0].name
         self.input_name2 = self.session2.get_inputs()[0].name
         self.P, self.m = _load_whitening(whitening_path)

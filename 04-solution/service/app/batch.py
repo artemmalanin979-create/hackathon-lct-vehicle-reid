@@ -148,6 +148,7 @@ def main() -> None:
         "model2": config.MODEL2_NAME,
         "model2_sha256": config.MODEL2_SHA256,
         "whitening_sha256": config.WHITENING_SHA256,
+        "inference_backend": getattr(embedder, "inference_backend", None),
         "versions": {
             "python": platform.python_version(),
             "numpy": np.__version__,

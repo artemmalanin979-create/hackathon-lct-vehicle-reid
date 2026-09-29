@@ -1,5 +1,6 @@
 """The HTTP search path must not turn non-finite numbers into a refusal."""
 import unittest
+from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 import numpy as np
@@ -55,6 +56,16 @@ class ApiScoreTests(unittest.TestCase):
         self.assertEqual(batch["candidates_score_scale"], "cosine")
         self.assertEqual(batch["default_threshold"], config.DEFAULT_THRESHOLD)
         self.assertEqual(batch["candidate_threshold"], config.DEFAULT_THRESHOLD)
+
+    def test_version_reports_actual_inference_backend(self):
+        backend = {"requested_device": "cuda", "active_device": "cuda",
+                   "providers": {"osnet": ["CUDAExecutionProvider", "CPUExecutionProvider"],
+                                 "combined_v1": ["CUDAExecutionProvider", "CPUExecutionProvider"]}}
+        with patch.dict(main.state, {"model_sha256": config.MODEL_SHA256,
+                                     "model2_sha256": config.MODEL2_SHA256,
+                                     "whitening_sha256": config.WHITENING_SHA256,
+                                     "embedder": SimpleNamespace(inference_backend=backend)}):
+            self.assertEqual(main.version()["inference_backend"], backend)
 
 
 if __name__ == "__main__":
