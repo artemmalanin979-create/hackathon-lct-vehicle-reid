@@ -212,7 +212,8 @@ DATA_DIR=/абсолютный/путь/к/data
 OUT_DIR=/абсолютный/путь/к/новому/каталогу-результатов
 SOURCE_SHA="$(git rev-parse HEAD)"
 mkdir -p "$OUT_DIR"
-docker build --build-arg SOURCE_SHA="$SOURCE_SHA" -t vehicle-reid-service .
+docker build --no-cache --build-arg SOURCE_SHA="$SOURCE_SHA" -t vehicle-reid-service .
+test "$(docker image inspect vehicle-reid-service --format '{{index .Config.Labels "org.opencontainers.image.revision"}}')" = "$SOURCE_SHA"
 docker run --rm --gpus all --network none \
   -v "$DATA_DIR:/data:ro" -v "$OUT_DIR:/out" \
   vehicle-reid-service python tools/benchmark_gpu.py \
