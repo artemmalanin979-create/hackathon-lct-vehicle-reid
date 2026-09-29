@@ -1,0 +1,15 @@
+# GPU inference image. The complete, pinned dependency set is in
+# requirements-gpu-lock.txt; CUDA user-space libraries are copied into the image.
+onnxruntime-gpu==1.20.2
+numpy==2.5.3
+pillow==12.3.0
+fastapi==0.141.1
+uvicorn==0.53.0
+python-multipart==0.0.32
+qdrant-client==1.19.0
+nvidia-cuda-runtime-cu12==12.2.140
+nvidia-cuda-nvrtc-cu12==12.2.140
+nvidia-cublas-cu12==12.2.5.6
+nvidia-cufft-cu12==11.0.8.103
+nvidia-curand-cu12==10.3.3.141
+nvidia-cudnn-cu12==9.1.1.17

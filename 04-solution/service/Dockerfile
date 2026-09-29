@@ -1,24 +1,8 @@
-# Образ сервиса инференса Vehicle ReID.
-# Веса модели попадают в образ на этапе сборки (COPY model/) — на запуске
-# доступ в интернет не нужен; sha256 весов проверяется при сборке.
+# GPU-first inference image for the organizer's CUDA 12.2 / RTX A5000 host.
+# Build may use PyPI; all packages, CUDA user-space libraries, and model weights
+# are installed into the image before network-isolated inference starts.
 
-# ── Стадия 1: зависимости ───────────────────────────────────────────────────
-# Отдельная стадия нужна ровно для того, чтобы каталог колёс НЕ попал в
-# итоговый образ. COPY всегда создаёт свой слой, и `rm -rf /wheels` в следующем
-# слое вес не возвращает: раньше образ и офлайн-архив были тяжелее на 59 251 200
-# байт. Здесь колёса живут только в этой стадии, наружу уходит /install.
-#
-# requirements.txt — семь прямых зависимостей, requirements-lock.txt — полный
-# снимок проверенной сборки (`pip freeze --all` из образа): как constraints он
-# закрепляет и транзитивные версии. Хешей wheel в нём нет.
-#
-# По умолчанию сборка идёт ОФЛАЙН, из каталога wheels/ в составе решения: 30 пакетов,
-# 57 МБ, собраны в этом же базовом образе командой из wheels/README.md. Так сборка не
-# зависит от доступности PyPI — жюри может собирать образ в изолированной среде.
-#
-# Запасной путь — ставить из сети: --build-arg PIP_SOURCE=network. Сам каталог
-# wheels/ нужен в любом случае: COPY ниже общий для обеих ветвей, без каталога
-# сборка не начнётся.
+# Separate dependency stage keeps downloaded wheels and pip cache out of runtime.
 FROM python:3.13-slim AS deps
 
 ENV PIP_NO_CACHE_DIR=1 \
@@ -26,18 +10,11 @@ ENV PIP_NO_CACHE_DIR=1 \
 
 WORKDIR /srv
 
-ARG PIP_SOURCE=offline
-COPY requirements.txt requirements-lock.txt ./
-COPY wheels/ /wheels/
-RUN if [ "$PIP_SOURCE" = "offline" ]; then \
-        pip install --prefix=/install --no-cache-dir --no-index --find-links=/wheels \
-            -r requirements.txt -c requirements-lock.txt; \
-    else \
-        pip install --prefix=/install --no-cache-dir \
-            -r requirements.txt -c requirements-lock.txt; \
-    fi
+COPY requirements-gpu.txt requirements-gpu-lock.txt ./
+RUN pip install --prefix=/install --no-cache-dir \
+        -r requirements-gpu.txt -c requirements-gpu-lock.txt
 
-# ── Стадия 2: сдаваемый образ ───────────────────────────────────────────────
+# Runtime image; the NVIDIA host driver enters through --gpus all, never pip.
 FROM python:3.13-slim
 
 ARG SOURCE_SHA=unspecified
@@ -45,13 +22,30 @@ LABEL org.opencontainers.image.revision="${SOURCE_SHA}"
 
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    LCT_DEVICE=cuda \
+    LD_LIBRARY_PATH=/usr/local/lib/python3.13/site-packages/nvidia/cuda_runtime/lib:/usr/local/lib/python3.13/site-packages/nvidia/cuda_nvrtc/lib:/usr/local/lib/python3.13/site-packages/nvidia/cublas/lib:/usr/local/lib/python3.13/site-packages/nvidia/cufft/lib:/usr/local/lib/python3.13/site-packages/nvidia/curand/lib:/usr/local/lib/python3.13/site-packages/nvidia/cudnn/lib
 
 WORKDIR /srv
 
-# /install собран стадией deps в схеме posix_prefix, поэтому ложится в
-# /usr/local один в один: lib/python3.13/site-packages и bin/uvicorn.
+# /install maps to /usr/local: site-packages and bin/uvicorn.
 COPY --from=deps /install /usr/local
+
+# Check the GPU wheel and CUDA user-space linkage without initializing the CUDA
+# provider. The provider needs ORT's plugin host symbols and a real NVIDIA driver
+# at session creation, neither of which is present during an ordinary build.
+RUN python - <<'EOF'
+from pathlib import Path
+import subprocess
+import onnxruntime as ort
+
+assert ort.__version__ == "1.20.2", ort.__version__
+assert "CUDAExecutionProvider" in ort.get_available_providers(), ort.get_available_providers()
+provider = Path(ort.__file__).parent / "capi/libonnxruntime_providers_cuda.so"
+result = subprocess.run(["ldd", str(provider)], check=True, capture_output=True, text=True)
+assert "not found" not in result.stdout, result.stdout
+print("CUDA provider user-space linkage OK:", provider)
+EOF
 
 # Веса — в составе решения. Если файла нет (например, клон без бинарников),
 # model/fetch_model.sh скачает и проверит его ДО сборки образа. combined_v1 и

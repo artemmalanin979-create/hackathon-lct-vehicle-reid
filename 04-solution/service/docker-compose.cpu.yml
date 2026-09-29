@@ -1,7 +1,4 @@
-# GPU-first запуск всего сервиса одной командой ИЗ ЭТОГО КАТАЛОГА:
-#   cd 04-solution/service && docker compose up --build -d
-# из корня репозитория то же самое:
-#   docker compose -f 04-solution/service/docker-compose.yml up --build -d
+# Explicit CPU fallback: docker compose -f docker-compose.cpu.yml up --build -d
 #
 # `up` поднимает хранилище, API и ЗАГРУЖАЕТ ГАЛЕРЕЮ: loader — обычный сервис
 # прогона (не профиль), он стартует после healthcheck Qdrant, отрабатывает и
@@ -13,20 +10,15 @@
 #   DATA_DIR=/путь/к/data docker compose up -d
 services:
   api:
-    build: .
-    image: vehicle-reid-service
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+    image: vehicle-reid-service-cpu
     ports:
       - "8000:8000"
     environment:
       QDRANT_URL: http://qdrant:6333
-      LCT_DEVICE: ${LCT_DEVICE:-cuda}
+      LCT_DEVICE: cpu
     # Кадры — только на чтение и только ради тонкого клиента: показать кандидата
     # картинкой и построить карту влияния. Расчётная часть их отсюда не берёт
     # (пакетный прогон получает каталог аргументом команды). Без этого тома
@@ -56,18 +48,13 @@ services:
   # загружена». Шаг идемпотентен (коллекция пересоздаётся), контейнер
   # разовый: отработал и вышел, перезапуском не поднимается.
   loader:
-    image: vehicle-reid-service
-    build: .
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    image: vehicle-reid-service-cpu
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
     environment:
       QDRANT_URL: http://qdrant:6333
-      LCT_DEVICE: ${LCT_DEVICE:-cuda}
+      LCT_DEVICE: cpu
     volumes:
       - ${DATA_DIR:-../../data}:/data:ro
     depends_on:
