@@ -17,9 +17,6 @@ RUN pip install --prefix=/install --no-cache-dir \
 # Runtime image; the NVIDIA host driver enters through --gpus all, never pip.
 FROM python:3.13-slim
 
-ARG SOURCE_SHA=unspecified
-LABEL org.opencontainers.image.revision="${SOURCE_SHA}"
-
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
@@ -72,10 +69,15 @@ print("все три файла весов в образе, sha256 OK")
 EOF
 
 COPY app/ app/
+COPY tools/ tools/
 
 ENV MODEL_PATH=/srv/model/osnet_ain_x1_0_vehicle_reid.onnx \
     MODEL2_PATH=/srv/model/osnet_ain_combined_v1.onnx \
     WHITENING_PATH=/srv/model/lw_ens_j48_rho0.5.npz
+
+ARG SOURCE_SHA=unspecified
+ENV SOURCE_SHA="${SOURCE_SHA}"
+LABEL org.opencontainers.image.revision="${SOURCE_SHA}"
 
 EXPOSE 8000
 # По умолчанию — HTTP-API; пакетный прогон запускается тем же образом:

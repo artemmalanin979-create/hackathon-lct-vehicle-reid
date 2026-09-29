@@ -205,7 +205,9 @@ def run(args: argparse.Namespace) -> dict:
                 "sha256": file_sha256(path)} for path in weight_paths]
     counts_and_gpu = (gpu_active and args.warmup == 50 and args.latency_runs == 300
                       and args.throughput_seconds >= 10)
-    source_sha_valid = bool(re.fullmatch(r"[0-9a-f]{40}", args.source_sha))
+    image_source_sha = os.environ.get("SOURCE_SHA", "NOT PROVIDED")
+    source_sha_valid = (bool(re.fullmatch(r"[0-9a-f]{40}", args.source_sha))
+                        and args.source_sha == image_source_sha)
     peak_vram_mib = "NOT MEASURED"  # Snapshots from nvidia-smi are not a true peak.
     protocol_ready = (counts_and_gpu and source_sha_valid and len(timed_images) >= 32
                       and isinstance(peak_vram_mib, (int, float)))
@@ -218,7 +220,7 @@ def run(args: argparse.Namespace) -> dict:
         "protocol_limitations": [
             reason for condition, reason in (
                 (counts_and_gpu, "GPU или число/длительность замеров не соответствуют ответу организатора"),
-                (source_sha_valid, "полный 40-значный source SHA не указан"),
+                (source_sha_valid, "source SHA не совпадает с меткой собранного образа"),
                 (len(timed_images) >= 32, "использовано меньше 32 разных файлов кадров"),
                 (isinstance(peak_vram_mib, (int, float)), "точный пиковый VRAM не измерен"),
             ) if not condition
@@ -259,7 +261,8 @@ def run(args: argparse.Namespace) -> dict:
                     "total_bytes": sum(item["bytes"] for item in weights)},
         "toolchain": {"python": platform.python_version(), "numpy": np.__version__,
                       "onnxruntime": __import__("onnxruntime").__version__,
-                      "source_sha": args.source_sha},
+                      "source_sha": args.source_sha,
+                      "image_source_sha": image_source_sha},
         "hardware": _hardware(),
         "threads": args.threads,
         "timing_note": "Warmed page cache may affect JPEG I/O; this is a local "

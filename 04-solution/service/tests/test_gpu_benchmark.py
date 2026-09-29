@@ -32,7 +32,7 @@ class GpuBenchmarkTests(unittest.TestCase):
                        "--images-dir", str(images), "--csv", str(csv_path),
                        "--out", str(output), "--warmup", "1", "--latency-runs", "3",
                        "--throughput-seconds", "0.02"]
-            env = {**os.environ, "LCT_DEVICE": "cpu"}
+            env = {**os.environ, "LCT_DEVICE": "cpu", "SOURCE_SHA": "a" * 40}
 
             rejected = subprocess.run(command, cwd=SERVICE, env=env,
                                       capture_output=True, text=True, timeout=60)
@@ -40,13 +40,16 @@ class GpuBenchmarkTests(unittest.TestCase):
             self.assertIn("--allow-cpu", rejected.stderr)
             self.assertFalse(output.exists())
 
-            accepted = subprocess.run([*command, "--allow-cpu"], cwd=SERVICE, env=env,
+            accepted = subprocess.run([*command, "--allow-cpu", "--source-sha", "b" * 40], cwd=SERVICE, env=env,
                                       capture_output=True, text=True, timeout=60)
             self.assertEqual(accepted.returncode, 0, accepted.stdout + accepted.stderr)
             result = json.loads(output.read_text())
             self.assertEqual(result["inference_backend"]["active_device"], "cpu")
             self.assertFalse(result["official_counts_and_gpu"])
             self.assertFalse(result["protocol_ready"])
+            self.assertIn("source SHA не совпадает с меткой собранного образа",
+                          result["protocol_limitations"])
+            self.assertEqual(result["toolchain"]["image_source_sha"], "a" * 40)
             self.assertEqual(result["peak_vram_mib"], "NOT MEASURED")
             self.assertEqual(result["scope"], "disk_jpeg_bbox_preprocess_two_onnx_whitening_l2")
             self.assertEqual(len(result["latency_b1"]["samples_ms"]), 3)
