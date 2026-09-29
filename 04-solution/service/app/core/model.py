@@ -13,6 +13,7 @@ y = l2n((x - m) @ P.T) в float32 -> финальная L2-нормировка 
 from __future__ import annotations
 
 import hashlib
+import ctypes
 import os
 import sys
 from numbers import Integral
@@ -43,6 +44,33 @@ def l2norm(m: np.ndarray) -> np.ndarray:
 
 CPU_PROVIDER = "CPUExecutionProvider"
 CUDA_PROVIDER = "CUDAExecutionProvider"
+
+
+def _cuda_driver_status() -> tuple[bool, str]:
+    """Check the injected NVIDIA driver before ORT attempts CUDA initialization.
+
+    A CUDA-enabled ORT wheel can advertise its provider without a usable host
+    driver. In that state session construction can crash in native code rather
+    than raise a Python exception, so get_available_providers() is insufficient.
+    """
+    try:
+        driver = ctypes.CDLL("libcuda.so.1")
+        driver.cuInit.argtypes = [ctypes.c_uint]
+        driver.cuInit.restype = ctypes.c_int
+        status = driver.cuInit(0)
+        if status != 0:
+            return False, f"cuInit вернул код {status}"
+        driver.cuDeviceGetCount.argtypes = [ctypes.POINTER(ctypes.c_int)]
+        driver.cuDeviceGetCount.restype = ctypes.c_int
+        count = ctypes.c_int()
+        status = driver.cuDeviceGetCount(ctypes.byref(count))
+        if status != 0:
+            return False, f"cuDeviceGetCount вернул код {status}"
+        if count.value <= 0:
+            return False, "доступных GPU нет"
+        return True, f"устройств {count.value}"
+    except (OSError, AttributeError) as exc:
+        return False, str(exc)
 
 
 def _open_session(model_path: Path, threads: int,
@@ -104,6 +132,15 @@ class Embedder:
                                "NVIDIA Container Toolkit и драйвер; для CPU задайте LCT_DEVICE=cpu")
 
         use_cuda = requested_device != "cpu" and CUDA_PROVIDER in available
+        if use_cuda:
+            driver_ok, driver_status = _cuda_driver_status()
+            if not driver_ok:
+                if requested_device == "cuda":
+                    raise RuntimeError("CUDA-драйвер или GPU недоступны контейнеру "
+                                       f"({driver_status}); проверьте --gpus all")
+                print("LCT_DEVICE=auto: CUDA-драйвер или GPU недоступны контейнеру "
+                      f"({driver_status}); обе модели запущены на CPU", file=sys.stderr)
+                use_cuda = False
         if use_cuda:
             try:
                 session = _open_session(model_path, threads, [CUDA_PROVIDER, CPU_PROVIDER])

@@ -1,10 +1,11 @@
 """The requested accelerator must match the backend actually running ONNX."""
 
+import ctypes
 import os
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import numpy as np
 
@@ -31,9 +32,17 @@ class _Session:
 
 
 class InferenceProviderTests(unittest.TestCase):
-    def _embedder(self, mode, factory):
+    def _embedder(self, mode, factory, driver_error=False):
         whitening = (np.eye(512, dtype=np.float32), np.zeros(512, dtype=np.float32))
+        def set_device_count(pointer):
+            ctypes.cast(pointer, ctypes.POINTER(ctypes.c_int))[0] = 1
+            return 0
+
+        driver = SimpleNamespace(cuInit=Mock(return_value=0),
+                                 cuDeviceGetCount=Mock(side_effect=set_device_count))
+        driver_loader = Mock(side_effect=OSError("libcuda.so.1 missing")) if driver_error else Mock(return_value=driver)
         with patch.dict(os.environ, {"LCT_DEVICE": mode}), \
+             patch.object(ctypes, "CDLL", driver_loader), \
              patch.object(model.ort, "get_available_providers", return_value=[CUDA, CPU]), \
              patch.object(model.ort, "InferenceSession", side_effect=factory), \
              patch.object(model, "_load_whitening", return_value=whitening):
@@ -99,6 +108,28 @@ class InferenceProviderTests(unittest.TestCase):
         self.assertEqual(requested[0], [CUDA, CPU])
         self.assertEqual(requested[-2:], [[CPU], [CPU]])
         self.assertEqual(embedder.inference_backend["active_device"], "cpu")
+
+    def test_auto_never_constructs_cuda_session_without_visible_driver(self):
+        requested = []
+
+        def open_session(*args, **kwargs):
+            requested.append(kwargs["providers"])
+            return _Session([CPU])
+
+        embedder = self._embedder("auto", open_session, driver_error=True)
+        self.assertEqual(requested, [[CPU], [CPU]])
+        self.assertEqual(embedder.inference_backend["active_device"], "cpu")
+
+    def test_strict_cuda_fails_before_onnx_without_visible_driver(self):
+        requested = []
+
+        def open_session(*args, **kwargs):
+            requested.append(kwargs["providers"])
+            return _Session([CPU])
+
+        with self.assertRaisesRegex(RuntimeError, "GPU|CUDA"):
+            self._embedder("cuda", open_session, driver_error=True)
+        self.assertEqual(requested, [])
 
 
 if __name__ == "__main__":
